@@ -1,0 +1,20 @@
+language: node_js
+sudo: true
+node_js: stable
+before_install:
+- openssl aes-256-cbc -K $encrypted_9419dece98d7_key -iv $encrypted_9419dece98d7_iv -in .travis/deploy_key.enc -out deploy_key -d
+- chmod 600 deploy_key
+- eval `ssh-agent -s`
+- ssh-add deploy_key
+- git config --global user.name "9renpoto"
+- git config --global user.email "9renpoto+kanto-riders@gmail.com"
+env:
+  matrix:
+  - CMD=test
+  - CMD=build
+script:
+- yarn $CMD
+after_success:
+- '[ "$TRAVIS_BRANCH" == master ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$CMD" == "build" ] && bash ./deploy.sh'
+notifications:
+  email: false

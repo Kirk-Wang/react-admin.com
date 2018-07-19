@@ -1,0 +1,25 @@
+{
+  "docs": {
+    "Knowledge": [
+      "intro",
+      "tutorial",
+      "data-providers",
+      "admin-component",
+      "resource-component",
+      "list-view-component",
+      "show-view-component",
+      "field-components",
+      "creat-edit-view-components",
+      "input-components",
+      "authentication",
+      "authorization",
+      "theming",
+      "actions",
+      "translation",
+      "custom-app",
+      "reference",
+      "faq",
+      "ecosystem"
+    ]
+  }
+}

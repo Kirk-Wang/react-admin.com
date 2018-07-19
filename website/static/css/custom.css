@@ -1,0 +1,108 @@
+/* your custom css */
+body {
+  background: #fff;
+  font-family: "Apple SD Gothic Neo", "AppleSDGothicNeo", -apple-system,
+    "Hiragino Kaku Gothic ProN", "メイリオ", Helvetica, Arial, sans-serif;
+}
+.mainContainer {
+  background: #ffffff;
+}
+
+.homeContainer {
+  background: #272e37;
+}
+
+.homeContainer .homeWrapper {
+  padding: 80px 0;
+}
+
+.homeContainer h2 {
+  color: #fff;
+}
+
+.imageAlignTop .blockImage {
+  max-width: 160px;
+}
+
+.productShowcaseSection {
+  background: #232930;
+  color: #fff;
+  padding: 80px 0;
+}
+
+.productShowcaseSection.lightBackground {
+  background: #272e37;
+}
+
+.promoSection .buttonWrapper:nth-of-type(1) .button {
+  background: #e85f61;
+}
+
+.promoSection .buttonWrapper:nth-of-type(2) .button {
+  background: #edae53;
+}
+
+.container.introSection h2 {
+  color: #fff;
+}
+
+.userSection h2 {
+  color: #be5baf;
+  margin: 0;
+}
+
+.userSection p {
+  margin-top: 30px;
+}
+
+.userSection .button {
+  color: #be5baf;
+  border: 1px solid #be5baf;
+  margin-top: 30px;
+}
+
+.userSection .button:hover {
+  color: #fff;
+  background: #be5baf;
+}
+
+footer.nav-footer {
+  background: #272e37;
+  box-shadow: none;
+}
+
+footer .sitemap .nav-home {
+  width: 30px;
+}
+
+
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (max-width: 736px) {
+  .introSection .blockElement + .blockElement {
+    margin-top: 50px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .homeContainer .inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .homeContainer .homeWrapper .projectLogo {
+    justify-content: center;
+    z-index: 1;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}

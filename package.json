@@ -1,0 +1,40 @@
+{
+  "name": "react-admin.com",
+  "version": "1.0.0",
+  "author": "Kirk Wang <kirk.w.wang@gmail.com>",
+  "devDependencies": {
+    "@9renpoto/eslint-config": "4.4.0",
+    "@9renpoto/eslint-config-react": "4.3.0",
+    "eslint": "4.19.1",
+    "husky": "0.14.3",
+    "lerna": "2.11.0",
+    "lint-staged": "7.2.0",
+    "prettier-eslint-cli": "4.7.1"
+  },
+  "license": "MIT",
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier-eslint --write",
+      "eslint",
+      "git add"
+    ],
+    "*.{md,css}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "main": "n/a",
+  "private": true,
+  "workspaces": [
+    "website"
+  ],
+  "repository": "ssh://git@github.com:Kirk-Wang/react-admin.com.git",
+  "scripts": {
+    "build": "lerna run build",
+    "deploy": "cd website && publish-gh-pages",
+    "postinstall": "cd website && yarn",
+    "precommit": "lint-staged",
+    "start": "cd website && npm start",
+    "test": "eslint . --ext=js.jsx"
+  }
+}
