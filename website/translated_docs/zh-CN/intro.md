@@ -10,7 +10,7 @@ title: 简介
 
 * 适配任何后端接口架构 （REST，GraphQL，SOAP等）
 * 完善的使用文档
-* Super-fast UI thanks to optimistic rendering (renders before the server returns)
+* Super-fast（超快的）UI 得益于optimistic （积极的）渲染 (在服务器返回之前呈现)
 * Undo updates and deletes for a few seconds
 * Supports relationships (many to one, one to many)
 * Internationalization (i18n)
