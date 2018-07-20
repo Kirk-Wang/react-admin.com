@@ -120,13 +120,13 @@ export const PostCreate = (props) => (
 
 Yes.
 
-React-admin uses an adapter approach, with a concept called *Data Providers*. Existing providers can be used as a blueprint to design your API, or you can write your own Data Provider to query an existing API. Writing a custom Data Provider is a matter of hours.
+React-admin使用适配器方法，其概念称为Data Providers（数据提供者）。 现有数据提供程序（Data Provider）可以用作blueprint来设计你的 API， 也可以编写自己的数据提供程序（Provider）来查询现有的 api。 Writing a custom Data Provider is a matter of hours.
 
 ![Data Provider architecture](https://marmelab.com/react-admin/img/data-provider.png)
 
-See the [Data Providers documentation](./DataProviders.md) for details.
+有关详细信息, 请参阅 [数据提供程序文档](./DataProviders.md)。
 
-## Batteries Included But Removable
+## 包含电池但可拆装
 
 React-admin is designed as a library of loosely coupled React components built on top of [material-ui](http://www.material-ui.com/#/), in addition to controller functions implemented the Redux way. It is very easy to replace one part of react-admin with your own, e.g. to use a custom datagrid, GraphQL instead of REST, or bootstrap instead of Material Design.
 
