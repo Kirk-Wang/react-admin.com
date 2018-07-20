@@ -2,14 +2,14 @@
 id: intro
 title: 简介
 ---
-A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, [React](https://facebook.github.io/react/) and [Material Design](https://material.io/). Previously named [admin-on-rest](https://github.com/marmelab/admin-on-rest). Open sourced and maintained by [marmelab](https://marmelab.com/).
+一个运行在浏览器中，在REST/GraphQL API之上，用于构建admin（中后台）应用程序的前端框架。它使用了ES6，[React](https://facebook.github.io/react/) 和 [Material Design](https://material.io/)进行编写。 它以前的名字叫做 [admin-on-rest](https://github.com/marmelab/admin-on-rest)。 由[marmelab](https://marmelab.com/)开源和维护。
 
 [Demo](https://marmelab.com/react-admin-demo/) - [Source](https://github.com/marmelab/react-admin) - [Releases](https://github.com/marmelab/react-admin/releases) - [Support](http://stackoverflow.com/questions/tagged/react-admin) <iframe src="https://player.vimeo.com/video/268958716?byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="display:block;margin:0 auto" mark="crwd-mark"></iframe> 
 
-## Features
+## 功能
 
-* Adapts to any backend (REST, GraphQL, SOAP, etc.)
-* Complete documentation
+* 适配任何后端接口架构 （REST，GraphQL，SOAP等）
+* 完善的使用文档
 * Super-fast UI thanks to optimistic rendering (renders before the server returns)
 * Undo updates and deletes for a few seconds
 * Supports relationships (many to one, one to many)
