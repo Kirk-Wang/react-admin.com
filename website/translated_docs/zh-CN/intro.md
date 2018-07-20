@@ -42,7 +42,7 @@ npm install react-admin
 
 ## 用法
 
-阅读大约15分钟的 [教程](./Tutorial.md)介绍。 之后，前往\[文档\](./index.html)，或查看\[演示的源代码\](https://github.com/marmelab/react-admin/tree/master/examples/demo)以便获取示例用法。
+阅读大约15分钟的 [教程](./Tutorial.md)介绍。 之后，前往[文档](./index.md)，或查看[演示的源代码](https://github.com/marmelab/react-admin/tree/master/examples/demo)以便获取示例用法。
 
 ## 一目了然
 
@@ -120,7 +120,7 @@ export const PostCreate = (props) => (
 
 Yes.
 
-React-admin使用适配器方法，其概念称为Data Providers（数据提供者）。 现有数据提供程序（Data Provider）可以用作blueprint来设计你的 API， 也可以编写自己的数据提供程序（Provider）来查询现有的 api。 Writing a custom Data Provider is a matter of hours.
+React-admin使用适配器方法，其概念称为Data Providers。 现有数据提供程序（Data Provider）可以用作blueprint来设计你的 API, 也可以编写自己的数据提供程序（Provider）来查询现有的 api。 编写自定义数据提供程序只需几个小时。
 
 ![Data Provider architecture](https://marmelab.com/react-admin/img/data-provider.png)
 
