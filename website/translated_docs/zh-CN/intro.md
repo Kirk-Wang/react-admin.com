@@ -8,7 +8,7 @@ title: 简介
 
 ## 功能
 
-* 适配任何后端接口架构（REST，GraphQL，SOAP等）
+* 适配任何后端接口架构 （REST，GraphQL，SOAP等）
 * 完善的使用文档
 * Super-fast（超快的）UI 得益于optimistic （积极的）渲染 (在服务器返回之前呈现)
 * 超快的撤消更新和删除
@@ -42,7 +42,7 @@ npm install react-admin
 
 ## 用法
 
-阅读大约15分钟的 \[教程\](./Tutorial.html) 介绍。 之后，前往\[文档\](./index.html)，或查看\[演示的源代码\](https://github.com/marmelab/react-admin/tree/master/examples/demo)以便获取示例用法。
+阅读大约15分钟的 [教程](./Tutorial.md)介绍。 之后，前往\[文档\](./index.html)，或查看\[演示的源代码\](https://github.com/marmelab/react-admin/tree/master/examples/demo)以便获取示例用法。
 
 ## 一目了然
 
@@ -175,10 +175,10 @@ $ cd ../myapp
 $ npm run
 ```
 
-## License
+## 许可
 
-React-admin is licensed under the [MIT Licence](https://github.com/marmelab/react-admin/blob/master/LICENSE.md), sponsored and supported by [marmelab](http://marmelab.com).
+React-admin遵循 [MIT Licence](https://github.com/marmelab/react-admin/blob/master/LICENSE.md)，由 [marmelab](http://marmelab.com)赞助和支持。
 
-## Donate
+## 捐赠
 
-This library is free to use, even for commercial purpose. If you want to give back, please talk about it, help newcomers, or contribute code. But the best way to give back is to **donate to a charity**. We recommend [Doctors Without Borders](http://www.doctorswithoutborders.org/).
+这个库是免费使用的，即使是商业用途。 如果你想要回馈，请交流它，帮助新人，或贡献代码。 但是, 最好的方法是 **捐赠慈善机构**。 我们推荐[Doctors Without Borders](http://www.doctorswithoutborders.org/)。
