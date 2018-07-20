@@ -40,11 +40,11 @@ React-admin 可以从npm获得并安装（和它所必需的依赖） 使用：
 npm install react-admin
 ```
 
-## Usage
+## 用法
 
-Read the [Tutorial](./Tutorial.md) for a 15 minutes introduction. After that, head to the [Documentation](./index.md), or checkout the [source code of the demo](https://github.com/marmelab/react-admin/tree/master/examples/demo) for an example usage.
+阅读大约15分钟的 \[教程\](./Tutorial.html) 介绍。 之后，前往\[文档\](./index.html)，或查看\[演示的源代码\](https://github.com/marmelab/react-admin/tree/master/examples/demo)以便获取示例用法。
 
-## At a Glance
+## 一目了然
 
 ```jsx
 // in app.js
@@ -63,7 +63,7 @@ render(
 );
 ```
 
-The `<Resource>` component is a configuration component that allows to define sub components for each of the admin view: `list`, `edit`, and `create`. These components use Material UI and custom components from react-admin:
+`<Resource>` 组件是一个配置组件，它允许你为每个admin视图定义子组件： `list`，`edit`和`create`。 这些组件使用来自于react-admin中的 Material UI 和 定制组件：
 
 ```jsx
 // in posts.js
@@ -116,7 +116,7 @@ export const PostCreate = (props) => (
 );
 ```
 
-## Does It Work With My API?
+## 它是否适用于我的API？
 
 Yes.
 
