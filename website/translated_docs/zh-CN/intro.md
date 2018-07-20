@@ -2,49 +2,49 @@
 id: intro
 title: 简介
 ---
-A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, [React](https://facebook.github.io/react/) and [Material Design](https://material.io/). Previously named [admin-on-rest](https://github.com/marmelab/admin-on-rest). Open sourced and maintained by [marmelab](https://marmelab.com/).
+一个运行在浏览器中，在REST/GraphQL API之上，用于构建admin（中后台）应用程序的前端框架。它使用了ES6，[React](https://facebook.github.io/react/) 和 [Material Design](https://material.io/)进行编写。 它以前的名字叫做 [admin-on-rest](https://github.com/marmelab/admin-on-rest)。 由[marmelab](https://marmelab.com/)开源和维护。
 
 [Demo](https://marmelab.com/react-admin-demo/) - [Source](https://github.com/marmelab/react-admin) - [Releases](https://github.com/marmelab/react-admin/releases) - [Support](http://stackoverflow.com/questions/tagged/react-admin) <iframe src="https://player.vimeo.com/video/268958716?byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="display:block;margin:0 auto" mark="crwd-mark"></iframe> 
 
-## Features
+## 功能
 
-* Adapts to any backend (REST, GraphQL, SOAP, etc.)
-* Complete documentation
-* Super-fast UI thanks to optimistic rendering (renders before the server returns)
-* Undo updates and deletes for a few seconds
-* Supports relationships (many to one, one to many)
-* Internationalization (i18n)
-* Conditional formatting
-* Themeable
-* Supports any authentication provider (REST API, OAuth, Basic Auth, ...)
-* Full-featured Datagrid (sort, pagination, filters)
-* Filter-as-you-type
-* Supports any form layout (simple, tabbed, etc.)
-* Data Validation
-* Custom actions
-* Large library of components for various data types: boolean, number, rich text, etc.
-* WYSIWYG editor
-* Customize dashboard, menu, layout
-* Super easy to extend and override (it's just React components)
-* Highly customizable interface
-* Can connect to multiple backends
-* Leverages the best libraries in the React ecosystem (Redux, redux-form, redux-saga, material-ui, recompose)
-* Can be included in another React app
-* Inspired by the popular [ng-admin](https://github.com/marmelab/ng-admin) library (also by marmelab)
+* 适配任何后端接口架构 （REST，GraphQL，SOAP等）
+* 完善的使用文档
+* Super-fast（超快的）UI 得益于optimistic （积极的）渲染 (在服务器返回之前呈现)
+* 超快的撤消更新和删除
+* 支持关联（多对一，一对多）
+* 国际化 （i18n）
+* 条件格式化
+* 主题化（可更换的主题）
+* 支持任何身份验证提供程序（REST API，OAuth，Basic Auth，...）
+* 功能全面的数据表格（排序，分页，过滤器）
+* 输入即筛选
+* 支持任何表单布局 (简单、选项卡式等)
+* 数据验证
+* 自定义action
+* 用于各种数据类型的大型组件库: boolean, number, rich text等。
+* 所见即所得（WYSIWYG）编辑器
+* 可自定义仪表板、菜单、版式
+* 超容易扩展和覆写 (它仅仅只是React组件)
+* 高度可定制的界面
+* 可以连接到多个后端
+* 使用了React生态系统中最好的库（Redux，redux-form，redux-saga，material-ui，recompose）
+* 可以包含在另一个React应用程序
+* 受流行库 \[ng-admin\](https://github.com/marmelab/ng-admin) 的启发 （ng-admin 也是由marmelab开源和维护）
 
-## Installation
+## 安装
 
-React-admin is available from npm. You can install it (and its required dependencies) using:
+React-admin 可以从npm获得并安装（和它所必需的依赖） 使用：
 
 ```sh
 npm install react-admin
 ```
 
-## Usage
+## 用法
 
-Read the [Tutorial](./Tutorial.md) for a 15 minutes introduction. After that, head to the [Documentation](./index.md), or checkout the [source code of the demo](https://github.com/marmelab/react-admin/tree/master/examples/demo) for an example usage.
+阅读大约15分钟的 [教程](./Tutorial.md)介绍。 之后，前往\[文档\](./index.html)，或查看\[演示的源代码\](https://github.com/marmelab/react-admin/tree/master/examples/demo)以便获取示例用法。
 
-## At a Glance
+## 一目了然
 
 ```jsx
 // in app.js
@@ -63,7 +63,7 @@ render(
 );
 ```
 
-The `<Resource>` component is a configuration component that allows to define sub components for each of the admin view: `list`, `edit`, and `create`. These components use Material UI and custom components from react-admin:
+`<Resource>` 组件是一个配置组件，它允许你为每个admin视图定义子组件： `list`，`edit`和`create`。 这些组件使用来自于react-admin中的 Material UI 和 定制组件：
 
 ```jsx
 // in posts.js
@@ -116,47 +116,47 @@ export const PostCreate = (props) => (
 );
 ```
 
-## Does It Work With My API?
+## 它是否适用于我的API？
 
 Yes.
 
-React-admin uses an adapter approach, with a concept called *Data Providers*. Existing providers can be used as a blueprint to design your API, or you can write your own Data Provider to query an existing API. Writing a custom Data Provider is a matter of hours.
+React-admin使用适配器方法，其概念称为Data Providers（数据提供者）。 现有数据提供程序（Data Provider）可以用作blueprint来设计你的 API， 也可以编写自己的数据提供程序（Provider）来查询现有的 api。 Writing a custom Data Provider is a matter of hours.
 
 ![Data Provider architecture](https://marmelab.com/react-admin/img/data-provider.png)
 
-See the [Data Providers documentation](./DataProviders.md) for details.
+有关详细信息, 请参阅 [数据提供程序文档](./DataProviders.md)。
 
-## Batteries Included But Removable
+## 包含电池但可拆装
 
-React-admin is designed as a library of loosely coupled React components built on top of [material-ui](http://www.material-ui.com/#/), in addition to controller functions implemented the Redux way. It is very easy to replace one part of react-admin with your own, e.g. to use a custom datagrid, GraphQL instead of REST, or bootstrap instead of Material Design.
+React-admin 在\[material-ui\](http://www.material-ui.com/#/)之上被设计为一个松散合的React组件库，除了控制器功能实现了Redux方法以外。 它也非常容易用你自己的方法来替换react-admin的某一部分，例如，去自定义datagrid，GraphQL代替REST，或者bootstrap代替Material Design。
 
-## Contributing
+## 贡献
 
-Pull requests are welcome on the [GitHub repository](https://github.com/marmelab/react-admin). Try to follow the coding style of the existing files, and include unit tests and documentation. Be prepared for a thorough code review, and be patient for the merge - this is an open-source initiative.
+欢迎所有在 [GitHub repository](https://github.com/marmelab/react-admin)上的PR。 尝试遵循现有文件的编码风格，并包括单元测试和文档。 为全面的代码审查做好准备，并且对合并要有耐心 - 这是一项开源的倡议。
 
-You can run the example app by calling:
+您可以运行这个示例应用程序通过调用：
 
 ```sh
 make run
 ```
 
-And then browse to <http://localhost:8080/>.
+然后浏览 <http://localhost:8080/>。
 
-If you want to contribute to the documentation, install jekyll, then call
+如果你想贡献文档， 安装jekyll， 然后调用
 
 ```sh
 make doc
 ```
 
-And then browse to <http://localhost:4000/>
+然后浏览 <http://localhost:4000/>
 
-You can run the unit tests by calling
+你可您可以运行单元测试通过调用
 
 ```sh
 make test
 ```
 
-If you are using react-admin as a dependency, and if you want to try and hack it, here is the advised process:
+如果你正使用react-admin作为依赖项，并且如果您想尝试并hack它，下面是建议的过程：
 
 ```sh
 # in myapp
@@ -175,10 +175,10 @@ $ cd ../myapp
 $ npm run
 ```
 
-## License
+## 许可
 
-React-admin is licensed under the [MIT Licence](https://github.com/marmelab/react-admin/blob/master/LICENSE.md), sponsored and supported by [marmelab](http://marmelab.com).
+React-admin遵循 [MIT Licence](https://github.com/marmelab/react-admin/blob/master/LICENSE.md)，由 [marmelab](http://marmelab.com)赞助和支持。
 
-## Donate
+## 捐赠
 
-This library is free to use, even for commercial purpose. If you want to give back, please talk about it, help newcomers, or contribute code. But the best way to give back is to **donate to a charity**. We recommend [Doctors Without Borders](http://www.doctorswithoutborders.org/).
+这个库是免费使用的，即使是商业用途。 如果你想要回馈，请交流它，帮助新人，或贡献代码。 但是, 最好的方法是 **捐赠慈善机构**。 我们推荐[Doctors Without Borders](http://www.doctorswithoutborders.org/)。
