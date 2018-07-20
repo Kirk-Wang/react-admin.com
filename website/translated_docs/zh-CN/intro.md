@@ -8,17 +8,17 @@ title: 简介
 
 ## 功能
 
-* 适配任何后端接口架构 （REST，GraphQL，SOAP等）
+* 适配任何后端接口架构（REST，GraphQL，SOAP等）
 * 完善的使用文档
 * Super-fast（超快的）UI 得益于optimistic （积极的）渲染 (在服务器返回之前呈现)
-* Undo updates and deletes for a few seconds
-* Supports relationships (many to one, one to many)
-* Internationalization (i18n)
-* Conditional formatting
-* Themeable
-* Supports any authentication provider (REST API, OAuth, Basic Auth, ...)
-* Full-featured Datagrid (sort, pagination, filters)
-* Filter-as-you-type
+* 超快的撤消更新和删除
+* 支持关联（多对一，一对多）
+* 国际化 （i18n）
+* 条件格式化
+* 主题化（可更换的主题）
+* 支持任何身份验证提供程序（REST API，OAuth，Basic Auth，...）
+* 功能全面的数据表格（排序，分页，过滤器）
+* 输入即筛选
 * Supports any form layout (simple, tabbed, etc.)
 * Data Validation
 * Custom actions
