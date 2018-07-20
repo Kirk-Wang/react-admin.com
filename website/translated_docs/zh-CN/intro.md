@@ -19,22 +19,22 @@ title: 简介
 * 支持任何身份验证提供程序（REST API，OAuth，Basic Auth，...）
 * 功能全面的数据表格（排序，分页，过滤器）
 * 输入即筛选
-* Supports any form layout (simple, tabbed, etc.)
-* Data Validation
-* Custom actions
-* Large library of components for various data types: boolean, number, rich text, etc.
-* WYSIWYG editor
-* Customize dashboard, menu, layout
-* Super easy to extend and override (it's just React components)
-* Highly customizable interface
-* Can connect to multiple backends
-* Leverages the best libraries in the React ecosystem (Redux, redux-form, redux-saga, material-ui, recompose)
-* Can be included in another React app
-* Inspired by the popular [ng-admin](https://github.com/marmelab/ng-admin) library (also by marmelab)
+* 支持任何表单布局 (简单、选项卡式等)
+* 数据验证
+* 自定义action
+* 用于各种数据类型的大型组件库: boolean, number, rich text等。
+* 所见即所得（WYSIWYG）编辑器
+* 可自定义仪表板、菜单、版式
+* 超容易扩展和覆写 (它仅仅只是React组件)
+* 高度可定制的界面
+* 可以连接到多个后端
+* 使用了React生态系统中最好的库（Redux，redux-form，redux-saga，material-ui，recompose）
+* 可以包含在另一个React应用程序
+* 受流行库 \[ng-admin\](https://github.com/marmelab/ng-admin) 的启发 （ng-admin 也是由marmelab开源和维护）
 
-## Installation
+## 安装
 
-React-admin is available from npm. You can install it (and its required dependencies) using:
+React-admin 可以从npm获得并安装（和它所必需的依赖） 使用：
 
 ```sh
 npm install react-admin
