@@ -128,35 +128,35 @@ React-admin使用适配器方法，其概念称为Data Providers（数据提供�
 
 ## 包含电池但可拆装
 
-React-admin is designed as a library of loosely coupled React components built on top of [material-ui](http://www.material-ui.com/#/), in addition to controller functions implemented the Redux way. It is very easy to replace one part of react-admin with your own, e.g. to use a custom datagrid, GraphQL instead of REST, or bootstrap instead of Material Design.
+React-admin 在\[material-ui\](http://www.material-ui.com/#/)之上被设计为一个松散合的React组件库，除了控制器功能实现了Redux方法以外。 它也非常容易用你自己的方法来替换react-admin的某一部分，例如，去自定义datagrid，GraphQL代替REST，或者bootstrap代替Material Design。
 
-## Contributing
+## 贡献
 
-Pull requests are welcome on the [GitHub repository](https://github.com/marmelab/react-admin). Try to follow the coding style of the existing files, and include unit tests and documentation. Be prepared for a thorough code review, and be patient for the merge - this is an open-source initiative.
+欢迎所有在 [GitHub repository](https://github.com/marmelab/react-admin)上的PR。 尝试遵循现有文件的编码风格，并包括单元测试和文档。 为全面的代码审查做好准备，并且对合并要有耐心 - 这是一项开源的倡议。
 
-You can run the example app by calling:
+您可以运行这个示例应用程序通过调用：
 
 ```sh
 make run
 ```
 
-And then browse to <http://localhost:8080/>.
+然后浏览 <http://localhost:8080/>。
 
-If you want to contribute to the documentation, install jekyll, then call
+如果你想贡献文档， 安装jekyll， 然后调用
 
 ```sh
 make doc
 ```
 
-And then browse to <http://localhost:4000/>
+然后浏览 <http://localhost:4000/>
 
-You can run the unit tests by calling
+你可您可以运行单元测试通过调用
 
 ```sh
 make test
 ```
 
-If you are using react-admin as a dependency, and if you want to try and hack it, here is the advised process:
+如果你正使用react-admin作为依赖项，并且如果您想尝试并hack它，下面是建议的过程：
 
 ```sh
 # in myapp
