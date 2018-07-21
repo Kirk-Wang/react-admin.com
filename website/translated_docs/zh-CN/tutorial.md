@@ -1,12 +1,12 @@
 ---
 id: tutorial
-title: Tutorial
+title: 教程
 ---
-This 15 minutes tutorial will expose how to create a new admin app based on an existing REST API.<video width="800" height="600" controls> <source src="http://static.marmelab.com/react-admin/react-admin.mp4" type="video/mp4"> Your browser does not support the video tag. </video> 
+这15分钟的教程将揭示如何创建一个新的管理应用程序基于现有的 REST API。<video width="800" height="600" controls> <source src="http://static.marmelab.com/react-admin/react-admin.mp4" type="video/mp4"> Your browser does not support the video tag. </video> 
 
-## Setting Up
+## 设置
 
-React-admin uses React. We'll use Facebook's [create-react-app](https://github.com/facebookincubator/create-react-app) to create an empty React app, and install the `react-admin` package:
+React-Admin使用React。 我们将使用 Facebook 的 [create-react-app](https://github.com/facebookincubator/create-react-app) 创建一个空的React app, 并安装 `react-admin` 软件包:
 
 ```sh
 npm install -g create-react-app
@@ -16,13 +16,13 @@ yarn add react-admin
 yarn start
 ```
 
-You should be up and running with an empty React application on port 3000.
+您应该是在3000端口上启动并运行着一个空的React应用程序。
 
-## Using an API As Data Source
+## 使用 API 作为数据源
 
-React-admin runs in the browser, and uses APIs for fetching and storing data.
+React-admin运行在浏览器中, 并使用 API 获取和存储数据。
 
-We'll be using [JSONPlaceholder](http://jsonplaceholder.typicode.com/), a fake REST API designed for testing and prototyping, as the datasource for the admin. Here is what it looks like:
+我们将使用 [JSONPlaceholder](http://jsonplaceholder.typicode.com/), 一个用于测试和原型设计的假 REST API, 作为管理员的数据源。下面是它的样子：
 
     curl http://jsonplaceholder.typicode.com/posts/12
     
