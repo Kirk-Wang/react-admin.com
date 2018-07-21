@@ -288,9 +288,9 @@ export const PostCreate = (props) => (
 
 至于`<ReferenceInput>`，它采用相同的属性作为`<ReferenceField>`（在早先的列表页用过）。 `<ReferenceInput>`用这些属性去获取可能引用关联到当前纪录的API（在这个例子中, 可能 `users`关联到了当前的`post`）。 它然后传递这些可能的引用到子组件（`<SelectInput>`），它是负责显示它们（在这种情况通过它们的`name`字段），并且让用户选择一个。 在HTML中`<SelectInput>`渲染为一个`<select>`标签。
 
-**Tip**: The `<Edit>` and the `<Create>` components use almost the same child form, except for the additional `id` input in `<Edit>`. In most cases, the forms for creating and editing a record are a bit different. But if they are the same, you can share a common form component between the two.
+**提示**：`<Edit>`和`<Create>`组件使用了几乎相同的子表单，但`<Edit>`中的附加`id` input 除外。 在大多数情况下, 创建和编辑记录的表单会有点不同。 但是, 如果它们相同, 则可以在两者之间共享一个常见的表单组件。
 
-Notice the additional `<EditButton>` field in the `<PostList>` children: that's what gives access to the post editing page. Also, the `<Edit>` component uses a custom `<PostTitle>` component as title, which shows the way to customize the title for a given page.
+注意在`<PostList>`子组件中增加的`<EditButton>`字段：这是给予获得编辑页的访问。 另外, `<Edit>` 组件使用自定义 `<PostTitle>` 组件作为标题, 它显示了自定义给定页的标题的方式。
 
 To use the new `<PostEdit>` and `<PostCreate>` components in the posts resource, just add them as `edit` and `create` attributes in the `<Resource>` component:
 
