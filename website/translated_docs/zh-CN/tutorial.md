@@ -54,7 +54,7 @@ const App = () => <Admin dataProvider={dataProvider} />;
 export default App;
 ```
 
-`App` 组件现在渲染了一个 `<Admin>` 组件, 它是react-admin应用程序的根组件。 This component expects a `dataProvider` prop - a function capable of fetching data from an API. Since there is no standard for data exchanges between computers, you will probably have to write a custom provider to connect react-admin to your own APIs - but we'll dive into Data Providers later. For now, let's take advantage of the `ra-data-json-server` data provider, which speaks the same REST dialect as JSONPlaceholder.
+`App` 组件现在渲染了一个 `<Admin>` 组件, 它是react-admin应用程序的根组件。 该组件需要一个`dataProvider` 属性- 一个能够从API获取数据的函数。 Since there is no standard for data exchanges between computers, you will probably have to write a custom provider to connect react-admin to your own APIs - but we'll dive into Data Providers later. For now, let's take advantage of the `ra-data-json-server` data provider, which speaks the same REST dialect as JSONPlaceholder.
 
 ```sh
 yarn add ra-data-json-server
