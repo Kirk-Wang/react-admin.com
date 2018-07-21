@@ -115,7 +115,7 @@ PostList的主要组件是 `<List>` 组件，负责从 API 中抓取信息，显
 
 你刚看到`<TextField>`组件，React-admin提供了许多字段组件去映射各种内容类型： number，date， image，HTML,，array，reference等。
 
-For instance, [the `/users` endpoint in JSONPlaceholder](http://jsonplaceholder.typicode.com/users) contains emails.
+例如, [ `/user` API端点在 JSONPlaceholder](http://jsonplaceholder.typicode.com/users) 中包含电子邮件。
 
     curl http://jsonplaceholder.typicode.com/users/2
     
