@@ -38,7 +38,7 @@ React-admin运行在浏览器中, 并使用 API 获取和存储数据。
 
 JSONPlaceholder为帖子，评论和用户提供端点（API）。 我们建立的管理员将允许创建，检索，更新和删除（CRUD）这些资源。
 
-## 使用数据提供程序（Data Provider）与API进行联系
+## 使用Data Provider与API进行联系
 
 通过以下代码替换`src/App.js`来引导admin app：
 
@@ -64,7 +64,7 @@ yarn add ra-data-json-server
 
 ## 使用Resource映射API端点
 
-`<Admin>` 组件需要一个或多个 `<Resource>` 子级组件。 Each resource maps a name to an endpoint in the API. Edit the `App.js` file to add a `posts` resource:
+`<Admin>` 组件需要一个或多个 `<Resource>` 子级组件。 每个Resource映射一个名称到 API 中的端点。 编辑 `App.js` 文件来添加一个`posts`资源:
 
 ```jsx
 // in src/App.js
@@ -77,7 +77,7 @@ const App = () => (
 );
 ```
 
-**Tip**: We'll define the `<PostList>` component in the next section.
+**提示**: 在下一节中, 我们将定义 `<PostList>` 组件。
 
 The line `<Resource name="posts" />` informs react-admin to fetch the "posts" records from the <http://jsonplaceholder.typicode.com/posts> URL.
 
