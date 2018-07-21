@@ -54,17 +54,17 @@ const App = () => <Admin dataProvider={dataProvider} />;
 export default App;
 ```
 
-`App` 组件现在渲染了一个 `<Admin>` 组件, 它是react-admin应用程序的根组件。 该组件需要一个`dataProvider` 属性- 一个能够从API获取数据的函数。 由于计算机之间并没有数据交换的标准，因此您可能必须编写自定义提供程序（Provider）以便将react-admin连接到您自己的API- 稍后我们会深入了解数据提供程序（Data Providers）。 For now, let's take advantage of the `ra-data-json-server` data provider, which speaks the same REST dialect as JSONPlaceholder.
+`App` 组件现在渲染了一个 `<Admin>` 组件, 它是react-admin应用程序的根组件。 该组件需要一个`dataProvider` 属性- 一个能够从API获取数据的函数。 由于计算机之间并没有数据交换的标准，因此您可能必须编写自定义提供程序（Provider）以便将react-admin连接到您自己的API- 稍后我们会深入了解数据提供程序（Data Providers）。 现在, 让我们利用 `ra-data-json-server` 数据提供程序, 它将适用于JSONPlaceholder 。
 
 ```sh
 yarn add ra-data-json-server
 ```
 
-That's enough for react-admin to run an empty app. Now it's time to add features!
+这足以让react-admin运行一个空的应用程序。现在是添加功能的时候了!
 
-## Mapping API Endpoints With Resources
+## 使用Resource映射API端点
 
-The `<Admin>` component expects one or more `<Resource>` child components. Each resource maps a name to an endpoint in the API. Edit the `App.js` file to add a `posts` resource:
+`<Admin>` 组件需要一个或多个 `<Resource>` 子级组件。 Each resource maps a name to an endpoint in the API. Edit the `App.js` file to add a `posts` resource:
 
 ```jsx
 // in src/App.js
