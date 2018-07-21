@@ -79,11 +79,11 @@ const App = () => (
 
 **提示**: 在下一节中, 我们将定义 `<PostList>` 组件。
 
-The line `<Resource name="posts" />` informs react-admin to fetch the "posts" records from the <http://jsonplaceholder.typicode.com/posts> URL.
+`<Resource name="posts" />` 这一行通知react-admin从 [http://jsonplaceholder.typicode.com/posts ](http://jsonplaceholder.typicode.com/posts) URL上获取 "posts" 记录。
 
-## Displaying A List Of Records
+## 显示记录列表
 
-`<Resource>` also defines the React components to use for each CRUD operation (`list`, `create`, `edit`, and `show`). The `list={PostList}` prop means that react-admin should use the `<PostList>` component to display the list of posts. Create that component as follows:
+`<Resource>` 还定义了每个 CRUD 操作所使用的React组件 （`列表（list）`, `创建（create）`, `编辑（edit）`, `显示（show）`）。 The `list={PostList}` prop means that react-admin should use the `<PostList>` component to display the list of posts. Create that component as follows:
 
 ```jsx
 // in src/posts.js
