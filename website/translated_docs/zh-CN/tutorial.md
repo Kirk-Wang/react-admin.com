@@ -167,9 +167,9 @@ export const UserList = (props) => (
 
 边栏现在提供了对第二个资源“users”的访问。你可以点击它，它工作了！“users” 列表将电子邮件地址显示为 `<a href="mailto:">` 标记。
 
-在react-admin中， 域是简单的react 组件。 At runtime, they receive the `record` fetched from the API (e.g. `{ "id": 2, "name": "Ervin Howell", "username": "Antonette", "email": "Shanna@melissa.tv" }`), and the `source` field they should display (e.g. `email`).
+在react-admin中， Field是简单的react 组件。 在运行时, 它们接收从 API 获取的 `记录` (例如, `{ "id": 2, "name": "Ervin Howell", "username": "Antonette", "email": "Shanna@melissa.tv" }`) 并且他们应该显示`source`所指定的字段 (如：`email`)。
 
-That means that writing a custom Field component is really simple. For instance, to create an `UrlField`:
+这意味着编写自定义字段组件非常简单。例如，去创建一个`UrlField`：
 
 ```jsx
 // in src/MyUrlField.js
@@ -189,7 +189,7 @@ UrlField.propTypes = {
 export default UrlField;
 ```
 
-## Handling Relationships
+## 处理关联性
 
 In JSONPlaceholder, each `post` record includes a `userId` field, which points to a `user`:
 
