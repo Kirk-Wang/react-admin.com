@@ -229,11 +229,11 @@ export const PostList = (props) => (
 
 **提示**：单独的 `<ReferenceField>` 组件不显示任何内容。 它只提取引用数据, 并将其作为 `record` 传递给其子组件。 就像 `<List>` 组件, 所有 `<Reference>` 组件只负责获取和准备数据, 并将呈现委托给其子级。
 
-**Tip**: Look at the network tab of your browser again: react-admin deduplicates requests for users, and aggregates them in order to make only *one* HTTP request to the `/users` endpoint for the whole datagrid. That's one of many optimizations that keep the UI fast and responsive.
+**提示**：再次查看浏览器的网络选项卡：react-admin对users的请求进行重复删除，并聚合它们，以便对于整个datagrid向 `/ users` 端点只发出*一个*HTTP请求。 这是保持UI快速响应的众多优化之一。
 
-## Adding Creation and Editing Capabilities
+## 添加创建和编辑功能
 
-An admin interface isn't just about displaying remote data, it should also allow creating and editing records. React-admin provides `<Create>` and `<Edit>` components for that purpose. Add them to the `posts.js` script:
+管理界面不仅仅是显示远程数据，还应该允许创建和编辑记录。 React-admin 提供了`<Create>`和`<Edit>`组件来做这件事。 添加它们到`posts.js`脚本：
 
 ```jsx
 // in src/posts.js
