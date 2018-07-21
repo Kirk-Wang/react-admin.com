@@ -191,7 +191,7 @@ export default UrlField;
 
 ## 处理关联性
 
-In JSONPlaceholder, each `post` record includes a `userId` field, which points to a `user`:
+在 JSONPlaceholder 中, 每个 `post` 记录都包括一个 `userId` 字段, 它指向一个 `user`：
 
 ```json
 {
@@ -202,7 +202,7 @@ In JSONPlaceholder, each `post` record includes a `userId` field, which points t
 }
 ```
 
-React-admin knows how to take advantage of these foreign keys to fetch references. For instance, to include the user name in the posts list, use the `<ReferenceField>`:
+React-admin知道如何利用这些外键来获取引用。例如，在这些post列表中包含用户名，使用`<ReferenceField>`：
 
 ```jsx
 // in src/posts.js
@@ -223,7 +223,7 @@ export const PostList = (props) => (
 );
 ```
 
-When displaying the posts list, the app now fetches related user records, and displays their `name` as a `<TextField>`. Notice the `label` property: you can use it on any field component to customize the field label.
+当我们显示这些帖子列表时，这个 app 现在会获取关联的用户纪录，并显示他们的 `name` 作为一个 `<TextField>` 。 请注意 `label` 属性： 可以在任何字段组件上使用它来自定义字段标签。
 
 ![reference posts in comment list](https://marmelab.com/react-admin/img/reference-posts.png)
 
