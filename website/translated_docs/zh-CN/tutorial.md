@@ -227,7 +227,7 @@ export const PostList = (props) => (
 
 ![reference posts in comment list](https://marmelab.com/react-admin/img/reference-posts.png)
 
-**Tip**: The `<ReferenceField>` component alone doesn't display anything. It just fetches the reference data, and passes it as a `record` to its child component. Just like the `<List>` component, all `<Reference>` components are only responsible for fetching and preparing data, and delegate rendering to their children.
+**提示**：单独的 `<ReferenceField>` 组件不显示任何内容。 它只提取引用数据, 并将其作为 `record` 传递给其子组件。 就像 `<List>` 组件, 所有 `<Reference>` 组件只负责获取和准备数据, 并将呈现委托给其子级。
 
 **Tip**: Look at the network tab of your browser again: react-admin deduplicates requests for users, and aggregates them in order to make only *one* HTTP request to the `/users` endpoint for the whole datagrid. That's one of many optimizations that keep the UI fast and responsive.
 
