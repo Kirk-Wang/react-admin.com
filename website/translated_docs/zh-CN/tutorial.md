@@ -36,11 +36,11 @@ React-admin运行在浏览器中, 并使用 API 获取和存储数据。
 }
 ```
 
-JSONPlaceholder provides endpoints for posts, comments, and users. The admin we'll build should allow to Create, Retrieve, Update, and Delete (CRUD) these resources.
+JSONPlaceholder为帖子，评论和用户提供端点（API）。 我们建立的管理员将允许创建，检索，更新和删除（CRUD）这些资源。
 
-## Making Contact With The API Using a Data Provider
+## 使用数据提供程序（Data Provider）与API进行联系
 
-Bootstrap the admin app by replacing the `src/App.js` by the following code:
+通过以下代码替换`src/App.js`来引导admin app：
 
 ```jsx
 // in src/App.js
@@ -54,7 +54,7 @@ const App = () => <Admin dataProvider={dataProvider} />;
 export default App;
 ```
 
-The `App` component now renders an `<Admin>` component, which is the root component of a react-admin application. This component expects a `dataProvider` prop - a function capable of fetching data from an API. Since there is no standard for data exchanges between computers, you will probably have to write a custom provider to connect react-admin to your own APIs - but we'll dive into Data Providers later. For now, let's take advantage of the `ra-data-json-server` data provider, which speaks the same REST dialect as JSONPlaceholder.
+`App` 组件现在渲染了一个 `<Admin>` 组件, 它是react-admin应用程序的根组件。 This component expects a `dataProvider` prop - a function capable of fetching data from an API. Since there is no standard for data exchanges between computers, you will probably have to write a custom provider to connect react-admin to your own APIs - but we'll dive into Data Providers later. For now, let's take advantage of the `ra-data-json-server` data provider, which speaks the same REST dialect as JSONPlaceholder.
 
 ```sh
 yarn add ra-data-json-server
