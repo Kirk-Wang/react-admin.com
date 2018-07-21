@@ -284,7 +284,7 @@ export const PostCreate = (props) => (
 );
 ```
 
-If you've understood the `<List>` component, the `<Edit>` and `<Create>` components will be no surprise. They are responsible for fetching the record (or initializing an empty record in the case of `<Create>`), and displaying the page title. They pass the record down to the `<SimpleForm>` component, which is responsible for the form layout, default values, and validation. Just like `<Datagrid>`, `<SimpleForm>` uses its children to determine the form inputs to display. It expects *input components* as children. `<DisabledInput>`, `<TextInput>`, `<LongTextInput>`, and `<ReferenceInput>` are such inputs.
+如果你已经理解`<List>`组件，这个`<Edit>`和`<Create>`组件将不足为奇。 他们负责获取记录（或者在`<Create>`的情况下初始化空记录），并显示页面标题。 它们传递纪录到这个`<SimpleForm>`组件，它负责表单布局，默认值，和验证。 就像`<Datagrid>`，`<SimpleForm>`用它的子组件来确定要显示的表单输入项。 它期望*input components*作为字组件。 `<DisabledInput>`，`<TextInput>`，`<LongTextInput>`和`<ReferenceInput>`都是这样的组件。
 
 As for the `<ReferenceInput>`, it takes the same props as the `<ReferenceField>` (used earlier in the list page). `<ReferenceInput>` uses these props to fetch the API for possible references related to the current record (in this case, possible `users` for the current `post`). It then passes these possible references to the child component (`<SelectInput>`), which is responsible for displaying them (via their `name` in that case), and letting the user select one. `<SelectInput>` renders as a `<select>` tag in HTML.
 
