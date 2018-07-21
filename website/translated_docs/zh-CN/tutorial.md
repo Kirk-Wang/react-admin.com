@@ -323,7 +323,7 @@ React-admin使用 *积极（optimistic ）呈现*。 这意味着, 当您编辑�
 
 ## 向列表中添加搜索和筛选器
 
-Let's get back to the post list for a minute. It offers sorting and pagination, but one feature is missing: the ability to search content.
+让我们回到帖子列表一分钟。它提供排序和分页, 但缺少一个功能: 搜索内容的能力。
 
 React-admin can use Input components to create a multi-criteria search engine in the list view. First, create a `<Filter>` component just like you would write a `<SimpleForm>` component, using input components as children. Then, add it to the list using the `filters` prop:
 
