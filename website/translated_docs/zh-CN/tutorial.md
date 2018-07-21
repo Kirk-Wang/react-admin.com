@@ -83,7 +83,7 @@ const App = () => (
 
 ## 显示记录列表
 
-`<Resource>` 还定义了每个 CRUD 操作所使用的React组件 （`列表（list）`, `创建（create）`, `编辑（edit）`, `显示（show）`）。 The `list={PostList}` prop means that react-admin should use the `<PostList>` component to display the list of posts. Create that component as follows:
+`<Resource>` 还定义了每个 CRUD 操作所使用的React组件 （`列表（list）`, `创建（create）`, `编辑（edit）`, `显示（show）`）。 `list={PostList}`属性意味着react-admin应该使用 `<PostList>` 组件来显示帖子列表。 按如下方式创建该组件:
 
 ```jsx
 // in src/posts.js
