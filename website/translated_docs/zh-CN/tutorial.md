@@ -317,7 +317,7 @@ const App = () => (
 
 **注释**：JSONPlaceholder是一个只读的 api；虽然它似乎接受`POST`和`PUT`请求，但它并没有考虑账户的新建和编辑 - 这就是为什么，在这种特定情况下，你将在创建后看到错误，并且在保存之后将不会看到你的编辑。 这只是 JSONPlaceholder 的一个假象。
 
-反应-管理员使用 *积极（optimistic ）呈现*。 That means that, when you edit a record and hit the "Save" button, the UI displays a confirmation and displays the updated data *before sending the update query to server*. Not only does this make the interface ultra fast, it also allows the "Undo" feature. It's already functional in the admin at that point. Try editing a record, then hit the "Undo" link in the black confirmation bar before it slides out. You'll see that the app does not send the `UPDATE` query to the API, and displays the non-modified data.
+React-admin使用 *积极（optimistic ）呈现*。 这意味着, 当您编辑记录并点击 “保存” 按钮时, UI 将显示一个确认, 并在*将更新查询发送到服务器之前*显示更新后的数据 。 这不仅使界面超快，而且还允许“Undo”功能。 它已经在admin中作为一个功能点了。 尝试编辑记录，然后在滑出之前点击黑色确认栏中的“Undo”链接。 您将看到应用程序不会将 `UPDATE` 查询发送到 API，并显示未修改的数据。
 
 **Note**: When you add the ability to edit an item, you also add the ability to delete it. The "Delete" button in the edit view is fully working out of the box.
 
