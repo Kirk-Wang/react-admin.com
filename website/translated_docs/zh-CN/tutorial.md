@@ -107,7 +107,7 @@ PostList的主要组件是 `<List>` 组件，负责从 API 中抓取信息，显
 
 ![Simple posts list](https://marmelab.com/react-admin/img/simple-post-list.png)
 
-If you look at your browser network tab in the developer tools, you'll notice that the application fetched the `http://jsonplaceholder.typicode.com/posts` URL, then used the results to build the datagrid. That's basically how react-admin works.
+如果你在浏览器开发者工具中查看网络选项卡时, 则会注意到应用程序拉取了 `http://jsonplaceholder.typicode.com/posts` URL, 然后使用结果（数据）生成 datagrid。 这些基本上解释了react-admin是如何工作的。
 
 The list is already functional: you can reorder it by clicking on column headers, or change pages by using the bottom pagination controls. The `ra-data-json-server` data provider translates these actions to a query string that JSONPlaceholder understands.
 
