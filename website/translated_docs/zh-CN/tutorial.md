@@ -109,9 +109,9 @@ PostList的主要组件是 `<List>` 组件，负责从 API 中抓取信息，显
 
 如果你在浏览器开发者工具中查看网络选项卡时, 则会注意到应用程序拉取了 `http://jsonplaceholder.typicode.com/posts` URL, 然后使用结果（数据）生成 datagrid。 这些基本上解释了react-admin是如何工作的。
 
-The list is already functional: you can reorder it by clicking on column headers, or change pages by using the bottom pagination controls. The `ra-data-json-server` data provider translates these actions to a query string that JSONPlaceholder understands.
+该列表已经功能化: 您可以通过单击列标题来重新排序, 或者使用底部分页控件更改页面。 `ra-data-json-server` 数据提供程序（Data Provider）将这些操作转换为 JSONPlaceholder 理解的查询字符串。
 
-## Using Field Types
+## 使用字段类型
 
 You've just met the `<TextField>` component. React-admin provides more Field components, mapping various data types: number, date, image, HTML, array, reference, etc.
 
