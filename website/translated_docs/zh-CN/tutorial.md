@@ -292,7 +292,7 @@ export const PostCreate = (props) => (
 
 注意在`<PostList>`子组件中增加的`<EditButton>`字段：这是给予获得编辑页的访问。 另外, `<Edit>` 组件使用自定义 `<PostTitle>` 组件作为标题, 它显示了自定义给定页的标题的方式。
 
-To use the new `<PostEdit>` and `<PostCreate>` components in the posts resource, just add them as `edit` and `create` attributes in the `<Resource>` component:
+要在posts资源中使用新的`<PostEdit>`和`<PostCreate>`组件，只需将它们添加成为`<Resource>`组件的edit和create属性：
 
 ```jsx
 // in src/App.js
