@@ -286,7 +286,7 @@ export const PostCreate = (props) => (
 
 如果你已经理解`<List>`组件，这个`<Edit>`和`<Create>`组件将不足为奇。 他们负责获取记录（或者在`<Create>`的情况下初始化空记录），并显示页面标题。 它们传递纪录到这个`<SimpleForm>`组件，它负责表单布局，默认值，和验证。 就像`<Datagrid>`，`<SimpleForm>`用它的子组件来确定要显示的表单输入项。 它期望*input components*作为字组件。 `<DisabledInput>`，`<TextInput>`，`<LongTextInput>`和`<ReferenceInput>`都是这样的组件。
 
-As for the `<ReferenceInput>`, it takes the same props as the `<ReferenceField>` (used earlier in the list page). `<ReferenceInput>` uses these props to fetch the API for possible references related to the current record (in this case, possible `users` for the current `post`). It then passes these possible references to the child component (`<SelectInput>`), which is responsible for displaying them (via their `name` in that case), and letting the user select one. `<SelectInput>` renders as a `<select>` tag in HTML.
+至于`<ReferenceInput>`，它采用相同的属性作为`<ReferenceField>`（在早先的列表页用过）。 `<ReferenceInput>`用这些属性去获取可能引用关联到当前纪录的API（在这个例子中, 可能 `users`关联到了当前的`post`）。 它然后传递这些可能的引用到子组件（`<SelectInput>`），它是负责显示它们（在这种情况通过它们的`name`字段），并且让用户选择一个。 在HTML中`<SelectInput>`渲染为一个`<select>`标签。
 
 **Tip**: The `<Edit>` and the `<Create>` components use almost the same child form, except for the additional `id` input in `<Edit>`. In most cases, the forms for creating and editing a record are a bit different. But if they are the same, you can share a common form component between the two.
 
