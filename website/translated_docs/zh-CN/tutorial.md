@@ -101,9 +101,9 @@ export const PostList = (props) => (
 );
 ```
 
-PostList的主要组件是 `<List>` 组件，负责从 API 中抓取信息，显示页面标题，以及处理页。 然后, 该List将实际posts列表的显示委托给其子级。 在这种情况下, 这是一个 `<Datagrid>` 组件, 它渲染为一张表，一行一条记录。 The datagrid uses its child components (here, a list of `<TextField>`) to determine the columns to render. Each Field component maps a different field in the API response, specified by the `source` prop.
+PostList的主要组件是 `<List>` 组件，负责从 API 中抓取信息，显示页面标题，以及处理页。 然后, 该List将实际posts列表的显示委托给其子级。 在这种情况下, 这是一个 `<Datagrid>` 组件, 它渲染为一张表，一行一条记录。 datagrid 使用其子组件 (此处为 `<TextField>`) 来确定要呈现的列。 每个域组件在 API 响应中映射一个不同的域, 由 `source`属性指定。
 
-That's enough to display the post list:
+这足以显示Post列表：
 
 ![Simple posts list](https://marmelab.com/react-admin/img/simple-post-list.png)
 
