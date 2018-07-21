@@ -307,11 +307,11 @@ const App = () => (
 );
 ```
 
-React-admin automatically adds a "create" button on top of the posts list to give access to the `<PostCreate>` component. And the `<EditButton>` renders in each line of the list to give access to the `<PostEdit>` component.
+在 posts 列表顶部 React-admin 自动地添加了一个 “create” 按钮来给予访问`<PostCreate>`组件。 并且 `<EditButton>`呈现在列表中的每一行来提供访问`<PostEdit>`组件。
 
 ![post list with access to edit and create](https://marmelab.com/react-admin/img/editable-post.png)
 
-The form rendered in the create and edit pages is already functional. It issues `POST` and `PUT` requests to the REST API upon submission.
+这个表单在创建和编辑页中已经是可使用了的。在提交上它分别发送`POST`和`PUT`请求到REST API。
 
 ![post edition form](https://marmelab.com/react-admin/img/post-edition.png)
 
