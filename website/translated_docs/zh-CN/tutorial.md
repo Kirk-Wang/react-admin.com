@@ -167,7 +167,7 @@ export const UserList = (props) => (
 
 边栏现在提供了对第二个资源“users”的访问。你可以点击它，它工作了！“users” 列表将电子邮件地址显示为 `<a href="mailto:">` 标记。
 
-In react-admin, fields are simple React components. At runtime, they receive the `record` fetched from the API (e.g. `{ "id": 2, "name": "Ervin Howell", "username": "Antonette", "email": "Shanna@melissa.tv" }`), and the `source` field they should display (e.g. `email`).
+在react-admin中， 域是简单的react 组件。 At runtime, they receive the `record` fetched from the API (e.g. `{ "id": 2, "name": "Ervin Howell", "username": "Antonette", "email": "Shanna@melissa.tv" }`), and the `source` field they should display (e.g. `email`).
 
 That means that writing a custom Field component is really simple. For instance, to create an `UrlField`:
 
