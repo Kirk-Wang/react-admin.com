@@ -319,9 +319,9 @@ const App = () => (
 
 React-admin使用 *积极（optimistic ）呈现*。 这意味着, 当您编辑记录并点击 “保存” 按钮时, UI 将显示一个确认, 并在*将更新查询发送到服务器之前*显示更新后的数据 。 这不仅使界面超快，而且还允许“Undo”功能。 它已经在admin中作为一个功能点了。 尝试编辑记录，然后在滑出之前点击黑色确认栏中的“Undo”链接。 您将看到应用程序不会将 `UPDATE` 查询发送到 API，并显示未修改的数据。
 
-**Note**: When you add the ability to edit an item, you also add the ability to delete it. The "Delete" button in the edit view is fully working out of the box.
+**注意**：添加编辑项目的功能时，还可以添加删除项目的功能。 编辑视图中的 “Delete” 按钮完全开箱即用。
 
-## Adding Search And Filters To The List
+## 向列表中添加搜索和筛选器
 
 Let's get back to the post list for a minute. It offers sorting and pagination, but one feature is missing: the ability to search content.
 
