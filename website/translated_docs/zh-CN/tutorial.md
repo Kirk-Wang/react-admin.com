@@ -129,7 +129,7 @@ PostList的主要组件是 `<List>` 组件，负责从 API 中抓取信息，显
 }
 ```
 
-Let's create a new `users` resource to fetch that endpoint. Add it in `src/App.js`:
+让我们创建一个新的 `users` 资源来获取该端点。在 `src` 中添加它：
 
 ```jsx
 // in src/App.js
@@ -144,7 +144,7 @@ const App = () => (
 );
 ```
 
-Now, create a `users.js` file exporting a `UserList`, using `<EmailField>` to map the `email` field:
+现在, 创建 `users. js` 文件导出 `UserList`，使用 `<EmailField>` 映射 `电子邮件` 字段：
 
 ```jsx
 // in src/users.js
@@ -165,7 +165,7 @@ export const UserList = (props) => (
 
 ![Simple user datagrid](https://marmelab.com/react-admin/img/simple-user-list.png)
 
-The sidebar now gives access to the second resource, "users". You can click on it, it's working! The users list shows email addresses as a `<a href="mailto:">` tags.
+边栏现在提供了对第二个资源“users”的访问。你可以点击它，它工作了！“users” 列表将电子邮件地址显示为 `<a href="mailto:">` 标记。
 
 In react-admin, fields are simple React components. At runtime, they receive the `record` fetched from the API (e.g. `{ "id": 2, "name": "Ervin Howell", "username": "Antonette", "email": "Shanna@melissa.tv" }`), and the `source` field they should display (e.g. `email`).
 
