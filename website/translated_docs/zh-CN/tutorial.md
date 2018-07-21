@@ -101,7 +101,7 @@ export const PostList = (props) => (
 );
 ```
 
-The main component of the post list is a `<List>` component, responsible for grabbing the information from the API, displaying the page title, and handling pagination. This list then delegates the display of the actual list of posts to its child. In this case, that's a `<Datagrid>` component, which renders a table with one row for each record. The datagrid uses its child components (here, a list of `<TextField>`) to determine the columns to render. Each Field component maps a different field in the API response, specified by the `source` prop.
+PostList的主要组件是 `<List>` 组件，负责从 API 中抓取信息，显示页面标题，以及处理页。 然后, 该List将实际posts列表的显示委托给其子级。 在这种情况下, 这是一个 `<Datagrid>` 组件, 它渲染为一张表，一行一条记录。 The datagrid uses its child components (here, a list of `<TextField>`) to determine the columns to render. Each Field component maps a different field in the API response, specified by the `source` prop.
 
 That's enough to display the post list:
 
