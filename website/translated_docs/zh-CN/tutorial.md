@@ -666,9 +666,9 @@ export default (type, resource, params) => {
 };
 ```
 
-**Tip**: `fetchJson()` is just a shortcut for `fetch().then(r => r.json())`, plus a control of the HTTP response code to throw an `HTTPError` in case of 4xx or 5xx response. Feel free to use `fetch()` directly if it doesn't suit your needs.
+**提示**：` fetchJson() `只是 `fetch().then(r => r.json())` 的快捷方式。加上对 HTTP 响应代码的控制，以便在 4xx 或 5xx 响应的情况下抛出 `HTTPError`。 如果不符合您的需要, 请随意使用 `fetch()`。
 
-Using this provider instead of the previous `jsonServerProvider` is just a matter of switching a function:
+使用此提供程序代替以前的 `jsonServerProvider` 只是切换函数的问题：
 
 ```jsx
 // in src/app.js
@@ -681,8 +681,8 @@ const App = () => (
 );
 ```
 
-## Conclusion
+## 结论
 
-React-admin was built with customization in mind. You can replace any react-admin component with a component of your own, for instance to display a custom list layout, or a different edit form for a given resource.
+React-admin 是以考虑定制为基础构建的。 您可以将任何 react-admin 组件替换为你自己的组件, 例如, 显示自定义列表布局或为一个给定的resource不同的编辑表单。
 
-Now that you've completed the tutorial, continue reading the [react-admin documentation](http://marmelab.com/react-admin/), and read the [Material UI components documentation](http://www.material-ui.com/#/).
+现在, 您已经完成了教程, 请继续阅读 [react-admin文档](http://marmelab.com/react-admin/), 并阅读 [Material UI 组件文档](http://www.material-ui.com/#/)。
