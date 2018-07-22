@@ -408,9 +408,9 @@ const App = () => (
 
 大多数admin app都需要身份验证。React-admin 可以在显示页面之前检查用户凭据，并在REST API返回403错误代码时重定向到登录表单。
 
-这些凭据是*什么*以及*如何*获取它们是您作为开发人员必须回答的问题。 React-admin makes no assumption about your authentication strategy (basic auth, OAuth, custom route, etc), but gives you the hooks to plug your logic at the right place - by calling an `authProvider` function.
+这些凭据是*什么*以及*如何*获取它们是您作为开发人员必须回答的问题。 React-admin 不会对您的身份验证策略（basic auth, OAuth, custom route, 等）做出任何假设，但会通过调用 authProvider 函数为您提供在正确位置插入逻辑的钩子。
 
-For this tutorial, since there is no public authentication API we can use, let's use a fake authentication provider that accepts every login request, and stores the `username` in `localStorage`. Each page change will require that `localStorage` contains a `username` item.
+对于本教程，由于没有我们能使用的公共认证API，让我们使用一个假身份验证提供程序，接受每一个登录请求，并存储 `username` 在 `localStorage` 中。 每个页面更改都要求 `localStorage` 包含 `username名` 项。
 
 The `authProvider` is a simple function, which must return a `Promise`:
 
