@@ -323,9 +323,9 @@ React-admin使用 *积极（optimistic ）呈现*。 这意味着, 当您编辑�
 
 ## 向列表中添加搜索和筛选器
 
-让我们回到帖子列表一分钟。它提供排序和分页, 但缺少一个功能: 搜索内容的能力。
+让我们回到Post列表一分钟。它提供排序和分页, 但缺少一个功能: 搜索内容的能力。
 
-React-admin can use Input components to create a multi-criteria search engine in the list view. First, create a `<Filter>` component just like you would write a `<SimpleForm>` component, using input components as children. Then, add it to the list using the `filters` prop:
+React-admin可以使用输入组件在列表视图中创建多标准搜索引擎。 首先, 创建一个 `<Filter>` 组件, 就像您将编写一个 `<SimpleForm>` 组件, 使用输入组件作为子级。 然后, 使用 `filters` 属性将其添加到List中:
 
 ```jsx
 // in src/posts.js
@@ -347,7 +347,7 @@ export const PostList = (props) => (
 );
 ```
 
-The first filter, 'q', takes advantage of a full-text functionality offered by JSONPlaceholder. It is `alwaysOn`, so it always appears on the screen. The second filter, 'userId', can be added by way of the "add filter" button, located on the top of the list. As it's a `<ReferenceInput>`, it's already populated with possible users. It can be turned off by the end user.
+第一个过滤器 ‘q’ 利用了JSONPlaceholder提供的全文功能。 它是 `alwaysOn`，所以它总是出现在屏幕上。 第二个筛选器，‘userId’ 可以通过位于列表顶部的 “add filter” 按钮来添加。 As it's a `<ReferenceInput>`, it's already populated with possible users. It can be turned off by the end user.
 
 ![posts search engine](https://marmelab.com/react-admin/img/filters.gif)
 
