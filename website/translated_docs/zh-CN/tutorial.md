@@ -450,9 +450,9 @@ export default (type, params) => {
 };
 ```
 
-**Tip**: As the `dataProvider` response is asynchronous, you can easily fetch an authentication server in there.
+**提示**: 由于 `dataProvider` 响应是异步的, 因此您可以非常容易地在这里 fetch 一个身份验证服务。
 
-To enable this authentication strategy, pass the client as the `authProvider` prop in the `<Admin>` component:
+要启用此身份验证策略, 请将 client 作为 `authProvider` 属性在 `<Admin> ` 组件中传递：
 
 ```jsx
 // in src/App.js
@@ -466,15 +466,15 @@ const App = () => (
 );
 ```
 
-Once the app reloads, it's now behind a login form that accepts everyone:
+应用程序重新加载后，会出现一个登录表单：
 
 ![Login form](https://marmelab.com/react-admin/img/login.gif)
 
-## Supporting Mobile Devices
+## 支持移动设备
 
-The react-admin layout is already responsive. Try to resize your browser to see how the sidebar switches to a drawer on smaller screens.
+react-admin 布局已是响应式。尝试调整浏览器大小来查看侧栏如何切换到较小屏幕上的抽屉样式。
 
-But a responsive layout is not enough to make a responsive app. Datagrid components work well on desktop, but are absolutely not adapted to mobile devices. If your admin must be used on mobile devices, you'll have to provide an alternative component for small screens.
+但是一个响应式布局不足以去做一个响应式的app。datagrid组件在桌面上工作良好，但绝对不能适应移动设备。 如果您的Admin必须在移动设备上使用, 您必须为小屏幕提供一个替代组件。
 
 First, you should know that you don't have to use the `<Datagrid>` component as `<List>` child. You can use any other component you like. For instance, the `<SimpleList>` component:
 
