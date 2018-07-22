@@ -554,9 +554,9 @@ React-admin 将每个数据查询委托给 Data Provider 函数。 这个函数�
 | Create a record     | `POST http://my.api.url/posts/123`                                                            |
 | Delete a record     | `DELETE http://my.api.url/posts/123`                                                          |
 
-React-admin 为这个列表的每个动作定义了自定义动词。 就像 HTTP 动词（GET，POST 等）一样，react-admin 动词限定一个 request 到一个 data provider 。 React-admin verbs are called `GET_LIST`, `GET_ONE`, `GET_MANY`, `CREATE`, `UPDATE`, and `DELETE`. The Data Provider will have to map each of these verbs to one (or many) HTTP request(s).
+React-admin 为这个列表的每个动作定义了自定义动词。 就像 HTTP 动词（GET，POST 等）一样，react-admin 动词限定一个 request 到一个 data provider 。 React-admin 动词被叫做 `GET_LIST`， `GET_ONE`，`GET_MANY`，`CREATE`，`UPDATE` 和 `DELETE`。 Data Provider 将得映射这些动词的每一个对应一个（或多个）HTTP 请求。 
 
-The code for a Data Provider for the `my.api.url` API is as follows:
+`my.api.url` API 的 Data Provider 代码如下：
 
 ```jsx
 // in src/dataProvider
