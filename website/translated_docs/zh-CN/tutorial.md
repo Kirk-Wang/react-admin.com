@@ -347,15 +347,15 @@ export const PostList = (props) => (
 );
 ```
 
-第一个过滤器 ‘q’ 利用了JSONPlaceholder提供的全文功能。 它是 `alwaysOn`，所以它总是出现在屏幕上。 第二个筛选器，‘userId’ 可以通过位于列表顶部的 “add filter” 按钮来添加。 As it's a `<ReferenceInput>`, it's already populated with possible users. It can be turned off by the end user.
+第一个过滤器 ‘q’ 利用了JSONPlaceholder提供的全文功能。 它是 `alwaysOn`，所以它总是出现在屏幕上。 第二个筛选器，‘userId’ 可以通过位于列表顶部的 “add filter” 按钮来添加。 因为它是一个`<ReferenceInput>`，所以它已经填充了可能的用户。 它可以由终端用户关闭。
 
 ![posts search engine](https://marmelab.com/react-admin/img/filters.gif)
 
-Filters are "search-as-you-type", meaning that when the user enters new values in the filter form, the list refreshes (via an API request) immediately.
+过滤器是 “search-as-you-type”，这意味着当用户在筛选表单中输入新值时，列表会立即刷新 (通过API请求)。
 
-## Customizing the Menu Icons
+## 自定义菜单图标
 
-The sidebar menu shows the same icon for both posts and users. Customizing the menu icon is just a matter of passing an `icon` attribute to each `<Resource>`:
+侧栏菜单显示出 posts 和 users 图标是一样的。幸运的是，自定义菜单图标只是将 `icon` 属性传递给每个 `<Resource>`：
 
 ```jsx
 // in src/App.js
@@ -372,9 +372,9 @@ const App = () => (
 
 ![custom menu icons](https://marmelab.com/react-admin/img/custom-menu.gif)
 
-## Using a Custom Home Page
+## 使用自定义主页
 
-By default, react-admin displays the list page of the first resource as home page. If you want to display a custom component instead, pass it in the `dashboard` prop of the `<Admin>` component.
+默认情况下，admin-on-rest显示第一个资源列表页为主页。 如果你想要显示一个自定义组件来代替，在 `<Admin>` 组件中作为 `dashboard` 属性传递它。
 
 ```jsx
 // in src/Dashboard.js
