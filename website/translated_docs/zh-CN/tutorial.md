@@ -412,7 +412,7 @@ const App = () => (
 
 对于本教程，由于没有我们能使用的公共认证API，让我们使用一个假身份验证提供程序，接受每一个登录请求，并存储 `username` 在 `localStorage` 中。 每个页面更改都要求 `localStorage` 包含 `username名` 项。
 
-The `authProvider` is a simple function, which must return a `Promise`:
+`authProvider` 是一个简单的函数, 它必须返回 `Promise`：
 
 ```jsx
 // in src/authProvider.js
