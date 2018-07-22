@@ -533,15 +533,15 @@ export const PostList = (props) => (
 );
 ```
 
-This works exactly the way you expect. The lesson here is that react-admin takes care of responsive web design for the layout, but it's your job to use `<Responsive>` in pages.
+这完全按你期望的方式工作。这里的经验是react-admin针对布局注意了响应式的web设计，但它是你的工作－在页面中用 `<Responsive>` 。 
 
 ![Responsive List](https://marmelab.com/react-admin/img/responsive-list.gif)
 
-## Connecting To A Real API
+## 连接到真正的 API
 
-Here is the elephant in the room of this tutorial. In real world projects, the dialect of your API (REST? GraphQL? Something else?) won't match the JSONPLaceholder dialect. Writing a Data Provider is probably the first thing you'll have to do to make react-admin work. Depending on your API, this can require a few hours of additional work.
+这是本教程的重点。 在现实世界的项目中，你的API的规范（REST? GraphQL? 别的？不符合 JSONPLaceholder 规范。 编写 Data Provider 可能是您必须做的第一件事，以使react-admin工作。 根据您的 API, 这可能需要几个小时的额外工作。
 
-React-admin delegates every data query to a Data Provider function. This function must simply return a promise for the result. This gives extreme freedom to map any API dialect, add authentication headers, use endpoints from several domains, etc.
+React-admin 将每个数据查询委托给 Data Provider 函数。 这个函数必须针对结果返回一个promise。 This gives extreme freedom to map any API dialect, add authentication headers, use endpoints from several domains, etc.
 
 For instance, let's imagine you have to use the `my.api.url` REST API, which expects the following parameters:
 
