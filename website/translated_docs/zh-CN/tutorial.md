@@ -476,7 +476,7 @@ react-admin 布局已是响应式。尝试调整浏览器大小来查看侧栏�
 
 但是一个响应式布局不足以去做一个响应式的app。datagrid组件在桌面上工作良好，但绝对不能适应移动设备。 如果您的Admin必须在移动设备上使用, 您必须为小屏幕提供一个替代组件。
 
-First, you should know that you don't have to use the `<Datagrid>` component as `<List>` child. You can use any other component you like. For instance, the `<SimpleList>` component:
+首先, 您应该知道您不必使用 `<Datagrid>` 组件作为 `<List>` 子级。 您可以使用您喜欢的任何其他组件。 例如, `<SimpleList>` 组件：
 
 ```jsx
 // in src/posts.js
@@ -494,13 +494,13 @@ export const PostList = (props) => (
 );
 ```
 
-The `<SimpleList>` component uses [material-ui's `<List>` and `<ListItem>` components](http://www.material-ui.com/#/components/list), and expects functions as `primaryText`, `secondaryText`, and `tertiaryText` props.
+`<SimpleList>` 组件使用 [material-ui 的 `<List>` 和 `<ListItem>` 组件](http://www.material-ui.com/#/components/list), 并且期望函数作为 `primaryText`, `secondaryText`, `tertiaryText` 的属性值。
 
 <img src="https://marmelab.com/react-admin/img/mobile-post-list.png" alt="Mobile post list" style="display:block;margin:2em auto;box-shadow:none;filter:drop-shadow(13px 12px 7px rgba(0,0,0,0.5));" />
 
-**Note:** We switched to a custom API for those screenshots in order to demonstrate how to use some of the `SimpleList` component props.
+注意：我们切换到这些屏幕截图的自定义API，以演示如何使用一些SimpleList组件属性。
 
-That works fine on mobile, but now the desktop user experience is worse. The best compromise would be to use `<SimpleList>` on small screens, and `<Datagrid>` on other screens. That's where the `<Responsive>` component comes in:
+这在移动设备上运行良好，但现在桌面用户体验更糟。 最好的折衷方案是在小屏幕上使用`<SimpleList>`，在其他屏幕上使用`<Datagrid>`。 这就是 `<Responsive>` 组件的用武之地：
 
 ```jsx
 // in src/posts.js
