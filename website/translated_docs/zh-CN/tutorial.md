@@ -404,11 +404,11 @@ const App = () => (
 
 ![Custom home page](https://marmelab.com/react-admin/img/dashboard.png)
 
-## Adding a Login Page
+## 添加登录页
 
-Most admin apps require authentication. React-admin can check user credentials before displaying a page, and redirect to a login form when the REST API returns a 403 error code.
+大多数admin app都需要身份验证。React-admin 可以在显示页面之前检查用户凭据，并在REST API返回403错误代码时重定向到登录表单。
 
-*What* those credentials are, and *how* to get them, are questions that you, as a developer, must answer. React-admin makes no assumption about your authentication strategy (basic auth, OAuth, custom route, etc), but gives you the hooks to plug your logic at the right place - by calling an `authProvider` function.
+这些凭据是*什么*以及*如何*获取它们是您作为开发人员必须回答的问题。 React-admin makes no assumption about your authentication strategy (basic auth, OAuth, custom route, etc), but gives you the hooks to plug your logic at the right place - by calling an `authProvider` function.
 
 For this tutorial, since there is no public authentication API we can use, let's use a fake authentication provider that accepts every login request, and stores the `username` in `localStorage`. Each page change will require that `localStorage` contains a `username` item.
 
