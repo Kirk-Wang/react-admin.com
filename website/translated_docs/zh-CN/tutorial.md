@@ -541,9 +541,9 @@ export const PostList = (props) => (
 
 这是本教程的重点。 在现实世界的项目中，你的API的规范（REST? GraphQL? 别的？不符合 JSONPLaceholder 规范。 编写 Data Provider 可能是您必须做的第一件事，以使react-admin工作。 根据您的 API, 这可能需要几个小时的额外工作。
 
-React-admin 将每个数据查询委托给 Data Provider 函数。 这个函数必须针对结果返回一个promise。 This gives extreme freedom to map any API dialect, add authentication headers, use endpoints from several domains, etc.
+React-admin 将每个数据查询委托给 Data Provider 函数。 这个函数必须针对结果返回一个promise。 这为映射任何 API 规范，添加身份验证头，使用来自多个域的 API 端点等提供了极大的自由度。
 
-For instance, let's imagine you have to use the `my.api.url` REST API, which expects the following parameters:
+例如，让我们假设您必须使用 `my.api.url` REST api，它需要以下参数：
 
 | Action              | Expected API request                                                                          |
 | ------------------- | --------------------------------------------------------------------------------------------- |
@@ -554,7 +554,7 @@ For instance, let's imagine you have to use the `my.api.url` REST API, which exp
 | Create a record     | `POST http://my.api.url/posts/123`                                                            |
 | Delete a record     | `DELETE http://my.api.url/posts/123`                                                          |
 
-React-admin defines custom verbs for each of the actions of this list. Just like HTTP verbs (`GET`, `POST`, etc.), react-admin verbs qualify a request to a data provider. React-admin verbs are called `GET_LIST`, `GET_ONE`, `GET_MANY`, `CREATE`, `UPDATE`, and `DELETE`. The Data Provider will have to map each of these verbs to one (or many) HTTP request(s).
+React-admin 为这个列表的每个动作定义了自定义动词。 就像 HTTP 动词（GET，POST 等）一样，react-admin 动词限定一个 request 到一个 data provider 。 React-admin verbs are called `GET_LIST`, `GET_ONE`, `GET_MANY`, `CREATE`, `UPDATE`, and `DELETE`. The Data Provider will have to map each of these verbs to one (or many) HTTP request(s).
 
 The code for a Data Provider for the `my.api.url` API is as follows:
 
