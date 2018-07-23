@@ -515,9 +515,9 @@ const App = () => (
 
 ## 在运行时声明资源
 
-您可能希望在应用启动时动态定义Resource。 The `<Admin>` component accepts a function as its child and this function can return a Promise. If you also defined an `authProvider`, the function will receive the result of a call to `authProvider` with the `AUTH_GET_PERMISSIONS` type (you can read more about this in the [Authorization](./Authorization.html) chapter).
+您可能希望在应用启动时动态定义Resource。 `<Admin>` 组件接受一个函数作为其子函数，此函数可以返回一个Promise。 如果还定义了 `authProvider`, 则该函数将接收到 `authProvider` 的调用结果, 并使用 `AUTH_GET_PERMISSIONS` 类型 (您可以在 [授权](./Authorization.html) 章节中阅读更多信息)。
 
-For instance, getting the resource from an API might look like:
+例如, 从 API 获取资源可能类似于：
 
 ```js
 import React from 'react';
