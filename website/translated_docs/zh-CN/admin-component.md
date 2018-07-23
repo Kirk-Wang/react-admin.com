@@ -372,7 +372,7 @@ export default App;
 
 ## `customRoutes`
 
-To register your own routes, create a module returning a list of [react-router](https://github.com/ReactTraining/react-router) `<Route>` component:
+要注册自己的路由, 请创建一个模块, 返回一个 [react-router](https://github.com/ReactTraining/react-router) `<Route>` 组件列表：
 
 ```jsx
 // in src/customRoutes.js
@@ -389,7 +389,7 @@ export default [
 ];
 ```
 
-Then, pass this array as `customRoutes` prop in the `<Admin>` component:
+然后，将此数组作为 `customRoutes` 属性传递到 `<Admin>` 组件中：
 
 ```jsx
 // in src/App.js
@@ -407,9 +407,9 @@ const App = () => (
 export default App;
 ```
 
-Now, when a user browses to `/foo` or `/bar`, the components you defined will appear in the main part of the screen. When a user browses to `/baz`, the component will appear outside of the defined Layout, leaving you the freedom to design the screen the way you want.
+现在，当用户浏览`/foo`或`/bar`时，您定义的组件将显示在屏幕的主要部分中。 当用户浏览 `/baz` 时，组件将出现在定义的布局之外，让您可以自由地按照自己的方式设计。
 
-**Tip**: It's up to you to create a [custom menu](#menu) entry, or custom buttons, to lead to your custom pages.
+**提示**：您可以创建[自定义菜单](#menu)条目或自定义按钮来引导您的自定义页面。
 
 **Tip**: Your custom pages take precedence over react-admin's own routes. That means that `customRoutes` lets you override any route you want! If you want to add routes *after* all the react-admin routes, use the [`catchAll` prop](#catchall) instead.
 
