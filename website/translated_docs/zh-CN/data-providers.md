@@ -441,7 +441,7 @@ React-admin 希望 Data Provider 的响应是具有 `data` 属性的对象。数
 
 `{Record}` 是一个至少具有 ` id ` 属性的对象文本, 例如 ` {id: 123, title: "hello, world"} `。
 
-Building up on the previous example, here are example responses matching the format expected by react-admin:
+在上一个示例的基础上，这里是与 react-admin 所期望的格式匹配的示例响应：
 
 ```jsx
 dataProvider(GET_LIST, 'posts', {
@@ -532,9 +532,9 @@ dataProvider(GET_MANY_REFERENCE, 'comments', {
 // }
 ```
 
-### Example Response Processing
+### 响应处理示例
 
-Let's continue with the REST backend example. This backend returns responses as follows:
+让我们继续REST后端示例。 此后端返回响应如下：
 
     GET http://path.to.my.api/posts?sort=['title','ASC']&range=[0, 4]&filter={author_id:12}
     Content-Range: posts 0-4/27
@@ -579,7 +579,7 @@ Let's continue with the REST backend example. This backend returns responses as 
     ]
     
 
-The Data Provider must therefore transform the response from the API backend to the expected response format.
+因此，Data Provider 必须将 API 后端的响应转换为 React-Admin 期望的响应格式。
 
 ```js
 // in myRestProvider.js
@@ -651,9 +651,9 @@ export default (type, resource, params) => {
 };
 ```
 
-### Error Format
+### 错误格式
 
-When the API backend returns an error, the Data Provider should `throw` an `Error` object. This object should contain a `status` property with the HTTP response code (404, 500, etc.). React-admin inspects this error code, and uses it for [authentication](./Authentication.md) (in case of 401 or 403 errors). Besides, react-admin displays the error `message` on screen in a temporary notification.
+当 API 后端返回一个错误时，这个 Data Provider 应该 `throw` 一个 `Error` 对象。 此对象应包含具有 HTTP 响应代码 (404、500等) 的 `status` 属性。 React-admin 检查此错误代码, 并将其用于 [身份验证](./Authentication.md) (在401或403错误的情况下)。 Besides, react-admin displays the error `message` on screen in a temporary notification.
 
 ### Example implementation
 
