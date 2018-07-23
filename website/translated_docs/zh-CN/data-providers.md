@@ -261,7 +261,7 @@ const dataProvider = (type, resource, params) => new Promise();
 | `GET_MANY`           | Read a list of resource, by ids                 | `{ ids: {mixed[]} }`                                                                                                                            |
 | `GET_MANY_REFERENCE` | Read a list of resources related to another one | `{ target: {string}, id: {mixed}, pagination: { page: {int} , perPage: {int} }, sort: { field: {string}, order: {string} }, filter: {Object} }` |
 
-Here are several examples of how react-admin can call the Data Provider with these types:
+以下是 react-admin 如何使用以下类型调用 Data Provider 的几个示例：
 
 ```jsx
 dataProvider(GET_LIST, 'posts', {
@@ -293,9 +293,9 @@ dataProvider(GET_MANY_REFERENCE, 'comments', {
 });
 ```
 
-### Example Request Processing
+### 示例请求处理
 
-Let's say that you want to map the Data Provider requests to a REST backend, like so:
+假设您希望将 Data Provider 请求映射到 REST 后端，是如下所示的样子:
 
 * `GET_LIST => GET http://path.to.my.api/posts?sort=["title","ASC"]&range=[0, 24]&filter={"author_id":12}`
 * `GET_ONE => GET http://path.to.my.api/posts/123`
@@ -307,7 +307,7 @@ Let's say that you want to map the Data Provider requests to a REST backend, lik
 * `GET_MANY => GET http://path.to.my.api/posts?filter={"ids":[123,124,125]}`
 * `GET_MANY_REFERENCE  => GET http://path.to.my.api/comments?sort=["created_at","DESC"]&range=[0, 24]&filter={"post_id":123}`
 
-Data Providers often use a `switch` statement, and finish by a call to `fetch()`. Here is an example implementation:
+数据提供者经常使用`switch`语句，并通过调用`fetch()`来完成。 这是一个示例实现：
 
 ```js
 // in myRestProvider.js
