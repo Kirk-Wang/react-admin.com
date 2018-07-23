@@ -149,11 +149,11 @@ const App = () => (
 
 ## `menu`
 
-**Tip**: This prop is deprecated. To override the menu component, use a [custom layout](#appLayout) instead.
+**提示**：这个属性被废弃了。要覆盖菜单组件，请使用自定义布局。
 
-React-admin uses the list of `<Resource>` components passed as children of `<Admin>` to build a menu to each resource with a `list` component.
+React-admin使用作为 `<Admin>` 子级传递的 `<Resource>` 组件列表，使用列表组件为每个资源构建菜单。
 
-If you want to add or remove menu items, for instance to link to non-resources pages, you can create your own menu component:
+如果你想要添加或删除菜单项，例如要链接到非资源页面，你可以创建你自己的菜单组件：
 
 ```jsx
 // in src/Menu.js
