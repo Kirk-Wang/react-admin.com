@@ -493,9 +493,9 @@ const App = () => (
 
 ## `history`
 
-By default, react-admin creates URLs using a hash sign (e.g. "myadmin.acme.com/#/posts/123"). The hash portion of the URL (i.e. `#/posts/123` in the example) contains the main application route. This strategy has the benefit of working without a server, and with legacy web browsers. But you may want to use another routing strategy, e.g. to allow server-side rendering.
+默认情况下, react-admin 使用哈希符号 (例如"myadmin.acme.com/#/posts/123") 创建 url。 URL 的哈希部分 (即 示例中的 `#/posts/123` 包含主应用程序路由。 此策略具有在没有服务器和旧式 web 浏览器的情况下工作的好处。 但您可能希望使用其他路由策略, 例如, 允许服务器端渲染。
 
-You can create your own `history` function (compatible with [the `history` npm package](https://github.com/reacttraining/history)), and pass it to the `<Admin>` component to override the default history strategy. For instance, to use `browserHistory`:
+您可以创建自己的 `history` 函数 (与 [ `history` npm包兼容](https://github.com/reacttraining/history))。并将其传递到 `<Admin>` 组件以覆盖默认历史记录策略。 例如，要使用 `browserHistory`：
 
 ```js
 import createHistory from 'history/createBrowserHistory';
@@ -509,13 +509,13 @@ const App = () => (
 );
 ```
 
-## Internationalization
+## 国际化 （in）
 
-The `locale` and `messages` props let you translate the GUI. The [Translation Documentation](./Translation.html) details this process.
+`locale` 和 `messages` 属性允许您翻译GUI。翻译文档详细介绍了此过程。
 
-## Declaring resources at runtime
+## 在运行时声明资源
 
-You might want to dynamically define the resources when the app starts. The `<Admin>` component accepts a function as its child and this function can return a Promise. If you also defined an `authProvider`, the function will receive the result of a call to `authProvider` with the `AUTH_GET_PERMISSIONS` type (you can read more about this in the [Authorization](./Authorization.html) chapter).
+您可能希望在应用启动时动态定义Resource。 The `<Admin>` component accepts a function as its child and this function can return a Promise. If you also defined an `authProvider`, the function will receive the result of a call to `authProvider` with the `AUTH_GET_PERMISSIONS` type (you can read more about this in the [Authorization](./Authorization.html) chapter).
 
 For instance, getting the resource from an API might look like:
 
