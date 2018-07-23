@@ -217,7 +217,7 @@ const App = () => (
 
 ## `theme`
 
-Material UI 支持 [主题](http://www.material-ui.com/#/customization/themes)。 This lets you customize the look and feel of an admin by overriding fonts, colors, and spacing. You can provide a custom material ui theme by using the `theme` prop:
+Material UI 支持 [主题](http://www.material-ui.com/#/customization/themes)。 这使您可以通过覆盖字体、颜色和间距来自定义 admin 的外观。 您可以使用 `theme` 属性提供自定义 material ui 主题:
 
 ```jsx
 import { createMuiTheme } from '@material-ui/core/styles';
