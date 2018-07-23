@@ -2,7 +2,7 @@
 id: admin-component
 title: <Admin>
 ---
-The `<Admin>` component creates an application with its own state, routing, and controller logic. `<Admin>` requires only a `dataProvider` prop, and at least one child `<Resource>` to work:
+`<Admin>` 组件创建一个具有自己的状态、路由和控制器逻辑的应用程序。 `<Admin>` requires only a `dataProvider` prop, and at least one child `<Resource>` to work:
 
 ```jsx
 // in src/App.js
