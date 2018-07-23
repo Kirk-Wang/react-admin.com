@@ -37,7 +37,7 @@ React-admin 项目包括 4 个 Data Provider:
 * [Graphcool](https://www.graph.cool/): [marmelab/ra-data-graphcool](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-graphcool). 遵循 Graphcool 约定的 GraphQL 服务器 Provider。 顺便提一下, 这个包建立在 [marmelab/ra-data-graphql](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-graphql)上, 它允许您为其他 graphql 约定开发Provider。
 * Local JSON: [marmelab/ra-data-fakerest](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-fakerest). 基于本地对象, 它甚至不使用 HTTP。 用于测试目的。
 
-You can find Data Providers for various backends in third-party repositories:
+您可以在第三方存储库中找到各种后端的 Data Provider：
 
 * **[DynamoDb](https://github.com/abiglobalhealth/aor-dynamodb-client)**: [abiglobalhealth/aor-dynamodb-client](https://github.com/abiglobalhealth/aor-dynamodb-client)
 * **[Epilogue](https://github.com/dchester/epilogue)**: [dunghuynh/aor-epilogue-client](https://github.com/dunghuynh/aor-epilogue-client)
@@ -49,13 +49,13 @@ You can find Data Providers for various backends in third-party repositories:
 * **[PostgREST](http://postgrest.com/en/v0.4/)**: [tomberek/aor-postgrest-client](https://github.com/tomberek/aor-postgrest-client)
 * **[Xmysql](https://github.com/o1lab/xmysql)**: [soaserele/aor-xmysql](https://github.com/soaserele/aor-xmysql)
 
-If you've written a Data Provider for another backend, and open-sourced it, please help complete this list with your package.
+如果您已经为另一个后端编写了一个 Data Provider，并开放了它的源代码，请使用您的包帮助完成这个列表。
 
-## Usage
+## 用法
 
-As an example, let's focus on the Simple REST data provider. It fits REST APIs using simple GET parameters for filters and sorting.
+作为一个示例，让我们关注 Simple REST data provider 。它使用过滤器和排序的简单GET参数来满足REST api。
 
-Install the `ra-data-simple-rest` package to use this provider.
+安装 `ra-data-simple-rest` 包以使用此 provider。
 
 ```sh
 npm install ra-data-simple-rest
