@@ -241,7 +241,7 @@ const App = () => (
 
 ## `appLayout`
 
-If you want to deeply customize the app header, the menu, or the notifications, the best way is to provide a custom layout component. It must contain a `{children}` placeholder, where react-admin will render the resources. If you use material UI fields and inputs, it should contain a `<MuiThemeProvider>` element. And finally, if you want to show the spinner in the app header when the app fetches data in the background, the Layout should connect to the redux store.
+如果要深度自定义应用程序头、菜单或通知, 最好的方法是提供自定义布局组件。 它必须包含 `{children}` 占位符, 其中就是 react-admin 将呈现的资源。 If you use material UI fields and inputs, it should contain a `<MuiThemeProvider>` element. And finally, if you want to show the spinner in the app header when the app fetches data in the background, the Layout should connect to the redux store.
 
 Use the [default layout](https://github.com/marmelab/react-admin/blob/master/packages/ra-ui-materialui/src/layout/Layout.js) as a starting point, and check [the Theming documentation](./Theming.html#using-a-custom-layout) for examples.
 
