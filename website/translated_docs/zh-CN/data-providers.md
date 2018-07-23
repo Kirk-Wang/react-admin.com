@@ -146,13 +146,13 @@ const httpClient = (url, options = {}) => {
 const dataProvider = simpleRestProvider('http://path.to.my.api/', httpClient);
 ```
 
-Now all the requests to the REST API will contain the `Authorization: SRTRDFVESGNJYTUKTYTHRG` header.
+现在，对REST API的所有请求都将包含 `Authorization：SRTRDFVESGNJYTUKTYTHRG` 头。
 
-## Decorating your Data Provider (Example of File Upload)
+## 装饰 Data Provider（文件上载示例）
 
-Instead of writing your own Data Provider, you can enhance the capabilities of an existing data provider. You can even restrict the customization on a given resource.
+您可以增强现有 Data Provider 的功能，而不是编写自己的 Data Provider。您甚至可以自定义限制给定资源。
 
-For instance, if you want to use upload components (such as `<ImageInput />` one), you can decorate the provider the following way:
+例如，如果您想要使用上传组件（如 `<ImageInput />`组件），你可以按以下方式修饰它：
 
 ```jsx
 // in addUploadFeature.js
