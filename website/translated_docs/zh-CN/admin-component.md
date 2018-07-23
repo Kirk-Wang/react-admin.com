@@ -551,6 +551,6 @@ const App = () => (
 );
 ```
 
-## Using react-admin without `<Admin>` and `<Resource>`
+## 在没有 `<Admin>` 和 `<Resource>` 的情况下使用 react-admin
 
-Using `<Admin>` and `<Resource>` is completely optional. If you feel like bootstrapping a redux app yourself, it's totally possible. Head to [Including in another app](./CustomApp.html) for a detailed how-to.
+使用 `<Admin>` 和 `<Resource>` 是完全可选的。 如果你想自己引导一个redux app， 这是完全有可能的。 前往[包含在另一个app](./CustomApp.html)，给了一个详细的指引。
