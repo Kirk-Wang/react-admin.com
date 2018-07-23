@@ -413,7 +413,7 @@ export default App;
 
 **提示**：自定义页面优先于 react-admin 自己的路由。 这意味着 `customRoutes` 允许您覆盖所需的任何路由！ 如果你要在所有 react-admin *之后*添加路由，请使用 [`catchAll` 属性](#catchall)代替。
 
-**Tip**: To look like other react-admin pages, your custom pages should have the following structure:
+**提示**：要看起来像其他 react-admin 页面，您的自定义页应具有以下结构:
 
 ```jsx
 // in src/Foo.js
@@ -436,7 +436,7 @@ export default Foo;
 
 ## `authProvider`
 
-The `authProvider` prop expect a function returning a Promise, to control the application authentication strategy:
+`authProvider` 属性期望函数返回一个Promise，以控制应用程序身份验证策略：
 
 ```jsx
 import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } from 'react-admin';
@@ -454,11 +454,11 @@ const App = () => (
 );
 ```
 
-The [Authentication documentation](./Authentication.html) explains how to implement these functions in detail.
+[身份验证文档](./Authentication.html) 解释如何详细实现这些功能。
 
 ## `loginPage`
 
-If you want to customize the Login page, or switch to another authentication strategy than a username/password form, pass a component of your own as the `loginPage` prop. React-admin will display this component whenever the `/login` route is called.
+如果要自定义登录页，或切换到其他身份验证策略，而不是用户名/密码表单, 请将自己的组件作为 `loginPage` 属性传递。 React-admin will display this component whenever the `/login` route is called.
 
 ```jsx
 import MyLoginPage from './MyLoginPage';
