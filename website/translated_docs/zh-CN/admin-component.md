@@ -338,7 +338,7 @@ export default App;
 
 `<Admin>` app 使用 redux-saga 来处理副作用（AJAX调用，通知，重定向等）。
 
-If your components dispatch custom actions, you probably need to register your own side effects as sagas. Let's imagine that you want to show a notification whenever the `BITCOIN_RATE_RECEIVED` action is dispatched. You probably have a saga looking like the following:
+如果你的组件 dispatch 自定义 action，则可能需要注册你自己的 side effedcts 作为 saga。 假设您希望在dispatch `BITCOIN_RATE_RECEIVED` action 时显示通知。 你可能有一个类似如下的saga：
 
 ```jsx
 // in src/bitcoinSaga.js
@@ -352,7 +352,7 @@ export default function* bitcoinSaga() {
 }
 ```
 
-To register this saga in the `<Admin>` app, simply pass it in the `customSagas` prop:
+要在 `<Admin>` app 中注册此 saga, 只需在 `customSagas` 属性中传递它：
 
 ```jsx
 // in src/App.js
