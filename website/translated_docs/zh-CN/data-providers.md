@@ -106,9 +106,9 @@ export default App;
 
 ## 添加自定义头
 
-`simpleRestProvider` 函数接受一个 HTTP client 函数作为第二个参数。 默认情况下, 他们使用 react-admin 的 `fetchUtils.fetchJson()` 作为 HTTP client。 It's similar to HTML5 `fetch()`, except it handles JSON decoding and HTTP error codes automatically.
+`simpleRestProvider` 函数接受一个 HTTP client 函数作为第二个参数。 默认情况下, 他们使用 react-admin 的 `fetchUtils.fetchJson()` 作为 HTTP client。 它类似于HTML5 `fetch()`，除了它自动处理 JSON 解码和 HTTP 错误代码。
 
-That means that if you need to add custom headers to your requests, you can just *wrap* the `fetchJson()` call inside your own function:
+这意味着如果您需要为请求添加自定义头，您可以将 `etchJson()` 调用*包装*在您自己的函数中：
 
 ```jsx
 import { fetchUtils, Admin, Resource } from 'react-admin';
@@ -131,7 +131,7 @@ const App = () => (
 );
 ```
 
-Now all the requests to the REST API will contain the `X-Custom-Header: foobar` header.
+现在，对 REST API 的所有请求都将包含 `X-Custom-Header:foobar` 头。
 
 **Tip**: The most common usage of custom headers is for authentication. `fetchJson` has built-on support for the `Authorization` token header:
 
