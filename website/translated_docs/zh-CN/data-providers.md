@@ -106,7 +106,7 @@ export default App;
 
 ## 添加自定义头
 
-The `simpleRestProvider` function accepts an HTTP client function as second argument. By default, it uses react-admin's `fetchUtils.fetchJson()` as HTTP client. It's similar to HTML5 `fetch()`, except it handles JSON decoding and HTTP error codes automatically.
+`simpleRestProvider` 函数接受一个 HTTP client 函数作为第二个参数。 默认情况下, 他们使用 react-admin 的 `fetchUtils.fetchJson()` 作为 HTTP client。 It's similar to HTML5 `fetch()`, except it handles JSON decoding and HTTP error codes automatically.
 
 That means that if you need to add custom headers to your requests, you can just *wrap* the `fetchJson()` call inside your own function:
 
