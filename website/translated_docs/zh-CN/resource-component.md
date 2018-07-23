@@ -66,15 +66,15 @@ const App = () => (
 
 ## `name`
 
-React-admin uses the `name` prop both to determine the API endpoint (passed to the `dataProvider`), and to form the URL for the resource.
+React-admin 使用 `name` 属性既确定API端点（被传递到`dataProvider`）又为resource构成URL。
 
 ```jsx
 <Resource name="posts" list={PostList} create={PostCreate} edit={PostEdit} show={PostShow} />
 ```
 
-For this resource react-admin will fetch the `http://jsonplaceholder.typicode.com/posts` endpoint for data.
+对于此资源， react-admin 将为数据获取 `http://jsonplaceholder.typicode.com/posts`端点。
 
-The routing will map the component as follows:
+路由将按如下方式映射组件:
 
 * `/posts/` maps to `PostList`
 * `/posts/create` maps to `PostCreate`
