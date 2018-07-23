@@ -201,7 +201,7 @@ const addUploadFeature = requestHandler => (type, resource, params) => {
 export default addUploadFeature;
 ```
 
-To enhance a provider with the upload feature, compose `addUploadFeature` function with the data provider function:
+让上传功能增强 Provider，使用 Data Provider 函数组合 addUploadFeature 函数：
 
 ```jsx
 import simpleRestProvider from 'ra-data-simple-rest';
@@ -217,7 +217,7 @@ const App = () => (
 );
 ```
 
-## Writing Your Own Data Provider
+## 编写自己的 Data Provider
 
 Quite often, there is no Data Provider that suits you API - either in the core providers, or in the third-party providers. In such cases, you'll have to write your own Data Provider.
 
