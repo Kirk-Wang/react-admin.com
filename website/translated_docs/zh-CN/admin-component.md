@@ -107,15 +107,15 @@ const App = () => (
 
 ![Custom home page](https://marmelab.com/react-admin/img/dashboard.png)
 
-**Tip**: Adding the `<ViewTitle>` component will also allow the header to be displayed in mobile resolutions.
+**提示**：添加 `<ViewTitle>` 组件还将允许标题以移动分辨率显示。
 
 ## `catchAll`
 
-When users type URLs that don't match any of the children `<Resource>` components, they see a default "Not Found" page.
+当用户键入的 url 与任何子 `<Resource>` 组件不匹配时, 它们会看到默认的 "Not Found" 页。
 
 ![Not Found](https://marmelab.com/react-admin/img/not-found.png)
 
-You can customize this page to use the component of your choice by passing it as the `catchAll` prop. To fit in the general design, use Material UI's `<Card>` component, and react-admin's `<ViewTitle>` component:
+您可以自定义此页以使用您选择的组件, 将其作为 `catchAll` 属性传递。 要适应一般设计，请使用Material UI `<Card>`组件和 react-admin `<ViewTitle>`组件：
 
 ```jsx
 // in src/NotFound.js
@@ -145,7 +145,7 @@ const App = () => (
 );
 ```
 
-**Tip**: If your custom `catchAll` component contains react-router `<Route>` components, this allows you to register new routes displayed within the react-admin layout easily. Note that these routes will match *after* all the react-admin resource routes have been tested. To add custom routes *before* the react-admin ones, and therefore override the default resource routes, use the [`customRoutes` prop](#customroutes) instead.
+**提示**：如果您的自定义 `catchAll` 组件包含 react-router `<Route>` 组件，则允许您轻松注册 react-admin 布局中显示的新路由。 请注意，在测试了所有 react-admin 资源路由*后*，这些路由将匹配。 To add custom routes *before* the react-admin ones, and therefore override the default resource routes, use the [`customRoutes` prop](#customroutes) instead.
 
 ## `menu`
 
