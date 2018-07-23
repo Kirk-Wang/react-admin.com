@@ -458,7 +458,7 @@ const App = () => (
 
 ## `loginPage`
 
-如果要自定义登录页，或切换到其他身份验证策略，而不是用户名/密码表单, 请将自己的组件作为 `loginPage` 属性传递。 React-admin will display this component whenever the `/login` route is called.
+如果要自定义登录页，或切换到其他身份验证策略，而不是用户名/密码表单, 请将自己的组件作为 `loginPage` 属性传递。 只要调用 `/login` 路由，React-admin 就会显示该组件。
 
 ```jsx
 import MyLoginPage from './MyLoginPage';
@@ -470,11 +470,11 @@ const App = () => (
 );
 ```
 
-See The [Authentication documentation](./Authentication.html#customizing-the-login-and-logout-components) for more details.
+有关详细信息, 请参阅 [身份验证文档](./Authentication.html#customizing-the-login-and-logout-components)。
 
 ## `logoutButton`
 
-If you customize the `loginPage`, you probably need to override the `logoutButton`, too - because they share the authentication strategy.
+如果自定义 `loginPage`，则可能需要重写 `logoutButton`，因为它们共享身份验证策略。
 
 ```jsx
 import MyLoginPage from './MyLoginPage';
@@ -489,7 +489,7 @@ const App = () => (
 
 ## `initialState`
 
-The `initialState` prop lets you pass preloaded state to Redux. See the [Redux Documentation](http://redux.js.org/docs/api/createStore.html#createstorereducer-preloadedstate-enhancer) for more details.
+`initialState` 属性允许您将预加载状态传递给Redux。 有关详细信息, 请参阅 [Redux文档](http://redux.js.org/docs/api/createStore.html#createstorereducer-preloadedstate-enhancer)。
 
 ## `history`
 
