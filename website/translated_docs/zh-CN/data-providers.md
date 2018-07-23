@@ -61,7 +61,7 @@ React-admin 项目包括 4 个 Data Provider:
 npm install ra-data-simple-rest
 ```
 
-Then, initialize the provider with the RESt backend URL, and pass the result to the `dataProvider` prop of the `<Admin>` component:
+然后, 使用 REST 后端 URL 初始化 Provider, 并将结果传递给 `<Admin>` 组件的 `dataProvider` 属性:
 
 ```jsx
 // in src/App.js
@@ -80,7 +80,7 @@ const App = () => (
 export default App;
 ```
 
-Here is how this provider maps request types to API calls:
+以下是此 Provider 如何将请求类型映射到 API 调用：
 
 | Request type         | API calls                                                                                     |
 | -------------------- | --------------------------------------------------------------------------------------------- |
@@ -94,7 +94,7 @@ Here is how this provider maps request types to API calls:
 | `GET_MANY`           | `GET http://my.api.url/posts?filter={ids:[123,456,789]}`                                      |
 | `GET_MANY_REFERENCE` | `GET http://my.api.url/posts?filter={author_id:345}`                                          |
 
-**Note**: The simple REST client expects the API to include a `Content-Range` header in the response to `GET_LIST` calls. The value must be the total number of resources in the collection. This allows react-admin to know how many pages of resources there are in total, and build the pagination controls.
+**注意**：Simple REST Client 希望 API 在对 GET_LIST 调用的响应中包含 Content-Range 头。 该值必须是集合中的资源总数。 这使 react-admin 能够知道总共有多少页资源，并生成分页控件。
 
     Content-Range: posts 0-24/319
     
