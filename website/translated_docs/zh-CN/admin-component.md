@@ -198,9 +198,9 @@ export default withRouter(connect(mapStateToProps)(Menu));
 
 **提示**：注意, 我们只在小设备上包含 ` logout ` 项目。实际上, ` logout ` 按钮已显示在较大设备的 AppBar 中。
 
-**提示**: 注意, 我们使用React Router [`withRouter`](https://reacttraining.com/react-router/web/api/withRouter) 高阶组件和使用 **之前** Redux[ connect ](https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)。 This is required if you want the active menu item to be highlighted.
+**提示**: 注意, 我们使用React Router [`withRouter`](https://reacttraining.com/react-router/web/api/withRouter) 高阶组件和使用 **之前** Redux[ connect ](https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)。 如果要突出显示活动菜单项，则需要此选项。
 
-Then, pass it to the `<Admin>` component as the `menu` prop:
+然后, 将其传递到 `<Admin>` 组件, 作为 `menu` 属性：
 
 ```jsx
 // in src/App.js
