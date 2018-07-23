@@ -2,7 +2,7 @@
 id: admin-component
 title: <Admin>
 ---
-`<Admin>` 组件创建一个具有自己的状态、路由和控制器逻辑的应用程序。 `<Admin>` requires only a `dataProvider` prop, and at least one child `<Resource>` to work:
+`<Admin>` 组件创建一个具有自己的状态、路由和控制器逻辑的应用程序。 `<Admin>` 只需要一个 `dataProvider` 属性, 并且至少有一个子 `<Resource>` 就能工作：
 
 ```jsx
 // in src/App.js
@@ -22,7 +22,7 @@ const App = () => (
 export default App;
 ```
 
-Here are all the props accepted by the component:
+以下是通过该组件接受的所有属性：
 
 * [`dataProvider`](#dataprovider)
 * [`title`](#title)
@@ -44,7 +44,7 @@ Here are all the props accepted by the component:
 
 ## `dataProvider`
 
-The only required prop, it must be a function returning a promise, with the following signature:
+唯一必需的属性，它必须是一个返回一个promise的函数，具有下列签名：
 
 ```jsx
 /**
@@ -62,11 +62,11 @@ The only required prop, it must be a function returning a promise, with the foll
 const dataProvider = (type, resource, params) => new Promise();
 ```
 
-The `dataProvider` is also the ideal place to add custom HTTP headers, authentication, etc. The [Data Providers Chapter](./DataProviders.html) of the documentation lists available data providers, and explains how to build your own.
+`dataProvider` 也是添加自定义 HTTP 头、身份验证等的理想位置。 [Data Providers 章节](./DataProviders.html) 文档列出了可用的Data Provider，以及如何构建自己的 Data Provider 客户端。
 
 ## `title`
 
-By default, the header of an admin app uses 'React Admin' as the main app title. It's probably the first thing you'll want to customize. The `title` prop serves exactly that purpose.
+默认情况下，一个admin app的头部使用'React Admin'作为主app标题。它可能是你会想要自定义的第一件事。这个`title`属性正是为这个目的服务的。
 
 ```jsx
 const App = () => (
@@ -78,7 +78,7 @@ const App = () => (
 
 ## `dashboard`
 
-By default, the homepage of an an admin app is the `list` of the first child `<Resource>`. But you can also specify a custom component instead. To fit in the general design, use Material UI's `<Card>` component, and react-admin's `<ViewTitle>` component:
+默认情况下，一个admin app的主页是第一个子`<Resource>`的`list`。 但你也可以指定一个自定义组件代替。 要适应一般设计，请使用Material UI `<Card>`组件和 react-admin `<ViewTitle>`组件：
 
 ```jsx
 // in src/Dashboard.js
