@@ -411,7 +411,7 @@ export default App;
 
 **提示**：您可以创建[自定义菜单](#menu)入口或自定义按钮来引导您的自定义页面。
 
-**提示**：自定义页面优先于 react-admin 自己的路由。 这意味着 `customRoutes` 允许您覆盖所需的任何路由！ If you want to add routes *after* all the react-admin routes, use the [`catchAll` prop](#catchall) instead.
+**提示**：自定义页面优先于 react-admin 自己的路由。 这意味着 `customRoutes` 允许您覆盖所需的任何路由！ 如果你要在所有 react-admin *之后*添加路由，请使用 [`catchAll` 属性](#catchall)代替。
 
 **Tip**: To look like other react-admin pages, your custom pages should have the following structure:
 
