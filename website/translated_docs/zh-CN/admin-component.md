@@ -323,7 +323,7 @@ export default App;
 
 {% endraw %}
 
-Now the state will look like:
+现在 state 将看起来像：
 
 ```jsx
 {
@@ -336,7 +336,7 @@ Now the state will look like:
 
 ## `customSagas`
 
-The `<Admin>` app uses [redux-saga](https://github.com/redux-saga/redux-saga) to handle side effects (AJAX calls, notifications, redirections, etc).
+`<Admin>` app 使用 redux-saga 来处理副作用（AJAX调用，通知，重定向等）。
 
 If your components dispatch custom actions, you probably need to register your own side effects as sagas. Let's imagine that you want to show a notification whenever the `BITCOIN_RATE_RECEIVED` action is dispatched. You probably have a saga looking like the following:
 
