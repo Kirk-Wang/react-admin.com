@@ -6,7 +6,7 @@ title: Data Providers
 
 ![Data Provider architecture](https://marmelab.com/react-admin/img/data-provider.png)
 
-The `dataProvider` parameter of the `<Admin>` component must be a function with the following signature:
+`<Admin>` 组件的 `dataProvider` 参数必须是具有以下签名的函数：
 
 ```jsx
 /**
@@ -24,13 +24,13 @@ The `dataProvider` parameter of the `<Admin>` component must be a function with 
 const dataProvider = (type, resource, params) => new Promise();
 ```
 
-You can find a Data Provider example implementation in [`packages/ra-data-simple-rest/src/index.js`](https://github.com/marmelab/react-admin/blob/master/packages/ra-data-simple-rest/src/index.js);
+您可以在 [`packages/ra-data-simple-rest/src/index.js`](https://github.com/marmelab/react-admin/blob/master/packages/ra-data-simple-rest/src/index.js) 找到 Data Provider 示例实现。
 
-The `dataProvider` is also the ideal place to add custom HTTP headers, authentication, etc.
+`dataProvider` 也是添加自定义 HTTP 头、身份验证等的理想位置。
 
-## Available Providers
+## 可用的 Provider
 
-The react-admin project includes 4 Data Providers:
+React-admin 项目包括 4 个 Data Provider:
 
 * Simple REST: [marmelab/ra-data-simple-rest](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest) ([read more below](#simple-rest)). It serves mostly as an example. Incidentally, it is compatible with the [FakeRest](https://github.com/marmelab/FakeRest) API.
 * **[JSON server](https://github.com/typicode/json-server)**: [marmelab/ra-data-json-server](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-json-server). Great for prototyping an admin over a yet-to-be-developed REST API.
