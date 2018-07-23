@@ -133,7 +133,7 @@ const App = () => (
 
 现在，对 REST API 的所有请求都将包含 `X-Custom-Header:foobar` 头。
 
-**Tip**: The most common usage of custom headers is for authentication. `fetchJson` has built-on support for the `Authorization` token header:
+**提示**：自定义头的最常见用法是进行身份验证。 `fetchJson` 具有对 Authorization 令牌头的内置支持：
 
 ```jsx
 const httpClient = (url, options = {}) => {
