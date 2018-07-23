@@ -32,7 +32,7 @@ const dataProvider = (type, resource, params) => new Promise();
 
 React-admin 项目包括 4 个 Data Provider:
 
-* Simple REST: [marmelab/ra-data-simple-rest](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest) ([read more below](#simple-rest)). It serves mostly as an example. Incidentally, it is compatible with the [FakeRest](https://github.com/marmelab/FakeRest) API.
+* Simple REST：[marmelab/ra-data-simple-rest](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest) （[请阅读以下内容](#simple-rest)）。 它主要用作一个例子。 顺便提一下, 它与 [FakeRest](https://github.com/marmelab/FakeRest) API 兼容。
 * **[JSON server](https://github.com/typicode/json-server)**: [marmelab/ra-data-json-server](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-json-server). Great for prototyping an admin over a yet-to-be-developed REST API.
 * [Graphcool](https://www.graph.cool/): [marmelab/ra-data-graphcool](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-graphcool). A provider for GraphQL servers following the Graphcool convention. Incidentally, this package builds up on [marmelab/ra-data-graphql](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-graphql), which lets you develop providers for other GraphQL conventions.
 * Local JSON: [marmelab/ra-data-fakerest](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-fakerest). Based on a local object, it doesn't even use HTTP. Use it for testing purposes.
