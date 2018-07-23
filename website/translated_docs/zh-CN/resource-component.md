@@ -85,7 +85,7 @@ React-admin 使用 `name` 属性既确定API端点（被传递到`dataProvider`�
 
 ## `icon`
 
-React-admin will render the `icon` prop component in the menu:
+React-admin 将在菜单中呈现 `icon` 属性组件:
 
 ```jsx
 // in src/App.js
@@ -107,7 +107,7 @@ const App = () => (
 
 ## options
 
-`options.label` allows to customize the display name of a given resource in the menu.
+`options.label` 允许在菜单中自定义显示给定资源的名称。
 
 ```jsx
 <Resource name="v2/posts" options={{ label: 'Posts' }} list={PostList} />
