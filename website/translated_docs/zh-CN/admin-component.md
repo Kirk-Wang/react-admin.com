@@ -213,11 +213,11 @@ const App = () => (
 );
 ```
 
-See the [Theming documentation](./Theming.html#using-a-custom-menu) for more details.
+有关详细信息, 请参阅 [主题文档](./Theming.html#using-a-custom-menu)。
 
 ## `theme`
 
-Material UI supports [theming](http://www.material-ui.com/#/customization/themes). This lets you customize the look and feel of an admin by overriding fonts, colors, and spacing. You can provide a custom material ui theme by using the `theme` prop:
+Material UI 支持 [主题](http://www.material-ui.com/#/customization/themes)。 This lets you customize the look and feel of an admin by overriding fonts, colors, and spacing. You can provide a custom material ui theme by using the `theme` prop:
 
 ```jsx
 import { createMuiTheme } from '@material-ui/core/styles';
