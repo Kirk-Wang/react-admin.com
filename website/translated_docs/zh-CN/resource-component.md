@@ -2,7 +2,7 @@
 id: resource-component
 title: <Resource>
 ---
-A `<Resource>` component maps one API endpoint to a CRUD interface. For instance, the following admin app offers a read-only interface to the resources exposed by the JSONPlaceholder API at [`http://jsonplaceholder.typicode.com/posts`](http://jsonplaceholder.typicode.com/posts) and [`http://jsonplaceholder.typicode.com/users`](http://jsonplaceholder.typicode.com/users):
+一个 `<Resource>` 组件将一个API端点映射到一个CRUD界面。 For instance, the following admin app offers a read-only interface to the resources exposed by the JSONPlaceholder API at [`http://jsonplaceholder.typicode.com/posts`](http://jsonplaceholder.typicode.com/posts) and [`http://jsonplaceholder.typicode.com/users`](http://jsonplaceholder.typicode.com/users):
 
 ```jsx
 // in src/App.js
