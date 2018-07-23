@@ -423,9 +423,9 @@ export default (type, resource, params) => {
 };
 ```
 
-### Response Format
+### 响应格式
 
-React-admin expects responses from Data Providers to be objects with a `data` property. The data format depends on the request type.
+React-admin 希望 Data Provider 的响应是具有 `data` 属性的对象。数据格式取决于请求类型。
 
 | Request Type         | Response format                                       |
 | -------------------- | ----------------------------------------------------- |
@@ -439,7 +439,7 @@ React-admin expects responses from Data Providers to be objects with a `data` pr
 | `GET_MANY`           | `{ data: {Record[]} }`                                |
 | `GET_MANY_REFERENCE` | `{ data: {Record[]}, total: {int} }`                  |
 
-A `{Record}` is an object literal with at least an `id` property, e.g. `{ id: 123, title: "hello, world" }`.
+`{Record}` 是一个至少具有 ` id ` 属性的对象文本, 例如 ` {id: 123, title: "hello, world"} `。
 
 Building up on the previous example, here are example responses matching the format expected by react-admin:
 
