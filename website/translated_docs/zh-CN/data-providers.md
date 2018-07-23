@@ -653,8 +653,8 @@ export default (type, resource, params) => {
 
 ### 错误格式
 
-当 API 后端返回一个错误时，这个 Data Provider 应该 `throw` 一个 `Error` 对象。 此对象应包含具有 HTTP 响应代码 (404、500等) 的 `status` 属性。 React-admin 检查此错误代码, 并将其用于 [身份验证](./Authentication.md) (在401或403错误的情况下)。 Besides, react-admin displays the error `message` on screen in a temporary notification.
+当 API 后端返回一个错误时，这个 Data Provider 应该 `throw` 一个 `Error` 对象。 此对象应包含具有 HTTP 响应代码 (404、500等) 的 `status` 属性。 React-admin 检查此错误代码, 并将其用于 [身份验证](./Authentication.md) (在401或403错误的情况下)。 此外，react-admin 会在屏幕上显示错误 `message` 。
 
-### Example implementation
+### 示例实现
 
-Check the code from the [simple REST client](https://github.com/marmelab/react-admin/blob/master/packages/ra-data-simple-rest/src/index.js): it's a good starting point for a custom Data Provider implementation.
+从 [ simple REST client ](https://github.com/marmelab/react-admin/blob/master/packages/ra-data-simple-rest/src/index.js)中查看代码: 它是自定义 Data Provider 实现的一个良好起点。
