@@ -2,7 +2,7 @@
 id: resource-component
 title: <Resource>
 ---
-一个 `<Resource>` 组件将一个API端点映射到一个CRUD界面。 For instance, the following admin app offers a read-only interface to the resources exposed by the JSONPlaceholder API at [`http://jsonplaceholder.typicode.com/posts`](http://jsonplaceholder.typicode.com/posts) and [`http://jsonplaceholder.typicode.com/users`](http://jsonplaceholder.typicode.com/users):
+一个 `<Resource>` 组件将一个API端点映射到一个CRUD界面。 例如，下面的 admin app 为 JSONPlaceholder API 公开在[`http://jsonplaceholder.ode.com/posts`](http://jsonplaceholder.typicode.com/posts) 和 [`http://jsonplaceholder.ode.com/users`](http://jsonplaceholder.typicode.com/users) 的资源提供了一个只读界面：
 
 ```jsx
 // in src/App.js
@@ -21,14 +21,14 @@ const App = () => (
 );
 ```
 
-`<Resource>` allows you to define a component for each CRUD operation, using the following prop names:
+`<Resource>` 允许您使用以下属性名称为每个 CRUD 操作定义组件:
 
 * `list`
 * `create`
 * `edit`
 * `show`
 
-Here is a more complete admin, with components for all the CRUD operations:
+这里是一个更完整的admin，具有所有 CRUD 操作的组件:
 
 ```jsx
 import React from 'react';
@@ -49,16 +49,16 @@ const App = () => (
 );
 ```
 
-**Tip**: Under the hood, the `<Resource>` component uses react-router to create several routes:
+提示：在引擎盖下，`<Resource>` 组件使用 react-router 创建多个路由：
 
 * `/` maps to the `list` component
 * `/create` maps to the `create` component
 * `/:id` maps to the `edit` component
 * `/:id/show` maps to the `show` component
 
-**Tip**: You must add a `<Resource>` when you declare a reference (via `<ReferenceField>`, `<ReferenceArrayField>`, `<ReferenceManyField>`, `<ReferenceInput>` or `<ReferenceArrayInput>`), because react-admin uses resources to define the data store structure. That's why there is an empty `tag` resource in the example above.
+**提示**：在声明引用时（通过`<ReferenceField>`，`<ReferenceArrayField>`，`<ReferenceManyField>`，`<ReferenceInput>` 或 `<ReferenceArrayInput>`），必须添加一个`<Resource>`，因为react-admin使用 Resource 来定义数据存储结构。 这就是上面示例中有一个空的 `tag` 资源的原因。
 
-`<Resource>` also accepts additional props:
+`<Resource>` 也接受额外的属性：
 
 * [`name`](#name)
 * [`icon`](#icon)
