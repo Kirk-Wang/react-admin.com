@@ -237,7 +237,7 @@ const App = () => (
 
 ![Dark theme](https://marmelab.com/react-admin/img/dark-theme.png)
 
-For more details on predefined themes and custom themes, refer to the [Material UI Customization documentation](https://material-ui.com/customization/themes/).
+有关预定义主题和自定义主题的详细信息, 请参阅 [Material UI 自定义文档](https://material-ui.com/customization/themes/)。
 
 ## `appLayout`
 
