@@ -409,9 +409,9 @@ export default App;
 
 现在，当用户浏览`/foo`或`/bar`时，您定义的组件将显示在屏幕的主要部分中。 当用户浏览 `/baz` 时，组件将出现在定义的布局之外，让您可以自由地按照自己的方式设计。
 
-**提示**：您可以创建[自定义菜单](#menu)条目或自定义按钮来引导您的自定义页面。
+**提示**：您可以创建[自定义菜单](#menu)入口或自定义按钮来引导您的自定义页面。
 
-**Tip**: Your custom pages take precedence over react-admin's own routes. That means that `customRoutes` lets you override any route you want! If you want to add routes *after* all the react-admin routes, use the [`catchAll` prop](#catchall) instead.
+**提示**：自定义页面优先于 react-admin 自己的路由。 这意味着 `customRoutes` 允许您覆盖所需的任何路由！ If you want to add routes *after* all the react-admin routes, use the [`catchAll` prop](#catchall) instead.
 
 **Tip**: To look like other react-admin pages, your custom pages should have the following structure:
 
