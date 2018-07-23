@@ -99,12 +99,12 @@ export default App;
     Content-Range: posts 0-24/319
     
 
-If your API is on another domain as the JS code, you'll need to whitelist this header with an `Access-Control-Expose-Headers` [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) header.
+在 JS 代码中如果您的 API 是在另一个域中，你需要到白名单中为这个添加一个 `Access-Control-Expose-Headers` [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) 头。
 
     Access-Control-Expose-Headers: Content-Range
     
 
-## Adding Custom Headers
+## 添加自定义头
 
 The `simpleRestProvider` function accepts an HTTP client function as second argument. By default, it uses react-admin's `fetchUtils.fetchJson()` as HTTP client. It's similar to HTML5 `fetch()`, except it handles JSON decoding and HTTP error codes automatically.
 
