@@ -239,15 +239,15 @@ Data Provider 是一个接收请求并针对响应返回 Promise 的函数。请
 const dataProvider = (type, resource, params) => new Promise();
 ```
 
-When you write a Data provider, your job is to route requests to your API backend(s), then transform their response to match the format returned by the Data Provider.
+编写一个 Data provider 时，您的任务是将请求路由到 API 后端，然后转换它们的响应以匹配 Data Provider 返回的格式。
 
 ### Request Format
 
-Data queries require a *type* (e.g. `GET_ONE`), a *resource* (e.g. 'posts') and a set of *parameters*.
+数据查询需要一个*类型*(例如 `GET_ONE`)、一个*资源*(例如“posts”)和一组参数。
 
-*Tip*: In comparison, HTTP requests require a *verb* (e.g. 'GET'), an *url* (e.g. 'http://myapi.com/posts'), a list of *headers* (like `Content-Type`) and a *body*.
+*提示*: 相比之下, HTTP 请求需要 *动词* (例如 "GET"), *url* (例如 "http://myapi.com/posts"), *headers* 的列表 (如 `Content-Type`)和 *body*。
 
-Possible types are:
+可能的类型有：
 
 | Type                 | Usage                                           | Params format                                                                                                                                   |
 | -------------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
