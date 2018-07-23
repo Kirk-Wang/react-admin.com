@@ -145,7 +145,7 @@ const App = () => (
 );
 ```
 
-**提示**：如果您的自定义 `catchAll` 组件包含 react-router `<Route>` 组件，则允许您轻松注册 react-admin 布局中显示的新路由。 请注意，在测试了所有 react-admin 资源路由*后*，这些路由将匹配。 To add custom routes *before* the react-admin ones, and therefore override the default resource routes, use the [`customRoutes` prop](#customroutes) instead.
+**提示**：如果您的自定义 `catchAll` 组件包含 react-router `<Route>` 组件，则允许您轻松注册 react-admin 布局中显示的新路由。 请注意，在测试了所有 react-admin 资源路由*后*，这些路由将匹配。 要在 react-admin *之前*添加自定义路由，并因此覆盖默认资源路由，请改用[customRoutes</code> 属性](#customroutes)。
 
 ## `menu`
 
