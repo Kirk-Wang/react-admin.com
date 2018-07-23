@@ -241,9 +241,9 @@ const App = () => (
 
 ## `appLayout`
 
-如果要深度自定义应用程序头、菜单或通知, 最好的方法是提供自定义布局组件。 它必须包含 `{children}` 占位符, 其中就是 react-admin 将渲染的资源。 如果使用material UI fields 和 inputs, 则应包含 `<MuiThemeProvider>` 元素。 And finally, if you want to show the spinner in the app header when the app fetches data in the background, the Layout should connect to the redux store.
+如果要深度自定义应用程序头、菜单或通知, 最好的方法是提供自定义布局组件。 它必须包含 `{children}` 占位符, 其中就是 react-admin 将渲染的资源。 如果使用material UI fields 和 inputs, 则应包含 `<MuiThemeProvider>` 元素。 最后, 如果您希望当应用程序在后台获取数据时，在 app header中显示spinner，则 Layout 应 connect 到redux store。
 
-Use the [default layout](https://github.com/marmelab/react-admin/blob/master/packages/ra-ui-materialui/src/layout/Layout.js) as a starting point, and check [the Theming documentation](./Theming.html#using-a-custom-layout) for examples.
+使用 [默认布局](https://github.com/marmelab/react-admin/blob/master/packages/ra-ui-materialui/src/layout/Layout.js) 作为起始点, 并查看 [主题文档](./Theming.html#using-a-custom-layout) 示例。
 
 ```jsx
 // in src/App.js
@@ -256,7 +256,7 @@ const App = () => (
 );
 ```
 
-Your custom layout can simply extend the default `<Layout>` component if you only want to override the appBar, the menu, or the notification component. For instance:
+如果只想覆盖 appBar、菜单或通知组件, 则自定义布局可以简单地扩展默认的 `<Layout>` 组件。例如：
 
 ```jsx
 // in src/MyLayout.js
@@ -275,11 +275,11 @@ const MyLayout = (props) => <Layout
 export default MyLayout;
 ```
 
-For more details on custom layouts, check [the Theming documentation](./Theming.html#using-a-custom-layout).
+有关自定义布局的详细信息，请查看 [主题文档](./Theming.html#using-a-custom-layout)。
 
 ## `customReducers`
 
-The `<Admin>` app uses [Redux](http://redux.js.org/) to manage state. The state has the following keys:
+`<Admin>` app 使用 [Redux](http://redux.js.org/) 来管理状态。状态具有以下键：
 
 ```jsx
 {
@@ -289,7 +289,7 @@ The `<Admin>` app uses [Redux](http://redux.js.org/) to manage state. The state 
 }
 ```
 
-If your components dispatch custom actions, you probably need to register your own reducers to update the state with these actions. Let's imagine that you want to keep the bitcoin exchange rate inside the `bitcoinRate` key in the state. You probably have a reducer looking like the following:
+如果你的组件 dispatch 自定义 action，则可能需要注册你自己的 reducer 以使用这些 action 更新状态。 让我们假设您希望将比特币汇率保持在状态中的 `bitcoinRate` 键中。 你可能有一个如下所示的 reducer：
 
 ```jsx
 // in src/bitcoinRateReducer.js
@@ -301,7 +301,7 @@ export default (previousState = 0, { type, payload }) => {
 }
 ```
 
-To register this reducer in the `<Admin>` app, simply pass it in the `customReducers` prop:
+要在`<Admin>`应用程序中注册此reducer，只需将其传递给`customReducers` 属性：
 
 {% raw %}
 
