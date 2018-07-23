@@ -194,11 +194,11 @@ const mapStateToProps = state => ({
 export default withRouter(connect(mapStateToProps)(Menu));
 ```
 
-**Tip**: Note the `MenuItemLink` component. It must be used to avoid unwanted side effects in mobile views. It supports a custom text and icon (which must be a material-ui `<SvgIcon>`).
+**提示**: 注意 `MenuItemLink` 组件。 必须使用它来避免移动视图中的不必要的副作用。 它支持自定义文本和图标 (必须是 material-ui 的 `<SvgIcon>`)。
 
-**Tip**: Note that we include the `logout` item only on small devices. Indeed, the `logout` button is already displayed in the AppBar on larger devices.
+**提示**：注意, 我们只在小设备上包含 ` logout ` 项目。实际上, ` logout ` 按钮已显示在较大设备的 AppBar 中。
 
-**Tip**: Note that we use React Router [`withRouter`](https://reacttraining.com/react-router/web/api/withRouter) Higher Order Component and that it is used **before** Redux [`connect](https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options). This is required if you want the active menu item to be highlighted.
+**提示**: 注意, 我们使用React Router [`withRouter`](https://reacttraining.com/react-router/web/api/withRouter) 高阶组件和使用 **之前** Redux[ connect ](https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)。 This is required if you want the active menu item to be highlighted.
 
 Then, pass it to the `<Admin>` component as the `menu` prop:
 
