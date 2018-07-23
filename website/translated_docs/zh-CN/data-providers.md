@@ -219,9 +219,9 @@ const App = () => (
 
 ## 编写自己的 Data Provider
 
-Quite often, there is no Data Provider that suits you API - either in the core providers, or in the third-party providers. In such cases, you'll have to write your own Data Provider.
+通常，没有适合您 API 的 Data Provider — 无论是在核心 Provider 中，还是在第三方 Provider 中。在这种情况下，您必须编写自己的 Data Provider。
 
-A Data Provider is a function that receives a request, and returns a promise for a response. Both the request and the response format are standardized.
+Data Provider 是一个接收请求并针对响应返回 Promise 的函数。请求和响应格式都是标准化的。
 
 ```jsx
 /**
