@@ -547,7 +547,7 @@ const PostList = ({ classes, ...props) => (
 export withStyles(styles)(PostList);
 ```
 
-**提示**：如果要为每列独立覆盖` header `和 ` cell `样式，请在 `<Field>` 组件中使用 headerClassName 和 cellClassName 属性。 For instance, to hide a certain column on small screens:
+**提示**：如果要为每列独立覆盖` header `和 ` cell `样式，请在 `<Field>` 组件中使用 headerClassName 和 cellClassName 属性。 例如，要在小屏幕上隐藏某个列：
 
 ```jsx
 import { withStyles } from '@material-ui/core/styles';
@@ -577,9 +577,9 @@ const PostList = ({ classes, ...props }) => (
 export default withStyles(styles)(PostList);
 ```
 
-## The `SimpleList` component
+## `SimpleList` 组件
 
-For mobile devices, a `<Datagrid>` is often unusable - there is simply not enough space to display several columns. The convention in that case is to use a simple list, with only one column per row. The `<SimpleList>` component serves that purpose, leveraging [material-ui's `<List>` and `<ListItem>` components](http://www.material-ui.com/#/components/list). You can use it as `<List>` or `<ReferenceManyField>` child:
+对于移动设备，`<Datagrid>` 通常是不可用的， 因为没有足够的空间来显示多个列。 这种情况下的惯例是使用一个简单的列表，每行只有一列。 在这种情况下的惯例是使用一个简单的列表，每行只有一列。 `<SimpleList>`组件用于此目的，利用[ material-ui 的 `<List>` 和 `<ListItem>` 组件](http://www.material-ui.com/#/components/list)。 You can use it as `<List>` or `<ReferenceManyField>` child:
 
 ```jsx
 // in src/posts.js
