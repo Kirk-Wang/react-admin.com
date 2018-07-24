@@ -2,7 +2,7 @@
 id: resource-component
 title: <Resource>
 ---
-A `<Resource>` component maps one API endpoint to a CRUD interface. For instance, the following admin app offers a read-only interface to the resources exposed by the JSONPlaceholder API at [`http://jsonplaceholder.typicode.com/posts`](http://jsonplaceholder.typicode.com/posts) and [`http://jsonplaceholder.typicode.com/users`](http://jsonplaceholder.typicode.com/users):
+一个 `<Resource>` 组件将一个API端点映射到一个CRUD界面。 例如，下面的 admin app 为 JSONPlaceholder API 公开在[`http://jsonplaceholder.ode.com/posts`](http://jsonplaceholder.typicode.com/posts) 和 [`http://jsonplaceholder.ode.com/users`](http://jsonplaceholder.typicode.com/users) 的资源提供了一个只读界面：
 
 ```jsx
 // in src/App.js
@@ -21,14 +21,14 @@ const App = () => (
 );
 ```
 
-`<Resource>` allows you to define a component for each CRUD operation, using the following prop names:
+`<Resource>` 允许您使用以下属性名称为每个 CRUD 操作定义组件:
 
 * `list`
 * `create`
 * `edit`
 * `show`
 
-Here is a more complete admin, with components for all the CRUD operations:
+这里是一个更完整的admin，具有所有 CRUD 操作的组件:
 
 ```jsx
 import React from 'react';
@@ -49,16 +49,16 @@ const App = () => (
 );
 ```
 
-**Tip**: Under the hood, the `<Resource>` component uses react-router to create several routes:
+提示：在引擎盖下，`<Resource>` 组件使用 react-router 创建多个路由：
 
 * `/` maps to the `list` component
 * `/create` maps to the `create` component
 * `/:id` maps to the `edit` component
 * `/:id/show` maps to the `show` component
 
-**Tip**: You must add a `<Resource>` when you declare a reference (via `<ReferenceField>`, `<ReferenceArrayField>`, `<ReferenceManyField>`, `<ReferenceInput>` or `<ReferenceArrayInput>`), because react-admin uses resources to define the data store structure. That's why there is an empty `tag` resource in the example above.
+**提示**：在声明引用时（通过`<ReferenceField>`，`<ReferenceArrayField>`，`<ReferenceManyField>`，`<ReferenceInput>` 或 `<ReferenceArrayInput>`），必须添加一个`<Resource>`，因为react-admin使用 Resource 来定义数据存储结构。 这就是上面示例中有一个空的 `tag` 资源的原因。
 
-`<Resource>` also accepts additional props:
+`<Resource>` 也接受额外的属性：
 
 * [`name`](#name)
 * [`icon`](#icon)
@@ -66,15 +66,15 @@ const App = () => (
 
 ## `name`
 
-React-admin uses the `name` prop both to determine the API endpoint (passed to the `dataProvider`), and to form the URL for the resource.
+React-admin 使用 `name` 属性既确定API端点（被传递到`dataProvider`）又为resource构成URL。
 
 ```jsx
 <Resource name="posts" list={PostList} create={PostCreate} edit={PostEdit} show={PostShow} />
 ```
 
-For this resource react-admin will fetch the `http://jsonplaceholder.typicode.com/posts` endpoint for data.
+对于此资源， react-admin 将为数据获取 `http://jsonplaceholder.typicode.com/posts`端点。
 
-The routing will map the component as follows:
+路由将按如下方式映射组件:
 
 * `/posts/` maps to `PostList`
 * `/posts/create` maps to `PostCreate`
@@ -85,7 +85,7 @@ The routing will map the component as follows:
 
 ## `icon`
 
-React-admin will render the `icon` prop component in the menu:
+React-admin 将在菜单中呈现 `icon` 属性组件:
 
 ```jsx
 // in src/App.js
@@ -107,7 +107,7 @@ const App = () => (
 
 ## options
 
-`options.label` allows to customize the display name of a given resource in the menu.
+`options.label` 允许在菜单中自定义显示给定资源的名称。
 
 ```jsx
 <Resource name="v2/posts" options={{ label: 'Posts' }} list={PostList} />

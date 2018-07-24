@@ -2,7 +2,7 @@
 id: admin-component
 title: <Admin>
 ---
-The `<Admin>` component creates an application with its own state, routing, and controller logic. `<Admin>` requires only a `dataProvider` prop, and at least one child `<Resource>` to work:
+`<Admin>` 组件创建一个具有自己的状态、路由和控制器逻辑的应用程序。 `<Admin>` 只需要一个 `dataProvider` 属性, 并且至少有一个子 `<Resource>` 就能工作：
 
 ```jsx
 // in src/App.js
@@ -22,7 +22,7 @@ const App = () => (
 export default App;
 ```
 
-Here are all the props accepted by the component:
+以下是通过该组件接受的所有属性：
 
 * [`dataProvider`](#dataprovider)
 * [`title`](#title)
@@ -44,7 +44,7 @@ Here are all the props accepted by the component:
 
 ## `dataProvider`
 
-The only required prop, it must be a function returning a promise, with the following signature:
+唯一必需的属性，它必须是一个返回一个promise的函数，具有下列签名：
 
 ```jsx
 /**
@@ -62,11 +62,11 @@ The only required prop, it must be a function returning a promise, with the foll
 const dataProvider = (type, resource, params) => new Promise();
 ```
 
-The `dataProvider` is also the ideal place to add custom HTTP headers, authentication, etc. The [Data Providers Chapter](./DataProviders.html) of the documentation lists available data providers, and explains how to build your own.
+`dataProvider` 也是添加自定义 HTTP 头、身份验证等的理想位置。 [Data Providers 章节](./DataProviders.html) 文档列出了可用的Data Provider，以及如何构建自己的 Data Provider 客户端。
 
 ## `title`
 
-By default, the header of an admin app uses 'React Admin' as the main app title. It's probably the first thing you'll want to customize. The `title` prop serves exactly that purpose.
+默认情况下，一个admin app的头部使用'React Admin'作为主app标题。它可能是你会想要自定义的第一件事。这个`title`属性正是为这个目的服务的。
 
 ```jsx
 const App = () => (
@@ -78,7 +78,7 @@ const App = () => (
 
 ## `dashboard`
 
-By default, the homepage of an an admin app is the `list` of the first child `<Resource>`. But you can also specify a custom component instead. To fit in the general design, use Material UI's `<Card>` component, and react-admin's `<ViewTitle>` component:
+默认情况下，一个admin app的主页是第一个子`<Resource>`的`list`。 但你也可以指定一个自定义组件代替。 要适应一般设计，请使用Material UI `<Card>`组件和 react-admin `<ViewTitle>`组件：
 
 ```jsx
 // in src/Dashboard.js
@@ -107,15 +107,15 @@ const App = () => (
 
 ![Custom home page](https://marmelab.com/react-admin/img/dashboard.png)
 
-**Tip**: Adding the `<ViewTitle>` component will also allow the header to be displayed in mobile resolutions.
+**提示**：添加 `<ViewTitle>` 组件还将允许标题以移动分辨率显示。
 
 ## `catchAll`
 
-When users type URLs that don't match any of the children `<Resource>` components, they see a default "Not Found" page.
+当用户键入的 url 与任何子 `<Resource>` 组件不匹配时, 它们会看到默认的 "Not Found" 页。
 
 ![Not Found](https://marmelab.com/react-admin/img/not-found.png)
 
-You can customize this page to use the component of your choice by passing it as the `catchAll` prop. To fit in the general design, use Material UI's `<Card>` component, and react-admin's `<ViewTitle>` component:
+您可以自定义此页以使用您选择的组件, 将其作为 `catchAll` 属性传递。 要适应一般设计，请使用Material UI `<Card>`组件和 react-admin `<ViewTitle>`组件：
 
 ```jsx
 // in src/NotFound.js
@@ -145,15 +145,15 @@ const App = () => (
 );
 ```
 
-**Tip**: If your custom `catchAll` component contains react-router `<Route>` components, this allows you to register new routes displayed within the react-admin layout easily. Note that these routes will match *after* all the react-admin resource routes have been tested. To add custom routes *before* the react-admin ones, and therefore override the default resource routes, use the [`customRoutes` prop](#customroutes) instead.
+**提示**：如果您的自定义 `catchAll` 组件包含 react-router `<Route>` 组件，则允许您轻松注册 react-admin 布局中显示的新路由。 请注意，在测试了所有 react-admin 资源路由*后*，这些路由将匹配。 要在 react-admin *之前*添加自定义路由，并因此覆盖默认资源路由，请改用[customRoutes</code> 属性](#customroutes)。
 
 ## `menu`
 
-**Tip**: This prop is deprecated. To override the menu component, use a [custom layout](#appLayout) instead.
+**提示**：这个属性被废弃了。要覆盖菜单组件，请使用自定义布局。
 
-React-admin uses the list of `<Resource>` components passed as children of `<Admin>` to build a menu to each resource with a `list` component.
+React-admin使用作为 `<Admin>` 子级传递的 `<Resource>` 组件列表，使用列表组件为每个资源构建菜单。
 
-If you want to add or remove menu items, for instance to link to non-resources pages, you can create your own menu component:
+如果你想要添加或删除菜单项，例如要链接到非资源页面，你可以创建你自己的菜单组件：
 
 ```jsx
 // in src/Menu.js
@@ -194,13 +194,13 @@ const mapStateToProps = state => ({
 export default withRouter(connect(mapStateToProps)(Menu));
 ```
 
-**Tip**: Note the `MenuItemLink` component. It must be used to avoid unwanted side effects in mobile views. It supports a custom text and icon (which must be a material-ui `<SvgIcon>`).
+**提示**: 注意 `MenuItemLink` 组件。 必须使用它来避免移动视图中的不必要的副作用。 它支持自定义文本和图标 (必须是 material-ui 的 `<SvgIcon>`)。
 
-**Tip**: Note that we include the `logout` item only on small devices. Indeed, the `logout` button is already displayed in the AppBar on larger devices.
+**提示**：注意, 我们只在小设备上包含 ` logout ` 项目。实际上, ` logout ` 按钮已显示在较大设备的 AppBar 中。
 
-**Tip**: Note that we use React Router [`withRouter`](https://reacttraining.com/react-router/web/api/withRouter) Higher Order Component and that it is used **before** Redux [`connect](https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options). This is required if you want the active menu item to be highlighted.
+**提示**: 注意, 我们使用React Router [`withRouter`](https://reacttraining.com/react-router/web/api/withRouter) 高阶组件和使用 **之前** Redux[ connect ](https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)。 如果要突出显示活动菜单项，则需要此选项。
 
-Then, pass it to the `<Admin>` component as the `menu` prop:
+然后, 将其传递到 `<Admin>` 组件, 作为 `menu` 属性：
 
 ```jsx
 // in src/App.js
@@ -213,11 +213,11 @@ const App = () => (
 );
 ```
 
-See the [Theming documentation](./Theming.html#using-a-custom-menu) for more details.
+有关详细信息, 请参阅 [主题文档](./Theming.html#using-a-custom-menu)。
 
 ## `theme`
 
-Material UI supports [theming](http://www.material-ui.com/#/customization/themes). This lets you customize the look and feel of an admin by overriding fonts, colors, and spacing. You can provide a custom material ui theme by using the `theme` prop:
+Material UI 支持 [主题](http://www.material-ui.com/#/customization/themes)。 这使您可以通过覆盖字体、颜色和间距来自定义 admin 的外观。 您可以使用 `theme` 属性提供自定义 material ui 主题:
 
 ```jsx
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -237,13 +237,13 @@ const App = () => (
 
 ![Dark theme](https://marmelab.com/react-admin/img/dark-theme.png)
 
-For more details on predefined themes and custom themes, refer to the [Material UI Customization documentation](https://material-ui.com/customization/themes/).
+有关预定义主题和自定义主题的详细信息, 请参阅 [Material UI 自定义文档](https://material-ui.com/customization/themes/)。
 
 ## `appLayout`
 
-If you want to deeply customize the app header, the menu, or the notifications, the best way is to provide a custom layout component. It must contain a `{children}` placeholder, where react-admin will render the resources. If you use material UI fields and inputs, it should contain a `<MuiThemeProvider>` element. And finally, if you want to show the spinner in the app header when the app fetches data in the background, the Layout should connect to the redux store.
+如果要深度自定义应用程序头、菜单或通知, 最好的方法是提供自定义布局组件。 它必须包含 `{children}` 占位符, 其中就是 react-admin 将渲染的资源。 如果使用material UI fields 和 inputs, 则应包含 `<MuiThemeProvider>` 元素。 最后, 如果您希望当应用程序在后台获取数据时，在 app header中显示spinner，则 Layout 应 connect 到redux store。
 
-Use the [default layout](https://github.com/marmelab/react-admin/blob/master/packages/ra-ui-materialui/src/layout/Layout.js) as a starting point, and check [the Theming documentation](./Theming.html#using-a-custom-layout) for examples.
+使用 [默认布局](https://github.com/marmelab/react-admin/blob/master/packages/ra-ui-materialui/src/layout/Layout.js) 作为起始点, 并查看 [主题文档](./Theming.html#using-a-custom-layout) 示例。
 
 ```jsx
 // in src/App.js
@@ -256,7 +256,7 @@ const App = () => (
 );
 ```
 
-Your custom layout can simply extend the default `<Layout>` component if you only want to override the appBar, the menu, or the notification component. For instance:
+如果只想覆盖 appBar、菜单或通知组件, 则自定义布局可以简单地扩展默认的 `<Layout>` 组件。例如：
 
 ```jsx
 // in src/MyLayout.js
@@ -275,11 +275,11 @@ const MyLayout = (props) => <Layout
 export default MyLayout;
 ```
 
-For more details on custom layouts, check [the Theming documentation](./Theming.html#using-a-custom-layout).
+有关自定义布局的详细信息，请查看 [主题文档](./Theming.html#using-a-custom-layout)。
 
 ## `customReducers`
 
-The `<Admin>` app uses [Redux](http://redux.js.org/) to manage state. The state has the following keys:
+`<Admin>` app 使用 [Redux](http://redux.js.org/) 来管理状态。状态具有以下键：
 
 ```jsx
 {
@@ -289,7 +289,7 @@ The `<Admin>` app uses [Redux](http://redux.js.org/) to manage state. The state 
 }
 ```
 
-If your components dispatch custom actions, you probably need to register your own reducers to update the state with these actions. Let's imagine that you want to keep the bitcoin exchange rate inside the `bitcoinRate` key in the state. You probably have a reducer looking like the following:
+如果你的组件 dispatch 自定义 action，则可能需要注册你自己的 reducer 以使用这些 action 更新状态。 让我们假设您希望将比特币汇率保持在状态中的 `bitcoinRate` 键中。 你可能有一个如下所示的 reducer：
 
 ```jsx
 // in src/bitcoinRateReducer.js
@@ -301,7 +301,7 @@ export default (previousState = 0, { type, payload }) => {
 }
 ```
 
-To register this reducer in the `<Admin>` app, simply pass it in the `customReducers` prop:
+要在`<Admin>`应用程序中注册此reducer，只需将其传递给`customReducers` 属性：
 
 {% raw %}
 
@@ -323,7 +323,7 @@ export default App;
 
 {% endraw %}
 
-Now the state will look like:
+现在 state 将看起来像：
 
 ```jsx
 {
@@ -336,9 +336,9 @@ Now the state will look like:
 
 ## `customSagas`
 
-The `<Admin>` app uses [redux-saga](https://github.com/redux-saga/redux-saga) to handle side effects (AJAX calls, notifications, redirections, etc).
+`<Admin>` app 使用 redux-saga 来处理副作用（AJAX调用，通知，重定向等）。
 
-If your components dispatch custom actions, you probably need to register your own side effects as sagas. Let's imagine that you want to show a notification whenever the `BITCOIN_RATE_RECEIVED` action is dispatched. You probably have a saga looking like the following:
+如果你的组件 dispatch 自定义 action，则可能需要注册你自己的 side effedcts 作为 saga。 假设您希望在dispatch `BITCOIN_RATE_RECEIVED` action 时显示通知。 你可能有一个类似如下的saga：
 
 ```jsx
 // in src/bitcoinSaga.js
@@ -352,7 +352,7 @@ export default function* bitcoinSaga() {
 }
 ```
 
-To register this saga in the `<Admin>` app, simply pass it in the `customSagas` prop:
+要在 `<Admin>` app 中注册此 saga, 只需在 `customSagas` 属性中传递它：
 
 ```jsx
 // in src/App.js
@@ -372,7 +372,7 @@ export default App;
 
 ## `customRoutes`
 
-To register your own routes, create a module returning a list of [react-router](https://github.com/ReactTraining/react-router) `<Route>` component:
+要注册自己的路由, 请创建一个模块, 返回一个 [react-router](https://github.com/ReactTraining/react-router) `<Route>` 组件列表：
 
 ```jsx
 // in src/customRoutes.js
@@ -389,7 +389,7 @@ export default [
 ];
 ```
 
-Then, pass this array as `customRoutes` prop in the `<Admin>` component:
+然后，将此数组作为 `customRoutes` 属性传递到 `<Admin>` 组件中：
 
 ```jsx
 // in src/App.js
@@ -407,13 +407,13 @@ const App = () => (
 export default App;
 ```
 
-Now, when a user browses to `/foo` or `/bar`, the components you defined will appear in the main part of the screen. When a user browses to `/baz`, the component will appear outside of the defined Layout, leaving you the freedom to design the screen the way you want.
+现在，当用户浏览`/foo`或`/bar`时，您定义的组件将显示在屏幕的主要部分中。 当用户浏览 `/baz` 时，组件将出现在定义的布局之外，让您可以自由地按照自己的方式设计。
 
-**Tip**: It's up to you to create a [custom menu](#menu) entry, or custom buttons, to lead to your custom pages.
+**提示**：您可以创建[自定义菜单](#menu)入口或自定义按钮来引导您的自定义页面。
 
-**Tip**: Your custom pages take precedence over react-admin's own routes. That means that `customRoutes` lets you override any route you want! If you want to add routes *after* all the react-admin routes, use the [`catchAll` prop](#catchall) instead.
+**提示**：自定义页面优先于 react-admin 自己的路由。 这意味着 `customRoutes` 允许您覆盖所需的任何路由！ 如果你要在所有 react-admin *之后*添加路由，请使用 [`catchAll` 属性](#catchall)代替。
 
-**Tip**: To look like other react-admin pages, your custom pages should have the following structure:
+**提示**：要看起来像其他 react-admin 页面，您的自定义页应具有以下结构:
 
 ```jsx
 // in src/Foo.js
@@ -436,7 +436,7 @@ export default Foo;
 
 ## `authProvider`
 
-The `authProvider` prop expect a function returning a Promise, to control the application authentication strategy:
+`authProvider` 属性期望函数返回一个Promise，以控制应用程序身份验证策略：
 
 ```jsx
 import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } from 'react-admin';
@@ -454,11 +454,11 @@ const App = () => (
 );
 ```
 
-The [Authentication documentation](./Authentication.html) explains how to implement these functions in detail.
+[身份验证文档](./Authentication.html) 解释如何详细实现这些功能。
 
 ## `loginPage`
 
-If you want to customize the Login page, or switch to another authentication strategy than a username/password form, pass a component of your own as the `loginPage` prop. React-admin will display this component whenever the `/login` route is called.
+如果要自定义登录页，或切换到其他身份验证策略，而不是用户名/密码表单, 请将自己的组件作为 `loginPage` 属性传递。 只要调用 `/login` 路由，React-admin 就会显示该组件。
 
 ```jsx
 import MyLoginPage from './MyLoginPage';
@@ -470,11 +470,11 @@ const App = () => (
 );
 ```
 
-See The [Authentication documentation](./Authentication.html#customizing-the-login-and-logout-components) for more details.
+有关详细信息, 请参阅 [身份验证文档](./Authentication.html#customizing-the-login-and-logout-components)。
 
 ## `logoutButton`
 
-If you customize the `loginPage`, you probably need to override the `logoutButton`, too - because they share the authentication strategy.
+如果自定义 `loginPage`，则可能需要重写 `logoutButton`，因为它们共享身份验证策略。
 
 ```jsx
 import MyLoginPage from './MyLoginPage';
@@ -489,13 +489,13 @@ const App = () => (
 
 ## `initialState`
 
-The `initialState` prop lets you pass preloaded state to Redux. See the [Redux Documentation](http://redux.js.org/docs/api/createStore.html#createstorereducer-preloadedstate-enhancer) for more details.
+`initialState` 属性允许您将预加载状态传递给Redux。 有关详细信息, 请参阅 [Redux文档](http://redux.js.org/docs/api/createStore.html#createstorereducer-preloadedstate-enhancer)。
 
 ## `history`
 
-By default, react-admin creates URLs using a hash sign (e.g. "myadmin.acme.com/#/posts/123"). The hash portion of the URL (i.e. `#/posts/123` in the example) contains the main application route. This strategy has the benefit of working without a server, and with legacy web browsers. But you may want to use another routing strategy, e.g. to allow server-side rendering.
+默认情况下, react-admin 使用哈希符号 (例如"myadmin.acme.com/#/posts/123") 创建 url。 URL 的哈希部分 (即 示例中的 `#/posts/123` 包含主应用程序路由。 此策略具有在没有服务器和旧式 web 浏览器的情况下工作的好处。 但您可能希望使用其他路由策略, 例如, 允许服务器端渲染。
 
-You can create your own `history` function (compatible with [the `history` npm package](https://github.com/reacttraining/history)), and pass it to the `<Admin>` component to override the default history strategy. For instance, to use `browserHistory`:
+您可以创建自己的 `history` 函数 (与 [ `history` npm包兼容](https://github.com/reacttraining/history))。并将其传递到 `<Admin>` 组件以覆盖默认历史记录策略。 例如，要使用 `browserHistory`：
 
 ```js
 import createHistory from 'history/createBrowserHistory';
@@ -509,15 +509,15 @@ const App = () => (
 );
 ```
 
-## Internationalization
+## 国际化 （in）
 
-The `locale` and `messages` props let you translate the GUI. The [Translation Documentation](./Translation.html) details this process.
+`locale` 和 `messages` 属性允许您翻译GUI。翻译文档详细介绍了此过程。
 
-## Declaring resources at runtime
+## 在运行时声明资源
 
-You might want to dynamically define the resources when the app starts. The `<Admin>` component accepts a function as its child and this function can return a Promise. If you also defined an `authProvider`, the function will receive the result of a call to `authProvider` with the `AUTH_GET_PERMISSIONS` type (you can read more about this in the [Authorization](./Authorization.html) chapter).
+您可能希望在应用启动时动态定义Resource。 `<Admin>` 组件接受一个函数作为其子函数，此函数可以返回一个Promise。 如果还定义了 `authProvider`, 则该函数将接收到 `authProvider` 的调用结果, 并使用 `AUTH_GET_PERMISSIONS` 类型 (您可以在 [授权](./Authorization.html) 章节中阅读更多信息)。
 
-For instance, getting the resource from an API might look like:
+例如, 从 API 获取资源可能类似于：
 
 ```js
 import React from 'react';
@@ -551,6 +551,6 @@ const App = () => (
 );
 ```
 
-## Using react-admin without `<Admin>` and `<Resource>`
+## 在没有 `<Admin>` 和 `<Resource>` 的情况下使用 react-admin
 
-Using `<Admin>` and `<Resource>` is completely optional. If you feel like bootstrapping a redux app yourself, it's totally possible. Head to [Including in another app](./CustomApp.html) for a detailed how-to.
+使用 `<Admin>` 和 `<Resource>` 是完全可选的。 如果你想自己引导一个redux app， 这是完全有可能的。 前往[包含在另一个app](./CustomApp.html)，给了一个详细的指引。

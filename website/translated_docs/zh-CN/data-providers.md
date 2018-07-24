@@ -2,11 +2,11 @@
 id: data-providers
 title: Data Providers
 ---
-React-admin can communicate with any API, whether it uses REST, GraphQL, or even SOAP, regardless of the dialect it uses. For REST servers, it can be [JSON API](http://jsonapi.org/), [HAL](http://stateless.co/hal_specification.html), [OData](http://www.odata.org/) or a custom dialect. The only thing react-admin needs is a Data Provider function. This is the place to translate data queries to HTTP requests, and HTTP responses to data responses.
+无论使用何种规范，REST，GraphQL还是SOAP。React-admin都可以与它的API进行通信。 对于 REST 服务器, 它可以是 [JSON API](http://jsonapi.org/), [HAL](http://stateless.co/hal_specification.html), [OData](http://www.odata.org/) 或自定义规范。 React-admin 只需要一个 Data Provider 函数。 这是将数据查询转换为 http 请求的地方, 以及对数据响应的 http 响应。
 
 ![Data Provider architecture](https://marmelab.com/react-admin/img/data-provider.png)
 
-The `dataProvider` parameter of the `<Admin>` component must be a function with the following signature:
+`<Admin>` 组件的 `dataProvider` 参数必须是具有以下签名的函数：
 
 ```jsx
 /**
@@ -24,20 +24,20 @@ The `dataProvider` parameter of the `<Admin>` component must be a function with 
 const dataProvider = (type, resource, params) => new Promise();
 ```
 
-You can find a Data Provider example implementation in [`packages/ra-data-simple-rest/src/index.js`](https://github.com/marmelab/react-admin/blob/master/packages/ra-data-simple-rest/src/index.js);
+您可以在 [`packages/ra-data-simple-rest/src/index.js`](https://github.com/marmelab/react-admin/blob/master/packages/ra-data-simple-rest/src/index.js) 找到 Data Provider 示例实现。
 
-The `dataProvider` is also the ideal place to add custom HTTP headers, authentication, etc.
+`dataProvider` 也是添加自定义 HTTP 头、身份验证等的理想位置。
 
-## Available Providers
+## 可用的 Provider
 
-The react-admin project includes 4 Data Providers:
+React-admin 项目包括 4 个 Data Provider:
 
-* Simple REST: [marmelab/ra-data-simple-rest](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest) ([read more below](#simple-rest)). It serves mostly as an example. Incidentally, it is compatible with the [FakeRest](https://github.com/marmelab/FakeRest) API.
-* **[JSON server](https://github.com/typicode/json-server)**: [marmelab/ra-data-json-server](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-json-server). Great for prototyping an admin over a yet-to-be-developed REST API.
-* [Graphcool](https://www.graph.cool/): [marmelab/ra-data-graphcool](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-graphcool). A provider for GraphQL servers following the Graphcool convention. Incidentally, this package builds up on [marmelab/ra-data-graphql](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-graphql), which lets you develop providers for other GraphQL conventions.
-* Local JSON: [marmelab/ra-data-fakerest](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-fakerest). Based on a local object, it doesn't even use HTTP. Use it for testing purposes.
+* Simple REST：[marmelab/ra-data-simple-rest](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest) （[请阅读以下内容](#simple-rest)）。 它主要用作一个例子。 顺便提一下, 它与 [FakeRest](https://github.com/marmelab/FakeRest) API 兼容。
+* **[JSON server](https://github.com/typicode/json-server)**: [marmelab/ra-data-json-server](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-json-server). 非常适合在尚未开发的 REST API 上，做一个 admin 原型。
+* [Graphcool](https://www.graph.cool/): [marmelab/ra-data-graphcool](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-graphcool). 遵循 Graphcool 约定的 GraphQL 服务器 Provider。 顺便提一下, 这个包建立在 [marmelab/ra-data-graphql](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-graphql)上, 它允许您为其他 graphql 约定开发Provider。
+* Local JSON: [marmelab/ra-data-fakerest](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-fakerest). 基于本地对象, 它甚至不使用 HTTP。 用于测试目的。
 
-You can find Data Providers for various backends in third-party repositories:
+您可以在第三方存储库中找到各种后端的 Data Provider：
 
 * **[DynamoDb](https://github.com/abiglobalhealth/aor-dynamodb-client)**: [abiglobalhealth/aor-dynamodb-client](https://github.com/abiglobalhealth/aor-dynamodb-client)
 * **[Epilogue](https://github.com/dchester/epilogue)**: [dunghuynh/aor-epilogue-client](https://github.com/dunghuynh/aor-epilogue-client)
@@ -49,19 +49,19 @@ You can find Data Providers for various backends in third-party repositories:
 * **[PostgREST](http://postgrest.com/en/v0.4/)**: [tomberek/aor-postgrest-client](https://github.com/tomberek/aor-postgrest-client)
 * **[Xmysql](https://github.com/o1lab/xmysql)**: [soaserele/aor-xmysql](https://github.com/soaserele/aor-xmysql)
 
-If you've written a Data Provider for another backend, and open-sourced it, please help complete this list with your package.
+如果您已经为另一个后端编写了一个 Data Provider，并开放了它的源代码，请使用您的包帮助完成这个列表。
 
-## Usage
+## 用法
 
-As an example, let's focus on the Simple REST data provider. It fits REST APIs using simple GET parameters for filters and sorting.
+作为一个示例，让我们关注 Simple REST data provider 。它使用过滤器和排序的简单GET参数来满足REST api。
 
-Install the `ra-data-simple-rest` package to use this provider.
+安装 `ra-data-simple-rest` 包以使用此 provider。
 
 ```sh
 npm install ra-data-simple-rest
 ```
 
-Then, initialize the provider with the RESt backend URL, and pass the result to the `dataProvider` prop of the `<Admin>` component:
+然后, 使用 REST 后端 URL 初始化 Provider, 并将结果传递给 `<Admin>` 组件的 `dataProvider` 属性:
 
 ```jsx
 // in src/App.js
@@ -80,7 +80,7 @@ const App = () => (
 export default App;
 ```
 
-Here is how this provider maps request types to API calls:
+以下是此 Provider 如何将请求类型映射到 API 调用：
 
 | Request type         | API calls                                                                                     |
 | -------------------- | --------------------------------------------------------------------------------------------- |
@@ -94,21 +94,21 @@ Here is how this provider maps request types to API calls:
 | `GET_MANY`           | `GET http://my.api.url/posts?filter={ids:[123,456,789]}`                                      |
 | `GET_MANY_REFERENCE` | `GET http://my.api.url/posts?filter={author_id:345}`                                          |
 
-**Note**: The simple REST client expects the API to include a `Content-Range` header in the response to `GET_LIST` calls. The value must be the total number of resources in the collection. This allows react-admin to know how many pages of resources there are in total, and build the pagination controls.
+**注意**：Simple REST Client 希望 API 在对 GET_LIST 调用的响应中包含 Content-Range 头。 该值必须是集合中的资源总数。 这使 react-admin 能够知道总共有多少页资源，并生成分页控件。
 
     Content-Range: posts 0-24/319
     
 
-If your API is on another domain as the JS code, you'll need to whitelist this header with an `Access-Control-Expose-Headers` [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) header.
+在 JS 代码中如果您的 API 是在另一个域中，你需要到白名单中为这个添加一个 `Access-Control-Expose-Headers` [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) 头。
 
     Access-Control-Expose-Headers: Content-Range
     
 
-## Adding Custom Headers
+## 添加自定义头
 
-The `simpleRestProvider` function accepts an HTTP client function as second argument. By default, it uses react-admin's `fetchUtils.fetchJson()` as HTTP client. It's similar to HTML5 `fetch()`, except it handles JSON decoding and HTTP error codes automatically.
+`simpleRestProvider` 函数接受一个 HTTP client 函数作为第二个参数。 默认情况下, 他们使用 react-admin 的 `fetchUtils.fetchJson()` 作为 HTTP client。 它类似于HTML5 `fetch()`，除了它自动处理 JSON 解码和 HTTP 错误代码。
 
-That means that if you need to add custom headers to your requests, you can just *wrap* the `fetchJson()` call inside your own function:
+这意味着如果您需要为请求添加自定义头，您可以将 `etchJson()` 调用*包装*在您自己的函数中：
 
 ```jsx
 import { fetchUtils, Admin, Resource } from 'react-admin';
@@ -131,9 +131,9 @@ const App = () => (
 );
 ```
 
-Now all the requests to the REST API will contain the `X-Custom-Header: foobar` header.
+现在，对 REST API 的所有请求都将包含 `X-Custom-Header:foobar` 头。
 
-**Tip**: The most common usage of custom headers is for authentication. `fetchJson` has built-on support for the `Authorization` token header:
+**提示**：自定义头的最常见用法是进行身份验证。 `fetchJson` 具有对 Authorization 令牌头的内置支持：
 
 ```jsx
 const httpClient = (url, options = {}) => {
@@ -146,13 +146,13 @@ const httpClient = (url, options = {}) => {
 const dataProvider = simpleRestProvider('http://path.to.my.api/', httpClient);
 ```
 
-Now all the requests to the REST API will contain the `Authorization: SRTRDFVESGNJYTUKTYTHRG` header.
+现在，对REST API的所有请求都将包含 `Authorization：SRTRDFVESGNJYTUKTYTHRG` 头。
 
-## Decorating your Data Provider (Example of File Upload)
+## 装饰 Data Provider（文件上载示例）
 
-Instead of writing your own Data Provider, you can enhance the capabilities of an existing data provider. You can even restrict the customization on a given resource.
+您可以增强现有 Data Provider 的功能，而不是编写自己的 Data Provider。您甚至可以自定义限制给定资源。
 
-For instance, if you want to use upload components (such as `<ImageInput />` one), you can decorate the provider the following way:
+例如，如果您想要使用上传组件（如 `<ImageInput />`组件），你可以按以下方式修饰它：
 
 ```jsx
 // in addUploadFeature.js
@@ -201,7 +201,7 @@ const addUploadFeature = requestHandler => (type, resource, params) => {
 export default addUploadFeature;
 ```
 
-To enhance a provider with the upload feature, compose `addUploadFeature` function with the data provider function:
+让上传功能增强 Provider，使用 Data Provider 函数组合 addUploadFeature 函数：
 
 ```jsx
 import simpleRestProvider from 'ra-data-simple-rest';
@@ -217,11 +217,11 @@ const App = () => (
 );
 ```
 
-## Writing Your Own Data Provider
+## 编写自己的 Data Provider
 
-Quite often, there is no Data Provider that suits you API - either in the core providers, or in the third-party providers. In such cases, you'll have to write your own Data Provider.
+通常，没有适合您 API 的 Data Provider — 无论是在核心 Provider 中，还是在第三方 Provider 中。在这种情况下，您必须编写自己的 Data Provider。
 
-A Data Provider is a function that receives a request, and returns a promise for a response. Both the request and the response format are standardized.
+Data Provider 是一个接收请求并针对响应返回 Promise 的函数。请求和响应格式都是标准化的。
 
 ```jsx
 /**
@@ -239,15 +239,15 @@ A Data Provider is a function that receives a request, and returns a promise for
 const dataProvider = (type, resource, params) => new Promise();
 ```
 
-When you write a Data provider, your job is to route requests to your API backend(s), then transform their response to match the format returned by the Data Provider.
+编写一个 Data provider 时，您的任务是将请求路由到 API 后端，然后转换它们的响应以匹配 Data Provider 返回的格式。
 
 ### Request Format
 
-Data queries require a *type* (e.g. `GET_ONE`), a *resource* (e.g. 'posts') and a set of *parameters*.
+数据查询需要一个*类型*(例如 `GET_ONE`)、一个*资源*(例如“posts”)和一组参数。
 
-*Tip*: In comparison, HTTP requests require a *verb* (e.g. 'GET'), an *url* (e.g. 'http://myapi.com/posts'), a list of *headers* (like `Content-Type`) and a *body*.
+*提示*: 相比之下, HTTP 请求需要 *动词* (例如 "GET"), *url* (例如 "http://myapi.com/posts"), *headers* 的列表 (如 `Content-Type`)和 *body*。
 
-Possible types are:
+可能的类型有：
 
 | Type                 | Usage                                           | Params format                                                                                                                                   |
 | -------------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -261,7 +261,7 @@ Possible types are:
 | `GET_MANY`           | Read a list of resource, by ids                 | `{ ids: {mixed[]} }`                                                                                                                            |
 | `GET_MANY_REFERENCE` | Read a list of resources related to another one | `{ target: {string}, id: {mixed}, pagination: { page: {int} , perPage: {int} }, sort: { field: {string}, order: {string} }, filter: {Object} }` |
 
-Here are several examples of how react-admin can call the Data Provider with these types:
+以下是 react-admin 如何使用以下类型调用 Data Provider 的几个示例：
 
 ```jsx
 dataProvider(GET_LIST, 'posts', {
@@ -293,9 +293,9 @@ dataProvider(GET_MANY_REFERENCE, 'comments', {
 });
 ```
 
-### Example Request Processing
+### 示例请求处理
 
-Let's say that you want to map the Data Provider requests to a REST backend, like so:
+假设您希望将 Data Provider 请求映射到 REST 后端，是如下所示的样子:
 
 * `GET_LIST => GET http://path.to.my.api/posts?sort=["title","ASC"]&range=[0, 24]&filter={"author_id":12}`
 * `GET_ONE => GET http://path.to.my.api/posts/123`
@@ -307,7 +307,7 @@ Let's say that you want to map the Data Provider requests to a REST backend, lik
 * `GET_MANY => GET http://path.to.my.api/posts?filter={"ids":[123,124,125]}`
 * `GET_MANY_REFERENCE  => GET http://path.to.my.api/comments?sort=["created_at","DESC"]&range=[0, 24]&filter={"post_id":123}`
 
-Data Providers often use a `switch` statement, and finish by a call to `fetch()`. Here is an example implementation:
+数据提供者经常使用`switch`语句，并通过调用`fetch()`来完成。 这是一个示例实现：
 
 ```js
 // in myRestProvider.js
@@ -423,9 +423,9 @@ export default (type, resource, params) => {
 };
 ```
 
-### Response Format
+### 响应格式
 
-React-admin expects responses from Data Providers to be objects with a `data` property. The data format depends on the request type.
+React-admin 希望 Data Provider 的响应是具有 `data` 属性的对象。数据格式取决于请求类型。
 
 | Request Type         | Response format                                       |
 | -------------------- | ----------------------------------------------------- |
@@ -439,9 +439,9 @@ React-admin expects responses from Data Providers to be objects with a `data` pr
 | `GET_MANY`           | `{ data: {Record[]} }`                                |
 | `GET_MANY_REFERENCE` | `{ data: {Record[]}, total: {int} }`                  |
 
-A `{Record}` is an object literal with at least an `id` property, e.g. `{ id: 123, title: "hello, world" }`.
+`{Record}` 是一个至少具有 ` id ` 属性的对象文本, 例如 ` {id: 123, title: "hello, world"} `。
 
-Building up on the previous example, here are example responses matching the format expected by react-admin:
+在上一个示例的基础上，这里是与 react-admin 所期望的格式匹配的示例响应：
 
 ```jsx
 dataProvider(GET_LIST, 'posts', {
@@ -532,9 +532,9 @@ dataProvider(GET_MANY_REFERENCE, 'comments', {
 // }
 ```
 
-### Example Response Processing
+### 响应处理示例
 
-Let's continue with the REST backend example. This backend returns responses as follows:
+让我们继续REST后端示例。 此后端返回响应如下：
 
     GET http://path.to.my.api/posts?sort=['title','ASC']&range=[0, 4]&filter={author_id:12}
     Content-Range: posts 0-4/27
@@ -579,7 +579,7 @@ Let's continue with the REST backend example. This backend returns responses as 
     ]
     
 
-The Data Provider must therefore transform the response from the API backend to the expected response format.
+因此，Data Provider 必须将 API 后端的响应转换为 React-Admin 期望的响应格式。
 
 ```js
 // in myRestProvider.js
@@ -651,10 +651,10 @@ export default (type, resource, params) => {
 };
 ```
 
-### Error Format
+### 错误格式
 
-When the API backend returns an error, the Data Provider should `throw` an `Error` object. This object should contain a `status` property with the HTTP response code (404, 500, etc.). React-admin inspects this error code, and uses it for [authentication](./Authentication.md) (in case of 401 or 403 errors). Besides, react-admin displays the error `message` on screen in a temporary notification.
+当 API 后端返回一个错误时，这个 Data Provider 应该 `throw` 一个 `Error` 对象。 此对象应包含具有 HTTP 响应代码 (404、500等) 的 `status` 属性。 React-admin 检查此错误代码, 并将其用于 [身份验证](./Authentication.md) (在401或403错误的情况下)。 此外，react-admin 会在屏幕上显示错误 `message` 。
 
-### Example implementation
+### 示例实现
 
-Check the code from the [simple REST client](https://github.com/marmelab/react-admin/blob/master/packages/ra-data-simple-rest/src/index.js): it's a good starting point for a custom Data Provider implementation.
+从 [ simple REST client ](https://github.com/marmelab/react-admin/blob/master/packages/ra-data-simple-rest/src/index.js)中查看代码: 它是自定义 Data Provider 实现的一个良好起点。
