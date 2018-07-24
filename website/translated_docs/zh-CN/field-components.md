@@ -20,7 +20,7 @@ export const PostList = (props) => (
 );
 ```
 
-All field components accept the following attributes:
+所有字段组件都接受以下属性：
 
 - `source`: Property name of your entity to view/edit. This attribute is required.
 - `label`: Used as a table header of an input label. Defaults to the `source` when omitted.
@@ -35,7 +35,7 @@ All field components accept the following attributes:
 <TextField source="zb_title" label="Title" style={{ color: 'purple' }} />
 ```
 
-**Tip**: You can use field components inside the `Edit` or `Show` views, too:
+**提示**：您也可以在 `Edit` 或 `Show` 视图中使用字段组件：
 
 ```jsx
 export const PostShow = ({ ...props }) => (
