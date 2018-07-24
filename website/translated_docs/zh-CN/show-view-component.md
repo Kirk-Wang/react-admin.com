@@ -2,20 +2,20 @@
 id: show-view-component
 title: <Show> View
 ---
-The Show view displays a record fetched from the API in a read-only fashion. It delegates the actual rendering of the record to a layout component - usually `<SimpleShowLayout>`. This layout component uses its children ([`<Fields>`](./Fields.md) components) to render each record field.
+Show 视图以只读方式显示从 API 获取的记录。 它将记录的实际呈现方式委托给一个布局组件——通常是 `<SimpleShowLayout>`。 此布局组件使用其子级 ([`<Fields>`](./Fields.md) 组件) 来呈现每个记录字段。
 
 ![post show view](https://marmelab.com/react-admin/img/show-view.png)
 
-## The `Show` component
+## `Show` 组件
 
-The `<Show>` component renders the page title and actions, and fetches the record from the REST API. It is not responsible for rendering the actual record - that's the job of its child component (usually `<SimpleShowLayout>`), to which they pass the `record` as prop.
+`<Show>` 组件呈现页标题和 action, 并从 REST API 中提取记录。 它不负责呈现实际记录-这是其子组件 (通常为 `<SimpleShowLayout>`) 的工作, 它们通过 `record` 作为属性。
 
-Here are all the props accepted by the `<Show>` component:
+以下是 `<Show>` 组件所接受的所有属性：
 
 * [`title`](#page-title)
 * [`actions`](#actions)
 
-Here is the minimal code necessary to display a view to show a post:
+以下是 show 视图显示帖子所需的最少代码：
 
 ```jsx
 // in src/App.js
@@ -55,9 +55,9 @@ That's enough to display the post show view:
 
 ### Page Title
 
-By default, the title for the Show view is "[resource_name] #[record_id]".
+默认情况下，Show 视图的显示标题是"[resource_name] #[record_id]"。
 
-You can customize this title by specifying a custom `title` prop:
+您可以通过指定一个自定义 `title` 属性来自定义此标题：
 
 ```jsx
 export const PostShow = (props) => (
@@ -67,7 +67,7 @@ export const PostShow = (props) => (
 );
 ```
 
-More interestingly, you can pass a component as `title`. React-admin clones this component and, in the `<ShowView>`, injects the current `record`. This allows to customize the title according to the current record:
+更有趣的是，你可以通过传递一个组件作为 `title`。 React-admin 克隆此组件，并在 `<ShowView>` 中注入当前 `record`。 这允许根据当前记录自定义标题：
 
 ```jsx
 const PostTitle = ({ record }) => {
@@ -82,7 +82,7 @@ export const PostShow = (props) => (
 
 ### Actions
 
-You can replace the list of default actions by your own element using the `actions` prop:
+你可以通过你自己的元素使用 `actions` 属性来替换默认 action 列表：
 
 ```jsx
 import CardActions from '@material-ui/core/CardActions';
@@ -113,11 +113,11 @@ export const PostShow = (props) => (
 );
 ```
 
-## The `SimpleShowLayout` component
+## `SimpleShowLayout` 组件
 
-The `<SimpleShowLayout>` component receives the `record` as prop from its parent component. It is responsible for rendering the actual view.
+`<SimpleShowLayout>`组件从它的父组件接收 `record` 作为属性。它负责渲染实际的视图。
 
-The `<SimpleShowLayout>` renders its child components line by line (within `<div>` components).
+`<SimpleShowLayout>` 逐行呈现其子组件（在`<div>`组件内）。
 
 ```jsx
 export const PostShow = (props) => (
@@ -131,7 +131,7 @@ export const PostShow = (props) => (
 );
 ```
 
-It is possible to override its style by specifying the `style` prop, for example:
+可以通过指定 `style` 属性来重写其样式，例如：
 
 ```jsx
 const styles = {
@@ -154,9 +154,9 @@ export const PostShow = (props) => (
 );
 ```
 
-## The `TabbedShowLayout` component
+## `TabbedShowLayout` 组件
 
-Just like `<SimpleShowLayout>`, `<TabbedShowLayout>` receives the `record` prop and renders the actual view. However, the `<TabbedShowLayout>` component renders fields grouped by tab. The tabs are set by using `<Tab>` components, which expect a `label` and an optional `icon` prop. Switching tabs will update the current url. By default, it uses the tabs indexes and the first tab will be displayed at the root url. You can customize the path by providing a `path` prop to each `Tab` component. If you'd like the first one to act as an index page, just omit the `path` prop.
+就像 `<SimpleShowLayout>`, `<TabbedShowLayout>` 接收到 `record` 属性并渲染实际视图。 但是, `<TabbedShowLayout>` 组件按 tab 分组渲染。 这些选项卡是使用 `<Tab>` 组件设置的, 该元件期望一个 `label` 和可选的 `icon` 属性。 切换 tab 将更新当前 url。 默认情况下，它使用选项卡索引，第一个选项卡将显示在根URL。 您可以通过为每个Tab组件提供` path ` 属性来自定义路径。 如果您希望第一个充当索引页面，只需省略` path` 属性。
 
 ![tabbed show](https://marmelab.com/react-admin/img/tabbed-show.gif)
 
@@ -195,13 +195,13 @@ export const PostShow = (props) => (
 );
 ```
 
-## Displaying Fields depending on the user permissions
+## 根据用户权限显示字段
 
-You might want to display some fields only to users with specific permissions. Those permissions are retrieved for each route and will provided to your component as a `permissions` prop.
+您可能希望只向具有特定权限的用户显示某些字段。为每个路由检索这些权限, 并将其作为 `permissions` 属性提供给您的组件。
 
-Each route will call the `authProvider` with the `AUTH_GET_PERMISSIONS` type and some parameters including the current location and route parameters. It's up to you to return whatever you need to check inside your component such as the user's role, etc.
+每个路由将使用 `AUTH_GET_PERMISSIONS` 类型和一些参数（包括当前位置和路由参数）调用 authProvider。 您可以在组件内部返回需要检查的内容，例如用户的角色等。
 
-Here's an example inside a `Show` view with a `SimpleShowLayout` and a custom `actions` component:
+下面是 `Show` 视图中的一个示例，其中有一个 `SimpleShowLayout` 和一个自定义 `actions` 组件:
 
 ```jsx
 import CardActions from '@material-ui/core/CardActions';
@@ -237,9 +237,9 @@ export const PostShow = ({ permissions, ...props }) => (
 );
 ```
 
-**Tip** Note how the `permissions` prop is passed down to the custom `actions` component.
+**提示** 请注意权限属性如何传递给自定义 `过滤器` 组件。
 
-This also works inside a `TabbedShowLayout`, and you can hide a `Tab` completely:
+这也适用于TabbedShowLayout，您可以完全隐藏Tab：
 
 ```jsx
 export const UserShow = ({ permissions, ...props }) =>
