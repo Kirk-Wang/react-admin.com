@@ -445,7 +445,7 @@ export const PostList = (props) => (
 
 下面是一个如何重写这些类的示例：
 
-You can customize the list styles by passing a `classes` object as prop, through `withStyles()`. Here is an example:
+通过将 `classes` 对象作为属性传递，通过 `withStyles()`，可以自定义列表样式。下面是一个示例：
 
 ```jsx
 const styles = {
@@ -465,15 +465,15 @@ const PostList = ({ classes, ...props) => (
 export withStyles(styles)(PostList);
 ```
 
-## The `Datagrid` component
+## `Datagrid` 组件
 
-The datagrid component renders a list of records as a table. It is usually used as a child of the [`<List>`](#the-list-component) and [`<ReferenceManyField>`](./Fields.md#referencemanyfield) components.
+Datagrid 组件将记录列表呈现为表表格。 它通常用作 [`<List>`](#the-list-component) 和 [`<ReferenceManyField>`](./Fields.md#referencemanyfield) 组件的子级。
 
-Here are all the props accepted by the component:
+以下是通过该组件接受的所有属性：
 
 - [`rowStyle`](#row-style-function)
 
-It renders as many columns as it receives `<Field>` children.
+它会在接收 `<Field>` 子项时呈现尽可能多的列。
 
 ```jsx
 // in src/posts.js
