@@ -213,7 +213,7 @@ export default connect(undefined, { crudUpdateMany })(ResetViewsAction);
 
 **提示**: `<Confirm>` material-ui 的 <`<Dialog>` 组件实现确认弹出菜单。请随时使用它在您的 admin 中！
 
-**Tip**: React-admin doesn't use the `<Confirm>` component internally, because deletes and updates are applied locally immediately, then dispatched to the server after a few seconds, unless the user chooses to undo the modification. That's what we call optimistic rendering. You can do the same for the `ResetViewsAction` by wrapping the `crudUpdateMany()` action creator inside a `startUndoable()` action creator, as follows:
+**提示**：React-admin 不在内部使用 `<Confirm>` 组件，因为删除和更新会立即在本地应用，然后在几秒钟后 dispatch 到服务器，除非用户选择撤消修改。 这就是我们所谓的积极渲染。 您可以通过将 `crudUpdateMany()` 动作创建器包装在 `startUndoable()` 动作创建器中来为 `ResetViewsAction` 执行相同操作，如下所示：
 
 ```jsx
 import { Component } from 'react';
