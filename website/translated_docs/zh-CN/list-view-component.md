@@ -745,13 +745,13 @@ export const CommentList = (props) => (
 );
 ```
 
-As you can see, nothing prevents you from using `<Field>` components inside your own components... provided you inject the current `record`. Also, notice that components building links require the `basePath` component, which is also injected.
+如你所见，没有任何东西阻止你使用 `<Field>` 组件在自己的组件之内..。 如果您插入当前的 `记录`。 另外, 请注意, 组件构建链接需要 `basePath` 组件, 它也会被注入。
 
-## Displaying Fields depending on the user permissions
+## 根据用户权限显示字段
 
-You might want to display some fields or filters only to users with specific permissions. Those permissions are retrieved for each route and will provided to your component as a `permissions` prop.
+您可能只想向具有特定权限的用户显示某些字段或过滤器。 为每个路由检索这些权限, 并将作为 `permissions` 属性提供给您的组件。
 
-Each route will call the `authProvider` with the `AUTH_GET_PERMISSIONS` type and some parameters including the current location and route parameters. It's up to you to return whatever you need to check inside your component such as the user's role, etc.
+每个路由将使用 `AUTH_GET_PERMISSIONS` 类型和一些参数（包括当前位置和路由参数）调用 authProvider。 您可以在组件内部返回需要检查的内容，例如用户的角色等。
 
 ```jsx
 const UserFilter = ({ permissions, ...props }) =>
