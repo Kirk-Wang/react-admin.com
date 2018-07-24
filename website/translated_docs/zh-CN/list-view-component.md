@@ -400,7 +400,7 @@ const filterSentToDataProvider = { ...filterDefaultValues, ...filterChosenByUser
 
 你可以通过你自己分页元素来替换默认分页元素，使用 `pagination` 属性。 分页元素接收当前页、每页记录数、记录总数,以及更改页面的 `setPage()` 函数。
 
-So if you want to replace the default pagination by a "<previous - next>" pagination, create a pagination component like the following:
+因此，如果您想要通过一个"<previous - next>"分页来替换默认的分页。<previous - next>创建如下所示的页状组件：
 
 ```jsx
 import Button from '@material-ui/core/Button';
@@ -436,14 +436,14 @@ export const PostList = (props) => (
 
 ### CSS API
 
-The `List` component accepts the usual `className` prop but you can override many class names injected to the inner components by React-admin thanks to the `classes` property (as most Material UI components, see their [documentation about it](https://material-ui.com/customization/overrides/#overriding-with-classes)). This property accepts the following keys:
+`List` 组件通常接受 `className` 属性，你可以通过React-admin覆盖注入内部组件的许多类名，这得益于`classes`属性（作为大多数 Material UI 组件的属性，请参阅关于它的[文档](https://material-ui.com/customization/overrides/#overriding-with-classes)）。 此属性接受以下项：
 
 - `root`: alternative to using `className`. Applied to the root element.
 - `header`: applied to the page header
 - `actions`: applied to the actions container
 - `noResults`: applied to the component shown when there is no result
 
-Here is an example of how you can override some of these classes:
+下面是一个如何重写这些类的示例：
 
 You can customize the list styles by passing a `classes` object as prop, through `withStyles()`. Here is an example:
 
