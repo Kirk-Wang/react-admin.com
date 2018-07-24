@@ -2,15 +2,15 @@
 layout: list-view-component
 title: <List> View
 ---
-The List view displays a list of records fetched from the REST API. The entry point for this view is the `<List>` component, which takes care of fetching the data. Then, it passes the data to an iterator view - usually `<Datagrid>`, which then delegates the rendering of each record property to [`<Field>`](./Fields.html) components.
+列表视图显示从 REST API 获取的记录列表。 此视图的入口点是`<List>`组件，它负责获取数据。 然后，它将数据传递到迭代器视图-通常是 `<Datagrid`，然后将每个记录属性的渲染委托给 [`<Field>`](./Fields.html) 组件。
 
 ![The List View](https://marmelab.com/react-admin/img/list-view.png)
 
-## The `List` Component
+## `List` 组件
 
-The `<List>` component renders the list layout (title, buttons, filters, pagination), and fetches the list of records from the REST API. It then delegates the rendering of the list of records to its child component. Usually, it's a `<Datagrid>`, responsible for displaying a table with one row for each post.
+`<List>` 组件渲染列表布局（标题、按钮、筛选器、分页），并从 REST API 中提取记录列表。 然后将记录列表的呈现委托给其子组件。 通常，它是一个 `<Datagrid>`，负责显示一个具有每个帖子一行的表格。
 
-**Tip**: In Redux terms, `<List>` is a connected component, and `<Datagrid>` is a dumb component.
+**提示**：在Redux条款中，`<List>` 是一个connected组件，并且`<Datagrid>` 是一个dumb组件。
 
 Here are all the props accepted by the `<List>` component:
 
