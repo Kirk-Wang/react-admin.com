@@ -515,7 +515,7 @@ export const PostList = (props) => (
 
 ### CSS API
 
-The `Datagrid` component accepts the usual `className` prop but you can override many class names injected to the inner components by React-admin thanks to the `classes` property (as most Material UI components, see their [documentation about it](https://material-ui.com/customization/overrides/#overriding-with-classes)). This property accepts the following keys:
+`Datagrid` 组件通常接受 `className` 属性，你可以通过React-admin覆盖注入内部组件的许多类名，这得益于`classes`属性（作为大多数 Material UI 组件的属性，请参阅关于它的[文档](https://material-ui.com/customization/overrides/#overriding-with-classes)）。 此属性接受以下项：
 
 - `table`: alternative to using `className`. Applied to the root element.
 - `tbody`: applied to the tbody
@@ -525,9 +525,9 @@ The `Datagrid` component accepts the usual `className` prop but you can override
 - `rowOdd`: applied to each odd row
 - `rowCell`: applied to each row cell
 
-Here is an example of how you can override some of these classes:
+下面是一个如何重写这些类的示例：
 
-You can customize the datagrid styles by passing a `classes` object as prop, through `withStyles()`. Here is an example:
+通过将 `classes` 对象作为属性传递，通过 `withStyles()`可以自定义列表样式。下面是一个示例：
 
 ```jsx
 const styles = {
@@ -547,7 +547,7 @@ const PostList = ({ classes, ...props) => (
 export withStyles(styles)(PostList);
 ```
 
-**Tip**: If you want to override the `header` and `cell` styles independently for each column, use the `headerClassName` and `cellClassName` props in `<Field>` components. For instance, to hide a certain column on small screens:
+**提示**：如果要为每列独立覆盖` header `和 ` cell `样式，请在 `<Field>` 组件中使用 headerClassName 和 cellClassName 属性。 For instance, to hide a certain column on small screens:
 
 ```jsx
 import { withStyles } from '@material-ui/core/styles';
