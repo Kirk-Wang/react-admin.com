@@ -473,7 +473,7 @@ Datagrid 组件将记录列表呈现为表表格。 它通常用作 [`<List>`](#
 
 - [`rowStyle`](#row-style-function)
 
-它会在接收 `<Field>` 子项时呈现尽可能多的列。
+它会在接收 `<Field>` 子项时呈现多列。
 
 ```jsx
 // in src/posts.js
@@ -492,13 +492,13 @@ export const PostList = (props) => (
 );
 ```
 
-The datagrid is an *iterator* component: it receives an array of ids, and a data store, and is supposed to iterate over the ids to display each record. Another example of iterator component is [`<SingleFieldList>`](#the-singlefieldlist-component).
+Datagrid是一个 *迭代器* 组件：它接收一个 id 数组和一个数据 store，并且应该迭代 id 以显示每个记录。 迭代器组件的另一个示例是 [`<SingleFieldList>`](#the-singlefieldlist-component)。
 
 ### Row Style Function
 
-You can customize the datagrid row style (applied to the `<tr>` element) based on the record, thanks to the `rowStyle` prop, which expects a function.
+由于 `rowStyle, 您可以根据记录自定义 datagrid 行样式 (应用于 <code><tr>` 元素)</code> 属性, 它期望一个函数。
 
-For instance, this allows to apply a custom background to the entire row if one value of the record - like its number of views - passes a certain threshold.
+例如，如果记录的一个值（如其视图数）超过某个阈值，则允许将自定义背景应用于整行。
 
 ```jsx
 const postRowStyle = (record, index) => ({
