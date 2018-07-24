@@ -365,7 +365,7 @@ export const PostList = (props) => (
 );
 ```
 
-The actual filter parameter sent to the REST client is the result of the combination of the *user* filters (the ones set through the `filters` component form), and the *permanent* filter. The user cannot override the permanent filters set by way of `filter`.
+发送到 REST client 的实际过滤器参数是 *user* 过滤器（通过过滤器组件表单设置的过滤器）和永久过滤器组合的结果。 用户无法覆盖通过`filter`设置的永久过滤器。
 
 ### Filter Default Values
 
