@@ -109,7 +109,7 @@ export const PostList = (props) => (
 
 ### Bulk Actions
 
-Bulk actions 是同时影响多个记录的操作，例如大量删除。 在 `<Datagrid>` 组件中，通过勾选表格第一列中的复选框，然后从批量操作菜单中选择操作来触发批量操作。 默认情况下，所有列表视图都有一个批量操作，即批量删除操作。 You can add other bulk actions by passing a custom element as the `bulkActions` prop of the `<List>` component:
+Bulk actions 是同时影响多个记录的操作，例如大量删除。 在 `<Datagrid>` 组件中，通过勾选表格第一列中的复选框，然后从批量操作菜单中选择操作来触发批量操作。 默认情况下，所有列表视图都有一个批量操作，即批量删除操作。 您可以通过将自定义元素作为 `<List>` 组件的 bulkActions 属性传递来添加其他批量操作：
 
 ```jsx
 import Button from '@material-ui/core/Button';
