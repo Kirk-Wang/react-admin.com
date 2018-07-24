@@ -2,7 +2,7 @@
 id: show-view-component
 title: <Show> View
 ---
-The Show view displays a record fetched from the API in a read-only fashion. It delegates the actual rendering of the record to a layout component - usually `<SimpleShowLayout>`. This layout component uses its children ([`<Fields>`](./Fields.md) components) to render each record field.
+Show 视图以只读方式显示从 API 获取的记录。 它将记录的实际呈现方式委托给一个布局组件——通常是 `<SimpleShowLayout>`。 This layout component uses its children ([`<Fields>`](./Fields.md) components) to render each record field.
 
 ![post show view](https://marmelab.com/react-admin/img/show-view.png)
 
