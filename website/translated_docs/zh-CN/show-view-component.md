@@ -156,7 +156,7 @@ export const PostShow = (props) => (
 
 ## `TabbedShowLayout` 组件
 
-就像 `<SimpleShowLayout>`, `<TabbedShowLayout>` 接收到 `record` 属性并渲染实际视图。 但是, `<TabbedShowLayout>` 组件按 tab 分组渲染。 这些选项卡是使用 `<Tab>` 组件设置的, 该元件期望一个 `label` 和可选的 `icon` 属性。 切换 tab 将更新当前 url。 By default, it uses the tabs indexes and the first tab will be displayed at the root url. You can customize the path by providing a `path` prop to each `Tab` component. If you'd like the first one to act as an index page, just omit the `path` prop.
+就像 `<SimpleShowLayout>`, `<TabbedShowLayout>` 接收到 `record` 属性并渲染实际视图。 但是, `<TabbedShowLayout>` 组件按 tab 分组渲染。 这些选项卡是使用 `<Tab>` 组件设置的, 该元件期望一个 `label` 和可选的 `icon` 属性。 切换 tab 将更新当前 url。 默认情况下，它使用选项卡索引，第一个选项卡将显示在根URL。 You can customize the path by providing a `path` prop to each `Tab` component. If you'd like the first one to act as an index page, just omit the `path` prop.
 
 ![tabbed show](https://marmelab.com/react-admin/img/tabbed-show.gif)
 
