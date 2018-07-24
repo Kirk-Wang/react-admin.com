@@ -688,11 +688,11 @@ export const PostList = (props) => (
 - `ids` 是当前显示在列表中的id的数组。
 - `data` 是一个用于此resource的所有取来数据的对象，通过id索引。
 
-For instance, what if you prefer to show a list of cards rather than a datagrid?
+例如，如果您希望显示卡片列表而不是datagrid，该怎么办？
 
 ![Custom iterator](https://marmelab.com/react-admin/img/custom-iterator.png)
 
-You'll need to create your own iterator component as follows:
+您需要创建自己的迭代器组件，如下所示：
 
 ```jsx
 // in src/comments.js
