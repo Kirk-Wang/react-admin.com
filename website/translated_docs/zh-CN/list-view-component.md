@@ -276,11 +276,11 @@ export const PostList = (props) => (
 
 `<Filter>` 表单的子项是常规输入。默认情况下，`<Filter>` 隐藏它们，除了那些具有 `alwaysOn` 属性的那些。
 
-**提示**：由于技术原因，react-admin 不接受具有 `defaultValue` 和 `alwaysOn` 的 `<Filter>` 的子元素。 To set default values for always on filters, use the `filterDefaultValues` prop of the `<List>` component instead (see below).
+**提示**：由于技术原因，react-admin 不接受具有 `defaultValue` 和 `alwaysOn` 的 `<Filter>` 的子元素。 要为 always on 过滤器设置默认值，请使用 `<List>` 组件的 filterDefaultValues 属性（参见下文）。
 
 ### Records Per Page
 
-By default, the list paginates results by groups of 10. You can override this setting by specifying the `perPage` prop:
+默认情况下，列表为每页10条标记页码。你可以通过指定 `perPage` 属性覆写这个设置：
 
 ```jsx
 // in src/posts.js
