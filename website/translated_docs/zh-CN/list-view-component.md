@@ -792,4 +792,4 @@ export const UserList = ({ permissions, ...props }) =>
     </List>;
 ```
 
-**Tip** Note how the `permissions` prop is passed down to the custom `filters` component.
+**提示** 请注意权限属性如何传递给自定义 `过滤器` 组件。
