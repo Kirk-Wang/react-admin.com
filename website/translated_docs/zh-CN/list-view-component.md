@@ -173,9 +173,9 @@ class ResetViewsAction extends Component {
 export default connect(undefined, { crudUpdateMany })(ResetViewsAction);
 ```
 
-此组件不呈现任何内容-它只是在挂载时 dispatch action。 Once finished, it also calls the `onExit()` method passed by the main bulk actions component, which has the effect of unmounting the `ResetViewsAction` component.
+此组件不呈现任何内容-它只是在挂载时 dispatch action。 完成后，它还调用由主批量操作组件传递的 `onExit()` 方法, 它具有卸载 `ResetViewsAction`组件的作用。
 
-But most of the time, bulk actions are mini-applications with a standalone user interface (in a Dialog), so the `render()` method is useful. Here is the same `ResetViewsAction` implemented behind a confirmation dialog:
+但大多数情况下，批量操作都是具有独立用户界面 (在对话框中) 的小型应用程序, 因此 `render ()` 方法很有用。 下面是在确认对话框后面实现的 `ResetViewsAction`：
 
 ```jsx
 // in ./ResetViewsAction.js
@@ -211,7 +211,7 @@ class ResetViewsAction extends Component {
 export default connect(undefined, { crudUpdateMany })(ResetViewsAction);
 ```
 
-**Tip**: `<Confirm>` leverages material-ui's `<Dialog>` component to implement a confirmation popup. Feel free to use it in your admins!
+**提示**: `<Confirm>` material-ui 的 <`<Dialog>` 组件实现确认弹出菜单。请随时使用它在您的 admin 中！
 
 **Tip**: React-admin doesn't use the `<Confirm>` component internally, because deletes and updates are applied locally immediately, then dispatched to the server after a few seconds, unless the user chooses to undo the modification. That's what we call optimistic rendering. You can do the same for the `ResetViewsAction` by wrapping the `crudUpdateMany()` action creator inside a `startUndoable()` action creator, as follows:
 
