@@ -115,9 +115,9 @@ export const PostShow = (props) => (
 
 ## `SimpleShowLayout` 组件
 
-The `<SimpleShowLayout>` component receives the `record` as prop from its parent component. It is responsible for rendering the actual view.
+`<SimpleShowLayout>`组件从它的父组件接收 `record` 作为属性。它负责渲染实际的视图。
 
-The `<SimpleShowLayout>` renders its child components line by line (within `<div>` components).
+`<SimpleShowLayout>` 逐行呈现其子组件（在`<div>`组件内）。
 
 ```jsx
 export const PostShow = (props) => (
@@ -131,7 +131,7 @@ export const PostShow = (props) => (
 );
 ```
 
-It is possible to override its style by specifying the `style` prop, for example:
+可以通过指定 `style` 属性来重写其样式，例如：
 
 ```jsx
 const styles = {
@@ -154,9 +154,9 @@ export const PostShow = (props) => (
 );
 ```
 
-## The `TabbedShowLayout` component
+## `TabbedShowLayout` 组件
 
-Just like `<SimpleShowLayout>`, `<TabbedShowLayout>` receives the `record` prop and renders the actual view. However, the `<TabbedShowLayout>` component renders fields grouped by tab. The tabs are set by using `<Tab>` components, which expect a `label` and an optional `icon` prop. Switching tabs will update the current url. By default, it uses the tabs indexes and the first tab will be displayed at the root url. You can customize the path by providing a `path` prop to each `Tab` component. If you'd like the first one to act as an index page, just omit the `path` prop.
+就像 `<SimpleShowLayout>`, `<TabbedShowLayout>` 接收到 `record` 属性并渲染实际视图。 但是, `<TabbedShowLayout>` 组件按 tab 分组渲染。 这些选项卡是使用 `<Tab>` 组件设置的, 该元件期望一个 `label` 和可选的 `icon` 属性。 切换 tab 将更新当前 url。 By default, it uses the tabs indexes and the first tab will be displayed at the root url. You can customize the path by providing a `path` prop to each `Tab` component. If you'd like the first one to act as an index page, just omit the `path` prop.
 
 ![tabbed show](https://marmelab.com/react-admin/img/tabbed-show.gif)
 
