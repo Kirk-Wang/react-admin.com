@@ -666,7 +666,7 @@ export const PostList = (props) => (
 
 ![ReferenceManyFieldSingleFieldList](https://marmelab.com/react-admin/img/reference-many-field-single-field-list.png)
 
-**Tip**: The `<SingleFieldList>` items link to the edition page by default. You can set the `linkType` prop to `show` to link to the `<Show>` page instead.
+**提示**：默认情况下, `<SingleFieldList>` 项目链接到编辑页。 可以将 `linkType` 属性设置为 `show`, 以链接到 `<Show>` 页。
 
 ```jsx
 // Display all the tags for the current post
@@ -681,12 +681,12 @@ export const PostList = (props) => (
 </ReferenceArrayField>
 ```
 
-## Using a Custom Iterator
+## 使用自定义迭代器
 
-A `<List>` can delegate to any iterator component - `<Datagrid>` is just one example. An iterator component must accept at least two props:
+`<List>` 可以委派到任何迭代器组件- `<Datagrid>` 只是一个示例。迭代器组件必须至少接受两个属性：
 
-- `ids` is an array of the ids currently displayed in the list
-- `data` is an object of all the fetched data for this resource, indexed by id.
+- `ids` 是当前显示在列表中的id的数组。
+- `data` 是一个用于此resource的所有取来数据的对象，通过id索引。
 
 For instance, what if you prefer to show a list of cards rather than a datagrid?
 
