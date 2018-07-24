@@ -237,11 +237,11 @@ class ResetViewsAction extends Component {
 export default connect(undefined, { startUndoable })(ResetViewsAction);
 ```
 
-Note that the `crudUpdateMany` action creator is *not* present in the `mapDispatchToProps` argument of `connect()` in that case. Only `startUndoable` needs to be dispatched in this case, using the result of the `crudUpdateMany()` call as parameter.
+请注意，在这种情况下，`connect()` 的 `mapDispatchToProps` 参数中不存在 `crudUpdateMany` action 创建者。 在这种情况下，只需使用 `crudUpdateMany()` 调用的结果作为参数分发startUndoable。
 
 ### Filters
 
-You can add a filter element to the list using the `filters` prop:
+你可以使用 `filters` 属性添加一个过滤器元素到这个列表：
 
 ```jsx
 const PostFilter = (props) => (
@@ -258,14 +258,14 @@ export const PostList = (props) => (
 );
 ```
 
-The filter component must be a `<Filter>` with `<Input>` children.
+过滤器组件必须是一个具有 `<Input>` 子级的 `<Filter>` 组件。
 
-**Tip**: `<Filter>` is a special component, which renders in two ways:
+**提示**：`<Filter>` 是一个特殊组件, 它以两种方式呈现：
 
-- as a filter button (to add new filters)
-- as a filter form (to enter filter values)
+- 作为一个过滤器按钮（去添加新过滤器）
+- 作为过滤器表单（去输入过滤器值）
 
-It does so by inspecting its `context` prop.
+它通过检查其 `context` 属性来进行此项检测。
 
 **Tip**: Don't mix up this `filters` prop, expecting a React element, with the `filter` props, which expects an object to define permanent filters (see below).
 
