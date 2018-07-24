@@ -81,7 +81,7 @@ React-admin 使用 `name` 属性既确定API端点（被传递到`dataProvider`�
 * `/posts/:id` maps to `PostEdit`
 * `/posts/:id/show` maps to `PostShow`
 
-**Tip**: If you want to use a special API endpoint (e.g. 'http://jsonplaceholder.typicode.com/my-custom-posts-endpoint') without altering the URL in the react-admin application (so still use `/posts`), write the mapping from the resource `name` (`posts`) to the API endpoint (`my-custom-posts-endpoint`) in your own [`dataProvider`](./Admin.md#dataprovider)
+**提示**：如果您想使用特殊的API端点（例如：'http://jsonplaceholder.typicode.com/my-custom-posts-endpoint'）而不更改react-admin应用程序中的URL（所以仍然使用`/posts`），在您自己的[`dataProvider`](./Admin.md#dataprovider) 中写入从资源`名称`（`posts`）到API端点（my-custom-posts-endpoint）的映射。
 
 ## `icon`
 
