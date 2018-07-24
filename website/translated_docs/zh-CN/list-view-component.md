@@ -369,9 +369,9 @@ export const PostList = (props) => (
 
 ### Filter Default Values
 
-To set default values to filters, you can either pass an object literal as the `filterDefaultValues` prop of the `<List>` element, or use the `defaultValue` prop of any input component.
+要将默认值设置为过滤器，您可以将对象文本作为 `<List>` 元素的filterDefaultValues 属性传递，或者使用任何输入组件的 defaultValue 属性。
 
-There is one exception: inputs with `alwaysOn` don't accept `defaultValue`. You have to use the `filterDefaultValues` for those.
+有一个例外: inputs `alwaysOn` 不接受 `defaultValue`。对于那些, 您必须使用 `filterDefaultValues`。
 
 ```jsx
 // in src/posts.js
@@ -390,7 +390,7 @@ export const PostList = (props) => (
 );
 ```
 
-**Tip**: The `filter` and `filterDefaultValues` props have one key difference: the `filterDefaultValues` can be overriddent by the user, while the `filter` values are always sent to the data provider. Or, to put it otherwise:
+**提示**：`filter` 和 `filterDefaultValues` 属性有一个关键的区别：`filterDefaultValues` 可以由用户 overriddent, 而 `filter` 值始终发送到 data provider。 或者, 否则：
 
 ```js
 const filterSentToDataProvider = { ...filterDefaultValues, ...filterChosenByUser, ...filters };
@@ -398,7 +398,7 @@ const filterSentToDataProvider = { ...filterDefaultValues, ...filterChosenByUser
 
 ### Pagination
 
-You can replace the default pagination element by your own, using the `pagination` prop. The pagination element receives the current page, the number of records per page, the total number of records, as well as a `setPage()` function that changes the page.
+你可以通过你自己分页元素来替换默认分页元素，使用 `pagination` 属性。 分页元素接收当前页、每页记录数、记录总数,以及更改页面的 `setPage()` 函数。
 
 So if you want to replace the default pagination by a "<previous - next>" pagination, create a pagination component like the following:
 
