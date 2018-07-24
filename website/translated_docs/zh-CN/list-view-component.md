@@ -2,17 +2,17 @@
 layout: list-view-component
 title: <List> View
 ---
-The List view displays a list of records fetched from the REST API. The entry point for this view is the `<List>` component, which takes care of fetching the data. Then, it passes the data to an iterator view - usually `<Datagrid>`, which then delegates the rendering of each record property to [`<Field>`](./Fields.html) components.
+列表视图显示从 REST API 获取的记录列表。 此视图的入口点是`<List>`组件，它负责获取数据。 然后，它将数据传递到迭代器视图-通常是 `<Datagrid`，然后将每个记录属性的渲染委托给 [`<Field>`](./Fields.html) 组件。
 
 ![The List View](https://marmelab.com/react-admin/img/list-view.png)
 
-## The `List` Component
+## `List` 组件
 
-The `<List>` component renders the list layout (title, buttons, filters, pagination), and fetches the list of records from the REST API. It then delegates the rendering of the list of records to its child component. Usually, it's a `<Datagrid>`, responsible for displaying a table with one row for each post.
+`<List>` 组件渲染列表布局（标题、按钮、筛选器、分页），并从 REST API 中提取记录列表。 然后将记录列表的呈现委托给其子组件。 通常，它是一个 `<Datagrid>`，负责显示一个具有每个帖子一行的表格。
 
-**Tip**: In Redux terms, `<List>` is a connected component, and `<Datagrid>` is a dumb component.
+**提示**：在Redux条款中，`<List>` 是一个connected组件，并且`<Datagrid>` 是一个dumb组件。
 
-Here are all the props accepted by the `<List>` component:
+以下是通过 `<List>` 组件接受的所有属性：
 
 - [`title`](#page-title)
 - [`actions`](#actions)
@@ -24,7 +24,7 @@ Here are all the props accepted by the `<List>` component:
 - [`filterDefaultValues`](#filter-default-values) (the default values for `alwaysOn` filters)
 - [`pagination`](#pagination)
 
-Here is the minimal code necessary to display a list of posts:
+下面是显示帖子列表所需的最少代码：
 
 ```jsx
 // in src/App.js
@@ -57,13 +57,13 @@ export const PostList = (props) => (
 );
 ```
 
-That's enough to display the post list:
+这足以显示帖子列表：
 
 ![Simple posts list](https://marmelab.com/react-admin/img/simple-post-list.png)
 
 ### Page Title
 
-The default title for a list view is "[resource] list" (e.g. "Posts list"). Use the `title` prop to customize the List view title:
+一个列表视图的默认标题是"[resource] list"（例如："Posts list"）。使用 `title` 属性来自定义列表视图标题：
 
 ```jsx
 // in src/posts.js
@@ -74,11 +74,11 @@ export const PostList = (props) => (
 );
 ```
 
-The title can be either a string, or an element of your own.
+标题可以是任何一个字符串，或者你自己的元素。
 
 ### Actions
 
-You can replace the list of default actions by your own element using the `actions` prop:
+你可以通过你自己的元素使用 `actions` 属性替换掉默认的 action 列表： 
 
 ```jsx
 import Button from '@material-ui/core/Button';
@@ -109,7 +109,7 @@ export const PostList = (props) => (
 
 ### Bulk Actions
 
-Bulk actions are actions that affect several records at once, like mass deletion for instance. In the `<Datagrid>` component, bulk actions are triggered by ticking the checkboxes in the first column of the table, then choosing an action from the bulk action menu. By default, all list views have a single bulk action, the bulk delete action. You can add other bulk actions by passing a custom element as the `bulkActions` prop of the `<List>` component:
+Bulk actions 是同时影响多个记录的操作，例如大量删除。 在 `<Datagrid>` 组件中，通过勾选表格第一列中的复选框，然后从批量操作菜单中选择操作来触发批量操作。 默认情况下，所有列表视图都有一个批量操作，即批量删除操作。 您可以通过将自定义元素作为 `<List>` 组件的 bulkActions 属性传递来添加其他批量操作：
 
 ```jsx
 import Button from '@material-ui/core/Button';
@@ -131,11 +131,11 @@ export const PostList = (props) => (
 );
 ```
 
-**Tip**: You can also disable bulk actions altogether by passing `false` to the `bulkActions` prop. When using a `Datagrid` inside a `List` with disabled bulk actions, the checkboxes column won't be added.
+**提示**：您还可以通过将 `false` 传递给 `bulkActions` 属性来完全禁用批量操作。 当在 `List` 中使用 `Datagrid` 并禁用了批量操作时，将不会添加复选框列。
 
-React-admin uses the `label` prop of the bulk action components to display the bulk action menu items.
+React-admin 使用批量操作组件的 `label` 属性来显示批量操作菜单项。
 
-Bulk action components are regular React component that gets mounted when the related menu item is clicked. The component receives several props allowing it to perform its job:
+批量操作组件是在单击相关菜单项时挂载的常规 React 组件。组件接收到几个属性，允许它执行其工作:
 
 - `resource`: the currently displayed resource (eg `posts`, `comments`, etc.)
 - `basePath`: the current router base path for the resource (eg `/posts`, `/comments`, etc.)
@@ -143,7 +143,7 @@ Bulk action components are regular React component that gets mounted when the re
 - `selectedIds`: the identifiers of the currently selected items.
 - `onExit`: an event handler you should call when the bulk action ends.
 
-Here is an example leveraging the `UPDATE_MANY` crud action, which will set the `views` property of all posts to `0`:
+下面是一个利用 `UPDATE_MANY` crud 操作的示例, 它将所有 posts 的 `views` 属性设置为 `0`：
 
 ```jsx
 // in ./ResetViewsAction.js
@@ -173,9 +173,9 @@ class ResetViewsAction extends Component {
 export default connect(undefined, { crudUpdateMany })(ResetViewsAction);
 ```
 
-This component renders nothing - it just dispatches an action when mounted. Once finished, it also calls the `onExit()` method passed by the main bulk actions component, which has the effect of unmounting the `ResetViewsAction` component.
+此组件不呈现任何内容-它只是在挂载时 dispatch action。 完成后，它还调用由主批量操作组件传递的 `onExit()` 方法, 它具有卸载 `ResetViewsAction`组件的作用。
 
-But most of the time, bulk actions are mini-applications with a standalone user interface (in a Dialog), so the `render()` method is useful. Here is the same `ResetViewsAction` implemented behind a confirmation dialog:
+但大多数情况下，批量操作都是具有独立用户界面 (在对话框中) 的小型应用程序, 因此 `render ()` 方法很有用。 下面是在确认对话框后面实现的 `ResetViewsAction`：
 
 ```jsx
 // in ./ResetViewsAction.js
@@ -211,9 +211,9 @@ class ResetViewsAction extends Component {
 export default connect(undefined, { crudUpdateMany })(ResetViewsAction);
 ```
 
-**Tip**: `<Confirm>` leverages material-ui's `<Dialog>` component to implement a confirmation popup. Feel free to use it in your admins!
+**提示**: `<Confirm>` material-ui 的 <`<Dialog>` 组件实现确认弹出菜单。请随时使用它在您的 admin 中！
 
-**Tip**: React-admin doesn't use the `<Confirm>` component internally, because deletes and updates are applied locally immediately, then dispatched to the server after a few seconds, unless the user chooses to undo the modification. That's what we call optimistic rendering. You can do the same for the `ResetViewsAction` by wrapping the `crudUpdateMany()` action creator inside a `startUndoable()` action creator, as follows:
+**提示**：React-admin 不在内部使用 `<Confirm>` 组件，因为删除和更新会立即在本地应用，然后在几秒钟后 dispatch 到服务器，除非用户选择撤消修改。 这就是我们所谓的积极渲染。 您可以通过将 `crudUpdateMany()` 动作创建器包装在 `startUndoable()` 动作创建器中来为 `ResetViewsAction` 执行相同操作，如下所示：
 
 ```jsx
 import { Component } from 'react';
@@ -237,11 +237,11 @@ class ResetViewsAction extends Component {
 export default connect(undefined, { startUndoable })(ResetViewsAction);
 ```
 
-Note that the `crudUpdateMany` action creator is *not* present in the `mapDispatchToProps` argument of `connect()` in that case. Only `startUndoable` needs to be dispatched in this case, using the result of the `crudUpdateMany()` call as parameter.
+请注意，在这种情况下，`connect()` 的 `mapDispatchToProps` 参数中不存在 `crudUpdateMany` action 创建者。 在这种情况下，只需使用 `crudUpdateMany()` 调用的结果作为参数分发startUndoable。
 
 ### Filters
 
-You can add a filter element to the list using the `filters` prop:
+你可以使用 `filters` 属性添加一个过滤器元素到这个列表：
 
 ```jsx
 const PostFilter = (props) => (
@@ -258,29 +258,29 @@ export const PostList = (props) => (
 );
 ```
 
-The filter component must be a `<Filter>` with `<Input>` children.
+过滤器组件必须是一个具有 `<Input>` 子级的 `<Filter>` 组件。
 
-**Tip**: `<Filter>` is a special component, which renders in two ways:
+**提示**：`<Filter>` 是一个特殊组件, 它以两种方式呈现：
 
-- as a filter button (to add new filters)
-- as a filter form (to enter filter values)
+- 作为一个过滤器按钮（去添加新过滤器）
+- 作为过滤器表单（去输入过滤器值）
 
-It does so by inspecting its `context` prop.
+它通过检查其 `context` 属性来进行此项检测。
 
-**Tip**: Don't mix up this `filters` prop, expecting a React element, with the `filter` props, which expects an object to define permanent filters (see below).
+**提示**：不要混淆这个 `filters` 属性，期望一个 React 元素，具有 `filter` 属性，它期望一个对象来定义永久过滤器 (见下文)。
 
-The `Filter` component accepts the usual `className` prop but you can override many class names injected to the inner components by React-admin thanks to the `classes` property (as most Material UI components, see their [documentation about it](https://material-ui.com/customization/overrides/#overriding-with-classes)). This property accepts the following keys:
+`Filter` 组件通常接受 `className` 属性，你可以通过React-admin覆盖注入内部组件的许多类名，这得益于`classes`属性（作为大多数 Material UI 组件的属性，请参阅关于它的[文档](https://material-ui.com/customization/overrides/#overriding-with-classes)）。 此属性接受以下值：
 
 - `form`: applied to the root element when rendering as a form.
 - `button`: applied to the root element when rendering as a button.
 
-Children of the `<Filter>` form are regular inputs. `<Filter>` hides them all by default, except those that have the `alwaysOn` prop.
+`<Filter>` 表单的子项是常规输入。默认情况下，`<Filter>` 隐藏它们，除了那些具有 `alwaysOn` 属性的那些。
 
-**Tip**: For technical reasons, react-admin does not accept children of `<Filter>` having both a `defaultValue` and `alwaysOn`. To set default values for always on filters, use the `filterDefaultValues` prop of the `<List>` component instead (see below).
+**提示**：由于技术原因，react-admin 不接受具有 `defaultValue` 和 `alwaysOn` 的 `<Filter>` 的子元素。 要为 always on 过滤器设置默认值，请使用 `<List>` 组件的 filterDefaultValues 属性（参见下文）。
 
 ### Records Per Page
 
-By default, the list paginates results by groups of 10. You can override this setting by specifying the `perPage` prop:
+默认情况下，列表为每页10条标记页码。你可以通过指定 `perPage` 属性覆写这个设置：
 
 ```jsx
 // in src/posts.js
@@ -293,7 +293,7 @@ export const PostList = (props) => (
 
 ### Default Sort Field
 
-Pass an object literal as the `sort` prop to determine the default `field` and `order` used for sorting:
+传递一个对象字面量作为 `sort` 属性来确定用于排序的 `field` 和 `order`：
 
 ```jsx
 // in src/posts.js
@@ -304,11 +304,11 @@ export const PostList = (props) => (
 );
 ```
 
-`sort` defines the *default* sort order ; the list remains sortable by clicking on column headers.
+`sort` 定义了 *default* 排序顺序；这个列表通过在列标题上单击保持可排序。
 
 ### Disabling Sorting
 
-It is possible to disable sorting for a specific field by passing a `sortable` property set to `false`:
+通过传递一个设置为 `false` 的 `sortable` 属性，它可能会为一个指定的字段去禁用排序：
 
 ```jsx
 // in src/posts.js
@@ -328,7 +328,7 @@ export const PostList = (props) => (
 
 ### Specify Sort Field
 
-By default, a column is sorted by the `source` property. To define another attribute to sort by, set it via the `sortBy` property:
+默认情况下，列按 `source` 属性排序。若要定义要排序的其他属性，请通过 `sortBy` 属性将其设置为：
 
 ```jsx
 // in src/posts.js
@@ -354,7 +354,7 @@ export const PostList = (props) => (
 
 ### Permanent Filter
 
-You can choose to always filter the list, without letting the user disable this filter - for instance to display only published posts. Write the filter to be passed to the REST client in the `filter` props:
+您可以选择始终过滤列表，而不允许用户禁用此过滤器，例如只显示已发布的帖子。 在 `filter` 属性中写被传递到 REST client 的过滤器：
 
 ```jsx
 // in src/posts.js
@@ -365,13 +365,13 @@ export const PostList = (props) => (
 );
 ```
 
-The actual filter parameter sent to the REST client is the result of the combination of the *user* filters (the ones set through the `filters` component form), and the *permanent* filter. The user cannot override the permanent filters set by way of `filter`.
+发送到 REST client 的实际过滤器参数是 *user* 过滤器（通过过滤器组件表单设置的过滤器）和永久过滤器组合的结果。 用户无法覆盖通过`filter`设置的永久过滤器。
 
 ### Filter Default Values
 
-To set default values to filters, you can either pass an object literal as the `filterDefaultValues` prop of the `<List>` element, or use the `defaultValue` prop of any input component.
+要将默认值设置为过滤器，您可以将对象文本作为 `<List>` 元素的filterDefaultValues 属性传递，或者使用任何输入组件的 defaultValue 属性。
 
-There is one exception: inputs with `alwaysOn` don't accept `defaultValue`. You have to use the `filterDefaultValues` for those.
+有一个例外: inputs `alwaysOn` 不接受 `defaultValue`。对于那些, 您必须使用 `filterDefaultValues`。
 
 ```jsx
 // in src/posts.js
@@ -390,7 +390,7 @@ export const PostList = (props) => (
 );
 ```
 
-**Tip**: The `filter` and `filterDefaultValues` props have one key difference: the `filterDefaultValues` can be overriddent by the user, while the `filter` values are always sent to the data provider. Or, to put it otherwise:
+**提示**：`filter` 和 `filterDefaultValues` 属性有一个关键的区别：`filterDefaultValues` 可以由用户 overriddent, 而 `filter` 值始终发送到 data provider。 或者, 否则：
 
 ```js
 const filterSentToDataProvider = { ...filterDefaultValues, ...filterChosenByUser, ...filters };
@@ -398,9 +398,9 @@ const filterSentToDataProvider = { ...filterDefaultValues, ...filterChosenByUser
 
 ### Pagination
 
-You can replace the default pagination element by your own, using the `pagination` prop. The pagination element receives the current page, the number of records per page, the total number of records, as well as a `setPage()` function that changes the page.
+你可以通过你自己分页元素来替换默认分页元素，使用 `pagination` 属性。 分页元素接收当前页、每页记录数、记录总数,以及更改页面的 `setPage()` 函数。
 
-So if you want to replace the default pagination by a "<previous - next>" pagination, create a pagination component like the following:
+因此，如果您想要通过一个"<previous - next>"分页来替换默认的分页。<previous - next>创建如下所示的页状组件：
 
 ```jsx
 import Button from '@material-ui/core/Button';
@@ -436,16 +436,16 @@ export const PostList = (props) => (
 
 ### CSS API
 
-The `List` component accepts the usual `className` prop but you can override many class names injected to the inner components by React-admin thanks to the `classes` property (as most Material UI components, see their [documentation about it](https://material-ui.com/customization/overrides/#overriding-with-classes)). This property accepts the following keys:
+`List` 组件通常接受 `className` 属性，你可以通过React-admin覆盖注入内部组件的许多类名，这得益于`classes`属性（作为大多数 Material UI 组件的属性，请参阅关于它的[文档](https://material-ui.com/customization/overrides/#overriding-with-classes)）。 此属性接受以下项：
 
 - `root`: alternative to using `className`. Applied to the root element.
 - `header`: applied to the page header
 - `actions`: applied to the actions container
 - `noResults`: applied to the component shown when there is no result
 
-Here is an example of how you can override some of these classes:
+下面是一个如何重写这些类的示例：
 
-You can customize the list styles by passing a `classes` object as prop, through `withStyles()`. Here is an example:
+通过将 `classes` 对象作为属性传递，通过 `withStyles()`，可以自定义列表样式。下面是一个示例：
 
 ```jsx
 const styles = {
@@ -465,15 +465,15 @@ const PostList = ({ classes, ...props) => (
 export withStyles(styles)(PostList);
 ```
 
-## The `Datagrid` component
+## `Datagrid` 组件
 
-The datagrid component renders a list of records as a table. It is usually used as a child of the [`<List>`](#the-list-component) and [`<ReferenceManyField>`](./Fields.md#referencemanyfield) components.
+Datagrid 组件将记录列表呈现为表表格。 它通常用作 [`<List>`](#the-list-component) 和 [`<ReferenceManyField>`](./Fields.md#referencemanyfield) 组件的子级。
 
-Here are all the props accepted by the component:
+以下是通过该组件接受的所有属性：
 
 - [`rowStyle`](#row-style-function)
 
-It renders as many columns as it receives `<Field>` children.
+它会在接收 `<Field>` 子项时呈现多列。
 
 ```jsx
 // in src/posts.js
@@ -492,13 +492,13 @@ export const PostList = (props) => (
 );
 ```
 
-The datagrid is an *iterator* component: it receives an array of ids, and a data store, and is supposed to iterate over the ids to display each record. Another example of iterator component is [`<SingleFieldList>`](#the-singlefieldlist-component).
+Datagrid是一个 *迭代器* 组件：它接收一个 id 数组和一个数据 store，并且应该迭代 id 以显示每个记录。 迭代器组件的另一个示例是 [`<SingleFieldList>`](#the-singlefieldlist-component)。
 
 ### Row Style Function
 
-You can customize the datagrid row style (applied to the `<tr>` element) based on the record, thanks to the `rowStyle` prop, which expects a function.
+由于 `rowStyle, 您可以根据记录自定义 datagrid 行样式 (应用于 <code><tr>` 元素)</code> 属性, 它期望一个函数。
 
-For instance, this allows to apply a custom background to the entire row if one value of the record - like its number of views - passes a certain threshold.
+例如，如果记录的一个值（如其视图数）超过某个阈值，则允许将自定义背景应用于整行。
 
 ```jsx
 const postRowStyle = (record, index) => ({
@@ -515,7 +515,7 @@ export const PostList = (props) => (
 
 ### CSS API
 
-The `Datagrid` component accepts the usual `className` prop but you can override many class names injected to the inner components by React-admin thanks to the `classes` property (as most Material UI components, see their [documentation about it](https://material-ui.com/customization/overrides/#overriding-with-classes)). This property accepts the following keys:
+`Datagrid` 组件通常接受 `className` 属性，你可以通过React-admin覆盖注入内部组件的许多类名，这得益于`classes`属性（作为大多数 Material UI 组件的属性，请参阅关于它的[文档](https://material-ui.com/customization/overrides/#overriding-with-classes)）。 此属性接受以下项：
 
 - `table`: alternative to using `className`. Applied to the root element.
 - `tbody`: applied to the tbody
@@ -525,9 +525,9 @@ The `Datagrid` component accepts the usual `className` prop but you can override
 - `rowOdd`: applied to each odd row
 - `rowCell`: applied to each row cell
 
-Here is an example of how you can override some of these classes:
+下面是一个如何重写这些类的示例：
 
-You can customize the datagrid styles by passing a `classes` object as prop, through `withStyles()`. Here is an example:
+通过将 `classes` 对象作为属性传递，通过 `withStyles()`可以自定义列表样式。下面是一个示例：
 
 ```jsx
 const styles = {
@@ -547,7 +547,7 @@ const PostList = ({ classes, ...props) => (
 export withStyles(styles)(PostList);
 ```
 
-**Tip**: If you want to override the `header` and `cell` styles independently for each column, use the `headerClassName` and `cellClassName` props in `<Field>` components. For instance, to hide a certain column on small screens:
+**提示**：如果要为每列独立覆盖` header `和 ` cell `样式，请在 `<Field>` 组件中使用 headerClassName 和 cellClassName 属性。 例如，要在小屏幕上隐藏某个列：
 
 ```jsx
 import { withStyles } from '@material-ui/core/styles';
@@ -577,9 +577,9 @@ const PostList = ({ classes, ...props }) => (
 export default withStyles(styles)(PostList);
 ```
 
-## The `SimpleList` component
+## `SimpleList` 组件
 
-For mobile devices, a `<Datagrid>` is often unusable - there is simply not enough space to display several columns. The convention in that case is to use a simple list, with only one column per row. The `<SimpleList>` component serves that purpose, leveraging [material-ui's `<List>` and `<ListItem>` components](http://www.material-ui.com/#/components/list). You can use it as `<List>` or `<ReferenceManyField>` child:
+对于移动设备，`<Datagrid>` 通常是不可用的， 因为没有足够的空间来显示多个列。 这种情况下的惯例是使用一个简单的列表，每行只有一列。 在这种情况下的惯例是使用一个简单的列表，每行只有一列。 `<SimpleList>`组件用于此目的，利用[ material-ui 的 `<List>` 和 `<ListItem>` 组件](http://www.material-ui.com/#/components/list)。 你可以使用它作为 `<List>` 或者 `<ReferenceManyField>` 子级：
 
 ```jsx
 // in src/posts.js
@@ -597,9 +597,9 @@ export const PostList = (props) => (
 );
 ```
 
-`<SimpleList>` iterates over the list data. For each record, it executes the `primaryText`, `secondaryText`, `leftAvatar`, `leftIcon`, `rightAvatar`, and `rightIcon` props function, and passes the result as the corresponding `<ListItem>` prop.
+`<SimpleList>` 遍历列表数据。 对于每个记录，它执行 `primaryText`、`secondaryText`、 `leftAvatar`、`leftIcon`、`rightAvatar` 和 `rightIcon` 的属性函数，并传递结果作为相应的 `<ListItem>` 属性。
 
-**Tip**: To use a `<SimpleList>` on small screens and a `<Datagrid>` on larger screens, use the `<Responsive>` component:
+**提示**：在小屏幕上使用一个`<SimpleList>`并在较大的屏幕上使用一个`<Datagrid>`，使用`<Responsive>`组件：
 
 ```jsx
 // in src/posts.js
@@ -626,7 +626,7 @@ export const PostList = (props) => (
 );
 ```
 
-**Tip**: The `<SimpleList>` items link to the edition page by default. You can set the `linkType` prop to `show` to link to the `<Show>` page instead.
+**提示**：默认情况下, `<SimpleList>` 项目链接到编辑页。 可以将 `linkType` 属性设置为 `show` , 以链接到 `<Show>` 页。
 
 ```jsx
 // in src/posts.js
@@ -645,11 +645,11 @@ export const PostList = (props) => (
 );
 ```
 
-Setting the `linkType` prop to `false` (boolean, not string) removes the link in all list items.
+将` linkType ` 属性设置为` false </ code>（boolean，而不是string）将删除所有列表项中的链接。</p>
 
-## The `SingleFieldList` component
+<h2><code>SingleFieldList` 组件</h2> 
 
-When you want to display only one property of a list of records, instead of using a `<Datagrid>`, use the `<SingleFieldList>`. It expects a single `<Field>` as child. It's especially useful for `<ReferenceManyField>` or `<ReferenceArrayField>` components:
+如果只希望显示记录列表的一个属性，而不是使用 `<Datagrid>`,那么请使用 `<SingleFieldList>`。 它期望单个 `<Field>` 为子级。 它特别适用于 `<ReferenceManyField>` 或 `<ReferenceArrayField>` 组件：
 
 ```jsx
 // Display all the tags for the current post
@@ -666,7 +666,7 @@ When you want to display only one property of a list of records, instead of usin
 
 ![ReferenceManyFieldSingleFieldList](https://marmelab.com/react-admin/img/reference-many-field-single-field-list.png)
 
-**Tip**: The `<SingleFieldList>` items link to the edition page by default. You can set the `linkType` prop to `show` to link to the `<Show>` page instead.
+**提示**：默认情况下, `<SingleFieldList>` 项目链接到编辑页。 可以将 `linkType` 属性设置为 `show`, 以链接到 `<Show>` 页。
 
 ```jsx
 // Display all the tags for the current post
@@ -681,18 +681,18 @@ When you want to display only one property of a list of records, instead of usin
 </ReferenceArrayField>
 ```
 
-## Using a Custom Iterator
+## 使用自定义迭代器
 
-A `<List>` can delegate to any iterator component - `<Datagrid>` is just one example. An iterator component must accept at least two props:
+`<List>` 可以委派到任何迭代器组件- `<Datagrid>` 只是一个示例。迭代器组件必须至少接受两个属性：
 
-- `ids` is an array of the ids currently displayed in the list
-- `data` is an object of all the fetched data for this resource, indexed by id.
+- `ids` 是当前显示在列表中的id的数组。
+- `data` 是一个用于此resource的所有取来数据的对象，通过id索引。
 
-For instance, what if you prefer to show a list of cards rather than a datagrid?
+例如，如果您希望显示卡片列表而不是datagrid，该怎么办？
 
 ![Custom iterator](https://marmelab.com/react-admin/img/custom-iterator.png)
 
-You'll need to create your own iterator component as follows:
+您需要创建自己的迭代器组件，如下所示：
 
 ```jsx
 // in src/comments.js
@@ -745,13 +745,13 @@ export const CommentList = (props) => (
 );
 ```
 
-As you can see, nothing prevents you from using `<Field>` components inside your own components... provided you inject the current `record`. Also, notice that components building links require the `basePath` component, which is also injected.
+如你所见，没有任何东西阻止你使用 `<Field>` 组件在自己的组件之内..。 如果您插入当前的 `记录`。 另外, 请注意, 组件构建链接需要 `basePath` 组件, 它也会被注入。
 
-## Displaying Fields depending on the user permissions
+## 根据用户权限显示字段
 
-You might want to display some fields or filters only to users with specific permissions. Those permissions are retrieved for each route and will provided to your component as a `permissions` prop.
+您可能只想向具有特定权限的用户显示某些字段或过滤器。 为每个路由检索这些权限, 并将作为 `permissions` 属性提供给您的组件。
 
-Each route will call the `authProvider` with the `AUTH_GET_PERMISSIONS` type and some parameters including the current location and route parameters. It's up to you to return whatever you need to check inside your component such as the user's role, etc.
+每个路由将使用 `AUTH_GET_PERMISSIONS` 类型和一些参数（包括当前位置和路由参数）调用 authProvider。 您可以在组件内部返回需要检查的内容，例如用户的角色等。
 
 ```jsx
 const UserFilter = ({ permissions, ...props }) =>
