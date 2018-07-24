@@ -267,7 +267,7 @@ export const PostList = (props) => (
 
 它通过检查其 `context` 属性来进行此项检测。
 
-**Tip**: Don't mix up this `filters` prop, expecting a React element, with the `filter` props, which expects an object to define permanent filters (see below).
+**提示**：不要混淆这个 `filters` 属性，期望一个 React 元素，具有 `filter` 属性，它期望一个对象来定义永久过滤器 (见下文)。
 
 The `Filter` component accepts the usual `className` prop but you can override many class names injected to the inner components by React-admin thanks to the `classes` property (as most Material UI components, see their [documentation about it](https://material-ui.com/customization/overrides/#overriding-with-classes)). This property accepts the following keys:
 
