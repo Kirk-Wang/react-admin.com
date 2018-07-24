@@ -8,14 +8,14 @@ Show 视图以只读方式显示从 API 获取的记录。 它将记录的实际
 
 ## `Show` 组件
 
-`<Show>` 组件呈现页标题和 action, 并从 REST API 中提取记录。 It is not responsible for rendering the actual record - that's the job of its child component (usually `<SimpleShowLayout>`), to which they pass the `record` as prop.
+`<Show>` 组件呈现页标题和 action, 并从 REST API 中提取记录。 它不负责呈现实际记录-这是其子组件 (通常为 `<SimpleShowLayout>`) 的工作, 它们通过 `record` 作为属性。
 
-Here are all the props accepted by the `<Show>` component:
+以下是 `<Show>` 组件所接受的所有属性：
 
 * [`title`](#page-title)
 * [`actions`](#actions)
 
-Here is the minimal code necessary to display a view to show a post:
+以下是 show 视图显示帖子所需的最少代码：
 
 ```jsx
 // in src/App.js
@@ -55,9 +55,9 @@ That's enough to display the post show view:
 
 ### Page Title
 
-By default, the title for the Show view is "[resource_name] #[record_id]".
+默认情况下，Show 视图的显示标题是"[resource_name] #[record_id]"。
 
-You can customize this title by specifying a custom `title` prop:
+您可以通过指定一个自定义 `title` 属性来自定义此标题：
 
 ```jsx
 export const PostShow = (props) => (
@@ -67,7 +67,7 @@ export const PostShow = (props) => (
 );
 ```
 
-More interestingly, you can pass a component as `title`. React-admin clones this component and, in the `<ShowView>`, injects the current `record`. This allows to customize the title according to the current record:
+更有趣的是，你可以通过传递一个组件作为 `title`。 React-admin clones this component and, in the `<ShowView>`, injects the current `record`. This allows to customize the title according to the current record:
 
 ```jsx
 const PostTitle = ({ record }) => {
