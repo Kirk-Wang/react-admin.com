@@ -579,7 +579,7 @@ export default withStyles(styles)(PostList);
 
 ## `SimpleList` 组件
 
-对于移动设备，`<Datagrid>` 通常是不可用的， 因为没有足够的空间来显示多个列。 这种情况下的惯例是使用一个简单的列表，每行只有一列。 在这种情况下的惯例是使用一个简单的列表，每行只有一列。 `<SimpleList>`组件用于此目的，利用[ material-ui 的 `<List>` 和 `<ListItem>` 组件](http://www.material-ui.com/#/components/list)。 You can use it as `<List>` or `<ReferenceManyField>` child:
+对于移动设备，`<Datagrid>` 通常是不可用的， 因为没有足够的空间来显示多个列。 这种情况下的惯例是使用一个简单的列表，每行只有一列。 在这种情况下的惯例是使用一个简单的列表，每行只有一列。 `<SimpleList>`组件用于此目的，利用[ material-ui 的 `<List>` 和 `<ListItem>` 组件](http://www.material-ui.com/#/components/list)。 你可以使用它作为 `<List>` 或者 `<ReferenceManyField>` 子级：
 
 ```jsx
 // in src/posts.js
@@ -597,9 +597,9 @@ export const PostList = (props) => (
 );
 ```
 
-`<SimpleList>` iterates over the list data. For each record, it executes the `primaryText`, `secondaryText`, `leftAvatar`, `leftIcon`, `rightAvatar`, and `rightIcon` props function, and passes the result as the corresponding `<ListItem>` prop.
+`<SimpleList>` 遍历列表数据。 对于每个记录，它执行 `primaryText`、`secondaryText`、 `leftAvatar`、`leftIcon`、`rightAvatar` 和 `rightIcon` 的属性函数，并传递结果作为相应的 `<ListItem>` 属性。
 
-**Tip**: To use a `<SimpleList>` on small screens and a `<Datagrid>` on larger screens, use the `<Responsive>` component:
+**提示**：在小屏幕上使用一个`<SimpleList>`并在较大的屏幕上使用一个`<Datagrid>`，使用`<Responsive>`组件：
 
 ```jsx
 // in src/posts.js
@@ -626,7 +626,7 @@ export const PostList = (props) => (
 );
 ```
 
-**Tip**: The `<SimpleList>` items link to the edition page by default. You can set the `linkType` prop to `show` to link to the `<Show>` page instead.
+**提示**：默认情况下, `<SimpleList>` 项目链接到编辑页。 可以将 `linkType` 属性设置为 `show` , 以链接到 `<Show>` 页。
 
 ```jsx
 // in src/posts.js
@@ -645,11 +645,11 @@ export const PostList = (props) => (
 );
 ```
 
-Setting the `linkType` prop to `false` (boolean, not string) removes the link in all list items.
+将` linkType ` 属性设置为` false </ code>（boolean，而不是string）将删除所有列表项中的链接。</p>
 
-## The `SingleFieldList` component
+<h2><code>SingleFieldList` 组件</h2> 
 
-When you want to display only one property of a list of records, instead of using a `<Datagrid>`, use the `<SingleFieldList>`. It expects a single `<Field>` as child. It's especially useful for `<ReferenceManyField>` or `<ReferenceArrayField>` components:
+如果只希望显示记录列表的一个属性，而不是使用 `<Datagrid>`,那么请使用 `<SingleFieldList>`。 它期望单个 `<Field>` 为子级。 它特别适用于 `<ReferenceManyField>` 或 `<ReferenceArrayField>` 组件：
 
 ```jsx
 // Display all the tags for the current post
