@@ -269,14 +269,14 @@ export const PostList = (props) => (
 
 **提示**：不要混淆这个 `filters` 属性，期望一个 React 元素，具有 `filter` 属性，它期望一个对象来定义永久过滤器 (见下文)。
 
-The `Filter` component accepts the usual `className` prop but you can override many class names injected to the inner components by React-admin thanks to the `classes` property (as most Material UI components, see their [documentation about it](https://material-ui.com/customization/overrides/#overriding-with-classes)). This property accepts the following keys:
+`Filter` 组件通常接受 `className` 属性，你可以通过React-admin覆盖注入内部组件的许多类名，这得益于`classes`属性（作为大多数 Material UI 组件的属性，请参阅关于它的[文档](https://material-ui.com/customization/overrides/#overriding-with-classes)）。 此属性接受以下值：
 
 - `form`: applied to the root element when rendering as a form.
 - `button`: applied to the root element when rendering as a button.
 
-Children of the `<Filter>` form are regular inputs. `<Filter>` hides them all by default, except those that have the `alwaysOn` prop.
+`<Filter>` 表单的子项是常规输入。默认情况下，`<Filter>` 隐藏它们，除了那些具有 `alwaysOn` 属性的那些。
 
-**Tip**: For technical reasons, react-admin does not accept children of `<Filter>` having both a `defaultValue` and `alwaysOn`. To set default values for always on filters, use the `filterDefaultValues` prop of the `<List>` component instead (see below).
+**提示**：由于技术原因，react-admin 不接受具有 `defaultValue` 和 `alwaysOn` 的 `<Filter>` 的子元素。 To set default values for always on filters, use the `filterDefaultValues` prop of the `<List>` component instead (see below).
 
 ### Records Per Page
 
