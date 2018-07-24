@@ -131,11 +131,11 @@ export const PostList = (props) => (
 );
 ```
 
-**Tip**: You can also disable bulk actions altogether by passing `false` to the `bulkActions` prop. When using a `Datagrid` inside a `List` with disabled bulk actions, the checkboxes column won't be added.
+**提示**：您还可以通过将 `false` 传递给 `bulkActions` 属性来完全禁用批量操作。 当在 `List` 中使用 `Datagrid` 并禁用了批量操作时，将不会添加复选框列。
 
-React-admin uses the `label` prop of the bulk action components to display the bulk action menu items.
+React-admin 使用批量操作组件的 `label` 属性来显示批量操作菜单项。
 
-Bulk action components are regular React component that gets mounted when the related menu item is clicked. The component receives several props allowing it to perform its job:
+批量操作组件是在单击相关菜单项时装入的常规 React 组件。组件接收到几个属性, 允许它执行其工作:
 
 - `resource`: the currently displayed resource (eg `posts`, `comments`, etc.)
 - `basePath`: the current router base path for the resource (eg `/posts`, `/comments`, etc.)
