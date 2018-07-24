@@ -2,13 +2,13 @@
 id: show-view-component
 title: <Show> View
 ---
-Show 视图以只读方式显示从 API 获取的记录。 它将记录的实际呈现方式委托给一个布局组件——通常是 `<SimpleShowLayout>`。 This layout component uses its children ([`<Fields>`](./Fields.md) components) to render each record field.
+Show 视图以只读方式显示从 API 获取的记录。 它将记录的实际呈现方式委托给一个布局组件——通常是 `<SimpleShowLayout>`。 此布局组件使用其子级 ([`<Fields>`](./Fields.md) 组件) 来呈现每个记录字段。
 
 ![post show view](https://marmelab.com/react-admin/img/show-view.png)
 
-## The `Show` component
+## `Show` 组件
 
-The `<Show>` component renders the page title and actions, and fetches the record from the REST API. It is not responsible for rendering the actual record - that's the job of its child component (usually `<SimpleShowLayout>`), to which they pass the `record` as prop.
+`<Show>` 组件呈现页标题和 action, 并从 REST API 中提取记录。 It is not responsible for rendering the actual record - that's the job of its child component (usually `<SimpleShowLayout>`), to which they pass the `record` as prop.
 
 Here are all the props accepted by the `<Show>` component:
 
