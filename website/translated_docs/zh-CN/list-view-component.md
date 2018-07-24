@@ -135,7 +135,7 @@ export const PostList = (props) => (
 
 React-admin 使用批量操作组件的 `label` 属性来显示批量操作菜单项。
 
-批量操作组件是在单击相关菜单项时装入的常规 React 组件。组件接收到几个属性, 允许它执行其工作:
+批量操作组件是在单击相关菜单项时挂载的常规 React 组件。组件接收到几个属性，允许它执行其工作:
 
 - `resource`: the currently displayed resource (eg `posts`, `comments`, etc.)
 - `basePath`: the current router base path for the resource (eg `/posts`, `/comments`, etc.)
@@ -143,7 +143,7 @@ React-admin 使用批量操作组件的 `label` 属性来显示批量操作菜�
 - `selectedIds`: the identifiers of the currently selected items.
 - `onExit`: an event handler you should call when the bulk action ends.
 
-Here is an example leveraging the `UPDATE_MANY` crud action, which will set the `views` property of all posts to `0`:
+下面是一个利用 `UPDATE_MANY` crud 操作的示例, 它将所有 posts 的 `views` 属性设置为 `0`：
 
 ```jsx
 // in ./ResetViewsAction.js
@@ -173,7 +173,7 @@ class ResetViewsAction extends Component {
 export default connect(undefined, { crudUpdateMany })(ResetViewsAction);
 ```
 
-This component renders nothing - it just dispatches an action when mounted. Once finished, it also calls the `onExit()` method passed by the main bulk actions component, which has the effect of unmounting the `ResetViewsAction` component.
+此组件不呈现任何内容-它只是在挂载时 dispatch action。 Once finished, it also calls the `onExit()` method passed by the main bulk actions component, which has the effect of unmounting the `ResetViewsAction` component.
 
 But most of the time, bulk actions are mini-applications with a standalone user interface (in a Dialog), so the `render()` method is useful. Here is the same `ResetViewsAction` implemented behind a confirmation dialog:
 
