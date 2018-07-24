@@ -156,7 +156,7 @@ export const PostShow = (props) => (
 
 ## `TabbedShowLayout` 组件
 
-就像 `<SimpleShowLayout>`, `<TabbedShowLayout>` 接收到 `record` 属性并渲染实际视图。 但是, `<TabbedShowLayout>` 组件按 tab 分组渲染。 这些选项卡是使用 `<Tab>` 组件设置的, 该元件期望一个 `label` 和可选的 `icon` 属性。 切换 tab 将更新当前 url。 默认情况下，它使用选项卡索引，第一个选项卡将显示在根URL。 You can customize the path by providing a `path` prop to each `Tab` component. If you'd like the first one to act as an index page, just omit the `path` prop.
+就像 `<SimpleShowLayout>`, `<TabbedShowLayout>` 接收到 `record` 属性并渲染实际视图。 但是, `<TabbedShowLayout>` 组件按 tab 分组渲染。 这些选项卡是使用 `<Tab>` 组件设置的, 该元件期望一个 `label` 和可选的 `icon` 属性。 切换 tab 将更新当前 url。 默认情况下，它使用选项卡索引，第一个选项卡将显示在根URL。 您可以通过为每个Tab组件提供` path ` 属性来自定义路径。 如果您希望第一个充当索引页面，只需省略` path` 属性。
 
 ![tabbed show](https://marmelab.com/react-admin/img/tabbed-show.gif)
 
@@ -195,13 +195,13 @@ export const PostShow = (props) => (
 );
 ```
 
-## Displaying Fields depending on the user permissions
+## 根据用户权限显示字段
 
-You might want to display some fields only to users with specific permissions. Those permissions are retrieved for each route and will provided to your component as a `permissions` prop.
+您可能希望只向具有特定权限的用户显示某些字段。为每个路由检索这些权限, 并将其作为 `permissions` 属性提供给您的组件。
 
-Each route will call the `authProvider` with the `AUTH_GET_PERMISSIONS` type and some parameters including the current location and route parameters. It's up to you to return whatever you need to check inside your component such as the user's role, etc.
+每个路由将使用 `AUTH_GET_PERMISSIONS` 类型和一些参数（包括当前位置和路由参数）调用 authProvider。 您可以在组件内部返回需要检查的内容，例如用户的角色等。
 
-Here's an example inside a `Show` view with a `SimpleShowLayout` and a custom `actions` component:
+下面是 `Show` 视图中的一个示例，其中有一个 `SimpleShowLayout` 和一个自定义 `actions` 组件:
 
 ```jsx
 import CardActions from '@material-ui/core/CardActions';
@@ -237,9 +237,9 @@ export const PostShow = ({ permissions, ...props }) => (
 );
 ```
 
-**Tip** Note how the `permissions` prop is passed down to the custom `actions` component.
+**提示** 请注意权限属性如何传递给自定义 `过滤器` 组件。
 
-This also works inside a `TabbedShowLayout`, and you can hide a `Tab` completely:
+这也适用于TabbedShowLayout，您可以完全隐藏Tab：
 
 ```jsx
 export const UserShow = ({ permissions, ...props }) =>
