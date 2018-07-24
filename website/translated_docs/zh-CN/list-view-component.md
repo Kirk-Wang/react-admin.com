@@ -354,7 +354,7 @@ export const PostList = (props) => (
 
 ### Permanent Filter
 
-您可以选择始终过滤列表，而不允许用户禁用此过滤器，例如只显示已发布的帖子。 Write the filter to be passed to the REST client in the `filter` props:
+您可以选择始终过滤列表，而不允许用户禁用此过滤器，例如只显示已发布的帖子。 在 `filter` 属性中写被传递到 REST client 的过滤器：
 
 ```jsx
 // in src/posts.js
