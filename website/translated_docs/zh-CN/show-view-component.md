@@ -67,7 +67,7 @@ export const PostShow = (props) => (
 );
 ```
 
-更有趣的是，你可以通过传递一个组件作为 `title`。 React-admin clones this component and, in the `<ShowView>`, injects the current `record`. This allows to customize the title according to the current record:
+更有趣的是，你可以通过传递一个组件作为 `title`。 React-admin 克隆此组件，并在 `<ShowView>` 中注入当前 `record`。 这允许根据当前记录自定义标题：
 
 ```jsx
 const PostTitle = ({ record }) => {
@@ -82,7 +82,7 @@ export const PostShow = (props) => (
 
 ### Actions
 
-You can replace the list of default actions by your own element using the `actions` prop:
+你可以通过你自己的元素使用 `actions` 属性来替换默认 action 列表：
 
 ```jsx
 import CardActions from '@material-ui/core/CardActions';
@@ -113,7 +113,7 @@ export const PostShow = (props) => (
 );
 ```
 
-## The `SimpleShowLayout` component
+## `SimpleShowLayout` 组件
 
 The `<SimpleShowLayout>` component receives the `record` as prop from its parent component. It is responsible for rendering the actual view.
 
