@@ -293,7 +293,7 @@ export const PostList = (props) => (
 
 ### Default Sort Field
 
-Pass an object literal as the `sort` prop to determine the default `field` and `order` used for sorting:
+传递一个对象字面量作为 `sort` 属性来确定用于排序的 `field` 和 `order`：
 
 ```jsx
 // in src/posts.js
@@ -304,11 +304,11 @@ export const PostList = (props) => (
 );
 ```
 
-`sort` defines the *default* sort order ; the list remains sortable by clicking on column headers.
+`sort` 定义了 *default* 排序顺序；这个列表通过在列标题上单击保持可排序。
 
 ### Disabling Sorting
 
-It is possible to disable sorting for a specific field by passing a `sortable` property set to `false`:
+通过传递一个设置为 `false` 的 `sortable` 属性，它可能会为一个指定的字段去禁用排序：
 
 ```jsx
 // in src/posts.js
@@ -328,7 +328,7 @@ export const PostList = (props) => (
 
 ### Specify Sort Field
 
-By default, a column is sorted by the `source` property. To define another attribute to sort by, set it via the `sortBy` property:
+默认情况下，列按 `source` 属性排序。若要定义要排序的其他属性，请通过 `sortBy` 属性将其设置为：
 
 ```jsx
 // in src/posts.js
@@ -354,7 +354,7 @@ export const PostList = (props) => (
 
 ### Permanent Filter
 
-You can choose to always filter the list, without letting the user disable this filter - for instance to display only published posts. Write the filter to be passed to the REST client in the `filter` props:
+您可以选择始终过滤列表，而不允许用户禁用此过滤器，例如只显示已发布的帖子。 Write the filter to be passed to the REST client in the `filter` props:
 
 ```jsx
 // in src/posts.js
