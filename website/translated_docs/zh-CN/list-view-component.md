@@ -12,7 +12,7 @@ title: <List> View
 
 **提示**：在Redux条款中，`<List>` 是一个connected组件，并且`<Datagrid>` 是一个dumb组件。
 
-Here are all the props accepted by the `<List>` component:
+以下是通过 `<List>` 组件接受的所有属性：
 
 - [`title`](#page-title)
 - [`actions`](#actions)
@@ -24,7 +24,7 @@ Here are all the props accepted by the `<List>` component:
 - [`filterDefaultValues`](#filter-default-values) (the default values for `alwaysOn` filters)
 - [`pagination`](#pagination)
 
-Here is the minimal code necessary to display a list of posts:
+下面是显示帖子列表所需的最少代码：
 
 ```jsx
 // in src/App.js
@@ -57,13 +57,13 @@ export const PostList = (props) => (
 );
 ```
 
-That's enough to display the post list:
+这足以显示帖子列表：
 
 ![Simple posts list](https://marmelab.com/react-admin/img/simple-post-list.png)
 
 ### Page Title
 
-The default title for a list view is "[resource] list" (e.g. "Posts list"). Use the `title` prop to customize the List view title:
+一个列表视图的默认标题是"[resource] list"（例如："Posts list"）。使用 `title` 属性来自定义列表视图标题：
 
 ```jsx
 // in src/posts.js
@@ -74,11 +74,11 @@ export const PostList = (props) => (
 );
 ```
 
-The title can be either a string, or an element of your own.
+标题可以是任何一个字符串，或者你自己的元素。
 
 ### Actions
 
-You can replace the list of default actions by your own element using the `actions` prop:
+你可以通过你自己的元素使用 `actions` 属性替换掉默认的 action 列表： 
 
 ```jsx
 import Button from '@material-ui/core/Button';
@@ -109,7 +109,7 @@ export const PostList = (props) => (
 
 ### Bulk Actions
 
-Bulk actions are actions that affect several records at once, like mass deletion for instance. In the `<Datagrid>` component, bulk actions are triggered by ticking the checkboxes in the first column of the table, then choosing an action from the bulk action menu. By default, all list views have a single bulk action, the bulk delete action. You can add other bulk actions by passing a custom element as the `bulkActions` prop of the `<List>` component:
+Bulk actions 是同时影响多个记录的操作，例如大量删除。 在 `<Datagrid>` 组件中，通过勾选表格第一列中的复选框，然后从批量操作菜单中选择操作来触发批量操作。 默认情况下，所有列表视图都有一个批量操作，即批量删除操作。 You can add other bulk actions by passing a custom element as the `bulkActions` prop of the `<List>` component:
 
 ```jsx
 import Button from '@material-ui/core/Button';
