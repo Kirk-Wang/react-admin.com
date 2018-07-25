@@ -2,7 +2,7 @@
 layout: field-components
 title: <Field> Components
 ---
-A `Field` component displays a given property of a REST resource. Such components are used in the `List` view, but you can also use them in the `Edit` and `Create` views for read-only fields. The most usual of all field components is `<TextField>`:
+`Field` 组件显示 REST 资源的给定属性。 此类组件在 `List` 视图中使用，但也可以针对只读字段在 `Edit` 和` Create` 视图中使用。 所有 Field 组件中最常见的是 `<TextField>`:
 
 ```jsx
 // in src/posts.js
@@ -20,7 +20,7 @@ export const PostList = (props) => (
 );
 ```
 
-All field components accept the following attributes:
+所有字段组件都接受以下属性：
 
 - `source`: Property name of your entity to view/edit. This attribute is required.
 - `label`: Used as a table header of an input label. Defaults to the `source` when omitted.
@@ -35,7 +35,7 @@ All field components accept the following attributes:
 <TextField source="zb_title" label="Title" style={{ color: 'purple' }} />
 ```
 
-**Tip**: You can use field components inside the `Edit` or `Show` views, too:
+**提示**：您也可以在 `Edit` 或 `Show` 视图中使用字段组件：
 
 ```jsx
 export const PostShow = ({ ...props }) => (
