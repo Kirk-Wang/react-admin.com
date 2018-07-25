@@ -98,7 +98,7 @@ export const PostShow = ({ ...props }) => (
 
 该子级必须是迭代器组件 (如 `<Datagrid>` 或 `<SingleFieldList>`)。
 
-Here is how to display all the backlinks of the current post as a `<datagrid>`
+以下是如何将当前 post 的所有 backlinks 显示为 `<datagrid>`
 
 ```jsx
 <ArrayField source="backlinks">
@@ -109,7 +109,7 @@ Here is how to display all the backlinks of the current post as a `<datagrid>`
 </ArrayField>
 ```
 
-And here is how to display all the tags of the current post as `<Chip>` components:
+下面是如何将当前 post 的所有 tag 显示为 `<Chip>` 组件:
 
 ```jsx
 <ArrayField source="tags">
@@ -119,7 +119,7 @@ And here is how to display all the tags of the current post as `<Chip>` componen
 </ArrayField>
 ```
 
-**Tip**: If you need to render a collection in a custom way, it's often simpler to write your own component:
+**提示**：如果需要以自定义方式呈现集合，则编写自己的组件通常比较简单：
 
 ```jsx
 const TagsField = ({ record }) => (
@@ -132,9 +132,9 @@ const TagsField = ({ record }) => (
 TagsField.defaultProps = { addLabel: true };
 ```
 
-## `BooleanField` Component
+## `BooleanField` 组件
 
-Displays a boolean value as a check.
+将布尔值显示为 check 。
 
 ```jsx
 import { BooleanField } from 'react-admin';
@@ -144,9 +144,9 @@ import { BooleanField } from 'react-admin';
 
 ![BooleanField](https://marmelab.com/react-admin/img/boolean-field.png)
 
-## `ChipField` Component
+## `ChipField` 组件
 
-Displays a value inside a ["Chip"](http://www.material-ui.com/#/components/chip), which is Material UI's term for a label.
+在 ["Chip"](http://www.material-ui.com/#/components/chip)中显示一个值, 它是 label 的 Material UI 术语。
 
 ```jsx
 import { ChipField } from 'react-admin';
@@ -156,7 +156,7 @@ import { ChipField } from 'react-admin';
 
 ![ChipField](https://marmelab.com/react-admin/img/chip-field.png)
 
-This field type is especially useful for one to many relationships, e.g. to display a list of books for a given author:
+该字段类型对于一对多关系特别有用，例如， 显示给定作者的书籍列表：
 
 ```jsx
 import { ChipField, SingleFieldList, ReferenceManyField } from 'react-admin';
@@ -168,7 +168,7 @@ import { ChipField, SingleFieldList, ReferenceManyField } from 'react-admin';
 </ReferenceManyField>
 ```
 
-## `DateField` Component
+## `DateField` 组件
 
 Displays a date or datetime using the browser locale (thanks to `Date.toLocaleDateString()` and `Date.toLocaleString()`).
 
