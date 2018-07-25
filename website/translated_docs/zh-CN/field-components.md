@@ -432,13 +432,13 @@ const choices = [
 <SelectField source="gender" choices={choices} translateChoice={false}/>
 ```
 
-**提示**: <referencefield> sets `translateChoice` to false by default.
+**提示**： <referencefield> 默认情况下, 将 `translateChoice` 设置为 false。
 
-## `ReferenceField` Component
+## `ReferenceField` 组件
 
-This component fetches a single referenced record (using the `GET_MANY` REST method), and displays one field of this record. That's why a `<ReferenceField>` must always have a child `<Field>`.
+此组件提取单个引用的记录 (使用 `GET_MANY` REST 方法)，并显示此记录的一个字段。 这就是为什么 `<ReferenceField>` 必须始终有一个子 `<Field>` 的原因。
 
-For instance, here is how to fetch the `post` related to `comment` records, and display the `title` for each:
+例如，这里是如何获取与 `post` 相关的 `user` 记录，并显示每个的 `name`：
 
 ```jsx
 import React from 'react';
