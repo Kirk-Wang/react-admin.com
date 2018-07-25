@@ -456,13 +456,13 @@ export const PostList = (props) => (
 );
 ```
 
-With this configuration, `<ReferenceField>` wraps the user's name in a link to the related user `<Edit>` page.
+使用此配置，`<ReferenceField>` 将用户的名称包装到相关用户 `<Edit>` 页的链接中。
 
 ![ReferenceField](https://marmelab.com/react-admin/img/reference-field.png)
 
-`<ReferenceField>` accepts a `reference` attribute, which specifies the resource to fetch for the related record. Also, you can use any `Field` component as child.
+`<ReferenceField>` 接受一个 `reference` 属性，它指定为相关记录获取资源。 此外，您可以使用任何 `Field` 组件作为子级。
 
-**Note**: You **must** add a `<Resource>` for the reference resource - react-admin needs it to fetch the reference data. You *can* omit the `list` prop in this reference if you want to hide it in the sidebar menu.
+**注释**: 您 **必须** 添加 `<Resource>` 对于 reference resource - react-admin 需要它来获取引用数据。 如果你想在侧边栏菜单中隐藏它，你 *可以* 省略此引用中的 `list` 属性。
 
 ```jsx
 <Admin dataProvider={myDataProvider}>
@@ -471,7 +471,7 @@ With this configuration, `<ReferenceField>` wraps the user's name in a link to t
 </Admin>
 ```
 
-To change the link from the `<Edit>` page to the `<Show>` page, set the `linkType` prop to "show".
+要将链接从 `<Edit>` 页更改为 `<Show>` 页， 将 `linkType` 属性设置为 "show"。
 
 ```jsx
 <ReferenceField label="User" source="userId" reference="users" linkType="show">
@@ -479,7 +479,7 @@ To change the link from the `<Edit>` page to the `<Show>` page, set the `linkTyp
 </ReferenceField>
 ```
 
-By default, `<ReferenceField>` is sorted by its `source`. To specify another attribute to sort by, set the `sortBy` prop to the according attribute's name.
+默认情况下，`<ReferenceField>` 按其 `source` 排序。 要指定要排序的其他属性，请将 `sortBy` 属性设置为相应属性的名称。
 
 ```jsx
 <ReferenceField label="User" source="userId" reference="users" sortBy="user.name">
@@ -487,7 +487,7 @@ By default, `<ReferenceField>` is sorted by its `source`. To specify another att
 </ReferenceField>
 ```
 
-You can also prevent `<ReferenceField>` from adding link to children by setting `linkType` to `false`.
+你也可以通过将 `linkType` 设置为 `false` 来阻止 `<ReferenceField>` 添加链接到子级。
 
 ```jsx
 // No link
