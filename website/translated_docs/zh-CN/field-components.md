@@ -308,20 +308,20 @@ import { FileField } from 'react-admin';
 <FileField source="files" src="url" title="desc" />
 ```
 
-You can optionally set the `target` prop to choose which window will the link try to open in.
+您可以选择设置`target`属性，以选择链接尝试打开的窗口。
 
 ```jsx
 // Will make the file open in new window
 <FileField source="file.url" target="_blank" />
 ```
 
-## `NumberField` Component
+## `NumberField` 组件
 
-Displays a number formatted according to the browser locale, right aligned.
+显示根据浏览器区域设置格式化的数字，右对齐。
 
-Uses `Intl.NumberFormat()` if available, passing the `locales` and `options` props as arguments. This allows perfect display of decimals, currencies, percentage, etc.
+使用 `Intl.NumberFormat()` 如果可用，传递 `locales` 和 `options` 属性作为参数。 这允许完美显示小数，货币，百分比等。
 
-If Intl is not available, it outputs number as is (and ignores the `locales` and `options` props).
+如果Intl不可用，它会按原样输出数字（并忽略 `locales` 和 `options` 属性）。
 
 ```jsx
 import { NumberField }  from 'react-admin';
@@ -351,11 +351,11 @@ import { NumberField }  from 'react-admin';
 <span style="color:red;">567</span>
 ```
 
-See [Intl.Numberformat documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString) for the `options` prop syntax.
+有关 `options` 属性语法，请参阅 [ Intl.Numberformat documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString)
 
-**Tip**: If you need more formatting options than what `Intl.Numberformat` can provide, build your own field component leveraging a third-party library like [numeral.js](http://numeraljs.com/).
+**提示**：如果您需要比 Intl.Numberformat 可以提供更多的格式化选项，使用像 [numeral.js](http://numeraljs.com/) 一个第三方库构建你自己的field组件。
 
-**Tip**: When used in a `Show` view, the right alignment may look weird. Disable it by resetting the `style` attribute:
+**提示**：当在 `Show` 视图中使用时, 右对齐可能看起来很怪异。通过重置 `style` 属性禁用它：
 
 ```jsx
 import { NumberField }  from 'react-admin';
@@ -363,11 +363,11 @@ import { NumberField }  from 'react-admin';
 <NumberField source="score" style={{}} />
 ```
 
-## `SelectField` Component
+## `SelectField` 组件
 
-When you need to display an enumerated field, `<SelectField>` maps the value to a string.
+当需要显示枚举字段时, `<SelectField>` 将该值映射到字符串。
 
-For instance, if the `gender` field can take values "M" and "F", here is how to display it as "Male" or "Female":
+例如, 如果 `gender` 字段可以取值 "M" 和 "F"，下面是如何将其显示为 "Male" 或 "Female"：
 
 ```jsx
 import { SelectField } from 'react-admin';
@@ -378,14 +378,14 @@ import { SelectField } from 'react-admin';
 ]} />
 ```
 
-By default, the text is built by
+默认情况下，文本构建通过
 
-- finding a choice where the 'id' property equals the field value
-- using the 'name' property an the option text
+- 查找 "id" 属性等于字段值的选项
+- 使用'name'属性作为一个选项文本
 
-**Warning**: This component name may conflict with material-ui's [`<SelectField>`](http://www.material-ui.com/#/components/select-field) if you import both.
+**警告**： 如果同时导入这两个，此组件名称可能与 material-ui 的 [`<SelectField>`](http://www.material-ui.com/#/components/select-field) 冲突。
 
-You can also customize the properties to use for the lookup value and text, thanks to the 'optionValue' and 'optionText' attributes.
+还可以自定义用于查找值和文本的属性, 这要归功于 "optionValue" 和 "optionText" 属性。
 
 ```jsx
 const choices = [
