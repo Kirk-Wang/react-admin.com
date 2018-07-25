@@ -496,7 +496,7 @@ export const PostList = (props) => (
 </ReferenceField>
 ```
 
-**Tip**: React-admin uses `CRUD_GET_ONE_REFERENCE` action to accumulate and deduplicate the ids of the referenced records to make *one* `GET_MANY` call for the entire list, instead of n `GET_ONE` calls. So for instance, if the API returns the following list of comments:
+**提示**：React-admin 使用 `CRUD_GET_ONE_REFERENCE` action 来累积和重复数据删除引用记录的 ID，以便对整个列表进行一次 `GET_MANY` 调用，而不是 n 次 `GET_ONE` 调用。 如果这个API返回下面的评论列表：
 
 ```jsx
 [
