@@ -395,7 +395,7 @@ const choices = [
 <SelectField source="author_id" choices={choices} optionText="full_name" optionValue="_id" />
 ```
 
-`optionText` also accepts a function, so you can shape the option text at will:
+`optionText` 也接受一个函数，所以你可以随意设置选项文本：
 
 ```jsx
 const choices = [
@@ -406,7 +406,7 @@ const optionRenderer = choice => `${choice.first_name} ${choice.last_name}`;
 <SelectField source="author_id" choices={choices} optionText={optionRenderer} />
 ```
 
-`optionText` also accepts a React Element, that will be cloned and receive the related choice as the `record` prop. You can use Field components there.
+`optionText` 也接受一个 Reac t元素，它将被克隆，并接收相关选择作为`record` 属性。您可以在那里使用 Field 组件。
 
 ```jsx
 const choices = [
@@ -417,7 +417,7 @@ const FullNameField = ({ record }) => <Chip>{record.first_name} {record.last_nam
 <SelectField source="gender" choices={choices} optionText={<FullNameField />}/>
 ```
 
-The current choice is translated by default, so you can use translation identifiers as choices:
+默认情况下翻译当前选项，因此您可以使用翻译标识符作为选择：
 
 ```jsx
 const choices = [
@@ -426,13 +426,13 @@ const choices = [
 ];
 ```
 
-However, in some cases (e.g. inside a `<ReferenceField>`), you may not want the choice to be translated. In that case, set the `translateChoice` prop to false.
+然而，在某些情况下（例如在 `<ReferenceField>` 内），您可能不希望翻译该选择。在这种情况下，请将 `translateChoice` 属性设置为false。
 
 ```jsx
 <SelectField source="gender" choices={choices} translateChoice={false}/>
 ```
 
-**Tip**: <referencefield> sets `translateChoice` to false by default.
+**提示**: <referencefield> sets `translateChoice` to false by default.
 
 ## `ReferenceField` Component
 
