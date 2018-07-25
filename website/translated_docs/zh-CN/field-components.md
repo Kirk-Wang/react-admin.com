@@ -548,11 +548,11 @@ export const PostList = (props) => (
 
 ![ReferenceManyFieldSingleFieldList](https://marmelab.com/react-admin/img/reference-many-field-single-field-list.png)
 
-`<ReferenceManyField>`接受一个 `reference` 属性，它指定获取相关记录的资源。 It also accepts a `source` attribute which define the field containing the value to look for in the `target` field of the referenced resource. By default this is the `id` of the resource (`post.id` in the previous example).
+`<ReferenceManyField>`接受一个 `reference` 属性，它指定获取相关记录的资源。 它还接受` source `属性，该属性定义包含要在引用资源的` target </ code>字段中查找的值的字段。 默认情况下, 这是资源的 <code>id` (`post. id` 在上一个示例中)。
 
-**Note**: You **must** add a `<Resource>` for the reference resource - react-admin needs it to fetch the reference data. You *can* omit the `list` prop in this reference if you want to hide it in the sidebar menu.
+**注释**：您 **必须** 添加 `<Resource>` 对于 reference resource - react-admin 需要它来获取引用数据。 如果你想在侧边栏菜单中隐藏它，你 *可以* 省略此引用中的 `list` 属性。
 
-You can use a `<Datagrid>` instead of a `<SingleFieldList>` - but not inside another `<Datagrid>`! This is useful if you want to display a read-only list of related records. For instance, if you want to show the `comments` related to a `post` in the post's `<Edit>` view:
+您可以使用 `<Datagrid>` 而不是 `<SingleFieldList>` - 但不能在另一个 `<Datagrid>` 内！ 如果要显示相关记录的只读列表，这很有用。 例如，如果要在帖子的 `<Edit>` 视图中显示与 `post` 相关的`comments`：
 
 ```jsx
 import React from 'react';
@@ -582,7 +582,7 @@ export const PostEdit = (props) => (
 
 ![ReferenceManyFieldDatagrid](https://marmelab.com/react-admin/img/reference-many-field-datagrid.png)
 
-By default, react-admin restricts the possible values to 25. You can change this limit by setting the `perPage` prop.
+默认情况下，react-admin 将可能的值限制为 25。您可以通过设置 `perPage` 属性来更改此限制。
 
 ```jsx
 <ReferenceManyField perPage={10} reference="comments" target="post_id">
