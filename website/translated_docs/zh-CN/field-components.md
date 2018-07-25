@@ -240,7 +240,7 @@ import { ImageField } from 'react-admin';
 
 这个 Field 也通常用在一个 [`<ImageInput />`](http://marmelab.com/react-admin/Inputs.md#imageinput) 组件内来显示预览。
 
-The optional `title` prop points to the picture title property, used for both `alt` and `title` attributes. It can either be an hard-written string, or a path within your JSON object:
+可选的 `title` 属性指向图片标题属性，用于 `alt` 和 `title` 属性。 它可以是一个硬编码的字符串，也可以是在你JSON对象内的路径：
 
 ```jsx
 // { picture: { url: 'cover.jpg', title: 'Larry Cover (French pun intended)' } }
@@ -252,9 +252,9 @@ The optional `title` prop points to the picture title property, used for both `a
 <ImageField source="picture.url" title="Picture" />
 ```
 
-If passed value is an existing path within your JSON object, then it uses the object attribute. Otherwise, it considers its value as an hard-written title.
+如果传递的值是在你 JSON 对象内的现有路径，那么它将使用 object 属性。否则，它将其值视为一个硬编码的标题。
 
-If the record actually contains an array of images in its property defined by the `source` prop, the `src` prop will be needed to determine the `src` value of the images, for example:
+如果该记录实际上包含一个由 `source` 属性定义在它属性中的图片数组，则需要 `src` 属性来确定图像的 `src` 值，例如：
 
 ```js
 // This is the record
@@ -268,9 +268,9 @@ If the record actually contains an array of images in its property defined by th
 <ImageField source="pictures" src="url" title="desc" />
 ```
 
-## `FileField` Component
+## `FileField` 组件
 
-If you need to display a file provided by your API, you can use the `<FileField />` component:
+如果需要显示 API 提供的文件，可以使用 `<FileField />` 组件：
 
 ```jsx
 import { FileField } from 'react-admin';
@@ -278,9 +278,9 @@ import { FileField } from 'react-admin';
 <FileField source="url" title="title" />
 ```
 
-This field is also generally used within an [<fileinput />](http://marmelab.com/react-admin/Inputs.md#fileinput) component to display preview.
+这个 Field 也通常用在一个 [`<FileInput />`](http://marmelab.com/react-admin/Inputs.md#fileinput) 组件内来显示预览。
 
-The optional `title` prop points to the file title property, used for `title` attributes. It can either be an hard-written string, or a path within your JSON object:
+可选的 `title` 属性指向文件标题属性，用于 `title` 属性。 它可以是一个硬编码的字符串，也可以是你JSON对象中的路径：
 
 ```jsx
 // { file: { url: 'doc.pdf', title: 'Presentation' } }
@@ -292,9 +292,9 @@ The optional `title` prop points to the file title property, used for `title` at
 <FileField source="file.url" title="File" />
 ```
 
-If passed value is an existing path within your JSON object, then it uses the object attribute. Otherwise, it considers its value as an hard-written title.
+如果传递的值是在你 JSON 对象内的现有路径，那么它将使用 object 属性。否则，它将其值视为一个硬编码的标题。
 
-If the record actually contains an array of files in its property defined by the `source` prop, the `src` prop will be needed to determine the `href` value of the links, for example:
+如果该记录实际上包含一个由 `source` 属性定义在它属性中的文件数组，则需要 `src` 属性来确定图像的 `href` 值，例如：
 
 ```js
 // This is the record
