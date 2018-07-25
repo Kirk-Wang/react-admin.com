@@ -170,7 +170,7 @@ import { ChipField, SingleFieldList, ReferenceManyField } from 'react-admin';
 
 ## `DateField` 组件
 
-Displays a date or datetime using the browser locale (thanks to `Date.toLocaleDateString()` and `Date.toLocaleString()`).
+使用浏览器 locale 显示一个日期或日期时间（得益于 `Date.toLocaleDateString()` 和 `Date.toLocaleString()`）。
 
 ```jsx
 import { DateField } from 'react-admin';
@@ -178,7 +178,7 @@ import { DateField } from 'react-admin';
 <DateField source="publication_date" />
 ```
 
-This component accepts a `showTime` attribute (false by default) to force the display of time in addition to date. It uses `Intl.DateTimeFormat()` if available, passing the `locales` and `options` props as arguments. If Intl is not available, it ignores the `locales` and `options` props.
+此组件接受一个 `showTime` 属性（默认为false），以强制显示除日期之外的时间。 它使用 `Intl.DateTimeFormat()` 如果可用，传递 `locales` 和 `options` 属性作为参数。 如果 Intl 不可用，它将忽略 `locales` 和 `options` 属性。
 
 ```jsx
 <DateField source="publication_date" />
@@ -202,13 +202,13 @@ This component accepts a `showTime` attribute (false by default) to force the di
 <span style="color:red;">4/23/2017</span>
 ```
 
-See [Intl.DateTimeformat documentation](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Date/toLocaleDateString) for the `options` prop syntax.
+有关 `options` 属性语法，请参阅 [Intl.DateTimeformat documentation](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Date/toLocaleDateString)
 
-**Tip**: If you need more formatting options than what `Intl.DateTimeformat` can provide, build your own field component leveraging a third-party library like [moment.js](http://momentjs.com/).
+** 提示 **：如果您需要比 `Intl.DateTimeformat` 可提供更多的格式化选项，利用一个第三方库如 [moment.js](http://momentjs.com/) 构建你自己的字段组件。
 
-## `EmailField` Component
+## `EmailField` 组件
 
-`<EmailField>` displays an email as a `<a href="mailto:" />` link.
+`<EmailField>` 将电子邮件显示为 `<a href="mailto:" />` 链接。
 
 ```jsx
 import { EmailField } from 'react-admin';
@@ -216,9 +216,9 @@ import { EmailField } from 'react-admin';
 <EmailField source="personal_email" />
 ```
 
-## `FunctionField` Component
+## `FunctionField` 组件
 
-If you need a special function to render a field, `<FunctionField>` is the perfect match. It passes the `record` to a `render` function supplied by the developer. For instance, to display the full name of a `user` record based on `first_name` and `last_name` properties:
+如果你需要一个特殊的函数来渲染一个字段，那么 `<FunctionField>` 就是完美的匹配。 它将 `record` 传递给通过开发人员提供的一个 `render` 函数。 例如，要显示基于 `first_name` 和 `last_name` 属性的 ` user `记录的全名：
 
 ```jsx
 import { FunctionField } from 'react-admin'
@@ -226,11 +226,11 @@ import { FunctionField } from 'react-admin'
 <FunctionField label="Name" render={record => `${record.first_name} ${record.last_name}`} />
 ```
 
-**Tip**: Technically, you can omit the `source` and `sortBy` properties for the `<FunctionField>` since you provide the render function. However, providing a `source` or a `sortBy` will allow the datagrid to make the column sortable, since when a user clicks on a column, the datagrid uses these properties to sort. Should you provide both, `sortBy` will override `source` for sorting the column.
+**提示**：从技术上讲，由于您提供了渲染函数，因此您可以省略`<FunctionField>` 的 `source` 属性。 但是，提供 `source` 或 `sortBy` 将允许 datagrid 使列可排序，因为当用户单击列时，datagrid使用这些属性进行排序。 如果同时提供两者，`sortBy` 将覆盖用于对列进行排序的 `source`。
 
-## `ImageField` Component
+## `ImageField` 组件
 
-If you need to display an image provided by your API, you can use the `<ImageField />` component:
+如果需要显示 API 提供的 image，你可以使用 `<ImageField />` 组件：
 
 ```jsx
 import { ImageField } from 'react-admin';
@@ -238,7 +238,7 @@ import { ImageField } from 'react-admin';
 <ImageField source="url" title="title" />
 ```
 
-This field is also generally used within an [<imageinput />](http://marmelab.com/react-admin/Inputs.md#imageinput) component to display preview.
+这个 Field 也通常用在一个 [`<ImageInput />`](http://marmelab.com/react-admin/Inputs.md#imageinput) 组件内来显示预览。
 
 The optional `title` prop points to the picture title property, used for both `alt` and `title` attributes. It can either be an hard-written string, or a path within your JSON object:
 
