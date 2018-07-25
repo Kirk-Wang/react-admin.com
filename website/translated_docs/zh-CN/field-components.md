@@ -35,7 +35,7 @@ export const PostList = (props) => (
 <TextField source="zb_title" label="Title" style={{ color: 'purple' }} />
 ```
 
-**提示**：您也可以在 `Edit` 或 `Show` 视图中使用字段组件：
+**提示**：您也可以在 `Edit` 或 `Show` 视图中使用 Field 组件：
 
 ```jsx
 export const PostShow = ({ ...props }) => (
@@ -47,7 +47,7 @@ export const PostShow = ({ ...props }) => (
 );
 ```
 
-**Tip**: If you display a record with a complex structure, you can use a path with dot separators as the `source` attribute. For instance, if the API returns the following 'book' record:
+**提示**：如果显示具有复杂结构的记录，则可以使用带有点分隔符的路径作为 `source` 属性。 例如，如果API返回以下'book'记录：
 
 ```jsx
 {
@@ -60,7 +60,7 @@ export const PostShow = ({ ...props }) => (
 }
 ```
 
-Then you can display the author first name as follows:
+然后可以显示作者名字如下：
 
 ```jsx
 <TextField source="author.firstName" />
