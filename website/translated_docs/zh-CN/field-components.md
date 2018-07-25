@@ -66,15 +66,15 @@ export const PostShow = ({ ...props }) => (
 <TextField source="author.firstName" />
 ```
 
-**Tip**: If you want to format a field according to the value, use a higher-order component to do conditional formatting, as described in the [Theming documentation](./Theming.md#conditional-formatting).
+**提示**：如果要根据该值格式化字段，请使用高阶组件执行条件格式设置，如[ Theming documentation ](./Theming.md#conditional-formatting)中所述。
 
-**Tip**: If your interface has to support multiple languages, don't use the `label` prop, and put the localized labels in a dictionary instead. See the [Translation documentation](./Translation.md#translating-resource-and-field-names) for details.
+**提示**：如果你的界面必须支持多种语言，请勿使用 `label`，放本地化标签在字典中代替它。 有关详细信息, 请参阅 [身份验证文档](./Translation.md#translating-resource-and-field-names)。
 
-## `ArrayField` Component
+## `ArrayField` 组件
 
-Display a collection using `<Field>` child components.
+使用 `<Field>` 子组件显示一个集合。
 
-Ideal for embedded arrays of objects, e.g. `tags` and `backlinks` in the following `post` object:
+非常适合嵌入式对象数组，例如： 以下` post `对象中的 `tags` 和 `backlinks`：
 
 ```js
 {
@@ -96,7 +96,7 @@ Ideal for embedded arrays of objects, e.g. `tags` and `backlinks` in the followi
 }
 ```
 
-The child must be an iterator component (like `<Datagrid>` or `<SingleFieldList>`).
+该子级必须是迭代器组件 (如 `<Datagrid>` 或 `<SingleFieldList>`)。
 
 Here is how to display all the backlinks of the current post as a `<datagrid>`
 
