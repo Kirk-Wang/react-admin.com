@@ -518,13 +518,13 @@ export const PostList = (props) => (
 ]
 ```
 
-Then react-admin renders the `<CommentList>` with a loader for the `<ReferenceField>`, fetches the API for the related posts in one call (`GET http://path.to.my.api/posts?ids=[789,735]`), and re-renders the list once the data arrives. This accelerates the rendering, and minimizes network load.
+然后 react-admin 使用 `<ReferenceField>` loader 渲染 `<CommentList>`，在一次调用（`GET http://path.to.my.api/posts?ids=[789,735]`）中获取相关帖子的API，并在数据到达后重新呈现列表。 这加速了渲染，并最大限度地减少了网络负载。
 
-## `ReferenceManyField` Component
+## `ReferenceManyField` 组件
 
-This component fetches a list of referenced records by reverse lookup of the current `record.id` in other resource (using the `GET_MANY_REFERENCE` REST method). The field name of the current record's id in the other resource is specified by the required `target` field. The result is then passed to an iterator component (like `<SingleFieldList>` or `<Datagrid>`). The iterator component usually has one or more child `<Field>` components.
+该组件通过在其他资源（使用 `GET_MANY_REFERENCE` REST方法）中反向查找当前的 `record.id` 来获取引用的记录列表。 另一资源中当前记录的 id 的字段名由所需的 `target` 字段指定。 然后将结果传递给迭代器组件（如 `<SingleFieldList>` 或 `<Datagrid>` ）。 迭代器组件通常具有一个或更多子 `<Field>` 组件。
 
-For instance, here is how to fetch the `comments` related to a `post` record by matching `comment.post_id` to `post.id`, and then display the `author.name` for each, in a `<ChipField>`:
+例如，这里是如何通过将 `comment.post_id` 匹配到 `post.id` 来获取与 `post` 记录相关的 `comments`，然后在 `<ChipField>` 中显示 `author.name`：
 
 ```jsx
 import React from 'react';
@@ -548,7 +548,7 @@ export const PostList = (props) => (
 
 ![ReferenceManyFieldSingleFieldList](https://marmelab.com/react-admin/img/reference-many-field-single-field-list.png)
 
-`<ReferenceManyField>` accepts a `reference` attribute, which specifies the resource to fetch for the related record. It also accepts a `source` attribute which define the field containing the value to look for in the `target` field of the referenced resource. By default this is the `id` of the resource (`post.id` in the previous example).
+`<ReferenceManyField>`接受一个 `reference` 属性，它指定获取相关记录的资源。 It also accepts a `source` attribute which define the field containing the value to look for in the `target` field of the referenced resource. By default this is the `id` of the resource (`post.id` in the previous example).
 
 **Note**: You **must** add a `<Resource>` for the reference resource - react-admin needs it to fetch the reference data. You *can* omit the `list` prop in this reference if you want to hide it in the sidebar menu.
 
