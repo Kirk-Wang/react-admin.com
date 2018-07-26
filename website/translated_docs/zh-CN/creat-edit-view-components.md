@@ -182,9 +182,10 @@ const commentDefaultValue = { nb_views: 0 };
 );
 ```
 
-要设置此`location.state`，您必须使用 react-router 的 `<Link></ code> 组件创建链接或按钮：</p>
+要设置此`location.state`，您必须使用 react-router 的 `<Link>` 组件创建链接或按钮：
 
-<pre><code class="jsx">// in PostShow.js
+```jsx
+// in PostShow.js
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
@@ -208,15 +209,15 @@ export default PostShow = props => (
         </SimpleShowLayout>
     </Show>
 )
-`</pre> 
+```
 
-**Tip**: To style the button with the main color from the material-ui theme, use the `Link` component from the `react-admin` package rather than the one from `react-router`.
+**提示**：要使用 material-ui 主题中的主要颜色设置样式，请使用` react-admin `包中的` Link `组件，而不是来自` react-router `的那个。
 
-## The `SimpleForm` component
+## `SimpleForm` 组件
 
-The `<SimpleForm>` component receives the `record` as prop from its parent component. It is responsible for rendering the actual form. It is also responsible for validating the form data. Finally, it receives a `handleSubmit` function as prop, to be called with the updated record as argument when the user submits the form.
+`<SimpleForm>` 组件从其父组件接收 `record` 作为属性。 它负责渲染实际的表单。 它还负责验证表单数据。 最后，它收到一个 `handleSubmit` 函数作为属性，当用户提交表单时，以更新的记录作为参数调用。
 
-The `<SimpleForm>` renders its child components line by line (within `<div>` components). It uses `redux-form`.
+`< SimpleForm> `逐行呈现其子组件（在`< div> `组件中）。 它使用` redux-form `。
 
 ![post edition form](https://marmelab.com/react-admin/img/post-edition.png)
 
