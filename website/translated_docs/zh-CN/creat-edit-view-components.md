@@ -526,7 +526,7 @@ export const PostEdit = (props) => (
 * 在 `<Create>` 视图中提交表单重定向到 `<Edit>` 视图
 * 在 `<Edit>` 视图中提交表单重定向到 `<List>` 视图
 
-You can customize the redirection by setting the `redirect` prop of the form component. Possible values are "edit", "show", "list", and `false` to disable redirection. You may also specify a custom path such as `/my-custom-route`. For instance, to redirect to the `<Show>` view after edition:
+您可以通过设置表单组件的 `redirect` 属性来自定义重定向。 可能的值为“edit”，“show”，“list” 和 `false` 以禁用重定向。 您还可以指定自定义路径, 如 `/my-custom-route`。 例如，要在编辑后重定向到 `<Show>` 视图：
 
 ```jsx
 export const PostEdit = (props) => (
