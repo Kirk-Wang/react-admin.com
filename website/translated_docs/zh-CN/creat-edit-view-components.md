@@ -10,14 +10,14 @@ title: <Create> and <Edit> Views
 
 ## `Create` 和 `Edit` 组件
 
-`<Create>` 和 `<Edit>` 组件渲染页面标题和操作，并从 Data Provider 获取记录。 They are not responsible for rendering the actual form - that's the job of their child component (usually `<SimpleForm>`), to which they pass the `record` as prop.
+`<Create>` 和 `<Edit>` 组件渲染页面标题和操作，并从 Data Provider 获取记录。 他们不负责渲染实际的表单 - 这是他们的子组件（通常是 `<SimpleForm>`）的工作，他们将 `record` 作为属性传递给它们。
 
-Here are all the props accepted by the `<Create>` and `<Edit>` components:
+这里是 `<Create>` 和 `<Edit>` 组件接受的所有属性：
 
 * [`title`](#page-title)
 * [`actions`](#actions)
 
-Here is the minimal code necessary to display a form to create and edit comments:
+以下是显示一个表单来创建和编辑评论所需的最少代码：
 
 ```jsx
 // in src/App.js
@@ -71,7 +71,7 @@ export const PostEdit = (props) => (
 );
 ```
 
-That's enough to display the post edit form:
+这足以显示 post 编辑表单：
 
 ![post edition form](https://marmelab.com/react-admin/img/post-edition.png)
 
