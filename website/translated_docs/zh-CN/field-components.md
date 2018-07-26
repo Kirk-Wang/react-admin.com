@@ -730,7 +730,7 @@ import { UrlField } from 'react-admin';
 
 ## Styling Fields
 
-All field components accept a `className` prop, allowing you to customize their style to your liking. We advise you to use the Material UI styling solution, JSS, to generate those classes. See their [documentation](https://material-ui.com/customization/css-in-js/#api) about that.
+所有 field 组件都接受 `className` 属性, 允许您根据自己的喜好自定义其样式。 我们建议您使用Material UI样式解决方案，JSS来生成这些类。 请参阅他们的[文档](https://material-ui.com/customization/css-in-js/#api)。
 
 ```jsx
 import { withStyles } from '@material-ui/core/styles';
