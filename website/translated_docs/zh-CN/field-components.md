@@ -880,23 +880,22 @@ export const UserList = (props) => (
 
 ## 在 "Show" 视图中向自定义 Field 组件添加标签
 
-React-admin 允许您在 List 视图和 Show 视图中使用相同的 Field 组件。 但是，如果您使用之前在 “Show” 视图中定义的` <FullNameField> `自定义 Field 组件，则会缺少某些内容：Field label。 为什么其他 Field 有标签而这个自定义 Field 没有？ And how can you create a Field component that has a label in the Show view, but not in the List view?
+React-admin 允许您在 List 视图和 Show 视图中使用相同的 Field 组件。 但是，如果您使用之前在 “Show” 视图中定义的` <FullNameField> `自定义 Field 组件，则会缺少某些内容：Field label。 为什么其他 Field 有标签而这个自定义 Field 没有？ 如何在 “Show” 视图中创建一个具有 label 但不在 “List” 视图中的 Field 组件？
 
-React-admin uses a trick: the Show view layouts (`<SimpleShowLayout>` and `<TabbedShowLayout>`) inspect their Field children, and whenever one has the `addLabel` prop set to `true`, the layout adds a label.
+React-admin 使用的技巧：Show 视图布局 (`<SimpleShowLayout>` 和 `<TabbedShowLayout>`) 检查他们的 Field 子级, 并且每当一个有 `addLabel` 属性设置为 `true`时，布局将添加一个 label。
 
-That means that the only thing you need to add to a custom component to make it usable in a Show view is a `addLabel: true` default prop.
+这意味着您需要添加到自定义组件以使其在 Show 视图中可用的唯一内容是` addLabel: true </ code> 默认属性。</p>
 
-```jsx
-FullNameField.defaultProps = {
+<pre><code class="jsx">FullNameField.defaultProps = {
     addLabel: true,
 };
-```
+`</pre> 
 
-## Hiding A Field Based On The Value Of Another
+## 基于其他值隐藏 Field
 
-In a Show view, you may want to display or hide fields based on the value of another field - for instance, show an `email` field only if the `hasEmail` boolean field is `true`.
+在 Show 视图中，您可能希望根据另一个 Field 的值显示或隐藏 Field- 例如，仅当` hasEmail `布尔字段为` true `时，才显示` email </ code> Field。</p>
 
-For such cases, you can use the custom field approach: use the injected `record` prop, and render another Field based on the value.
+<p>For such cases, you can use the custom field approach: use the injected <code>record` prop, and render another Field based on the value.
 
 ```jsx
 import React from 'react';
