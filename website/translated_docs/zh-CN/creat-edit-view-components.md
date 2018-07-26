@@ -2,15 +2,15 @@
 layout: creat-edit-view-components
 title: <Create> and <Edit> Views
 ---
-The Create and Edit views both display a form, initialized with an empty record (for the Create view) or with a record fetched from the API (for the Edit view). The `<Create>` and `<Edit>` components then delegate the actual rendering of the form to a form component - usually `<SimpleForm>`. This form component uses its children ([`<Input>`](./Inputs.md) components) to render each form input.
+“创建”和“编辑”视图都显示一个表单，使用空记录初始化的（对于“创建视图”）或具有一条从API（对于“编辑”视图）获取的记录。 `<Create>` 和 `<Edit>` 组件然后将表单的实际渲染委托给表单组件 - 通常是 `<SimpleForm>`。 此表单组件使用其子级 ([`<Input>`](./Inputs.md) 组件) 来呈现每个 from input。
 
 ![post creation form](https://marmelab.com/react-admin/img/create-view.png)
 
 ![post edition form](https://marmelab.com/react-admin/img/edit-view.png)
 
-## The `Create` and `Edit` components
+## `Create` 和 `Edit` 组件
 
-The `<Create>` and `<Edit>` components render the page title and actions, and fetch the record from the data provider. They are not responsible for rendering the actual form - that's the job of their child component (usually `<SimpleForm>`), to which they pass the `record` as prop.
+`<Create>` 和 `<Edit>` 组件渲染页面标题和操作，并从 Data Provider 获取记录。 They are not responsible for rendering the actual form - that's the job of their child component (usually `<SimpleForm>`), to which they pass the `record` as prop.
 
 Here are all the props accepted by the `<Create>` and `<Edit>` components:
 
