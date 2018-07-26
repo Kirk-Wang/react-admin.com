@@ -523,8 +523,8 @@ export const PostEdit = (props) => (
 
 默认情况下：
 
-* Submitting the form in the `<Create>` view redirects to the `<Edit>` view
-* Submitting the form in the `<Edit>` view redirects to the `<List>` view
+* 在 `<Create>` 视图中提交表单重定向到 `<Edit>` 视图
+* 在 `<Edit>` 视图中提交表单重定向到 `<List>` 视图
 
 You can customize the redirection by setting the `redirect` prop of the form component. Possible values are "edit", "show", "list", and `false` to disable redirection. You may also specify a custom path such as `/my-custom-route`. For instance, to redirect to the `<Show>` view after edition:
 
