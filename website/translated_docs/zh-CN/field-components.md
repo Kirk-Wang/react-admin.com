@@ -35,7 +35,7 @@ export const PostList = (props) => (
 <TextField source="zb_title" label="Title" style={{ color: 'purple' }} />
 ```
 
-**提示**：您也可以在 `Edit` 或 `Show` 视图中使用字段组件：
+**提示**：您也可以在 `Edit` 或 `Show` 视图中使用 Field 组件：
 
 ```jsx
 export const PostShow = ({ ...props }) => (
@@ -47,7 +47,7 @@ export const PostShow = ({ ...props }) => (
 );
 ```
 
-**Tip**: If you display a record with a complex structure, you can use a path with dot separators as the `source` attribute. For instance, if the API returns the following 'book' record:
+**提示**：如果显示具有复杂结构的记录，则可以使用带有点分隔符的路径作为 `source` 属性。 例如，如果API返回以下'book'记录：
 
 ```jsx
 {
@@ -60,21 +60,21 @@ export const PostShow = ({ ...props }) => (
 }
 ```
 
-Then you can display the author first name as follows:
+然后可以显示作者名字如下：
 
 ```jsx
 <TextField source="author.firstName" />
 ```
 
-**Tip**: If you want to format a field according to the value, use a higher-order component to do conditional formatting, as described in the [Theming documentation](./Theming.md#conditional-formatting).
+**提示**：如果要根据该值格式化字段，请使用高阶组件执行条件格式设置，如[ Theming documentation ](./Theming.md#conditional-formatting)中所述。
 
-**Tip**: If your interface has to support multiple languages, don't use the `label` prop, and put the localized labels in a dictionary instead. See the [Translation documentation](./Translation.md#translating-resource-and-field-names) for details.
+**提示**：如果你的界面必须支持多种语言，请勿使用 `label`，放本地化标签在字典中代替它。 有关详细信息, 请参阅 [身份验证文档](./Translation.md#translating-resource-and-field-names)。
 
-## `ArrayField` Component
+## `ArrayField` 组件
 
-Display a collection using `<Field>` child components.
+使用 `<Field>` 子组件显示一个集合。
 
-Ideal for embedded arrays of objects, e.g. `tags` and `backlinks` in the following `post` object:
+非常适合嵌入式对象数组，例如： 以下` post `对象中的 `tags` 和 `backlinks`：
 
 ```js
 {
@@ -96,9 +96,9 @@ Ideal for embedded arrays of objects, e.g. `tags` and `backlinks` in the followi
 }
 ```
 
-The child must be an iterator component (like `<Datagrid>` or `<SingleFieldList>`).
+该子级必须是迭代器组件 (如 `<Datagrid>` 或 `<SingleFieldList>`)。
 
-Here is how to display all the backlinks of the current post as a `<datagrid>`
+以下是如何将当前 post 的所有 backlinks 显示为 `<datagrid>`
 
 ```jsx
 <ArrayField source="backlinks">
@@ -109,7 +109,7 @@ Here is how to display all the backlinks of the current post as a `<datagrid>`
 </ArrayField>
 ```
 
-And here is how to display all the tags of the current post as `<Chip>` components:
+下面是如何将当前 post 的所有 tag 显示为 `<Chip>` 组件:
 
 ```jsx
 <ArrayField source="tags">
@@ -119,7 +119,7 @@ And here is how to display all the tags of the current post as `<Chip>` componen
 </ArrayField>
 ```
 
-**Tip**: If you need to render a collection in a custom way, it's often simpler to write your own component:
+**提示**：如果需要以自定义方式呈现集合，则编写自己的组件通常比较简单：
 
 ```jsx
 const TagsField = ({ record }) => (
@@ -132,9 +132,9 @@ const TagsField = ({ record }) => (
 TagsField.defaultProps = { addLabel: true };
 ```
 
-## `BooleanField` Component
+## `BooleanField` 组件
 
-Displays a boolean value as a check.
+将布尔值显示为 check 。
 
 ```jsx
 import { BooleanField } from 'react-admin';
@@ -144,9 +144,9 @@ import { BooleanField } from 'react-admin';
 
 ![BooleanField](https://marmelab.com/react-admin/img/boolean-field.png)
 
-## `ChipField` Component
+## `ChipField` 组件
 
-Displays a value inside a ["Chip"](http://www.material-ui.com/#/components/chip), which is Material UI's term for a label.
+在 ["Chip"](http://www.material-ui.com/#/components/chip)中显示一个值, 它是 label 的 Material UI 术语。
 
 ```jsx
 import { ChipField } from 'react-admin';
@@ -156,7 +156,7 @@ import { ChipField } from 'react-admin';
 
 ![ChipField](https://marmelab.com/react-admin/img/chip-field.png)
 
-This field type is especially useful for one to many relationships, e.g. to display a list of books for a given author:
+该字段类型对于一对多关系特别有用，例如， 显示给定作者的书籍列表：
 
 ```jsx
 import { ChipField, SingleFieldList, ReferenceManyField } from 'react-admin';
@@ -168,9 +168,9 @@ import { ChipField, SingleFieldList, ReferenceManyField } from 'react-admin';
 </ReferenceManyField>
 ```
 
-## `DateField` Component
+## `DateField` 组件
 
-Displays a date or datetime using the browser locale (thanks to `Date.toLocaleDateString()` and `Date.toLocaleString()`).
+使用浏览器 locale 显示一个日期或日期时间（得益于 `Date.toLocaleDateString()` 和 `Date.toLocaleString()`）。
 
 ```jsx
 import { DateField } from 'react-admin';
@@ -178,7 +178,7 @@ import { DateField } from 'react-admin';
 <DateField source="publication_date" />
 ```
 
-This component accepts a `showTime` attribute (false by default) to force the display of time in addition to date. It uses `Intl.DateTimeFormat()` if available, passing the `locales` and `options` props as arguments. If Intl is not available, it ignores the `locales` and `options` props.
+此组件接受一个 `showTime` 属性（默认为false），以强制显示除日期之外的时间。 它使用 `Intl.DateTimeFormat()` 如果可用，传递 `locales` 和 `options` 属性作为参数。 如果 Intl 不可用，它将忽略 `locales` 和 `options` 属性。
 
 ```jsx
 <DateField source="publication_date" />
@@ -202,13 +202,13 @@ This component accepts a `showTime` attribute (false by default) to force the di
 <span style="color:red;">4/23/2017</span>
 ```
 
-See [Intl.DateTimeformat documentation](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Date/toLocaleDateString) for the `options` prop syntax.
+有关 `options` 属性语法，请参阅 [Intl.DateTimeformat documentation](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Date/toLocaleDateString)
 
-**Tip**: If you need more formatting options than what `Intl.DateTimeformat` can provide, build your own field component leveraging a third-party library like [moment.js](http://momentjs.com/).
+** 提示 **：如果您需要比 `Intl.DateTimeformat` 可提供更多的格式化选项，利用一个第三方库如 [moment.js](http://momentjs.com/) 构建你自己的字段组件。
 
-## `EmailField` Component
+## `EmailField` 组件
 
-`<EmailField>` displays an email as a `<a href="mailto:" />` link.
+`<EmailField>` 将电子邮件显示为 `<a href="mailto:" />` 链接。
 
 ```jsx
 import { EmailField } from 'react-admin';
@@ -216,9 +216,9 @@ import { EmailField } from 'react-admin';
 <EmailField source="personal_email" />
 ```
 
-## `FunctionField` Component
+## `FunctionField` 组件
 
-If you need a special function to render a field, `<FunctionField>` is the perfect match. It passes the `record` to a `render` function supplied by the developer. For instance, to display the full name of a `user` record based on `first_name` and `last_name` properties:
+如果你需要一个特殊的函数来渲染一个字段，那么 `<FunctionField>` 就是完美的匹配。 它将 `record` 传递给通过开发人员提供的一个 `render` 函数。 例如，要显示基于 `first_name` 和 `last_name` 属性的 ` user `记录的全名：
 
 ```jsx
 import { FunctionField } from 'react-admin'
@@ -226,11 +226,11 @@ import { FunctionField } from 'react-admin'
 <FunctionField label="Name" render={record => `${record.first_name} ${record.last_name}`} />
 ```
 
-**Tip**: Technically, you can omit the `source` and `sortBy` properties for the `<FunctionField>` since you provide the render function. However, providing a `source` or a `sortBy` will allow the datagrid to make the column sortable, since when a user clicks on a column, the datagrid uses these properties to sort. Should you provide both, `sortBy` will override `source` for sorting the column.
+**提示**：从技术上讲，由于您提供了渲染函数，因此您可以省略`<FunctionField>` 的 `source` 属性。 但是，提供 `source` 或 `sortBy` 将允许 datagrid 使列可排序，因为当用户单击列时，datagrid使用这些属性进行排序。 如果同时提供两者，`sortBy` 将覆盖用于对列进行排序的 `source`。
 
-## `ImageField` Component
+## `ImageField` 组件
 
-If you need to display an image provided by your API, you can use the `<ImageField />` component:
+如果需要显示 API 提供的 image，你可以使用 `<ImageField />` 组件：
 
 ```jsx
 import { ImageField } from 'react-admin';
@@ -238,9 +238,9 @@ import { ImageField } from 'react-admin';
 <ImageField source="url" title="title" />
 ```
 
-This field is also generally used within an [<imageinput />](http://marmelab.com/react-admin/Inputs.md#imageinput) component to display preview.
+这个 Field 也通常用在一个 [`<ImageInput />`](http://marmelab.com/react-admin/Inputs.md#imageinput) 组件内来显示预览。
 
-The optional `title` prop points to the picture title property, used for both `alt` and `title` attributes. It can either be an hard-written string, or a path within your JSON object:
+可选的 `title` 属性指向图片标题属性，用于 `alt` 和 `title` 属性。 它可以是一个硬编码的字符串，也可以是在你JSON对象内的路径：
 
 ```jsx
 // { picture: { url: 'cover.jpg', title: 'Larry Cover (French pun intended)' } }
@@ -252,9 +252,9 @@ The optional `title` prop points to the picture title property, used for both `a
 <ImageField source="picture.url" title="Picture" />
 ```
 
-If passed value is an existing path within your JSON object, then it uses the object attribute. Otherwise, it considers its value as an hard-written title.
+如果传递的值是在你 JSON 对象内的现有路径，那么它将使用 object 属性。否则，它将其值视为一个硬编码的标题。
 
-If the record actually contains an array of images in its property defined by the `source` prop, the `src` prop will be needed to determine the `src` value of the images, for example:
+如果该记录实际上包含一个由 `source` 属性定义在它属性中的图片数组，则需要 `src` 属性来确定图像的 `src` 值，例如：
 
 ```js
 // This is the record
@@ -268,9 +268,9 @@ If the record actually contains an array of images in its property defined by th
 <ImageField source="pictures" src="url" title="desc" />
 ```
 
-## `FileField` Component
+## `FileField` 组件
 
-If you need to display a file provided by your API, you can use the `<FileField />` component:
+如果需要显示 API 提供的文件，可以使用 `<FileField />` 组件：
 
 ```jsx
 import { FileField } from 'react-admin';
@@ -278,9 +278,9 @@ import { FileField } from 'react-admin';
 <FileField source="url" title="title" />
 ```
 
-This field is also generally used within an [<fileinput />](http://marmelab.com/react-admin/Inputs.md#fileinput) component to display preview.
+这个 Field 也通常用在一个 [`<FileInput />`](http://marmelab.com/react-admin/Inputs.md#fileinput) 组件内来显示预览。
 
-The optional `title` prop points to the file title property, used for `title` attributes. It can either be an hard-written string, or a path within your JSON object:
+可选的 `title` 属性指向文件标题属性，用于 `title` 属性。 它可以是一个硬编码的字符串，也可以是你JSON对象中的路径：
 
 ```jsx
 // { file: { url: 'doc.pdf', title: 'Presentation' } }
@@ -292,9 +292,9 @@ The optional `title` prop points to the file title property, used for `title` at
 <FileField source="file.url" title="File" />
 ```
 
-If passed value is an existing path within your JSON object, then it uses the object attribute. Otherwise, it considers its value as an hard-written title.
+如果传递的值是在你 JSON 对象内的现有路径，那么它将使用 object 属性。否则，它将其值视为一个硬编码的标题。
 
-If the record actually contains an array of files in its property defined by the `source` prop, the `src` prop will be needed to determine the `href` value of the links, for example:
+如果该记录实际上包含一个由 `source` 属性定义在它属性中的文件数组，则需要 `src` 属性来确定图像的 `href` 值，例如：
 
 ```js
 // This is the record
@@ -308,20 +308,20 @@ If the record actually contains an array of files in its property defined by the
 <FileField source="files" src="url" title="desc" />
 ```
 
-You can optionally set the `target` prop to choose which window will the link try to open in.
+您可以选择设置`target`属性，以选择链接尝试打开的窗口。
 
 ```jsx
 // Will make the file open in new window
 <FileField source="file.url" target="_blank" />
 ```
 
-## `NumberField` Component
+## `NumberField` 组件
 
-Displays a number formatted according to the browser locale, right aligned.
+显示根据浏览器区域设置格式化的数字，右对齐。
 
-Uses `Intl.NumberFormat()` if available, passing the `locales` and `options` props as arguments. This allows perfect display of decimals, currencies, percentage, etc.
+使用 `Intl.NumberFormat()` 如果可用，传递 `locales` 和 `options` 属性作为参数。 这允许完美显示小数，货币，百分比等。
 
-If Intl is not available, it outputs number as is (and ignores the `locales` and `options` props).
+如果Intl不可用，它会按原样输出数字（并忽略 `locales` 和 `options` 属性）。
 
 ```jsx
 import { NumberField }  from 'react-admin';
@@ -351,11 +351,11 @@ import { NumberField }  from 'react-admin';
 <span style="color:red;">567</span>
 ```
 
-See [Intl.Numberformat documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString) for the `options` prop syntax.
+有关 `options` 属性语法，请参阅 [ Intl.Numberformat documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString)
 
-**Tip**: If you need more formatting options than what `Intl.Numberformat` can provide, build your own field component leveraging a third-party library like [numeral.js](http://numeraljs.com/).
+**提示**：如果您需要比 Intl.Numberformat 可以提供更多的格式化选项，使用像 [numeral.js](http://numeraljs.com/) 一个第三方库构建你自己的field组件。
 
-**Tip**: When used in a `Show` view, the right alignment may look weird. Disable it by resetting the `style` attribute:
+**提示**：当在 `Show` 视图中使用时, 右对齐可能看起来很怪异。通过重置 `style` 属性禁用它：
 
 ```jsx
 import { NumberField }  from 'react-admin';
@@ -363,11 +363,11 @@ import { NumberField }  from 'react-admin';
 <NumberField source="score" style={{}} />
 ```
 
-## `SelectField` Component
+## `SelectField` 组件
 
-When you need to display an enumerated field, `<SelectField>` maps the value to a string.
+当需要显示枚举字段时, `<SelectField>` 将该值映射到字符串。
 
-For instance, if the `gender` field can take values "M" and "F", here is how to display it as "Male" or "Female":
+例如, 如果 `gender` 字段可以取值 "M" 和 "F"，下面是如何将其显示为 "Male" 或 "Female"：
 
 ```jsx
 import { SelectField } from 'react-admin';
@@ -378,14 +378,14 @@ import { SelectField } from 'react-admin';
 ]} />
 ```
 
-By default, the text is built by
+默认情况下，文本构建通过
 
-- finding a choice where the 'id' property equals the field value
-- using the 'name' property an the option text
+- 查找 "id" 属性等于字段值的选项
+- 使用'name'属性作为一个选项文本
 
-**Warning**: This component name may conflict with material-ui's [`<SelectField>`](http://www.material-ui.com/#/components/select-field) if you import both.
+**警告**： 如果同时导入这两个，此组件名称可能与 material-ui 的 [`<SelectField>`](http://www.material-ui.com/#/components/select-field) 冲突。
 
-You can also customize the properties to use for the lookup value and text, thanks to the 'optionValue' and 'optionText' attributes.
+还可以自定义用于查找值和文本的属性, 这要归功于 "optionValue" 和 "optionText" 属性。
 
 ```jsx
 const choices = [
@@ -395,7 +395,7 @@ const choices = [
 <SelectField source="author_id" choices={choices} optionText="full_name" optionValue="_id" />
 ```
 
-`optionText` also accepts a function, so you can shape the option text at will:
+`optionText` 也接受一个函数，所以你可以随意设置选项文本：
 
 ```jsx
 const choices = [
@@ -406,7 +406,7 @@ const optionRenderer = choice => `${choice.first_name} ${choice.last_name}`;
 <SelectField source="author_id" choices={choices} optionText={optionRenderer} />
 ```
 
-`optionText` also accepts a React Element, that will be cloned and receive the related choice as the `record` prop. You can use Field components there.
+`optionText` 也接受一个 Reac t元素，它将被克隆，并接收相关选择作为`record` 属性。您可以在那里使用 Field 组件。
 
 ```jsx
 const choices = [
@@ -417,7 +417,7 @@ const FullNameField = ({ record }) => <Chip>{record.first_name} {record.last_nam
 <SelectField source="gender" choices={choices} optionText={<FullNameField />}/>
 ```
 
-The current choice is translated by default, so you can use translation identifiers as choices:
+默认情况下翻译当前选项，因此您可以使用翻译标识符作为选择：
 
 ```jsx
 const choices = [
@@ -426,19 +426,19 @@ const choices = [
 ];
 ```
 
-However, in some cases (e.g. inside a `<ReferenceField>`), you may not want the choice to be translated. In that case, set the `translateChoice` prop to false.
+然而，在某些情况下（例如在 `<ReferenceField>` 内），您可能不希望翻译该选择。在这种情况下，请将 `translateChoice` 属性设置为false。
 
 ```jsx
 <SelectField source="gender" choices={choices} translateChoice={false}/>
 ```
 
-**Tip**: <referencefield> sets `translateChoice` to false by default.
+**提示**： <referencefield> 默认情况下, 将 `translateChoice` 设置为 false。
 
-## `ReferenceField` Component
+## `ReferenceField` 组件
 
-This component fetches a single referenced record (using the `GET_MANY` REST method), and displays one field of this record. That's why a `<ReferenceField>` must always have a child `<Field>`.
+此组件提取单个引用的记录 (使用 `GET_MANY` REST 方法)，并显示此记录的一个字段。 这就是为什么 `<ReferenceField>` 必须始终有一个子 `<Field>` 的原因。
 
-For instance, here is how to fetch the `post` related to `comment` records, and display the `title` for each:
+例如，这里是如何获取与 `post` 相关的 `user` 记录，并显示每个的 `name`：
 
 ```jsx
 import React from 'react';
@@ -456,13 +456,13 @@ export const PostList = (props) => (
 );
 ```
 
-With this configuration, `<ReferenceField>` wraps the user's name in a link to the related user `<Edit>` page.
+使用此配置，`<ReferenceField>` 将用户的名称包装到相关用户 `<Edit>` 页的链接中。
 
 ![ReferenceField](https://marmelab.com/react-admin/img/reference-field.png)
 
-`<ReferenceField>` accepts a `reference` attribute, which specifies the resource to fetch for the related record. Also, you can use any `Field` component as child.
+`<ReferenceField>` 接受一个 `reference` 属性，它指定为相关记录获取资源。 此外，您可以使用任何 `Field` 组件作为子级。
 
-**Note**: You **must** add a `<Resource>` for the reference resource - react-admin needs it to fetch the reference data. You *can* omit the `list` prop in this reference if you want to hide it in the sidebar menu.
+**注释**: 您 **必须** 添加 `<Resource>` 对于 reference resource - react-admin 需要它来获取引用数据。 如果你想在侧边栏菜单中隐藏它，你 *可以* 省略此引用中的 `list` 属性。
 
 ```jsx
 <Admin dataProvider={myDataProvider}>
@@ -471,7 +471,7 @@ With this configuration, `<ReferenceField>` wraps the user's name in a link to t
 </Admin>
 ```
 
-To change the link from the `<Edit>` page to the `<Show>` page, set the `linkType` prop to "show".
+要将链接从 `<Edit>` 页更改为 `<Show>` 页， 将 `linkType` 属性设置为 "show"。
 
 ```jsx
 <ReferenceField label="User" source="userId" reference="users" linkType="show">
@@ -479,7 +479,7 @@ To change the link from the `<Edit>` page to the `<Show>` page, set the `linkTyp
 </ReferenceField>
 ```
 
-By default, `<ReferenceField>` is sorted by its `source`. To specify another attribute to sort by, set the `sortBy` prop to the according attribute's name.
+默认情况下，`<ReferenceField>` 按其 `source` 排序。 要指定要排序的其他属性，请将 `sortBy` 属性设置为相应属性的名称。
 
 ```jsx
 <ReferenceField label="User" source="userId" reference="users" sortBy="user.name">
@@ -487,7 +487,7 @@ By default, `<ReferenceField>` is sorted by its `source`. To specify another att
 </ReferenceField>
 ```
 
-You can also prevent `<ReferenceField>` from adding link to children by setting `linkType` to `false`.
+你也可以通过将 `linkType` 设置为 `false` 来阻止 `<ReferenceField>` 添加链接到子级。
 
 ```jsx
 // No link
@@ -496,7 +496,7 @@ You can also prevent `<ReferenceField>` from adding link to children by setting 
 </ReferenceField>
 ```
 
-**Tip**: React-admin uses `CRUD_GET_ONE_REFERENCE` action to accumulate and deduplicate the ids of the referenced records to make *one* `GET_MANY` call for the entire list, instead of n `GET_ONE` calls. So for instance, if the API returns the following list of comments:
+**提示**：React-admin 使用 `CRUD_GET_ONE_REFERENCE` action 来累积和重复数据删除引用记录的 ID，以便对整个列表进行一次 `GET_MANY` 调用，而不是 n 次 `GET_ONE` 调用。 如果这个API返回下面的评论列表：
 
 ```jsx
 [
@@ -518,13 +518,13 @@ You can also prevent `<ReferenceField>` from adding link to children by setting 
 ]
 ```
 
-Then react-admin renders the `<CommentList>` with a loader for the `<ReferenceField>`, fetches the API for the related posts in one call (`GET http://path.to.my.api/posts?ids=[789,735]`), and re-renders the list once the data arrives. This accelerates the rendering, and minimizes network load.
+然后 react-admin 使用 `<ReferenceField>` loader 渲染 `<CommentList>`，在一次调用（`GET http://path.to.my.api/posts?ids=[789,735]`）中获取相关帖子的API，并在数据到达后重新呈现列表。 这加速了渲染，并最大限度地减少了网络负载。
 
-## `ReferenceManyField` Component
+## `ReferenceManyField` 组件
 
-This component fetches a list of referenced records by reverse lookup of the current `record.id` in other resource (using the `GET_MANY_REFERENCE` REST method). The field name of the current record's id in the other resource is specified by the required `target` field. The result is then passed to an iterator component (like `<SingleFieldList>` or `<Datagrid>`). The iterator component usually has one or more child `<Field>` components.
+该组件通过在其他资源（使用 `GET_MANY_REFERENCE` REST方法）中反向查找当前的 `record.id` 来获取引用的记录列表。 另一资源中当前记录的 id 的字段名由所需的 `target` 字段指定。 然后将结果传递给迭代器组件（如 `<SingleFieldList>` 或 `<Datagrid>` ）。 迭代器组件通常具有一个或更多子 `<Field>` 组件。
 
-For instance, here is how to fetch the `comments` related to a `post` record by matching `comment.post_id` to `post.id`, and then display the `author.name` for each, in a `<ChipField>`:
+例如，这里是如何通过将 `comment.post_id` 匹配到 `post.id` 来获取与 `post` 记录相关的 `comments`，然后在 `<ChipField>` 中显示 `author.name`：
 
 ```jsx
 import React from 'react';
@@ -548,11 +548,11 @@ export const PostList = (props) => (
 
 ![ReferenceManyFieldSingleFieldList](https://marmelab.com/react-admin/img/reference-many-field-single-field-list.png)
 
-`<ReferenceManyField>` accepts a `reference` attribute, which specifies the resource to fetch for the related record. It also accepts a `source` attribute which define the field containing the value to look for in the `target` field of the referenced resource. By default this is the `id` of the resource (`post.id` in the previous example).
+`<ReferenceManyField>`接受一个 `reference` 属性，它指定获取相关记录的资源。 它还接受` source `属性，该属性定义包含要在引用资源的` target </ code>字段中查找的值的字段。 默认情况下, 这是资源的 <code>id` (`post. id` 在上一个示例中)。
 
-**Note**: You **must** add a `<Resource>` for the reference resource - react-admin needs it to fetch the reference data. You *can* omit the `list` prop in this reference if you want to hide it in the sidebar menu.
+**注释**：您 **必须** 添加 `<Resource>` 对于 reference resource - react-admin 需要它来获取引用数据。 如果你想在侧边栏菜单中隐藏它，你 *可以* 省略此引用中的 `list` 属性。
 
-You can use a `<Datagrid>` instead of a `<SingleFieldList>` - but not inside another `<Datagrid>`! This is useful if you want to display a read-only list of related records. For instance, if you want to show the `comments` related to a `post` in the post's `<Edit>` view:
+您可以使用 `<Datagrid>` 而不是 `<SingleFieldList>` - 但不能在另一个 `<Datagrid>` 内！ 如果要显示相关记录的只读列表，这很有用。 例如，如果要在帖子的 `<Edit>` 视图中显示与 `post` 相关的`comments`：
 
 ```jsx
 import React from 'react';
@@ -582,7 +582,7 @@ export const PostEdit = (props) => (
 
 ![ReferenceManyFieldDatagrid](https://marmelab.com/react-admin/img/reference-many-field-datagrid.png)
 
-By default, react-admin restricts the possible values to 25. You can change this limit by setting the `perPage` prop.
+默认情况下，react-admin 将可能的值限制为 25。您可以通过设置 `perPage` 属性来更改此限制。
 
 ```jsx
 <ReferenceManyField perPage={10} reference="comments" target="post_id">
@@ -590,7 +590,7 @@ By default, react-admin restricts the possible values to 25. You can change this
 </ReferenceManyField>
 ```
 
-By default, it orders the possible values by id desc. You can change this order by setting the `sort` prop (an object with `field` and `order` properties).
+默认情况下，它通过 id desc 排序可能的值。 您可以通过设置 `sort` 属性（具有 `field` 和 `order` 属性的对象）来更改此顺序。
 
 ```jsx
 <ReferenceManyField sort={{ field: 'created_at', order: 'DESC' }} reference="comments" target="post_id">
@@ -598,7 +598,7 @@ By default, it orders the possible values by id desc. You can change this order 
 </ReferenceManyField>
 ```
 
-Also, you can filter the query used to populate the possible values. Use the `filter` prop for that.
+此外，您还可以过滤用于填充可能值的查询。使用 `filter` 属性。
 
 ```jsx
 <ReferenceManyField filter={{ is_published: true }} reference="comments" target="post_id">
@@ -606,11 +606,11 @@ Also, you can filter the query used to populate the possible values. Use the `fi
 </ReferenceManyField>
 ```
 
-## `ReferenceArrayField` Component
+## `ReferenceArrayField` 组件
 
-Use `<ReferenceArrayField>` to display an list of reference values based on an array of foreign keys.
+使用 `<ReferenceArrayField>` 来显示基于外键数组的引用值列表。
 
-For instance, if a post has many tags, a post resource may look like:
+例如, 如果 post 有许多 tag, 则 post 资源可能类似于：
 
 ```js
 {
@@ -620,18 +620,18 @@ For instance, if a post has many tags, a post resource may look like:
 }
 ```
 
-Where `[1, 23, 4]` refer to ids of `tag` resources.
+其中 `[1, 23, 4]` 引用 `tag` 资源的 id。
 
-`<ReferenceArrayField>` can fetch the `tag` resources related to this `post` resource by matching `post.tag_ids` to `tag.id`. `<ReferenceArrayField source="tags_ids" reference="tags">` would issue an HTTP request looking like:
+`<ReferenceArrayField>` 可以通过将 `post.tag_ids` 匹配到 `tag.id` 来获取与这个 `post` 资源相关的 `tag` 资源。 `<ReferenceArrayField source="tags_ids" reference="tags">` 将发出一个 HTTP 请求, 其样子如下：
 
     http://myapi.com/tags?id=[1,23,4]
     
 
-**Tip**: `<ReferenceArrayField>` fetches the related resources using the `GET_MANY` REST method, so the actual HTTP request depends on your REST client.
+**提示**：`<ReferenceArrayField>` 使用 `GET_MANY` REST 方法获取相关资源，所以实际的 HTTP 请求取决于你的REST客户端。
 
-Once it receives the related resources, `<ReferenceArrayField>` passes them to its child component using the `ids` and `data` props, so the child must be an iterator component (like `<SingleFieldList>` or `<Datagrid>`). The iterator component usually has one or more child `<Field>` components.
+一旦接收到相关的资源， `<ReferenceArrayField>` 使用 `ids` 和 `data` 属性传递它们给它的子组件，所以子级必须是一个迭代器组件（如 `<SingleFieldList>` 或 `<Datagrid>`）。 迭代器组件通常具有一个或多个子 `<Field>` 组件。
 
-Here is how to fetch the list of tags for each post in a `PostList`, and display the `name` for each `tag` in a `<ChipField>`:
+以下是如何获取 `PostList` 中每个帖子的标签列表，并在`<ChipField>` 中显示每个 `tag` 的 `name`：
 
 ```jsx
 import React from 'react';
@@ -653,7 +653,7 @@ export const PostList = (props) => (
 );
 ```
 
-**Note**: You **must** add a `<Resource>` component for the reference resource to your `<Admin>` component, because react-admin needs it to fetch the reference data. You can omit the `list` prop in this Resource if you don't want to show an entry for it in the sidebar menu.
+**注意**：您**必须**为引用资源添加一个`<Resource>` 组件到您的 `<Admin>` 组件，因为 react-admin 需要它来获取引用数据。 如果您不想在侧边栏菜单中显示一个条目给它，你可以在此资源中省略 `list` 属性。
 
 ```jsx
 export const App = () => (
@@ -664,7 +664,7 @@ export const App = () => (
 );
 ```
 
-In an Edit of Show view, you can combine `<ReferenceArrayField>` with `<Datagrid>` to display a related resources in a table. For instance, to display more details about the tags related to a post in the `PostShow` view:
+在 "显示" 视图的编辑中, 可以将 `<ReferenceArrayField>` 与 `<Datagrid> `合并在一起 显示表中的相关资源。 例如, 要在 `PostShow` 视图中显示与 post 相关的标记的详细信息, 请执行以下操作：
 
 ```jsx
 import React from 'react';
@@ -688,9 +688,9 @@ export const PostShow = (props) => (
 );
 ```
 
-## `RichTextField` Component
+## `RichTextField` 组件
 
-This component displays some HTML content. The content is "rich" (i.e. unescaped) by default.
+此组件显示一些HTML内容。 内容默认为“丰富”（即未转义）。
 
 ```jsx
 import { RichTextField } from 'react-admin';
@@ -700,7 +700,7 @@ import { RichTextField } from 'react-admin';
 
 ![RichTextField](https://marmelab.com/react-admin/img/rich-text-field.png)
 
-The `stripTags` attribute (`false` by default) allows you to remove any HTML markup, preventing some display glitches (which is especially useful in list views).
+` stripTags `属性（默认情况下为` false `）允许您删除任何HTML标记，从而防止出现一些显示毛刺（这在列表视图中尤其有用）。
 
 ```jsx
 import { RichTextField } from 'react-admin';
@@ -708,9 +708,9 @@ import { RichTextField } from 'react-admin';
 <RichTextField source="body" stripTags />
 ```
 
-## `TextField` Component
+## `TextField` 组件
 
-The most simple as all fields, `<TextField>` simply displays the record property as plain text.
+最简单的作为所有字段，`<TextField>` 只是将记录属性显示为纯文本。
 
 ```jsx
 import { TextField } from 'react-admin';
@@ -718,9 +718,9 @@ import { TextField } from 'react-admin';
 <TextField label="Author Name" source="name" />
 ```
 
-## `UrlField` Component
+## `UrlField` 组件
 
-`<UrlField>` displays an url in an `< a href="">` tag.
+`<UrlField>` 在`< a href="">` 标签中显示一个url。
 
 ```jsx
 import { UrlField } from 'react-admin';
@@ -730,7 +730,7 @@ import { UrlField } from 'react-admin';
 
 ## Styling Fields
 
-All field components accept a `className` prop, allowing you to customize their style to your liking. We advise you to use the Material UI styling solution, JSS, to generate those classes. See their [documentation](https://material-ui.com/customization/css-in-js/#api) about that.
+所有 field 组件都接受 `className` 属性, 允许您根据自己的喜好自定义其样式。 我们建议您使用Material UI样式解决方案，JSS来生成这些类。 请参阅他们的[文档](https://material-ui.com/customization/css-in-js/#api)。
 
 ```jsx
 import { withStyles } from '@material-ui/core/styles';
