@@ -221,9 +221,9 @@ export default PostShow = props => (
 
 ![post edition form](https://marmelab.com/react-admin/img/post-edition.png)
 
-默认情况下, `<SimpleForm>` 在用户按 `ENTER` 时提交表单。 如果您想要改变这种行为，你可以传递 `false` 给 `submitOnEnter` 属性。 This can be useful e.g. if you have an input widget using `ENTER` for a special function.
+默认情况下, `<SimpleForm>` 在用户按 `ENTER` 时提交表单。 如果您想要改变这种行为，你可以传递 `false` 给 `submitOnEnter` 属性。 如果您有一个使用 `ENTER` 的输入小部件来进行特殊的功能，这可能很有用。
 
-Here are all the props accepted by the `<SimpleForm>` component:
+以下是 `<SimpleForm>` 组件所接受的所有属性：
 
 * [`defautValue`](#default-values)
 * [`validate`](#validation)
