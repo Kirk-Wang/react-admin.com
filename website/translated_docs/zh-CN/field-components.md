@@ -700,7 +700,7 @@ import { RichTextField } from 'react-admin';
 
 ![RichTextField](https://marmelab.com/react-admin/img/rich-text-field.png)
 
-The `stripTags` attribute (`false` by default) allows you to remove any HTML markup, preventing some display glitches (which is especially useful in list views).
+` stripTags `属性（默认情况下为` false `）允许您删除任何HTML标记，从而防止出现一些显示毛刺（这在列表视图中尤其有用）。
 
 ```jsx
 import { RichTextField } from 'react-admin';
@@ -708,9 +708,9 @@ import { RichTextField } from 'react-admin';
 <RichTextField source="body" stripTags />
 ```
 
-## `TextField` Component
+## `TextField` 组件
 
-The most simple as all fields, `<TextField>` simply displays the record property as plain text.
+最简单的作为所有字段，`<TextField>` 只是将记录属性显示为纯文本。
 
 ```jsx
 import { TextField } from 'react-admin';
@@ -718,9 +718,9 @@ import { TextField } from 'react-admin';
 <TextField label="Author Name" source="name" />
 ```
 
-## `UrlField` Component
+## `UrlField` 组件
 
-`<UrlField>` displays an url in an `< a href="">` tag.
+`<UrlField>` 在`< a href="">` 标签中显示一个url。
 
 ```jsx
 import { UrlField } from 'react-admin';
