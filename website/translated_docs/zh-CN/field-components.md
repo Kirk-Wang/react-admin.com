@@ -848,7 +848,7 @@ import get from 'lodash/get';
 const TextField = ({ source, record = {} }) => <span>{get(record, source)}</span>;
 ```
 
-If you are not looking for reusability, you can create even simpler components, with no attributes. Let's say an API returns user records with `firstName` and `lastName` properties, and that you want to display a full name in a user list.
+如果您不是在寻找可重用性，您可以创建更简单的组件，没有任何属性。 假设一个API返回具有 `firstName` 和 `lastName` 属性的用户记录，并且要在用户列表中显示全名。
 
 ```jsx
 {
@@ -858,7 +858,7 @@ If you are not looking for reusability, you can create even simpler components, 
 }
 ```
 
-The component will be:
+该组件将是：
 
 ```jsx
 import React from 'react';
@@ -876,11 +876,11 @@ export const UserList = (props) => (
 );
 ```
 
-**Tip**: In such custom fields, the `source` is optional. React-admin uses it to determine which column to use for sorting when the column header is clicked. In case you use the `source` property for additional purposes, the sorting can be overridden by the `sortBy` property on any `Field` component.
+**提示**：在此类自定义字段中，` source `是可选的。 React-admin 使用它来确定单击列标题时用于排序的列。 如果您将` source `属性用于其他目的，则可以通过任何` Field `组件上的` sortBy `属性覆盖排序。
 
-## Adding Label To Custom Field Components In The Show View
+## 在 "Show" 视图中向自定义 Field 组件添加标签
 
-React-admin lets you use the same Field components in the List view and in the Show view. But if you use the `<FullNameField>` custom field component defined earlier in a Show view, something is missing: the Field label. Why do other fields have a label and not this custom Field? And how can you create a Field component that has a label in the Show view, but not in the List view?
+React-admin 允许您在 List 视图和 Show 视图中使用相同的 Field 组件。 But if you use the `<FullNameField>` custom field component defined earlier in a Show view, something is missing: the Field label. Why do other fields have a label and not this custom Field? And how can you create a Field component that has a label in the Show view, but not in the List view?
 
 React-admin uses a trick: the Show view layouts (`<SimpleShowLayout>` and `<TabbedShowLayout>`) inspect their Field children, and whenever one has the `addLabel` prop set to `true`, the layout adds a label.
 
