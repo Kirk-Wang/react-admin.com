@@ -932,7 +932,7 @@ export default ConditionalEmailField;
 
 但是这有一个缺点：`< ConditionalEmailField> `不能再用于List视图，因为它总是有一个标签。 如果要在 List 中重用自定义组件，则这不是正确的解决方案。
 
-另一种解决方案是拆分`< Show> `组件。 在引擎盖下，`< Show> ` 组件由两个子组件组成：`<ShowController> `组件，用于获取记录，`<ShowView> </ code>，负责呈现视图标题，操作和子项。 <code><ShowController>` uses the *render props* pattern:
+另一种解决方案是拆分`< Show> `组件。 在引擎盖下，`< Show> ` 组件由两个子组件组成：`<ShowController> `组件，用于获取记录，`<ShowView> </ code>，负责呈现视图标题，操作和子项。 <code><ShowController> ` 使用 *render props</ em> 模式：</p> 
 
 ```jsx
 // inside react-admin
@@ -943,7 +943,7 @@ const Show = props => (
 );
 ```
 
-The `<ShowController>` fetches the `record` from the data provider, and passes it to its child function when received (among the `controllerProps`). That means the following code:
+`<ShowController>` 从 Data Provider 中提取 `记录`, 并将其传递给其子级接收时的函数 (在 `controllerProps` 中)。 这意味着以下代码：
 
 ```jsx
 import { Show, SimpleShowLayout, TextField } from 'react-admin';
@@ -958,7 +958,7 @@ const UserShow = props => (
 );
 ```
 
-Is equivalent to:
+相当于：
 
 ```jsx
 import { ShowController, ShowView, SimpleShowLayout, TextField } from 'react-admin';
@@ -977,7 +977,7 @@ const UserShow = props => (
 );
 ```
 
-If you want one field to be displayed based on the `record`, for instance to display the email field only if the `hasEmail` field is `true`, you just need to test the value from `controllerProps.record`, as follows:
+如果希望基于 `record` 显示一个字段，例如，仅当 `hasEmail` 时字段为 `true`时才显示电子邮件 Field，只需测试 `controllerProps.record` 的值, 如下所示：
 
 ```jsx
 import { ShowController, ShowView, SimpleShowLayout, TextField } from 'react-admin';
@@ -998,4 +998,4 @@ const UserShow = props => (
 );
 ```
 
-And now you can use a regular Field component, and the label displays correctly in the Show view.
+现在，您可以使用常规字段组件, 并且 label 在 "Show" 视图中正确显示。
