@@ -300,13 +300,13 @@ export const PostEdit = (props) => (
 );
 ```
 
-## Default Values
+## 默认值
 
-To define default values, you can add a `defaultValue` prop to form components (`<SimpleForm>`, `<Tabbedform>`, etc.), or add a `defaultValue` to individual input components. Let's see each of these options.
+要定义默认值，您可以添加一个 `defaultValue` 属性到表单组件（`<SimpleForm>`，`<Tabbedform>`等），或者添加一个 `defaultValue` 到每个输入组件。 让我们看看这些选项。
 
-### Global Default Value
+### 全局默认值
 
-The value of the form `defaultValue` prop can be an object, or a function returning an object, specifying default values for the created record. For instance:
+表单 `defaultValue` 属性的值可以是一个对象或一个返回对象的函数，为创建的记录指定默认值。 例如：
 
 ```jsx
 const postDefaultValue = { created_at: new Date(), nb_views: 0 };
@@ -321,9 +321,9 @@ export const PostCreate = (props) => (
 );
 ```
 
-**Tip**: You can include properties in the form `defaultValue` that are not listed as input components, like the `created_at` property in the previous example.
+**提示**：你可以在表单 `defaultValue` 中包含不被列为输入组件的属性，如上例中的 `created_at` 属性。
 
-### Per Input Default Value
+### 每个字段默认值
 
 Alternatively, you can specify a `defaultValue` prop directly in `<Input>` components. Just like for form-level default values, an input-level default value can be a scalar, or a function returning a scalar. React-admin will merge the input default values with the form default value (input > form):
 
