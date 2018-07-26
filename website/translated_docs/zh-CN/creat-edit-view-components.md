@@ -138,11 +138,11 @@ export const PostEdit = (props) => (
 );
 ```
 
-Using a custom `EditActions` component also allow to remove the `<DeleteButton>` if you want to prevent deletions from the admin.
+如果要阻止 admin 删除，使用自定义` EditActions `组件还允许删除`< DeleteButton > `。
 
-## Prefilling a `Create` Record
+## 预填充`创建`记录
 
-By default, the `<Create>` view starts with an empty `record`. You can pass a custom `record` object to start with preset values:
+默认情况下，`<Create>` 视图以空 `record` 开头。可以通过自定义 `record` 对象来从预设值开始：
 
 ```jsx
 const commentDefaultValue = { nb_views: 0 };
@@ -157,11 +157,11 @@ export const CommentCreate = (props) => (
 );
 ```
 
-While using the `record` to set default values works here, it doesn't work with `<Edit>`. So it's recommended to use [the `defaultValue` prop in the Form component](#default-values) instead.
+在这里使用 `record` 设置默认值时，它不适用于 `<Edit>`。 因此，建议在 Form 组件中使用 [ `defaultValue`](#default-values) 属性代替。
 
-However, there is a valid use case for presetting the `record` prop: to prepopulate a record based on a related record. For instance, in a `PostShow` component, you may want to display a button to create a comment related to the current post, that would lead to a `CommentCreate` page where the `post_id` is preset.
+但是，有一个有效的用例来预置` record ` 属性：根据相关记录预填充记录。 例如，在` PostShow `组件中，您可能希望显示一个按钮来创建与当前帖子相关的评论，这将导致` CommentCreate `页面中的` post_id `已预设。
 
-To enable this, you must first update the `CommentCreate` component to read the record from the `location` object (which is injected by react-router):
+要启用此项，必须首先更新 `CommentCreate` 组件，以从 `location` 对象中读取记录 (由 react-router 注入)：
 
 ```diff
 const commentDefaultValue = { nb_views: 0 };
@@ -182,7 +182,7 @@ const commentDefaultValue = { nb_views: 0 };
 );
 ```
 
-To set this `location.state`, you have to create a link or a button using react-router's `<Link>` component:
+要设置此`location.state`，您必须使用 react-router 的 `<Link>` 组件创建链接或按钮：
 
 ```jsx
 // in PostShow.js
@@ -211,19 +211,19 @@ export default PostShow = props => (
 )
 ```
 
-**Tip**: To style the button with the main color from the material-ui theme, use the `Link` component from the `react-admin` package rather than the one from `react-router`.
+**提示**：要使用 material-ui 主题中的主要颜色设置样式，请使用` react-admin `包中的` Link `组件，而不是来自` react-router `的那个。
 
-## The `SimpleForm` component
+## `SimpleForm` 组件
 
-The `<SimpleForm>` component receives the `record` as prop from its parent component. It is responsible for rendering the actual form. It is also responsible for validating the form data. Finally, it receives a `handleSubmit` function as prop, to be called with the updated record as argument when the user submits the form.
+`<SimpleForm>` 组件从其父组件接收 `record` 作为属性。 它负责渲染实际的表单。 它还负责验证表单数据。 最后，它收到一个 `handleSubmit` 函数作为属性，当用户提交表单时，以更新的记录作为参数调用。
 
-The `<SimpleForm>` renders its child components line by line (within `<div>` components). It uses `redux-form`.
+`< SimpleForm> `逐行呈现其子组件（在`< div> `组件中）。 它使用` redux-form `。
 
 ![post edition form](https://marmelab.com/react-admin/img/post-edition.png)
 
-By default the `<SimpleForm>` submits the form when the user presses `ENTER`. If you want to change this behaviour you can pass `false` for the `submitOnEnter` property, and the user will only be able to submit by pressing the save button. This can be useful e.g. if you have an input widget using `ENTER` for a special function.
+默认情况下, `<SimpleForm>` 在用户按 `ENTER` 时提交表单。 如果您想要改变这种行为，你可以传递 `false` 给 `submitOnEnter` 属性。 如果您有一个使用 `ENTER` 的输入小部件来进行特殊的功能，这可能很有用。
 
-Here are all the props accepted by the `<SimpleForm>` component:
+以下是 `<SimpleForm>` 组件所接受的所有属性：
 
 * [`defautValue`](#default-values)
 * [`validate`](#validation)
@@ -246,15 +246,15 @@ export const PostCreate = (props) => (
 );
 ```
 
-## The `TabbedForm` component
+## `TabbedForm` 组件
 
-Just like `<SimpleForm>`, `<TabbedForm>` receives the `record` prop, renders the actual form, and handles form validation on submit. However, the `<TabbedForm>` component renders inputs grouped by tab. The tabs are set by using `<FormTab>` components, which expect a `label` and an `icon` prop.
+就像 `<SimpleForm>` 一样， `<TabbedForm>` 接收 `record` 属性，渲染实际的表单，并在提交上处理表单验证。 但是，`<TabbedForm>` 组件会按选项卡渲染 input。 这些选项卡通过使用 `<FormTab>` 组件设置，该组件期望一个`label` 和一个 `icon` 属性。
 
 ![tabbed form](https://marmelab.com/react-admin/img/tabbed-form.gif)
 
-By default the `<TabbedForm>` submits the form when the user presses `ENTER`, if you want to change this behaviour you can pass `false` for the `submitOnEnter` property.
+默认情况下，当用户按 `ENTER` 键时 `<TabbedForm>` 提交表单，如果要更改此行为，你可以为 `submitOnEnter` 属性传递 `false`。
 
-Here are all the props accepted by the `<TabbedForm>` component:
+以下是 `<TabbedForm>` 组件所接受的所有属性：
 
 * [`defautValue`](#default-values)
 * [`validate`](#validation)
@@ -300,13 +300,13 @@ export const PostEdit = (props) => (
 );
 ```
 
-## Default Values
+## 默认值
 
-To define default values, you can add a `defaultValue` prop to form components (`<SimpleForm>`, `<Tabbedform>`, etc.), or add a `defaultValue` to individual input components. Let's see each of these options.
+要定义默认值，您可以添加一个 `defaultValue` 属性到表单组件（`<SimpleForm>`，`<Tabbedform>`等），或者添加一个 `defaultValue` 到每个输入组件。 让我们看看这些选项。
 
-### Global Default Value
+### 全局默认值
 
-The value of the form `defaultValue` prop can be an object, or a function returning an object, specifying default values for the created record. For instance:
+表单 `defaultValue` 属性的值可以是一个对象或一个返回对象的函数，为创建的记录指定默认值。 例如：
 
 ```jsx
 const postDefaultValue = { created_at: new Date(), nb_views: 0 };
@@ -321,11 +321,11 @@ export const PostCreate = (props) => (
 );
 ```
 
-**Tip**: You can include properties in the form `defaultValue` that are not listed as input components, like the `created_at` property in the previous example.
+**提示**：你可以在表单 `defaultValue` 中包含不被列为输入组件的属性，如上例中的 `created_at` 属性。
 
-### Per Input Default Value
+### 每个字段默认值
 
-Alternatively, you can specify a `defaultValue` prop directly in `<Input>` components. Just like for form-level default values, an input-level default value can be a scalar, or a function returning a scalar. React-admin will merge the input default values with the form default value (input > form):
+或者, 您可以在 `<Input>` 组件中直接指定 `defaultValue` 属性。 与 form-level 默认值一样， input-level 的默认值可以是标量，或者返回标量的函数。 React-admin 将 input 默认值与 form 默认值 (输入 > 窗体) 合并：
 
 ```jsx
 export const PostCreate = (props) => (
@@ -340,15 +340,15 @@ export const PostCreate = (props) => (
 );
 ```
 
-## Validation
+## 验证
 
-React-admin relies on [redux-form](http://redux-form.com/) for the validation.
+React-admin 依赖于 [redux-form](http://redux-form.com/) 进行验证。
 
-To validate values submitted by a form, you can add a `validate` prop to the form component, to individual inputs, or even mix both approaches.
+要验证表单提交的值，您可以向表单组件添加一个 `validate` 属性，将其添加到单个输入中，甚至可以混合使用两种方法。
 
-### Global Validation
+### 全局验证
 
-The value of the form `validate` prop must be a function taking the record as input, and returning an object with error messages indexed by field. For instance:
+表单 `validate` 属性的值必须是将记录作为输入的函数，并返回一个具有由字段索引的错误消息的对象。 例如：
 
 ```jsx
 const validateUserCreation = (values) => {
@@ -374,11 +374,11 @@ export const UserCreate = (props) => (
 );
 ```
 
-**Tip**: The props you pass to `<SimpleForm>` and `<TabbedForm>` end up as `reduxForm()` parameters. This means that, in addition to `validate`, you can also pass `warn` or `asyncValidate` functions. Read the [`reduxForm()` documentation](http://redux-form.com/6.5.0/docs/api/ReduxForm.md/) for details.
+**提示**：您传递给`<SimpleForm>` 和 `<TabbedForm>` 的属性最后为 `reduxForm()` 参数。 这意味着, 除了 `validate`之外, 还可以通过 `warn` 或 `asyncValidate` 函数。 有关详细信息, 请阅读 [`reduxForm()` 文档](http://redux-form.com/6.5.0/docs/api/ReduxForm.md/)。
 
-### Per Input Validation: Function Validator
+### 每个 Input 验证: 函数验证程序
 
-Alternatively, you can specify a `validate` prop directly in `<Input>` components, taking either a function, or an array of functions. These functions should return `undefined` when there is no error, or an error string.
+或者，您可以在 `<Input>` 组件中直接指定一个 `validate` 属性，使用一个函数或一组函数。 当没有错误或错误字符串时，这些函数应该返回 `undefined`。
 
 ```jsx
 const required = (message = 'Required') =>
@@ -413,18 +413,18 @@ export const UserCreate = (props) => (
 );
 ```
 
-React-admin will combine all the input-level functions into a single function looking just like the previous one.
+React-admin 将所有 input-level 函数组合成一个函数，就像前一个函数一样。
 
-Input validation functions receive the current field value, and the values of all fields of the current record. This allows for complex validation scenarios (e.g. validate that two passwords are the same).
+输入验证函数接收当前字段值和当前记录的所有字段的值。 这允许复杂的验证场景（例如，验证两个密码是相同的）。
 
-**Tip**: Validator functions receive the form `props` as third parameter, including the `translate` function. This lets you build internationalized validators:
+**提示**：验证器函数接收表单 `props` 作为第三个参数，包括`translate` 函数。这样可以建立国际化验证器：
 
 ```jsx
 const required = (message = 'myroot.validation.required') => 
     (value, allValues, props) => value ? undefined : props.translate(message);
 ```
 
-**Tip**: Make sure to define validation functions or array of functions in a variable, instead of defining them directly in JSX. This can result in a new function or array at every render, and trigger infinite rerender.
+**提示</ strong>：确保在变量中定义验证函数或函数数组，而不是直接在JSX中定义它们。 这会在每次渲染时产生新函数或数组，并触发无限重新渲染。</p> 
 
 ```jsx
 const validateStock = [required(), number(), minValue(0)];
@@ -443,13 +443,13 @@ export const ProductEdit = ({ ...props }) => (
 );
 ```
 
-**Tip**: The props of your Input components are passed to a redux-form `<Field>` component. So in addition to `validate`, you can also use `warn`.
+**提示**：将您的输入组件的属性传递给redux-form `<Field>`组件。所以除了 `validate`，你也可以使用 `warn`。
 
-**Tip**: You can use *both* Form validation and input validation.
+**提示**：您可以 *同时* 使用表单验证和输入验证。
 
-### Built-in Field Validators
+### 内置字段验证器
 
-React-admin already bundles a few validator functions, that you can just require, and use as input-level validators:
+React-admin 已经捆绑了一些您可以只需 require 的验证器函数，并用作输入级验证器：
 
 * `required(message)` if the field is mandatory,
 * `minValue(min, message)` to specify a minimum value for integers,
@@ -461,7 +461,7 @@ React-admin already bundles a few validator functions, that you can just require
 * `regex(pattern, message)` to validate that the input matches a regex,
 * `choices(list, message)` to validate that the input is within a given list,
 
-Example usage:
+使用示例：
 
 ```jsx
 import { 
@@ -498,16 +498,16 @@ export const UserCreate = (props) => (
 );
 ```
 
-**Tip**: If you pass a function as a message, react-admin calls this function with `{ args, value, values,translate, ...props }` as argument. For instance:
+**提示</ strong>：如果您将函数作为消息传递，则 react-admin 调用此函数并传递` {args，value，values，translate，... props} ` 作为参数。例如：</p> 
 
 ```jsx
 const message = ({ translate }) => translate('myroot.validation.email_invalid');
 const validateEmail = email(message);
 ```
 
-## Submit On Enter
+## 回车提交
 
-By default, pressing `ENTER` in any of the form fields submits the form - this is the expected behavior in most cases. However, some of your custom input components (e.g. Google Maps widget) may have special handlers for the `ENTER` key. In that case, to disable the automated form submission on enter, set the `submitOnEnter` prop of the form component to `false`:
+默认情况下，在任何表单字段中按 `ENTER` 提交表单 - 这是大多数情况下的预期行为。 但是，您的某些自定义输入组件（例如，Google Maps小部件）可能会有 `ENTER` 键的特殊处理程序。 在这种情况下，要在 enter 上禁用自动表单提交，请将表单组件的 `submitOnEnter` 属性设置为 `false`：
 
 ```jsx
 export const PostEdit = (props) => (
@@ -519,14 +519,14 @@ export const PostEdit = (props) => (
 );
 ```
 
-## Redirection After Submission
+## 提交后重定向
 
-By default:
+默认情况下：
 
-* Submitting the form in the `<Create>` view redirects to the `<Edit>` view
-* Submitting the form in the `<Edit>` view redirects to the `<List>` view
+* 在 `<Create>` 视图中提交表单重定向到 `<Edit>` 视图
+* 在 `<Edit>` 视图中提交表单重定向到 `<List>` 视图
 
-You can customize the redirection by setting the `redirect` prop of the form component. Possible values are "edit", "show", "list", and `false` to disable redirection. You may also specify a custom path such as `/my-custom-route`. For instance, to redirect to the `<Show>` view after edition:
+您可以通过设置表单组件的 `redirect` 属性来自定义重定向。 可能的值为“edit”，“show”，“list” 和 `false` 以禁用重定向。 您还可以指定自定义路径, 如 `/my-custom-route`。 例如，要在编辑后重定向到 `<Show>` 视图：
 
 ```jsx
 export const PostEdit = (props) => (
@@ -538,7 +538,7 @@ export const PostEdit = (props) => (
 );
 ```
 
-You can also pass a custom route (e.g. "/home") or a function as `redirect` prop value. For example, if you want to redirect to a page related to the current object:
+您还可以将自定义路由（例如“/home”）或函数作为` redirect ` 属性值传递。 例如，如果要重定向到与当前对象相关的页面：
 
 ```jsx
 // redirect to the related Author show page
@@ -553,13 +553,13 @@ export const PostEdit = (props) => {
 );
 ```
 
-This affects both the submit button, and the form submission when the user presses `ENTER` in one of the form fields.
+当用户在其中一个表单字段中按` ENTER `时，这会影响提交按钮和表单提交。
 
 ## Toolbar
 
-At the bottom of the form, the toolbar displays the submit button. You can override this component by setting the `toolbar` prop, to display the buttons of your choice.
+在表单的底部，工具栏显示提交按钮。 您可以通过设置` toolbar </ code> 属性来覆盖此组件，以显示您选择的按钮。</p>
 
-The most common use case is to display two submit buttons in the `<Create>` view:
+<p>最常见的用例是在 <code><Create>` 视图中显示两个提交按钮:
 
 * one that creates and redirects to the `<Show>` view of the new resource, and
 * one that redirects to a blank `<Create>` view after creation (allowing bulk creation)
