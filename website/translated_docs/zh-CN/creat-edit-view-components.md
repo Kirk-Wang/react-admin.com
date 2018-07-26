@@ -557,9 +557,9 @@ export const PostEdit = (props) => {
 
 ## Toolbar
 
-At the bottom of the form, the toolbar displays the submit button. You can override this component by setting the `toolbar` prop, to display the buttons of your choice.
+在表单的底部，工具栏显示提交按钮。 您可以通过设置` toolbar </ code> 属性来覆盖此组件，以显示您选择的按钮。</p>
 
-The most common use case is to display two submit buttons in the `<Create>` view:
+<p>最常见的用例是在 <code><Create>` 视图中显示两个提交按钮:
 
 * one that creates and redirects to the `<Show>` view of the new resource, and
 * one that redirects to a blank `<Create>` view after creation (allowing bulk creation)
