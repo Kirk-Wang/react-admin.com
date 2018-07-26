@@ -590,7 +590,7 @@ export const PostEdit = (props) => (
 </ReferenceManyField>
 ```
 
-By default, it orders the possible values by id desc. You can change this order by setting the `sort` prop (an object with `field` and `order` properties).
+默认情况下，它通过 id desc 排序可能的值。 您可以通过设置 `sort` 属性（具有 `field` 和 `order` 属性的对象）来更改此顺序。
 
 ```jsx
 <ReferenceManyField sort={{ field: 'created_at', order: 'DESC' }} reference="comments" target="post_id">
@@ -598,7 +598,7 @@ By default, it orders the possible values by id desc. You can change this order 
 </ReferenceManyField>
 ```
 
-Also, you can filter the query used to populate the possible values. Use the `filter` prop for that.
+此外，您还可以过滤用于填充可能值的查询。使用 `filter` 属性。
 
 ```jsx
 <ReferenceManyField filter={{ is_published: true }} reference="comments" target="post_id">
@@ -606,7 +606,7 @@ Also, you can filter the query used to populate the possible values. Use the `fi
 </ReferenceManyField>
 ```
 
-## `ReferenceArrayField` Component
+## `ReferenceArrayField` 组件
 
 Use `<ReferenceArrayField>` to display an list of reference values based on an array of foreign keys.
 
