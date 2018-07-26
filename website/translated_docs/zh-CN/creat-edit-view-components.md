@@ -246,15 +246,15 @@ export const PostCreate = (props) => (
 );
 ```
 
-## The `TabbedForm` component
+## `TabbedForm` 组件
 
-Just like `<SimpleForm>`, `<TabbedForm>` receives the `record` prop, renders the actual form, and handles form validation on submit. However, the `<TabbedForm>` component renders inputs grouped by tab. The tabs are set by using `<FormTab>` components, which expect a `label` and an `icon` prop.
+就像 `<SimpleForm>` 一样， `<TabbedForm>` 接收 `record` 属性，渲染实际的表单，并在提交上处理表单验证。 但是，`<TabbedForm>` 组件会按选项卡渲染 input。 这些选项卡通过使用 `<FormTab>` 组件设置，该组件期望一个`label` 和一个 `icon` 属性。
 
 ![tabbed form](https://marmelab.com/react-admin/img/tabbed-form.gif)
 
-By default the `<TabbedForm>` submits the form when the user presses `ENTER`, if you want to change this behaviour you can pass `false` for the `submitOnEnter` property.
+默认情况下，当用户按 `ENTER` 键时 `<TabbedForm>` 提交表单，如果要更改此行为，你可以为 `submitOnEnter` 属性传递 `false`。
 
-Here are all the props accepted by the `<TabbedForm>` component:
+以下是 `<TabbedForm>` 组件所接受的所有属性：
 
 * [`defautValue`](#default-values)
 * [`validate`](#validation)
