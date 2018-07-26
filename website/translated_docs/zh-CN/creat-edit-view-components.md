@@ -325,7 +325,7 @@ export const PostCreate = (props) => (
 
 ### 每个字段默认值
 
-Alternatively, you can specify a `defaultValue` prop directly in `<Input>` components. Just like for form-level default values, an input-level default value can be a scalar, or a function returning a scalar. React-admin will merge the input default values with the form default value (input > form):
+或者, 您可以在 `<Input>` 组件中直接指定 `defaultValue` 属性。 与 form-level 默认值一样， input-level 的默认值可以是标量，或者返回标量的函数。 React-admin 将 input 默认值与 form 默认值 (输入 > 窗体) 合并：
 
 ```jsx
 export const PostCreate = (props) => (
@@ -340,9 +340,9 @@ export const PostCreate = (props) => (
 );
 ```
 
-## Validation
+## 验证
 
-React-admin relies on [redux-form](http://redux-form.com/) for the validation.
+React-admin 依赖于 [redux-form](http://redux-form.com/) 进行验证。
 
 To validate values submitted by a form, you can add a `validate` prop to the form component, to individual inputs, or even mix both approaches.
 
