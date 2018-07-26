@@ -608,7 +608,7 @@ export const PostEdit = (props) => (
 
 ## `ReferenceArrayField` 组件
 
-Use `<ReferenceArrayField>` to display an list of reference values based on an array of foreign keys.
+使用 `<ReferenceArrayField>` 来显示基于外键数组的引用值列表。
 
 For instance, if a post has many tags, a post resource may look like:
 
