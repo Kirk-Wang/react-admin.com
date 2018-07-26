@@ -822,7 +822,7 @@ PriceField.defaultProps = {
 
 如果你在上面的列表中找不到您需要的内容，编写你自己的 Field 组件非常容易。 它必须是一个常规的 React 组件，不仅可以接受 `source` 属性，还可以接受`record` 属性。 React-admin 将在渲染时基于 API 响应数据注入 `record`。 字段组件只需要在 `record` 中找到 `source` 并显示它。
 
-For instance, here is an equivalent of react-admin's `<TextField>` component:
+例如, 这里是一个类似的 react-admin 的 `<TextField>` 组件：
 
 ```jsx
 import React from 'react';
@@ -839,9 +839,9 @@ TextField.propTypes = {
 export default TextField;
 ```
 
-**Tip**: The `label` attribute isn't used in the `render()` method, but react-admin uses it to display the table header.
+**提示**：`label` 属性不使用在 `render()` 方法, 但 react-admin 使用它来显示表头。
 
-**Tip**: If you want to support deep field sources (e.g. source values like `author.name`), use [`lodash/get`](https://www.npmjs.com/package/lodash.get) to replace the simple object lookup:
+**提示**：如果想要支持深层 Field source（例如`author.name` 等 source code），请使用[`lodash.get`](https://www.npmjs.com/package/lodash.get) 替换简单的对象查找：
 
 ```jsx
 import get from 'lodash/get';
