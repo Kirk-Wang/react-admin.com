@@ -138,11 +138,11 @@ export const PostEdit = (props) => (
 );
 ```
 
-Using a custom `EditActions` component also allow to remove the `<DeleteButton>` if you want to prevent deletions from the admin.
+如果要阻止 admin 删除，使用自定义` EditActions `组件还允许删除`< DeleteButton > `。
 
-## Prefilling a `Create` Record
+## 预填充`创建`记录
 
-By default, the `<Create>` view starts with an empty `record`. You can pass a custom `record` object to start with preset values:
+默认情况下，`<Create>` 视图以空 `record` 开头。可以通过自定义 `record` 对象来从预设值开始：
 
 ```jsx
 const commentDefaultValue = { nb_views: 0 };
@@ -157,9 +157,9 @@ export const CommentCreate = (props) => (
 );
 ```
 
-While using the `record` to set default values works here, it doesn't work with `<Edit>`. So it's recommended to use [the `defaultValue` prop in the Form component](#default-values) instead.
+在这里使用 `record` 设置默认值时，它不适用于 `<Edit>`。 因此，建议在 Form 组件中使用 [ `defaultValue`](#default-values) 属性代替。
 
-However, there is a valid use case for presetting the `record` prop: to prepopulate a record based on a related record. For instance, in a `PostShow` component, you may want to display a button to create a comment related to the current post, that would lead to a `CommentCreate` page where the `post_id` is preset.
+但是，有一个有效的用例来预置` record ` 属性：根据相关记录预填充记录。 For instance, in a `PostShow` component, you may want to display a button to create a comment related to the current post, that would lead to a `CommentCreate` page where the `post_id` is preset.
 
 To enable this, you must first update the `CommentCreate` component to read the record from the `location` object (which is injected by react-router):
 
