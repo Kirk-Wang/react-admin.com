@@ -378,7 +378,7 @@ export const UserCreate = (props) => (
 
 ### 每个 Input 验证: 函数验证程序
 
-Alternatively, you can specify a `validate` prop directly in `<Input>` components, taking either a function, or an array of functions. These functions should return `undefined` when there is no error, or an error string.
+或者，您可以在 `<Input>` 组件中直接指定一个 `validate` 属性，使用一个函数或一组函数。 当没有错误或错误字符串时，这些函数应该返回 `undefined`。
 
 ```jsx
 const required = (message = 'Required') =>
@@ -413,11 +413,11 @@ export const UserCreate = (props) => (
 );
 ```
 
-React-admin will combine all the input-level functions into a single function looking just like the previous one.
+React-admin 将所有 input-level 函数组合成一个函数，就像前一个函数一样。
 
-Input validation functions receive the current field value, and the values of all fields of the current record. This allows for complex validation scenarios (e.g. validate that two passwords are the same).
+输入验证函数接收当前字段值和当前记录的所有字段的值。 这允许复杂的验证场景（例如，验证两个密码是相同的）。
 
-**Tip**: Validator functions receive the form `props` as third parameter, including the `translate` function. This lets you build internationalized validators:
+**提示**：验证器函数接收表单 `props` 作为第三个参数，包括`translate` 函数。这样可以建立国际化验证器：
 
 ```jsx
 const required = (message = 'myroot.validation.required') => 
