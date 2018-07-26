@@ -664,7 +664,7 @@ export const App = () => (
 );
 ```
 
-In an Edit of Show view, you can combine `<ReferenceArrayField>` with `<Datagrid>` to display a related resources in a table. For instance, to display more details about the tags related to a post in the `PostShow` view:
+在 "显示" 视图的编辑中, 可以将 `<ReferenceArrayField>` 与 `<Datagrid> `合并在一起 显示表中的相关资源。 例如, 要在 `PostShow` 视图中显示与 post 相关的标记的详细信息, 请执行以下操作：
 
 ```jsx
 import React from 'react';
@@ -688,9 +688,9 @@ export const PostShow = (props) => (
 );
 ```
 
-## `RichTextField` Component
+## `RichTextField` 组件
 
-This component displays some HTML content. The content is "rich" (i.e. unescaped) by default.
+此组件显示一些HTML内容。 内容默认为“丰富”（即未转义）。
 
 ```jsx
 import { RichTextField } from 'react-admin';
