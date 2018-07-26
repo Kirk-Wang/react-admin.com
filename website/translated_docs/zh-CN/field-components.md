@@ -910,9 +910,9 @@ export default ConditionalEmailField;
 
 **提示**：在检查其属性之前，请务必检查是否已定义`record`，因为 react-admin 会在从数据中提取记录 *之前* 显示 Show 视图。 因此，第一次呈现资源的show视图时，`record`是未定义的。
 
-当 `hasEmail` 为 false 时, 此 `ConditionalEmailField` 正确隐藏。 但是当 `hasEmail` 为 true 时, 显示布局将呈现它。 没有标签。 And if you add a `addLabel` default prop, the Show layout will render the label regardless of the `hasEmail` value...
+当 `hasEmail` 为 false 时, 此 `ConditionalEmailField` 正确隐藏。 但是当 `hasEmail` 为 true 时, 显示布局将呈现它。 没有标签。 如果添加` addLabel `默认属性，则无论` hasEmail `值如何，Show布局都会呈现label...
 
-One solution is to add the label manually in the custom component:
+一种解决方案是在自定义组件中手动添加label：
 
 ```jsx
 import React from 'react';
@@ -930,9 +930,9 @@ const ConditionalEmailField = ({ record, ...rest }) =>
 export default ConditionalEmailField;
 ```
 
-This comes with a drawback, though: the `<ConditionalEmailField>` cannot be used in a List view anymore, as it will always have a label. If you want to reuse the custom component in a List, this isn't the right solution.
+但是这有一个缺点：`< ConditionalEmailField> `不能再用于List视图，因为它总是有一个标签。 如果要在 List 中重用自定义组件，则这不是正确的解决方案。
 
-An alternative solution is to split the `<Show>` component. Under the hood, the `<Show>` component is composed of two sub components: the `<ShowController>` component, which fetches the record, and the `<ShowView>`, which is responsible for rendering the view title, actions, and children. `<ShowController>` uses the *render props* pattern:
+另一种解决方案是拆分`< Show> `组件。 在引擎盖下，`< Show> ` 组件由两个子组件组成：`<ShowController> `组件，用于获取记录，`<ShowView> </ code>，负责呈现视图标题，操作和子项。 <code><ShowController>` uses the *render props* pattern:
 
 ```jsx
 // inside react-admin
