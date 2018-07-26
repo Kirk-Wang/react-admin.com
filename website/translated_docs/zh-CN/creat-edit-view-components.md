@@ -507,7 +507,7 @@ const validateEmail = email(message);
 
 ## 回车提交
 
-默认情况下，在任何表单字段中按 `ENTER` 提交表单 - 这是大多数情况下的预期行为。 但是，您的某些自定义输入组件（例如，Google Maps小部件）可能会有 `ENTER` 键的特殊处理程序。 In that case, to disable the automated form submission on enter, set the `submitOnEnter` prop of the form component to `false`:
+默认情况下，在任何表单字段中按 `ENTER` 提交表单 - 这是大多数情况下的预期行为。 但是，您的某些自定义输入组件（例如，Google Maps小部件）可能会有 `ENTER` 键的特殊处理程序。 在这种情况下，要在 enter 上禁用自动表单提交，请将表单组件的 `submitOnEnter` 属性设置为 `false`：
 
 ```jsx
 export const PostEdit = (props) => (
@@ -519,9 +519,9 @@ export const PostEdit = (props) => (
 );
 ```
 
-## Redirection After Submission
+## 提交后重定向
 
-By default:
+默认情况下：
 
 * Submitting the form in the `<Create>` view redirects to the `<Edit>` view
 * Submitting the form in the `<Edit>` view redirects to the `<List>` view
