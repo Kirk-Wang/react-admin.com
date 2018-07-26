@@ -538,7 +538,7 @@ export const PostEdit = (props) => (
 );
 ```
 
-You can also pass a custom route (e.g. "/home") or a function as `redirect` prop value. For example, if you want to redirect to a page related to the current object:
+您还可以将自定义路由（例如“/home”）或函数作为` redirect ` 属性值传递。 例如，如果要重定向到与当前对象相关的页面：
 
 ```jsx
 // redirect to the related Author show page
@@ -553,7 +553,7 @@ export const PostEdit = (props) => {
 );
 ```
 
-This affects both the submit button, and the form submission when the user presses `ENTER` in one of the form fields.
+当用户在其中一个表单字段中按` ENTER `时，这会影响提交按钮和表单提交。
 
 ## Toolbar
 
