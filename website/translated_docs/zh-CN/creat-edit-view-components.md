@@ -344,11 +344,11 @@ export const PostCreate = (props) => (
 
 React-admin 依赖于 [redux-form](http://redux-form.com/) 进行验证。
 
-To validate values submitted by a form, you can add a `validate` prop to the form component, to individual inputs, or even mix both approaches.
+要验证表单提交的值，您可以向表单组件添加一个 `validate` 属性，将其添加到单个输入中，甚至可以混合使用两种方法。
 
-### Global Validation
+### 全局验证
 
-The value of the form `validate` prop must be a function taking the record as input, and returning an object with error messages indexed by field. For instance:
+表单 `validate` 属性的值必须是将记录作为输入的函数，并返回一个具有由字段索引的错误消息的对象。 例如：
 
 ```jsx
 const validateUserCreation = (values) => {
@@ -374,9 +374,9 @@ export const UserCreate = (props) => (
 );
 ```
 
-**Tip**: The props you pass to `<SimpleForm>` and `<TabbedForm>` end up as `reduxForm()` parameters. This means that, in addition to `validate`, you can also pass `warn` or `asyncValidate` functions. Read the [`reduxForm()` documentation](http://redux-form.com/6.5.0/docs/api/ReduxForm.md/) for details.
+**提示**：您传递给`<SimpleForm>` 和 `<TabbedForm>` 的属性最后为 `reduxForm()` 参数。 这意味着, 除了 `validate`之外, 还可以通过 `warn` 或 `asyncValidate` 函数。 有关详细信息, 请阅读 [`reduxForm()` 文档](http://redux-form.com/6.5.0/docs/api/ReduxForm.md/)。
 
-### Per Input Validation: Function Validator
+### 每个 Input 验证: 函数验证程序
 
 Alternatively, you can specify a `validate` prop directly in `<Input>` components, taking either a function, or an array of functions. These functions should return `undefined` when there is no error, or an error string.
 
