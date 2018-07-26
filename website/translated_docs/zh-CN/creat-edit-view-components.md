@@ -221,7 +221,7 @@ export default PostShow = props => (
 
 ![post edition form](https://marmelab.com/react-admin/img/post-edition.png)
 
-By default the `<SimpleForm>` submits the form when the user presses `ENTER`. If you want to change this behaviour you can pass `false` for the `submitOnEnter` property, and the user will only be able to submit by pressing the save button. This can be useful e.g. if you have an input widget using `ENTER` for a special function.
+默认情况下, `<SimpleForm>` 在用户按 `ENTER` 时提交表单。 如果您想要改变这种行为，你可以传递 `false` 给 `submitOnEnter` 属性。 This can be useful e.g. if you have an input widget using `ENTER` for a special function.
 
 Here are all the props accepted by the `<SimpleForm>` component:
 
