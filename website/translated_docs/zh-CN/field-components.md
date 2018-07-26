@@ -820,7 +820,7 @@ PriceField.defaultProps = {
 
 ## 编写你自己的 Field 组件
 
-如果你在上面的列表中找不到您需要的内容，编写你自己的 Field 组件非常容易。 它必须是一个常规的 React 组件，不仅可以接受 `source` 属性，还可以接受`record` 属性。 React-admin will inject the `record` based on the API response data at render time. The field component only needs to find the `source` in the `record` and display it.
+如果你在上面的列表中找不到您需要的内容，编写你自己的 Field 组件非常容易。 它必须是一个常规的 React 组件，不仅可以接受 `source` 属性，还可以接受`record` 属性。 React-admin 将在渲染时基于 API 响应数据注入 `record`。 字段组件只需要在 `record` 中找到 `source` 并显示它。
 
 For instance, here is an equivalent of react-admin's `<TextField>` component:
 
