@@ -880,7 +880,7 @@ export const UserList = (props) => (
 
 ## 在 "Show" 视图中向自定义 Field 组件添加标签
 
-React-admin 允许您在 List 视图和 Show 视图中使用相同的 Field 组件。 But if you use the `<FullNameField>` custom field component defined earlier in a Show view, something is missing: the Field label. Why do other fields have a label and not this custom Field? And how can you create a Field component that has a label in the Show view, but not in the List view?
+React-admin 允许您在 List 视图和 Show 视图中使用相同的 Field 组件。 但是，如果您使用之前在 “Show” 视图中定义的` <FullNameField> `自定义 Field 组件，则会缺少某些内容：Field label。 为什么其他 Field 有标签而这个自定义 Field 没有？ And how can you create a Field component that has a label in the Show view, but not in the List view?
 
 React-admin uses a trick: the Show view layouts (`<SimpleShowLayout>` and `<TabbedShowLayout>`) inspect their Field children, and whenever one has the `addLabel` prop set to `true`, the layout adds a label.
 
