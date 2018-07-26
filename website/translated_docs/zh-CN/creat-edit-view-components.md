@@ -498,16 +498,16 @@ export const UserCreate = (props) => (
 );
 ```
 
-**Tip**: If you pass a function as a message, react-admin calls this function with `{ args, value, values,translate, ...props }` as argument. For instance:
+**提示</ strong>：如果您将函数作为消息传递，则 react-admin 调用此函数并传递` {args，value，values，translate，... props} ` 作为参数。例如：</p> 
 
 ```jsx
 const message = ({ translate }) => translate('myroot.validation.email_invalid');
 const validateEmail = email(message);
 ```
 
-## Submit On Enter
+## 回车提交
 
-By default, pressing `ENTER` in any of the form fields submits the form - this is the expected behavior in most cases. However, some of your custom input components (e.g. Google Maps widget) may have special handlers for the `ENTER` key. In that case, to disable the automated form submission on enter, set the `submitOnEnter` prop of the form component to `false`:
+默认情况下，在任何表单字段中按 `ENTER` 提交表单 - 这是大多数情况下的预期行为。 但是，您的某些自定义输入组件（例如，Google Maps小部件）可能会有 `ENTER` 键的特殊处理程序。 In that case, to disable the automated form submission on enter, set the `submitOnEnter` prop of the form component to `false`:
 
 ```jsx
 export const PostEdit = (props) => (
