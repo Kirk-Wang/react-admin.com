@@ -610,7 +610,7 @@ export const PostEdit = (props) => (
 
 使用 `<ReferenceArrayField>` 来显示基于外键数组的引用值列表。
 
-For instance, if a post has many tags, a post resource may look like:
+例如, 如果 post 有许多 tag, 则 post 资源可能类似于：
 
 ```js
 {
@@ -620,9 +620,9 @@ For instance, if a post has many tags, a post resource may look like:
 }
 ```
 
-Where `[1, 23, 4]` refer to ids of `tag` resources.
+其中 `[1, 23, 4]` 引用 `tag` 资源的 id。
 
-`<ReferenceArrayField>` can fetch the `tag` resources related to this `post` resource by matching `post.tag_ids` to `tag.id`. `<ReferenceArrayField source="tags_ids" reference="tags">` would issue an HTTP request looking like:
+`<ReferenceArrayField>` 可以通过将 `post.tag_ids` 匹配到 `tag.id` 来获取与这个 `post` 资源相关的 `tag` 资源。 `<ReferenceArrayField source="tags_ids" reference="tags">` would issue an HTTP request looking like:
 
     http://myapi.com/tags?id=[1,23,4]
     
