@@ -2,22 +2,22 @@
 layout: creat-edit-view-components
 title: <Create> and <Edit> Views
 ---
-The Create and Edit views both display a form, initialized with an empty record (for the Create view) or with a record fetched from the API (for the Edit view). The `<Create>` and `<Edit>` components then delegate the actual rendering of the form to a form component - usually `<SimpleForm>`. This form component uses its children ([`<Input>`](./Inputs.md) components) to render each form input.
+“创建”和“编辑”视图都显示一个表单，使用空记录初始化的（对于“创建视图”）或具有一条从API（对于“编辑”视图）获取的记录。 `<Create>` 和 `<Edit>` 组件然后将表单的实际渲染委托给表单组件 - 通常是 `<SimpleForm>`。 此表单组件使用其子级 ([`<Input>`](./Inputs.md) 组件) 来呈现每个 from input。
 
 ![post creation form](https://marmelab.com/react-admin/img/create-view.png)
 
 ![post edition form](https://marmelab.com/react-admin/img/edit-view.png)
 
-## The `Create` and `Edit` components
+## `Create` 和 `Edit` 组件
 
-The `<Create>` and `<Edit>` components render the page title and actions, and fetch the record from the data provider. They are not responsible for rendering the actual form - that's the job of their child component (usually `<SimpleForm>`), to which they pass the `record` as prop.
+`<Create>` 和 `<Edit>` 组件渲染页面标题和操作，并从 Data Provider 获取记录。 他们不负责渲染实际的表单 - 这是他们的子组件（通常是 `<SimpleForm>`）的工作，他们将 `record` 作为属性传递给它们。
 
-Here are all the props accepted by the `<Create>` and `<Edit>` components:
+这里是 `<Create>` 和 `<Edit>` 组件接受的所有属性：
 
 * [`title`](#page-title)
 * [`actions`](#actions)
 
-Here is the minimal code necessary to display a form to create and edit comments:
+以下是显示一个表单来创建和编辑评论所需的最少代码：
 
 ```jsx
 // in src/App.js
@@ -71,19 +71,19 @@ export const PostEdit = (props) => (
 );
 ```
 
-That's enough to display the post edit form:
+这足以显示 post 编辑表单：
 
 ![post edition form](https://marmelab.com/react-admin/img/post-edition.png)
 
-**Tip**: You might find it cumbersome to repeat the same input components for both the `<Create>` and the `<Edit>` view. In practice, these two views almost never have exactly the same form inputs. For instance, in the previous snippet, the `<Edit>` views shows related comments to the current post, which makes no sense for a new post. Having two separate sets of input components for the two views is therefore a deliberate choice. However, if you have the same set of input components, export them as a custom Form component to avoid repetition.
+**提示**：您可能会发现为 `<Create>` 和 `<Edit>` 视图重复相同的 input 组件很麻烦。 实际上，这两个视图几乎从来没有完全相同的表单输入。 例如，在以前的代码片段中， `<Edit>` 视图显示了对当前帖子的相关评论，这对于新的帖子是没有意义的。 因此，为两个视图拥有两组单独的输入组件是一个有意的选择。 但是，如果您具有相同的输入组件集，则将它们导出为自定义Form组件以避免重复。
 
-`<Create>` accepts a `record` prop, to initialize the form based on an value object.
+`< Create> ` 接受 `record` 属性，以基于值对象初始化表单。
 
-### Page Title
+### 页面标题
 
-By default, the title for the Create view is "Create [resource_name]", and the title for the Edit view is "Edit [resource_name] #[record_id]".
+默认情况下，"创建" 视图的标题为 "创建 [resource_name]"，编辑视图的标题为 "编辑 [resource_name] #[record_id]"。
 
-You can customize this title by specifying a custom `title` prop:
+您可以通过指定一个自定义 `title` 属性来自定义此标题：
 
 ```jsx
 export const PostEdit = (props) => (
@@ -93,7 +93,7 @@ export const PostEdit = (props) => (
 );
 ```
 
-More interestingly, you can pass a component as `title`. React-admin clones this component and, in the `<EditView>`, injects the current `record`. This allows to customize the title according to the current record:
+更有趣的是，你可以通过传递一个组件作为 `title`。 React-admin 克隆此组件，并在 `<EditView>` 中注入当前 `record`。 这允许根据当前记录自定义标题：
 
 ```jsx
 const PostTitle = ({ record }) => {
@@ -108,7 +108,7 @@ export const PostEdit = (props) => (
 
 ### Actions
 
-You can replace the list of default actions by your own element using the `actions` prop:
+你可以通过你自己的元素使用 `actions` 属性来替换默认 action 列表：
 
 ```jsx
 import Button from '@material-ui/core/Button';
