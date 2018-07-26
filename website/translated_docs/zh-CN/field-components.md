@@ -895,10 +895,9 @@ React-admin 使用的技巧：Show 视图布局 (`<SimpleShowLayout>` 和 `<Tabb
 
 在 Show 视图中，您可能希望根据另一个 Field 的值显示或隐藏 Field- 例如，仅当` hasEmail `布尔字段为` true `时，才显示` email </ code> Field。</p>
 
-<p>For such cases, you can use the custom field approach: use the injected <code>record` prop, and render another Field based on the value.
+<p>对于这种情况，您可以使用自定义 Field 方法：使用注入的 <code>record</ code> 属性，并根据值渲染另一个 Field。</p>
 
-```jsx
-import React from 'react';
+<pre><code class="jsx">import React from 'react';
 import { EmailField } from 'react-admin';
 
 const ConditionalEmailField = ({ record, ...rest }) => 
@@ -907,11 +906,11 @@ const ConditionalEmailField = ({ record, ...rest }) =>
         : null;
 
 export default ConditionalEmailField;
-```
+`</pre> 
 
-**Tip**: Always check that the `record` is defined before inspecting its properties, as react-admin displays the Show view *before* fetching the record from the data provider. So the first time it renders the show view for a resource, the `record` is undefined.
+**提示**：在检查其属性之前，请务必检查是否已定义`record`，因为 react-admin 会在从数据中提取记录 *之前* 显示 Show 视图。 因此，第一次呈现资源的show视图时，`record`是未定义的。
 
-This `ConditionalEmailField` is properly hidden when `hasEmail` is false. But when `hasEmail` is true, the Show layout renders it... without label. And if you add a `addLabel` default prop, the Show layout will render the label regardless of the `hasEmail` value...
+当 `hasEmail` 为 false 时, 此 `ConditionalEmailField` 正确隐藏。 但是当 `hasEmail` 为 true 时, 显示布局将呈现它。 没有标签。 And if you add a `addLabel` default prop, the Show layout will render the label regardless of the `hasEmail` value...
 
 One solution is to add the label manually in the custom component:
 
