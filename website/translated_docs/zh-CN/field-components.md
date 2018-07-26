@@ -631,7 +631,7 @@ export const PostEdit = (props) => (
 
 一旦接收到相关的资源， `<ReferenceArrayField>` 使用 `ids` 和 `data` 属性传递它们给它的子组件，所以子级必须是一个迭代器组件（如 `<SingleFieldList>` 或 `<Datagrid>`）。 迭代器组件通常具有一个或多个子 `<Field>` 组件。
 
-Here is how to fetch the list of tags for each post in a `PostList`, and display the `name` for each `tag` in a `<ChipField>`:
+以下是如何获取 `PostList` 中每个帖子的标签列表，并在`<ChipField>` 中显示每个 `tag` 的 `name`：
 
 ```jsx
 import React from 'react';
@@ -653,7 +653,7 @@ export const PostList = (props) => (
 );
 ```
 
-**Note**: You **must** add a `<Resource>` component for the reference resource to your `<Admin>` component, because react-admin needs it to fetch the reference data. You can omit the `list` prop in this Resource if you don't want to show an entry for it in the sidebar menu.
+**注意**：您**必须**为引用资源添加一个`<Resource>` 组件到您的 `<Admin>` 组件，因为 react-admin 需要它来获取引用数据。 如果您不想在侧边栏菜单中显示一个条目给它，你可以在此资源中省略 `list` 属性。
 
 ```jsx
 export const App = () => (
