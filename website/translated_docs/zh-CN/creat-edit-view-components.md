@@ -424,7 +424,7 @@ const required = (message = 'myroot.validation.required') =>
     (value, allValues, props) => value ? undefined : props.translate(message);
 ```
 
-**Tip**: Make sure to define validation functions or array of functions in a variable, instead of defining them directly in JSX. This can result in a new function or array at every render, and trigger infinite rerender.
+**提示</ strong>：确保在变量中定义验证函数或函数数组，而不是直接在JSX中定义它们。 这会在每次渲染时产生新函数或数组，并触发无限重新渲染。</p> 
 
 ```jsx
 const validateStock = [required(), number(), minValue(0)];
@@ -443,13 +443,13 @@ export const ProductEdit = ({ ...props }) => (
 );
 ```
 
-**Tip**: The props of your Input components are passed to a redux-form `<Field>` component. So in addition to `validate`, you can also use `warn`.
+**提示**：将您的输入组件的属性传递给redux-form `<Field>`组件。所以除了 `validate`，你也可以使用 `warn`。
 
-**Tip**: You can use *both* Form validation and input validation.
+**提示**：您可以 *同时* 使用表单验证和输入验证。
 
-### Built-in Field Validators
+### 内置字段验证器
 
-React-admin already bundles a few validator functions, that you can just require, and use as input-level validators:
+React-admin 已经捆绑了一些您可以只需 require 的验证器函数，并用作输入级验证器：
 
 * `required(message)` if the field is mandatory,
 * `minValue(min, message)` to specify a minimum value for integers,
@@ -461,7 +461,7 @@ React-admin already bundles a few validator functions, that you can just require
 * `regex(pattern, message)` to validate that the input matches a regex,
 * `choices(list, message)` to validate that the input is within a given list,
 
-Example usage:
+使用示例：
 
 ```jsx
 import { 
