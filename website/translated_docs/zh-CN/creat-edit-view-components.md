@@ -159,9 +159,9 @@ export const CommentCreate = (props) => (
 
 在这里使用 `record` 设置默认值时，它不适用于 `<Edit>`。 因此，建议在 Form 组件中使用 [ `defaultValue`](#default-values) 属性代替。
 
-但是，有一个有效的用例来预置` record ` 属性：根据相关记录预填充记录。 For instance, in a `PostShow` component, you may want to display a button to create a comment related to the current post, that would lead to a `CommentCreate` page where the `post_id` is preset.
+但是，有一个有效的用例来预置` record ` 属性：根据相关记录预填充记录。 例如，在` PostShow `组件中，您可能希望显示一个按钮来创建与当前帖子相关的评论，这将导致` CommentCreate `页面中的` post_id `已预设。
 
-To enable this, you must first update the `CommentCreate` component to read the record from the `location` object (which is injected by react-router):
+要启用此项，必须首先更新 `CommentCreate` 组件，以从 `location` 对象中读取记录 (由 react-router 注入)：
 
 ```diff
 const commentDefaultValue = { nb_views: 0 };
@@ -182,10 +182,9 @@ const commentDefaultValue = { nb_views: 0 };
 );
 ```
 
-To set this `location.state`, you have to create a link or a button using react-router's `<Link>` component:
+要设置此`location.state`，您必须使用 react-router 的 `<Link></ code> 组件创建链接或按钮：</p>
 
-```jsx
-// in PostShow.js
+<pre><code class="jsx">// in PostShow.js
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
@@ -209,7 +208,7 @@ export default PostShow = props => (
         </SimpleShowLayout>
     </Show>
 )
-```
+`</pre> 
 
 **Tip**: To style the button with the main color from the material-ui theme, use the `Link` component from the `react-admin` package rather than the one from `react-router`.
 
