@@ -998,4 +998,4 @@ const UserShow = props => (
 );
 ```
 
-现在，您可以使用常规字段组件, 并且 label 在 "Show" 视图中正确显示。
+现在，您可以使用常规 Field 组件, 并且 label 在 "Show" 视图中正确显示。
