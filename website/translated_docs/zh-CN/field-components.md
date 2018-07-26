@@ -622,14 +622,14 @@ export const PostEdit = (props) => (
 
 其中 `[1, 23, 4]` 引用 `tag` 资源的 id。
 
-`<ReferenceArrayField>` 可以通过将 `post.tag_ids` 匹配到 `tag.id` 来获取与这个 `post` 资源相关的 `tag` 资源。 `<ReferenceArrayField source="tags_ids" reference="tags">` would issue an HTTP request looking like:
+`<ReferenceArrayField>` 可以通过将 `post.tag_ids` 匹配到 `tag.id` 来获取与这个 `post` 资源相关的 `tag` 资源。 `<ReferenceArrayField source="tags_ids" reference="tags">` 将发出一个 HTTP 请求, 其样子如下：
 
     http://myapi.com/tags?id=[1,23,4]
     
 
-**Tip**: `<ReferenceArrayField>` fetches the related resources using the `GET_MANY` REST method, so the actual HTTP request depends on your REST client.
+**提示**：`<ReferenceArrayField>` 使用 `GET_MANY` REST 方法获取相关资源，所以实际的 HTTP 请求取决于你的REST客户端。
 
-Once it receives the related resources, `<ReferenceArrayField>` passes them to its child component using the `ids` and `data` props, so the child must be an iterator component (like `<SingleFieldList>` or `<Datagrid>`). The iterator component usually has one or more child `<Field>` components.
+一旦接收到相关的资源， `<ReferenceArrayField>` 使用 `ids` 和 `data` 属性传递它们给它的子组件，所以子级必须是一个迭代器组件（如 `<SingleFieldList>` 或 `<Datagrid>`）。 迭代器组件通常具有一个或多个子 `<Field>` 组件。
 
 Here is how to fetch the list of tags for each post in a `PostList`, and display the `name` for each `tag` in a `<ChipField>`:
 
