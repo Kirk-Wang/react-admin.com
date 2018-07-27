@@ -94,9 +94,9 @@ import { ArrayInput, SimpleFormIterator, DateInput, UrlInput } from 'react-admin
 }
 ```
 
-`<ArrayInput>` 需要一个子节点，它必须是* 表单迭代器 *组件。 表单迭代器是一个组件，它接受由redux-form `<FieldArray>` 组件传递的 `fields` 对象，并定义 fields 数组的布局。 例如，`<SimpleFormIterator>` 组件显示无序列表（`<ul>`）中的字段数组，按列表项（`<li>`）显示一个子表单。 It also provides controls for adding and removing a sub-record (a backlink in this example).
+`<ArrayInput>` 需要一个子节点，它必须是* 表单迭代器 *组件。 表单迭代器是一个组件，它接受由redux-form `<FieldArray>` 组件传递的 `fields` 对象，并定义 fields 数组的布局。 例如，`<SimpleFormIterator>` 组件显示无序列表（`<ul>`）中的字段数组，按列表项（`<li>`）显示一个子表单。 它还提供了添加和删除子记录的控件（在此示例中为反向链接）。
 
-You can pass `disableAdd` and `disableRemove` as props of `SimpleFormIterator`, to disable `ADD` and `REMOVE` button respectively. Default value of both is `false`.
+您可以将 `disableAdd` 和 `disableRemove` 作为 `SimpleFormIterator` 的属性传递，分别禁用 `ADD` 和 `REMOVE` 按钮。 两者的默认值均为 `false`。
 
 ```jsx
 import { ArrayInput, SimpleFormIterator, DateInput, UrlInput } from 'react-admin';
