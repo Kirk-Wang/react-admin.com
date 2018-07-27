@@ -630,13 +630,13 @@ export const UserEdit = withStyles(styles)(({ classes, ...props }) => (
     </Edit>
 ```
 
-## Displaying Fields or Inputs depending on the user permissions
+## 根据用户权限显示 Field 或 Input
 
-You might want to display some fields, inputs or filters only to users with specific permissions. Those permissions are retrieved for each route and will provided to your component as a `permissions` prop.
+您可能希望仅向具有特定权限的用户显示某些 field，input 或 filter。 将为每个路径检索这些权限，并将其作为` permissions ` 属性提供给您的组件。
 
-Each route will call the `authProvider` with the `AUTH_GET_PERMISSIONS` type and some parameters including the current location and route parameters. It's up to you to return whatever you need to check inside your component such as the user's role, etc.
+每个路由将使用 `AUTH_GET_PERMISSIONS` 类型和一些参数（包括当前位置和路由参数）调用 `authProvider`。 您可以在组件内部返回需要检查的内容，例如用户的角色等。
 
-Here's an example inside a `Create` view with a `SimpleForm` and a custom `Toolbar`:
+以下是在` Create `视图中使用` SimpleForm `和自定义` Toolbar `的示例：
 
 ```jsx
 const UserCreateToolbar = ({ permissions, ...props }) =>
@@ -668,9 +668,9 @@ export const UserCreate = ({ permissions, ...props }) =>
     </Create>;
 ```
 
-**Tip**: Note how the `permissions` prop is passed down to the custom `toolbar` component.
+**提示</ strong>：请注意` permissions ` 属性如何传递给自定义` toolbar `组件。</p> 
 
-This also works inside an `Edition` view with a `TabbedForm`, and you can hide a `FormTab` completely:
+这也适用于带` TabbedForm `的` Edition `视图，你可以完全隐藏` FormTab `：
 
 ```jsx
 export const UserEdit = ({ permissions, ...props }) =>
