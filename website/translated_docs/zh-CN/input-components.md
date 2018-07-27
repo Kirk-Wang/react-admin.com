@@ -36,9 +36,9 @@ export const PostEdit = (props) => (
 <TextInput source="zb_title" label="Title" />
 ```
 
-其他属性传递给底层组件（通常是 material-ui 组件）。 For instance, when setting the `fullWidth` prop on a `TextInput` component, the underlying material-ui `<TextField>` receives it, and goes full width.
+其他属性传递给底层组件（通常是 material-ui 组件）。 例如，在` TextInput `组件上设置` fullWidth ` 属性时，底层 material-ui `<TextField>` 接收它，并且全宽。
 
-**Tip**: If you edit a record with a complex structure, you can use a path as the `source` parameter. For instance, if the API returns the following 'book' record:
+**提示**：如果编辑具有复杂结构的记录，则可以使用路径作为` source `参数。 例如，如果 API 返回以下 “book” 记录：
 
 ```jsx
 {
@@ -51,17 +51,17 @@ export const PostEdit = (props) => (
 }
 ```
 
-Then you can display a text input to edit the author first name as follows:
+然后，您可以显示文本输入以便编辑作者名字，如下所示： 
 
 ```jsx
 <TextInput source="author.firstName" />
 ```
 
-**Tip**: If your interface has to support multiple languages, don't use the `label` prop, and put the localized labels in a dictionary instead. See the [Translation documentation](./Translation.md#translating-resource-and-field-names) for details.
+**提示**：如果您的界面必须支持多种语言，请不要使用` label ` 属性，而是将本地化标签放入字典中。 有关详细信息，请参阅[翻译文档](./Translation.md#translating-resource-and-field-names)。
 
-## `ArrayInput` Component
+## `ArrayInput` 组件
 
-To edit arrays of data embedded inside a record, `<ArrayInput>` creates a list of sub-forms.
+要编辑嵌入记录中的数据数组，`<ArrayInput>` 会创建子表单列表。
 
 ```jsx
 import { ArrayInput, SimpleFormIterator, DateInput, UrlInput } from 'react-admin';
