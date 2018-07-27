@@ -566,7 +566,7 @@ export const PostEdit = (props) => {
 
 ![Form toolbar](https://marmelab.com/react-admin/img/form-toolbar.png)
 
-For that use case, use the `<SaveButton>` component with a custom `redirect` prop:
+对于该用例，请使用具有自定义 `redirect` 属性的 `<SaveButton>` 组件：
 
 ```jsx
 import { Edit, SimpleForm, SaveButton, Toolbar } from 'react-admin';
