@@ -2,7 +2,7 @@
 id: input-components
 title: <Input> components
 ---
-An `Input` component displays an input, or a dropdown list, a list of radio buttons, etc. Such components allow to edit a record property, and are common in the `<Edit>`, `<Create>`, and `<Filter>` views.
+`Input` 组件显示一个输入, 或一个下拉列表, 一个单选按钮列表, 等等。 这些组件允许编辑记录属性，并且在 `<Edit>`， `<Create>` 和 `<Filter>` 视图中是常见的。
 
 ```jsx
 // in src/posts.js
@@ -23,7 +23,7 @@ export const PostEdit = (props) => (
 );
 ```
 
-All input components accept the following attributes:
+所有输入组件都接受以下属性：
 
 * `source`: Property name of your entity to view/edit. This attribute is required.
 * `defaultValue`: Value to be set when the property is `null` or `undefined`.
