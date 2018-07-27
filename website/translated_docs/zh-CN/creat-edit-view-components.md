@@ -561,8 +561,8 @@ export const PostEdit = (props) => {
 
 <p>最常见的用例是在 <code><Create>` 视图中显示两个提交按钮:
 
-* one that creates and redirects to the `<Show>` view of the new resource, and
-* one that redirects to a blank `<Create>` view after creation (allowing bulk creation)
+* 创建并重定向到新资源的 `<Show> </ code>视图的那个，以及</li>
+<li>在创建后重定向到一个空白 <code><Create>` 视图的（允许批量创建）
 
 ![Form toolbar](https://marmelab.com/react-admin/img/form-toolbar.png)
 
