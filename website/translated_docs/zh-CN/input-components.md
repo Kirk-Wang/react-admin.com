@@ -25,18 +25,18 @@ export const PostEdit = (props) => (
 
 所有输入组件都接受以下属性：
 
-* `source`: Property name of your entity to view/edit. This attribute is required.
-* `defaultValue`: Value to be set when the property is `null` or `undefined`.
-* `validate`: Validation rules for the current property (see the [Validation Documentation](./CreateEdit.html#validation))
-* `label`: Used as a table header of an input label. Defaults to the `source` when omitted.
-* `style`: A style object to customize the look and feel of the field container (e.g. the `<div>` in a form).
-* `elStyle`: A style object to customize the look and feel of the field element itself
+* `source`：view/edit 中你实体的属性名称。此属性是必需的。
+* `defaultValue`：当属性为 `null` 或 `undefined` 时要设置的值。
+* `validate`：当前属性的验证规则（请参阅\[Validation Documentation\](./CreateEdit.html#validation)）
+* `label`：用作输入标签的 header。省略时默认为 `source`。
+* `style`：用于定制字段容器的外观和风格的样式对象（例如表单中的 `<div>`）。
+* `elStyle`：一个样式对象，用于定制字段元素本身的外观。
 
 ```jsx
 <TextInput source="zb_title" label="Title" />
 ```
 
-Additional props are passed down to the underlying component (usually a material-ui component). For instance, when setting the `fullWidth` prop on a `TextInput` component, the underlying material-ui `<TextField>` receives it, and goes full width.
+其他属性传递给底层组件（通常是 material-ui 组件）。 For instance, when setting the `fullWidth` prop on a `TextInput` component, the underlying material-ui `<TextField>` receives it, and goes full width.
 
 **Tip**: If you edit a record with a complex structure, you can use a path as the `source` parameter. For instance, if the API returns the following 'book' record:
 
