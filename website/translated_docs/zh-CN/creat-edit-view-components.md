@@ -596,22 +596,24 @@ export const PostEdit = (props) => (
 );
 ```
 
-Here are the props received by the `Toolbar` component when passed as the `toolbar` prop of the `SimpleForm` or `TabbedForm` components:
+以下是 `Toolbar` 组件在作为` SimpleForm `或` TabbedForm `组件的` toolbar </ code> 属性传递时收到的：</p>
 
-* `handleSubmitWithRedirect`: The function to call in order to submit the form. It accepts a single parameter overriding the form's default redirect.
+<ul>
+<li><code>handleSubmitWithRedirect`: The function to call in order to submit the form. It accepts a single parameter overriding the form's default redirect.</li> 
+
 * `invalid`: A boolean indicating whether the form is invalid
 * `pristine`: A boolean indicating whether the form is pristine (eg: no inputs have been changed yet)
 * `redirect`: The default form's redirect
 * `saving`: A boolean indicating whether a save operation is ongoing.
-* `submitOnEnter`: A boolean indicating whether the form should be submitted when pressing `enter`
+* `submitOnEnter`: A boolean indicating whether the form should be submitted when pressing `enter`</ul> 
 
-**Tip**: Use react-admin's `<Toolbar>` component instead of material-ui's `<Toolbar>` component. The former builds up on the latter, and adds support for an alternative mobile layout (and is therefore responsive).
+** 提示 **: 使用 react-admin 的 `<Toolbar>` 组件代替 material-ui 的 `<Toolbar>` 组件。 前者建立在后者之上, 并增加了对另一种移动布局的支持 (因此是响应性的)。
 
-**Tip**: Don't forget to also set the `redirect` prop of the Form component to handle submission by the `ENTER` key.
+**提示**: 不要忘记还要设置表单组件的 ` redirect ` 属性，以处理由 `ENTER` 键。
 
-## Customizing Input Container Styles
+## 自定义输入容器样式
 
-The input components are wrapped inside a `div` to ensure a good looking form by default. You can pass a `formClassName` prop to the input components to customize the style of this `div`. For example, here is how to display two inputs on the same line:
+输入组件包含在` div `中，以确保默认情况下具有良好外观。 可以将 `formClassName` 属性传递给输入组件, 以自定义此 `div` 的样式。 例如, 下面是如何在同一行上显示两个输入：
 
 ```jsx
 const styles = {
