@@ -76,7 +76,7 @@ import { ArrayInput, SimpleFormIterator, DateInput, UrlInput } from 'react-admin
 
 ![ArrayInput](https://marmelab.com/react-admin/img/array-input.png)
 
-`<ArrayInput>` allows the edition of embedded arrays, like the `backlinks` field in the following `post` record:
+`<ArrayInput>` 允许嵌入式数组的编辑，例如以下 `post `记录中的` backlinks `字段：
 
 ```js
 {
@@ -94,7 +94,7 @@ import { ArrayInput, SimpleFormIterator, DateInput, UrlInput } from 'react-admin
 }
 ```
 
-`<ArrayInput>` expects a single child, which must be a *form iterator* component. A form iterator is a component accepting a `fields` object as passed by [redux-form's `<FieldArray>` component](https://redux-form.com/7.3.0/examples/fieldarrays/), and defining a layout for an array of fields. For instance, the `<SimpleFormIterator>` component displays an array of fields in an unordered list (`<ul>`), one sub-form by list item (`<li>`). It also provides controls for adding and removing a sub-record (a backlink in this example).
+`<ArrayInput>` 需要一个子节点，它必须是* 表单迭代器 *组件。 表单迭代器是一个组件，它接受由redux-form `<FieldArray>` 组件传递的 `fields` 对象，并定义 fields 数组的布局。 例如，`<SimpleFormIterator>` 组件显示无序列表（`<ul>`）中的字段数组，按列表项（`<li>`）显示一个子表单。 It also provides controls for adding and removing a sub-record (a backlink in this example).
 
 You can pass `disableAdd` and `disableRemove` as props of `SimpleFormIterator`, to disable `ADD` and `REMOVE` button respectively. Default value of both is `false`.
 
