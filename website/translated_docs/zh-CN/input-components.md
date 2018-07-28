@@ -412,13 +412,13 @@ export const PostEdit = (props) => (
 </ImageInput>
 ```
 
-Writing a custom field component for displaying the current value(s) is easy: it's a standard [field](./Fields.md#writing_your_own_field_component).
+编写用于显示当前值的自定义 field 组件很简单：它是标准的 [Field](./Fields.md#writing_your_own_field_component)。
 
-When receiving **new** files, `ImageInput` will add a `rawFile` property to the object passed as the `record` prop of children. This `rawFile` is the [File](https://developer.mozilla.org/en-US/docs/Web/API/File) instance of the newly added file. This can be useful to display informations about size or mimetype inside a custom field.
+当接收到 **新的** 文件时，`ImageInput` 会将一个 `rawFile` 属性添加到作为子级 `record` 属性传递的对象中。 这个 `rawFile` 是新添加的文件 [File](https://developer.mozilla.org/en-US/docs/Web/API/File) 的实例。 这对于在自定义字段内显示大小或 mimetype 的信息很有用。
 
-The `ImageInput` component accepts all [react-dropzone properties](https://github.com/okonet/react-dropzone#features), in addition to those of react-admin. For instance, if you need to upload several images at once, just add the `multiple` DropZone attribute to your `<ImageInput />` field.
+除了react-admin之外，`ImageInput` 组件还接受所有 [react-dropzone](https://github.com/okonet/react-dropzone#features) 属性。 例如，如果您需要一次上传多个图像，只需将`多个` DropZone 属性添加到`<ImageInput/>` field 即可。
 
-If the default Dropzone label doesn't fit with your need, you can pass a `placeholder` attribute to overwrite it. The attribute can be anything React can render (`PropTypes.node`):
+如果默认的 dropzone 上标签不符合您的需要, 则可以传递 `placeholder` 属性来覆盖它。 属性可以是任何 React 可以渲染的东西（`PropTypes.node`）：
 
 ```jsx
 <ImageInput source="pictures" label="Related pictures" accept="image/*" placeholder={<p>Drop your file here</p>}>
