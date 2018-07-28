@@ -426,9 +426,9 @@ export const PostEdit = (props) => (
 </ImageInput>
 ```
 
-Note that the image upload returns a [File](https://developer.mozilla.org/en/docs/Web/API/File) object. It is your responsibility to handle it depending on your API behavior. You can for instance encode it in base64, or send it as a multi-part form data. Check [this example](./DataProviders.md#decorating-your-rest-client-example-of-file-upload) for base64 encoding data by extending the REST Client.
+请注意, 图像上载返回 [File](https://developer.mozilla.org/en/docs/Web/API/File) 对象。 根据您的 API 行为来处理它是您的责任。 例如，可以在 base64 中对其进行编码或者将其作为多部分表单数据发送。 通过扩展 REST 客户端，检查此 [示例](./DataProviders.md#decorating-your-rest-client-example-of-file-upload) 以获取 base64 编码数据。
 
-## `FileInput` Component
+## `FileInput` 组件
 
 `<FileInput>` allows to upload some files using [react-dropzone](https://github.com/okonet/react-dropzone).
 
