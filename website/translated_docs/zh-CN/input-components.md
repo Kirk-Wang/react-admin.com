@@ -899,11 +899,11 @@ import { SelectInput, ReferenceInput } from 'react-admin'
 </ReferenceInput>
 ```
 
-If, instead of showing choices as a dropdown list, you prefer to display them as a list of radio buttons, try the [`<RadioButtonGroupInput>`](#radiobuttongroupinput). And if the list is too big, prefer the [`<AutocompleteInput>`](#autocompleteinput).
+如果您不想将选项显示为下拉列表，而是希望将它们显示为单选按钮列表，请尝试 [`<RadioButtonGroupInput>`](#radiobuttongroupinput)。 如果列表太大，则更喜欢 [`<AutocompleteInput>`](#autocompleteinput)。
 
-## `SelectArrayInput` Component
+## ` SelectArrayInput ` 组件
 
-To let users choose several values in a list using a dropdown, use `<SelectArrayInput>`. It renders using [Material ui's `<Select>`](http://www.material-ui.com/#/components/select). Set the `choices` attribute to determine the options (with `id`, `name` tuples):
+要让用户使用下拉列表选择 list 中的几个值, 请使用 `< SelectArrayInput>`。 它使用 [ Material ui 的 `< Select>`](http://www.material-ui.com/#/components/select) 呈现。 设置 `choices` 属性以确定 options（具有 `id`, `name` 元组）：
 
 ```js
 import { SelectArrayInput } from 'react-admin';
@@ -919,7 +919,7 @@ import { SelectArrayInput } from 'react-admin';
 
 ![SelectArrayInput](https://marmelab.com/react-admin/img/select-array-input.gif)
 
-You can also customize the properties to use for the option name and value, thanks to the `optionText` and `optionValue` attributes.
+还可以自定义用于选项名称和值的属性，这归功于 `optionText` 和 `optionValue` 属性：
 
 ```js
 const choices = [
@@ -930,7 +930,7 @@ const choices = [
 <SelectArrayInput source="categories" choices={choices} optionText="plural_name" optionValue="_id" />
 ```
 
-`optionText` also accepts a function, so you can shape the option text at will:
+`optionText` 也接受一个函数，所以你可以随意设置选项文本：
 
 ```js
 const choices = [
@@ -942,7 +942,7 @@ const optionRenderer = choice => `${choice.name} (${choice.quantity})`;
 <SelectArrayInput source="categories" choices={choices} optionText={optionRenderer} />
 ```
 
-The choices are translated by default, so you can use translation identifiers as choices:
+默认情况下翻译当前选项，因此您可以使用翻译标识符作为选项：
 
 ```js
 const choices = [
@@ -951,7 +951,7 @@ const choices = [
 ];
 ```
 
-Lastly, use the `options` attribute if you want to override any of the `<Select>` attributes:
+最后，如果要覆盖任何 `<Select>` 的属性，请使用` options `属性：
 
 {% raw %}
 
@@ -961,7 +961,7 @@ Lastly, use the `options` attribute if you want to override any of the `<Select>
 
 {% endraw %}
 
-Refer to [the Select documentation](http://www.material-ui.com/#/components/select) for more details.
+有关详细信息, 请参阅 [ Select 文档](http://www.material-ui.com/#/components/select)。
 
 The `SelectArrayInput` component **cannot** be used inside a `ReferenceInput` but can be used inside a `ReferenceArrayInput`.
 
