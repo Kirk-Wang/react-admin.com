@@ -398,13 +398,13 @@ export const PostEdit = (props) => (
 );
 ```
 
-## `ImageInput` Component
+## `ImageInput` 组件
 
-`<ImageInput>` allows to upload some pictures using [react-dropzone](https://github.com/okonet/react-dropzone).
+`<ImageInput>` 允许使用 [react-dropzone](https://github.com/okonet/react-dropzone) 上传一些图片。
 
 ![ImageInput](https://marmelab.com/react-admin/img/image-input.png)
 
-Previews are enabled using `<ImageInput>` children, as following:
+使用 `<ImageInput>` 子项启用预览，如下所示：
 
 ```jsx
 <ImageInput source="pictures" label="Related pictures" accept="image/*">
