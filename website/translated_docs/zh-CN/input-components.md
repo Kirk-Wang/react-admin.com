@@ -257,9 +257,9 @@ import { NullableBooleanInput } from 'react-admin';
 
 ![NullableBooleanInput](https://marmelab.com/react-admin/img/nullable-boolean-input.png)
 
-## `CheckboxGroupInput` Component
+## `CheckboxGroupInput` 组件
 
-If you want to let the user choose multiple values among a list of possible values by showing them all, `<CheckboxGroupInput>` is the right component. Set the `choices` attribute to determine the options (with `id`, `name` tuples):
+如果要让用户通过显示所有可能的值来选择多个值, 则 `<CheckboxGroupInput>` 是正确的组件。 设置 `choices` 属性以确定 options （使用 `id`, `name` 元组）：
 
 ```jsx
 import { CheckboxGroupInput } from 'react-admin';
@@ -273,7 +273,7 @@ import { CheckboxGroupInput } from 'react-admin';
 
 ![CheckboxGroupInput](https://marmelab.com/react-admin/img/checkbox-group-input.png)
 
-You can also customize the properties to use for the option name and value, thanks to the `optionText` and `optionValue` attributes:
+还可以自定义用于选项名称和值的属性，这归功于 `optionText` 和 `optionValue` 属性：
 
 ```jsx
 const choices = [
@@ -283,7 +283,7 @@ const choices = [
 <CheckboxGroupInput source="author_id" choices={choices} optionText="full_name" optionValue="_id" />
 ```
 
-`optionText` also accepts a function, so you can shape the option text at will:
+`optionText` 还接受一个函数, 因此您可以按意愿对选项文本进行设置：
 
 ```jsx
 const choices = [
