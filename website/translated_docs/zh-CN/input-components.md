@@ -109,9 +109,9 @@ import { ArrayInput, SimpleFormIterator, DateInput, UrlInput } from 'react-admin
 </ArrayInput>
 ```
 
-## `AutocompleteInput` Component
+## ` AutocompleteInput `组件
 
-To let users choose a value in a list using a dropdown with autocompletion, use `<AutocompleteInput>`. It renders using [react-autosuggest](http://react-autosuggest.js.org/) and a `fuzzySearch` filter. Set the `choices` attribute to determine the options list (with `id`, `name` tuples).
+要让用户使用带有自动完成功能的下拉列表在 list 中选择一个值, 请使用 `<AutocompleteInput>`。 它使用 [ react-autosuggest](http://react-autosuggest.js.org/) 和 `fuzzySearch` 筛选器渲染。 设置 `choices` 属性以确定选项列表 (使用 `id`, `name` tuples)。
 
 ```jsx
 import { AutocompleteInput } from 'react-admin';
@@ -123,7 +123,7 @@ import { AutocompleteInput } from 'react-admin';
 ]} />
 ```
 
-You can also customize the properties to use for the option name and value, thanks to the `optionText` and `optionValue` attributes:
+还可以自定义用于选项名称和值的属性，这归功于 `optionText` 和 `optionValue` 属性：
 
 ```jsx
 const choices = [
@@ -133,7 +133,7 @@ const choices = [
 <AutocompleteInput source="author_id" choices={choices} optionText="full_name" optionValue="_id" />
 ```
 
-`optionText` also accepts a function, so you can shape the option text at will:
+`optionText` 也接受一个函数，所以你可以随意设置选项文本：
 
 ```jsx
 const choices = [
