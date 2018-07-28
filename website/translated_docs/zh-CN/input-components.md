@@ -247,7 +247,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 有关详细信息, 请参阅 [Material UI Switch 文档](http://www.material-ui.com/#/components/switch)。
 
-`<NullableBooleanInput />` renders as a dropdown list, allowing to choose between true, false, and null values.
+`<NullableBooleanInput />` 呈现为下拉列表，允许在 true、false 和 null 值之间进行选择。
 
 ```jsx
 import { NullableBooleanInput } from 'react-admin';
