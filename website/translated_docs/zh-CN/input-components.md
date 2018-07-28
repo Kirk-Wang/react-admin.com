@@ -693,7 +693,7 @@ import { ReferenceInput, SelectInput } from 'react-admin'
 </Admin>
 ```
 
-如果要在选项列表中添加值为 null 的空选项，请设置` allowEmpty ` 属性。 禁用` allowEmpty `并不意味着需要输入。 If you want to make the input required, you must add a validator as indicated in [Validation Documentation](./CreateEdit.html#validation). Enabling the `allowEmpty` props just adds an empty choice (with `null` value) on top of the options, and makes the value nullable.
+如果要在选项列表中添加值为 null 的空选项，请设置` allowEmpty ` 属性。 禁用` allowEmpty `并不意味着需要输入。 如果要进行所需的输入，则必须按照 [验证文档](./CreateEdit.html#validation) 中的说明添加验证器。 启用 `allowEmpty` 属性只会在选项之上添加一个空选项（具有` null `值），并使值可为空。
 
 ```jsx
 import { ReferenceInput, SelectInput } from 'react-admin'
@@ -703,7 +703,7 @@ import { ReferenceInput, SelectInput } from 'react-admin'
 </ReferenceInput>
 ```
 
-**Tip**: `allowEmpty` is set by default for all Input components children of the `<Filter>` component:
+**提示</ strong>：默认情况下为 `<Filter>` 组件的所有子级输入组件设置` allowEmpty `：</p> 
 
 ```jsx
 const CommentFilter = (props) => (
@@ -715,7 +715,7 @@ const CommentFilter = (props) => (
 );
 ```
 
-You can tweak how this component fetches the possible values using the `perPage`, `sort`, and `filter` props.
+您可以使用` perPage `，` sort `和` filter ` 属性来调整此组件如何获取可能的值。
 
 {% raw %}
 
@@ -750,7 +750,7 @@ You can tweak how this component fetches the possible values using the `perPage`
 
 {% endraw %}
 
-The child component may further filter results (that's the case, for instance, for `<AutocompleteInput>`). ReferenceInput passes a `setFilter` function as prop to its child component. It uses the value to create a filter for the query - by default `{ q: [searchText] }`. You can customize the mapping `searchText => searchQuery` by setting a custom `filterToQuery` function prop:
+子组件可以进一步过滤结果（例如，`< AutocompleteInput>`的情况）。 ReferenceInput 将 ` setFilter `函数作为属性传递给其子组件。 它使用该值为查询创建过滤器 - 默认情况下为 `{q: [searchText] }`。 您可以自定义映射 `searchText => searchQuery `通过设置自定义` filterToQuery ` 函数属性：
 
 ```jsx
 <ReferenceInput
@@ -761,7 +761,7 @@ The child component may further filter results (that's the case, for instance, f
 </ReferenceInput>
 ```
 
-The child component receives the following props from `<ReferenceInput>`:
+子组件从 `<ReferenceInput>` 接收以下属性：
 
 * `isLoading`: whether the request for possible values is loading or not
 * `filter`: the current filter of the request for possible values. Defaults to `{}`.
