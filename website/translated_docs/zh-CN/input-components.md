@@ -193,9 +193,9 @@ import { AutocompleteInput, ReferenceInput } from 'react-admin'
 </ReferenceInput>
 ```
 
-**Tip**: `<AutocompleteInput>` is a stateless component, so it only allows to *filter* the list of choices, not to *extend* it. If you need to populate the list of choices based on the result from a `fetch` call (and if [`<ReferenceInput>`](#referenceinput) doesn't cover your need), you'll have to [write your own Input component](#writing-your-own-input-component) based on material-ui `<AutoComplete>` component.
+**提示**： `<AutocompleteInput>` 是一个无状态组件，所以它只允许 *过滤* choice 列表，而不是 *扩展*。 如果您需要根据 `fetch` 调用的结果填充选项列表（如[`<ReferenceInput>`](#referenceinput)不能满足您的需要），你得编写[自己的输入组件](#writing-your-own-input-component)， 基于 material-ui `<AutoComplete>` 组件。
 
-**Tip**: React-admin's `<AutocompleteInput>` has only a capital A, while material-ui's `<AutoComplete>` has a capital A and a capital C. Don't mix up the components!
+**提示**：React-admin 的 `<AutocompleteInput>` 只有一个大写字母 A，而 material-ui 的 `<AutoComplete>` 有一个大写字母A和一个大写字母C。不要混淆组件！
 
 ### Properties
 
@@ -211,7 +211,7 @@ import { AutocompleteInput, ReferenceInput } from 'react-admin'
 | `setFilter`           | Optional | `Function`               | null                                                                                                                     | A callback to inform the `searchText` has changed and new `choices` can be retrieved based on this `searchText`. Signature `searchText => void`. This function is automatically setup when using `ReferenceInput`.                         |
 | `suggestionComponent` | Optional | Function                 | `({ suggestion, query, isHighlighted, props }) => <div {...props} />`                                           | Allows to override how the item is rendered.                                                                                                                                                                                                  |
 
-## `BooleanInput` and `NullableBooleanInput` Component
+## `BooleanInput` 与 `NullableBooleanInput` 组件
 
 `<BooleanInput />` is a toggle button allowing you to attribute a `true` or `false` value to a record field.
 
