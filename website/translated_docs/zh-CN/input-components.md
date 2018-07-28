@@ -523,7 +523,7 @@ const optionRenderer = choice => `${choice.first_name} ${choice.last_name}`;
 <RadioButtonGroupInput source="author_id" choices={choices} optionText={optionRenderer} />
 ```
 
-`optionText` 也接受一个 Reac t元素，它将被克隆，并接收相关选择作为`record` 属性。您可以在那里使用 Field 组件。
+`optionText` 也接受一个 React 元素，它将被克隆，并接收相关选择作为 `record` 属性。您可以在那里使用 Field 组件。
 
 ```jsx
 const choices = [
@@ -534,7 +534,7 @@ const FullNameField = ({ record }) => <span>{record.first_name} {record.last_nam
 <RadioButtonGroupInput source="gender" choices={choices} optionText={<FullNameField />}/>
 ```
 
-The choices are translated by default, so you can use translation identifiers as choices:
+默认情况下翻译当前选项，因此您可以使用翻译标识符作为选项：
 
 ```jsx
 const choices = [
@@ -543,13 +543,13 @@ const choices = [
 ];
 ```
 
-However, in some cases (e.g. inside a `<ReferenceInput>`), you may not want the choice to be translated. In that case, set the `translateChoice` prop to false.
+但是, 在某些情况下 (例如, 在 `<ReferenceInput>`中)，您可能不希望翻译该选项。在这种情况下, 将 `translateChoice` 设置为 false。
 
 ```jsx
 <RadioButtonGroupInput source="gender" choices={choices} translateChoice={false}/>
 ```
 
-Lastly, use the `options` attribute if you want to override any of Material UI's `<RadioButtonGroup>` attributes:
+最后，如果要覆盖任何 Material UI 的 `<RadioButtonGroup>` 属性，请使用` options `属性：
 
 {% raw %}
 
@@ -561,9 +561,9 @@ Lastly, use the `options` attribute if you want to override any of Material UI's
 
 {% endraw %}
 
-Refer to [Material UI RadioGroup documentation](http://www.material-ui.com/#/components/radio-button) for more details.
+有关详细信息, 请参阅 [Material UI RadioGroup 文档](http://www.material-ui.com/#/components/radio-button)。
 
-**Tip**: If you want to populate the `choices` attribute with a list of related records, you should decorate `<RadioButtonGroupInput>` with [`<ReferenceInput>`](#referenceinput), and leave the `choices` empty:
+**提示**：如果要使用相关记录的列表填充 `choices` 属性，则应使用 [`<ReferenceInput>`](#referenceinput) 装饰`<AutocompleteInput>`，并将 `choices` 留空：
 
 ```jsx
 import { RadioButtonGroupInput, ReferenceInput } from 'react-admin'
@@ -573,9 +573,9 @@ import { RadioButtonGroupInput, ReferenceInput } from 'react-admin'
 </ReferenceInput>
 ```
 
-## `ReferenceArrayInput` Component
+## `ReferenceArrayInput` 组件
 
-Use `<ReferenceArrayInput>` to edit an array of reference values, i.e. to let users choose a list of values (usually foreign keys) from another REST endpoint.
+使用 `<ReferenceArrayInput>` 编辑引用值数组，即让用户从另一个 REST 端点中选择值列表（通常是外键）。
 
 `<ReferenceArrayInput>` fetches the related resources (using the `CRUD_GET_MANY` REST method) as well as possible resources (using the `CRUD_GET_MATCHING` REST method) in the reference endpoint.
 
