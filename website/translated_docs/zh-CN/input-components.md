@@ -774,11 +774,11 @@ const CommentFilter = (props) => (
 * `setPagination`: : function to call to update the pagination of the request for possible values
 * `setSort`: function to call to update the sorting of the request for possible values
 
-## `RichTextInput` Component
+## ` RichTextInput ` 组件
 
-`<RichTextInput>` is the ideal component if you want to allow your users to edit some HTML contents. It is powered by [Quill](https://quilljs.com/).
+如果您希望允许用户编辑某些 HTML 内容，`<RichTextInput>` 是理想的组件。它由 [Quill](https://quilljs.com/) 提供动力。
 
-**Note**: Due to its size, `<RichTextInput>` is not bundled by default with react-admin. You must install it first, using npm:
+注意：由于其大小，`<RichTextInput>` 默认情况下不与 react-admin 捆绑在一起。 您必须先使用npm 安装它：
 
 ```sh
 npm install ra-input-rich-text
@@ -794,15 +794,15 @@ import RichTextInput from 'ra-input-rich-text';
 
 ![RichTextInput](https://marmelab.com/react-admin/img/rich-text-input.png)
 
-You can customize the rich text editor toolbar using the `toolbar` attribute, as described on the [Quill official toolbar documentation](https://quilljs.com/docs/modules/toolbar/).
+您可以使用 `toolbar` 属性自定义富文本编辑器工具栏，如 [Quill官方工具栏文档](https://quilljs.com/docs/modules/toolbar/) 中所述。
 
 ```jsx
 <RichTextInput source="body" toolbar={[ ['bold', 'italic', 'underline', 'link'] ]} />
 ```
 
-## `SelectInput` Component
+## `SelectInput` 组件
 
-To let users choose a value in a list using a dropdown, use `<SelectInput>`. It renders using [Material ui's `<SelectField>`](http://www.material-ui.com/#/components/select-field). Set the `choices` attribute to determine the options (with `id`, `name` tuples):
+要让用户使用下拉列表选择 list 中的值, 请使用 `<SelectInput>`。 它使用 [ Material ui 的 `<SelectField>`](http://www.material-ui.com/#/components/select-field) 呈现。 设置 `choices` 属性以确定 options（具有 `id`, `name` 元组）：
 
 ```jsx
 import { SelectInput } from 'react-admin';
