@@ -159,7 +159,7 @@ const choices = [
 <AutocompleteInput source="gender" choices={choices} translateChoice={false}/>
 ```
 
-默认情况下，组件使用当前 Input searchText 匹配选项：如果找到匹配项，则将选择此选项。 例如，给出选项` [{id：'M'，name：'Male'，id：'F'，name：'Female'}] `，当用户输入文本` male `时，然后组件将输入值设置为` M </ code>。 如果需要更改选择的匹配方式, 请将自定义函数作为 <code>inputValueMatcher` 属性传递。 For example, given the choices: `[{id:1,iso2:'NL',name:'Dutch'},{id:2,iso2:'EN',name:'English'},{id:3,iso2:'FR',name:'French'}]`, if you want to match choices on the iso2 code, you can create the following `inputValueMatcher` function:
+默认情况下，组件使用当前 Input searchText 匹配选项：如果找到匹配项，则将选择此选项。 例如，给出选项` [{id：'M'，name：'Male'，id：'F'，name：'Female'}] `，当用户输入文本` male `时，然后组件将输入值设置为` M </ code>。 如果需要更改选择的匹配方式, 请将自定义函数作为 <code>inputValueMatcher` 属性传递。 例如，给定以下选项：`[{id:1,iso2:'NL',name:'Dutch'},{id:2,iso2:'EN',name:'English'},{id:3,iso2:'FR',name:'French'}]`，如果要匹配 iso2 上的选项代码中, 可以创建以下 `inputValueMatcher` 函数：
 
 ```javascript
 <AutocompleteInput inputValueMatcher={
@@ -169,9 +169,9 @@ const choices = [
 }/>
 ```
 
-If you want to limit the initial choices shown to the current value only, you can set the `limitChoicesToValue` prop.
+如果要将显示的初始选择限制为仅当前值，可以设置` limitChoicesToValue </ 0> 属性。</p>
 
-Lastly, `<AutocompleteInput>` renders a meterial-ui `<TextField>` component. Use the `options` attribute to override any of the `<TextField>` attributes:
+<p>Lastly, <code><AutocompleteInput>` renders a meterial-ui `<TextField>` component. Use the `options` attribute to override any of the `<TextField>` attributes:
 
 {% raw %}
 
