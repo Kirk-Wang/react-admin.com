@@ -577,9 +577,9 @@ import { RadioButtonGroupInput, ReferenceInput } from 'react-admin'
 
 使用 `<ReferenceArrayInput>` 编辑引用值数组，即让用户从另一个 REST 端点中选择值列表（通常是外键）。
 
-`<ReferenceArrayInput>` fetches the related resources (using the `CRUD_GET_MANY` REST method) as well as possible resources (using the `CRUD_GET_MATCHING` REST method) in the reference endpoint.
+在引用端点中，`<ReferenceArrayInput>` 获取相关资源（使用`CRUD_GET_MANY` REST方法）与获取可能的资源（使用`CRUD_GET_MATCHING` REST方法）一样
 
-For instance, if the post object has many tags, a post resource may look like:
+例如，如果 post 对象有许多 tag，则 post 资源可能如下所示：
 
 ```js
 {
@@ -588,17 +588,17 @@ For instance, if the post object has many tags, a post resource may look like:
 }
 ```
 
-Then `<ReferenceArrayInput>` would fetch a list of tag resources from these two calls:
+然后 `<ReferenceArrayInput>` 将从这两个调用中获取 tag 资源列表：
 
     http://myapi.com/tags?id=[1,23,4]
     http://myapi.com/tags?page=1&perPage=25
     
 
-Once it receives the deduplicated reference resources, this component delegates rendering to a subcomponent, to which it passes the possible choices as the `choices` attribute.
+一旦接收到重复数据删除的引用资源，该组件将渲染委托给一个子组件，它将可能的选择作为 `choices` 属性传递给该子组件。
 
-This means you can use `<ReferenceArrayInput>` with [`<SelectArrayInput>`](#selectarrayinput), or with the component of your choice, provided it supports the `choices` attribute.
+这意味着您可以使用具有 [`<SelectArrayInput>`](#selectarrayinput) 的 `<ReferenceArrayInput>`，或者使用您选择的组件，只要它支持 `choices` 属性。
 
-The component expects a `source` and a `reference` attributes. For instance, to make the `tag_ids` for a `post` editable:
+该组件需要一个 `source` 和 `reference` 属性。 例如，要使 `post` 的 `tag_ids` 可编辑：
 
 ```js
 import { ReferenceArrayInput, SelectArrayInput } from 'react-admin'
