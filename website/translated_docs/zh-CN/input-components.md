@@ -488,7 +488,7 @@ import { NumberInput } from 'react-admin';
 
 ## `RadioButtonGroupInput` 组件
 
-If you want to let the user choose a value among a list of possible values by showing them all (instead of hiding them behind a dropdown list, as in [`<SelectInput>`](#selectinput)), `<RadioButtonGroupInput>` is the right component. Set the `choices` attribute to determine the options (with `id`, `name` tuples):
+如果要让用户通过显示的所有值（而不是将它们隐藏在下拉列表之后）选择一个在可能值列表中的值，如 [`<SelectInput>`](#selectinput)，`<RadioButtonGroupInput>` 是正确的组件。 设置 `choices` 属性来确定选项（使用 `id`，`name` 元组）：
 
 ```jsx
 import { RadioButtonGroupInput } from 'react-admin';
@@ -502,7 +502,7 @@ import { RadioButtonGroupInput } from 'react-admin';
 
 ![RadioButtonGroupInput](https://marmelab.com/react-admin/img/radio-button-group-input.png)
 
-You can also customize the properties to use for the option name and value, thanks to the `optionText` and `optionValue` attributes:
+还可以自定义用于选项名称和值的属性, 这归功于 `optionText` 和 `optionValue` 属性：
 
 ```jsx
 const choices = [
@@ -512,7 +512,7 @@ const choices = [
 <RadioButtonGroupInput source="author_id" choices={choices} optionText="full_name" optionValue="_id" />
 ```
 
-`optionText` also accepts a function, so you can shape the option text at will:
+`optionText` 还接受一个函数, 因此您可以按意愿对选项文本进行设置：
 
 ```jsx
 const choices = [
@@ -523,7 +523,7 @@ const optionRenderer = choice => `${choice.first_name} ${choice.last_name}`;
 <RadioButtonGroupInput source="author_id" choices={choices} optionText={optionRenderer} />
 ```
 
-`optionText` also accepts a React Element, that will be cloned and receive the related choice as the `record` prop. You can use Field components there.
+`optionText` 也接受一个 Reac t元素，它将被克隆，并接收相关选择作为`record` 属性。您可以在那里使用 Field 组件。
 
 ```jsx
 const choices = [
