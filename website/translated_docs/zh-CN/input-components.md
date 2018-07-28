@@ -144,7 +144,7 @@ const optionRenderer = choice => `${choice.first_name} ${choice.last_name}`;
 <AutocompleteInput source="author_id" choices={choices} optionText={optionRenderer} />
 ```
 
-The choices are translated by default, so you can use translation identifiers as choices:
+默认情况下将转换这些选项，因此可以将翻译标识符用作选项：
 
 ```jsx
 const choices = [
@@ -153,7 +153,7 @@ const choices = [
 ];
 ```
 
-However, in some cases (e.g. inside a `<ReferenceInput>`), you may not want the choice to be translated. In that case, set the `translateChoice` prop to false.
+但是, 在某些情况下 (例如, 在 `<ReferenceInput>`中)，您可能不希望翻译该选项。在这种情况下, 将 `translateChoice` 设置为 false。
 
 ```jsx
 <AutocompleteInput source="gender" choices={choices} translateChoice={false}/>
