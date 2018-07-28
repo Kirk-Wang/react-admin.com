@@ -458,9 +458,9 @@ export const PostEdit = (props) => (
 
 请注意, 文件上载返回 [File](https://developer.mozilla.org/en/docs/Web/API/File) 对象。 根据您的 API 行为来处理它是您的责任。 例如，可以在 base64 中对其进行编码或者将其作为多部分表单数据发送。 通过扩展 REST 客户端，查看此 [示例](./DataProviders.md#decorating-your-rest-client-example-of-file-upload) 以获取 base64 编码数据。
 
-## `LongTextInput` Component
+## `LongTextInput` 组件
 
-`<LongTextInput>` is the best choice for multiline text values. It renders as an auto expandable textarea.
+`<LongTextInput>` 是多行文本值的最佳选择。它呈现为自动扩展 textarea。
 
 ```jsx
 import { LongTextInput } from 'react-admin';
@@ -470,9 +470,9 @@ import { LongTextInput } from 'react-admin';
 
 ![LongTextInput](https://marmelab.com/react-admin/img/long-text-input.png)
 
-## `NumberInput` Component
+## `NumberInput` 组件
 
-`<NumberInput>` translates to a HTML `<input type="number">`. It is necessary for numeric values because of a [known React bug](https://github.com/facebook/react/issues/1425), which prevents using the more generic [`<TextInput>`](#textinput) in that case.
+`<NumberInput>` 转换为HTMl `<input type="number">`。 由于 [known React bug](https://github.com/facebook/react/issues/1425)，因此数字值是必需的，在那种情况下这阻止了使用更通用的 [<TextInput></code>](#textinput)。
 
 ```jsx
 import { NumberInput } from 'react-admin';
@@ -480,13 +480,13 @@ import { NumberInput } from 'react-admin';
 <NumberInput source="nb_views" />
 ```
 
-You can customize the `step` props (which defaults to "any"):
+您可以自定义 `step` 属性（默认为“any”）：
 
 ```jsx
 <NumberInput source="nb_views" step={1} />
 ```
 
-## `RadioButtonGroupInput` Component
+## `RadioButtonGroupInput` 组件
 
 If you want to let the user choose a value among a list of possible values by showing them all (instead of hiding them behind a dropdown list, as in [`<SelectInput>`](#selectinput)), `<RadioButtonGroupInput>` is the right component. Set the `choices` attribute to determine the options (with `id`, `name` tuples):
 
