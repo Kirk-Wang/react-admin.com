@@ -610,7 +610,7 @@ import { ReferenceArrayInput, SelectArrayInput } from 'react-admin'
 
 ![SelectArrayInput](https://marmelab.com/react-admin/img/select-array-input.gif)
 
-**Note**: You **must** add a `<Resource>` for the reference resource - react-admin needs it to fetch the reference data. You can omit the list prop in this reference if you want to hide it in the sidebar menu.
+**注意**：你**必须**为引用资源添加一个`<Resource>` - react-admin 需要它来获取引用数据。 如果你想在侧边栏菜单中隐藏它，你 可以 省略此引用中的 list 属性。
 
 ```js
 <Admin dataProvider={myDataProvider}>
@@ -619,7 +619,7 @@ import { ReferenceArrayInput, SelectArrayInput } from 'react-admin'
 </Admin>
 ```
 
-Set the `allowEmpty` prop when you want to add an empty choice with a value of null in the choices list. Disabling `allowEmpty` does not mean that the input will be required. If you want to make the input required, you must add a validator as indicated in [Validation Documentation](./CreateEdit.html#validation). Enabling the `allowEmpty` props just adds an empty choice (with `null` value) on top of the options, and makes the value nullable.
+如果要在选项列表中添加值为null的空选项，请设置` allowEmpty ` 属性。 禁用` allowEmpty `并不意味着需要输入。 If you want to make the input required, you must add a validator as indicated in [Validation Documentation](./CreateEdit.html#validation). Enabling the `allowEmpty` props just adds an empty choice (with `null` value) on top of the options, and makes the value nullable.
 
 ```js
 import { ReferenceArrayInput, SelectArrayInput } from 'react-admin'
