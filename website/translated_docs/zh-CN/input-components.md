@@ -816,7 +816,7 @@ import { SelectInput } from 'react-admin';
 
 ![SelectInput](https://marmelab.com/react-admin/img/select-input.gif)
 
-You can also customize the properties to use for the option name and value, thanks to the `optionText` and `optionValue` attributes:
+还可以自定义用于选项名称和值的属性, 这归功于 `optionText` 和 `optionValue` 属性：
 
 ```jsx
 const choices = [
@@ -826,7 +826,7 @@ const choices = [
 <SelectInput source="author_id" choices={choices} optionText="full_name" optionValue="_id" />
 ```
 
-`optionText` also accepts a function, so you can shape the option text at will:
+`optionText` 也接受一个函数，所以你可以随意设置选项文本：
 
 ```jsx
 const choices = [
@@ -837,7 +837,7 @@ const optionRenderer = choice => `${choice.first_name} ${choice.last_name}`;
 <SelectInput source="author_id" choices={choices} optionText={optionRenderer} />
 ```
 
-`optionText` also accepts a React Element, that will be cloned and receive the related choice as the `record` prop. You can use Field components there.
+`optionText` 还接受一个 React 元素, 它将被克隆并接收与 `record` 属性相关的选项。您可以在那里使用 Field 组件。
 
 ```jsx
 const choices = [
@@ -848,7 +848,7 @@ const FullNameField = ({ record }) => <span>{record.first_name} {record.last_nam
 <SelectInput source="gender" choices={choices} optionText={<FullNameField />}/>
 ```
 
-Enabling the `allowEmpty` props adds an empty choice (with `null` value) on top of the options, and makes the value nullable:
+启用 `allowEmpty` 属性只会在选项之上添加一个空选项（具有` null `值），并使值可为空。
 
 ```jsx
 <SelectInput source="category" allowEmpty choices={[
@@ -858,7 +858,7 @@ Enabling the `allowEmpty` props adds an empty choice (with `null` value) on top 
 ]} />
 ```
 
-The choices are translated by default, so you can use translation identifiers as choices:
+默认情况下翻译当前选项，因此您可以使用翻译标识符作为选项：
 
 ```jsx
 const choices = [
@@ -867,15 +867,15 @@ const choices = [
 ];
 ```
 
-However, in some cases, you may not want the choice to be translated. In that case, set the `translateChoice` prop to false.
+但是, 在某些情况下您可能不希望翻译该选项。在这种情况下, 将 `translateChoice` 设置为 false。
 
 ```jsx
 <SelectInput source="gender" choices={choices} translateChoice={false}/>
 ```
 
-Note that `translateChoice` is set to false when `<SelectInput>` is a child of `<ReferenceInput>`.
+请注意，当 `<SelectInput>` 是 `<ReferenceInput>` 的子项时， `translateChoice` 设置为 false。
 
-Lastly, use the `options` attribute if you want to override any of Material UI's `<SelectField>` attributes:
+最后，如果要覆盖任何 Material UI 的 `< SelectField>` 属性，请使用` options `属性：
 
 {% raw %}
 
@@ -887,9 +887,9 @@ Lastly, use the `options` attribute if you want to override any of Material UI's
 
 {% endraw %}
 
-Refer to [Material UI SelectField documentation](http://www.material-ui.com/#/components/select-field) for more details.
+有关详细信息, 请参阅 [Material UI SelectField 文档](http://www.material-ui.com/#/components/select-field)。
 
-**Tip**: If you want to populate the `choices` attribute with a list of related records, you should decorate `<SelectInput>` with [`<ReferenceInput>`](#referenceinput), and leave the `choices` empty:
+**提示**：如果要使用相关记录的列表填充 `choices` 属性，则应使用 [`<ReferenceInput>`](#referenceinput) 装饰 `<SelectInput>` ，并将 `choices` 留空：
 
 ```jsx
 import { SelectInput, ReferenceInput } from 'react-admin'
