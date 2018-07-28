@@ -668,11 +668,11 @@ import { ReferenceArrayInput, SelectArrayInput } from 'react-admin'
 
 ## `ReferenceInput` 组件
 
-Use `<ReferenceInput>` for foreign-key values, for instance, to edit the `post_id` of a `comment` resource. This component fetches the possible values in the reference resource (using the `GET_LIST` REST method) and the referenced record (using the `GET_ONE` REST method), then delegates rendering to a subcomponent, to which it passes the possible choices as the `choices` attribute.
+例如，对外键值使用 `<ReferenceInput>` 来编辑 `comment` 资源的 `post_id`。 此组件获取引用资源中的可能值（使用 `GET_LIST` REST方法）和引用的记录（使用 `GET_ONE` REST方法），然后将呈现委托给子组件，它将可能的选项作为 `choices` 属性传递给子组件。
 
-This means you can use `<ReferenceInput>` with any of [`<SelectInput>`](#selectinput), [`<AutocompleteInput>`](#autocompleteinput), or [`<RadioButtonGroupInput>`](#radiobuttongroupinput), or even with the component of your choice, provided it supports the `choices` attribute.
+这意味着您可以将 `<ReferenceInput>` 与 [`<SelectInput>`](#selectinput) ，[`<AutocompleteInput>`](#autocompleteinput) 或 [`<RadioButtonGroupInput>`](#radiobuttongroupinput) 中的任何一个一起使用，或者甚至使用您选择的组件，前提是它支持 `choices` 属性。
 
-The component expects a `source` and a `reference` attributes. For instance, to make the `post_id` for a `comment` editable:
+该组件需要一个 `source` 和 `reference` 属性。 例如，要使 `comment` 的 `post_id` 可编辑：
 
 ```jsx
 import { ReferenceInput, SelectInput } from 'react-admin'
@@ -684,7 +684,7 @@ import { ReferenceInput, SelectInput } from 'react-admin'
 
 ![ReferenceInput](https://marmelab.com/react-admin/img/reference-input.gif)
 
-**Note**: You **must** add a `<Resource>` for the reference resource - react-admin needs it to fetch the reference data. You *can* omit the `list` prop in this reference if you want to hide it in the sidebar menu.
+**注意**：你**必须**为引用资源添加一个`<Resource>` - react-admin 需要它来获取引用数据。 如果你想在侧边栏菜单中隐藏它，你 *可以* 省略此引用中的 `list` 属性。
 
 ```jsx
 <Admin dataProvider={myDataProvider}>
