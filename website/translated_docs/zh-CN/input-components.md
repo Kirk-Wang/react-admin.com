@@ -294,7 +294,7 @@ const optionRenderer = choice => `${choice.first_name} ${choice.last_name}`;
 <CheckboxGroupInput source="author_id" choices={choices} optionText={optionRenderer} />
 ```
 
-`optionText` also accepts a React Element, that will be cloned and receive the related choice as the `record` prop. You can use Field components there.
+`optionText` 还接受一个 React 元素, 它将被克隆并接收与 `record` 属性相关的选项。您可以在那里使用 Field 组件。
 
 ```jsx
 const choices = [
@@ -305,7 +305,7 @@ const FullNameField = ({ record }) => <span>{record.first_name} {record.last_nam
 <CheckboxGroupInput source="gender" choices={choices} optionText={<FullNameField />}/>
 ```
 
-The choices are translated by default, so you can use translation identifiers as choices:
+默认情况下翻译当前选项，因此您可以使用翻译标识符作为选项：
 
 ```jsx
 const choices = [
@@ -315,13 +315,13 @@ const choices = [
 ];
 ```
 
-However, in some cases (e.g. inside a `<ReferenceInput>`), you may not want the choice to be translated. In that case, set the `translateChoice` prop to false.
+但是, 在某些情况下 (例如, 在 `<ReferenceInput>`中)，您可能不希望翻译该选项。在这种情况下，将 `translateChoice` 设置为 false。
 
 ```jsx
 <CheckboxGroupInput source="gender" choices={choices} translateChoice={false}/>
 ```
 
-Lastly, use the `options` attribute if you want to override any of Material UI's `<Checkbox>` attributes:
+最后，如果要覆盖任何 Material UI 的 `<Checkbox>` 属性，请使用` options `属性：
 
 {% raw %}
 
@@ -333,11 +333,11 @@ Lastly, use the `options` attribute if you want to override any of Material UI's
 
 {% endraw %}
 
-Refer to [Material UI Checkbox documentation](http://www.material-ui.com/#/components/checkbox) for more details.
+有关详细信息, 请参阅 [Material UI Checkbox 文档](http://www.material-ui.com/#/components/checkbox)。
 
-## `DateInput` Component
+## `DateInput` 组件
 
-Ideal for editing dates, `<DateInput>` renders a standard browser [Date Picker](http://www.material-ui.com/#/components/date-picker).
+理想的编辑日期, `<DateInput>` 呈现标准浏览器 [日期选取器](http://www.material-ui.com/#/components/date-picker)。
 
 ```jsx
 import { DateInput } from 'react-admin';
@@ -347,9 +347,9 @@ import { DateInput } from 'react-admin';
 
 ![DateInput](./img/date-input.gif)
 
-## `DisabledInput` Component
+## `DisabledInput` 组件
 
-When you want to display a record property in an `<Edit>` form without letting users update it (such as for auto-incremented primary keys), use the `<DisabledInput>`:
+如果要在 `<Edit></ code> 表单中显示记录属性而不让用户更新它（例如自动递增的主键），请使用<code><DisabledInput>`：
 
 ```jsx
 import { DisabledInput } from 'react-admin';
@@ -359,7 +359,7 @@ import { DisabledInput } from 'react-admin';
 
 ![DisabledInput](https://marmelab.com/react-admin/img/disabled-input.png)
 
-**Tip**: To add non-editable fields to the `<Edit>` view, you can also use one of react-admin `Field` components:
+**提示</ strong>：要将不可修改的字段添加到 `<Edit>` 视图，您还可以使用 react-admin ` Field `组件之一：</p> 
 
 ```jsx
 // in src/posts.js
@@ -375,7 +375,7 @@ export const PostEdit = (props) => (
 );
 ```
 
-**Tip**: You can even use a component of your own, provided it accepts a `record` prop:
+**提示**：您甚至可以使用自己的组件，前提是它接受 `record` 属性：
 
 ```jsx
 // in src/posts.js
