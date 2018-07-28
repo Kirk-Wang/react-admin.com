@@ -213,7 +213,7 @@ import { AutocompleteInput, ReferenceInput } from 'react-admin'
 
 ## `BooleanInput` 与 `NullableBooleanInput` 组件
 
-`<BooleanInput />` is a toggle button allowing you to attribute a `true` or `false` value to a record field.
+`<BooleanInput />` 是一个切换按钮，允许您把 `true` 或 `false` 值归于一个记录字段。
 
 ```jsx
 import { BooleanInput } from 'react-admin';
