@@ -183,7 +183,7 @@ const choices = [
 
 {% endraw %}
 
-**Tip**: If you want to populate the `choices` attribute with a list of related records, you should decorate `<AutocompleteInput>` with [`<ReferenceInput>`](#referenceinput), and leave the `choices` empty:
+**提示**：如果要使用相关记录的列表填充 `choices` 属性，则应使用 [`<ReferenceInput>`](#referenceinput) 装饰`<AutocompleteInput>`，并将 `choices` 留空：
 
 ```jsx
 import { AutocompleteInput, ReferenceInput } from 'react-admin'
