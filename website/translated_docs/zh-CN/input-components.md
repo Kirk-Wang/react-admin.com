@@ -223,9 +223,9 @@ import { BooleanInput } from 'react-admin';
 
 ![BooleanInput](https://marmelab.com/react-admin/img/boolean-input.png)
 
-This input does not handle `null` values. You would need the `<NullableBooleanInput />` component if you have to handle non-set booleans.
+此输入不处理 `null` 值。如果您必须处理非设置的布尔值，则需要 `<NullableBooleanInput />` 组件。
 
-You can use the `options` prop to pass any option supported by the Material UI `Switch` components. For example, here's how to set a custom checked icon:
+您可以使用` options ` 属性传递Material UI ` Switch `组件支持的任何选项。 例如，以下是设置自定义选中图标的方法：
 
 {% raw %}
 
@@ -245,7 +245,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 ![CustomBooleanInputCheckIcon](https://marmelab.com/react-admin/img/custom-switch-icon.png)
 
-Refer to [Material UI Switch documentation](http://www.material-ui.com/#/components/switch) for more details.
+有关详细信息, 请参阅 [Material UI Switch 文档](http://www.material-ui.com/#/components/switch)。
 
 `<NullableBooleanInput />` renders as a dropdown list, allowing to choose between true, false, and null values.
 
