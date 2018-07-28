@@ -171,7 +171,7 @@ const choices = [
 
 如果要将显示的初始选择限制为仅当前值，可以设置` limitChoicesToValue </ 0> 属性。</p>
 
-<p>Lastly, <code><AutocompleteInput>` renders a meterial-ui `<TextField>` component. Use the `options` attribute to override any of the `<TextField>` attributes:
+<p>最后，<code><AutocompleteInput>` 呈现 material-ui `<TextField> `组件。 使用` options `属性覆盖任何 `<TextField>` 属性：
 
 {% raw %}
 
