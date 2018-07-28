@@ -1016,9 +1016,9 @@ import { TextInput } from 'react-admin';
 
 **警告**: 不要使用 `type="number"`, 或者您将收到一个字符串作为值 (这是一个 [已知的React bug](https://github.com/facebook/react/issues/1425))。 相反, 请使用 [`<NumberInput>`](#numberinput)。
 
-## Transforming Input Value to/from Record
+## 将输入值转换 to/from 记录
 
-The data format returned by the input component may not be what your API desires. Since React-admin uses Redux Form, we can use its `parse()` and `format()` functions to transform the input value when saving to and loading from the record. It's better to understand the [input value's lifecycle](http://redux-form.com/6.5.0/docs/ValueLifecycle.md/) before you start.
+输入组件返回的数据格式可能不是您的 API 所期望的。 由于 React-admin 使用Redux Form，我们可以使用其` parse() ` 和 ` format() `函数在保存到记录并从记录加载时转换 input 值。 在开始之前了解输入值的生命周期会更好。
 
 Mnemonic for the two functions: - `parse()`: input -> record - `format()`: record -> input
 
