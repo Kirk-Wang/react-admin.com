@@ -963,7 +963,7 @@ const choices = [
 
 有关详细信息, 请参阅 [ Select 文档](http://www.material-ui.com/#/components/select)。
 
-The `SelectArrayInput` component **cannot** be used inside a `ReferenceInput` but can be used inside a `ReferenceArrayInput`.
+`SelectArrayInput` 组件**不能**在 `ReferenceInput` 中使用，但可以在`ReferenceArrayInput` 中使用。
 
 ```jsx
 import React from 'react';
@@ -994,11 +994,11 @@ export const PostCreate = props => (
 );
 ```
 
-**Tip**: As it does not provide autocompletion, the `SelectArrayInput` might not be suited when the referenced resource has a lot of items.
+提示：由于它不提供自动完成功能，因此当引用的资源包含大量项目时，`SelectArrayInput`可能不适用。
 
-## `TextInput` Component
+## `TextInput` 组件
 
-`<TextInput>` is the most common input. It is used for texts, emails, URL or passwords. In translates to an HTML `<input>` tag.
+`<TextInput>` 是最常见的输入。它用于文本、电子邮件、URL 或密码。在转换为 HTML `<input>` 标记中。
 
 ```jsx
 import { TextInput } from 'react-admin';
@@ -1008,13 +1008,13 @@ import { TextInput } from 'react-admin';
 
 ![TextInput](https://marmelab.com/react-admin/img/text-input.png)
 
-You can choose a specific input type using the `type` attribute, for instance `text` (the default), `email`, `url`, or `password`:
+可以使用 ` type ` 属性选择特定的输入类型，例如 `text` (默认值)，`email`，`url` 或 `password`：
 
 ```jsx
 <TextInput label="Email Address" source="email" type="email" />
 ```
 
-**Warning**: Do not use `type="number"`, or you'll receive a string as value (this is a [known React bug](https://github.com/facebook/react/issues/1425)). Instead, use [`<NumberInput>`](#numberinput).
+**警告**: 不要使用 `type="number"`, 或者您将收到一个字符串作为值 (这是一个 [已知的React bug](https://github.com/facebook/react/issues/1425))。 相反, 请使用 [`<NumberInput>`](#numberinput)。
 
 ## Transforming Input Value to/from Record
 
