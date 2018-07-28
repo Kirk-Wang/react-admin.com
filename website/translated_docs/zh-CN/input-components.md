@@ -619,7 +619,7 @@ import { ReferenceArrayInput, SelectArrayInput } from 'react-admin'
 </Admin>
 ```
 
-如果要在选项列表中添加值为null的空选项，请设置` allowEmpty ` 属性。 禁用` allowEmpty `并不意味着需要输入。 If you want to make the input required, you must add a validator as indicated in [Validation Documentation](./CreateEdit.html#validation). Enabling the `allowEmpty` props just adds an empty choice (with `null` value) on top of the options, and makes the value nullable.
+如果要在选项列表中添加值为null的空选项，请设置` allowEmpty ` 属性。 禁用` allowEmpty `并不意味着需要输入。 如果要进行所需的输入，则必须按照 [验证文档](./CreateEdit.html#validation) 中的说明添加验证器。 启用 `allowEmpty` 属性只会在选项之上添加一个空选项（具有` null `值），并使值可为空。
 
 ```js
 import { ReferenceArrayInput, SelectArrayInput } from 'react-admin'
@@ -629,9 +629,9 @@ import { ReferenceArrayInput, SelectArrayInput } from 'react-admin'
 </ReferenceArrayInput>
 ```
 
-**Tip**: `allowEmpty` is set by default for all Input components children of the `<Filter>` component
+**提示</ strong>：默认情况下为 `<Filter>` 组件的所有子级输入组件设置` allowEmpty `</p> 
 
-You can tweak how this component fetches the possible values using the `perPage`, `sort`, and `filter` props.
+您可以使用` perPage `，` sort `和` filter ` 属性来调整此组件如何获取可能的值。
 
 {% raw %}
 
@@ -666,7 +666,7 @@ You can tweak how this component fetches the possible values using the `perPage`
 
 {% endraw %}
 
-## `ReferenceInput` Component
+## `ReferenceInput` 组件
 
 Use `<ReferenceInput>` for foreign-key values, for instance, to edit the `post_id` of a `comment` resource. This component fetches the possible values in the reference resource (using the `GET_LIST` REST method) and the referenced record (using the `GET_ONE` REST method), then delegates rendering to a subcomponent, to which it passes the possible choices as the `choices` attribute.
 
