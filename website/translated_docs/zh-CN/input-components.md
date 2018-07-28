@@ -430,11 +430,11 @@ export const PostEdit = (props) => (
 
 ## `FileInput` 组件
 
-`<FileInput>` allows to upload some files using [react-dropzone](https://github.com/okonet/react-dropzone).
+`<FileInput>` 允许使用 [react-dropzone](https://github.com/okonet/react-dropzone) 上传一些文件。
 
 ![FileInput](https://marmelab.com/react-admin/img/file-input.png)
 
-Previews (actually a simple list of files names) are enabled using `<FileInput>` children, as following:
+使用 `<FileInput>` 子级启用预览（实际上是一个简单的文件名称列表），如下所示：
 
 ```jsx
 <FileInput source="files" label="Related files" accept="application/pdf">
@@ -442,13 +442,13 @@ Previews (actually a simple list of files names) are enabled using `<FileInput>`
 </FileInput>
 ```
 
-Writing a custom field component for displaying the current value(s) is easy: it's a standard [field](./Fields.md#writing_your_own_field_component).
+编写用于显示当前值的自定义字段组件很简单：它是标准的 [field](./Fields.md#writing_your_own_field_component)
 
-When receiving **new** files, `FileInput` will add a `rawFile` property to the object passed as the `record` prop of children. This `rawFile` is the [File](https://developer.mozilla.org/en-US/docs/Web/API/File) instance of the newly added file. This can be useful to display informations about size or mimetype inside a custom field.
+当接收到 **新的** 文件时， `FileInput` 将会将一个 `rawFile` 属性添加到作为子级 `record` 属性传递的对象中。 这个 `rawFile` 是新添加的文件的 [File](https://developer.mozilla.org/en-US/docs/Web/API/File) 实例。 这对于在自定义字段内显示大小或 mimetype 的信息很有用。
 
-The `FileInput` component accepts all [react-dropzone properties](https://github.com/okonet/react-dropzone#features), in addition to those of react-admin. For instance, if you need to upload several files at once, just add the `multiple` DropZone attribute to your `<FileInput />` field.
+除了 react-admin 之外，`FileInput` 组件还接受所有 [react-dropzone](https://github.com/okonet/react-dropzone#features) 属性。 例如，如果您需要一次上传多个文件，只需将`多个` DropZone 属性添加到`<FileInput />` field 即可。
 
-If the default Dropzone label doesn't fit with your need, you can pass a `placeholder` attribute to overwrite it. The attribute can be anything React can render (`PropTypes.node`):
+如果默认的 dropzone 上标签不符合您的需要, 则可以传递 `placeholder` 属性来覆盖它。 属性可以是任何 React 可以渲染的东西（`PropTypes.node`）：
 
 ```jsx
 <FileInput source="files" label="Related files" accept="application/pdf" placeholder={<p>Drop your file here</p>}>
@@ -456,7 +456,7 @@ If the default Dropzone label doesn't fit with your need, you can pass a `placeh
 </FileInput>
 ```
 
-Note that the file upload returns a [File](https://developer.mozilla.org/en/docs/Web/API/File) object. It is your responsibility to handle it depending on your API behavior. You can for instance encode it in base64, or send it as a multi-part form data. Check [this example](./DataProviders.md#decorating-your-rest-client-example-of-file-upload) for base64 encoding data by extending the REST Client.
+请注意, 文件上载返回 [File](https://developer.mozilla.org/en/docs/Web/API/File) 对象。 根据您的 API 行为来处理它是您的责任。 例如，可以在 base64 中对其进行编码或者将其作为多部分表单数据发送。 通过扩展 REST 客户端，查看此 [示例](./DataProviders.md#decorating-your-rest-client-example-of-file-upload) 以获取 base64 编码数据。
 
 ## `LongTextInput` Component
 
