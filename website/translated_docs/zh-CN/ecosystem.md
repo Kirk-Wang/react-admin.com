@@ -1,6 +1,6 @@
 ---
 id: ecosystem
-title: Ecosystem
+title: 生态
 ---
 - [Input 组件和 Field 组件](#inputs-and-fields)
 - [翻译](#translations)
