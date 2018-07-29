@@ -208,13 +208,13 @@ export const PostList = (props) => (
 );
 ```
 
-If you want to read more about higher-order components, check out this SitePoint tutorial: [Higher Order Components: A React Application Design Pattern](https://www.sitepoint.com/react-higher-order-components/)
+如果您想了解有关高阶组件的更多信息，请查看此SitePoint教程：[Higher Order Components: A React Application Design Pattern](https://www.sitepoint.com/react-higher-order-components/)
 
 ## Responsive Utility
 
-To provide an optimized experience on mobile, tablet, and desktop devices, you often need to display different components depending on the screen size. That's the purpose of the `<Responsive>` component, which offers a declarative approach to responsive web design.
+要在移动设备，平板电脑和桌面设备上提供优化的体验，您通常需要根据屏幕大小显示不同的组件。 这就是 `<Responsive>` 组件的目的，它为响应式Web设计提供了一种声明式方法。
 
-It expects element props named `small`, `medium`, and `large`. It displays the element that matches the screen size (with breakpoints at 768 and 992 pixels):
+它期望元素道具命名为 `small`，`medium` 和 `large`。 它显示与屏幕大小匹配的元素（断点为768和992像素）：
 
 ```jsx
 // in src/posts.js
@@ -247,7 +247,7 @@ export const PostList = (props) => (
 );
 ```
 
-**Tip**: If you only provide `small` and `medium`, the `medium` element will also be used on large screens. The same kind of smart default exists for when you omit `small` or `medium`.
+**提示**：如果您只提供`small` 和 `medium`，则`medium`型元素也将用于大屏幕。 当省略 `small` 或 `medium` 时，存在相同类型的智能默认值。
 
 **Tip**: You can specify `null` as the value for `small`, `medium` or `large` to avoid rendering something on a specific size without falling back to others.
 
