@@ -1235,9 +1235,9 @@ const ItemEdit = (props) => (
 
 编辑表单通常包含链接的输入，例如国家和城市 (后者的选择取决于前者的值)。
 
-React-admin 依赖于 redux-form，因此您可以使用 redux-form [formValueSelector()](https://redux-form.com/7.3.0/docs/api/formvalueselector.md/) 获取当前表单值。 Alternatively, you can use the react-admin `<FormDataConsumer>` component, which grabs the form values, and passes them to a child function.
+React-admin 依赖于 redux-form，因此您可以使用 redux-form [formValueSelector()](https://redux-form.com/7.3.0/docs/api/formvalueselector.md/) 获取当前表单值。 或者，您可以使用react-admin `<FormDataConsumer>`< FormDataConsumer></0>组件来获取表单值，并将它们传递给子函数。
 
-This facilitates the implementation of linked inputs:
+这有助于实现链接输入：
 
 ```jsx
 import { FormDataConsumer } from 'react-admin';
@@ -1260,11 +1260,11 @@ const OrderEdit = (props) => (
 ); 
 ```
 
-## Hiding Inputs Based On Other Inputs
+## 隐藏基于其他 Input 的 Input
 
-You may want to display or hide inputs base on the value of another input - for instance, show an `email` input only if the `hasEmail` boolean input is ticked to `true`.
+您可能希望根据另一个 input 的值显示或隐藏输入 - 例如，仅当 `hasEmail` 布尔输入被选中为 `true` 时才显示 `email` 输入。
 
-For such cases, you can use the approach described above, using the `<FormDataConsumer>` component.
+对于这种情况，您可以使用 `<FormDataConsumer>` 组件使用上述方法。
 
 ```jsx
 import { FormDataConsumer } from 'react-admin';
