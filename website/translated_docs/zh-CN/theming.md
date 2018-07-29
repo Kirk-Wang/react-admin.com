@@ -277,7 +277,7 @@ const App = () => (
 
 ## 编写自定义主题
 
-If you need more fine tuning, you'll need to write your own `theme` object, following [Material UI themes documentation](https://material-ui.com/customization/themes/). Material UI merges custom theme objects with the default theme.
+如果需要更精细的调优，则需要编写自己的 `theme` 对象, 以下是 [Material UI 主题文档](https://material-ui.com/customization/themes/)。 Material UI将自定义主题对象与默认主题合并。
 
 ```jsx
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -313,7 +313,7 @@ const myTheme = createMuiTheme({
 });
 ```
 
-The `muiTheme` object contains the following keys:
+MuiTheme 对象包含以下键：
 
 * `breakpoints`
 * `direction`
@@ -327,9 +327,9 @@ The `muiTheme` object contains the following keys:
 * `spacing`
 * `zIndex`
 
-**Tip**: Check [Material UI default theme documentation](https://material-ui.com/customization/default-theme/) to see the default values and meaning for these keys.
+**提示**：查看 [Material UI默认主题文档](https://material-ui.com/customization/default-theme/) 以查看这些键的默认值和含义。
 
-Once your theme is defined, pass it to the `<Admin>` component, in the `theme` prop.
+定义主题后，将其传递给 `<Admin>` 组件的 `theme` 属性中。
 
 ```jsx
 const App = () => (
@@ -339,9 +339,9 @@ const App = () => (
 );
 ```
 
-## Using a Custom Layout
+## 使用自定义布局
 
-Instead of the default layout, you can use your own component as the admin layout. Just use the `appLayout` prop of the `<Admin>` component:
+您可以使用自己的组件作为 admin 布局，而不是默认布局。 只需使用 `<Admin>` 组件的 appLayout 属性：
 
 ```jsx
 // in src/App.js
@@ -354,7 +354,7 @@ const App = () => (
 );
 ```
 
-Your custom layout can extend the default `<Layout>` component if you only want to override the appBar, the menu, or the notification component. For instance:
+如果您只想覆盖 appBar，menu 或 notification 组件，则自定义布局可以扩展默认的 `<Layout>` 组件。 例如：
 
 ```jsx
 // in src/MyLayout.js
@@ -373,7 +373,7 @@ const MyLayout = (props) => <Layout
 export default MyLayout;
 ```
 
-For more custom layouts, write a component from scratch. It must contain a `{children}` placeholder, where react-admin will render the resources. Use the [default layout](https://github.com/marmelab/react-admin/blob/master/src/mui/layout/Layout.js) as a starting point. Here is a simplified version (with no responsive support):
+要获得更多自定义布局，请从头开始编写组件。 它必须包含 `{children}` 占位符, 其中就是 react-admin 将渲染的资源。 Use the [default layout](https://github.com/marmelab/react-admin/blob/master/src/mui/layout/Layout.js) as a starting point. Here is a simplified version (with no responsive support):
 
 ```jsx
 // in src/MyLayout.js
