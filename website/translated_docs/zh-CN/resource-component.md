@@ -1,6 +1,6 @@
 ---
 id: resource-component
-title: <Resource>
+title: Resource 组件
 ---
 一个 `<Resource>` 组件将一个API端点映射到一个CRUD界面。 例如，下面的 admin app 为 JSONPlaceholder API 公开在[`http://jsonplaceholder.ode.com/posts`](http://jsonplaceholder.typicode.com/posts) 和 [`http://jsonplaceholder.ode.com/users`](http://jsonplaceholder.typicode.com/users) 的资源提供了一个只读界面：
 
