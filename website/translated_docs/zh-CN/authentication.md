@@ -115,15 +115,15 @@ export default (type, params) => {
 
 ![Logout button](https://marmelab.com/react-admin/img/logout.gif)
 
-The `authProvider` is also a good place to notify the authentication API that the user credentials are no longer valid after logout.
+`authProvider` 也是通知 authentication API 的好地方, 用户凭据在注销后不再有效。
 
-## Catching Authentication Errors On The API
+## 捕获 API 上的身份验证错误
 
-Even though a user may be authenticated on the client-side, their credentials may no longer be valid server-side (e.g. if the token is only valid for a couple weeks). In that case, the API usually answers to all REST requests with an error code 401 or 403 - but what about *your* API?
+即使用户可能在客户端进行身份验证，服务器端其凭据可能不再是有效的（例如，如果令牌仅在几周内有效）。 在这种情况下，API 通常会回答所有 REST 请求具有错误代码 401 或 403 - 但是*你的*API呢？
 
-Fortunately, each time the API returns an error, the `authProvider` is called with the `AUTH_ERROR` type. Once again, it's up to you to decide which HTTP status codes should let the user continue (by returning a resolved promise) or log them out (by returning a rejected promise).
+幸运的是，每次 API 返回一个错误时，`authProvider` 都将使用 `AUTH_ERROR` type 调用。 再次，由您决定哪些 HTTP 状态代码应允许用户继续 (通过返回已解决的 Promise) 或注销 (通过返回拒绝的 Promise)。
 
-For instance, to redirect the user to the login page for both 401 and 403 codes:
+例如，401和403代码都要将用户重定向到登录页面：
 
 ```jsx
 // in src/authProvider.js
