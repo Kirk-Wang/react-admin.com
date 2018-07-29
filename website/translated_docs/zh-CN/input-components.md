@@ -1022,13 +1022,13 @@ import { TextInput } from 'react-admin';
 
 两个函数的助记符： - `parse()`：input -> record - `format()`：record -> input
 
-Say the user would like to input values of 0-100 to a percentage field but your API (hence record) expects 0-1.0. You can use simple `parse()` and `format()` functions to archive the transform:
+假设用户想要将0-100的值输入到百分比字段，但您的API（因此记录）需要0-1.0。 您可以使用简单的 `parse()` 和 `format()` 函数来存档转换：
 
 ```jsx
 <NumberInput source="percent" format={v => v*100} parse={v => v/100} label="Formatted number" />
 ```
 
-`<DateInput>` stores and returns a string. If you would like to store a JavaScript Date object in your record instead:
+`<DateInput>` 存储并返回一个字符串。如果您希望将 JavaScript 日期对象存储在记录中，请改用：
 
 ```jsx
 const dateFormatter = v => {
@@ -1053,9 +1053,9 @@ const dateParser = v => {
 <DateInput source="isodate" format={dateFormatter} parse={dateParser} />
 ```
 
-## Third-Party Components
+## 第三方组件
 
-You can find components for react-admin in third-party repositories.
+您可以在第三方存储库中找到 react-admin 的组件。
 
 * [vascofg/react-admin-color-input](https://github.com/vascofg/react-admin-color-input): a color input using [React Color](http://casesandberg.github.io/react-color/), a collection of color pickers.
 * [LoicMahieu/aor-tinymce-input](https://github.com/LoicMahieu/aor-tinymce-input): a TinyMCE component, useful for editing HTML
