@@ -106,4 +106,4 @@ const App = () => (
 );
 ```
 
-This application has no sidebar, no theming, no [auth control](./Authentication.md#restricting-access-to-a-custom-page) - it's up to you to add these. From there on, you can customize pretty much anything you want.
+此应用程序没有侧边栏，没有主题，没有[auth control](./Authentication.md#restricting-access-to-a-custom-page) - 由你自己添加。 从那时起，你可以自定义几乎任何你想要的。
