@@ -332,9 +332,9 @@ export default withRouter(MyPage);
 
 `<Authenticated>` 组件使用 `AUTH_CHECK` 和 `uthParams` 调用 `authProvider` 函数。 如果响应是一个fulfilled promise，则子组件被渲染。 如果响应是被拒绝的 promise，`<Authenticated>` 将重定向到登录表单。 成功登录后，用户将被重定向到初始位置（这就是为什么必须从路由器获取位置）。
 
-## Redirect After Logout
+## 注销后重定向
 
-By default, react-admin redirects the user to '/login' after they log out. This can be changed by passing the url to redirect to as parameter to the `userLogout()` action creator when you `connect` the `MyLogoutButton` component:
+默认情况下，react-admin在用户注销后会将用户重定向到 “/login”。 当您 `connect` 到 `MyLogoutButton`组件时，可以通过将 url 传递给 `userLogout()` action 创建者作为参数来更改：
 
 ```diff
 // in src/MyLogoutButton.js
