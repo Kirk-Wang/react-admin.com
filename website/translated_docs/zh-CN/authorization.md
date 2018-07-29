@@ -92,7 +92,7 @@ export default (type, params) => {
 
 每个路由将使用 `AUTH_GET_PERMISSIONS` 类型和一些参数（包括当前位置和路由参数）调用 authProvider。 您可以在组件内部返回需要检查的内容，例如用户的角色等。
 
-Here's an example inside a `Create` view with a `SimpleForm` and a custom `Toolbar`:
+以下是使用 `SimpleForm` 和自定义 `Toolbar` 的 `Create` 视图中的示例：
 
 ```jsx
 const UserCreateToolbar = ({ permissions, ...props }) =>
@@ -124,9 +124,9 @@ export const UserCreate = ({ permissions, ...props }) =>
     </Create>;
 ```
 
-**Tip** Note how the `permissions` prop is passed down to the custom `toolbar` component.
+**提示</ strong>：请注意` permissions ` 属性如何传递给自定义` toolbar `组件。</p> 
 
-This also works inside an `Edition` view with a `TabbedForm`, and you can hide a `FormTab` completely:
+这也适用于带` TabbedForm `的` Edition `视图，你可以完全隐藏` FormTab `：
 
 ```jsx
 export const UserEdit = ({ permissions, ...props }) =>
@@ -144,7 +144,7 @@ export const UserEdit = ({ permissions, ...props }) =>
     </Edit>;
 ```
 
-What about the `List` view, the `DataGrid`, `SimpleList` and `Filter` components? It works there, too.
+List视图，DataGrid，SimpleList和Filter组件怎么样？ 它也适用于那里。
 
 ```jsx
 const UserFilter = ({ permissions, ...props }) =>
@@ -185,11 +185,11 @@ export const UserList = ({ permissions, ...props }) =>
     </List>;
 ```
 
-**Tip** Note how the `permissions` prop is passed down to the custom `filters` component.
+**提示** 注意 `permissions` 属性如何传递到自定义 `filters` 组件。
 
-## Restricting Access to Content Inside a Dashboard
+## 限制对 Dashboard 内部内容的访问
 
-The component provided as a [`dashboard`]('./Admin.md#dashboard) will receive the permissions in its props too:
+作为 [`dashboard`]('./Admin.md#dashboard) 提供的组件也将在其属性中获得 permissions：
 
 ```jsx
 // in src/Dashboard.js
@@ -210,9 +210,9 @@ export default ({ permissions }) => (
 );
 ```
 
-## Restricting Access to Content Inside Custom Pages
+## 限制对自定义页中内容的访问
 
-You might want to check user permissions inside a [custom pages](./Admin.md#customroutes). You'll have to use the `WithPermissions` component for that. It will ensure the user is authenticated then call the `authProvider` with the `AUTH_GET_PERMISSIONS` type and the `authParams` you specify:
+您可能希望检查 [自定义页](./Admin.md#customroutes) 内的用户权限。 您必须为此使用 `WithPermissions` 组件。 它将确保用户通过身份验证，然后使用 `AUTH_GET_PERMISSIONS` type和您指定的 `authParams` 调用 `authProvider`：
 
 ```jsx
 // in src/MyPage.js
@@ -259,9 +259,9 @@ export default [
 ];
 ```
 
-## Restricting Access to Content in Custom Menu
+## 限制对自定义菜单中内容的访问
 
-What if you want to check the permissions inside a [custom menu](./Admin.html#menu) ? Much like getting permissions inside a custom page, you'll have to use the `WithPermissions` component:
+如果要检查自定义菜单中的权限，该怎么办？ 就像在自定义页面中获取权限一样，您必须使用 `WithPermissions` 组件：
 
 ```jsx
 // in src/myMenu.js
