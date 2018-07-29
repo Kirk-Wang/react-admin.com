@@ -55,7 +55,7 @@ export default connect(null, {
 
 `showNotification` 和 `push` 是 *动作创建者*。 这是返回简单 action 对象的函数的Redux术语。 当在第二个参数中给出一个动作创建者的对象时，`connect()` 将使用 Redux 的`dispatch` 方法装饰[每个动作创建者](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)，因此在 `handleClick` 函数中，对`showNotification()` 的调用实际上是对 `dispatch(showNotification())` 的调用。
 
-This `ApproveButton` can be used right away, for instance in the list of comments, where `<Datagrid>` automatically injects the `record` to its children:
+可以立即使用此 `ApproveButton`，例如在注释列表中，其中 `<Datagrid>` 自动将 `record` 注入其子项：
 
 ```jsx
 // in src/comments/index.js
@@ -73,7 +73,7 @@ export const CommentList = (props) =>
     </List>;
 ```
 
-Or, in the `<Edit>` page, as a [custom action](./CreateEdit.md#actions):
+或者，在 `<Edit>` 页面中，作为 [自定义action](./CreateEdit.md#actions)：
 
 ```jsx
 // in src/comments/CommentEditActions.js
@@ -107,9 +107,9 @@ export const CommentEdit = (props) =>
     </Edit>;
 ```
 
-## Using a Data Provider Instead of Fetch
+## 使用 Data Provider 代替 Fetch
 
-The previous code uses `fetch()`, which means it has to make raw HTTP requests. The REST logic often requires a bit of HTTP plumbing to deal with query parameters, encoding, headers, body formatting, etc. It turns out you probably already have a function that maps from a REST request to an HTTP request: the [Data Provider](./DataProviders.md). So it's a good idea to use this function instead of `fetch` - provided you have exported it:
+前面的代码使用 `fetch()`，这意味着它必须生成原始 HTTP 请求。 REST 逻辑通常需要一些 HTTP 管道来处理查询参数，编码，headers，正文格式等。 事实证明，您可能已经有一个从REST请求映射到HTTP请求的函数：[Data Provider](./DataProviders.md)。 因此，使用此函数而不是 `fetch` 是个好主意 - 前提是您已导出它：
 
 ```jsx
 // in src/dataProvider.js
@@ -141,7 +141,7 @@ class ApproveButton extends Component {
 }
 ```
 
-There you go: no more `fetch`. Just like `fetch`, the `dataProvider` returns a `Promise`. It's signature is:
+这下你会懂了：不再 `fetch`。就如 `fetch`，`dataProvider` 返回一个 `Promise`。它的签名是：
 
 ```jsx
 /**
@@ -159,11 +159,11 @@ There you go: no more `fetch`. Just like `fetch`, the `dataProvider` returns a `
 const dataProvider = (type, resource, params) => new Promise();
 ```
 
-As for the syntax of the various request types (`GET_LIST`, `GET_ONE`, `UPDATE`, etc.), head to the [Data Provider documentation](./DataProviders.md#request-format) for more details.
+至于各种请求类型的语法（`GET_LIST`，`GET_ONE`，`UPDATE`等），请转到 [Data Provider文档](./DataProviders.md#request-format) 以获取更多详细信息。
 
-## Using a Custom Action Creator
+## 使用自定义 Action Creator
 
-Fetching data right inside the component is easy. But if you're a Redux user, you might want to do it in a more idiomatic way - by dispatching actions. First, create your own action creator to replace the call to `dataProvider`:
+在组件内部获取数据很容易。 但是，如果您是Redux用户，则可能需要以更为惯用的方式执行此操作-通过分发 action。 首先，创建自己的 action 创建者以替换对 `dataProvider` 的调用：
 
 ```jsx
 // in src/comment/commentActions.js
