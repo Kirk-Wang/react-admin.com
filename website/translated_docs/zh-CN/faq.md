@@ -1,6 +1,6 @@
 ---
 id: faq
-title: FAQ
+title: 常见问题
 ---
 - [是否可以为资源提供自定义标识符/主键？](#can-i-have-custom-identifiersprimary-keys-for-my-resources)
 - [我收到关于数组中子项的唯一键的警告](#i-get-warning-about-unique-key-for-child-in-array)
