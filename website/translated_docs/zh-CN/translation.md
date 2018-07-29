@@ -325,9 +325,9 @@ const MyHelloButton = ({ translate }) => (
 export default translate(MyHelloButton);
 ```
 
-**Tip**: For your message identifiers, choose a different root name than `ra` and `resources`, which are reserved.
+**提示</ strong>：对于您的 message 标识符，请选择与 ` ra` 和 ` resources` 不同的根名称，这些名称是保留的。</p> 
 
-**Tip**: Don't use `translate` for Field and Input labels, or for page titles, as they are already translated:
+**提示</ strong>：请勿对字段和输入标签或页面标题使用` translate `，因为它们已被翻译：</p> 
 
 ```jsx
 // don't do this
@@ -341,9 +341,9 @@ export default translate(MyHelloButton);
 // and translate the `resources.customers.fields.first_name` key
 ```
 
-## Using Specific Polyglot Features
+## 使用特定Polyglot Features
 
-Polyglot.js is a fantastic library: in addition to being small, fully maintained, and totally framework agnostic, it provides some nice features such as interpolation and pluralization, that you can use in react-admin.
+Polyglot.js是一个很棒的库：除了小，完全维护和完全框架不可知外，它还提供了一些很好的功能，例如插值和复数，可以在 react-admin 中使用。
 
 ```jsx
 const messages = {
@@ -367,17 +367,17 @@ translate('not_yet_translated', { _: 'Default translation' })
 => 'Default translation'
 ```
 
-To find more detailed examples, please refer to <http://airbnb.io/polyglot.js/>
+要查找更详细的示例，请参阅[ http://airbnb.io/polyglot.js/ ](http://airbnb.io/polyglot.js/)
 
 ## Notifications With Variables
 
-It is possible to pass variables for polyglot interpolation with custom notifications. For example:
+可以使用自定义通知传递多语言插值的变量。 例如：
 
 ```js
 showNotification('myroot.hello.world', 'info', { messageArgs: { name: 'Planet Earth' } });
 ```
 
-Assuming you have the following in your custom messages:
+假设您的自定义消息中包含以下内容：
 
 ```js
 // in src/App.js
