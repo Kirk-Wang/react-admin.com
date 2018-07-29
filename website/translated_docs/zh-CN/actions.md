@@ -2,13 +2,13 @@
 id: actions
 title: Writing Actions
 ---
-Admin interfaces often have to offer custom actions, beyond the simple CRUD. For instance, in an administration for comments, an "Approve" button (allowing to update the `is_approved` property and to save the updated record in one click) - is a must have.
+Admin 界面通常必须提供自定义操作，而不仅仅是简单的 CRUD。 例如, 在管理评论中, "Approve" 按钮 (允许更新 `is_approved` 属性, 并在一次单击中保存更新的记录)-是必须具有的。
 
-How can you add such custom actions with react-admin? The answer is twofold, and learning to do it properly will give you a better understanding of how react-admin uses Redux and redux-saga.
+如何使用 react-admin 添加这样的自定义动作？ 答案是双重的，react-admin 如何使用 Redux 和 redux-saga，学习并正确的做到这一点会给你更好的理解。
 
-## The Simple Way
+## 简单的方法
 
-Here is an implementation of the "Approve" button that works perfectly:
+这是一个完美的“Approve”按钮的实现：
 
 ```jsx
 // in src/comments/ApproveButton.js
