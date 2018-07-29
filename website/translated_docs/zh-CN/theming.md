@@ -533,11 +533,11 @@ const App = () => (
 );
 ```
 
-**提示**：如果您使用 authentication，请不要忘记在自定义菜单组件中渲染` logout `属性。 Also, the `onMenuClick` function passed as prop is used to close the sidebar on mobile.
+**提示**：如果您使用 authentication，请不要忘记在自定义菜单组件中渲染` logout `属性。 此外，作为属性传递的 `onMenuClick` 函数用于关闭移动设备上的侧边栏。
 
-The `MenuItemLink` component make use of the React Router [`NavLink`](https://reacttraining.com/react-router/web/api/NavLink) component, hence allowing to customize its style when it targets the current page.
+`MenuItemLink` 组件使用 React Router `NavLink` 组件，因此允许在定位当前页面时自定义其样式。</p> 
 
-If the default active style does not suit your tastes, you can override it by passing your own `classes`:
+如果默认的活动样式不符合您的喜好，您可以通过传递自己的 `classes` 来覆盖它：
 
 ```jsx
 // in src/MyMenu.js
@@ -575,9 +575,9 @@ export default withRouter(connect(mapStateToProps)(withStyles(styles)(Menu)));
 
 ## Notifications
 
-If you use your own layout (or custom login page), then you probably use the `<Notification>` component.
+如果您使用自己的layout（或自定义登录页面），则可能使用 `<Notification>` 组件。
 
-You can override the notification duration by setting the `autoHideDuration` prop. It defaults to 4000, i.e. 4 seconds. For instance, to create a custom Notification component with a 5 seconds default:
+您可以通过设置 `autoHideDuration` 属性来重写通知持续时间。 它默认为4000，即4秒。 例如，要创建一个默认为5秒的自定义通知组件：
 
 ```jsx
 // in src/MyNotification.js
@@ -588,11 +588,11 @@ const MyNotification = props => <Notification {...props}autoHideDuration={5000} 
 export default MyNotification;
 ```
 
-**Tip**: if you use the `showNotification` action, then you can define `autoHideDuration` per message as the third parameter of the `showNotification` action creator.
+**提示**：如果您使用 `showNotification` action，则可以将每条消息的 `autoHideDuration` 定义为 `showNotification` action创建者的第三个参数。
 
 ## Loading
 
-Display a circular progress component with optional messages. Display the same loading component as `react-admin` on custom pages for consistency.
+显示带有可选消息的循环进度组件。 在自定义页面上显示与 `react-admin` 相同的加载组件以保持一致性。
 
 Supported props:
 
