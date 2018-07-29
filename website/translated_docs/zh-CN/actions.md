@@ -286,7 +286,7 @@ export const commentApprove = (id, data, basePath) => ({
 });
 ```
 
-在这种情况下，调度` COMMENT_APPROVE ` action 时不会触发任何副作用。 However, when the `fetch` side effects returns successfully, react-admin dispatches a `COMMENT_APPROVE_SUCCESS` action, and copies the `onSuccess` side effects into the `meta` property. So it will dispatch an action looking like:
+在这种情况下，调度` COMMENT_APPROVE ` action 时不会触发任何副作用。 但是，当 `fetch` 副作用成功返回时，react-admin 将 dispatch `COMMENT_APPROVE_SUCCESS` action，并将 `onSuccess` 副作用复制到 `meta` 属性中。 所以它会发出一个看起来像这样的 action：
 
 ```js
 {
@@ -304,17 +304,17 @@ export const commentApprove = (id, data, basePath) => ({
 }
 ```
 
-And then, the side effects will trigger. With this code, approving a review now displays the correct notification, and redirects to the comment list.
+然后，副作用将触发。 使用此代码，批准审核现在会显示正确的通知，并重定向到评论列表。
 
-You can use `onSuccess` and `onFailure` metas in your own actions to handle side effects.
+您可以在自己的 action 中使用 `onSuccess` 和 `onFailure` metas来处理副作用。
 
-## Custom sagas
+## 自定义 saga
 
-Sometimes, you may want to trigger other *side effects*. React-admin promotes a programming style where side effects are decoupled from the rest of the code, which has the benefit of making them testable.
+有时，您可能想要触发其他*副作用*。 React-admin 提升了一种编程风格，其中副作用与代码的其余部分分离，这有利于使它们可测试。
 
-In react-admin, side effects are handled by Sagas. [Redux-saga](https://redux-saga.github.io/redux-saga/) is a side effect library built for Redux, where side effects are defined by generator functions. If this is new to you, take a few minutes to go through the Saga documentation.
+在react-admin中，副作用由 Saga 处理。 [Redux-saga](https://redux-saga.github.io/redux-saga/) 是为 Redux 构建的副作用库，其副作用由生成器函数定义。 如果这对您来说是新手，请花几分钟时间浏览Saga文档。
 
-Here is the generator function necessary to handle the side effects for a failed `COMMENT_APPROVE` action which would log the error with an external service such as [Sentry](https://sentry.io):
+这是处理失败的 `COMMENT_APPROVE` action的副作用所必需的生成器函数，该操作将使用 [Sentry](https://sentry.io) 等外部服务记录错误：
 
 ```jsx
 // in src/comments/commentSaga.js
@@ -329,7 +329,7 @@ export default function* commentSaga() {
 }
 ```
 
-Let's explain all of that, starting with the final `commentSaga` generator function. A [generator function](http://exploringjs.com/es6/ch_generators.html) (denoted by the `*` in the function name) gets paused on statements called by `yield` - until the yielded statement returns. `yield takeEvery([ACTION_NAME], callback)` executes the provided callback [every time the related action is called](https://redux-saga.github.io/redux-saga/docs/basics/UsingSagaHelpers.html). To summarize, this will execute `commentApproveFailure` when the fetch initiated by `commentApprove()` fails.
+让我们解释所有这些，从最后的 `commentSaga` 生成器函数开始。 [generator function](http://exploringjs.com/es6/ch_generators.html)（由函数名中的`*`表示）在 `yield` 调用的语句上暂停 - 直到 yielding 语句返回。 `yield takeEvery([ACTION_NAME], callback)` executes the provided callback [every time the related action is called](https://redux-saga.github.io/redux-saga/docs/basics/UsingSagaHelpers.html). To summarize, this will execute `commentApproveFailure` when the fetch initiated by `commentApprove()` fails.
 
 As for `commentApproveFailure`, it just dispatch a [`call`](https://redux-saga.js.org/docs/api/#callfn-args) side effect to the `captureException` function from the global `Raven` object.
 
