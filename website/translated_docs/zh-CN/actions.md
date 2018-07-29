@@ -51,9 +51,9 @@ export default connect(null, {
 })(ApproveButton);
 ```
 
-The `handleClick` function makes a `PUT` request the REST API with `fetch`, then displays a notification (with `showNotification`) and redirects to the comments list page (with `push`);
+`handleClick` 函数通过 `fetch` 使 `PUT` 请求 REST API，然后显示通知（使用 `showNotification`）并重定向到 comments 列表页面（使用`push`）;
 
-`showNotification` and `push` are *action creators*. This is a Redux term for functions that return a simple action object. When given an object of action creators in the second argument, `connect()` will [decorate each action creator](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) with Redux' `dispatch` method, so in the `handleClick` function, a call to `showNotification()` is actually a call to `dispatch(showNotification())`.
+`showNotification` 和 `push` 是 *动作创建者*。 这是返回简单 action 对象的函数的Redux术语。 当在第二个参数中给出一个动作创建者的对象时，`connect()` 将使用 Redux 的`dispatch` 方法装饰[每个动作创建者](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)，因此在 `handleClick` 函数中，对`showNotification()` 的调用实际上是对 `dispatch(showNotification())` 的调用。
 
 This `ApproveButton` can be used right away, for instance in the list of comments, where `<Datagrid>` automatically injects the `record` to its children:
 
