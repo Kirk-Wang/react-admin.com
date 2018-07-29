@@ -1129,7 +1129,7 @@ const LatLngInput = () => (
 export default LatLngInput;
 ```
 
-Now the component will render with a label:
+现在组件将使用标签渲染：
 
 ```html
 <label>Position</label>
@@ -1139,7 +1139,7 @@ Now the component will render with a label:
 </span>
 ```
 
-Instead of HTML `input` elements, you can use a material-ui component. To compose material-ui and `Field`, use a [field renderer function](http://redux-form.com/6.5.0/examples/material-ui/) to map the props:
+您可以使用 material-ui 组件代替 HTML `input` 元素。 要编写 material-ui 和 `Field`，请使用 [field渲染器函数](http://redux-form.com/6.5.0/examples/material-ui/) 来映射属性：
 
 ```jsx
 // in LatLongInput.js
@@ -1163,9 +1163,9 @@ const LatLngInput = () => (
 );
 ```
 
-Material-ui's `<TextField>` component already includes a label, so you don't need to use `<Labeled>` in this case. `<Field>` injects two props to its child component: `input` and `meta`. To learn more about these props, please refer to [the `<Field>` component documentation](http://redux-form.com/6.5.0/docs/api/Field.md/#props) in the redux-form website.
+Material-ui的 `<TextField>` 组件已包含 label，因此在这种情况下您不需要使用 `<Labeled>` 。 `<Field>` 为其子组件注入两个属性：`input` 和 `meta`。 要了解有关这些属性的更多信息，请参阅 redux-form 网站中的 [`<Field>`组件文档](http://redux-form.com/6.5.0/docs/api/Field.md/#props)。
 
-**Tip**: If you only need one `<Field>` component in a custom input, you can let react-admin do the `<Field>` decoration for you by using the `addField` Higher-order component:
+**提示**：如果在自定义输入中只需要一个 `<Field>` 组件，则可以让 react-admin 使用 `addField` 高阶组件为您执行 `<Field>` 修饰：
 
 ```jsx
 // in SexInput.js
@@ -1204,7 +1204,7 @@ const SexInput = ({ source }) => <Field name={source} component={renderSexInput}
 export default SexInput;
 ```
 
-For more details on how to use redux-form's `<Field>` component, please refer to [the redux-form doc](http://redux-form.com/6.5.0/docs/api/Field.md/).
+有关如何使用 redux-form `<Field>` 组件的更多详细信息，请参阅 [redux-form doc](http://redux-form.com/6.5.0/docs/api/Field.md/)。
 
 Instead of HTML `input` elements or material-ui components, you can use react-admin input components, like `<NumberInput>` for instance. React-admin components are already decorated by `<Field>`, and already include a label, so you don't need either `<Field>` or `<Labeled>` when using them:
 
