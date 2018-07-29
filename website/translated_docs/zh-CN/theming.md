@@ -373,7 +373,7 @@ const MyLayout = (props) => <Layout
 export default MyLayout;
 ```
 
-要获得更多自定义布局，请从头开始编写组件。 它必须包含 `{children}` 占位符, 其中就是 react-admin 将渲染的资源。 Use the [default layout](https://github.com/marmelab/react-admin/blob/master/src/mui/layout/Layout.js) as a starting point. Here is a simplified version (with no responsive support):
+要获得更多自定义布局，请从头开始编写组件。 它必须包含 `{children}` 占位符, 其中就是 react-admin 将渲染的资源。 使用 [default layout](https://github.com/marmelab/react-admin/blob/master/src/mui/layout/Layout.js) 作为起点。 下面是一个简化版本 (没有 responsive 支持):
 
 ```jsx
 // in src/MyLayout.js
@@ -467,11 +467,11 @@ const mapStateToProps = state => ({ isLoading: state.admin.loading > 0 });
 export default connect(mapStateToProps, { setSidebarVisibility })(withStyles(styles)(MyLayout));
 ```
 
-## Using a Custom Menu
+## 使用自定义菜单
 
-By default, React-admin uses the list of `<Resource>` components passed as children of `<Admin>` to build a menu to each resource with a `list` component.
+默认情况下，React-admin 使用作为 `<Admin>` 子级传递的 `<Resource>` 组件列表来为具有 `list` 组件的每个资源构建菜单。
 
-If you want to add or remove menu items, for instance to link to non-resources pages, you can create your own menu component:
+如果要添加或删除菜单项，例如链接到非资源页面，可以创建自己的菜单组件：
 
 ```jsx
 // in src/MyMenu.js
@@ -502,13 +502,13 @@ export default withRouter(connect(mapStateToProps)(MyMenu));
 
 ```
 
-**Tip**: Note the `MenuItemLink` component. It must be used to avoid unwanted side effects in mobile views.
+**提示**：请注意 `MenuItemLink` 组件。 必须使用它来避免移动视图中不必要的副作用。
 
-**Tip**: Note that we include the `logout` item only on small devices. Indeed, the `logout` button is already displayed in the AppBar on larger devices.
+**提示**：注意, 我们只在小设备上包含 ` logout ` 项。实际上, ` logout ` 按钮已显示在较大设备的 AppBar 中。
 
-**Tip**: Note that we use React Router [`withRouter`](https://reacttraining.com/react-router/web/api/withRouter) Higher Order Component and that it is used **before** Redux [`connect](https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options). This is required if you want the active menu item to be highlighted.
+**提示**：请注意，我们使用React Router [`withRouter`](https://reacttraining.com/react-router/web/api/withRouter) Hoc，并在Redux [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) **之前**使用它。 如果要突出显示活动菜单项，则需要这样做。
 
-To use this custom menu component, pass it to a custom Layout, as explained above:
+要使用此自定义菜单组件，请将其传递给自定义布局，如上所述：
 
 ```jsx
 // in src/MyLayout.js
@@ -520,7 +520,7 @@ const MyLayout = (props) => <Layout {...props} menu={MyMenu} />;
 export default MyLayout;
 ```
 
-Then, use this layout in the `<Admin>` `applayout` prop:
+然后，在 `<Admin>` `applayout` 属性中使用此布局：
 
 ```jsx
 // in src/App.js
@@ -533,7 +533,7 @@ const App = () => (
 );
 ```
 
-**Tip**: If you use authentication, don't forget to render the `logout` prop in your custom menu component. Also, the `onMenuClick` function passed as prop is used to close the sidebar on mobile.
+**提示**：如果您使用 authentication，请不要忘记在自定义菜单组件中渲染` logout `属性。 Also, the `onMenuClick` function passed as prop is used to close the sidebar on mobile.
 
 The `MenuItemLink` component make use of the React Router [`NavLink`](https://reacttraining.com/react-router/web/api/NavLink) component, hence allowing to customize its style when it targets the current page.
 
