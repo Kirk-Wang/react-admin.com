@@ -249,13 +249,13 @@ export const PostList = (props) => (
 
 **提示**：如果您只提供`small` 和 `medium`，则`medium`型元素也将用于大屏幕。 当省略 `small` 或 `medium` 时，存在相同类型的智能默认值。
 
-**Tip**: You can specify `null` as the value for `small`, `medium` or `large` to avoid rendering something on a specific size without falling back to others.
+提示：您可以将 null 指定为 `small`，`medium` 或 `large` 的值，以避免在特定大小上呈现某些内容而不会回退到其他大小。
 
-**Tip**: You can also use [material-ui's `withWidth()` higher order component](https://github.com/callemall/material-ui/blob/master/src/utils/withWidth.js) to have the `with` prop injected in your own components.
+提示：您还可以使用 [material-ui 的 `withWidth()` 高阶组件](https://github.com/callemall/material-ui/blob/master/src/utils/withWidth.js)，以便在您自己的组件中注入 `with` 属性。
 
-## Using a Predefined Theme
+## 使用预定义主题
 
-Material UI also supports [complete theming](http://www.material-ui.com/#/customization/themes) out of the box. Material UI ships two base themes: light and dark. React-admin uses the light one by default. To use the dark one, pass it to the `<Admin>` component, in the `theme` prop (along with `createMuiTheme()`).
+Material UI 也支持开箱即用的 [complete theming](http://www.material-ui.com/#/customization/themes)。 Material UI提供两个基本主题：light 和 dark。 React-admin 默认使用 light。 To use the dark one, pass it to the `<Admin>` component, in the `theme` prop (along with `createMuiTheme()`).
 
 ```jsx
 import { createMuiTheme } from '@material-ui/core/styles';
