@@ -1061,11 +1061,11 @@ const dateParser = v => {
 * [LoicMahieu/aor-tinymce-input](https://github.com/LoicMahieu/aor-tinymce-input): a TinyMCE component, useful for editing HTML
 * [vascofg/react-admin-date-inputs](https://github.com/vascofg/react-admin-date-inputs): a collection of Date Inputs, based on [material-ui-pickers](https://material-ui-pickers.firebaseapp.com/)
 
-## Writing Your Own Input Component
+## 编写自己的输入组件
 
-If you need a more specific input type, you can also write it yourself. You'll have to rely on redux-form's [`<Field>`](http://redux-form.com/6.5.0/docs/api/Field.md/) component, so as to handle the value update cycle.
+如果您需要更具体的输入类型，您也可以自己编写。 您将不得不依赖 redux-form 的 [`<Field>`](http://redux-form.com/6.5.0/docs/api/Field.md/) 组件，以便处理值更新周期。
 
-For instance, let's write a component to edit the latitude and longitude of the current record:
+例如，让我们编写一个组件来编辑当前记录的纬度和经度：
 
 ```jsx
 // in LatLongInput.js
@@ -1089,7 +1089,7 @@ const ItemEdit = (props) => (
 );
 ```
 
-`LatLngInput` takes no props, because the `<Field>` component can access the current record via its context. The `name` prop serves as a selector for the record property to edit. All `Field` props except `name` and `component` are passed to the child component/element (an `<input>` in that example). Executing this component will render roughly the following code:
+`LatLngInput` 不带任何属性，因为 `<Field>` 组件可以通过其上下文访问当前记录。 `name` 属性用作要编辑记录属性的选择器。 除 `name` 和 `component` 之外的所有 `Field` 属性都将传递给子组件/元素（该示例中的 `<input>`）。 执行此组件将大致呈现以下代码：
 
 ```html
 <span>
@@ -1098,7 +1098,7 @@ const ItemEdit = (props) => (
 </span>
 ```
 
-**Tip**: The `<Field>` component supports dot notation in the `name` prop, to edit nested props:
+**提示**：`<Field>` 组件支持 `name` 属性中的点表示法，以便编辑嵌套的属性：
 
 ```jsx
 const LatLongInput = () => (
@@ -1110,7 +1110,7 @@ const LatLongInput = () => (
 );
 ```
 
-This component lacks a label. React-admin provides the `<Labeled>` component for that:
+该组件缺少label。React-admin 为此提供了 `<Labeled>` 组件：
 
 ```jsx
 // in LatLongInput.js
