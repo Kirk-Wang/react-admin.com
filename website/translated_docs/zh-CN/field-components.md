@@ -1,6 +1,6 @@
 ---
 layout: field-components
-title: <Field> Components
+title: Field 组件
 ---
 `Field` 组件显示 REST 资源的给定属性。 此类组件在 `List` 视图中使用，但也可以针对只读字段在 `Edit` 和` Create` 视图中使用。 所有 Field 组件中最常见的是 `<TextField>`:
 
