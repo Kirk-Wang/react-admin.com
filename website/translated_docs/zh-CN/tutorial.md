@@ -1,6 +1,6 @@
 ---
 id: tutorial
-title: 十分钟教程
+title: Tutorial
 ---
 
 这 15 分钟的教程将揭示如何创建一个新的管理应用程序基于现有的 REST API。<video width="100%" controls> <source src="http://static.marmelab.com/react-admin/react-admin.mp4" type="video/mp4"> Your browser does not support the video tag. </video>
