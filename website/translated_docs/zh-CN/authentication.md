@@ -60,9 +60,9 @@ const App = () => (
 );
 ```
 
-当收到403响应时, admin app显示登录页。 `authProvider` 现在在用户提交登录表单时被调用。 Once the promise resolves, the login form redirects to the previous page, or to the admin index if the user just arrived.
+当收到403响应时, admin app显示登录页。 `authProvider` 现在在用户提交登录表单时被调用。 一旦 promise resolve ，登录表单重定向到上一页，或者如果用户刚刚到达，则重定向到 admin index。
 
-## Sending Credentials to the API
+## 向 API 发送凭据
 
 To use the credentials when calling a data provider, you have to tweak, this time, the `dataProvider` function. As explained in the [Data providers documentation](DataProviders.md#adding-custom-headers), `simpleRestProvider` and `jsonServerProvider` take an `httpClient` as second parameter. That's the place where you can change request headers, cookies, etc.
 
