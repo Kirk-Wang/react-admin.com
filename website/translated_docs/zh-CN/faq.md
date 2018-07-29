@@ -2,9 +2,9 @@
 id: faq
 title: FAQ
 ---
-- [Can I have custom identifiers/primary keys for my resources?](#can-i-have-custom-identifiersprimary-keys-for-my-resources)
-- [I get warning about unique key for child in array](#i-get-warning-about-unique-key-for-child-in-array)
-- [A form with validation freezes when rendering](#a-form-with-validation-freezes-when-rendering)
+- [是否可以为资源提供自定义标识符/主键？](#can-i-have-custom-identifiersprimary-keys-for-my-resources)
+- [我收到关于数组中子项的唯一键的警告](#i-get-warning-about-unique-key-for-child-in-array)
+- [呈现时冻结验证的表单](#a-form-with-validation-freezes-when-rendering)
 - [How can I customize the UI depending on the user permissions?](#how-can-i-customize-the-ui-depending-on-the-user-permissions)
 - [How can I customize forms depending on its inputs values?](#how-can-i-customize-forms-depending-on-its-inputs-values)
 
