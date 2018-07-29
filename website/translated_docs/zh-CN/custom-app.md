@@ -1,6 +1,6 @@
 ---
-id: 在其它 App 中包含 Admin
-title: Including the Admin in Another App
+id: custom-app
+title: 在其它 App 中包含 Admin
 ---
 `<Admin>` 标签是一个很好的快捷方式，在几分钟内就可以启动和运行react-admin。 但是，在许多情况下，您需要将 admin 嵌入到另一个应用程序中，或者深入定制 admin。 幸运的是，您可以在任何 React 应用程序中执行 `<Admin>` 所做的所有工作。
 
