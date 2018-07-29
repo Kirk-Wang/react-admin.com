@@ -45,9 +45,9 @@ export default (type, params) => {
 }
 ```
 
-**提示**：在 `localStorage`中存储凭据是一个好主意，以便在打开新的浏览器选项卡时避免重新连接。 But this makes your application [open to XSS attacks](http://www.redotheweb.com/2015/11/09/api-security.html), so you'd better double down on security, and add an `httpOnly` cookie on the server side, too.
+**提示**：在 `localStorage`中存储凭据是一个好主意，以便在打开新的浏览器选项卡时避免重新连接。 但这会使您的应用程序 [对XSS攻击开放](http://www.redotheweb.com/2015/11/09/api-security.html)，因此您最好在安全性方面加倍，并在服务器端添加一个`httpOnly` cookie。
 
-Then, pass this client to the `<Admin>` component:
+然后, 将此客户端传递到 `<Admin>` 组件：
 
 ```jsx
 // in src/App.js
@@ -60,7 +60,7 @@ const App = () => (
 );
 ```
 
-Upon receiving a 403 response, the admin app shows the Login page. `authProvider` is now called when the user submits the login form. Once the promise resolves, the login form redirects to the previous page, or to the admin index if the user just arrived.
+当收到403响应时, admin app显示登录页。 `authProvider` 现在在用户提交登录表单时被调用。 Once the promise resolves, the login form redirects to the previous page, or to the admin index if the user just arrived.
 
 ## Sending Credentials to the API
 
