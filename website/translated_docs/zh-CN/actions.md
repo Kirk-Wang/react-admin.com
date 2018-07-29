@@ -401,13 +401,13 @@ export default connect(null, {
 })(ApproveButton);
 ```
 
-这就是使 fetch action 变得积极所需的全部内容。 请注意，`startUndoable` action 创建者将作为 `mapDispatchToProp` 传递给Redux `connect`，以便使用 `dispatch` 进行修饰 - 但是`commentApprove`不是。 Only the first action must be decorated with dispatch.
+这就是使 fetch action 变得积极所需的全部内容。 请注意，`startUndoable` action 创建者将作为 `mapDispatchToProp` 传递给Redux `connect`，以便使用 `dispatch` 进行修饰 - 但是`commentApprove`不是。 只有第一个 action 必须用 dispatch 装饰。
 
-The fact that react-admin updates the internal store if you use custom actions with the `fetch` meta should be another motivation to avoid using raw `fetch`.
+如果您对` fetch ` meta 使用自定义 action，react-admin 更新内部 store 的事应该是避免使用原始 `fetch` 的另一个动机。
 
-## Using a Custom Reducer
+## 使用自定义 Reducer
 
-In addition to triggering REST calls, you may want to store the effect of your own actions in the application state. For instance, if you want to display a widget showing the current exchange rate for the bitcoin, you might need the following action:
+除了触发REST调用之外，您可能希望将自己的操作的效果存储在应用程序状态。 例如，如果要显示一个显示比特币当前汇率的小部件，可能需要执行以下操作：
 
 ```jsx
 // in src/bitcoinRateReceived.js
@@ -418,7 +418,7 @@ export const bitcoinRateReceived = (rate) => ({
 });
 ```
 
-This action can be triggered on mount by the following component:
+可以通过以下组件在挂载时触发此动作：
 
 ```jsx
 // in src/BitCoinRate.js
@@ -453,7 +453,7 @@ export default connect(mapStateToProps, {
 })(BitCoinRate);
 ```
 
-In order to put the rate passed to `bitcoinRateReceived()` into the Redux store, you'll need a reducer:
+为了将汇率传递到 `bitcoinRateReceived()` 进入 Redux store 里，你需要一个reducer：
 
 ```jsx
 // in src/rateReducer.js
