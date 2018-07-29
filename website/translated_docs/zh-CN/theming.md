@@ -1,6 +1,6 @@
 ---
 id: theming
-title: Theming
+title: 主题
 ---
 无论您需要为单个组件调整CSS规则，还是更改整个应用程序中的标签颜色，都可以！
 
