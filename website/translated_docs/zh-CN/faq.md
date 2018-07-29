@@ -93,4 +93,4 @@ export const CommentEdit = ({ ...props }) => (
 - 如果另一个输入具有特定值，则显示/隐藏某些输入
 - 如果当前表单值与特定约束匹配，则显示/隐藏某些输入
 
-For all those cases, you can use the [aor-dependent-input](https://github.com/marmelab/aor-dependent-input) addon.
+对于所有这些情况，您可以使用 [aor-dependent-input](https://github.com/marmelab/aor-dependent-input) 插件。
