@@ -214,9 +214,9 @@ export default connect(null, {
 
 ## 处理副作用
 
-Fetching data is called a *side effect*, since it calls the outside world, and is asynchronous. Usual actions may have other side effects, like showing a notification, or redirecting the user to another page. Just like for the `fetch` side effect, you can associate side effects to an action declaratively by setting the appropriate keys in the action `meta`.
+获取数据称为 *副作用*，因为它调用外部世界，并且是异步的。 通常 actions 可能会产生其他副作用，例如显示通知或将用户重定向到其他页面。 就像 `fetch` 副作用一样，您可以通过在动作元 `meta` 中设置适当的键，以声明方式将 side effects 与 action 相关联。
 
-For instance, to display a notification when the `COMMENT_APPROVE` action is dispatched, add the `notification` meta:
+例如，要在调度 `COMMENT_APPROVE` 动作时显示通知，请添加 `notification` meta：
 
 ```diff
 // in src/comment/commentActions.js
@@ -238,7 +238,7 @@ export const commentApprove = (id, data, basePath) => ({
 });
 ```
 
-React-admin can handle the following side effects metas:
+React-admin可以处理以下副作用：
 
 * `notification`: Display a notification. The property value should be an object describing the notification to display. The `body` can be a translation key. `level` can be either `info` or `warning`.
 * `redirectTo`: Redirect the user to another page. The property value should be the path to redirect the user to.
@@ -246,11 +246,11 @@ React-admin can handle the following side effects metas:
 * `unselectAll`: Unselect all lines in the current datagrid. Set to true to enable.
 * `basePath`: This is not a side effect, but it's used internaly to compute redirection paths. Set it when you have a redirection side effect.
 
-## Success and Failure Side Effects
+## 成功与失败的Side Effects
 
-In the previous example, the "notification approved" notification appears when the `COMMENT_APPROVE` action is dispatched, i.e. *before* the server is even called. That's a bit too early: what if the server returns an error?
+在前面的示例中，当调度 `COMMENT_APPROVE` action 时，即在甚至调用服务器 *之前*，会出现 "notification approved" 通知。 这有点太早：如果服务器返回错误怎么办？
 
-In practice, most side effects must be triggered after the `fetch` side effect succeeds or fails. To support that, you can enclose side effects under the `onSuccess` and `onFailure` keys in the `meta` property of an action:
+在实践中，大多数副作用必须在 `fetch` 副作用成功或失败后触发。 为了支持这一点，您可以在动作的 `meta` 属性中的 onSuccess 和 onFailure 键下包含副作用：
 
 ```diff
 // in src/comment/commentActions.js
@@ -286,7 +286,7 @@ export const commentApprove = (id, data, basePath) => ({
 });
 ```
 
-In this case, no side effect is triggered when the `COMMENT_APPROVE` action is dispatched. However, when the `fetch` side effects returns successfully, react-admin dispatches a `COMMENT_APPROVE_SUCCESS` action, and copies the `onSuccess` side effects into the `meta` property. So it will dispatch an action looking like:
+在这种情况下，调度` COMMENT_APPROVE ` action 时不会触发任何副作用。 However, when the `fetch` side effects returns successfully, react-admin dispatches a `COMMENT_APPROVE_SUCCESS` action, and copies the `onSuccess` side effects into the `meta` property. So it will dispatch an action looking like:
 
 ```js
 {
