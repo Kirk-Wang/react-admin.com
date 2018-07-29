@@ -2,13 +2,13 @@
 id: actions
 title: Writing Actions
 ---
-Admin interfaces often have to offer custom actions, beyond the simple CRUD. For instance, in an administration for comments, an "Approve" button (allowing to update the `is_approved` property and to save the updated record in one click) - is a must have.
+Admin 界面通常必须提供自定义操作，而不仅仅是简单的 CRUD。 例如, 在管理评论中, "Approve" 按钮 (允许更新 `is_approved` 属性, 并在一次单击中保存更新的记录)-是必须具有的。
 
-How can you add such custom actions with react-admin? The answer is twofold, and learning to do it properly will give you a better understanding of how react-admin uses Redux and redux-saga.
+如何使用 react-admin 添加这样的自定义动作？ 答案是双重的，react-admin 如何使用 Redux 和 redux-saga，学习并正确的做到这一点会给你更好的理解。
 
-## The Simple Way
+## 简单的方法
 
-Here is an implementation of the "Approve" button that works perfectly:
+这是一个完美的“Approve”按钮的实现：
 
 ```jsx
 // in src/comments/ApproveButton.js
@@ -51,11 +51,11 @@ export default connect(null, {
 })(ApproveButton);
 ```
 
-The `handleClick` function makes a `PUT` request the REST API with `fetch`, then displays a notification (with `showNotification`) and redirects to the comments list page (with `push`);
+`handleClick` 函数通过 `fetch` 使 `PUT` 请求 REST API，然后显示通知（使用 `showNotification`）并重定向到 comments 列表页面（使用`push`）;
 
-`showNotification` and `push` are *action creators*. This is a Redux term for functions that return a simple action object. When given an object of action creators in the second argument, `connect()` will [decorate each action creator](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) with Redux' `dispatch` method, so in the `handleClick` function, a call to `showNotification()` is actually a call to `dispatch(showNotification())`.
+`showNotification` 和 `push` 是 *动作创建者*。 这是返回简单 action 对象的函数的Redux术语。 当在第二个参数中给出一个动作创建者的对象时，`connect()` 将使用 Redux 的`dispatch` 方法装饰[每个动作创建者](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)，因此在 `handleClick` 函数中，对`showNotification()` 的调用实际上是对 `dispatch(showNotification())` 的调用。
 
-This `ApproveButton` can be used right away, for instance in the list of comments, where `<Datagrid>` automatically injects the `record` to its children:
+可以立即使用此 `ApproveButton`，例如在注释列表中，其中 `<Datagrid>` 自动将 `record` 注入其子项：
 
 ```jsx
 // in src/comments/index.js
@@ -73,7 +73,7 @@ export const CommentList = (props) =>
     </List>;
 ```
 
-Or, in the `<Edit>` page, as a [custom action](./CreateEdit.md#actions):
+或者，在 `<Edit>` 页面中，作为 [自定义action](./CreateEdit.md#actions)：
 
 ```jsx
 // in src/comments/CommentEditActions.js
@@ -107,9 +107,9 @@ export const CommentEdit = (props) =>
     </Edit>;
 ```
 
-## Using a Data Provider Instead of Fetch
+## 使用 Data Provider 代替 Fetch
 
-The previous code uses `fetch()`, which means it has to make raw HTTP requests. The REST logic often requires a bit of HTTP plumbing to deal with query parameters, encoding, headers, body formatting, etc. It turns out you probably already have a function that maps from a REST request to an HTTP request: the [Data Provider](./DataProviders.md). So it's a good idea to use this function instead of `fetch` - provided you have exported it:
+前面的代码使用 `fetch()`，这意味着它必须生成原始 HTTP 请求。 REST 逻辑通常需要一些 HTTP 管道来处理查询参数，编码，headers，正文格式等。 事实证明，您可能已经有一个从REST请求映射到HTTP请求的函数：[Data Provider](./DataProviders.md)。 因此，使用此函数而不是 `fetch` 是个好主意 - 前提是您已导出它：
 
 ```jsx
 // in src/dataProvider.js
@@ -141,7 +141,7 @@ class ApproveButton extends Component {
 }
 ```
 
-There you go: no more `fetch`. Just like `fetch`, the `dataProvider` returns a `Promise`. It's signature is:
+这下你会懂了：不再 `fetch`。就如 `fetch`，`dataProvider` 返回一个 `Promise`。它的签名是：
 
 ```jsx
 /**
@@ -159,11 +159,11 @@ There you go: no more `fetch`. Just like `fetch`, the `dataProvider` returns a `
 const dataProvider = (type, resource, params) => new Promise();
 ```
 
-As for the syntax of the various request types (`GET_LIST`, `GET_ONE`, `UPDATE`, etc.), head to the [Data Provider documentation](./DataProviders.md#request-format) for more details.
+至于各种请求类型的语法（`GET_LIST`，`GET_ONE`，`UPDATE`等），请转到 [Data Provider文档](./DataProviders.md#request-format) 以获取更多详细信息。
 
-## Using a Custom Action Creator
+## 使用自定义 Action Creator
 
-Fetching data right inside the component is easy. But if you're a Redux user, you might want to do it in a more idiomatic way - by dispatching actions. First, create your own action creator to replace the call to `dataProvider`:
+在组件内部获取数据很容易。 但是，如果您是Redux用户，则可能需要以更为惯用的方式执行此操作-通过分发 action。 首先，创建自己的 action 创建者以替换对 `dataProvider` 的调用：
 
 ```jsx
 // in src/comment/commentActions.js
@@ -176,9 +176,9 @@ export const commentApprove = (id, data, basePath) => ({
 });
 ```
 
-This action creator takes advantage of react-admin's built in fetcher, which listens to actions with the `fetch` meta. Upon dispatch, this action will trigger the call to `dataProvider(UPDATE, 'comments')`, dispatch a `COMMENT_APPROVE_LOADING` action, then after receiving the response, dispatch either a `COMMENT_APPROVE_SUCCESS`, or a `COMMENT_APPROVE_FAILURE`.
+这个动作创建者利用了 react-admin 的内置 fetcher，它使用 `fetch` meta 监听动作。 在 dispatch 时，此操作将触发对 `dataProvider的调用（UPDATE，'comments'）`，dispatch 一个 `COMMENT_APPROVE_LOADING` action，然后在收到响应后，dispatch一个 `COMMENT_APPROVE_SUCCESS` 或 `COMMENT_APPROVE_FAILURE`。
 
-To use the new action creator in the component, `connect` it:
+若要在组件中使用新的action creator，请 `connect`：
 
 ```jsx
 // in src/comments/ApproveButton.js
@@ -210,13 +210,13 @@ export default connect(null, {
 })(ApproveButton);
 ```
 
-This works fine: when a user presses the "Approve" button, the API receives the `UPDATE` call, and that approves the comment. But it's not possible to call `push` or `showNotification` in `handleClick` anymore. This is because `commentApprove()` returns immediately, whether the API call succeeds or not. How can you run a function only when the action succeeds?
+这很好用：当用户按下 “Approve” 按钮时，API 接收 UPDATE 调用，并批准 comment。 但是不可能再在 `handleClick` 中调用 `push` 或 `showNotification`。 这是因为 `commentApprove()` 会立即返回，无论 API 调用是否成功。 你如何在只有当操作成功时运行一个函数？
 
-## Handling Side Effects
+## 处理副作用
 
-Fetching data is called a *side effect*, since it calls the outside world, and is asynchronous. Usual actions may have other side effects, like showing a notification, or redirecting the user to another page. Just like for the `fetch` side effect, you can associate side effects to an action declaratively by setting the appropriate keys in the action `meta`.
+获取数据称为 *副作用*，因为它调用外部世界，并且是异步的。 通常 actions 可能会产生其他副作用，例如显示通知或将用户重定向到其他页面。 就像 `fetch` 副作用一样，您可以通过在动作元 `meta` 中设置适当的键，以声明方式将 side effects 与 action 相关联。
 
-For instance, to display a notification when the `COMMENT_APPROVE` action is dispatched, add the `notification` meta:
+例如，要在调度 `COMMENT_APPROVE` 动作时显示通知，请添加 `notification` meta：
 
 ```diff
 // in src/comment/commentActions.js
@@ -238,7 +238,7 @@ export const commentApprove = (id, data, basePath) => ({
 });
 ```
 
-React-admin can handle the following side effects metas:
+React-admin可以处理以下副作用：
 
 * `notification`: Display a notification. The property value should be an object describing the notification to display. The `body` can be a translation key. `level` can be either `info` or `warning`.
 * `redirectTo`: Redirect the user to another page. The property value should be the path to redirect the user to.
@@ -246,11 +246,11 @@ React-admin can handle the following side effects metas:
 * `unselectAll`: Unselect all lines in the current datagrid. Set to true to enable.
 * `basePath`: This is not a side effect, but it's used internaly to compute redirection paths. Set it when you have a redirection side effect.
 
-## Success and Failure Side Effects
+## 成功与失败的Side Effects
 
-In the previous example, the "notification approved" notification appears when the `COMMENT_APPROVE` action is dispatched, i.e. *before* the server is even called. That's a bit too early: what if the server returns an error?
+在前面的示例中，当调度 `COMMENT_APPROVE` action 时，即在甚至调用服务器 *之前*，会出现 "notification approved" 通知。 这有点太早：如果服务器返回错误怎么办？
 
-In practice, most side effects must be triggered after the `fetch` side effect succeeds or fails. To support that, you can enclose side effects under the `onSuccess` and `onFailure` keys in the `meta` property of an action:
+在实践中，大多数副作用必须在 `fetch` 副作用成功或失败后触发。 为了支持这一点，您可以在动作的 `meta` 属性中的 onSuccess 和 onFailure 键下包含副作用：
 
 ```diff
 // in src/comment/commentActions.js
@@ -286,7 +286,7 @@ export const commentApprove = (id, data, basePath) => ({
 });
 ```
 
-In this case, no side effect is triggered when the `COMMENT_APPROVE` action is dispatched. However, when the `fetch` side effects returns successfully, react-admin dispatches a `COMMENT_APPROVE_SUCCESS` action, and copies the `onSuccess` side effects into the `meta` property. So it will dispatch an action looking like:
+在这种情况下，调度` COMMENT_APPROVE ` action 时不会触发任何副作用。 但是，当 `fetch` 副作用成功返回时，react-admin 将 dispatch `COMMENT_APPROVE_SUCCESS` action，并将 `onSuccess` 副作用复制到 `meta` 属性中。 所以它会发出一个看起来像这样的 action：
 
 ```js
 {
@@ -304,17 +304,17 @@ In this case, no side effect is triggered when the `COMMENT_APPROVE` action is d
 }
 ```
 
-And then, the side effects will trigger. With this code, approving a review now displays the correct notification, and redirects to the comment list.
+然后，副作用将触发。 使用此代码，批准审核现在会显示正确的通知，并重定向到评论列表。
 
-You can use `onSuccess` and `onFailure` metas in your own actions to handle side effects.
+您可以在自己的 action 中使用 `onSuccess` 和 `onFailure` metas来处理副作用。
 
-## Custom sagas
+## 自定义 saga
 
-Sometimes, you may want to trigger other *side effects*. React-admin promotes a programming style where side effects are decoupled from the rest of the code, which has the benefit of making them testable.
+有时，您可能想要触发其他*副作用*。 React-admin 提升了一种编程风格，其中副作用与代码的其余部分分离，这有利于使它们可测试。
 
-In react-admin, side effects are handled by Sagas. [Redux-saga](https://redux-saga.github.io/redux-saga/) is a side effect library built for Redux, where side effects are defined by generator functions. If this is new to you, take a few minutes to go through the Saga documentation.
+在react-admin中，副作用由 Saga 处理。 [Redux-saga](https://redux-saga.github.io/redux-saga/) 是为 Redux 构建的副作用库，其副作用由生成器函数定义。 如果这对您来说是新手，请花几分钟时间浏览Saga文档。
 
-Here is the generator function necessary to handle the side effects for a failed `COMMENT_APPROVE` action which would log the error with an external service such as [Sentry](https://sentry.io):
+这是处理失败的 `COMMENT_APPROVE` action的副作用所必需的生成器函数，该操作将使用 [Sentry](https://sentry.io) 等外部服务记录错误：
 
 ```jsx
 // in src/comments/commentSaga.js
@@ -329,11 +329,11 @@ export default function* commentSaga() {
 }
 ```
 
-Let's explain all of that, starting with the final `commentSaga` generator function. A [generator function](http://exploringjs.com/es6/ch_generators.html) (denoted by the `*` in the function name) gets paused on statements called by `yield` - until the yielded statement returns. `yield takeEvery([ACTION_NAME], callback)` executes the provided callback [every time the related action is called](https://redux-saga.github.io/redux-saga/docs/basics/UsingSagaHelpers.html). To summarize, this will execute `commentApproveFailure` when the fetch initiated by `commentApprove()` fails.
+让我们解释所有这些，从最后的 `commentSaga` 生成器函数开始。 [generator function](http://exploringjs.com/es6/ch_generators.html)（由函数名中的`*`表示）在 `yield` 调用的语句上暂停 - 直到 yielding 语句返回。 `yield takeEvery([ACTION_NAME], callback)` [每次调用相关 action 时](https://redux-saga.github.io/redux-saga/docs/basics/UsingSagaHelpers.html)都会执行提供的回调。 总而言之，当 `commentApprove()` 初始 fetch 失败时，这将执行commentApproveFailure。
 
-As for `commentApproveFailure`, it just dispatch a [`call`](https://redux-saga.js.org/docs/api/#callfn-args) side effect to the `captureException` function from the global `Raven` object.
+对于 `commentApproveFailure`，它只是从全局 `Raven` 对象向`captureException` 函数 dispatch 一个 [`call `](https://redux-saga.js.org/docs/api/#callfn-args) 副作用。
 
-To use this saga, pass it in the `customSagas` props of the `<Admin>` component:
+要使用此 saga，请将其传递到 `<Admin>` 组件的 `customSagas` 属性中：
 
 ```jsx
 // in src/App.js
@@ -352,19 +352,19 @@ const App = () => (
 export default App;
 ```
 
-With this code, a failed review approval now sends the the correct signal to Sentry.
+使用此代码，失败的审核批准现在会向 Sentry 发送正确的信号。
 
-**Tip**: The side effects are [testable](https://redux-saga.github.io/redux-saga/docs/introduction/BeginnerTutorial.html#making-our-code-testable), too.
+**提示**：副作用也是[可测试的](https://redux-saga.github.io/redux-saga/docs/introduction/BeginnerTutorial.html#making-our-code-testable)。
 
-## Optimistic Rendering and Undo
+## 积极的渲染和撤消
 
-In the previous example, after clicking on the "Approve" button, a spinner displays while the data provider is fetched. Then, users are redirected to the comments list. But in most cases, the server returns a success response, so the user waits for this response for nothing.
+在前面的示例中，单击“Approve”按钮后，将在 fetch data provider 时显示 spinner。 然后，用户被重定向到评论列表。 但在大多数情况下，服务器会返回成功响应，因此用户无需等待此响应。
 
-For its own fetch actions, react-admin uses an approach called *optimistic rendering*. The idea is to handle the `fetch` actions on the client side first (i.e. updating entities in the Redux store), and re-render the screen immediately. The user sees the effect of their action with no delay. Then, react-admin applies the success side effects, and only after that it triggers the fetch to the data provider. If the fetch ends with a success, react-admin does nothing more than a refresh to grab the latest data from the server, but in most cases, the user sees no difference (the data in the Redux store and the data from the data provider are the same). If the fetch fails, react-admin shows an error notification, and forces a refresh, too.
+对于自己的 fetch actions，react-admin 使用称为 *积极渲染* 的方法。 想法是首先处理客户端上的 `fetch` actions（即更新 Redux store 的实体），并立即重新渲染屏幕。 用户可以毫不拖延地看到他们 action 的效果。 然后，react-admin 应用 success side effects, 并且仅在此之后它触发对 data provider 的 fetch。 如果 fetch 成功结束，react-admin 只会刷新以从服务器获取最新数据，但在大多数情况下，用户看不到任何差异（Redux store 中的数据和来自 data provider 的数据） 是相同的）。 如果提取失败，react-admin 会显示错误通知，并强制刷新。
 
-As a bonus, while the success notification is displayed, users have the ability to cancel the action *before* the data provider is even called.
+作为奖励，当显示成功通知时，用户可以在甚至调用 data provide *之前* 取消 action。
 
-To make an action with a `fetch` meta optimistic, decorate it with the `startUndoable` action creator:
+要使用` fetch ` meta optimistic 进行操作，请使用` startUndoable ` action 创建器进行装饰：
 
 ```diff
 // in src/comments/ApproveButton.js
@@ -401,13 +401,13 @@ export default connect(null, {
 })(ApproveButton);
 ```
 
-And that's all it takes to make a fetch action optimistic. Note that the `startUndoable` action creator is passed to Redux `connect` as `mapDispatchToProp`, to be decorated with `dispatch` - but `commentApprove` is not. Only the first action must be decorated with dispatch.
+这就是使 fetch action 变得积极所需的全部内容。 请注意，`startUndoable` action 创建者将作为 `mapDispatchToProp` 传递给Redux `connect`，以便使用 `dispatch` 进行修饰 - 但是`commentApprove`不是。 只有第一个 action 必须用 dispatch 装饰。
 
-The fact that react-admin updates the internal store if you use custom actions with the `fetch` meta should be another motivation to avoid using raw `fetch`.
+如果您对` fetch ` meta 使用自定义 action，react-admin 更新内部 store 的事应该是避免使用原始 `fetch` 的另一个动机。
 
-## Using a Custom Reducer
+## 使用自定义 Reducer
 
-In addition to triggering REST calls, you may want to store the effect of your own actions in the application state. For instance, if you want to display a widget showing the current exchange rate for the bitcoin, you might need the following action:
+除了触发REST调用之外，您可能希望将自己的操作的效果存储在应用程序状态。 例如，如果要显示一个显示比特币当前汇率的小部件，可能需要执行以下操作：
 
 ```jsx
 // in src/bitcoinRateReceived.js
@@ -418,7 +418,7 @@ export const bitcoinRateReceived = (rate) => ({
 });
 ```
 
-This action can be triggered on mount by the following component:
+可以通过以下组件在挂载时触发此动作：
 
 ```jsx
 // in src/BitCoinRate.js
@@ -453,7 +453,7 @@ export default connect(mapStateToProps, {
 })(BitCoinRate);
 ```
 
-In order to put the rate passed to `bitcoinRateReceived()` into the Redux store, you'll need a reducer:
+为了将汇率传递到 `bitcoinRateReceived()` 进入 Redux store 里，你需要一个reducer：
 
 ```jsx
 // in src/rateReducer.js
@@ -467,7 +467,7 @@ export default (previousState = 0, { type, payload }) => {
 }
 ```
 
-Now the question is: How can you put this reducer in the `<Admin>` app? Simple: use the `customReducers` props:
+现在的问题是：你如何把这个 reducer 放在 `<Admin>` 应用程序中？ 简单：使用 `customReducers` 属性：
 
 ```jsx
 // in src/App.js
@@ -485,22 +485,23 @@ const App = () => (
 export default App;
 ```
 
-**Tip**: You can avoid storing data in the Redux state by storing data in a component state instead. It's much less complicated to deal with, and more performant, too. Use the global state only when you really need to.
+**提示**: 您可以避免将数据存储在 Redux 状态中，而是将数据存储在组件状态中。 处理起来要复杂得多，而且性能也要高一些。 只有在真正需要时才使用全局状态。
 
 ## List Bulk Actions
 
-Almost everything we saw before is true for custom `List` bulk actions too, with the following few differences:
+我们之前看到的几乎所有内容都适用于自定义 `List` 批量操作，但有以下几点不同：
 
-* They receive the following props: `resource`, `selectedIds` and `filterValues`
-* They do not receive the current record in the `record` prop as there are many of them.
-* They must render as a material-ui [`MenuItem`](http://www.material-ui.com/#/components/menu).
+* 他们收到以下属性：`resource`，`selectedIds` 和 `filterValues`
+* 它们没有收到` record ` 属性中的当前记录，因为它们中有很多。
+* 它们必须呈现为 material-ui [`MenuItem`](http://www.material-ui.com/#/components/menu)。
 
-You can find a complete example in the `List` documentation, in the [`bulk-actions`](/List.html#bulk-actions) section.
+您可以在 [`批量操作`](/List.html#bulk-actions) 部分的 `
+List` 文档中找到完整的示例。
 
-## Conclusion
+## 结论
 
-Which style should you choose for your own action buttons?
+您应该为自己的操作按钮选择哪种样式？
 
-The first version (with `fetch`) is perfectly fine, and if you're not into unit testing your components, or decoupling side effects from pure functions, then you can stick with it without problem.
+第一个版本（带 `fetch`）是非常好的，如果您不必单元测试您的组件，或者从纯功能中解除副作用，那么您可以坚持使用它。
 
-On the other hand, if you want to promote reusability, separation of concerns, adhere to react-admin's coding standards, and if you know enough Redux and Saga, use the final version.
+另一方面，如果您想提高可重用性，关注点分离，遵守 react-admin 的编码标准，并且如果您对Redux 和 Saga 有足够的了解，请使用最终版本。

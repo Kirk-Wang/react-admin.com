@@ -4,19 +4,19 @@ title: Authentication
 ---
 ![Logout button](https://marmelab.com/react-admin/img/login.gif)
 
-React-admin lets you secure your admin app with the authentication strategy of your choice. Since there are many different possible strategies (Basic Auth, JWT, OAuth, etc.), react-admin simply provides hooks to execute your own authentication code.
+React-admin 可以通过您选择的身份验证策略来保护您的admin app。 由于有许多不同的可能策略（Basic Auth，JWT，OAuth等），react-admin 只需提供钩子来执行您自己的验证代码。
 
-By default, an react-admin app doesn't require authentication. But if the REST API ever returns a 401 (Unauthorized) or a 403 (Forbidden) response, then the user is redirected to the `/login` route. You have nothing to do - it's already built in.
+默认情况下，react-admin 应用程序不需要身份验证。 但是，如果REST API返回401（Unauthorized）或403（Forbidden）响应，则用户将被重定向到 `/login` 路由。 你啥事都不需要做 - 它已经内置了。
 
-## Configuring the Auth Provider
+## 配置 Auth Provider
 
-By default, the `/login` route renders a special component called `Login`, which displays a login form asking for username and password.
+默认情况下，`/login` 路由呈现一个名为 `Login` 的特殊组件，它显示一个要求输入用户名和密码的登录表单。
 
 ![Default Login Form](https://marmelab.com/react-admin/img/login-form.png)
 
-What this form does upon submission depends on the `authProvider` prop of the `<Admin>` component. This function receives authentication requests `(type, params)`, and should return a Promise. `Login` calls `authProvider` with the `AUTH_LOGIN` type, and `{ login, password }` as parameters. It's the ideal place to authenticate the user, and store their credentials.
+这种表单在提交时取决于 `<Admin>` 组件的 `authProvider`属性。 此函数接收认证请求 `type，params`，并返回一个 Promise。 `Login` 使用 `AUTH_LOGIN` 类型调用 `authProvider`，并使用 `{login，password}` 作为参数。 它是验证用户身份和存储凭据的理想场所。
 
-For instance, to query an authentication route via HTTPS and store the credentials (a token) in local storage, configure `authProvider` as follows:
+例如，要通过HTTPS查询身份验证路由并将凭据（令牌）存储在本地存储中，请按如下方式配置`authProvider`：
 
 ```jsx
 // in src/authProvider.js
@@ -45,9 +45,9 @@ export default (type, params) => {
 }
 ```
 
-**Tip**: It's a good idea to store credentials in `localStorage`, to avoid reconnection when opening a new browser tab. But this makes your application [open to XSS attacks](http://www.redotheweb.com/2015/11/09/api-security.html), so you'd better double down on security, and add an `httpOnly` cookie on the server side, too.
+**提示**：在 `localStorage`中存储凭据是一个好主意，以便在打开新的浏览器选项卡时避免重新连接。 但这会使您的应用程序 [对XSS攻击开放](http://www.redotheweb.com/2015/11/09/api-security.html)，因此您最好在安全性方面加倍，并在服务器端添加一个`httpOnly` cookie。
 
-Then, pass this client to the `<Admin>` component:
+然后, 将此客户端传递到 `<Admin>` 组件：
 
 ```jsx
 // in src/App.js
@@ -60,13 +60,13 @@ const App = () => (
 );
 ```
 
-Upon receiving a 403 response, the admin app shows the Login page. `authProvider` is now called when the user submits the login form. Once the promise resolves, the login form redirects to the previous page, or to the admin index if the user just arrived.
+当收到403响应时, admin app显示登录页。 `authProvider` 现在在用户提交登录表单时被调用。 一旦 promise resolve ，登录表单重定向到上一页，或者如果用户刚刚到达，则重定向到 admin index。
 
-## Sending Credentials to the API
+## 向 API 发送凭据
 
-To use the credentials when calling a data provider, you have to tweak, this time, the `dataProvider` function. As explained in the [Data providers documentation](DataProviders.md#adding-custom-headers), `simpleRestProvider` and `jsonServerProvider` take an `httpClient` as second parameter. That's the place where you can change request headers, cookies, etc.
+要在调用数据提供程序时使用凭据，您必须进行调整，这一次是`dataProvider` 函数。 如 [ Data Provider 文档](DataProviders.md#adding-custom-headers)中所述, `simpleRestProvider` 和 `jsonServerProvider` 以 `httpClient` 作为第二个参数。 这是您可以更改请求头、cookie 等的位置。
 
-For instance, to pass the token obtained during login as an `Authorization` header, configure the Data Provider as follows:
+例如，要将登录期间获得的令牌传递为 `Authorization` header，请按如下方式配置Data Provider：
 
 ```jsx
 import { fetchUtils, Admin, Resource } from 'react-admin';
@@ -89,13 +89,13 @@ const App = () => (
 );
 ```
 
-If you have a custom REST client, don't forget to add credentials yourself.
+如果您有一个自定义 REST client，请不要忘记自己添加凭据。
 
-## Adding a Logout Button
+## 添加 Logout 按钮
 
-If you provide an `authProvider` prop to `<Admin>`, react-admin displays a logout button in the top bar (or in the menu on mobile). When the user clicks on the logout button, this calls the `authProvider` with the `AUTH_LOGOUT` type and removes potentially sensitive data from the redux store. When resolved, the user gets redirected to the login page.
+如果您提供 `authProvider` 属性到 `<Admin>`，react-admin 显示注销按钮在顶部栏 (或在移动菜单上)。 当用户单击注销按钮时，此操作将使用 `AUTH_LOGOUT` 类型调用 `authProvider`，并删除来自 redux store 的潜在敏感数据。 Resolve 后，用户将被重定向到登录页面。
 
-For instance, to remove the token from local storage upon logout:
+例如，要在注销时从 local storage 中删除 token：
 
 ```jsx
 // in src/authProvider.js
@@ -115,15 +115,15 @@ export default (type, params) => {
 
 ![Logout button](https://marmelab.com/react-admin/img/logout.gif)
 
-The `authProvider` is also a good place to notify the authentication API that the user credentials are no longer valid after logout.
+`authProvider` 也是通知 authentication API 的好地方, 用户凭据在注销后不再有效。
 
-## Catching Authentication Errors On The API
+## 捕获 API 上的身份验证错误
 
-Even though a user may be authenticated on the client-side, their credentials may no longer be valid server-side (e.g. if the token is only valid for a couple weeks). In that case, the API usually answers to all REST requests with an error code 401 or 403 - but what about *your* API?
+即使用户可能在客户端进行身份验证，服务器端其凭据可能不再是有效的（例如，如果令牌仅在几周内有效）。 在这种情况下，API 通常会回答所有 REST 请求具有错误代码 401 或 403 - 但是*你的*API呢？
 
-Fortunately, each time the API returns an error, the `authProvider` is called with the `AUTH_ERROR` type. Once again, it's up to you to decide which HTTP status codes should let the user continue (by returning a resolved promise) or log them out (by returning a rejected promise).
+幸运的是，每次 API 返回一个错误时，`authProvider` 都将使用 `AUTH_ERROR` type 调用。 再次，由您决定哪些 HTTP 状态代码应允许用户继续 (通过返回已解决的 Promise) 或注销 (通过返回拒绝的 Promise)。
 
-For instance, to redirect the user to the login page for both 401 and 403 codes:
+例如，401和403代码都要将用户重定向到登录页面：
 
 ```jsx
 // in src/authProvider.js
@@ -148,13 +148,13 @@ export default (type, params) => {
 };
 ```
 
-## Checking Credentials During Navigation
+## 在导航过程中检查凭据
 
-Redirecting to the login page whenever a REST response uses a 401 status code is usually not enough, because react-admin keeps data on the client side, and could display stale data while contacting the server - even after the credentials are no longer valid.
+当 REST 响应使用 401 状态代码时，重定向到登录页面通常是不够的，因为 react-admin 保留数据在客户端，并且可能在联系服务器时显示过时的数据 - 即使凭据不再有效。
 
-Fortunately, each time the user navigates, react-admin calls the `authProvider` with the `AUTH_CHECK` type, so it's the ideal place to check for credentials.
+幸运的是，每当用户导航时，react-admin 都使用 `AUTH_CHECK` type 调用`authProvider`，因此它是检查凭据的理想场所。
 
-For instance, to check for the existence of the token in local storage:
+例如，要检查本地存储中的令牌是否存在：
 
 ```jsx
 // in src/authProvider.js
@@ -177,7 +177,7 @@ export default (type, params) => {
 };
 ```
 
-If the promise is rejected, react-admin redirects by default to the `/login` page. You can override where to redirect the user by passing an argument with a `redirectTo` property to the rejected promise:
+如果promise被拒绝，默认情况下 react-admin 重定向到 `/login` 页面。 您可以通过将具有 `redirectTo` 属性的参数传递给被拒绝的 promise 来覆盖用户重定向的位置：
 
 ```jsx
 // in src/authProvider.js
@@ -200,7 +200,7 @@ export default (type, params) => {
 };
 ```
 
-**Tip**: For the `AUTH_CHECK` call, the `params` argument contains the `resource` name, so you can implement different checks for different resources:
+**提示**：对于 `AUTH_CHECK` 调用，`params` 参数包含`resource`名称，因此可以为不同的资源实现不同的检查：
 
 ```jsx
 // in src/authProvider.js
@@ -229,17 +229,17 @@ export default (type, params) => {
 };
 ```
 
-**Tip**: The `authProvider` can only be called with `AUTH_LOGIN`, `AUTH_LOGOUT`, `AUTH_ERROR`, or `AUTH_CHECK`; that's why the final return is a rejected promise.
+**提示**：`authClient` 只能用 `AUTH_LOGIN`，`AUTH_LOGOUT`，`AUTH_ERROR` 或 `AUTH_CHECK` 调用；这就是为什么最终返回一个拒绝的 promise。
 
-## Customizing The Login and Logout Components
+## 自定义登录和注销组件
 
-Using `authProvider` and `checkCredentials` is enough to implement a full-featured authorization system if the authentication relies on a username and password.
+如果身份验证依赖于用户名和密码，则使用 `authProvider` 和 `checkCredentials` 就可以实现全功能授权系统。
 
-But what if you want to use an email instead of a username? What if you want to use a Single-Sign-On (SSO) with a third-party authentication service? What if you want to use two-factor authentication?
+但是如果您想使用电子邮件而不是用户名呢？ 如果要使用带有第三方身份验证服务的单点登录（SSO），该怎么办？如果要使用双重身份认证怎么办？
 
-For all these cases, it's up to you to implement your own `LoginPage` component, which will be displayed under the `/login` route instead of the default username/password form, and your own `LogoutButton` component, which will be displayed in the sidebar. Pass both these components to the `<Admin>` component:
+对于所有这些情况，您需要实现自己的 `LoginPage` 组件，该组件将显示在 `/login` 路由下，而不是默认的用户名/密码表单以及您自己的 `LogoutButton` 组件，这将显示在侧边栏。 将这两个组件都传递给 `<Admin>` 组件：
 
-**Tip**: Use the `userLogin` and `userLogout` actions in your custom `Login` and `Logout` components.
+**提示**：在您的自定义 `Login` 和 `Logout` 组件中使用 `userLogin` 和 `userLogout` action。
 
 ```jsx
 // in src/MyLoginPage.js
@@ -310,9 +310,9 @@ const App = () => (
 );
 ```
 
-## Restricting Access To A Custom Page
+## 限制对自定义页面的访问
 
-If you add [custom pages](./Actions.md), of if you [create an admin app from scratch](./CustomApp.md), you may need to secure access to pages manually. That's the purpose of the `<Authenticated>` component, that you can use as a decorator for your own components.
+如果您添加[自定义页面](./Actions.md)，如果您[从头开始创建admin app](./CustomApp.md)，则可能需要手动保护对页面的访问。 这就是 `<Authenticated>` 组件的目的，您可以将其用作自己组件的装饰器。
 
 ```jsx
 // in src/MyPage.js
@@ -330,11 +330,11 @@ const MyPage = ({ location }) => (
 export default withRouter(MyPage);
 ```
 
-The `<Authenticated>` component calls the `authProvider` function with `AUTH_CHECK` and `authParams`. If the response is a fulfilled promise, the child component is rendered. If the response is a rejected promise, `<Authenticated>` redirects to the login form. Upon successful login, the user is redirected to the initial location (that's why it's necessary to get the location from the router).
+`<Authenticated>` 组件使用 `AUTH_CHECK` 和 `uthParams` 调用 `authProvider` 函数。 如果响应是一个fulfilled promise，则子组件被渲染。 如果响应是被拒绝的 promise，`<Authenticated>` 将重定向到登录表单。 成功登录后，用户将被重定向到初始位置（这就是为什么必须从路由器获取位置）。
 
-## Redirect After Logout
+## 注销后重定向
 
-By default, react-admin redirects the user to '/login' after they log out. This can be changed by passing the url to redirect to as parameter to the `userLogout()` action creator when you `connect` the `MyLogoutButton` component:
+默认情况下，react-admin在用户注销后会将用户重定向到 “/login”。 当您 `connect` 到 `MyLogoutButton`组件时，可以通过将 url 传递给 `userLogout()` action 创建者作为参数来更改：
 
 ```diff
 // in src/MyLogoutButton.js

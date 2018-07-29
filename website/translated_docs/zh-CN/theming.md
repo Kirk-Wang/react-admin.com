@@ -2,13 +2,13 @@
 id: theming
 title: Theming
 ---
-Whether you need to adjust a CSS rule for a single component, or change the color of the labels in the entire app, you're covered!
+无论您需要为单个组件调整CSS规则，还是更改整个应用程序中的标签颜色，都可以！
 
-## Overriding A Component Style
+## 重写组件样式
 
-Every react-admin component provides a `className` property, which is always applied to the root element.
+每个 react-admin 组件都提供 `className` 属性，该属性始终应用于根元素。
 
-Here is an example customizing an `EditButton` component inside a `Datagrid`, using its `className` property and the `withStyles` Higher Order Component from Material-UI:
+下面是使用其 `className` 属性和 Material-UI 中的 `withStyles` 高阶组件自定义 `Datagrid` 中的 `EditButton` 组件的示例：
 
 ```jsx
 import { NumberField, List, Datagrid, EditButton } from 'react-admin';
@@ -40,9 +40,9 @@ export const ProductList = (props) => (
 );
 ```
 
-For some components, you may want to override not only the root component style, but also the style of components inside the root. In this case, the `className` property isn't enough. You can take advantage of the `classes` property to customize the classes that the component uses internally.
+对于某些组件，您可能不仅要覆盖根组件样式，还要覆盖根目录中组件的样式。 在这种情况下 `className` 属性是不够的。 您可以利用 `classes` 属性来自定义组件在内部使用的类。
 
-Here is an example using the `classes` property of the `Filter` and `List` components:
+下面是使用 `Filter` 和 `List` 组件的 `classes` 属性的示例：
 
 ```jsx
 import React from 'react';
@@ -120,17 +120,17 @@ export const VisitorList = withStyles(listStyles)(({ classes, ...props }) => (
 ));
 ```
 
-This example results in:
+此示例导致：
 
 ![Visitor List with customized CSS classes](https://marmelab.com/react-admin/img/list_with_customized_css.png)
 
-Take a look at a component documentation and source code to know which classes are available for styling. For instance, you can have a look at the [Datagrid CSS documentation](./List.md#the-datagrid-component).
+查看组件文档和源代码，了解哪些类可用于样式。 例如，您可以查看 [Datagrid CSS文档](./List.md#the-datagrid-component)。
 
-If you need more control over the HTML code, you can also create your own [Field](./Fields.md#writing-your-own-field-component) and [Input](./Inputs.md#writing-your-own-input-component) components.
+如果您需要更多地控制 HTML 代码，您还可以创建自己的 [Field](./Fields.md#writing-your-own-field-component) 和 [Input](./Inputs.md#writing-your-own-input-component) 组件。
 
-## Conditional Formatting
+## 条件格式
 
-Sometimes you want the format to depend on the value. The following example shows how to create a new custom `NumberField` component which highlight its text in red when its value is 100 or higher.
+有时您希望格式取决于值。 以下示例显示如何创建新的自定义 `NumberField` 组件，该组件在其值为100或更高时以红色突出显示其文本。
 
 ```jsx
 import { NumberField, List, Datagrid, EditButton } from 'react-admin';
@@ -168,7 +168,7 @@ export const PostList = (props) => (
 );
 ```
 
-Furthermore, you may extract this highlighting strategy into an Higher Order Component if you'd like to reuse it for other components as well:
+此外，如果您想将其重新用于其他组件，则可以将此突出显示策略提取到高阶组件中：
 
 ```jsx
 import { NumberField, List, Datagrid, EditButton } from 'react-admin';
@@ -208,13 +208,13 @@ export const PostList = (props) => (
 );
 ```
 
-If you want to read more about higher-order components, check out this SitePoint tutorial: [Higher Order Components: A React Application Design Pattern](https://www.sitepoint.com/react-higher-order-components/)
+如果您想了解有关高阶组件的更多信息，请查看此SitePoint教程：[Higher Order Components: A React Application Design Pattern](https://www.sitepoint.com/react-higher-order-components/)
 
 ## Responsive Utility
 
-To provide an optimized experience on mobile, tablet, and desktop devices, you often need to display different components depending on the screen size. That's the purpose of the `<Responsive>` component, which offers a declarative approach to responsive web design.
+要在移动设备，平板电脑和桌面设备上提供优化的体验，您通常需要根据屏幕大小显示不同的组件。 这就是 `<Responsive>` 组件的目的，它为响应式Web设计提供了一种声明式方法。
 
-It expects element props named `small`, `medium`, and `large`. It displays the element that matches the screen size (with breakpoints at 768 and 992 pixels):
+它期望元素道具命名为 `small`，`medium` 和 `large`。 它显示与屏幕大小匹配的元素（断点为768和992像素）：
 
 ```jsx
 // in src/posts.js
@@ -247,15 +247,15 @@ export const PostList = (props) => (
 );
 ```
 
-**Tip**: If you only provide `small` and `medium`, the `medium` element will also be used on large screens. The same kind of smart default exists for when you omit `small` or `medium`.
+**提示**：如果您只提供`small` 和 `medium`，则`medium`型元素也将用于大屏幕。 当省略 `small` 或 `medium` 时，存在相同类型的智能默认值。
 
-**Tip**: You can specify `null` as the value for `small`, `medium` or `large` to avoid rendering something on a specific size without falling back to others.
+提示：您可以将 null 指定为 `small`，`medium` 或 `large` 的值，以避免在特定大小上呈现某些内容而不会回退到其他大小。
 
-**Tip**: You can also use [material-ui's `withWidth()` higher order component](https://github.com/callemall/material-ui/blob/master/src/utils/withWidth.js) to have the `with` prop injected in your own components.
+提示：您还可以使用 [material-ui 的 `withWidth()` 高阶组件](https://github.com/callemall/material-ui/blob/master/src/utils/withWidth.js)，以便在您自己的组件中注入 `with` 属性。
 
-## Using a Predefined Theme
+## 使用预定义主题
 
-Material UI also supports [complete theming](http://www.material-ui.com/#/customization/themes) out of the box. Material UI ships two base themes: light and dark. React-admin uses the light one by default. To use the dark one, pass it to the `<Admin>` component, in the `theme` prop (along with `createMuiTheme()`).
+Material UI 也支持开箱即用的 [complete theming](http://www.material-ui.com/#/customization/themes)。 Material UI提供两个基本主题：light 和 dark。 React-admin 默认使用 light。 要使用深色的, 请将 `theme` 属性传递到 `<Admin>` 组件（连同 `createMuiTheme()`）。
 
 ```jsx
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -275,9 +275,9 @@ const App = () => (
 
 ![Dark theme](https://marmelab.com/react-admin/img/dark-theme.png)
 
-## Writing a Custom Theme
+## 编写自定义主题
 
-If you need more fine tuning, you'll need to write your own `theme` object, following [Material UI themes documentation](https://material-ui.com/customization/themes/). Material UI merges custom theme objects with the default theme.
+如果需要更精细的调优，则需要编写自己的 `theme` 对象, 以下是 [Material UI 主题文档](https://material-ui.com/customization/themes/)。 Material UI将自定义主题对象与默认主题合并。
 
 ```jsx
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -313,7 +313,7 @@ const myTheme = createMuiTheme({
 });
 ```
 
-The `muiTheme` object contains the following keys:
+MuiTheme 对象包含以下键：
 
 * `breakpoints`
 * `direction`
@@ -327,9 +327,9 @@ The `muiTheme` object contains the following keys:
 * `spacing`
 * `zIndex`
 
-**Tip**: Check [Material UI default theme documentation](https://material-ui.com/customization/default-theme/) to see the default values and meaning for these keys.
+**提示**：查看 [Material UI默认主题文档](https://material-ui.com/customization/default-theme/) 以查看这些键的默认值和含义。
 
-Once your theme is defined, pass it to the `<Admin>` component, in the `theme` prop.
+定义主题后，将其传递给 `<Admin>` 组件的 `theme` 属性中。
 
 ```jsx
 const App = () => (
@@ -339,9 +339,9 @@ const App = () => (
 );
 ```
 
-## Using a Custom Layout
+## 使用自定义布局
 
-Instead of the default layout, you can use your own component as the admin layout. Just use the `appLayout` prop of the `<Admin>` component:
+您可以使用自己的组件作为 admin 布局，而不是默认布局。 只需使用 `<Admin>` 组件的 appLayout 属性：
 
 ```jsx
 // in src/App.js
@@ -354,7 +354,7 @@ const App = () => (
 );
 ```
 
-Your custom layout can extend the default `<Layout>` component if you only want to override the appBar, the menu, or the notification component. For instance:
+如果您只想覆盖 appBar，menu 或 notification 组件，则自定义布局可以扩展默认的 `<Layout>` 组件。 例如：
 
 ```jsx
 // in src/MyLayout.js
@@ -373,7 +373,7 @@ const MyLayout = (props) => <Layout
 export default MyLayout;
 ```
 
-For more custom layouts, write a component from scratch. It must contain a `{children}` placeholder, where react-admin will render the resources. Use the [default layout](https://github.com/marmelab/react-admin/blob/master/src/mui/layout/Layout.js) as a starting point. Here is a simplified version (with no responsive support):
+要获得更多自定义布局，请从头开始编写组件。 它必须包含 `{children}` 占位符, 其中就是 react-admin 将渲染的资源。 使用 [default layout](https://github.com/marmelab/react-admin/blob/master/src/mui/layout/Layout.js) 作为起点。 下面是一个简化版本 (没有 responsive 支持):
 
 ```jsx
 // in src/MyLayout.js
@@ -467,11 +467,11 @@ const mapStateToProps = state => ({ isLoading: state.admin.loading > 0 });
 export default connect(mapStateToProps, { setSidebarVisibility })(withStyles(styles)(MyLayout));
 ```
 
-## Using a Custom Menu
+## 使用自定义菜单
 
-By default, React-admin uses the list of `<Resource>` components passed as children of `<Admin>` to build a menu to each resource with a `list` component.
+默认情况下，React-admin 使用作为 `<Admin>` 子级传递的 `<Resource>` 组件列表来为具有 `list` 组件的每个资源构建菜单。
 
-If you want to add or remove menu items, for instance to link to non-resources pages, you can create your own menu component:
+如果要添加或删除菜单项，例如链接到非资源页面，可以创建自己的菜单组件：
 
 ```jsx
 // in src/MyMenu.js
@@ -502,13 +502,13 @@ export default withRouter(connect(mapStateToProps)(MyMenu));
 
 ```
 
-**Tip**: Note the `MenuItemLink` component. It must be used to avoid unwanted side effects in mobile views.
+**提示**：请注意 `MenuItemLink` 组件。 必须使用它来避免移动视图中不必要的副作用。
 
-**Tip**: Note that we include the `logout` item only on small devices. Indeed, the `logout` button is already displayed in the AppBar on larger devices.
+**提示**：注意, 我们只在小设备上包含 ` logout ` 项。实际上, ` logout ` 按钮已显示在较大设备的 AppBar 中。
 
-**Tip**: Note that we use React Router [`withRouter`](https://reacttraining.com/react-router/web/api/withRouter) Higher Order Component and that it is used **before** Redux [`connect](https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options). This is required if you want the active menu item to be highlighted.
+**提示**：请注意，我们使用React Router [`withRouter`](https://reacttraining.com/react-router/web/api/withRouter) Hoc，并在Redux [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) **之前**使用它。 如果要突出显示活动菜单项，则需要这样做。
 
-To use this custom menu component, pass it to a custom Layout, as explained above:
+要使用此自定义菜单组件，请将其传递给自定义布局，如上所述：
 
 ```jsx
 // in src/MyLayout.js
@@ -520,7 +520,7 @@ const MyLayout = (props) => <Layout {...props} menu={MyMenu} />;
 export default MyLayout;
 ```
 
-Then, use this layout in the `<Admin>` `applayout` prop:
+然后，在 `<Admin>` `applayout` 属性中使用此布局：
 
 ```jsx
 // in src/App.js
@@ -533,11 +533,11 @@ const App = () => (
 );
 ```
 
-**Tip**: If you use authentication, don't forget to render the `logout` prop in your custom menu component. Also, the `onMenuClick` function passed as prop is used to close the sidebar on mobile.
+**提示**：如果您使用 authentication，请不要忘记在自定义菜单组件中渲染` logout `属性。 此外，作为属性传递的 `onMenuClick` 函数用于关闭移动设备上的侧边栏。
 
-The `MenuItemLink` component make use of the React Router [`NavLink`](https://reacttraining.com/react-router/web/api/NavLink) component, hence allowing to customize its style when it targets the current page.
+`MenuItemLink` 组件使用 React Router `NavLink` 组件，因此允许在定位当前页面时自定义其样式。</p> 
 
-If the default active style does not suit your tastes, you can override it by passing your own `classes`:
+如果默认的活动样式不符合您的喜好，您可以通过传递自己的 `classes` 来覆盖它：
 
 ```jsx
 // in src/MyMenu.js
@@ -575,9 +575,9 @@ export default withRouter(connect(mapStateToProps)(withStyles(styles)(Menu)));
 
 ## Notifications
 
-If you use your own layout (or custom login page), then you probably use the `<Notification>` component.
+如果您使用自己的layout（或自定义登录页面），则可能使用 `<Notification>` 组件。
 
-You can override the notification duration by setting the `autoHideDuration` prop. It defaults to 4000, i.e. 4 seconds. For instance, to create a custom Notification component with a 5 seconds default:
+您可以通过设置 `autoHideDuration` 属性来重写通知持续时间。 它默认为4000，即4秒。 例如，要创建一个默认为5秒的自定义通知组件：
 
 ```jsx
 // in src/MyNotification.js
@@ -588,11 +588,11 @@ const MyNotification = props => <Notification {...props}autoHideDuration={5000} 
 export default MyNotification;
 ```
 
-**Tip**: if you use the `showNotification` action, then you can define `autoHideDuration` per message as the third parameter of the `showNotification` action creator.
+**提示**：如果您使用 `showNotification` action，则可以将每条消息的 `autoHideDuration` 定义为 `showNotification` action创建者的第三个参数。
 
 ## Loading
 
-Display a circular progress component with optional messages. Display the same loading component as `react-admin` on custom pages for consistency.
+显示带有可选消息的循环进度组件。 在自定义页面上显示与 `react-admin` 相同的加载组件以保持一致性。
 
 Supported props:
 
@@ -609,9 +609,9 @@ Usage:
 
 ## LinearProgress
 
-Display a linear progress component. Display the same loading component as `react-admin` on custom inputs for consistency.
+显示线性进度组件。在自定义输入上显示与` react-admin `相同的加载组件以保持一致性。
 
-Usage:
+用法：
 
 ```jsx
 ({ data, ...props }) => !data? 

@@ -2,21 +2,21 @@
 id: translation
 title: Translation
 ---
-The react-admin interface uses English as the default language. But it also supports any other language, thanks to the [polyglot.js](http://airbnb.io/polyglot.js/) library.
+React-admin 界面使用英语作为默认语言。但是它也支持任何其他语言，归功于[polyglot.js]（http://airbnb.io/polyglot.js/）库。
 
-## Changing Locale
+## 改变区域设置
 
-If you want to use another locale, you'll have to install a third-party package. For instance, to change the interface to French, you must install the `ra-language-french` npm package then instruct react-admin to use it.
+如果要使用其他语言环境，则必须安装第三方软件包。 例如，要将界面更改为法语，您必须安装`ra-language-french` npm包，然后指示 react-admin 使用它。
 
-The `<Admin>` component has an `i18nProvider` prop, which accepts a function with the following signature:
+`<Admin>` 组件有一个 `i18nProvider` 属性，它接受一个具有以下签名的函数：
 
 ```js
 const i18nProvider = locale => messages;
 ```
 
-The `messages` should be a dictionary of interface and resource names (see the [Translation Messages section](#translation-messages) below for details about the dictionary format).
+` messages `应该是界面和资源名称的字典（有关字典格式的详细信息，请参阅下面的[翻译消息部分](#translation-messages)）。
 
-React-admin calls the `i18nProvider` when it starts, passing the `locale` specified on the `Admin` component as parameter. The provider must return the messages synchronously. React-admin also calls the `i18nProvider` whenever the locale changes, passing the new locale as parameter. So the simplest example for a multilingual interface reads as follow:
+React-admin 在启动时调用 `i18nProvider`，将 Admin 组件上指定的语言 `local` 作为参数传递。 Provide 必须同步返回消息。 每当语言环境发生变化时，React-admin 也会调用 i18nProvider，并将新语言环境作为参数传递。 因此，多语言界面的最简单示例如下：
 
 ```jsx
 import React from 'react';
@@ -39,7 +39,7 @@ const App = () => (
 export default App;
 ```
 
-The `i18nProvider` may return a promise for locale change calls (except the initial call, when the app starts). This can be useful to only load the needed locale. For example:
+` i18nProvider `可能会返回一个区域设置更改调用的Promise（初始调用除外，应用程序启动时）。 这对于仅加载所需的区域设置非常有用。 例如：
 
 ```js
 import englishMessages from '../en.js';
@@ -65,9 +65,9 @@ const App = () => (
 );
 ```
 
-## Available Locales
+## 可用区域设置
 
-You can find translation packages for the following languages:
+您可以找到以下语言的翻译包：
 
 - Chinese (`cn`): [chen4w/ra-language-chinese](https://github.com/chen4w/ra-language-chinese)
 - Czech (`cs`): [binao/ra-language-czech](https://github.com/binao/ra-language-czech)
@@ -84,7 +84,7 @@ You can find translation packages for the following languages:
 - Spanish (`es`): [blackboxvision/ra-language-spanish](https://github.com/BlackBoxVision/ra-language-spanish)
 - Ukrainian (`ua`): [koresar/ra-language-ukrainian](https://github.com/koresar/ra-language-ukrainian)
 
-The previous version of react-admin, called admin-on-rest, was translated in the following languages:
+之前版本的 react-admin，名为 admin-on-rest，已翻译成以下语言：
 
 - Arabic ( `ع` ): [aymendhaya/aor-language-arabic](https://github.com/aymendhaya/aor-language-arabic)
 - Chinese (`cn`): [downup2u/aor-language-chinese](https://github.com/downup2u/aor-language-chinese)
@@ -110,13 +110,13 @@ The previous version of react-admin, called admin-on-rest, was translated in the
 - Ukrainian (`uk`): [vitivs/aor-language-ukrainian](https://github.com/vitivs/aor-language-ukrainian)
 - Vietnamese (`vi`): [kimkha/aor-language-vietnamese](https://github.com/kimkha/aor-language-vietnamese)
 
-These packages are not directly interoperable with react-admin, but the upgrade is straightforward; rename the root key from "aor" to "ra". We invite the authors of the packages listed above to republish their translations for react-admin, using a different package name.
+这些软件包不能与 react-admin 直接互操作，但升级很简单; 将 root key 从 “aor” 重命名为 “ra”。 我们邀请上面列出的软件包的作者使用不同的软件包名称为 react-admin 重新发布他们的翻译。
 
-If you want to contribute a new translation, feel free to submit a pull request to update [this page](https://github.com/marmelab/react-admin/blob/master/docs/Translation.md) with a link to your package.
+如果您想提供新的翻译，请随时提交 pr 以更新[此页面](https://github.com/marmelab/react-admin/blob/master/docs/Translation.md)，并附带指向您软件包的链接。
 
-## Changing Locale At Runtime
+## 在运行时更改区域设置
 
-If you want to offer the ability to change locale at runtime, you must provide the messages for all possible translations:
+如果要在运行时提供更改语言环境的功能，则必须提供所有可能翻译的 messages：
 
 ```jsx
 import React from 'react';
@@ -139,7 +139,7 @@ const App = () => (
 export default App;
 ```
 
-Then, dispatch the `CHANGE_LOCALE` action, by using the `changeLocale` action creator. For instance, the following component switches language between English and French:
+然后，使用 `changeLocale</ code> 动作创建者 dispatch <code>CHANGE_LOCALE` action。 例如，以下组件在英语和法语之间切换语言：
 
 ```jsx
 import React, { Component } from 'react';
@@ -166,9 +166,9 @@ class LocaleSwitcher extends Component {
 export default connect(undefined, { changeLocale: changeLocaleAction })(LocaleSwitcher);
 ```
 
-## Using The Browser Locale
+## 使用浏览器区域设置
 
-React-admin provides a helper function named `resolveBrowserLocale()`, which helps you to introduce a dynamic locale attribution based on the locale configured in the user's browser. To use it, simply pass the function as `locale` prop.
+React-admin 提供一个名为 `resolveBrowserLocale()` 的帮助器函数，它帮助您根据用户浏览器中配置的区域设置来引入动态区域设置属性。 要使用它，只需将函数传递作为 `locale` 属性。
 
 ```jsx
 import React from 'react';
@@ -191,9 +191,9 @@ const App = () => (
 export default App;
 ```
 
-## Translation Messages
+## 翻译 Messages
 
-The `message` returned by the `i18nProvider` value should be a dictionary where the keys identify interface components, and values are the translated string. This dictionary is a simple JavaScript object looking like the following:
+`i18nProvider` 值返回的 `message` 应该是一个字典，其中键标界面组件，值是翻译后的字符串。 这个字典是一个简单的 JavaScript 对象，如下所示：
 
 ```jsx
 {
@@ -212,20 +212,20 @@ The `message` returned by the `i18nProvider` value should be a dictionary where 
 }
 ```
 
-All core translations are in the `ra` namespace, in order to prevent collisions with your own custom translations. The root key used at runtime is determined by the value of the `locale` prop.
+所有核心翻译都在 `ra` 命名空间中，以防止与您自己的自定义翻译冲突。 运行时使用的 root key 由 `locale` 属性的值决定。
 
-The default messages are available [here](https://github.com/marmelab/react-admin/blob/master/packages/ra-language-english/index.js).
+可用的默认 [messages ](https://github.com/marmelab/react-admin/blob/master/packages/ra-language-english/index.js)
 
-## Translating Resource and Field Names
+## 翻译 Resource 和 Field 名称
 
-By default, React-admin uses resource names ("post", "comment", etc) and field names ("title", "first_name", etc) everywhere in the interface. It simply "humanizes" the technical identifiers to make them look better (e.g. "first_name" becomes "First name").
+默认情况下，React-admin在界面中的任何位置使用 resource 名称（“post”，“comment”等）和 field 名称（“title”，“first_name”等）。 它简单地“人性化”技术标识符，使其看起来更好（例如“first_name”变为“First name”）。
 
-However, before humanizing names, react-admin checks the `messages` dictionary for a possible translation, with the following keys:
+但是，在人性化名称之前，react-admin 会使用以下键检查 `messages` 字典以查找可能的翻译：
 
-- `${locale}.resources.${resourceName}.name` for resource names (used for the menu and page titles)
-- `${locale}.resources.${resourceName}.fields.${fieldName}` for field names (used for datagrid header and form input labels)
+- `${locale}.resources.${resourceName}.name` 用于资源名称（用于菜单和页面标题）
+- `${locale}.resources.${resourceName}.fields.${fieldName}`用于字段名称（用于datagrid header和表单输入标签）
 
-This lets you translate your own resource and field names by passing a `messages` object with a `resources` key:
+这使您可以通过使用 `resources` 键传递 `messages` 对象来翻译自己的 resource 和 field 名称：
 
 ```jsx
 {
@@ -251,13 +251,13 @@ This lets you translate your own resource and field names by passing a `messages
 }
 ```
 
-As you can see, [polyglot pluralization](http://airbnb.io/polyglot.js/#pluralization) is used here, but it is optional.
+如您所见, [polyglot pluralization](http://airbnb.io/polyglot.js/#pluralization) 在这里使用，但它是可选的。
 
-Using `resources` keys is an alternative to using the `label` prop in Field and Input components, with the advantage of supporting translation.
+使用 `resources` 键是在 Field 和 Input 组件中使用 `label` 属性的替代方法，具有支持翻译的优势。
 
-## Mixing Interface and Domain Translations
+## 混合界面和域翻译
 
-When translating an admin, interface messages (e.g. "List", "Page", etc.) usually come from a third-party package, while your domain messages (e.g. "Shoe", "Date of birth", etc.) come from your own code. That means you need to combine these messages before passing them to `<Admin>`. The recipe for combining messages is to use ES6 destructuring:
+当翻译admin时，界面消息（例如“List”，“Page”等）通常来自第三方软件包，而您的域信息（例如“Shoe”，“Date of birth”等）来自你自己的代码。 这意味着在将这些消息传递到 `<Admin>` 之前, 您需要合并这些 messages 。 组合消息的方法是使用ES6解构：
 
 ```jsx
 // interface translations
@@ -280,9 +280,9 @@ const App = () => (
 );
 ```
 
-## Translating Your Own Components
+## 翻译自己的组件
 
-The translation system use the React `context` to pass translations down the component tree. To translate a sentence, use the `translate` function from the context. Of course, this assumes that you've previously added the corresponding translation to the `messages` props of the `Admin` component.
+翻译系统使用React `context` 在组件树中传递翻译。 要翻译一个句子，请使用上下文中的 `translate` 函数。 当然，这假设你以前已经将相应的翻译添加到 `Admin` 组件的`messages` 属性中。
 
 ```jsx
 // in src/MyHelloButton.js
@@ -311,7 +311,7 @@ const messages = {
 };
 ```
 
-However, using the context makes components harder to test. That's why react-admin provides a `translate` Higher-Order Component, which simply passes the `translate` function from context to props:
+然而，使用上下文使组件更难测试。 这就是为什么 react-admin 提供了一个 `translate` 高阶组件，它只是将`translate` 函数从上下文传递给属性：
 
 ```jsx
 // in src/MyHelloButton.js
