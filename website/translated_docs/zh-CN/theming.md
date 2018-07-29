@@ -255,7 +255,7 @@ export const PostList = (props) => (
 
 ## 使用预定义主题
 
-Material UI 也支持开箱即用的 [complete theming](http://www.material-ui.com/#/customization/themes)。 Material UI提供两个基本主题：light 和 dark。 React-admin 默认使用 light。 To use the dark one, pass it to the `<Admin>` component, in the `theme` prop (along with `createMuiTheme()`).
+Material UI 也支持开箱即用的 [complete theming](http://www.material-ui.com/#/customization/themes)。 Material UI提供两个基本主题：light 和 dark。 React-admin 默认使用 light。 要使用深色的, 请将 `theme` 属性传递到 `<Admin>` 组件（连同 `createMuiTheme()`）。
 
 ```jsx
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -275,7 +275,7 @@ const App = () => (
 
 ![Dark theme](https://marmelab.com/react-admin/img/dark-theme.png)
 
-## Writing a Custom Theme
+## 编写自定义主题
 
 If you need more fine tuning, you'll need to write your own `theme` object, following [Material UI themes documentation](https://material-ui.com/customization/themes/). Material UI merges custom theme objects with the default theme.
 
