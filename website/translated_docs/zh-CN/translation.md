@@ -168,7 +168,7 @@ export default connect(undefined, { changeLocale: changeLocaleAction })(LocaleSw
 
 ## 使用浏览器区域设置
 
-React-admin provides a helper function named `resolveBrowserLocale()`, which helps you to introduce a dynamic locale attribution based on the locale configured in the user's browser. To use it, simply pass the function as `locale` prop.
+React-admin 提供一个名为 `resolveBrowserLocale()` 的帮助器函数，它帮助您根据用户浏览器中配置的区域设置来引入动态区域设置属性。 要使用它，只需将函数传递作为 `locale` 属性。
 
 ```jsx
 import React from 'react';
@@ -191,9 +191,9 @@ const App = () => (
 export default App;
 ```
 
-## Translation Messages
+## 翻译 Messages
 
-The `message` returned by the `i18nProvider` value should be a dictionary where the keys identify interface components, and values are the translated string. This dictionary is a simple JavaScript object looking like the following:
+`i18nProvider` 值返回的 `message` 应该是一个字典，其中键标界面组件，值是翻译后的字符串。 这个字典是一个简单的 JavaScript 对象，如下所示：
 
 ```jsx
 {
@@ -212,11 +212,11 @@ The `message` returned by the `i18nProvider` value should be a dictionary where 
 }
 ```
 
-All core translations are in the `ra` namespace, in order to prevent collisions with your own custom translations. The root key used at runtime is determined by the value of the `locale` prop.
+所有核心翻译都在 `ra` 命名空间中，以防止与您自己的自定义翻译冲突。 运行时使用的 root key 由 `locale` 属性的值决定。
 
-The default messages are available [here](https://github.com/marmelab/react-admin/blob/master/packages/ra-language-english/index.js).
+可用的默认 [messages ](https://github.com/marmelab/react-admin/blob/master/packages/ra-language-english/index.js)
 
-## Translating Resource and Field Names
+## 翻译 Resource 和 Field 名称
 
 By default, React-admin uses resource names ("post", "comment", etc) and field names ("title", "first_name", etc) everywhere in the interface. It simply "humanizes" the technical identifiers to make them look better (e.g. "first_name" becomes "First name").
 
