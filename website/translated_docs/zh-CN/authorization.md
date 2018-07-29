@@ -1,6 +1,6 @@
 ---
 id: authorization
-title: Authorization
+title: 授权
 ---
 某些应用程序可能需要确定特定身份验证的用户对安全资源的访问级别。 由于有许多不同的可能策略 (单个角色、多个角色或权限等), 因此, react-admin 只需提供 hooks 即可执行您自己的授权代码。
 
