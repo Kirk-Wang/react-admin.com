@@ -1206,7 +1206,7 @@ export default SexInput;
 
 有关如何使用 redux-form `<Field>` 组件的更多详细信息，请参阅 [redux-form doc](http://redux-form.com/6.5.0/docs/api/Field.md/)。
 
-Instead of HTML `input` elements or material-ui components, you can use react-admin input components, like `<NumberInput>` for instance. React-admin components are already decorated by `<Field>`, and already include a label, so you don't need either `<Field>` or `<Labeled>` when using them:
+您可以使用 react-admin input 组件（例如 `<NumberInput>`）代替 HTML `input` 元素或 material-ui 组件。 React-admin 组件已经由 `<Field>` 修饰，并且已经包含一个标签，因此在使用它们时不需要 `<Field>` 或 `<Labeled>`：
 
 ```jsx
 // in LatLongInput.js
@@ -1231,11 +1231,11 @@ const ItemEdit = (props) => (
 );
 ```
 
-## Linking Two Inputs
+## 链接两个输入
 
-Edition forms often contain linked inputs, e.g. country and city (the choices of the latter depending on the value of the former).
+编辑表单通常包含链接的输入，例如国家和城市 (后者的选择取决于前者的值)。
 
-React-admin relies on redux-form, so you can grab the current form values using redux-form [formValueSelector()](https://redux-form.com/7.3.0/docs/api/formvalueselector.md/). Alternatively, you can use the react-admin `<FormDataConsumer>` component, which grabs the form values, and passes them to a child function.
+React-admin 依赖于 redux-form，因此您可以使用 redux-form [formValueSelector()](https://redux-form.com/7.3.0/docs/api/formvalueselector.md/) 获取当前表单值。 Alternatively, you can use the react-admin `<FormDataConsumer>` component, which grabs the form values, and passes them to a child function.
 
 This facilitates the implementation of linked inputs:
 
