@@ -502,6 +502,6 @@ List` 文档中找到完整的示例。
 
 您应该为自己的操作按钮选择哪种样式？
 
-The first version (with `fetch`) is perfectly fine, and if you're not into unit testing your components, or decoupling side effects from pure functions, then you can stick with it without problem.
+第一个版本（带 `fetch`）是非常好的，如果您不必单元测试您的组件，或者从纯功能中解除副作用，那么您可以坚持使用它。
 
-On the other hand, if you want to promote reusability, separation of concerns, adhere to react-admin's coding standards, and if you know enough Redux and Saga, use the final version.
+另一方面，如果您想提高可重用性，关注点分离，遵守 react-admin 的编码标准，并且如果您对Redux 和 Saga 有足够的了解，请使用最终版本。
