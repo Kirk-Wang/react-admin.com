@@ -329,11 +329,11 @@ export default function* commentSaga() {
 }
 ```
 
-让我们解释所有这些，从最后的 `commentSaga` 生成器函数开始。 [generator function](http://exploringjs.com/es6/ch_generators.html)（由函数名中的`*`表示）在 `yield` 调用的语句上暂停 - 直到 yielding 语句返回。 `yield takeEvery([ACTION_NAME], callback)` executes the provided callback [every time the related action is called](https://redux-saga.github.io/redux-saga/docs/basics/UsingSagaHelpers.html). To summarize, this will execute `commentApproveFailure` when the fetch initiated by `commentApprove()` fails.
+让我们解释所有这些，从最后的 `commentSaga` 生成器函数开始。 [generator function](http://exploringjs.com/es6/ch_generators.html)（由函数名中的`*`表示）在 `yield` 调用的语句上暂停 - 直到 yielding 语句返回。 `yield takeEvery([ACTION_NAME], callback)` [每次调用相关 action 时](https://redux-saga.github.io/redux-saga/docs/basics/UsingSagaHelpers.html)都会执行提供的回调。 总而言之，当 `commentApprove()` 初始 fetch 失败时，这将执行commentApproveFailure。
 
-As for `commentApproveFailure`, it just dispatch a [`call`](https://redux-saga.js.org/docs/api/#callfn-args) side effect to the `captureException` function from the global `Raven` object.
+对于 `commentApproveFailure`，它只是从全局 `Raven` 对象向`captureException` 函数 dispatch 一个 [`call `](https://redux-saga.js.org/docs/api/#callfn-args) 副作用。
 
-To use this saga, pass it in the `customSagas` props of the `<Admin>` component:
+要使用此 saga，请将其传递到 `<Admin>` 组件的 `customSagas` 属性中：
 
 ```jsx
 // in src/App.js
@@ -352,13 +352,13 @@ const App = () => (
 export default App;
 ```
 
-With this code, a failed review approval now sends the the correct signal to Sentry.
+使用此代码，失败的审核批准现在会向 Sentry 发送正确的信号。
 
-**Tip**: The side effects are [testable](https://redux-saga.github.io/redux-saga/docs/introduction/BeginnerTutorial.html#making-our-code-testable), too.
+**提示**：副作用也是[可测试的](https://redux-saga.github.io/redux-saga/docs/introduction/BeginnerTutorial.html#making-our-code-testable)。
 
-## Optimistic Rendering and Undo
+## 积极的渲染和撤消
 
-In the previous example, after clicking on the "Approve" button, a spinner displays while the data provider is fetched. Then, users are redirected to the comments list. But in most cases, the server returns a success response, so the user waits for this response for nothing.
+在前面的示例中，单击“Approve”按钮后，将在 fetch data provider 时显示 spinner。 然后，用户被重定向到评论列表。 但在大多数情况下，服务器会返回成功响应，因此用户无需等待此响应。
 
 For its own fetch actions, react-admin uses an approach called *optimistic rendering*. The idea is to handle the `fetch` actions on the client side first (i.e. updating entities in the Redux store), and re-render the screen immediately. The user sees the effect of their action with no delay. Then, react-admin applies the success side effects, and only after that it triggers the fetch to the data provider. If the fetch ends with a success, react-admin does nothing more than a refresh to grab the latest data from the server, but in most cases, the user sees no difference (the data in the Redux store and the data from the data provider are the same). If the fetch fails, react-admin shows an error notification, and forces a refresh, too.
 
