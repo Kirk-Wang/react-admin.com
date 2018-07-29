@@ -64,9 +64,9 @@ const App = () => (
 
 ## 向 API 发送凭据
 
-To use the credentials when calling a data provider, you have to tweak, this time, the `dataProvider` function. As explained in the [Data providers documentation](DataProviders.md#adding-custom-headers), `simpleRestProvider` and `jsonServerProvider` take an `httpClient` as second parameter. That's the place where you can change request headers, cookies, etc.
+要在调用数据提供程序时使用凭据，您必须进行调整，这一次是`dataProvider` 函数。 如 [ Data Provider 文档](DataProviders.md#adding-custom-headers)中所述, `simpleRestProvider` 和 `jsonServerProvider` 以 `httpClient` 作为第二个参数。 这是您可以更改请求头、cookie 等的位置。
 
-For instance, to pass the token obtained during login as an `Authorization` header, configure the Data Provider as follows:
+例如，要将登录期间获得的令牌传递为 `Authorization` header，请按如下方式配置Data Provider：
 
 ```jsx
 import { fetchUtils, Admin, Resource } from 'react-admin';
@@ -89,11 +89,11 @@ const App = () => (
 );
 ```
 
-If you have a custom REST client, don't forget to add credentials yourself.
+如果您有一个自定义 REST client，请不要忘记自己添加凭据。
 
-## Adding a Logout Button
+## 添加 Logout 按钮
 
-If you provide an `authProvider` prop to `<Admin>`, react-admin displays a logout button in the top bar (or in the menu on mobile). When the user clicks on the logout button, this calls the `authProvider` with the `AUTH_LOGOUT` type and removes potentially sensitive data from the redux store. When resolved, the user gets redirected to the login page.
+如果您提供 `authProvider` 属性到 `<Admin>`，react-admin 显示注销按钮在顶部栏 (或在移动菜单上)。 当用户单击注销按钮时，此操作将使用 `AUTH_LOGOUT` 类型调用 `authProvider`，并删除来自 redux store 的潜在敏感数据。 When resolved, the user gets redirected to the login page.
 
 For instance, to remove the token from local storage upon logout:
 
