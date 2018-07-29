@@ -237,9 +237,9 @@ export default (type, params) => {
 
 但是如果您想使用电子邮件而不是用户名呢？ 如果要使用带有第三方身份验证服务的单点登录（SSO），该怎么办？如果要使用双重身份认证怎么办？
 
-For all these cases, it's up to you to implement your own `LoginPage` component, which will be displayed under the `/login` route instead of the default username/password form, and your own `LogoutButton` component, which will be displayed in the sidebar. Pass both these components to the `<Admin>` component:
+对于所有这些情况，您需要实现自己的 `LoginPage` 组件，该组件将显示在 `/login` 路由下，而不是默认的用户名/密码表单以及您自己的 `LogoutButton` 组件，这将显示在侧边栏。 将这两个组件都传递给 `<Admin>` 组件：
 
-**Tip**: Use the `userLogin` and `userLogout` actions in your custom `Login` and `Logout` components.
+**提示**：在您的自定义 `Login` 和 `Logout` 组件中使用 `userLogin` 和 `userLogout` action。
 
 ```jsx
 // in src/MyLoginPage.js
@@ -310,9 +310,9 @@ const App = () => (
 );
 ```
 
-## Restricting Access To A Custom Page
+## 限制对自定义页面的访问
 
-If you add [custom pages](./Actions.md), of if you [create an admin app from scratch](./CustomApp.md), you may need to secure access to pages manually. That's the purpose of the `<Authenticated>` component, that you can use as a decorator for your own components.
+如果您添加[自定义页面](./Actions.md)，如果您[从头开始创建admin app](./CustomApp.md)，则可能需要手动保护对页面的访问。 这就是 `<Authenticated>` 组件的目的，您可以将其用作自己组件的装饰器。
 
 ```jsx
 // in src/MyPage.js
@@ -330,7 +330,7 @@ const MyPage = ({ location }) => (
 export default withRouter(MyPage);
 ```
 
-The `<Authenticated>` component calls the `authProvider` function with `AUTH_CHECK` and `authParams`. If the response is a fulfilled promise, the child component is rendered. If the response is a rejected promise, `<Authenticated>` redirects to the login form. Upon successful login, the user is redirected to the initial location (that's why it's necessary to get the location from the router).
+`<Authenticated>` 组件使用 `AUTH_CHECK` 和 `uthParams` 调用 `authProvider` 函数。 如果响应是一个fulfilled promise，则子组件被渲染。 如果响应是被拒绝的 promise，`<Authenticated>` 将重定向到登录表单。 成功登录后，用户将被重定向到初始位置（这就是为什么必须从路由器获取位置）。
 
 ## Redirect After Logout
 
