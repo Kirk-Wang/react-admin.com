@@ -4,19 +4,19 @@ title: Authentication
 ---
 ![Logout button](https://marmelab.com/react-admin/img/login.gif)
 
-React-admin 可以通过您选择的身份验证策略来保护您的admin app。 Since there are many different possible strategies (Basic Auth, JWT, OAuth, etc.), react-admin simply provides hooks to execute your own authentication code.
+React-admin 可以通过您选择的身份验证策略来保护您的admin app。 由于有许多不同的可能策略（Basic Auth，JWT，OAuth等），react-admin 只需提供钩子来执行您自己的验证代码。
 
-By default, an react-admin app doesn't require authentication. But if the REST API ever returns a 401 (Unauthorized) or a 403 (Forbidden) response, then the user is redirected to the `/login` route. You have nothing to do - it's already built in.
+默认情况下，react-admin 应用程序不需要身份验证。 但是，如果REST API返回401（Unauthorized）或403（Forbidden）响应，则用户将被重定向到 `/login` 路由。 你啥事都不需要做 - 它已经内置了。
 
-## Configuring the Auth Provider
+## 配置 Auth Provider
 
-By default, the `/login` route renders a special component called `Login`, which displays a login form asking for username and password.
+默认情况下，`/login` 路由呈现一个名为 `Login` 的特殊组件，它显示一个要求输入用户名和密码的登录表单。
 
 ![Default Login Form](https://marmelab.com/react-admin/img/login-form.png)
 
-What this form does upon submission depends on the `authProvider` prop of the `<Admin>` component. This function receives authentication requests `(type, params)`, and should return a Promise. `Login` calls `authProvider` with the `AUTH_LOGIN` type, and `{ login, password }` as parameters. It's the ideal place to authenticate the user, and store their credentials.
+这种表单在提交时取决于 `<Admin>` 组件的 `authProvider`属性。 此函数接收认证请求 `type，params`，并返回一个 Promise。 `Login` 使用 `AUTH_LOGIN` 类型调用 `authProvider`，并使用 `{login，password}` 作为参数。 它是验证用户身份和存储凭据的理想场所。
 
-For instance, to query an authentication route via HTTPS and store the credentials (a token) in local storage, configure `authProvider` as follows:
+例如，要通过HTTPS查询身份验证路由并将凭据（令牌）存储在本地存储中，请按如下方式配置`authProvider`：
 
 ```jsx
 // in src/authProvider.js
@@ -45,7 +45,7 @@ export default (type, params) => {
 }
 ```
 
-**Tip**: It's a good idea to store credentials in `localStorage`, to avoid reconnection when opening a new browser tab. But this makes your application [open to XSS attacks](http://www.redotheweb.com/2015/11/09/api-security.html), so you'd better double down on security, and add an `httpOnly` cookie on the server side, too.
+**提示**：在 `localStorage`中存储凭据是一个好主意，以便在打开新的浏览器选项卡时避免重新连接。 But this makes your application [open to XSS attacks](http://www.redotheweb.com/2015/11/09/api-security.html), so you'd better double down on security, and add an `httpOnly` cookie on the server side, too.
 
 Then, pass this client to the `<Admin>` component:
 
