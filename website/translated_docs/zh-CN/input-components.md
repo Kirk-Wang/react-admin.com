@@ -1020,7 +1020,7 @@ import { TextInput } from 'react-admin';
 
 输入组件返回的数据格式可能不是您的 API 所期望的。 由于 React-admin 使用Redux Form，我们可以使用其` parse() ` 和 ` format() `函数在保存到记录并从记录加载时转换 input 值。 在开始之前了解输入值的生命周期会更好。
 
-Mnemonic for the two functions: - `parse()`: input -> record - `format()`: record -> input
+两个函数的助记符： - `parse()`：input -> record - `format()`：record -> input
 
 Say the user would like to input values of 0-100 to a percentage field but your API (hence record) expects 0-1.0. You can use simple `parse()` and `format()` functions to archive the transform:
 
