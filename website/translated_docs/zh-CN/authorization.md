@@ -2,15 +2,15 @@
 id: authorization
 title: Authorization
 ---
-某些应用程序可能需要确定特定身份验证的用户对安全资源的访问级别。 Since there are many different possible strategies (single role, multiple roles or rights, etc.), react-admin simply provides hooks to execute your own authorization code.
+某些应用程序可能需要确定特定身份验证的用户对安全资源的访问级别。 由于有许多不同的可能策略 (单个角色、多个角色或权限等), 因此, react-admin 只需提供 hooks 即可执行您自己的授权代码。
 
-By default, a react-admin app doesn't require authorization. However, if needed, it will rely on the `authProvider` introduced in the [Authentication](./Authentication.html) section.
+默认情况下, react-admin 应用程序不需要授权。 但是, 如果需要, 它将依赖于 [Authentication](./Authentication.html) 部分中引入的 `authProvider`。
 
-## Configuring the Auth Provider
+## 配置 Auth Provider
 
-A call to the `authProvider` with the `AUTH_GET_PERMISSIONS` type will be made each time a component requires to check the user's permissions.
+每次组件需要检查用户的权限时，都会调用具有 `AUTH_GET_PERMISSIONS` 类型的 `authProvider`。
 
-Following is an example where the `authProvider` stores the user's role upon authentication, and returns it when called for a permissions check:
+下面是 `authProvider` 在身份验证时存储用户角色的示例，并在调用权限检查时返回它：
 
 ```jsx
 // in src/authProvider.js
@@ -57,9 +57,9 @@ export default (type, params) => {
 };
 ```
 
-## Restricting Access to Resources or Views
+## 限制对资源或视图的访问
 
-It's possible to restrict access to resources or their views inside the `Admin` component. To do so, you must specify a function as the `Admin` only child. This function will be called with the permissions returned by the `authProvider`.
+可以限制对 `Admin` 组件内的资源或其视图的访问。 To do so, you must specify a function as the `Admin` only child. This function will be called with the permissions returned by the `authProvider`.
 
 ```jsx
 <Admin
