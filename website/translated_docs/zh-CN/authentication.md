@@ -148,9 +148,9 @@ export default (type, params) => {
 };
 ```
 
-## Checking Credentials During Navigation
+## 在导航过程中检查凭据
 
-Redirecting to the login page whenever a REST response uses a 401 status code is usually not enough, because react-admin keeps data on the client side, and could display stale data while contacting the server - even after the credentials are no longer valid.
+当 REST 响应使用 401 状态代码时，重定向到登录页面通常是不够的，因为 react-admin 保留数据在客户端，并且可能在联系服务器时显示过时的数据 - 即使凭据不再有效。
 
 Fortunately, each time the user navigates, react-admin calls the `authProvider` with the `AUTH_CHECK` type, so it's the ideal place to check for credentials.
 
