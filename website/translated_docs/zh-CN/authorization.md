@@ -59,7 +59,7 @@ export default (type, params) => {
 
 ## 限制对资源或视图的访问
 
-可以限制对 `Admin` 组件内的资源或其视图的访问。 To do so, you must specify a function as the `Admin` only child. This function will be called with the permissions returned by the `authProvider`.
+可以限制对 `Admin` 组件内的资源或其视图的访问。 为此，您必须将一个函数指定为仅 `Admin` 子项。 将使用 authProvider 返回的 permissions 调用此函数。
 
 ```jsx
 <Admin
@@ -82,15 +82,15 @@ export default (type, params) => {
 </Admin>
 ```
 
-Note that the function returns an array of React elements. This is required to avoid having to wrap them in a container element which would prevent the `Admin` from working.
+请注意，该函数返回一个 React 元素数组。 这是必须的，以避免必须将它们包装在容器元素中，这将阻止 `Admin` 工作。
 
-**Tip** Even if that's possible, be careful when completely excluding a resource (like with the `categories` resource in this example) as it will prevent you to reference them in the other resource views, too.
+提示即使可能，在完全排除资源时也要小心（比如本例中的 `categories` 资源），因为它也会阻止您在其他资源视图中引用它们。
 
-## Restricting Access to Fields and Inputs
+## 限制对 Fields 和 Inputs 的访问
 
-You might want to display some fields or inputs only to users with specific permissions. Those permissions are retrieved for each route and will provided to your component as a `permissions` prop.
+您可能希望仅向具有特定权限的用户显示某些字段或输入。 将为每个路径检索这些权限，并将其作为 `permissions` 属性提供给您的组件。
 
-Each route will call the `authProvider` with the `AUTH_GET_PERMISSIONS` type and some parameters including the current location and route parameters. It's up to you to return whatever you need to check inside your component such as the user's role, etc.
+每个路由将使用 `AUTH_GET_PERMISSIONS` 类型和一些参数（包括当前位置和路由参数）调用 authProvider。 您可以在组件内部返回需要检查的内容，例如用户的角色等。
 
 Here's an example inside a `Create` view with a `SimpleForm` and a custom `Toolbar`:
 
