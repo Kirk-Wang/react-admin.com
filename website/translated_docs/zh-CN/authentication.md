@@ -152,9 +152,9 @@ export default (type, params) => {
 
 当 REST 响应使用 401 状态代码时，重定向到登录页面通常是不够的，因为 react-admin 保留数据在客户端，并且可能在联系服务器时显示过时的数据 - 即使凭据不再有效。
 
-Fortunately, each time the user navigates, react-admin calls the `authProvider` with the `AUTH_CHECK` type, so it's the ideal place to check for credentials.
+幸运的是，每当用户导航时，react-admin 都使用 `AUTH_CHECK` type 调用`authProvider`，因此它是检查凭据的理想场所。
 
-For instance, to check for the existence of the token in local storage:
+例如，要检查本地存储中的令牌是否存在：
 
 ```jsx
 // in src/authProvider.js
@@ -177,7 +177,7 @@ export default (type, params) => {
 };
 ```
 
-If the promise is rejected, react-admin redirects by default to the `/login` page. You can override where to redirect the user by passing an argument with a `redirectTo` property to the rejected promise:
+如果promise被拒绝，默认情况下 react-admin 重定向到 `/login` 页面。 您可以通过将具有 `redirectTo` 属性的参数传递给被拒绝的 promise 来覆盖用户重定向的位置：
 
 ```jsx
 // in src/authProvider.js
@@ -200,7 +200,7 @@ export default (type, params) => {
 };
 ```
 
-**Tip**: For the `AUTH_CHECK` call, the `params` argument contains the `resource` name, so you can implement different checks for different resources:
+**提示**：对于 `AUTH_CHECK` 调用，`params` 参数包含`resource`名称，因此可以为不同的资源实现不同的检查：
 
 ```jsx
 // in src/authProvider.js
@@ -229,13 +229,13 @@ export default (type, params) => {
 };
 ```
 
-**Tip**: The `authProvider` can only be called with `AUTH_LOGIN`, `AUTH_LOGOUT`, `AUTH_ERROR`, or `AUTH_CHECK`; that's why the final return is a rejected promise.
+**提示**：`authClient` 只能用 `AUTH_LOGIN`，`AUTH_LOGOUT`，`AUTH_ERROR` 或 `AUTH_CHECK` 调用；这就是为什么最终返回一个拒绝的 promise。
 
-## Customizing The Login and Logout Components
+## 自定义登录和注销组件
 
-Using `authProvider` and `checkCredentials` is enough to implement a full-featured authorization system if the authentication relies on a username and password.
+如果身份验证依赖于用户名和密码，则使用 `authProvider` 和 `checkCredentials` 就可以实现全功能授权系统。
 
-But what if you want to use an email instead of a username? What if you want to use a Single-Sign-On (SSO) with a third-party authentication service? What if you want to use two-factor authentication?
+但是如果您想使用电子邮件而不是用户名呢？ 如果要使用带有第三方身份验证服务的单点登录（SSO），该怎么办？如果要使用双重身份认证怎么办？
 
 For all these cases, it's up to you to implement your own `LoginPage` component, which will be displayed under the `/login` route instead of the default username/password form, and your own `LogoutButton` component, which will be displayed in the sidebar. Pass both these components to the `<Admin>` component:
 
