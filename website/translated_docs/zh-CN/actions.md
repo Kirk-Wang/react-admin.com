@@ -176,9 +176,9 @@ export const commentApprove = (id, data, basePath) => ({
 });
 ```
 
-This action creator takes advantage of react-admin's built in fetcher, which listens to actions with the `fetch` meta. Upon dispatch, this action will trigger the call to `dataProvider(UPDATE, 'comments')`, dispatch a `COMMENT_APPROVE_LOADING` action, then after receiving the response, dispatch either a `COMMENT_APPROVE_SUCCESS`, or a `COMMENT_APPROVE_FAILURE`.
+这个动作创建者利用了 react-admin 的内置 fetcher，它使用 `fetch` meta 监听动作。 在 dispatch 时，此操作将触发对 `dataProvider的调用（UPDATE，'comments'）`，dispatch 一个 `COMMENT_APPROVE_LOADING` action，然后在收到响应后，dispatch一个 `COMMENT_APPROVE_SUCCESS` 或 `COMMENT_APPROVE_FAILURE`。
 
-To use the new action creator in the component, `connect` it:
+若要在组件中使用新的action creator，请 `connect`：
 
 ```jsx
 // in src/comments/ApproveButton.js
@@ -210,9 +210,9 @@ export default connect(null, {
 })(ApproveButton);
 ```
 
-This works fine: when a user presses the "Approve" button, the API receives the `UPDATE` call, and that approves the comment. But it's not possible to call `push` or `showNotification` in `handleClick` anymore. This is because `commentApprove()` returns immediately, whether the API call succeeds or not. How can you run a function only when the action succeeds?
+这很好用：当用户按下 “Approve” 按钮时，API 接收 UPDATE 调用，并批准 comment。 但是不可能再在 `handleClick` 中调用 `push` 或 `showNotification`。 这是因为 `commentApprove()` 会立即返回，无论 API 调用是否成功。 你如何在只有当操作成功时运行一个函数？
 
-## Handling Side Effects
+## 处理副作用
 
 Fetching data is called a *side effect*, since it calls the outside world, and is asynchronous. Usual actions may have other side effects, like showing a notification, or redirecting the user to another page. Just like for the `fetch` side effect, you can associate side effects to an action declaratively by setting the appropriate keys in the action `meta`.
 
