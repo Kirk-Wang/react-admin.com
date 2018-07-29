@@ -2,20 +2,20 @@
 id: ecosystem
 title: Ecosystem
 ---
-- [Inputs and Fields](#inputs-and-fields)
-- [Translations](#translations)
+- [Input 组件和 Field 组件](#inputs-and-fields)
+- [翻译](#translations)
 - [Data Providers](#data-providers)
-- [Miscellaneous](#miscellaneous)
+- [杂项](#miscellaneous)
 
-## Inputs and Fields
+## Input 组件和 Field 组件
 
-- [vascofg/react-admin-color-input](https://github.com/vascofg/react-admin-color-input): a color input using [React Color](http://casesandberg.github.io/react-color/), a collection of color pickers.
-- [LoicMahieu/aor-tinymce-input](https://github.com/LoicMahieu/aor-tinymce-input): a TinyMCE component, useful for editing HTML
-- [vascofg/react-admin-date-inputs](https://github.com/vascofg/react-admin-date-inputs): a collection of Date Inputs, based on [material-ui-pickers](https://material-ui-pickers.firebaseapp.com/)
+- [vascofg/react-admin-color-input](https://github.com/vascofg/react-admin-color-input)：使用 [React Color](http://casesandberg.github.io/react-color/) 的颜色输入，一个颜色选择器的集合。
+- [LoicMahieu/aor-tinymce-input](https://github.com/LoicMahieu/aor-tinymce-input)：TinyMCE组件，用于编辑HTML
+- [vascofg/react-admin-date-inputs](https://github.com/vascofg/react-admin-date-inputs): 日期输入的集合，基于 [material-ui-pickers](https://material-ui-pickers.firebaseapp.com/)
 
-## Translations
+## 翻译
 
-See the [translation](./Translation.md#available-locales) page.
+请参阅 [translation](./Translation.md#available-locales) 页面。
 
 ## Data Providers
 
