@@ -609,9 +609,9 @@ Usage:
 
 ## LinearProgress
 
-Display a linear progress component. Display the same loading component as `react-admin` on custom inputs for consistency.
+显示线性进度组件。在自定义输入上显示与` react-admin `相同的加载组件以保持一致性。
 
-Usage:
+用法：
 
 ```jsx
 ({ data, ...props }) => !data? 
