@@ -93,9 +93,9 @@ const App = () => (
 
 ## 添加 Logout 按钮
 
-如果您提供 `authProvider` 属性到 `<Admin>`，react-admin 显示注销按钮在顶部栏 (或在移动菜单上)。 当用户单击注销按钮时，此操作将使用 `AUTH_LOGOUT` 类型调用 `authProvider`，并删除来自 redux store 的潜在敏感数据。 When resolved, the user gets redirected to the login page.
+如果您提供 `authProvider` 属性到 `<Admin>`，react-admin 显示注销按钮在顶部栏 (或在移动菜单上)。 当用户单击注销按钮时，此操作将使用 `AUTH_LOGOUT` 类型调用 `authProvider`，并删除来自 redux store 的潜在敏感数据。 Resolve 后，用户将被重定向到登录页面。
 
-For instance, to remove the token from local storage upon logout:
+例如，要在注销时从 local storage 中删除 token：
 
 ```jsx
 // in src/authProvider.js
