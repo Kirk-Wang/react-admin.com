@@ -218,12 +218,12 @@ export default App;
 
 ## 翻译 Resource 和 Field 名称
 
-By default, React-admin uses resource names ("post", "comment", etc) and field names ("title", "first_name", etc) everywhere in the interface. It simply "humanizes" the technical identifiers to make them look better (e.g. "first_name" becomes "First name").
+默认情况下，React-admin在界面中的任何位置使用 resource 名称（“post”，“comment”等）和 field 名称（“title”，“first_name”等）。 它简单地“人性化”技术标识符，使其看起来更好（例如“first_name”变为“First name”）。
 
-However, before humanizing names, react-admin checks the `messages` dictionary for a possible translation, with the following keys:
+但是，在人性化名称之前，react-admin 会使用以下键检查 `messages` 字典以查找可能的翻译：
 
-- `${locale}.resources.${resourceName}.name` for resource names (used for the menu and page titles)
-- `${locale}.resources.${resourceName}.fields.${fieldName}` for field names (used for datagrid header and form input labels)
+- `${locale}.resources.${resourceName}.name` 用于资源名称（用于菜单和页面标题）
+- `${locale}.resources.${resourceName}.fields.${fieldName}`用于字段名称（用于datagrid header和表单输入标签）
 
 This lets you translate your own resource and field names by passing a `messages` object with a `resources` key:
 
