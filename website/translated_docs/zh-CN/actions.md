@@ -467,7 +467,7 @@ export default (previousState = 0, { type, payload }) => {
 }
 ```
 
-Now the question is: How can you put this reducer in the `<Admin>` app? Simple: use the `customReducers` props:
+现在的问题是：你如何把这个 reducer 放在 `<Admin>` 应用程序中？ 简单：使用 `customReducers` 属性：
 
 ```jsx
 // in src/App.js
@@ -485,21 +485,22 @@ const App = () => (
 export default App;
 ```
 
-**Tip**: You can avoid storing data in the Redux state by storing data in a component state instead. It's much less complicated to deal with, and more performant, too. Use the global state only when you really need to.
+**提示**: 您可以避免将数据存储在 Redux 状态中，而是将数据存储在组件状态中。 处理起来要复杂得多，而且性能也要高一些。 只有在真正需要时才使用全局状态。
 
 ## List Bulk Actions
 
-Almost everything we saw before is true for custom `List` bulk actions too, with the following few differences:
+我们之前看到的几乎所有内容都适用于自定义 `List` 批量操作，但有以下几点不同：
 
-* They receive the following props: `resource`, `selectedIds` and `filterValues`
-* They do not receive the current record in the `record` prop as there are many of them.
-* They must render as a material-ui [`MenuItem`](http://www.material-ui.com/#/components/menu).
+* 他们收到以下属性：`resource`，`selectedIds` 和 `filterValues`
+* 它们没有收到` record ` 属性中的当前记录，因为它们中有很多。
+* 它们必须呈现为 material-ui [`MenuItem`](http://www.material-ui.com/#/components/menu)。
 
-You can find a complete example in the `List` documentation, in the [`bulk-actions`](/List.html#bulk-actions) section.
+您可以在 [`批量操作`](/List.html#bulk-actions) 部分的 `
+List` 文档中找到完整的示例。
 
-## Conclusion
+## 结论
 
-Which style should you choose for your own action buttons?
+您应该为自己的操作按钮选择哪种样式？
 
 The first version (with `fetch`) is perfectly fine, and if you're not into unit testing your components, or decoupling side effects from pure functions, then you can stick with it without problem.
 
