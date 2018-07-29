@@ -2,7 +2,7 @@
 id: authorization
 title: Authorization
 ---
-Some applications may require to determine what level of access a particular authenticated user should have to secured resources. Since there are many different possible strategies (single role, multiple roles or rights, etc.), react-admin simply provides hooks to execute your own authorization code.
+某些应用程序可能需要确定特定身份验证的用户对安全资源的访问级别。 Since there are many different possible strategies (single role, multiple roles or rights, etc.), react-admin simply provides hooks to execute your own authorization code.
 
 By default, a react-admin app doesn't require authorization. However, if needed, it will rely on the `authProvider` introduced in the [Authentication](./Authentication.html) section.
 
