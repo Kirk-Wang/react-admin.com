@@ -360,11 +360,11 @@ export default App;
 
 在前面的示例中，单击“Approve”按钮后，将在 fetch data provider 时显示 spinner。 然后，用户被重定向到评论列表。 但在大多数情况下，服务器会返回成功响应，因此用户无需等待此响应。
 
-For its own fetch actions, react-admin uses an approach called *optimistic rendering*. The idea is to handle the `fetch` actions on the client side first (i.e. updating entities in the Redux store), and re-render the screen immediately. The user sees the effect of their action with no delay. Then, react-admin applies the success side effects, and only after that it triggers the fetch to the data provider. If the fetch ends with a success, react-admin does nothing more than a refresh to grab the latest data from the server, but in most cases, the user sees no difference (the data in the Redux store and the data from the data provider are the same). If the fetch fails, react-admin shows an error notification, and forces a refresh, too.
+对于自己的 fetch actions，react-admin 使用称为 *积极渲染* 的方法。 想法是首先处理客户端上的 `fetch` actions（即更新 Redux store 的实体），并立即重新渲染屏幕。 用户可以毫不拖延地看到他们 action 的效果。 然后，react-admin 应用 success side effects, 并且仅在此之后它触发对 data provider 的 fetch。 如果 fetch 成功结束，react-admin 只会刷新以从服务器获取最新数据，但在大多数情况下，用户看不到任何差异（Redux store 中的数据和来自 data provider 的数据） 是相同的）。 如果提取失败，react-admin 会显示错误通知，并强制刷新。
 
-As a bonus, while the success notification is displayed, users have the ability to cancel the action *before* the data provider is even called.
+作为奖励，当显示成功通知时，用户可以在甚至调用 data provide *之前* 取消 action。
 
-To make an action with a `fetch` meta optimistic, decorate it with the `startUndoable` action creator:
+要使用` fetch ` meta optimistic 进行操作，请使用` startUndoable ` action 创建器进行装饰：
 
 ```diff
 // in src/comments/ApproveButton.js
@@ -401,7 +401,7 @@ export default connect(null, {
 })(ApproveButton);
 ```
 
-And that's all it takes to make a fetch action optimistic. Note that the `startUndoable` action creator is passed to Redux `connect` as `mapDispatchToProp`, to be decorated with `dispatch` - but `commentApprove` is not. Only the first action must be decorated with dispatch.
+这就是使 fetch action 变得积极所需的全部内容。 请注意，`startUndoable` action 创建者将作为 `mapDispatchToProp` 传递给Redux `connect`，以便使用 `dispatch` 进行修饰 - 但是`commentApprove`不是。 Only the first action must be decorated with dispatch.
 
 The fact that react-admin updates the internal store if you use custom actions with the `fetch` meta should be another motivation to avoid using raw `fetch`.
 
