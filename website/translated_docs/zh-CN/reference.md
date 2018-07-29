@@ -1,6 +1,6 @@
 ---
 id: reference
-title: Reference
+title: 引用
 ---
 <div style="column-count:3">
   <ul>

@@ -1,6 +1,6 @@
 ---
 id: translation
-title: Translation
+title: 翻译
 ---
 React-admin 界面使用英语作为默认语言。但是它也支持任何其他语言，归功于[polyglot.js]（http://airbnb.io/polyglot.js/）库。
 

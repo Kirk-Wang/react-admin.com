@@ -1,6 +1,6 @@
 ---
 id: authentication
-title: Authentication
+title: 身份验证
 ---
 ![Logout button](https://marmelab.com/react-admin/img/login.gif)
 

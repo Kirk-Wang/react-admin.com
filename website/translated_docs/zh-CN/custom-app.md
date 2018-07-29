@@ -1,14 +1,14 @@
 ---
 id: custom-app
-title: Including the Admin in Another App
+title: 在其它 App 中包含 Admin
 ---
-The `<Admin>` tag is a great shortcut got be up and running with react-admin in minutes. However, in many cases, you will want to embed the admin in another application, or customize the admin deeply. Fortunately, you can do all the work that `<Admin>` does on any React application.
+`<Admin>` 标签是一个很好的快捷方式，在几分钟内就可以启动和运行react-admin。 但是，在许多情况下，您需要将 admin 嵌入到另一个应用程序中，或者深入定制 admin。 幸运的是，您可以在任何 React 应用程序中执行 `<Admin>` 所做的所有工作。
 
-Beware that you need to know about [redux](http://redux.js.org/), [react-router](https://github.com/reactjs/react-router), and [redux-saga](https://github.com/yelouafi/redux-saga) to go further.
+请注意，您需要进一步了解 [redux](http://redux.js.org/)，[react-router](https://github.com/reactjs/react-router) 和 [redux-saga](https://github.com/yelouafi/redux-saga)。
 
-**Tip**: Before going for the Custom App route, explore all the options of [the `<Admin>` component](./Admin.md). They allow you to add custom routes, custom reducers, custom sagas, and customize the layout.
+**提示**：在进入自定义应用程序路线之前，请探索 [`Admin>` 组件](./Admin.md)的所有选项。 它们允许您添加自定义路由，自定义reducers，自定义sagas和自定义布局。
 
-Here is the main code for bootstrapping a barebones react-admin application with 3 resources: `posts`, `comments`, and `users`:
+以下是使用3个资源引导一个准系统 react-admin 应用程序的主要代码：`posts`，`comments` 和 `users`：
 
 ```jsx
 // in src/App.js
@@ -106,4 +106,4 @@ const App = () => (
 );
 ```
 
-This application has no sidebar, no theming, no [auth control](./Authentication.md#restricting-access-to-a-custom-page) - it's up to you to add these. From there on, you can customize pretty much anything you want.
+此应用程序没有侧边栏，没有主题，没有[auth control](./Authentication.md#restricting-access-to-a-custom-page) - 由你自己添加。 从那时起，你可以自定义几乎任何你想要的。

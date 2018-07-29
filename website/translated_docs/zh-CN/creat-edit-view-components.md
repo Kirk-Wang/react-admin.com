@@ -1,6 +1,6 @@
 ---
 layout: creat-edit-view-components
-title: <Create> and <Edit> Views
+title: Create 和 Edit 视图组件
 ---
 “创建”和“编辑”视图都显示一个表单，使用空记录初始化的（对于“创建视图”）或具有一条从API（对于“编辑”视图）获取的记录。 `<Create>` 和 `<Edit>` 组件然后将表单的实际渲染委托给表单组件 - 通常是 `<SimpleForm>`。 此表单组件使用其子级 ([`<Input>`](./Inputs.md) 组件) 来呈现每个 from input。
 
