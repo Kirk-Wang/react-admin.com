@@ -225,7 +225,7 @@ export default App;
 - `${locale}.resources.${resourceName}.name` 用于资源名称（用于菜单和页面标题）
 - `${locale}.resources.${resourceName}.fields.${fieldName}`用于字段名称（用于datagrid header和表单输入标签）
 
-This lets you translate your own resource and field names by passing a `messages` object with a `resources` key:
+这使您可以通过使用 `resources` 键传递 `messages` 对象来翻译自己的 resource 和 field 名称：
 
 ```jsx
 {
@@ -251,13 +251,13 @@ This lets you translate your own resource and field names by passing a `messages
 }
 ```
 
-As you can see, [polyglot pluralization](http://airbnb.io/polyglot.js/#pluralization) is used here, but it is optional.
+如您所见, [polyglot pluralization](http://airbnb.io/polyglot.js/#pluralization) 在这里使用，但它是可选的。
 
-Using `resources` keys is an alternative to using the `label` prop in Field and Input components, with the advantage of supporting translation.
+使用 `resources` 键是在 Field 和 Input 组件中使用 `label` 属性的替代方法，具有支持翻译的优势。
 
-## Mixing Interface and Domain Translations
+## 混合界面和域翻译
 
-When translating an admin, interface messages (e.g. "List", "Page", etc.) usually come from a third-party package, while your domain messages (e.g. "Shoe", "Date of birth", etc.) come from your own code. That means you need to combine these messages before passing them to `<Admin>`. The recipe for combining messages is to use ES6 destructuring:
+当翻译admin时，界面消息（例如“List”，“Page”等）通常来自第三方软件包，而您的域信息（例如“Shoe”，“Date of birth”等）来自你自己的代码。 这意味着在将这些消息传递到 `<Admin>` 之前, 您需要合并这些 messages 。 组合消息的方法是使用ES6解构：
 
 ```jsx
 // interface translations
@@ -280,9 +280,9 @@ const App = () => (
 );
 ```
 
-## Translating Your Own Components
+## 翻译自己的组件
 
-The translation system use the React `context` to pass translations down the component tree. To translate a sentence, use the `translate` function from the context. Of course, this assumes that you've previously added the corresponding translation to the `messages` props of the `Admin` component.
+翻译系统使用React `context` 在组件树中传递翻译。 要翻译一个句子，请使用上下文中的 `translate` 函数。 当然，这假设你以前已经将相应的翻译添加到 `Admin` 组件的`messages` 属性中。
 
 ```jsx
 // in src/MyHelloButton.js
@@ -311,7 +311,7 @@ const messages = {
 };
 ```
 
-However, using the context makes components harder to test. That's why react-admin provides a `translate` Higher-Order Component, which simply passes the `translate` function from context to props:
+然而，使用上下文使组件更难测试。 这就是为什么 react-admin 提供了一个 `translate` 高阶组件，它只是将`translate` 函数从上下文传递给属性：
 
 ```jsx
 // in src/MyHelloButton.js
