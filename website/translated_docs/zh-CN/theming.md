@@ -2,13 +2,13 @@
 id: theming
 title: Theming
 ---
-Whether you need to adjust a CSS rule for a single component, or change the color of the labels in the entire app, you're covered!
+无论您需要为单个组件调整CSS规则，还是更改整个应用程序中的标签颜色，都可以！
 
-## Overriding A Component Style
+## 重写组件样式
 
-Every react-admin component provides a `className` property, which is always applied to the root element.
+每个 react-admin 组件都提供 `className` 属性，该属性始终应用于根元素。
 
-Here is an example customizing an `EditButton` component inside a `Datagrid`, using its `className` property and the `withStyles` Higher Order Component from Material-UI:
+下面是使用其 `className` 属性和 Material-UI 中的 `withStyles` 高阶组件自定义 `Datagrid` 中的 `EditButton` 组件的示例：
 
 ```jsx
 import { NumberField, List, Datagrid, EditButton } from 'react-admin';
@@ -40,9 +40,9 @@ export const ProductList = (props) => (
 );
 ```
 
-For some components, you may want to override not only the root component style, but also the style of components inside the root. In this case, the `className` property isn't enough. You can take advantage of the `classes` property to customize the classes that the component uses internally.
+对于某些组件，您可能不仅要覆盖根组件样式，还要覆盖根目录中组件的样式。 在这种情况下 `className` 属性是不够的。 您可以利用 `classes` 属性来自定义组件在内部使用的类。
 
-Here is an example using the `classes` property of the `Filter` and `List` components:
+下面是使用 `Filter` 和 `List` 组件的 `classes` 属性的示例：
 
 ```jsx
 import React from 'react';
@@ -120,17 +120,17 @@ export const VisitorList = withStyles(listStyles)(({ classes, ...props }) => (
 ));
 ```
 
-This example results in:
+此示例导致：
 
 ![Visitor List with customized CSS classes](https://marmelab.com/react-admin/img/list_with_customized_css.png)
 
-Take a look at a component documentation and source code to know which classes are available for styling. For instance, you can have a look at the [Datagrid CSS documentation](./List.md#the-datagrid-component).
+查看组件文档和源代码，了解哪些类可用于样式。 例如，您可以查看 [Datagrid CSS文档](./List.md#the-datagrid-component)。
 
-If you need more control over the HTML code, you can also create your own [Field](./Fields.md#writing-your-own-field-component) and [Input](./Inputs.md#writing-your-own-input-component) components.
+如果您需要更多地控制 HTML 代码，您还可以创建自己的 [Field](./Fields.md#writing-your-own-field-component) 和 [Input](./Inputs.md#writing-your-own-input-component) 组件。
 
-## Conditional Formatting
+## 条件格式
 
-Sometimes you want the format to depend on the value. The following example shows how to create a new custom `NumberField` component which highlight its text in red when its value is 100 or higher.
+有时您希望格式取决于值。 以下示例显示如何创建新的自定义 `NumberField` 组件，该组件在其值为100或更高时以红色突出显示其文本。
 
 ```jsx
 import { NumberField, List, Datagrid, EditButton } from 'react-admin';
@@ -168,7 +168,7 @@ export const PostList = (props) => (
 );
 ```
 
-Furthermore, you may extract this highlighting strategy into an Higher Order Component if you'd like to reuse it for other components as well:
+此外，如果您想将其重新用于其他组件，则可以将此突出显示策略提取到高阶组件中：
 
 ```jsx
 import { NumberField, List, Datagrid, EditButton } from 'react-admin';
