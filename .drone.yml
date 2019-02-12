@@ -32,7 +32,7 @@ steps:
         from_secret: username
       password:
         from_secret: password
-      target: /data/wwwroot/lotteryjs
+      target: /data/wwwroot/react-admin
       source: docker-compose.yml
 
   - name: restart container
