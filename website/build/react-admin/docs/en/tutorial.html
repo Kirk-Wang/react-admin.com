@@ -1,0 +1,584 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Tutorial · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This 15 minutes tutorial will expose how to create a new admin app based on an existing REST API."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Tutorial · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="This 15 minutes tutorial will expose how to create a new admin app based on an existing REST API."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/zh-CN/tutorial.html">中文</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/intro.html">Introduction</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/tutorial.html">Tutorial</a></li><li class="navListItem"><a class="navItem" href="/docs/en/data-providers.html">Data Providers</a></li><li class="navListItem"><a class="navItem" href="/docs/en/admin-component.html">&lt;Admin&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/resource-component.html">&lt;Resource&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/list-view-component.html">&lt;List&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/show-view-component.html">&lt;Show&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/field-components.html">&lt;Field&gt; Components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/creat-edit-view-components.html">&lt;Create&gt; and &lt;Edit&gt; Views</a></li><li class="navListItem"><a class="navItem" href="/docs/en/input-components.html">&lt;Input&gt; components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authentication.html">Authentication</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authorization.html">Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/en/theming.html">Theming</a></li><li class="navListItem"><a class="navItem" href="/docs/en/actions.html">Writing Actions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/translation.html">Translation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/custom-app.html">Including the Admin in Another App</a></li><li class="navListItem"><a class="navItem" href="/docs/en/reference.html">Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/en/faq.html">FAQ</a></li><li class="navListItem"><a class="navItem" href="/docs/en/ecosystem.html">Ecosystem</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Tutorial</h1></header><article><div><span><p>This 15 minutes tutorial will expose how to create a new admin app based on an existing REST API.</p>
+<video width="800" height="600" controls>
+  <source src="http://static.marmelab.com/react-admin/react-admin.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<h2><a class="anchor" aria-hidden="true" id="setting-up"></a><a href="#setting-up" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setting Up</h2>
+<p>React-admin uses React. We'll use Facebook's <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a> to create an empty React app, and install the <code>react-admin</code> package:</p>
+<pre><code class="hljs css languages- sh">npm install -g create-react-app
+create-react-app <span class="hljs-built_in">test</span>-admin
+<span class="hljs-built_in">cd</span> <span class="hljs-built_in">test</span>-admin/
+yarn add react-admin
+yarn start
+</code></pre>
+<p>You should be up and running with an empty React application on port 3000.</p>
+<h2><a class="anchor" aria-hidden="true" id="using-an-api-as-data-source"></a><a href="#using-an-api-as-data-source" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using an API As Data Source</h2>
+<p>React-admin runs in the browser, and uses APIs for fetching and storing data.</p>
+<p>We'll be using <a href="http://jsonplaceholder.typicode.com/">JSONPlaceholder</a>, a fake REST API designed for testing and prototyping, as the datasource for the admin. Here is what it looks like:</p>
+<pre><code class="hljs">curl http:<span class="hljs-regexp">//</span>jsonplaceholder.typicode.com<span class="hljs-regexp">/posts/</span><span class="hljs-number">12</span>
+</code></pre>
+<pre><code class="hljs css languages- json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-number">12</span>,
+  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"in quibusdam tempore odit est dolorem"</span>,
+  <span class="hljs-attr">"body"</span>: <span class="hljs-string">"itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"</span>,
+  <span class="hljs-attr">"userId"</span>: <span class="hljs-number">2</span>
+}
+</code></pre>
+<p>JSONPlaceholder provides endpoints for posts, comments, and users. The admin we'll build should allow to Create, Retrieve, Update, and Delete (CRUD) these resources.</p>
+<h2><a class="anchor" aria-hidden="true" id="making-contact-with-the-api-using-a-data-provider"></a><a href="#making-contact-with-the-api-using-a-data-provider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Making Contact With The API Using a Data Provider</h2>
+<p>Bootstrap the admin app by replacing the <code>src/App.js</code> by the following code:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> jsonServerProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-json-server'</span>;
+
+<span class="hljs-keyword">const</span> dataProvider = jsonServerProvider(<span class="hljs-string">'http://jsonplaceholder.typicode.com'</span>);
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &lt;Admin dataProvider={dataProvider} /&gt;;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
+</code></pre>
+<p>The <code>App</code> component now renders an <code>&lt;Admin&gt;</code> component, which is the root component of a react-admin application. This component expects a <code>dataProvider</code> prop - a function capable of fetching data from an API. Since there is no standard for data exchanges between computers, you will probably have to write a custom provider to connect react-admin to your own APIs - but we'll dive into Data Providers later. For now, let's take advantage of the <code>ra-data-json-server</code> data provider, which speaks the same REST dialect as JSONPlaceholder.</p>
+<pre><code class="hljs css languages- sh">yarn add ra-data-json-server
+</code></pre>
+<p>That's enough for react-admin to run an empty app. Now it's time to add features!</p>
+<h2><a class="anchor" aria-hidden="true" id="mapping-api-endpoints-with-resources"></a><a href="#mapping-api-endpoints-with-resources" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mapping API Endpoints With Resources</h2>
+<p>The <code>&lt;Admin&gt;</code> component expects one or more <code>&lt;Resource&gt;</code> child components. Each resource maps a name to an endpoint in the API. Edit the <code>App.js</code> file to add a <code>posts</code> resource:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> { PostList } <span class="hljs-keyword">from</span> <span class="hljs-string">'./posts'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{dataProvider}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{PostList}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+);
+</span></code></pre>
+<p><strong>Tip</strong>: We'll define the <code>&lt;PostList&gt;</code> component in the next section.</p>
+<p>The line <code>&lt;Resource name=&quot;posts&quot; /&gt;</code> informs react-admin to fetch the &quot;posts&quot; records from the <a href="http://jsonplaceholder.typicode.com/posts">http://jsonplaceholder.typicode.com/posts</a> URL.</p>
+<h2><a class="anchor" aria-hidden="true" id="displaying-a-list-of-records"></a><a href="#displaying-a-list-of-records" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Displaying A List Of Records</h2>
+<p><code>&lt;Resource&gt;</code> also defines the React components to use for each CRUD operation (<code>list</code>, <code>create</code>, <code>edit</code>, and <code>show</code>). The <code>list={PostList}</code> prop means that react-admin should use the <code>&lt;PostList&gt;</code> component to display the list of posts. Create that component as follows:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;TextField source="body" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>The main component of the post list is a <code>&lt;List&gt;</code> component, responsible for grabbing the information from the API, displaying the page title, and handling pagination. This list then delegates the display of the actual list of posts to its child. In this case, that's a <code>&lt;Datagrid&gt;</code> component, which renders a table with one row for each record. The datagrid uses its child components (here, a list of <code>&lt;TextField&gt;</code>) to determine the columns to render. Each Field component maps a different field in the API response, specified by the <code>source</code> prop.</p>
+<p>That's enough to display the post list:</p>
+<p><img src="https://marmelab.com/react-admin/img/simple-post-list.png" alt="Simple posts list"></p>
+<p>If you look at your browser network tab in the developer tools, you'll notice that the application fetched the <code>http://jsonplaceholder.typicode.com/posts</code> URL, then used the results to build the datagrid. That's basically how react-admin works.</p>
+<p>The list is already functional: you can reorder it by clicking on column headers, or change pages by using the bottom pagination controls. The <code>ra-data-json-server</code> data provider translates these actions to a query string that JSONPlaceholder understands.</p>
+<h2><a class="anchor" aria-hidden="true" id="using-field-types"></a><a href="#using-field-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using Field Types</h2>
+<p>You've just met the <code>&lt;TextField&gt;</code> component. React-admin provides more Field components, mapping various data types: number, date, image, HTML, array, reference, etc.</p>
+<p>For instance, <a href="http://jsonplaceholder.typicode.com/users">the <code>/users</code> endpoint in JSONPlaceholder</a> contains emails.</p>
+<pre><code class="hljs">curl http:<span class="hljs-regexp">//</span>jsonplaceholder.typicode.com<span class="hljs-regexp">/users/</span><span class="hljs-number">2</span>
+</code></pre>
+<pre><code class="hljs css languages- json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Ervin Howell"</span>,
+  <span class="hljs-attr">"username"</span>: <span class="hljs-string">"Antonette"</span>,
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"Shanna@melissa.tv"</span>,
+}
+</code></pre>
+<p>Let's create a new <code>users</code> resource to fetch that endpoint. Add it in <code>src/App.js</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> { PostList } <span class="hljs-keyword">from</span> <span class="hljs-string">'./posts'</span>;
+<span class="hljs-keyword">import</span> { UserList } <span class="hljs-keyword">from</span> <span class="hljs-string">'./users'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;Admin dataProvider={dataProvider}&gt;
+        &lt;Resource name="posts" list={PostList} /&gt;
+        &lt;Resource name="users" list={UserList} /&gt;
+    &lt;/Admin&gt;
+);
+</code></pre>
+<p>Now, create a <code>users.js</code> file exporting a <code>UserList</code>, using <code>&lt;EmailField&gt;</code> to map the <code>email</code> field:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/users.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, EmailField, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List title="All users" {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="name" /&gt;
+            &lt;TextField source="username" /&gt;
+            &lt;EmailField source="email" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/simple-user-list.png" alt="Simple user datagrid"></p>
+<p>The sidebar now gives access to the second resource, &quot;users&quot;. You can click on it, it's working! The users list shows email addresses as a <code>&lt;a href=&quot;mailto:&quot;&gt;</code> tags.</p>
+<p>In react-admin, fields are simple React components. At runtime, they receive the <code>record</code> fetched from the API (e.g. <code>{ &quot;id&quot;: 2, &quot;name&quot;: &quot;Ervin Howell&quot;, &quot;username&quot;: &quot;Antonette&quot;, &quot;email&quot;: &quot;Shanna@melissa.tv&quot; }</code>), and the <code>source</code> field they should display (e.g. <code>email</code>).</p>
+<p>That means that writing a custom Field component is really simple. For instance, to create an <code>UrlField</code>:</p>
+<pre><code class="hljs css languages- jsx">// in src/MyUrlField.js
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const UrlField = ({ record = {}, source }) =&gt;
+    &lt;a href={record[source]}&gt;
+        {record[source]}
+    &lt;/a&gt;;
+
+UrlField.propTypes = {
+    record: PropTypes.object,
+    source: PropTypes.string.isRequired,
+};
+
+export default UrlField;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="handling-relationships"></a><a href="#handling-relationships" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Handling Relationships</h2>
+<p>In JSONPlaceholder, each <code>post</code> record includes a <code>userId</code> field, which points to a <code>user</code>:</p>
+<pre><code class="hljs css languages- json">{
+    <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"sunt aut facere repellat provident occaecati excepturi optio reprehenderit"</span>,
+    <span class="hljs-attr">"body"</span>: <span class="hljs-string">"quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"</span>,
+    <span class="hljs-attr">"userId"</span>: <span class="hljs-number">1</span>
+}
+</code></pre>
+<p>React-admin knows how to take advantage of these foreign keys to fetch references. For instance, to include the user name in the posts list, use the <code>&lt;ReferenceField&gt;</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, TextField, EmailField, ReferenceField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;ReferenceField label="User" source="userId" reference="users"&gt;
+                &lt;TextField source="name" /&gt;
+            &lt;/ReferenceField&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;TextField source="body" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>When displaying the posts list, the app now fetches related user records, and displays their <code>name</code> as a <code>&lt;TextField&gt;</code>. Notice the <code>label</code> property: you can use it on any field component to customize the field label.</p>
+<p><img src="https://marmelab.com/react-admin/img/reference-posts.png" alt="reference posts in comment list"></p>
+<p><strong>Tip</strong>: The <code>&lt;ReferenceField&gt;</code> component alone doesn't display anything. It just fetches the reference data, and passes it as a <code>record</code> to its child component. Just like the <code>&lt;List&gt;</code> component, all <code>&lt;Reference&gt;</code> components are only responsible for fetching and preparing data, and delegate rendering to their children.</p>
+<p><strong>Tip</strong>: Look at the network tab of your browser again: react-admin deduplicates requests for users, and aggregates them in order to make only <em>one</em> HTTP request to the <code>/users</code> endpoint for the whole datagrid. That's one of many optimizations that keep the UI fast and responsive.</p>
+<h2><a class="anchor" aria-hidden="true" id="adding-creation-and-editing-capabilities"></a><a href="#adding-creation-and-editing-capabilities" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Adding Creation and Editing Capabilities</h2>
+<p>An admin interface isn't just about displaying remote data, it should also allow creating and editing records. React-admin provides <code>&lt;Create&gt;</code> and <code>&lt;Edit&gt;</code> components for that purpose. Add them to the <code>posts.js</code> script:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Edit, Create, Datagrid, ReferenceField, TextField, EditButton, DisabledInput, LongTextInput, ReferenceInput, SelectInput, SimpleForm, TextInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;ReferenceField label="User" source="userId" reference="users"&gt;
+                &lt;TextField source="name" /&gt;
+            &lt;/ReferenceField&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;TextField source="body" /&gt;
+            &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+
+const PostTitle = ({ record }) =&gt; {
+    return &lt;span&gt;Post {record ? `"${record.title}"` : ''}&lt;/span&gt;;
+};
+
+export const PostEdit = (props) =&gt; (
+    &lt;Edit title={&lt;PostTitle /&gt;} {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput source="id" /&gt;
+            &lt;ReferenceInput label="User" source="userId" reference="users"&gt;
+                &lt;SelectInput optionText="name" /&gt;
+            &lt;/ReferenceInput&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;LongTextInput source="body" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+
+export const PostCreate = (props) =&gt; (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;ReferenceInput label="User" source="userId" reference="users"&gt;
+                &lt;SelectInput optionText="name" /&gt;
+            &lt;/ReferenceInput&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;LongTextInput source="body" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p>If you've understood the <code>&lt;List&gt;</code> component, the <code>&lt;Edit&gt;</code> and <code>&lt;Create&gt;</code> components will be no surprise. They are responsible for fetching the record (or initializing an empty record in the case of <code>&lt;Create&gt;</code>), and displaying the page title. They pass the record down to the <code>&lt;SimpleForm&gt;</code> component, which is responsible for the form layout, default values, and validation. Just like <code>&lt;Datagrid&gt;</code>, <code>&lt;SimpleForm&gt;</code> uses its children to determine the form inputs to display. It expects <em>input components</em> as children. <code>&lt;DisabledInput&gt;</code>, <code>&lt;TextInput&gt;</code>, <code>&lt;LongTextInput&gt;</code>, and <code>&lt;ReferenceInput&gt;</code> are such inputs.</p>
+<p>As for the <code>&lt;ReferenceInput&gt;</code>, it takes the same props as the <code>&lt;ReferenceField&gt;</code> (used earlier in the list page). <code>&lt;ReferenceInput&gt;</code> uses these props to fetch the API for possible references related to the current record (in this case, possible <code>users</code> for the current <code>post</code>). It then passes these possible references to the child component (<code>&lt;SelectInput&gt;</code>), which is responsible for displaying them (via their <code>name</code> in that case), and letting the user select one. <code>&lt;SelectInput&gt;</code> renders as a <code>&lt;select&gt;</code> tag in HTML.</p>
+<p><strong>Tip</strong>: The <code>&lt;Edit&gt;</code> and the <code>&lt;Create&gt;</code> components use almost the same child form, except for the additional <code>id</code> input in <code>&lt;Edit&gt;</code>. In most cases, the forms for creating and editing a record are a bit different. But if they are the same, you can share a common form component between the two.</p>
+<p>Notice the additional <code>&lt;EditButton&gt;</code> field in the <code>&lt;PostList&gt;</code> children: that's what gives access to the post editing page. Also, the <code>&lt;Edit&gt;</code> component uses a custom <code>&lt;PostTitle&gt;</code> component as title, which shows the way to customize the title for a given page.</p>
+<p>To use the new <code>&lt;PostEdit&gt;</code> and <code>&lt;PostCreate&gt;</code> components in the posts resource, just add them as <code>edit</code> and <code>create</code> attributes in the <code>&lt;Resource&gt;</code> component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> { PostList, PostEdit, PostCreate } <span class="hljs-keyword">from</span> <span class="hljs-string">'./posts'</span>;
+<span class="hljs-keyword">import</span> { UserList } <span class="hljs-keyword">from</span> <span class="hljs-string">'./users'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{dataProvider}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{PostList}</span> <span class="hljs-attr">edit</span>=<span class="hljs-string">{PostEdit}</span> <span class="hljs-attr">create</span>=<span class="hljs-string">{PostCreate}</span> /&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+);
+</span></code></pre>
+<p>React-admin automatically adds a &quot;create&quot; button on top of the posts list to give access to the <code>&lt;PostCreate&gt;</code> component. And the <code>&lt;EditButton&gt;</code> renders in each line of the list to give access to the <code>&lt;PostEdit&gt;</code> component.</p>
+<p><img src="https://marmelab.com/react-admin/img/editable-post.png" alt="post list with access to edit and create"></p>
+<p>The form rendered in the create and edit pages is already functional. It issues <code>POST</code> and <code>PUT</code> requests to the REST API upon submission.</p>
+<p><img src="https://marmelab.com/react-admin/img/post-edition.png" alt="post edition form"></p>
+<p><strong>Note</strong>: JSONPlaceholder is a read-only API; although it seems to accept <code>POST</code> and <code>PUT</code> requests, it doesn't take into account the creations and edits - that's why, in this particular case, you will see errors after creation, and you won't see your edits after you save them. It's just an artifact of JSONPlaceholder.</p>
+<p>React-admin uses <em>optimistic rendering</em>. That means that, when you edit a record and hit the &quot;Save&quot; button, the UI displays a confirmation and displays the updated data <em>before sending the update query to server</em>. Not only does this make the interface ultra fast, it also allows the &quot;Undo&quot; feature. It's already functional in the admin at that point. Try editing a record, then hit the &quot;Undo&quot; link in the black confirmation bar before it slides out. You'll see that the app does not send the <code>UPDATE</code> query to the API, and displays the non-modified data.</p>
+<p><strong>Note</strong>: When you add the ability to edit an item, you also add the ability to delete it. The &quot;Delete&quot; button in the edit view is fully working out of the box.</p>
+<h2><a class="anchor" aria-hidden="true" id="adding-search-and-filters-to-the-list"></a><a href="#adding-search-and-filters-to-the-list" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Adding Search And Filters To The List</h2>
+<p>Let's get back to the post list for a minute. It offers sorting and pagination, but one feature is missing: the ability to search content.</p>
+<p>React-admin can use Input components to create a multi-criteria search engine in the list view. First, create a <code>&lt;Filter&gt;</code> component just like you would write a <code>&lt;SimpleForm&gt;</code> component, using input components as children. Then, add it to the list using the <code>filters</code> prop:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> { Filter, ReferenceInput, SelectInput, TextInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> PostFilter = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Filter {...props}&gt;
+        &lt;TextInput label="Search" source="q" alwaysOn /&gt;
+        &lt;ReferenceInput label="User" source="userId" reference="users" allowEmpty&gt;
+            &lt;SelectInput optionText="name" /&gt;
+        &lt;/ReferenceInput&gt;
+    &lt;/Filter&gt;
+);
+
+export const PostList = (props) =&gt; (
+    &lt;List {...props} filters={&lt;PostFilter /&gt;}&gt;
+        // ...
+    &lt;/List&gt;
+);
+</code></pre>
+<p>The first filter, 'q', takes advantage of a full-text functionality offered by JSONPlaceholder. It is <code>alwaysOn</code>, so it always appears on the screen. The second filter, 'userId', can be added by way of the &quot;add filter&quot; button, located on the top of the list. As it's a <code>&lt;ReferenceInput&gt;</code>, it's already populated with possible users. It can be turned off by the end user.</p>
+<p><img src="https://marmelab.com/react-admin/img/filters.gif" alt="posts search engine"></p>
+<p>Filters are &quot;search-as-you-type&quot;, meaning that when the user enters new values in the filter form, the list refreshes (via an API request) immediately.</p>
+<h2><a class="anchor" aria-hidden="true" id="customizing-the-menu-icons"></a><a href="#customizing-the-menu-icons" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Customizing the Menu Icons</h2>
+<p>The sidebar menu shows the same icon for both posts and users. Customizing the menu icon is just a matter of passing an <code>icon</code> attribute to each <code>&lt;Resource&gt;</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> PostIcon <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/Book'</span>;
+<span class="hljs-keyword">import</span> UserIcon <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/Group'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;Admin dataProvider={dataProvider}&gt;
+        &lt;Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon} /&gt;
+        &lt;Resource name="users" list={UserList} icon={UserIcon} /&gt;
+    &lt;/Admin&gt;
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/custom-menu.gif" alt="custom menu icons"></p>
+<h2><a class="anchor" aria-hidden="true" id="using-a-custom-home-page"></a><a href="#using-a-custom-home-page" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using a Custom Home Page</h2>
+<p>By default, react-admin displays the list page of the first resource as home page. If you want to display a custom component instead, pass it in the <code>dashboard</code> prop of the <code>&lt;Admin&gt;</code> component.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/Dashboard.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> Card <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Card'</span>;
+<span class="hljs-keyword">import</span> CardContent <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardContent'</span>;
+<span class="hljs-keyword">import</span> CardHeader <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardHeader'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> () =&gt; (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">CardHeader</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Welcome to the administration"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">CardContent</span>&gt;</span>Lorem ipsum sic dolor amet...<span class="hljs-tag">&lt;/<span class="hljs-name">CardContent</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span>
+);
+</span></code></pre>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> Dashboard <span class="hljs-keyword">from</span> <span class="hljs-string">'./Dashboard'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dashboard</span>=<span class="hljs-string">{Dashboard}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{dataProvider}</span>&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/dashboard.png" alt="Custom home page"></p>
+<h2><a class="anchor" aria-hidden="true" id="adding-a-login-page"></a><a href="#adding-a-login-page" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Adding a Login Page</h2>
+<p>Most admin apps require authentication. React-admin can check user credentials before displaying a page, and redirect to a login form when the REST API returns a 403 error code.</p>
+<p><em>What</em> those credentials are, and <em>how</em> to get them, are questions that you, as a developer, must answer. React-admin makes no assumption about your authentication strategy (basic auth, OAuth, custom route, etc), but gives you the hooks to plug your logic at the right place - by calling an <code>authProvider</code> function.</p>
+<p>For this tutorial, since there is no public authentication API we can use, let's use a fake authentication provider that accepts every login request, and stores the <code>username</code> in <code>localStorage</code>. Each page change will require that <code>localStorage</code> contains a <code>username</code> item.</p>
+<p>The <code>authProvider</code> is a simple function, which must return a <code>Promise</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-comment">// called when the user attempts to log in</span>
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-keyword">const</span> { username } = params;
+        localStorage.setItem(<span class="hljs-string">'username'</span>, username);
+        <span class="hljs-comment">// accept all username/password combinations</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+    }
+    <span class="hljs-comment">// called when the user clicks on the logout button</span>
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        localStorage.removeItem(<span class="hljs-string">'username'</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+    }
+    <span class="hljs-comment">// called when the API returns an error</span>
+    <span class="hljs-keyword">if</span> (type === AUTH_ERROR) {
+        <span class="hljs-keyword">const</span> { status } = params;
+        <span class="hljs-keyword">if</span> (status === <span class="hljs-number">401</span> || status === <span class="hljs-number">403</span>) {
+            localStorage.removeItem(<span class="hljs-string">'username'</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject();
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+    }
+    <span class="hljs-comment">// called when the user navigates to a new location</span>
+    <span class="hljs-keyword">if</span> (type === AUTH_CHECK) {
+        <span class="hljs-keyword">return</span> localStorage.getItem(<span class="hljs-string">'username'</span>)
+            ? <span class="hljs-built_in">Promise</span>.resolve()
+            : <span class="hljs-built_in">Promise</span>.reject();
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-string">'Unknown method'</span>);
+};
+</code></pre>
+<p><strong>Tip</strong>: As the <code>dataProvider</code> response is asynchronous, you can easily fetch an authentication server in there.</p>
+<p>To enable this authentication strategy, pass the client as the <code>authProvider</code> prop in the <code>&lt;Admin&gt;</code> component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> Dashboard <span class="hljs-keyword">from</span> <span class="hljs-string">'./Dashboard'</span>;
+<span class="hljs-keyword">import</span> authProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'./authProvider'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dashboard</span>=<span class="hljs-string">{Dashboard}</span> <span class="hljs-attr">authProvider</span>=<span class="hljs-string">{authProvider}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{dataProvider}</span>&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p>Once the app reloads, it's now behind a login form that accepts everyone:</p>
+<p><img src="https://marmelab.com/react-admin/img/login.gif" alt="Login form"></p>
+<h2><a class="anchor" aria-hidden="true" id="supporting-mobile-devices"></a><a href="#supporting-mobile-devices" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Supporting Mobile Devices</h2>
+<p>The react-admin layout is already responsive. Try to resize your browser to see how the sidebar switches to a drawer on smaller screens.</p>
+<p>But a responsive layout is not enough to make a responsive app. Datagrid components work well on desktop, but are absolutely not adapted to mobile devices. If your admin must be used on mobile devices, you'll have to provide an alternative component for small screens.</p>
+<p>First, you should know that you don't have to use the <code>&lt;Datagrid&gt;</code> component as <code>&lt;List&gt;</code> child. You can use any other component you like. For instance, the <code>&lt;SimpleList&gt;</code> component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, SimpleList } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">SimpleList</span>
+            <span class="hljs-attr">primaryText</span>=<span class="hljs-string">{record</span> =&gt;</span> record.title}
+            secondaryText={record =&gt; `${record.views} views`}
+            tertiaryText={record =&gt; new Date(record.published_at).toLocaleDateString()}
+        /&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span>
+);
+</span></code></pre>
+<p>The <code>&lt;SimpleList&gt;</code> component uses <a href="http://www.material-ui.com/#/components/list">material-ui's <code>&lt;List&gt;</code> and <code>&lt;ListItem&gt;</code> components</a>, and expects functions as <code>primaryText</code>, <code>secondaryText</code>, and <code>tertiaryText</code> props.</p>
+<p><img src="https://marmelab.com/react-admin/img/mobile-post-list.png" alt="Mobile post list" style="display:block;margin:2em auto;box-shadow:none;filter:drop-shadow(13px 12px 7px rgba(0,0,0,0.5));" /></p>
+<p><strong>Note:</strong> We switched to a custom API for those screenshots in order to demonstrate how to use some of the <code>SimpleList</code> component props.</p>
+<p>That works fine on mobile, but now the desktop user experience is worse. The best compromise would be to use <code>&lt;SimpleList&gt;</code> on small screens, and <code>&lt;Datagrid&gt;</code> on other screens. That's where the <code>&lt;Responsive&gt;</code> component comes in:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Responsive, SimpleList, Datagrid, TextField, ReferenceField, EditButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Responsive
+            small={
+                &lt;SimpleList
+                    primaryText={record =&gt; record.title}
+                    secondaryText={record =&gt; `${record.views} views`}
+                    tertiaryText={record =&gt; new Date(record.published_at).toLocaleDateString()}
+                /&gt;
+            }
+            medium={
+                &lt;Datagrid&gt;
+                    &lt;TextField source="id" /&gt;
+                    &lt;ReferenceField label="User" source="userId" reference="users"&gt;
+                        &lt;TextField source="name" /&gt;
+                    &lt;/ReferenceField&gt;
+                    &lt;TextField source="title" /&gt;
+                    &lt;TextField source="body" /&gt;
+                    &lt;EditButton /&gt;
+                &lt;/Datagrid&gt;
+            }
+        /&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>This works exactly the way you expect. The lesson here is that react-admin takes care of responsive web design for the layout, but it's your job to use <code>&lt;Responsive&gt;</code> in pages.</p>
+<p><img src="https://marmelab.com/react-admin/img/responsive-list.gif" alt="Responsive List"></p>
+<h2><a class="anchor" aria-hidden="true" id="connecting-to-a-real-api"></a><a href="#connecting-to-a-real-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Connecting To A Real API</h2>
+<p>Here is the elephant in the room of this tutorial. In real world projects, the dialect of your API (REST? GraphQL? Something else?) won't match the JSONPLaceholder dialect. Writing a Data Provider is probably the first thing you'll have to do to make react-admin work. Depending on your API, this can require a few hours of additional work.</p>
+<p>React-admin delegates every data query to a Data Provider function. This function must simply return a promise for the result. This gives extreme freedom to map any API dialect, add authentication headers, use endpoints from several domains, etc.</p>
+<p>For instance, let's imagine you have to use the <code>my.api.url</code> REST API, which expects the following parameters:</p>
+<table>
+<thead>
+<tr><th>Action</th><th>Expected API request</th></tr>
+</thead>
+<tbody>
+<tr><td>Get list</td><td><code>GET http://my.api.url/posts?sort=['title','ASC']&amp;range=[0, 24]&amp;filter={title:'bar'}</code></td></tr>
+<tr><td>Get one record</td><td><code>GET http://my.api.url/posts/123</code></td></tr>
+<tr><td>Get several records</td><td><code>GET http://my.api.url/posts?filter={ids:[123,456,789]}</code></td></tr>
+<tr><td>Update a record</td><td><code>PUT http://my.api.url/posts/123</code></td></tr>
+<tr><td>Create a record</td><td><code>POST http://my.api.url/posts/123</code></td></tr>
+<tr><td>Delete a record</td><td><code>DELETE http://my.api.url/posts/123</code></td></tr>
+</tbody>
+</table>
+<p>React-admin defines custom verbs for each of the actions of this list. Just like HTTP verbs (<code>GET</code>, <code>POST</code>, etc.), react-admin verbs qualify a request to a data provider. React-admin verbs are called <code>GET_LIST</code>, <code>GET_ONE</code>, <code>GET_MANY</code>, <code>CREATE</code>, <code>UPDATE</code>, and <code>DELETE</code>. The Data Provider will have to map each of these verbs to one (or many) HTTP request(s).</p>
+<p>The code for a Data Provider for the <code>my.api.url</code> API is as follows:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/dataProvider</span>
+<span class="hljs-keyword">import</span> {
+    GET_LIST,
+    GET_ONE,
+    GET_MANY,
+    GET_MANY_REFERENCE,
+    CREATE,
+    UPDATE,
+    DELETE,
+    fetchUtils,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { stringify } <span class="hljs-keyword">from</span> <span class="hljs-string">'query-string'</span>;
+
+<span class="hljs-keyword">const</span> API_URL = <span class="hljs-string">'my.api.url'</span>;
+
+<span class="hljs-comment">/**
+ * @param {String} type One of the constants appearing at the top if this file, e.g. 'UPDATE'
+ * @param {String} resource Name of the resource to fetch, e.g. 'posts'
+ * @param {Object} params The Data Provider request params, depending on the type
+ * @returns {Object} { url, options } The HTTP request parameters
+ */</span>
+<span class="hljs-keyword">const</span> convertDataProviderRequestToHTTP = <span class="hljs-function">(<span class="hljs-params">type, resource, params</span>) =&gt;</span> {
+    <span class="hljs-keyword">switch</span> (type) {
+    <span class="hljs-keyword">case</span> GET_LIST: {
+        <span class="hljs-keyword">const</span> { page, perPage } = params.pagination;
+        <span class="hljs-keyword">const</span> { field, order } = params.sort;
+        <span class="hljs-keyword">const</span> query = {
+            <span class="hljs-attr">sort</span>: <span class="hljs-built_in">JSON</span>.stringify([field, order]),
+            <span class="hljs-attr">range</span>: <span class="hljs-built_in">JSON</span>.stringify([(page - <span class="hljs-number">1</span>) * perPage, page * perPage - <span class="hljs-number">1</span>]),
+            <span class="hljs-attr">filter</span>: <span class="hljs-built_in">JSON</span>.stringify(params.filter),
+        };
+        <span class="hljs-keyword">return</span> { <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>?<span class="hljs-subst">${stringify(query)}</span>`</span> };
+    }
+    <span class="hljs-keyword">case</span> GET_ONE:
+        <span class="hljs-keyword">return</span> { <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>/<span class="hljs-subst">${params.id}</span>`</span> };
+    <span class="hljs-keyword">case</span> GET_MANY: {
+        <span class="hljs-keyword">const</span> query = {
+            <span class="hljs-attr">filter</span>: <span class="hljs-built_in">JSON</span>.stringify({ <span class="hljs-attr">id</span>: params.ids }),
+        };
+        <span class="hljs-keyword">return</span> { <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>?<span class="hljs-subst">${stringify(query)}</span>`</span> };
+    }
+    <span class="hljs-keyword">case</span> GET_MANY_REFERENCE: {
+        <span class="hljs-keyword">const</span> { page, perPage } = params.pagination;
+        <span class="hljs-keyword">const</span> { field, order } = params.sort;
+        <span class="hljs-keyword">const</span> query = {
+            <span class="hljs-attr">sort</span>: <span class="hljs-built_in">JSON</span>.stringify([field, order]),
+            <span class="hljs-attr">range</span>: <span class="hljs-built_in">JSON</span>.stringify([(page - <span class="hljs-number">1</span>) * perPage, (page * perPage) - <span class="hljs-number">1</span>]),
+            <span class="hljs-attr">filter</span>: <span class="hljs-built_in">JSON</span>.stringify({ ...params.filter, [params.target]: params.id }),
+        };
+        <span class="hljs-keyword">return</span> { <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>?<span class="hljs-subst">${stringify(query)}</span>`</span> };
+    }
+    <span class="hljs-keyword">case</span> UPDATE:
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>/<span class="hljs-subst">${params.id}</span>`</span>,
+            <span class="hljs-attr">options</span>: { <span class="hljs-attr">method</span>: <span class="hljs-string">'PUT'</span>, <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify(params.data) },
+        };
+    <span class="hljs-keyword">case</span> CREATE:
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>`</span>,
+            <span class="hljs-attr">options</span>: { <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>, <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify(params.data) },
+        };
+    <span class="hljs-keyword">case</span> DELETE:
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>/<span class="hljs-subst">${params.id}</span>`</span>,
+            <span class="hljs-attr">options</span>: { <span class="hljs-attr">method</span>: <span class="hljs-string">'DELETE'</span> },
+        };
+    <span class="hljs-keyword">default</span>:
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Unsupported fetch action type <span class="hljs-subst">${type}</span>`</span>);
+    }
+};
+
+<span class="hljs-comment">/**
+ * @param {Object} response HTTP response from fetch()
+ * @param {String} type One of the constants appearing at the top if this file, e.g. 'UPDATE'
+ * @param {String} resource Name of the resource to fetch, e.g. 'posts'
+ * @param {Object} params The Data Provider request params, depending on the type
+ * @returns {Object} Data Provider response
+ */</span>
+<span class="hljs-keyword">const</span> convertHTTPResponseToDataProvider = <span class="hljs-function">(<span class="hljs-params">response, type, resource, params</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> { headers, json } = response;
+    <span class="hljs-keyword">switch</span> (type) {
+    <span class="hljs-keyword">case</span> GET_LIST:
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">data</span>: json.map(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x),
+            <span class="hljs-attr">total</span>: <span class="hljs-built_in">parseInt</span>(headers.get(<span class="hljs-string">'content-range'</span>).split(<span class="hljs-string">'/'</span>).pop(), <span class="hljs-number">10</span>),
+        };
+    <span class="hljs-keyword">case</span> CREATE:
+        <span class="hljs-keyword">return</span> { <span class="hljs-attr">data</span>: { ...params.data, <span class="hljs-attr">id</span>: json.id } };
+    <span class="hljs-keyword">default</span>:
+        <span class="hljs-keyword">return</span> { <span class="hljs-attr">data</span>: json };
+    }
+};
+
+<span class="hljs-comment">/**
+ * @param {string} type Request type, e.g GET_LIST
+ * @param {string} resource Resource name, e.g. "posts"
+ * @param {Object} payload Request parameters. Depends on the request type
+ * @returns {Promise} the Promise for response
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, resource, params) =&gt; {
+    <span class="hljs-keyword">const</span> { fetchJson } = fetchUtils;
+    <span class="hljs-keyword">const</span> { url, options } = convertDataProviderRequestToHTTP(type, resource, params);
+    <span class="hljs-keyword">return</span> fetchJson(url, options)
+        .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> convertHTTPResponseToDataProvider(response, type, resource, params));
+};
+</code></pre>
+<p><strong>Tip</strong>: <code>fetchJson()</code> is just a shortcut for <code>fetch().then(r =&gt; r.json())</code>, plus a control of the HTTP response code to throw an <code>HTTPError</code> in case of 4xx or 5xx response. Feel free to use <code>fetch()</code> directly if it doesn't suit your needs.</p>
+<p>Using this provider instead of the previous <code>jsonServerProvider</code> is just a matter of switching a function:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/app.js</span>
+<span class="hljs-keyword">import</span> dataProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'./dataProvider'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{dataProvider}</span>&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="conclusion"></a><a href="#conclusion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conclusion</h2>
+<p>React-admin was built with customization in mind. You can replace any react-admin component with a component of your own, for instance to display a custom list layout, or a different edit form for a given resource.</p>
+<p>Now that you've completed the tutorial, continue reading the <a href="http://marmelab.com/react-admin/">react-admin documentation</a>, and read the <a href="http://www.material-ui.com/#/">Material UI components documentation</a>.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/intro.html">← Introduction</a><a class="docs-next button" href="/docs/en/data-providers.html">Data Providers →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#setting-up">Setting Up</a></li><li><a href="#using-an-api-as-data-source">Using an API As Data Source</a></li><li><a href="#making-contact-with-the-api-using-a-data-provider">Making Contact With The API Using a Data Provider</a></li><li><a href="#mapping-api-endpoints-with-resources">Mapping API Endpoints With Resources</a></li><li><a href="#displaying-a-list-of-records">Displaying A List Of Records</a></li><li><a href="#using-field-types">Using Field Types</a></li><li><a href="#handling-relationships">Handling Relationships</a></li><li><a href="#adding-creation-and-editing-capabilities">Adding Creation and Editing Capabilities</a></li><li><a href="#adding-search-and-filters-to-the-list">Adding Search And Filters To The List</a></li><li><a href="#customizing-the-menu-icons">Customizing the Menu Icons</a></li><li><a href="#using-a-custom-home-page">Using a Custom Home Page</a></li><li><a href="#adding-a-login-page">Adding a Login Page</a></li><li><a href="#supporting-mobile-devices">Supporting Mobile Devices</a></li><li><a href="#connecting-to-a-real-api">Connecting To A Real API</a></li><li><a href="#conclusion">Conclusion</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

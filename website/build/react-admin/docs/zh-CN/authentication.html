@@ -1,0 +1,314 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>身份验证 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="![Logout button](https://marmelab.com/react-admin/img/login.gif)"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="身份验证 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="![Logout button](https://marmelab.com/react-admin/img/login.gif)"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/authentication.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">身份验证</h1></header><article><div><span><p><img src="https://marmelab.com/react-admin/img/login.gif" alt="Logout button"></p>
+<p>React-admin 可以通过您选择的身份验证策略来保护您的admin app。 由于有许多不同的可能策略（Basic Auth，JWT，OAuth等），react-admin 只需提供钩子来执行您自己的验证代码。</p>
+<p>默认情况下，react-admin 应用程序不需要身份验证。 但是，如果REST API返回401（Unauthorized）或403（Forbidden）响应，则用户将被重定向到 <code>/login</code> 路由。 你啥事都不需要做 - 它已经内置了。</p>
+<h2><a class="anchor" aria-hidden="true" id="配置-auth-provider"></a><a href="#配置-auth-provider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>配置 Auth Provider</h2>
+<p>默认情况下，<code>/login</code> 路由呈现一个名为 <code>Login</code> 的特殊组件，它显示一个要求输入用户名和密码的登录表单。</p>
+<p><img src="https://marmelab.com/react-admin/img/login-form.png" alt="Default Login Form"></p>
+<p>这种表单在提交时取决于 <code>&lt;Admin&gt;</code> 组件的 <code>authProvider</code>属性。 此函数接收认证请求 <code>type，params</code>，并返回一个 Promise。 <code>Login</code> 使用 <code>AUTH_LOGIN</code> 类型调用 <code>authProvider</code>，并使用 <code>{login，password}</code> 作为参数。 它是验证用户身份和存储凭据的理想场所。</p>
+<p>例如，要通过HTTPS查询身份验证路由并将凭据（令牌）存储在本地存储中，请按如下方式配置<code>authProvider</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-keyword">const</span> { username, password } = params;
+        <span class="hljs-keyword">const</span> request = <span class="hljs-keyword">new</span> Request(<span class="hljs-string">'https://mydomain.com/authenticate'</span>, {
+            <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+            <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({ username, password }),
+            <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({ <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span> }),
+        })
+        <span class="hljs-keyword">return</span> fetch(request)
+            .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (response.status &lt; <span class="hljs-number">200</span> || response.status &gt;= <span class="hljs-number">300</span>) {
+                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(response.statusText);
+                }
+                <span class="hljs-keyword">return</span> response.json();
+            })
+            .then(<span class="hljs-function">(<span class="hljs-params">{ token }</span>) =&gt;</span> {
+                localStorage.setItem(<span class="hljs-string">'token'</span>, token);
+            });
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+}
+</code></pre>
+<p><strong>提示</strong>：在 <code>localStorage</code>中存储凭据是一个好主意，以便在打开新的浏览器选项卡时避免重新连接。 但这会使您的应用程序 <a href="http://www.redotheweb.com/2015/11/09/api-security.html">对XSS攻击开放</a>，因此您最好在安全性方面加倍，并在服务器端添加一个<code>httpOnly</code> cookie。</p>
+<p>然后, 将此客户端传递到 <code>&lt;Admin&gt;</code> 组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> authProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'./authProvider'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">authProvider</span>=<span class="hljs-string">{authProvider}</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p>当收到403响应时, admin app显示登录页。 <code>authProvider</code> 现在在用户提交登录表单时被调用。 一旦 promise resolve ，登录表单重定向到上一页，或者如果用户刚刚到达，则重定向到 admin index。</p>
+<h2><a class="anchor" aria-hidden="true" id="向-api-发送凭据"></a><a href="#向-api-发送凭据" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>向 API 发送凭据</h2>
+<p>要在调用数据提供程序时使用凭据，您必须进行调整，这一次是<code>dataProvider</code> 函数。 如 <a href="DataProviders.md#adding-custom-headers"> Data Provider 文档</a>中所述, <code>simpleRestProvider</code> 和 <code>jsonServerProvider</code> 以 <code>httpClient</code> 作为第二个参数。 这是您可以更改请求头、cookie 等的位置。</p>
+<p>例如，要将登录期间获得的令牌传递为 <code>Authorization</code> header，请按如下方式配置Data Provider：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { fetchUtils, Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> simpleRestProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-simple-rest'</span>;
+
+<span class="hljs-keyword">const</span> httpClient = <span class="hljs-function">(<span class="hljs-params">url, options = {}</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (!options.headers) {
+        options.headers = <span class="hljs-keyword">new</span> Headers({ <span class="hljs-attr">Accept</span>: <span class="hljs-string">'application/json'</span> });
+    }
+    <span class="hljs-keyword">const</span> token = localStorage.getItem(<span class="hljs-string">'token'</span>);
+    options.headers.set(<span class="hljs-string">'Authorization'</span>, <span class="hljs-string">`Bearer <span class="hljs-subst">${token}</span>`</span>);
+    <span class="hljs-keyword">return</span> fetchUtils.fetchJson(url, options);
+}
+<span class="hljs-keyword">const</span> dataProvider = simpleRestProvider(<span class="hljs-string">'http://localhost:3000'</span>, httpClient);
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{dataProvider}</span> <span class="hljs-attr">authProvider</span>=<span class="hljs-string">{authProvider}</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p>如果您有一个自定义 REST client，请不要忘记自己添加凭据。</p>
+<h2><a class="anchor" aria-hidden="true" id="添加-logout-按钮"></a><a href="#添加-logout-按钮" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>添加 Logout 按钮</h2>
+<p>如果您提供 <code>authProvider</code> 属性到 <code>&lt;Admin&gt;</code>，react-admin 显示注销按钮在顶部栏 (或在移动菜单上)。 当用户单击注销按钮时，此操作将使用 <code>AUTH_LOGOUT</code> 类型调用 <code>authProvider</code>，并删除来自 redux store 的潜在敏感数据。 Resolve 后，用户将被重定向到登录页面。</p>
+<p>例如，要在注销时从 local storage 中删除 token：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        localStorage.removeItem(<span class="hljs-string">'token'</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+};
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/logout.gif" alt="Logout button"></p>
+<p><code>authProvider</code> 也是通知 authentication API 的好地方, 用户凭据在注销后不再有效。</p>
+<h2><a class="anchor" aria-hidden="true" id="捕获-api-上的身份验证错误"></a><a href="#捕获-api-上的身份验证错误" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>捕获 API 上的身份验证错误</h2>
+<p>即使用户可能在客户端进行身份验证，服务器端其凭据可能不再是有效的（例如，如果令牌仅在几周内有效）。 在这种情况下，API 通常会回答所有 REST 请求具有错误代码 401 或 403 - 但是<em>你的</em>API呢？</p>
+<p>幸运的是，每次 API 返回一个错误时，<code>authProvider</code> 都将使用 <code>AUTH_ERROR</code> type 调用。 再次，由您决定哪些 HTTP 状态代码应允许用户继续 (通过返回已解决的 Promise) 或注销 (通过返回拒绝的 Promise)。</p>
+<p>例如，401和403代码都要将用户重定向到登录页面：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_ERROR) {
+        <span class="hljs-keyword">const</span> status  = params.status;
+        <span class="hljs-keyword">if</span> (status === <span class="hljs-number">401</span> || status === <span class="hljs-number">403</span>) {
+            localStorage.removeItem(<span class="hljs-string">'token'</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject();
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="在导航过程中检查凭据"></a><a href="#在导航过程中检查凭据" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>在导航过程中检查凭据</h2>
+<p>当 REST 响应使用 401 状态代码时，重定向到登录页面通常是不够的，因为 react-admin 保留数据在客户端，并且可能在联系服务器时显示过时的数据 - 即使凭据不再有效。</p>
+<p>幸运的是，每当用户导航时，react-admin 都使用 <code>AUTH_CHECK</code> type 调用<code>authProvider</code>，因此它是检查凭据的理想场所。</p>
+<p>例如，要检查本地存储中的令牌是否存在：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_ERROR) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_CHECK) {
+        <span class="hljs-keyword">return</span> localStorage.getItem(<span class="hljs-string">'token'</span>) ? <span class="hljs-built_in">Promise</span>.resolve() : <span class="hljs-built_in">Promise</span>.reject();
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-string">'Unkown method'</span>);
+};
+</code></pre>
+<p>如果promise被拒绝，默认情况下 react-admin 重定向到 <code>/login</code> 页面。 您可以通过将具有 <code>redirectTo</code> 属性的参数传递给被拒绝的 promise 来覆盖用户重定向的位置：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_ERROR) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_CHECK) {
+        <span class="hljs-keyword">return</span> localStorage.getItem(<span class="hljs-string">'token'</span>) ? <span class="hljs-built_in">Promise</span>.resolve() : <span class="hljs-built_in">Promise</span>.reject({ <span class="hljs-attr">redirectTo</span>: <span class="hljs-string">'/no-access'</span> });
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-string">'Unkown method'</span>);
+};
+</code></pre>
+<p><strong>提示</strong>：对于 <code>AUTH_CHECK</code> 调用，<code>params</code> 参数包含<code>resource</code>名称，因此可以为不同的资源实现不同的检查：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_ERROR) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_CHECK) {
+        <span class="hljs-keyword">const</span> { resource } = params;
+        <span class="hljs-keyword">if</span> (resource === <span class="hljs-string">'posts'</span>) {
+            <span class="hljs-comment">// check credentials for the posts resource</span>
+        }
+        <span class="hljs-keyword">if</span> (resource === <span class="hljs-string">'comments'</span>) {
+            <span class="hljs-comment">// check credentials for the comments resource</span>
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-string">'Unkown method'</span>);
+};
+</code></pre>
+<p><strong>提示</strong>：<code>authClient</code> 只能用 <code>AUTH_LOGIN</code>，<code>AUTH_LOGOUT</code>，<code>AUTH_ERROR</code> 或 <code>AUTH_CHECK</code> 调用；这就是为什么最终返回一个拒绝的 promise。</p>
+<h2><a class="anchor" aria-hidden="true" id="自定义登录和注销组件"></a><a href="#自定义登录和注销组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>自定义登录和注销组件</h2>
+<p>如果身份验证依赖于用户名和密码，则使用 <code>authProvider</code> 和 <code>checkCredentials</code> 就可以实现全功能授权系统。</p>
+<p>但是如果您想使用电子邮件而不是用户名呢？ 如果要使用带有第三方身份验证服务的单点登录（SSO），该怎么办？如果要使用双重身份认证怎么办？</p>
+<p>对于所有这些情况，您需要实现自己的 <code>LoginPage</code> 组件，该组件将显示在 <code>/login</code> 路由下，而不是默认的用户名/密码表单以及您自己的 <code>LogoutButton</code> 组件，这将显示在侧边栏。 将这两个组件都传递给 <code>&lt;Admin&gt;</code> 组件：</p>
+<p><strong>提示</strong>：在您的自定义 <code>Login</code> 和 <code>Logout</code> 组件中使用 <code>userLogin</code> 和 <code>userLogout</code> action。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyLoginPage.js</span>
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { userLogin } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyLoginPage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    submit = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+        e.preventDefault();
+        <span class="hljs-comment">// gather your data/credentials here</span>
+        <span class="hljs-keyword">const</span> credentials = { };
+
+        <span class="hljs-comment">// Dispatch the userLogin action (injected by connect)</span>
+        <span class="hljs-keyword">this</span>.props.userLogin(credentials);
+    }
+
+    render() {
+        <span class="hljs-keyword">return</span> (
+            <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{this.submit}</span>&gt;</span>
+            ...
+            <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></span>
+        );
+    }
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connect(<span class="hljs-literal">undefined</span>, { userLogin })(MyLoginPage);
+
+<span class="hljs-comment">// in src/MyLogoutButton.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { Responsive, userLogout } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> MenuItem <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/MenuItem'</span>;
+<span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> ExitIcon <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/PowerSettingsNew'</span>;
+
+<span class="hljs-keyword">const</span> MyLogoutButton = <span class="hljs-function">(<span class="hljs-params">{ userLogout, ...rest }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Responsive</span>
+        <span class="hljs-attr">xsmall</span>=<span class="hljs-string">{</span>
+            &lt;<span class="hljs-attr">MenuItem</span>
+                <span class="hljs-attr">onClick</span>=<span class="hljs-string">{userLogout}</span>
+                {<span class="hljs-attr">...sanitizeRestProps</span>(<span class="hljs-attr">rest</span>)}
+            &gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">ExitIcon</span> /&gt;</span> Logout
+            <span class="hljs-tag">&lt;/<span class="hljs-name">MenuItem</span>&gt;</span>
+        }
+        medium={
+            <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+                <span class="hljs-attr">onClick</span>=<span class="hljs-string">{userLogout}</span>
+                <span class="hljs-attr">size</span>=<span class="hljs-string">"small"</span>
+                {<span class="hljs-attr">...sanitizeRestProps</span>(<span class="hljs-attr">rest</span>)}
+            &gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">ExitIcon</span> /&gt;</span> Logout
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+        }
+    /&gt;
+);
+export default connect(undefined, { userLogout: userLogout() })(MyLogoutButton);
+
+// in src/App.js
+import MyLoginPage from './MyLoginPage';
+import MyLogoutButton from './MyLogoutButton';
+
+const App = () =&gt; (
+    <span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">loginPage</span>=<span class="hljs-string">{MyLoginPage}</span> <span class="hljs-attr">logoutButton</span>=<span class="hljs-string">{MyLogoutButton}</span> <span class="hljs-attr">authProvider</span>=<span class="hljs-string">{authProvider}</span>&gt;</span>
+    ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+);
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="限制对自定义页面的访问"></a><a href="#限制对自定义页面的访问" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>限制对自定义页面的访问</h2>
+<p>如果您添加<a href="./Actions.md">自定义页面</a>，如果您<a href="./CustomApp.md">从头开始创建admin app</a>，则可能需要手动保护对页面的访问。 这就是 <code>&lt;Authenticated&gt;</code> 组件的目的，您可以将其用作自己组件的装饰器。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyPage.js</span>
+<span class="hljs-keyword">import</span> { withRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+<span class="hljs-keyword">import</span> { Authenticated } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> MyPage = <span class="hljs-function">(<span class="hljs-params">{ location }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Authenticated</span> <span class="hljs-attr">authParams</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">foo:</span> '<span class="hljs-attr">bar</span>' }} <span class="hljs-attr">location</span>=<span class="hljs-string">{location}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+            ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Authenticated</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> withRouter(MyPage);
+</code></pre>
+<p><code>&lt;Authenticated&gt;</code> 组件使用 <code>AUTH_CHECK</code> 和 <code>uthParams</code> 调用 <code>authProvider</code> 函数。 如果响应是一个fulfilled promise，则子组件被渲染。 如果响应是被拒绝的 promise，<code>&lt;Authenticated&gt;</code> 将重定向到登录表单。 成功登录后，用户将被重定向到初始位置（这就是为什么必须从路由器获取位置）。</p>
+<h2><a class="anchor" aria-hidden="true" id="注销后重定向"></a><a href="#注销后重定向" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>注销后重定向</h2>
+<p>默认情况下，react-admin在用户注销后会将用户重定向到 “/login”。 当您 <code>connect</code> 到 <code>MyLogoutButton</code>组件时，可以通过将 url 传递给 <code>userLogout()</code> action 创建者作为参数来更改：</p>
+<pre><code class="hljs css languages- diff">// in src/MyLogoutButton.js
+// ...
+<span class="hljs-deletion">- export default connect(undefined, { userLogout: userLogout() })(MyLogoutButton);</span>
+<span class="hljs-addition">+ export default connect(undefined, { userLogout: userLogout('/') })(MyLogoutButton);</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/input-components.html">← Input 组件</a><a class="docs-next button" href="/docs/zh-CN/authorization.html">授权 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#配置-auth-provider">配置 Auth Provider</a></li><li><a href="#向-api-发送凭据">向 API 发送凭据</a></li><li><a href="#添加-logout-按钮">添加 Logout 按钮</a></li><li><a href="#捕获-api-上的身份验证错误">捕获 API 上的身份验证错误</a></li><li><a href="#在导航过程中检查凭据">在导航过程中检查凭据</a></li><li><a href="#自定义登录和注销组件">自定义登录和注销组件</a></li><li><a href="#限制对自定义页面的访问">限制对自定义页面的访问</a></li><li><a href="#注销后重定向">注销后重定向</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

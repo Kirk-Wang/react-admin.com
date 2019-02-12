@@ -1,0 +1,774 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>&lt;Field&gt; Components · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="A `Field` component displays a given property of a REST resource. Such components are used in the `List` view, but you can also use them in the `Edit` and `Create` views for read-only fields. The most usual of all field components is `&lt;TextField&gt;`:"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="&lt;Field&gt; Components · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="A `Field` component displays a given property of a REST resource. Such components are used in the `List` view, but you can also use them in the `Edit` and `Create` views for read-only fields. The most usual of all field components is `&lt;TextField&gt;`:"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/zh-CN/field-components.html">中文</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/intro.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/docs/en/tutorial.html">Tutorial</a></li><li class="navListItem"><a class="navItem" href="/docs/en/data-providers.html">Data Providers</a></li><li class="navListItem"><a class="navItem" href="/docs/en/admin-component.html">&lt;Admin&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/resource-component.html">&lt;Resource&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/list-view-component.html">&lt;List&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/show-view-component.html">&lt;Show&gt; View</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/field-components.html">&lt;Field&gt; Components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/creat-edit-view-components.html">&lt;Create&gt; and &lt;Edit&gt; Views</a></li><li class="navListItem"><a class="navItem" href="/docs/en/input-components.html">&lt;Input&gt; components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authentication.html">Authentication</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authorization.html">Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/en/theming.html">Theming</a></li><li class="navListItem"><a class="navItem" href="/docs/en/actions.html">Writing Actions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/translation.html">Translation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/custom-app.html">Including the Admin in Another App</a></li><li class="navListItem"><a class="navItem" href="/docs/en/reference.html">Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/en/faq.html">FAQ</a></li><li class="navListItem"><a class="navItem" href="/docs/en/ecosystem.html">Ecosystem</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">&lt;Field&gt; Components</h1></header><article><div><span><p>A <code>Field</code> component displays a given property of a REST resource. Such components are used in the <code>List</code> view, but you can also use them in the <code>Edit</code> and <code>Create</code> views for read-only fields. The most usual of all field components is <code>&lt;TextField&gt;</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;TextField source="body" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>All field components accept the following attributes:</p>
+<ul>
+<li><code>source</code>: Property name of your entity to view/edit. This attribute is required.</li>
+<li><code>label</code>: Used as a table header of an input label. Defaults to the <code>source</code> when omitted.</li>
+<li><code>sortable</code>: Should the list be sortable using <code>source</code> attribute? Defaults to <code>true</code>.</li>
+<li><code>className</code>: A class name (usually generated by JSS) to customize the look and feel of the field element itself</li>
+<li><code>cellClassName</code>: A class name (usually generated by JSS) to customize the look and feel of the field container (e.g. the <code>&lt;td&gt;</code> in a datagrid).</li>
+<li><code>headerClassName</code>: A class name (usually generated by JSS) to customize the look and feel of the field header (e.g. the <code>&lt;th&gt;</code> in a datagrid).</li>
+<li><code>addLabel</code>: Defines the visibility of the label when the field is not in a datagrid. Default value is <code>true</code>.</li>
+<li><code>textAlign</code>: Defines the text alignment inside a cell. Supports <code>left</code> (the default) and <code>right</code>.</li>
+</ul>
+<pre><code class="hljs css languages- jsx">&lt;TextField source=<span class="hljs-string">"zb_title"</span> label=<span class="hljs-string">"Title"</span> style={{ <span class="hljs-attr">color</span>: <span class="hljs-string">'purple'</span> }} /&gt;
+</code></pre>
+<p><strong>Tip</strong>: You can use field components inside the <code>Edit</code> or <code>Show</code> views, too:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostShow = <span class="hljs-function">(<span class="hljs-params">{ ...props }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Show</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">SimpleShowLayout</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">TextField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">SimpleShowLayout</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Show</span>&gt;</span>
+);
+</span></code></pre>
+<p><strong>Tip</strong>: If you display a record with a complex structure, you can use a path with dot separators as the <code>source</code> attribute. For instance, if the API returns the following 'book' record:</p>
+<pre><code class="hljs css languages- jsx">{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">1234</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'War and Peace'</span>,
+    <span class="hljs-attr">author</span>: {
+        <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Leo'</span>,
+        <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Tolstoi'</span>
+    }
+}
+</code></pre>
+<p>Then you can display the author first name as follows:</p>
+<pre><code class="hljs css languages- jsx">&lt;TextField source=<span class="hljs-string">"author.firstName"</span> /&gt;
+</code></pre>
+<p><strong>Tip</strong>: If you want to format a field according to the value, use a higher-order component to do conditional formatting, as described in the <a href="./Theming.md#conditional-formatting">Theming documentation</a>.</p>
+<p><strong>Tip</strong>: If your interface has to support multiple languages, don't use the <code>label</code> prop, and put the localized labels in a dictionary instead. See the <a href="./Translation.md#translating-resource-and-field-names">Translation documentation</a> for details.</p>
+<h2><a class="anchor" aria-hidden="true" id="arrayfield-component"></a><a href="#arrayfield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ArrayField</code> Component</h2>
+<p>Display a collection using <code>&lt;Field&gt;</code> child components.</p>
+<p>Ideal for embedded arrays of objects, e.g. <code>tags</code> and <code>backlinks</code> in the following <code>post</code> object:</p>
+<pre><code class="hljs css languages- js">{
+  <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>
+  tags: [
+        { <span class="hljs-attr">name</span>: <span class="hljs-string">'foo'</span> },
+        { <span class="hljs-attr">name</span>: <span class="hljs-string">'bar'</span> }
+  ],
+  <span class="hljs-attr">backlinks</span>: [
+        {
+            <span class="hljs-attr">date</span>: <span class="hljs-string">'2012-08-10T00:00:00.000Z'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'http://example.com/foo/bar.html'</span>,
+        },
+        {
+            <span class="hljs-attr">date</span>: <span class="hljs-string">'2012-08-14T00:00:00.000Z'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'https://blog.johndoe.com/2012/08/12/foobar.html'</span>,
+        }
+   ]
+}
+</code></pre>
+<p>The child must be an iterator component (like <code>&lt;Datagrid&gt;</code> or <code>&lt;SingleFieldList&gt;</code>).</p>
+<p>Here is how to display all the backlinks of the current post as a <code>&lt;datagrid&gt;</code></p>
+<pre><code class="hljs css languages- jsx">&lt;ArrayField source=<span class="hljs-string">"backlinks"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Datagrid</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">DateField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"date"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">UrlField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"url"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Datagrid</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ArrayField</span>&gt;</span>
+</span></code></pre>
+<p>And here is how to display all the tags of the current post as <code>&lt;Chip&gt;</code> components:</p>
+<pre><code class="hljs css languages- jsx">&lt;ArrayField source=<span class="hljs-string">"tags"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SingleFieldList</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ChipField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">SingleFieldList</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ArrayField</span>&gt;</span></span>
+</code></pre>
+<p><strong>Tip</strong>: If you need to render a collection in a custom way, it's often simpler to write your own component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> TagsField = <span class="hljs-function">(<span class="hljs-params">{ record }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+        {record.tags.map(item =&gt; (
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{item.name}</span>&gt;</span>{item.name}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        ))}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span>
+)
+TagsField.defaultProps = { <span class="hljs-attr">addLabel</span>: <span class="hljs-literal">true</span> };
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="booleanfield-component"></a><a href="#booleanfield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>BooleanField</code> Component</h2>
+<p>Displays a boolean value as a check.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { BooleanField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BooleanField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"commentable"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/boolean-field.png" alt="BooleanField"></p>
+<h2><a class="anchor" aria-hidden="true" id="chipfield-component"></a><a href="#chipfield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ChipField</code> Component</h2>
+<p>Displays a value inside a <a href="http://www.material-ui.com/#/components/chip">&quot;Chip&quot;</a>, which is Material UI's term for a label.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ChipField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ChipField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"category"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/chip-field.png" alt="ChipField"></p>
+<p>This field type is especially useful for one to many relationships, e.g. to display a list of books for a given author:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ChipField, SingleFieldList, ReferenceManyField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ReferenceManyField</span> <span class="hljs-attr">reference</span>=<span class="hljs-string">"books"</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"author_id"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">SingleFieldList</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ChipField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">SingleFieldList</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceManyField</span>&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="datefield-component"></a><a href="#datefield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>DateField</code> Component</h2>
+<p>Displays a date or datetime using the browser locale (thanks to <code>Date.toLocaleDateString()</code> and <code>Date.toLocaleString()</code>).</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { DateField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">DateField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"publication_date"</span> /&gt;</span>
+</span></code></pre>
+<p>This component accepts a <code>showTime</code> attribute (false by default) to force the display of time in addition to date. It uses <code>Intl.DateTimeFormat()</code> if available, passing the <code>locales</code> and <code>options</code> props as arguments. If Intl is not available, it ignores the <code>locales</code> and <code>options</code> props.</p>
+<pre><code class="hljs css languages- jsx">&lt;DateField source="publication_date" /&gt;
+// renders the record { id: 1234, publication_date: new Date('2017-04-23') } as
+&lt;span&gt;4/23/2017&lt;/span&gt;
+
+&lt;DateField source="publication_date" showTime /&gt;
+// renders the record { id: 1234, publication_date: new Date('2017-04-23 23:05') } as
+&lt;span&gt;4/23/2017, 11:05:00 PM&lt;/span&gt;
+
+&lt;DateField source="publication_date" options={{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }} /&gt;
+// renders the record { id: 1234, publication_date: new Date('2017-04-23') } as
+&lt;span&gt;Sunday, April 23, 2017&lt;/span&gt;
+
+&lt;DateField source="publication_date" locales="fr-FR" /&gt;
+// renders the record { id: 1234, publication_date: new Date('2017-04-23') } as
+&lt;span&gt;23/04/2017&lt;/span&gt;
+
+&lt;DateField source="publication_date" elStyle={{ color: 'red' }} /&gt;
+// renders the record { id: 1234, publication_date: new Date('2017-04-23') } as
+&lt;span style="color:red;"&gt;4/23/2017&lt;/span&gt;
+</code></pre>
+<p>See <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Date/toLocaleDateString">Intl.DateTimeformat documentation</a> for the <code>options</code> prop syntax.</p>
+<p><strong>Tip</strong>: If you need more formatting options than what <code>Intl.DateTimeformat</code> can provide, build your own field component leveraging a third-party library like <a href="http://momentjs.com/">moment.js</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="emailfield-component"></a><a href="#emailfield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EmailField</code> Component</h2>
+<p><code>&lt;EmailField&gt;</code> displays an email as a <code>&lt;a href=&quot;mailto:&quot; /&gt;</code> link.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { EmailField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">EmailField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"personal_email"</span> /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="functionfield-component"></a><a href="#functionfield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>FunctionField</code> Component</h2>
+<p>If you need a special function to render a field, <code>&lt;FunctionField&gt;</code> is the perfect match. It passes the <code>record</code> to a <code>render</code> function supplied by the developer. For instance, to display the full name of a <code>user</code> record based on <code>first_name</code> and <code>last_name</code> properties:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { FunctionField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;FunctionField label=<span class="hljs-string">"Name"</span> render={record =&gt; <span class="hljs-string">`<span class="hljs-subst">${record.first_name}</span> <span class="hljs-subst">${record.last_name}</span>`</span>} /&gt;
+</code></pre>
+<p><strong>Tip</strong>: Technically, you can omit the <code>source</code> and <code>sortBy</code> properties for the <code>&lt;FunctionField&gt;</code> since you provide the render function. However, providing a <code>source</code> or a <code>sortBy</code> will allow the datagrid to make the column sortable, since when a user clicks on a column, the datagrid uses these properties to sort. Should you provide both, <code>sortBy</code> will override <code>source</code> for sorting the column.</p>
+<h2><a class="anchor" aria-hidden="true" id="imagefield-component"></a><a href="#imagefield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ImageField</code> Component</h2>
+<p>If you need to display an image provided by your API, you can use the <code>&lt;ImageField /&gt;</code> component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ImageField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ImageField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"url"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+</span></code></pre>
+<p>This field is also generally used within an <a href="http://marmelab.com/react-admin/Inputs.md#imageinput"><ImageInput /></a> component to display preview.</p>
+<p>The optional <code>title</code> prop points to the picture title property, used for both <code>alt</code> and <code>title</code> attributes. It can either be an hard-written string, or a path within your JSON object:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// { picture: { url: 'cover.jpg', title: 'Larry Cover (French pun intended)' } }</span>
+
+<span class="hljs-comment">// Title would be "picture.title", hence "Larry Cover (French pun intended)"</span>
+&lt;ImageField source=<span class="hljs-string">"picture.url"</span> title=<span class="hljs-string">"picture.title"</span> /&gt;
+
+<span class="hljs-comment">// Title would be "Picture", as "Picture" is not a path in previous given object</span>
+&lt;ImageField source=<span class="hljs-string">"picture.url"</span> title=<span class="hljs-string">"Picture"</span> /&gt;
+</code></pre>
+<p>If passed value is an existing path within your JSON object, then it uses the object attribute. Otherwise, it considers its value as an hard-written title.</p>
+<p>If the record actually contains an array of images in its property defined by the <code>source</code> prop, the <code>src</code> prop will be needed to determine the <code>src</code> value of the images, for example:</p>
+<pre><code class="hljs css languages- js"><span class="hljs-comment">// This is the record</span>
+{
+    <span class="hljs-attr">pictures</span>: [
+        { <span class="hljs-attr">url</span>: <span class="hljs-string">'image1.jpg'</span>, <span class="hljs-attr">desc</span>: <span class="hljs-string">'First image'</span> },
+        { <span class="hljs-attr">url</span>: <span class="hljs-string">'image2.jpg'</span>, <span class="hljs-attr">desc</span>: <span class="hljs-string">'Second image'</span> },
+    ],
+}
+
+&lt;ImageField source=<span class="hljs-string">"pictures"</span> src=<span class="hljs-string">"url"</span> title=<span class="hljs-string">"desc"</span> /&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="filefield-component"></a><a href="#filefield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>FileField</code> Component</h2>
+<p>If you need to display a file provided by your API, you can use the <code>&lt;FileField /&gt;</code> component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { FileField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">FileField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"url"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+</span></code></pre>
+<p>This field is also generally used within an <a href="http://marmelab.com/react-admin/Inputs.md#fileinput"><FileInput /></a> component to display preview.</p>
+<p>The optional <code>title</code> prop points to the file title property, used for <code>title</code> attributes. It can either be an hard-written string, or a path within your JSON object:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// { file: { url: 'doc.pdf', title: 'Presentation' } }</span>
+
+<span class="hljs-comment">// Title would be "file.title", hence "Presentation"</span>
+&lt;FileField source=<span class="hljs-string">"file.url"</span> title=<span class="hljs-string">"file.title"</span> /&gt;
+
+<span class="hljs-comment">// Title would be "File", as "File" is not a path in previous given object</span>
+&lt;FileField source=<span class="hljs-string">"file.url"</span> title=<span class="hljs-string">"File"</span> /&gt;
+</code></pre>
+<p>If passed value is an existing path within your JSON object, then it uses the object attribute. Otherwise, it considers its value as an hard-written title.</p>
+<p>If the record actually contains an array of files in its property defined by the <code>source</code> prop, the <code>src</code> prop will be needed to determine the <code>href</code> value of the links, for example:</p>
+<pre><code class="hljs css languages- js"><span class="hljs-comment">// This is the record</span>
+{
+    <span class="hljs-attr">files</span>: [
+        { <span class="hljs-attr">url</span>: <span class="hljs-string">'image1.jpg'</span>, <span class="hljs-attr">desc</span>: <span class="hljs-string">'First image'</span> },
+        { <span class="hljs-attr">url</span>: <span class="hljs-string">'image2.jpg'</span>, <span class="hljs-attr">desc</span>: <span class="hljs-string">'Second image'</span> },
+    ],
+}
+
+&lt;FileField source=<span class="hljs-string">"files"</span> src=<span class="hljs-string">"url"</span> title=<span class="hljs-string">"desc"</span> /&gt;
+</code></pre>
+<p>You can optionally set the <code>target</code> prop to choose which window will the link try to open in.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// Will make the file open in new window</span>
+&lt;FileField source=<span class="hljs-string">"file.url"</span> target=<span class="hljs-string">"_blank"</span> /&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="numberfield-component"></a><a href="#numberfield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>NumberField</code> Component</h2>
+<p>Displays a number formatted according to the browser locale, right aligned.</p>
+<p>Uses <code>Intl.NumberFormat()</code> if available, passing the <code>locales</code> and <code>options</code> props as arguments. This allows perfect display of decimals, currencies, percentage, etc.</p>
+<p>If Intl is not available, it outputs number as is (and ignores the <code>locales</code> and <code>options</code> props).</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NumberField }  <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+&lt;NumberField source="score" /&gt;
+// renders the record { id: 1234, score: 567 } as
+&lt;span&gt;567&lt;/span&gt;
+
+&lt;NumberField source="score" options={{ maximumFractionDigits: 2 }}/&gt;
+// renders the record { id: 1234, score: 567.3567458569 } as
+&lt;span&gt;567.35&lt;/span&gt;
+
+&lt;NumberField source="share" options={{ style: 'percent' }} /&gt;
+// renders the record { id: 1234, share: 0.2545 } as
+&lt;span&gt;25%&lt;/span&gt;
+
+&lt;NumberField source="price" options={{ style: 'currency', currency: 'USD' }} /&gt;
+// renders the record { id: 1234, price: 25.99 } as
+&lt;span&gt;$25.99&lt;/span&gt;
+
+&lt;NumberField source="price" locales="fr-FR" options={{ style: 'currency', currency: 'USD' }} /&gt;
+// renders the record { id: 1234, price: 25.99 } as
+&lt;span&gt;25,99 $US&lt;/span&gt;
+
+&lt;NumberField source="score" elStyle={{ color: 'red' }} /&gt;
+// renders the record { id: 1234, score: 567 } as
+&lt;span style="color:red;"&gt;567&lt;/span&gt;
+</code></pre>
+<p>See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString">Intl.Numberformat documentation</a> for the <code>options</code> prop syntax.</p>
+<p><strong>Tip</strong>: If you need more formatting options than what <code>Intl.Numberformat</code> can provide, build your own field component leveraging a third-party library like <a href="http://numeraljs.com/">numeral.js</a>.</p>
+<p><strong>Tip</strong>: When used in a <code>Show</code> view, the right alignment may look weird. Disable it by resetting the <code>style</code> attribute:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NumberField }  <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">NumberField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"score"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{}}</span> /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="selectfield-component"></a><a href="#selectfield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>SelectField</code> Component</h2>
+<p>When you need to display an enumerated field, <code>&lt;SelectField&gt;</code> maps the value to a string.</p>
+<p>For instance, if the <code>gender</code> field can take values &quot;M&quot; and &quot;F&quot;, here is how to display it as &quot;Male&quot; or &quot;Female&quot;:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { SelectField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"gender"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{[</span>
+   { <span class="hljs-attr">id:</span> '<span class="hljs-attr">M</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Male</span>' },
+   { <span class="hljs-attr">id:</span> '<span class="hljs-attr">F</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Female</span>' },
+]} /&gt;</span>
+</span></code></pre>
+<p>By default, the text is built by</p>
+<ul>
+<li>finding a choice where the 'id' property equals the field value</li>
+<li>using the 'name' property an the option text</li>
+</ul>
+<p><strong>Warning</strong>: This component name may conflict with material-ui's <a href="http://www.material-ui.com/#/components/select-field"><code>&lt;SelectField&gt;</code></a> if you import both.</p>
+<p>You can also customize the properties to use for the lookup value and text, thanks to the 'optionValue' and 'optionText' attributes.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">_id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Leo Tolstoi'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'M'</span> },
+   { <span class="hljs-attr">_id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Jane Austen'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'F'</span> },
+];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"full_name"</span> <span class="hljs-attr">optionValue</span>=<span class="hljs-string">"_id"</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> also accepts a function, so you can shape the option text at will:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Leo'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Tolstoi'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Austen'</span> },
+];
+<span class="hljs-keyword">const</span> optionRenderer = <span class="hljs-function"><span class="hljs-params">choice</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${choice.first_name}</span> <span class="hljs-subst">${choice.last_name}</span>`</span>;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">{optionRenderer}</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> also accepts a React Element, that will be cloned and receive the related choice as the <code>record</code> prop. You can use Field components there.</p>
+<pre><code class="hljs css languages- jsx">const choices = [
+   { id: 123, first_name: 'Leo', last_name: 'Tolstoi' },
+   { id: 456, first_name: 'Jane', last_name: 'Austen' },
+];
+const FullNameField = ({ record }) =&gt; &lt;Chip&gt;{record.first_name} {record.last_name}&lt;/Chip&gt;;
+&lt;SelectField source="gender" choices={choices} optionText={&lt;FullNameField /&gt;}/&gt;
+</code></pre>
+<p>The current choice is translated by default, so you can use translation identifiers as choices:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'M'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.male'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'F'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.female'</span> },
+];
+</code></pre>
+<p>However, in some cases (e.g. inside a <code>&lt;ReferenceField&gt;</code>), you may not want the choice to be translated. In that case, set the <code>translateChoice</code> prop to false.</p>
+<pre><code class="hljs css languages- jsx">&lt;SelectField source=<span class="hljs-string">"gender"</span> choices={choices} translateChoice={<span class="hljs-literal">false</span>}/&gt;
+</code></pre>
+<p><strong>Tip</strong>: <ReferenceField> sets <code>translateChoice</code> to false by default.</p>
+<h2><a class="anchor" aria-hidden="true" id="referencefield-component"></a><a href="#referencefield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ReferenceField</code> Component</h2>
+<p>This component fetches a single referenced record (using the <code>GET_MANY</code> REST method), and displays one field of this record. That's why a <code>&lt;ReferenceField&gt;</code> must always have a child <code>&lt;Field&gt;</code>.</p>
+<p>For instance, here is how to fetch the <code>post</code> related to <code>comment</code> records, and display the <code>title</code> for each:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, ReferenceField, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;ReferenceField label="Author" source="user_id" reference="users"&gt;
+                &lt;TextField source="name" /&gt;
+            &lt;/ReferenceField&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>With this configuration, <code>&lt;ReferenceField&gt;</code> wraps the user's name in a link to the related user <code>&lt;Edit&gt;</code> page.</p>
+<p><img src="https://marmelab.com/react-admin/img/reference-field.png" alt="ReferenceField"></p>
+<p><code>&lt;ReferenceField&gt;</code> accepts a <code>reference</code> attribute, which specifies the resource to fetch for the related record. Also, you can use any <code>Field</code> component as child.</p>
+<p><strong>Note</strong>: You <strong>must</strong> add a <code>&lt;Resource&gt;</code> for the reference resource - react-admin needs it to fetch the reference data. You <em>can</em> omit the <code>list</code> prop in this reference if you want to hide it in the sidebar menu.</p>
+<pre><code class="hljs css languages- jsx">&lt;Admin dataProvider={myDataProvider}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"comments"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{CommentList}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+</span></code></pre>
+<p>To change the link from the <code>&lt;Edit&gt;</code> page to the <code>&lt;Show&gt;</code> page, set the <code>linkType</code> prop to &quot;show&quot;.</p>
+<pre><code class="hljs css languages- jsx">&lt;ReferenceField label=<span class="hljs-string">"User"</span> source=<span class="hljs-string">"userId"</span> reference=<span class="hljs-string">"users"</span> linkType=<span class="hljs-string">"show"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceField</span>&gt;</span></span>
+</code></pre>
+<p>By default, <code>&lt;ReferenceField&gt;</code> is sorted by its <code>source</code>. To specify another attribute to sort by, set the <code>sortBy</code> prop to the according attribute's name.</p>
+<pre><code class="hljs css languages- jsx">&lt;ReferenceField label=<span class="hljs-string">"User"</span> source=<span class="hljs-string">"userId"</span> reference=<span class="hljs-string">"users"</span> sortBy=<span class="hljs-string">"user.name"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceField</span>&gt;</span></span>
+</code></pre>
+<p>You can also prevent <code>&lt;ReferenceField&gt;</code> from adding link to children by setting <code>linkType</code> to <code>false</code>.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// No link</span>
+&lt;ReferenceField label=<span class="hljs-string">"User"</span> source=<span class="hljs-string">"userId"</span> reference=<span class="hljs-string">"users"</span> linkType={<span class="hljs-literal">false</span>}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceField</span>&gt;</span></span>
+</code></pre>
+<p><strong>Tip</strong>: React-admin uses <code>CRUD_GET_ONE_REFERENCE</code> action to accumulate and deduplicate the ids of the referenced records to make <em>one</em> <code>GET_MANY</code> call for the entire list, instead of n <code>GET_ONE</code> calls. So for instance, if the API returns the following list of comments:</p>
+<pre><code class="hljs css languages- jsx">[
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>,
+        <span class="hljs-attr">body</span>: <span class="hljs-string">'Totally agree'</span>,
+        <span class="hljs-attr">post_id</span>: <span class="hljs-number">789</span>,
+    },
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-number">124</span>,
+        <span class="hljs-attr">title</span>: <span class="hljs-string">'You are right my friend'</span>,
+        <span class="hljs-attr">post_id</span>: <span class="hljs-number">789</span>
+    },
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-number">125</span>,
+        <span class="hljs-attr">title</span>: <span class="hljs-string">'Not sure about this one'</span>,
+        <span class="hljs-attr">post_id</span>: <span class="hljs-number">735</span>
+    }
+]
+</code></pre>
+<p>Then react-admin renders the <code>&lt;CommentList&gt;</code> with a loader for the <code>&lt;ReferenceField&gt;</code>, fetches the API for the related posts in one call (<code>GET http://path.to.my.api/posts?ids=[789,735]</code>), and re-renders the list once the data arrives. This accelerates the rendering, and minimizes network load.</p>
+<h2><a class="anchor" aria-hidden="true" id="referencemanyfield-component"></a><a href="#referencemanyfield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ReferenceManyField</code> Component</h2>
+<p>This component fetches a list of referenced records by reverse lookup of the current <code>record.id</code> in other resource (using the <code>GET_MANY_REFERENCE</code> REST method). The field name of the current record's id in the other resource is specified by the required <code>target</code> field. The result is then passed to an iterator component (like <code>&lt;SingleFieldList&gt;</code> or <code>&lt;Datagrid&gt;</code>). The iterator component usually has one or more child <code>&lt;Field&gt;</code> components.</p>
+<p>For instance, here is how to fetch the <code>comments</code> related to a <code>post</code> record by matching <code>comment.post_id</code> to <code>post.id</code>, and then display the <code>author.name</code> for each, in a <code>&lt;ChipField&gt;</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, ChipField, ReferenceManyField, SingleFieldList, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" type="email" /&gt;
+            &lt;ReferenceManyField label="Comments by" reference="comments" target="post_id"&gt;
+                &lt;SingleFieldList&gt;
+                    &lt;ChipField source="author.name" /&gt;
+                &lt;/SingleFieldList&gt;
+            &lt;/ReferenceManyField&gt;
+            &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/reference-many-field-single-field-list.png" alt="ReferenceManyFieldSingleFieldList"></p>
+<p><code>&lt;ReferenceManyField&gt;</code> accepts a <code>reference</code> attribute, which specifies the resource to fetch for the related record. It also accepts a <code>source</code> attribute which define the field containing the value to look for in the <code>target</code> field of the referenced resource. By default this is the <code>id</code> of the resource (<code>post.id</code> in the previous example).</p>
+<p><strong>Note</strong>: You <strong>must</strong> add a <code>&lt;Resource&gt;</code> for the reference resource - react-admin needs it to fetch the reference data. You <em>can</em> omit the <code>list</code> prop in this reference if you want to hide it in the sidebar menu.</p>
+<p>You can use a <code>&lt;Datagrid&gt;</code> instead of a <code>&lt;SingleFieldList&gt;</code> - but not inside another <code>&lt;Datagrid&gt;</code>! This is useful if you want to display a read-only list of related records. For instance, if you want to show the <code>comments</code> related to a <code>post</code> in the post's <code>&lt;Edit&gt;</code> view:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Edit, Datagrid, SimpleForm, DisabledInput, DateField, EditButton, ReferenceManyField, TextField, TextInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput label="Id" source="id" /&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;ReferenceManyField
+                label="Comments"
+                reference="comments"
+                target="post_id"
+            &gt;
+                &lt;Datagrid&gt;
+                    &lt;DateField source="created_at" /&gt;
+                    &lt;TextField source="author.name" /&gt;
+                    &lt;TextField source="body" /&gt;
+                    &lt;EditButton /&gt;
+                &lt;/Datagrid&gt;
+            &lt;/ReferenceManyField&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/reference-many-field-datagrid.png" alt="ReferenceManyFieldDatagrid"></p>
+<p>By default, react-admin restricts the possible values to 25. You can change this limit by setting the <code>perPage</code> prop.</p>
+<pre><code class="hljs css languages- jsx">&lt;ReferenceManyField perPage={10} reference="comments" target="post_id"&gt;
+   ...
+&lt;/ReferenceManyField&gt;
+</code></pre>
+<p>By default, it orders the possible values by id desc. You can change this order by setting the <code>sort</code> prop (an object with <code>field</code> and <code>order</code> properties).</p>
+<pre><code class="hljs css languages- jsx">&lt;ReferenceManyField sort={{ field: 'created_at', order: 'DESC' }} reference="comments" target="post_id"&gt;
+   ...
+&lt;/ReferenceManyField&gt;
+</code></pre>
+<p>Also, you can filter the query used to populate the possible values. Use the <code>filter</code> prop for that.</p>
+<pre><code class="hljs css languages- jsx">&lt;ReferenceManyField filter={{ is_published: true }} reference="comments" target="post_id"&gt;
+   ...
+&lt;/ReferenceManyField&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="referencearrayfield-component"></a><a href="#referencearrayfield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ReferenceArrayField</code> Component</h2>
+<p>Use <code>&lt;ReferenceArrayField&gt;</code> to display an list of reference values based on an array of foreign keys.</p>
+<p>For instance, if a post has many tags, a post resource may look like:</p>
+<pre><code class="hljs css languages- js">{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">1234</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'Lorem Ipsum'</span>,
+    <span class="hljs-attr">tag_ids</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">23</span>, <span class="hljs-number">4</span>]
+}
+</code></pre>
+<p>Where <code>[1, 23, 4]</code> refer to ids of <code>tag</code> resources.</p>
+<p><code>&lt;ReferenceArrayField&gt;</code> can fetch the <code>tag</code> resources related to this <code>post</code> resource by matching <code>post.tag_ids</code> to <code>tag.id</code>. <code>&lt;ReferenceArrayField source=&quot;tags_ids&quot; reference=&quot;tags&quot;&gt;</code> would issue an HTTP request looking like:</p>
+<pre><code class="hljs"><span class="hljs-link">http://myapi.com/tags?id=</span>[<span class="hljs-string">1,23,4</span>]
+</code></pre>
+<p><strong>Tip</strong>: <code>&lt;ReferenceArrayField&gt;</code> fetches the related resources using the <code>GET_MANY</code> REST method, so the actual HTTP request depends on your REST client.</p>
+<p>Once it receives the related resources, <code>&lt;ReferenceArrayField&gt;</code> passes them to its child component using the <code>ids</code> and <code>data</code> props, so the child must be an iterator component (like <code>&lt;SingleFieldList&gt;</code> or <code>&lt;Datagrid&gt;</code>). The iterator component usually has one or more child <code>&lt;Field&gt;</code> components.</p>
+<p>Here is how to fetch the list of tags for each post in a <code>PostList</code>, and display the <code>name</code> for each <code>tag</code> in a <code>&lt;ChipField&gt;</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, ChipField, ReferenceArrayField, SingleFieldList, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;ReferenceArrayField label="Tags" reference="tags" source="tag_ids"&gt;
+                &lt;SingleFieldList&gt;
+                    &lt;ChipField source="name" /&gt;
+                &lt;/SingleFieldList&gt;
+            &lt;/ReferenceArrayField&gt;
+            &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p><strong>Note</strong>: You <strong>must</strong> add a <code>&lt;Resource&gt;</code> component for the reference resource to your <code>&lt;Admin&gt;</code> component, because react-admin needs it to fetch the reference data. You can omit the <code>list</code> prop in this Resource if you don't want to show an entry for it in the sidebar menu.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;Admin dataProvider={restProvider('http://path.to.my.api')}&gt;
+        &lt;Resource name="posts" list={PostList} /&gt;
+        &lt;Resource name="tags" /&gt; // &lt;= this one is compulsory
+    &lt;/Admin&gt;
+);
+</code></pre>
+<p>In an Edit of Show view, you can combine <code>&lt;ReferenceArrayField&gt;</code> with <code>&lt;Datagrid&gt;</code> to display a related resources in a table. For instance, to display more details about the tags related to a post in the <code>PostShow</code> view:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Show, SimpleShowLayout, TextField, ReferenceArrayField, Datagrid, ShowButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostShow = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Show {...props}&gt;
+        &lt;SimpleShowLayout&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;ReferenceArrayField label="Tags" reference="tags" source="tag_ids"&gt;
+                &lt;Datagrid&gt;
+                    &lt;TextField source="id" /&gt;
+                    &lt;TextField source="name" /&gt;
+                    &lt;ShowButton /&gt;
+                &lt;/Datagrid&gt;
+            &lt;/ReferenceArrayField&gt;
+            &lt;EditButton /&gt;
+        &lt;/SimpleShowLayout&gt;
+    &lt;/Show&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="richtextfield-component"></a><a href="#richtextfield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>RichTextField</code> Component</h2>
+<p>This component displays some HTML content. The content is &quot;rich&quot; (i.e. unescaped) by default.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { RichTextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RichTextField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"body"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/rich-text-field.png" alt="RichTextField"></p>
+<p>The <code>stripTags</code> attribute (<code>false</code> by default) allows you to remove any HTML markup, preventing some display glitches (which is especially useful in list views).</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { RichTextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RichTextField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"body"</span> <span class="hljs-attr">stripTags</span> /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="textfield-component"></a><a href="#textfield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>TextField</code> Component</h2>
+<p>The most simple as all fields, <code>&lt;TextField&gt;</code> simply displays the record property as plain text.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextField</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Author Name"</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="urlfield-component"></a><a href="#urlfield-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>UrlField</code> Component</h2>
+<p><code>&lt;UrlField&gt;</code> displays an url in an <code>&lt; a href=&quot;&quot;&gt;</code> tag.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { UrlField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">UrlField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"site_url"</span> /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="styling-fields"></a><a href="#styling-fields" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Styling Fields</h2>
+<p>All field components accept a <code>className</code> prop, allowing you to customize their style to your liking. We advise you to use the Material UI styling solution, JSS, to generate those classes. See their <a href="https://material-ui.com/customization/css-in-js/#api">documentation</a> about that.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">price</span>: { <span class="hljs-attr">color</span>: <span class="hljs-string">'purple'</span> },
+};
+
+<span class="hljs-keyword">const</span> PriceField = withStyles(styles)(<span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;TextField className={classes.price} {...props} /&gt;
+));
+
+export const ProductList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;PriceField source="price" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+
+// renders in the datagrid as
+&lt;td&gt;&lt;span class="[class name generated by JSS]"&gt;2&lt;/span&gt;&lt;/td&gt;
+</code></pre>
+<p>React-admin usually delegates the rendering of fields components to material-ui components. Refer to the material-ui documentation to see the default styles for elements.</p>
+<p>You may want to customize the cell style inside a <code>DataGrid</code>. You can use the <code>cellClassName</code> for that:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">priceCell</span>: { <span class="hljs-attr">fontWeight</span>: <span class="hljs-string">'bold'</span> },
+};
+
+<span class="hljs-keyword">const</span> PriceField = withStyles(styles)(<span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;TextField cellClassName={classes.priceCell} {...props} /&gt;
+));
+
+export const ProductList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;PriceField source="price" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+
+// renders in the datagrid as
+&lt;td class="[class name generated by JSS]"&gt;&lt;span&gt;2&lt;/span&gt;&lt;/td&gt;
+</code></pre>
+<p>You may want to override the field header (the <code>&lt;th&gt;</code> element in the datagrid). In that case, use the <code>headerClassName</code> prop:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">priceHeader</span>: { <span class="hljs-attr">fontWeight</span>: <span class="hljs-string">'bold'</span> },
+};
+
+<span class="hljs-keyword">const</span> PriceField = withStyles(styles)(<span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;TextField headerClassName={classes.priceHeader} {...props} /&gt;
+));
+
+export const ProductList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;PriceField source="price" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+// renders in the table header as
+&lt;th class="[class name generated by JSS]"&gt;&lt;button&gt;Price&lt;/button&gt;&lt;/td&gt;
+</code></pre>
+<p>Finally, sometimes, you just want to right align the text of a cell. Use the <code>textAlign</code> prop, which accepts either <code>left</code> or <code>right</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> PriceField = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextField</span> {<span class="hljs-attr">...props</span>} /&gt;</span>
+);
+
+PriceField.defaultProps = {
+    textAlign: 'right',
+};
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="writing-your-own-field-component"></a><a href="#writing-your-own-field-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Writing Your Own Field Component</h2>
+<p>If you don't find what you need in the list above, you can write your own Field component. It must be a regular React component, accepting not only a <code>source</code> attribute, but also a <code>record</code> attribute. React-admin will inject the <code>record</code> based on the API response data at render time. The field component only needs to find the <code>source</code> in the <code>record</code> and display it.</p>
+<p>For instance, here is an equivalent of react-admin's <code>&lt;TextField&gt;</code> component:</p>
+<pre><code class="hljs css languages- jsx">import React from 'react';
+import PropTypes from 'prop-types';
+
+const TextField = ({ source, record = {} }) =&gt; &lt;span&gt;{record[source]}&lt;/span&gt;;
+
+TextField.propTypes = {
+    label: PropTypes.string,
+    record: PropTypes.object,
+    source: PropTypes.string.isRequired,
+};
+
+export default TextField;
+</code></pre>
+<p><strong>Tip</strong>: The <code>label</code> attribute isn't used in the <code>render()</code> method, but react-admin uses it to display the table header.</p>
+<p><strong>Tip</strong>: If you want to support deep field sources (e.g. source values like <code>author.name</code>), use <a href="https://www.npmjs.com/package/lodash.get"><code>lodash/get</code></a> to replace the simple object lookup:</p>
+<pre><code class="hljs css languages- jsx">import get from 'lodash/get';
+const TextField = ({ source, record = {} }) =&gt; &lt;span&gt;{get(record, source)}&lt;/span&gt;;
+</code></pre>
+<p>If you are not looking for reusability, you can create even simpler components, with no attributes. Let's say an API returns user records with <code>firstName</code> and <code>lastName</code> properties, and that you want to display a full name in a user list.</p>
+<pre><code class="hljs css languages- jsx">{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>,
+    <span class="hljs-attr">firstName</span>: <span class="hljs-string">'John'</span>,
+    <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Doe'</span>
+}
+</code></pre>
+<p>The component will be:</p>
+<pre><code class="hljs css languages- jsx">import React from 'react';
+import { List, Datagrid, TextField } from 'react-admin';
+
+const FullNameField = ({ record = {} }) =&gt; &lt;span&gt;{record.firstName} {record.lastName}&lt;/span&gt;;
+FullNameField.defaultProps = { label: 'Name' };
+
+export const UserList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;FullNameField source="lastName" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p><strong>Tip</strong>: In such custom fields, the <code>source</code> is optional. React-admin uses it to determine which column to use for sorting when the column header is clicked. In case you use the <code>source</code> property for additional purposes, the sorting can be overridden by the <code>sortBy</code> property on any <code>Field</code> component.</p>
+<h2><a class="anchor" aria-hidden="true" id="adding-label-to-custom-field-components-in-the-show-view"></a><a href="#adding-label-to-custom-field-components-in-the-show-view" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Adding Label To Custom Field Components In The Show View</h2>
+<p>React-admin lets you use the same Field components in the List view and in the Show view. But if you use the <code>&lt;FullNameField&gt;</code> custom field component defined earlier in a Show view, something is missing: the Field label. Why do other fields have a label and not this custom Field? And how can you create a Field component that has a label in the Show view, but not in the List view?</p>
+<p>React-admin uses a trick: the Show view layouts (<code>&lt;SimpleShowLayout&gt;</code> and <code>&lt;TabbedShowLayout&gt;</code>) inspect their Field children, and whenever one has the <code>addLabel</code> prop set to <code>true</code>, the layout adds a label.</p>
+<p>That means that the only thing you need to add to a custom component to make it usable in a Show view is a <code>addLabel: true</code> default prop.</p>
+<pre><code class="hljs css languages- jsx">FullNameField.defaultProps = {
+    <span class="hljs-attr">addLabel</span>: <span class="hljs-literal">true</span>,
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="hiding-a-field-based-on-the-value-of-another"></a><a href="#hiding-a-field-based-on-the-value-of-another" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hiding A Field Based On The Value Of Another</h2>
+<p>In a Show view, you may want to display or hide fields based on the value of another field - for instance, show an <code>email</code> field only if the <code>hasEmail</code> boolean field is <code>true</code>.</p>
+<p>For such cases, you can use the custom field approach: use the injected <code>record</code> prop, and render another Field based on the value.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { EmailField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> ConditionalEmailField = <span class="hljs-function">(<span class="hljs-params">{ record, ...rest }</span>) =&gt;</span> 
+    record &amp;&amp; record.hasEmail 
+        ? <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">EmailField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">record</span>=<span class="hljs-string">{record}</span> {<span class="hljs-attr">...rest</span>} /&gt;</span>
+        : null;
+
+export default ConditionalEmailField;
+</span></code></pre>
+<p><strong>Tip</strong>: Always check that the <code>record</code> is defined before inspecting its properties, as react-admin displays the Show view <em>before</em> fetching the record from the data provider. So the first time it renders the show view for a resource, the <code>record</code> is undefined.</p>
+<p>This <code>ConditionalEmailField</code> is properly hidden when <code>hasEmail</code> is false. But when <code>hasEmail</code> is true, the Show layout renders it... without label. And if you add a <code>addLabel</code> default prop, the Show layout will render the label regardless of the <code>hasEmail</code> value...</p>
+<p>One solution is to add the label manually in the custom component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Labeled, EmailField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> ConditionalEmailField = <span class="hljs-function">(<span class="hljs-params">{ record, ...rest }</span>) =&gt;</span> 
+    record &amp;&amp; record.hasEmail 
+        ? (
+            <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Labeled</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Email"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">EmailField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">record</span>=<span class="hljs-string">{record}</span> {<span class="hljs-attr">...rest</span>} /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Labeled</span>&gt;</span>
+        )
+        : null;
+
+export default ConditionalEmailField;
+</span></code></pre>
+<p>This comes with a drawback, though: the <code>&lt;ConditionalEmailField&gt;</code> cannot be used in a List view anymore, as it will always have a label. If you want to reuse the custom component in a List, this isn't the right solution.</p>
+<p>An alternative solution is to split the <code>&lt;Show&gt;</code> component. Under the hood, the <code>&lt;Show&gt;</code> component is composed of two sub components: the <code>&lt;ShowController&gt;</code> component, which fetches the record, and the <code>&lt;ShowView&gt;</code>, which is responsible for rendering the view title, actions, and children. <code>&lt;ShowController&gt;</code> uses the <em>render props</em> pattern:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// inside react-admin</span>
+<span class="hljs-keyword">const</span> Show = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ShowController</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        {controllerProps =&gt; <span class="hljs-tag">&lt;<span class="hljs-name">ShowView</span> {<span class="hljs-attr">...props</span>} {<span class="hljs-attr">...controllerProps</span>} /&gt;</span>}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ShowController</span>&gt;</span>
+);
+</span></code></pre>
+<p>The <code>&lt;ShowController&gt;</code> fetches the <code>record</code> from the data provider, and passes it to its child function when received (among the <code>controllerProps</code>). That means the following code:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { Show, SimpleShowLayout, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> UserShow = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    &lt;Show {...props}&gt;
+        &lt;SimpleShowLayout&gt;
+            &lt;TextField source="username" /&gt;
+            &lt;TextField source="email" /&gt;
+        &lt;/SimpleShowLayout&gt;
+    &lt;/Show&gt;
+);
+</code></pre>
+<p>Is equivalent to:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ShowController, ShowView, SimpleShowLayout, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> UserShow = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    &lt;ShowController {...props}&gt;
+        {controllerProps =&gt; 
+            &lt;ShowView {...props} {...controllerProps}&gt;
+                &lt;SimpleShowLayout&gt;
+                    &lt;TextField source="username" /&gt;
+                    &lt;TextField source="email" /&gt;
+                &lt;/SimpleShowLayout&gt;
+            &lt;/ShowView&gt;
+        }
+    &lt;/ShowController&gt;
+);
+</code></pre>
+<p>If you want one field to be displayed based on the <code>record</code>, for instance to display the email field only if the <code>hasEmail</code> field is <code>true</code>, you just need to test the value from <code>controllerProps.record</code>, as follows:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ShowController, ShowView, SimpleShowLayout, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> UserShow = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    &lt;ShowController {...props}&gt;
+        {controllerProps =&gt; 
+            &lt;ShowView {...props} {...controllerProps}&gt;
+                &lt;SimpleShowLayout&gt;
+                    &lt;TextField source="username" /&gt;
+                    {controllerProps.record &amp;&amp; controllerProps.record.hasEmail &amp;&amp; 
+                        &lt;TextField source="email" /&gt;
+                    }
+                &lt;/SimpleShowLayout&gt;
+            &lt;/ShowView&gt;
+        }
+    &lt;/ShowController&gt;
+);
+</code></pre>
+<p>And now you can use a regular Field component, and the label displays correctly in the Show view.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/show-view-component.html">← &lt;Show&gt; View</a><a class="docs-next button" href="/docs/en/creat-edit-view-components.html">&lt;Create&gt; and &lt;Edit&gt; Views →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#arrayfield-component"><code>ArrayField</code> Component</a></li><li><a href="#booleanfield-component"><code>BooleanField</code> Component</a></li><li><a href="#chipfield-component"><code>ChipField</code> Component</a></li><li><a href="#datefield-component"><code>DateField</code> Component</a></li><li><a href="#emailfield-component"><code>EmailField</code> Component</a></li><li><a href="#functionfield-component"><code>FunctionField</code> Component</a></li><li><a href="#imagefield-component"><code>ImageField</code> Component</a></li><li><a href="#filefield-component"><code>FileField</code> Component</a></li><li><a href="#numberfield-component"><code>NumberField</code> Component</a></li><li><a href="#selectfield-component"><code>SelectField</code> Component</a></li><li><a href="#referencefield-component"><code>ReferenceField</code> Component</a></li><li><a href="#referencemanyfield-component"><code>ReferenceManyField</code> Component</a></li><li><a href="#referencearrayfield-component"><code>ReferenceArrayField</code> Component</a></li><li><a href="#richtextfield-component"><code>RichTextField</code> Component</a></li><li><a href="#textfield-component"><code>TextField</code> Component</a></li><li><a href="#urlfield-component"><code>UrlField</code> Component</a></li><li><a href="#styling-fields">Styling Fields</a></li><li><a href="#writing-your-own-field-component">Writing Your Own Field Component</a></li><li><a href="#adding-label-to-custom-field-components-in-the-show-view">Adding Label To Custom Field Components In The Show View</a></li><li><a href="#hiding-a-field-based-on-the-value-of-another">Hiding A Field Based On The Value Of Another</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

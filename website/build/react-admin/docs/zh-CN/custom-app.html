@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>在其它 App 中包含 Admin · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="`&lt;Admin&gt;` 标签是一个很好的快捷方式，在几分钟内就可以启动和运行react-admin。 但是，在许多情况下，您需要将 admin 嵌入到另一个应用程序中，或者深入定制 admin。 幸运的是，您可以在任何 React 应用程序中执行 `&lt;Admin&gt;` 所做的所有工作。"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="在其它 App 中包含 Admin · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="`&lt;Admin&gt;` 标签是一个很好的快捷方式，在几分钟内就可以启动和运行react-admin。 但是，在许多情况下，您需要将 admin 嵌入到另一个应用程序中，或者深入定制 admin。 幸运的是，您可以在任何 React 应用程序中执行 `&lt;Admin&gt;` 所做的所有工作。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/custom-app.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">在其它 App 中包含 Admin</h1></header><article><div><span><p><code>&lt;Admin&gt;</code> 标签是一个很好的快捷方式，在几分钟内就可以启动和运行react-admin。 但是，在许多情况下，您需要将 admin 嵌入到另一个应用程序中，或者深入定制 admin。 幸运的是，您可以在任何 React 应用程序中执行 <code>&lt;Admin&gt;</code> 所做的所有工作。</p>
+<p>请注意，您需要进一步了解 <a href="http://redux.js.org/">redux</a>，<a href="https://github.com/reactjs/react-router">react-router</a> 和 <a href="https://github.com/yelouafi/redux-saga">redux-saga</a>。</p>
+<p><strong>提示</strong>：在进入自定义应用程序路线之前，请探索 <a href="./Admin.md"><code>Admin&gt;</code> 组件</a>的所有选项。 它们允许您添加自定义路由，自定义reducers，自定义sagas和自定义布局。</p>
+<p>以下是使用3个资源引导一个准系统 react-admin 应用程序的主要代码：<code>posts</code>，<code>comments</code> 和 <code>users</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'prop-types'</span>;
+<span class="hljs-keyword">import</span> { render } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
+
+<span class="hljs-comment">// redux, react-router, redux-form, saga, and material-ui</span>
+<span class="hljs-comment">// form the 'kernel' on which react-admin runs</span>
+<span class="hljs-keyword">import</span> { combineReducers, createStore, compose, applyMiddleware } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>;
+<span class="hljs-keyword">import</span> { Provider } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> createHistory <span class="hljs-keyword">from</span> <span class="hljs-string">'history/createHashHistory'</span>;
+<span class="hljs-keyword">import</span> { Switch, Route } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+<span class="hljs-keyword">import</span> { ConnectedRouter, routerReducer, routerMiddleware } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-redux'</span>;
+<span class="hljs-keyword">import</span> { reducer <span class="hljs-keyword">as</span> formReducer } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-form'</span>;
+<span class="hljs-keyword">import</span> createSagaMiddleware <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-saga'</span>;
+<span class="hljs-keyword">import</span> { MuiThemeProvider } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+<span class="hljs-keyword">import</span> AppBar <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/AppBar'</span>;
+<span class="hljs-keyword">import</span> Toolbar <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Toolbar'</span>;
+<span class="hljs-keyword">import</span> Typography <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Typography'</span>;
+
+<span class="hljs-comment">// prebuilt react-admin features</span>
+<span class="hljs-keyword">import</span> {
+    adminReducer,
+    i18nReducer,
+    adminSaga,
+    TranslationProvider,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> restProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-simple-rest'</span>;
+<span class="hljs-keyword">import</span> defaultMessages <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-language-english'</span>;
+
+<span class="hljs-comment">// your app components</span>
+<span class="hljs-keyword">import</span> Dashboard <span class="hljs-keyword">from</span> <span class="hljs-string">'./Dashboard'</span>;
+<span class="hljs-keyword">import</span> { PostList, PostCreate, PostEdit, PostShow } <span class="hljs-keyword">from</span> <span class="hljs-string">'./Post'</span>;
+<span class="hljs-keyword">import</span> { CommentList, CommentEdit, CommentCreate } <span class="hljs-keyword">from</span> <span class="hljs-string">'./Comment'</span>;
+<span class="hljs-keyword">import</span> { UserList, UserEdit, UserCreate } <span class="hljs-keyword">from</span> <span class="hljs-string">'./User'</span>;
+<span class="hljs-comment">// your app labels</span>
+<span class="hljs-keyword">import</span> messages <span class="hljs-keyword">from</span> <span class="hljs-string">'./i18n'</span>;
+
+<span class="hljs-comment">// create a Redux app</span>
+<span class="hljs-keyword">const</span> reducer = combineReducers({
+    <span class="hljs-attr">admin</span>: adminReducer,
+    <span class="hljs-attr">i18n</span>: i18nReducer(<span class="hljs-string">'en'</span>, messages[<span class="hljs-string">'en'</span>]),
+    <span class="hljs-attr">form</span>: formReducer,
+    <span class="hljs-attr">routing</span>: routerReducer,
+});
+<span class="hljs-keyword">const</span> sagaMiddleware = createSagaMiddleware();
+<span class="hljs-keyword">const</span> history = createHistory();
+<span class="hljs-keyword">const</span> store = createStore(reducer, <span class="hljs-literal">undefined</span>, compose(
+    applyMiddleware(sagaMiddleware, routerMiddleware(history)),
+    <span class="hljs-built_in">window</span>.devToolsExtension ? <span class="hljs-built_in">window</span>.devToolsExtension() : <span class="hljs-function"><span class="hljs-params">f</span> =&gt;</span> f,
+));
+
+<span class="hljs-comment">// side effects</span>
+<span class="hljs-keyword">const</span> dataProvider = restProvider(<span class="hljs-string">'http://path.to.my.api/'</span>);
+<span class="hljs-keyword">const</span> authProvider = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">Promise</span>.resolve();
+<span class="hljs-keyword">const</span> i18nProvider = <span class="hljs-function"><span class="hljs-params">locale</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (locale !== <span class="hljs-string">'en'</span>) {
+        <span class="hljs-keyword">return</span> messages[locale];
+    }
+    <span class="hljs-keyword">return</span> defaultMessages;
+};
+sagaMiddleware.run(adminSaga(dataProvider, authProvider, i18nProvider));
+
+<span class="hljs-comment">// bootstrap redux and the routes</span>
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;Provider store={store}&gt;
+        &lt;TranslationProvider&gt;
+            &lt;ConnectedRouter history={history}&gt;
+                &lt;MuiThemeProvider&gt;
+                    &lt;AppBar position="static" color="default"&gt;
+                        &lt;Toolbar&gt;
+                            &lt;Typography variant="title" color="inherit"&gt;
+                                My admin
+                            &lt;/Typography&gt;
+                        &lt;/Toolbar&gt;
+                    &lt;/AppBar&gt;
+                    &lt;Switch&gt;
+                        &lt;Route exact path="/" component={Dashboard} /&gt;
+                        &lt;Route exact path="/posts" hasCreate render={(routeProps) =&gt; &lt;PostList resource="posts" {...routeProps} /&gt;} /&gt;
+                        &lt;Route exact path="/posts/create" render={(routeProps) =&gt; &lt;PostCreate resource="posts" {...routeProps} /&gt;} /&gt;
+                        &lt;Route exact path="/posts/:id" hasShow render={(routeProps) =&gt; &lt;PostEdit resource="posts" {...routeProps} /&gt;} /&gt;
+                        &lt;Route exact path="/posts/:id/show" hasEdit render={(routeProps) =&gt; &lt;PostShow resource="posts" {...routeProps} /&gt;} /&gt;
+                        &lt;Route exact path="/comments" hasCreate render={(routeProps) =&gt; &lt;CommentList resource="comments" {...routeProps} /&gt;} /&gt;
+                        &lt;Route exact path="/comments/create" render={(routeProps) =&gt; &lt;CommentCreate resource="comments" {...routeProps} /&gt;} /&gt;
+                        &lt;Route exact path="/comments/:id" render={(routeProps) =&gt; &lt;CommentEdit resource="comments" {...routeProps} /&gt;} /&gt;
+                        &lt;Route exact path="/users" hasCreate render={(routeProps) =&gt; &lt;UsersList resource="users" {...routeProps} /&gt;} /&gt;
+                        &lt;Route exact path="/users/create" render={(routeProps) =&gt; &lt;UsersCreate resource="users" {...routeProps} /&gt;} /&gt;
+                        &lt;Route exact path="/users/:id" render={(routeProps) =&gt; &lt;UsersEdit resource="users" {...routeProps} /&gt;} /&gt;
+                    &lt;/Switch&gt;
+                &lt;/MuiThemeProvider&gt;
+            &lt;/ConnectedRouter&gt;
+        &lt;/TranslationProvider&gt;
+    &lt;/Provider&gt;
+);
+</code></pre>
+<p>此应用程序没有侧边栏，没有主题，没有<a href="./Authentication.md#restricting-access-to-a-custom-page">auth control</a> - 由你自己添加。 从那时起，你可以自定义几乎任何你想要的。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/translation.html">← 翻译</a><a class="docs-next button" href="/docs/zh-CN/reference.html">引用 →</a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

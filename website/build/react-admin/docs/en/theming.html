@@ -1,0 +1,568 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Theming · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Whether you need to adjust a CSS rule for a single component, or change the color of the labels in the entire app, you&#x27;re covered!"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Theming · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="Whether you need to adjust a CSS rule for a single component, or change the color of the labels in the entire app, you&#x27;re covered!"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/zh-CN/theming.html">中文</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/intro.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/docs/en/tutorial.html">Tutorial</a></li><li class="navListItem"><a class="navItem" href="/docs/en/data-providers.html">Data Providers</a></li><li class="navListItem"><a class="navItem" href="/docs/en/admin-component.html">&lt;Admin&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/resource-component.html">&lt;Resource&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/list-view-component.html">&lt;List&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/show-view-component.html">&lt;Show&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/field-components.html">&lt;Field&gt; Components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/creat-edit-view-components.html">&lt;Create&gt; and &lt;Edit&gt; Views</a></li><li class="navListItem"><a class="navItem" href="/docs/en/input-components.html">&lt;Input&gt; components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authentication.html">Authentication</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authorization.html">Authorization</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/theming.html">Theming</a></li><li class="navListItem"><a class="navItem" href="/docs/en/actions.html">Writing Actions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/translation.html">Translation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/custom-app.html">Including the Admin in Another App</a></li><li class="navListItem"><a class="navItem" href="/docs/en/reference.html">Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/en/faq.html">FAQ</a></li><li class="navListItem"><a class="navItem" href="/docs/en/ecosystem.html">Ecosystem</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Theming</h1></header><article><div><span><p>Whether you need to adjust a CSS rule for a single component, or change the color of the labels in the entire app, you're covered!</p>
+<h2><a class="anchor" aria-hidden="true" id="overriding-a-component-style"></a><a href="#overriding-a-component-style" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overriding A Component Style</h2>
+<p>Every react-admin component provides a <code>className</code> property, which is always applied to the root element.</p>
+<p>Here is an example customizing an <code>EditButton</code> component inside a <code>Datagrid</code>, using its <code>className</code> property and the <code>withStyles</code> Higher Order Component from Material-UI:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NumberField, List, Datagrid, EditButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">button</span>: {
+        <span class="hljs-attr">fontWeight</span>: <span class="hljs-string">'bold'</span>,
+        <span class="hljs-comment">// This is JSS syntax to target a deeper element using css selector, here the svg icon for this button</span>
+        <span class="hljs-string">'&amp; svg'</span>: { <span class="hljs-attr">color</span>: <span class="hljs-string">'orange'</span> }
+    },
+};
+
+<span class="hljs-keyword">const</span> MyEditButton = withStyles(styles)(<span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;EditButton
+        className={classes.button}
+        {...props}
+    /&gt;
+));
+
+export const ProductList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="sku" /&gt;
+            &lt;TextField source="price" /&gt;
+            &lt;MyEditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>For some components, you may want to override not only the root component style, but also the style of components inside the root. In this case, the <code>className</code> property isn't enough. You can take advantage of the <code>classes</code> property to customize the classes that the component uses internally.</p>
+<p>Here is an example using the <code>classes</code> property of the <code>Filter</code> and <code>List</code> components:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> {
+    BooleanField,
+    Datagrid,
+    DateField,
+    DateInput,
+    EditButton,
+    Filter,
+    List,
+    NullableBooleanInput,
+    NumberField,
+    TextInput,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> Icon <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/Person'</span>;
+<span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> VisitorIcon = Icon;
+
+<span class="hljs-comment">// The Filter component supports the `form` and `button` CSS classes. Here we override the `form` class</span>
+<span class="hljs-keyword">const</span> filterStyles = {
+    <span class="hljs-attr">form</span>: {
+        <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'Lavender'</span>,
+    },
+};
+
+<span class="hljs-keyword">const</span> VisitorFilter = withStyles(filterStyles)(<span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;Filter classes={classes} {...props}&gt;
+        &lt;TextInput
+            className={classes.searchInput}
+            label="pos.search"
+            source="q"
+            alwaysOn
+        /&gt;
+        &lt;DateInput source="last_seen_gte" /&gt;
+        &lt;NullableBooleanInput source="has_ordered" /&gt;
+        &lt;NullableBooleanInput source="has_newsletter" defaultValue /&gt;
+    &lt;/Filter&gt;
+));
+
+// The List component supports the `root`, `header`, `actions` and `noResults` CSS classes. Here we override the `header` and `actions` classes
+const listStyles = {
+    actions: {
+        backgroundColor: 'Lavender',
+    },
+    header: {
+        backgroundColor: 'Lavender',
+    },
+};
+
+export const VisitorList = withStyles(listStyles)(({ classes, ...props }) =&gt; (
+    &lt;List
+        classes={classes}
+        {...props}
+        filters={&lt;VisitorFilter /&gt;}
+        sort={{ field: 'last_seen', order: 'DESC' }}
+        perPage={25}
+    &gt;
+        &lt;Datagrid classes={classes} {...props}&gt;
+            &lt;DateField source="last_seen" type="date" /&gt;
+            &lt;NumberField
+                source="nb_commands"
+                label="resources.customers.fields.commands"
+            /&gt;
+            &lt;NumberField
+                source="total_spent"
+                options={{ style: 'currency', currency: 'USD' }}
+            /&gt;
+            &lt;DateField source="latest_purchase" showTime /&gt;
+            &lt;BooleanField source="has_newsletter" label="News." /&gt;
+            &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+));
+</code></pre>
+<p>This example results in:</p>
+<p><img src="https://marmelab.com/react-admin/img/list_with_customized_css.png" alt="Visitor List with customized CSS classes"></p>
+<p>Take a look at a component documentation and source code to know which classes are available for styling. For instance, you can have a look at the <a href="./List.md#the-datagrid-component">Datagrid CSS documentation</a>.</p>
+<p>If you need more control over the HTML code, you can also create your own <a href="./Fields.md#writing-your-own-field-component">Field</a> and <a href="./Inputs.md#writing-your-own-input-component">Input</a> components.</p>
+<h2><a class="anchor" aria-hidden="true" id="conditional-formatting"></a><a href="#conditional-formatting" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conditional Formatting</h2>
+<p>Sometimes you want the format to depend on the value. The following example shows how to create a new custom <code>NumberField</code> component which highlight its text in red when its value is 100 or higher.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NumberField, List, Datagrid, EditButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+<span class="hljs-keyword">import</span> classnames <span class="hljs-keyword">from</span> <span class="hljs-string">'classnames'</span>;
+
+<span class="hljs-keyword">const</span> coloredStyles = {
+    <span class="hljs-attr">small</span>: { <span class="hljs-attr">color</span>: <span class="hljs-string">'black'</span> },
+    <span class="hljs-attr">big</span>: { <span class="hljs-attr">color</span>: <span class="hljs-string">'red'</span> },
+};
+
+<span class="hljs-keyword">const</span> ColoredNumberField = withStyles(coloredStyles)(
+    <span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+        &lt;NumberField
+            className={classnames({
+                [classes.small]: props.record[props.source] &lt; 100,
+                [classes.big]: props.record[props.source] &gt;= 100,
+            })}
+            {...props}
+        /&gt;
+    ));
+
+// Ensure the original component defaultProps are still applied as they may be used by its parents (such as the `Show` component):
+ColoredNumberField.defaultProps = NumberField.defaultProps;
+
+export const PostList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            ...
+            &lt;ColoredNumberField source="nb_views" /&gt;
+            &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>Furthermore, you may extract this highlighting strategy into an Higher Order Component if you'd like to reuse it for other components as well:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NumberField, List, Datagrid, EditButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+<span class="hljs-keyword">import</span> classnames <span class="hljs-keyword">from</span> <span class="hljs-string">'classnames'</span>;
+
+<span class="hljs-keyword">const</span> coloredStyles = {
+    <span class="hljs-attr">small</span>: { <span class="hljs-attr">color</span>: <span class="hljs-string">'black'</span> },
+    <span class="hljs-attr">big</span>: { <span class="hljs-attr">color</span>: <span class="hljs-string">'red'</span> },
+};
+
+<span class="hljs-keyword">const</span> colored = <span class="hljs-function"><span class="hljs-params">WrappedComponent</span> =&gt;</span> withStyles(coloredStyles)(
+    <span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+        &lt;WrappedComponent
+            className={classnames({
+                [classes.small]: props.record[props.source] &lt; 500,
+                [classes.big]: props.record[props.source] &gt;= 500,
+            })}
+            {...props}
+        /&gt;
+    ));
+
+
+const ColoredNumberField = colored(NumberField);
+// Ensure the original component defaultProps are still applied as they may be used by its parents (such as the `Show` component):
+ColoredNumberField.defaultProps = NumberField.defaultProps;
+
+export const PostList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            ...
+            &lt;ColoredNumberField source="nb_views" /&gt;
+            &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>If you want to read more about higher-order components, check out this SitePoint tutorial: <a href="https://www.sitepoint.com/react-higher-order-components/">Higher Order Components: A React Application Design Pattern</a></p>
+<h2><a class="anchor" aria-hidden="true" id="responsive-utility"></a><a href="#responsive-utility" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Responsive Utility</h2>
+<p>To provide an optimized experience on mobile, tablet, and desktop devices, you often need to display different components depending on the screen size. That's the purpose of the <code>&lt;Responsive&gt;</code> component, which offers a declarative approach to responsive web design.</p>
+<p>It expects element props named <code>small</code>, <code>medium</code>, and <code>large</code>. It displays the element that matches the screen size (with breakpoints at 768 and 992 pixels):</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Responsive, SimpleList, Datagrid, TextField, ReferenceField, EditButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Responsive
+            small={
+                &lt;SimpleList
+                    primaryText={record =&gt; record.title}
+                    secondaryText={record =&gt; `${record.views} views`}
+                    tertiaryText={record =&gt; new Date(record.published_at).toLocaleDateString()}
+                /&gt;
+            }
+            medium={
+                &lt;Datagrid&gt;
+                    &lt;TextField source="id" /&gt;
+                    &lt;ReferenceField label="User" source="userId" reference="users"&gt;
+                        &lt;TextField source="name" /&gt;
+                    &lt;/ReferenceField&gt;
+                    &lt;TextField source="title" /&gt;
+                    &lt;TextField source="body" /&gt;
+                    &lt;EditButton /&gt;
+                &lt;/Datagrid&gt;
+            }
+        /&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p><strong>Tip</strong>: If you only provide <code>small</code> and <code>medium</code>, the <code>medium</code> element will also be used on large screens. The same kind of smart default exists for when you omit <code>small</code> or <code>medium</code>.</p>
+<p><strong>Tip</strong>: You can specify <code>null</code> as the value for <code>small</code>, <code>medium</code> or <code>large</code> to avoid rendering something on a specific size without falling back to others.</p>
+<p><strong>Tip</strong>: You can also use <a href="https://github.com/callemall/material-ui/blob/master/src/utils/withWidth.js">material-ui's <code>withWidth()</code> higher order component</a> to have the <code>with</code> prop injected in your own components.</p>
+<h2><a class="anchor" aria-hidden="true" id="using-a-predefined-theme"></a><a href="#using-a-predefined-theme" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using a Predefined Theme</h2>
+<p>Material UI also supports <a href="http://www.material-ui.com/#/customization/themes">complete theming</a> out of the box. Material UI ships two base themes: light and dark. React-admin uses the light one by default. To use the dark one, pass it to the <code>&lt;Admin&gt;</code> component, in the <code>theme</code> prop (along with <code>createMuiTheme()</code>).</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { createMuiTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">const</span> theme = createMuiTheme({
+  <span class="hljs-attr">palette</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'dark'</span>, <span class="hljs-comment">// Switching the dark mode on is a single property value change.</span>
+  },
+});
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">{theme}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/dark-theme.png" alt="Dark theme"></p>
+<h2><a class="anchor" aria-hidden="true" id="writing-a-custom-theme"></a><a href="#writing-a-custom-theme" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Writing a Custom Theme</h2>
+<p>If you need more fine tuning, you'll need to write your own <code>theme</code> object, following <a href="https://material-ui.com/customization/themes/">Material UI themes documentation</a>. Material UI merges custom theme objects with the default theme.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { createMuiTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+<span class="hljs-keyword">import</span> indigo <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/colors/indigo'</span>;
+<span class="hljs-keyword">import</span> pink <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/colors/pink'</span>;
+<span class="hljs-keyword">import</span> red <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/colors/red'</span>;
+
+<span class="hljs-keyword">const</span> myTheme = createMuiTheme({
+    <span class="hljs-attr">palette</span>: {
+        <span class="hljs-attr">primary</span>: indigo,
+        <span class="hljs-attr">secondary</span>: pink,
+        <span class="hljs-attr">error</span>: red,
+        <span class="hljs-attr">contrastThreshold</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-attr">tonalOffset</span>: <span class="hljs-number">0.2</span>,
+    },
+    <span class="hljs-attr">typography</span>: {
+        <span class="hljs-comment">// Use the system font instead of the default Roboto font.</span>
+        fontFamily: [
+            <span class="hljs-string">'-apple-system'</span>,
+            <span class="hljs-string">'BlinkMacSystemFont'</span>,
+            <span class="hljs-string">'"Segoe UI"'</span>,
+            <span class="hljs-string">'Arial'</span>,
+            <span class="hljs-string">'sans-serif'</span>,
+        ].join(<span class="hljs-string">','</span>),
+    },
+    <span class="hljs-attr">overrides</span>: {
+        <span class="hljs-attr">MuiButton</span>: { <span class="hljs-comment">// override the styles of all instances of this component</span>
+            root: { <span class="hljs-comment">// Name of the rule</span>
+                color: <span class="hljs-string">'white'</span>, <span class="hljs-comment">// Some CSS</span>
+            },
+        },
+    },
+});
+</code></pre>
+<p>The <code>muiTheme</code> object contains the following keys:</p>
+<ul>
+<li><code>breakpoints</code></li>
+<li><code>direction</code></li>
+<li><code>mixins</code></li>
+<li><code>overrides</code></li>
+<li><code>palette</code></li>
+<li><code>props</code></li>
+<li><code>shadows</code></li>
+<li><code>typography</code></li>
+<li><code>transitions</code></li>
+<li><code>spacing</code></li>
+<li><code>zIndex</code></li>
+</ul>
+<p><strong>Tip</strong>: Check <a href="https://material-ui.com/customization/default-theme/">Material UI default theme documentation</a> to see the default values and meaning for these keys.</p>
+<p>Once your theme is defined, pass it to the <code>&lt;Admin&gt;</code> component, in the <code>theme</code> prop.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">{myTheme}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="using-a-custom-layout"></a><a href="#using-a-custom-layout" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using a Custom Layout</h2>
+<p>Instead of the default layout, you can use your own component as the admin layout. Just use the <code>appLayout</code> prop of the <code>&lt;Admin&gt;</code> component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> MyLayout <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyLayout'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">appLayout</span>=<span class="hljs-string">{MyLayout}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p>Your custom layout can extend the default <code>&lt;Layout&gt;</code> component if you only want to override the appBar, the menu, or the notification component. For instance:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyLayout.js</span>
+<span class="hljs-keyword">import</span> { Layout } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> MyAppBar <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyAppBar'</span>;
+<span class="hljs-keyword">import</span> MyMenu <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyMenu'</span>;
+<span class="hljs-keyword">import</span> MyNotification <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyNotification'</span>;
+
+<span class="hljs-keyword">const</span> MyLayout = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> &lt;Layout 
+    {...props}
+    appBar={MyAppBar}
+    menu={MyMenu}
+    notification={MyNotification}
+/&gt;;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> MyLayout;
+</code></pre>
+<p>For more custom layouts, write a component from scratch. It must contain a <code>{children}</code> placeholder, where react-admin will render the resources. Use the <a href="https://github.com/marmelab/react-admin/blob/master/src/mui/layout/Layout.js">default layout</a> as a starting point. Here is a simplified version (with no responsive support):</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyLayout.js</span>
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'prop-types'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { withStyles, MuiThemeProvider, createMuiTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+<span class="hljs-keyword">import</span> {
+    AppBar,
+    Menu,
+    Notification,
+    Sidebar,
+    setSidebarVisibility,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> styles = <span class="hljs-function"><span class="hljs-params">theme</span> =&gt;</span> ({
+    <span class="hljs-attr">root</span>: {
+        <span class="hljs-attr">display</span>: <span class="hljs-string">'flex'</span>,
+        <span class="hljs-attr">flexDirection</span>: <span class="hljs-string">'column'</span>,
+        <span class="hljs-attr">zIndex</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">minHeight</span>: <span class="hljs-string">'100vh'</span>,
+        <span class="hljs-attr">backgroundColor</span>: theme.palette.background.default,
+        <span class="hljs-attr">position</span>: <span class="hljs-string">'relative'</span>,
+    },
+    <span class="hljs-attr">appFrame</span>: {
+        <span class="hljs-attr">display</span>: <span class="hljs-string">'flex'</span>,
+        <span class="hljs-attr">flexDirection</span>: <span class="hljs-string">'column'</span>,
+        <span class="hljs-attr">overflowX</span>: <span class="hljs-string">'auto'</span>,
+    },
+    <span class="hljs-attr">contentWithSidebar</span>: {
+        <span class="hljs-attr">display</span>: <span class="hljs-string">'flex'</span>,
+        <span class="hljs-attr">flexGrow</span>: <span class="hljs-number">1</span>,
+    },
+    <span class="hljs-attr">content</span>: {
+        <span class="hljs-attr">display</span>: <span class="hljs-string">'flex'</span>,
+        <span class="hljs-attr">flexDirection</span>: <span class="hljs-string">'column'</span>,
+        <span class="hljs-attr">flexGrow</span>: <span class="hljs-number">2</span>,
+        <span class="hljs-attr">padding</span>: theme.spacing.unit * <span class="hljs-number">3</span>,
+        <span class="hljs-attr">marginTop</span>: <span class="hljs-string">'4em'</span>,
+        <span class="hljs-attr">paddingLeft</span>: <span class="hljs-number">5</span>,
+    },
+});
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyLayout</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    componentWillMount() {
+        <span class="hljs-keyword">this</span>.props.setSidebarVisibility(<span class="hljs-literal">true</span>);
+    }
+
+    render() {
+        <span class="hljs-keyword">const</span> {
+            children,
+            classes,
+            dashboard,
+            isLoading,
+            logout,
+            open,
+            title,
+        } = <span class="hljs-keyword">this</span>.props;
+        <span class="hljs-keyword">return</span> (
+            &lt;div className={classes.root}&gt;
+                &lt;div className={classes.appFrame}&gt;
+                    &lt;AppBar title={title} open={open} logout={logout} /&gt;
+                    &lt;main className={classes.contentWithSidebar}&gt;
+                        &lt;Sidebar&gt;
+                            &lt;Menu logout={logout} hasDashboard={!!dashboard} /&gt;
+                        &lt;/Sidebar&gt;
+                        &lt;div className={classes.content}&gt;
+                            {children}
+                        &lt;/div&gt;
+                    &lt;/main&gt;
+                    &lt;Notification /&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+MyLayout.propTypes = {
+    children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    dashboard: PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.string,
+    ]),
+    isLoading: PropTypes.bool.isRequired,
+    logout: componentPropType,
+    setSidebarVisibility: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = state =&gt; ({ isLoading: state.admin.loading &gt; 0 });
+export default connect(mapStateToProps, { setSidebarVisibility })(withStyles(styles)(MyLayout));
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="using-a-custom-menu"></a><a href="#using-a-custom-menu" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using a Custom Menu</h2>
+<p>By default, React-admin uses the list of <code>&lt;Resource&gt;</code> components passed as children of <code>&lt;Admin&gt;</code> to build a menu to each resource with a <code>list</code> component.</p>
+<p>If you want to add or remove menu items, for instance to link to non-resources pages, you can create your own menu component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyMenu.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { MenuItemLink, getResources } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+<span class="hljs-keyword">import</span> Responsive <span class="hljs-keyword">from</span> <span class="hljs-string">'../layout/Responsive'</span>;
+
+<span class="hljs-keyword">const</span> MyMenu = <span class="hljs-function">(<span class="hljs-params">{ resources, onMenuClick, logout }</span>) =&gt;</span> (
+    &lt;div&gt;
+        {resources.map(resource =&gt; (
+            &lt;MenuItemLink to={`/${resource.name}`} primaryText={resource.name} onClick={onMenuClick} /&gt;
+        ))}
+        &lt;MenuItemLink to="/custom-route" primaryText="Miscellaneous" onClick={onMenuClick} /&gt;
+        &lt;Responsive
+            small={logout}
+            medium={null} // Pass null to render nothing on larger devices
+        /&gt;
+    &lt;/div&gt;
+);
+
+const mapStateToProps = state =&gt; ({
+    resources: getResources(state),
+});
+
+export default withRouter(connect(mapStateToProps)(MyMenu));
+
+</code></pre>
+<p><strong>Tip</strong>: Note the <code>MenuItemLink</code> component. It must be used to avoid unwanted side effects in mobile views.</p>
+<p><strong>Tip</strong>: Note that we include the <code>logout</code> item only on small devices. Indeed, the <code>logout</code> button is already displayed in the AppBar on larger devices.</p>
+<p><strong>Tip</strong>: Note that we use React Router <a href="https://reacttraining.com/react-router/web/api/withRouter"><code>withRouter</code></a> Higher Order Component and that it is used <strong>before</strong> Redux <a href="https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options">`connect</a>. This is required if you want the active menu item to be highlighted.</p>
+<p>To use this custom menu component, pass it to a custom Layout, as explained above:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyLayout.js</span>
+<span class="hljs-keyword">import</span> { Layout } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> MyMenu <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyMenu'</span>;
+
+<span class="hljs-keyword">const</span> MyLayout = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> &lt;Layout {...props} menu={MyMenu} /&gt;;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> MyLayout;
+</code></pre>
+<p>Then, use this layout in the <code>&lt;Admin&gt;</code> <code>applayout</code> prop:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> MyLayout <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyLayout'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">appLayout</span>=<span class="hljs-string">{MyLayout}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p><strong>Tip</strong>: If you use authentication, don't forget to render the <code>logout</code> prop in your custom menu component. Also, the <code>onMenuClick</code> function passed as prop is used to close the sidebar on mobile.</p>
+<p>The <code>MenuItemLink</code> component make use of the React Router <a href="https://reacttraining.com/react-router/web/api/NavLink"><code>NavLink</code></a> component, hence allowing to customize its style when it targets the current page.</p>
+<p>If the default active style does not suit your tastes, you can override it by passing your own <code>classes</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyMenu.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { MenuItemLink, getResources } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+<span class="hljs-keyword">import</span> { withRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+
+<span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">root</span>: {}, <span class="hljs-comment">// Style applied to the MenuItem from material-ui</span>
+    active: { <span class="hljs-attr">fontWeight</span>: <span class="hljs-string">'bold'</span> }, <span class="hljs-comment">// Style applied when the menu item is the active one</span>
+    icon: {}, <span class="hljs-comment">// Style applied to the icon</span>
+};
+
+<span class="hljs-keyword">const</span> MyMenu = <span class="hljs-function">(<span class="hljs-params">{ classes, resources, onMenuClick, logout }</span>) =&gt;</span> (
+    &lt;div&gt;
+        {resources.map(resource =&gt; (
+            &lt;MenuItemLink classes={classes} to={`/${resource.name}`} primaryText={resource.name} onClick={onMenuClick} /&gt;
+        ))}
+        &lt;MenuItemLink classes={classes} to="/custom-route" primaryText="Miscellaneous" onClick={onMenuClick} /&gt;
+        &lt;Responsive
+            small={logout}
+            medium={null} // Pass null to render nothing on larger devices
+        /&gt;
+    &lt;/div&gt;
+);
+
+const mapStateToProps = state =&gt; ({
+    resources: getResources(state),
+});
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(Menu)));
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="notifications"></a><a href="#notifications" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Notifications</h2>
+<p>If you use your own layout (or custom login page), then you probably use the <code>&lt;Notification&gt;</code> component.</p>
+<p>You can override the notification duration by setting the <code>autoHideDuration</code> prop. It defaults to 4000, i.e. 4 seconds. For instance, to create a custom Notification component with a 5 seconds default:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyNotification.js</span>
+<span class="hljs-keyword">import</span> { Notification } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> MyNotification = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> &lt;Notification {...props}autoHideDuration={<span class="hljs-number">5000</span>} /&gt;;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> MyNotification;
+</code></pre>
+<p><strong>Tip</strong>: if you use the <code>showNotification</code> action, then you can define <code>autoHideDuration</code> per message as the third parameter of the <code>showNotification</code> action creator.</p>
+<h2><a class="anchor" aria-hidden="true" id="loading"></a><a href="#loading" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Loading</h2>
+<p>Display a circular progress component with optional messages. Display the same loading component as <code>react-admin</code> on custom pages for consistency.</p>
+<p>Supported props:</p>
+<table>
+<thead>
+<tr><th>Prop</th><th>Type</th><th>Default</th><th>Descriptions</th></tr>
+</thead>
+<tbody>
+<tr><td><code>loadingPrimary</code></td><td><code>String</code></td><td><code>ra.page.loading</code></td><td>Label to use for primary loading message</td></tr>
+<tr><td><code>loadingSecondary</code></td><td><code>String</code></td><td><code>ra.message.loading</code></td><td>Label to use for secondary loading message</td></tr>
+</tbody>
+</table>
+<p>Usage:</p>
+<pre><code class="hljs css languages- jsx">&lt;Loading loadingPrimary=<span class="hljs-string">"app.page.loading"</span> loadingSecondary=<span class="hljs-string">"app.message.loading"</span> /&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="linearprogress"></a><a href="#linearprogress" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>LinearProgress</h2>
+<p>Display a linear progress component. Display the same loading component as <code>react-admin</code> on custom inputs for consistency.</p>
+<p>Usage:</p>
+<pre><code class="hljs css languages- jsx">({ data, ...props }) =&gt; !data? 
+        &lt;LinearProgress /&gt; : 
+        &lt;MyInput data={data} /&gt;        
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/authorization.html">← Authorization</a><a class="docs-next button" href="/docs/en/actions.html">Writing Actions →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#overriding-a-component-style">Overriding A Component Style</a></li><li><a href="#conditional-formatting">Conditional Formatting</a></li><li><a href="#responsive-utility">Responsive Utility</a></li><li><a href="#using-a-predefined-theme">Using a Predefined Theme</a></li><li><a href="#writing-a-custom-theme">Writing a Custom Theme</a></li><li><a href="#using-a-custom-layout">Using a Custom Layout</a></li><li><a href="#using-a-custom-menu">Using a Custom Menu</a></li><li><a href="#notifications">Notifications</a></li><li><a href="#loading">Loading</a></li><li><a href="#linearprogress">LinearProgress</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

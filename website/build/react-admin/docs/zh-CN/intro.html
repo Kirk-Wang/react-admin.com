@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>简介 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="一个运行在浏览器中，在REST/GraphQL API之上，用于构建admin（中后台）应用程序的前端框架。它使用了ES6，[React](https://facebook.github.io/react/) 和 [Material Design](https://material.io/)进行编写。 它以前的名字叫做 [admin-on-rest](https://github.com/marmelab/admin-on-rest)。 由[marmelab](https://marmelab.com/)开源和维护。"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="简介 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="一个运行在浏览器中，在REST/GraphQL API之上，用于构建admin（中后台）应用程序的前端框架。它使用了ES6，[React](https://facebook.github.io/react/) 和 [Material Design](https://material.io/)进行编写。 它以前的名字叫做 [admin-on-rest](https://github.com/marmelab/admin-on-rest)。 由[marmelab](https://marmelab.com/)开源和维护。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive siteNavItemActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/intro.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">简介</h1></header><article><div><span><p>一个运行在浏览器中，在REST/GraphQL API之上，用于构建admin（中后台）应用程序的前端框架。它使用了ES6，<a href="https://facebook.github.io/react/">React</a> 和 <a href="https://material.io/">Material Design</a>进行编写。 它以前的名字叫做 <a href="https://github.com/marmelab/admin-on-rest">admin-on-rest</a>。 由<a href="https://marmelab.com/">marmelab</a>开源和维护。</p>
+<p><a href="https://marmelab.com/react-admin-demo/">Demo</a> - <a href="https://github.com/marmelab/react-admin">Source</a> - <a href="https://github.com/marmelab/react-admin/releases">Releases</a> - <a href="http://stackoverflow.com/questions/tagged/react-admin">Support</a> <iframe src="https://player.vimeo.com/video/268958716?byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="display:block;margin:0 auto" mark="crwd-mark"></iframe></p>
+<h2><a class="anchor" aria-hidden="true" id="功能"></a><a href="#功能" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>功能</h2>
+<ul>
+<li>适配任何后端接口架构 （REST，GraphQL，SOAP等）</li>
+<li>完善的使用文档</li>
+<li>Super-fast（超快的）UI 得益于optimistic （积极的）渲染 (在服务器返回之前呈现)</li>
+<li>超快的撤消更新和删除</li>
+<li>支持关联（多对一，一对多）</li>
+<li>国际化 （i18n）</li>
+<li>条件格式化</li>
+<li>主题化（可更换的主题）</li>
+<li>支持任何身份验证提供程序（REST API，OAuth，Basic Auth，...）</li>
+<li>功能全面的数据表格（排序，分页，过滤器）</li>
+<li>输入即筛选</li>
+<li>支持任何表单布局 (简单、选项卡式等)</li>
+<li>数据验证</li>
+<li>自定义action</li>
+<li>用于各种数据类型的大型组件库: boolean, number, rich text等。</li>
+<li>所见即所得（WYSIWYG）编辑器</li>
+<li>可自定义仪表板、菜单、版式</li>
+<li>超容易扩展和覆写 (它仅仅只是React组件)</li>
+<li>高度可定制的界面</li>
+<li>可以连接到多个后端</li>
+<li>使用了React生态系统中最好的库（Redux，redux-form，redux-saga，material-ui，recompose）</li>
+<li>可以包含在另一个React应用程序</li>
+<li>受流行库 [ng-admin](<a href="https://github.com/marmelab/ng-admin">https://github.com/marmelab/ng-admin</a>) 的启发 （ng-admin 也是由marmelab开源和维护）</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="安装"></a><a href="#安装" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>安装</h2>
+<p>React-admin 可以从npm获得并安装（和它所必需的依赖） 使用：</p>
+<pre><code class="hljs css languages- sh">npm install react-admin
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="用法"></a><a href="#用法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h2>
+<p>阅读大约15分钟的 <a href="./Tutorial.md">教程</a>介绍。 之后，前往<a href="./index.md">文档</a>，或查看<a href="https://github.com/marmelab/react-admin/tree/master/examples/demo">演示的源代码</a>以便获取示例用法。</p>
+<h2><a class="anchor" aria-hidden="true" id="一目了然"></a><a href="#一目了然" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>一目了然</h2>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in app.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { render } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> simpleRestProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-simple-rest'</span>;
+
+<span class="hljs-keyword">import</span> { PostList, PostEdit, PostCreate, PostIcon } <span class="hljs-keyword">from</span> <span class="hljs-string">'./posts'</span>;
+
+render(
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">localhost:3000</span>')}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{PostList}</span> <span class="hljs-attr">edit</span>=<span class="hljs-string">{PostEdit}</span> <span class="hljs-attr">create</span>=<span class="hljs-string">{PostCreate}</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">{PostIcon}/</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>,
+    document.getElementById('root')
+);
+</span></code></pre>
+<p><code>&lt;Resource&gt;</code> 组件是一个配置组件，它允许你为每个admin视图定义子组件： <code>list</code>，<code>edit</code>和<code>create</code>。 这些组件使用来自于react-admin中的 Material UI 和 定制组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, DisabledInput, TextInput, LongTextInput, DateInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> BookIcon <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/Book'</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostIcon = BookIcon;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;DateField source="published_at" /&gt;
+            &lt;TextField source="average_note" /&gt;
+            &lt;TextField source="views" /&gt;
+            &lt;EditButton basePath="/posts" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+
+const PostTitle = ({ record }) =&gt; {
+    return &lt;span&gt;Post {record ? `"${record.title}"` : ''}&lt;/span&gt;;
+};
+
+export const PostEdit = (props) =&gt; (
+    &lt;Edit title={&lt;PostTitle /&gt;} {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput source="id" /&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;TextInput source="teaser" options={{ multiLine: true }} /&gt;
+            &lt;LongTextInput source="body" /&gt;
+            &lt;DateInput label="Publication date" source="published_at" /&gt;
+            &lt;TextInput source="average_note" /&gt;
+            &lt;DisabledInput label="Nb views" source="views" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+
+export const PostCreate = (props) =&gt; (
+    &lt;Create title="Create a Post" {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;TextInput source="teaser" options={{ multiLine: true }} /&gt;
+            &lt;LongTextInput source="body" /&gt;
+            &lt;TextInput label="Publication date" source="published_at" /&gt;
+            &lt;TextInput source="average_note" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="它是否适用于我的api"></a><a href="#它是否适用于我的api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>它是否适用于我的API？</h2>
+<p>Yes.</p>
+<p>React-admin使用适配器方法，其概念称为Data Providers。 现有数据提供程序（Data Provider）可以用作blueprint来设计你的 API, 也可以编写自己的数据提供程序（Provider）来查询现有的 api。 编写自定义数据提供程序只需几个小时。</p>
+<p><img src="https://marmelab.com/react-admin/img/data-provider.png" alt="Data Provider architecture"></p>
+<p>有关详细信息, 请参阅 <a href="./DataProviders.md">数据提供程序文档</a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="包含电池但可拆装"></a><a href="#包含电池但可拆装" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>包含电池但可拆装</h2>
+<p>React-admin 在[material-ui](<a href="http://www.material-ui.com/#/">http://www.material-ui.com/#/</a>)之上被设计为一个松散合的React组件库，除了控制器功能实现了Redux方法以外。 它也非常容易用你自己的方法来替换react-admin的某一部分，例如，去自定义datagrid，GraphQL代替REST，或者bootstrap代替Material Design。</p>
+<h2><a class="anchor" aria-hidden="true" id="贡献"></a><a href="#贡献" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>贡献</h2>
+<p>欢迎所有在 <a href="https://github.com/marmelab/react-admin">GitHub repository</a>上的PR。 尝试遵循现有文件的编码风格，并包括单元测试和文档。 为全面的代码审查做好准备，并且对合并要有耐心 - 这是一项开源的倡议。</p>
+<p>您可以运行这个示例应用程序通过调用：</p>
+<pre><code class="hljs css languages- sh">make run
+</code></pre>
+<p>然后浏览 <a href="http://localhost:8080/">http://localhost:8080/</a>。</p>
+<p>如果你想贡献文档， 安装jekyll， 然后调用</p>
+<pre><code class="hljs css languages- sh">make doc
+</code></pre>
+<p>然后浏览 <a href="http://localhost:4000/">http://localhost:4000/</a></p>
+<p>你可您可以运行单元测试通过调用</p>
+<pre><code class="hljs css languages- sh">make <span class="hljs-built_in">test</span>
+</code></pre>
+<p>如果你正使用react-admin作为依赖项，并且如果您想尝试并hack它，下面是建议的过程：</p>
+<pre><code class="hljs css languages- sh"><span class="hljs-comment"># in myapp</span>
+<span class="hljs-comment"># install react-admin from GitHub in another directory</span>
+$ <span class="hljs-built_in">cd</span> ..
+$ git <span class="hljs-built_in">clone</span> git@github.com:marmelab/react-admin.git &amp;&amp; <span class="hljs-built_in">cd</span> react-admin &amp;&amp; make install
+<span class="hljs-comment"># replace your node_modules/react-admin by a symbolic link to the github checkout</span>
+$ <span class="hljs-built_in">cd</span> ../myapp
+$ npm link ../react-admin
+<span class="hljs-comment"># go back to the checkout, and replace the version of react by the one in your app</span>
+$ <span class="hljs-built_in">cd</span> ../react-admin
+$ npm link ../myapp/node_modules/react
+$ make watch
+<span class="hljs-comment"># in another terminal, go back to your app, and start it as usual</span>
+$ <span class="hljs-built_in">cd</span> ../myapp
+$ npm run
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="许可"></a><a href="#许可" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>许可</h2>
+<p>React-admin遵循 <a href="https://github.com/marmelab/react-admin/blob/master/LICENSE.md">MIT Licence</a>，由 <a href="http://marmelab.com">marmelab</a>赞助和支持。</p>
+<h2><a class="anchor" aria-hidden="true" id="捐赠"></a><a href="#捐赠" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>捐赠</h2>
+<p>这个库是免费使用的，即使是商业用途。 如果你想要回馈，请交流它，帮助新人，或贡献代码。 但是, 最好的方法是 <strong>捐赠慈善机构</strong>。 我们推荐<a href="http://www.doctorswithoutborders.org/">Doctors Without Borders</a>。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/docs/zh-CN/tutorial.html">十分钟教程 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#功能">功能</a></li><li><a href="#安装">安装</a></li><li><a href="#用法">用法</a></li><li><a href="#一目了然">一目了然</a></li><li><a href="#它是否适用于我的api">它是否适用于我的API？</a></li><li><a href="#包含电池但可拆装">包含电池但可拆装</a></li><li><a href="#贡献">贡献</a></li><li><a href="#许可">许可</a></li><li><a href="#捐赠">捐赠</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

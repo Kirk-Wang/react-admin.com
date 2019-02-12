@@ -1,0 +1,280 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Authorization · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Some applications may require to determine what level of access a particular authenticated user should have to secured resources. Since there are many different possible strategies (single role, multiple roles or rights, etc.), react-admin simply provides hooks to execute your own authorization code."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Authorization · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="Some applications may require to determine what level of access a particular authenticated user should have to secured resources. Since there are many different possible strategies (single role, multiple roles or rights, etc.), react-admin simply provides hooks to execute your own authorization code."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/zh-CN/authorization.html">中文</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/intro.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/docs/en/tutorial.html">Tutorial</a></li><li class="navListItem"><a class="navItem" href="/docs/en/data-providers.html">Data Providers</a></li><li class="navListItem"><a class="navItem" href="/docs/en/admin-component.html">&lt;Admin&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/resource-component.html">&lt;Resource&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/list-view-component.html">&lt;List&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/show-view-component.html">&lt;Show&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/field-components.html">&lt;Field&gt; Components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/creat-edit-view-components.html">&lt;Create&gt; and &lt;Edit&gt; Views</a></li><li class="navListItem"><a class="navItem" href="/docs/en/input-components.html">&lt;Input&gt; components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authentication.html">Authentication</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/authorization.html">Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/en/theming.html">Theming</a></li><li class="navListItem"><a class="navItem" href="/docs/en/actions.html">Writing Actions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/translation.html">Translation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/custom-app.html">Including the Admin in Another App</a></li><li class="navListItem"><a class="navItem" href="/docs/en/reference.html">Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/en/faq.html">FAQ</a></li><li class="navListItem"><a class="navItem" href="/docs/en/ecosystem.html">Ecosystem</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Authorization</h1></header><article><div><span><p>Some applications may require to determine what level of access a particular authenticated user should have to secured resources. Since there are many different possible strategies (single role, multiple roles or rights, etc.), react-admin simply provides hooks to execute your own authorization code.</p>
+<p>By default, a react-admin app doesn't require authorization. However, if needed, it will rely on the <code>authProvider</code> introduced in the <a href="./Authentication.html">Authentication</a> section.</p>
+<h2><a class="anchor" aria-hidden="true" id="configuring-the-auth-provider"></a><a href="#configuring-the-auth-provider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuring the Auth Provider</h2>
+<p>A call to the <code>authProvider</code> with the <code>AUTH_GET_PERMISSIONS</code> type will be made each time a component requires to check the user's permissions.</p>
+<p>Following is an example where the <code>authProvider</code> stores the user's role upon authentication, and returns it when called for a permissions check:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_GET_PERMISSIONS } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> decodeJwt <span class="hljs-keyword">from</span> <span class="hljs-string">'jwt-decode'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-keyword">const</span> { username, password } = params;
+        <span class="hljs-keyword">const</span> request = <span class="hljs-keyword">new</span> Request(<span class="hljs-string">'https://mydomain.com/authenticate'</span>, {
+            <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+            <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({ username, password }),
+            <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({ <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span> }),
+        })
+        <span class="hljs-keyword">return</span> fetch(request)
+            .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (response.status &lt; <span class="hljs-number">200</span> || response.status &gt;= <span class="hljs-number">300</span>) {
+                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(response.statusText);
+                }
+                <span class="hljs-keyword">return</span> response.json();
+            })
+            .then(<span class="hljs-function">(<span class="hljs-params">{ token }</span>) =&gt;</span> {
+                <span class="hljs-keyword">const</span> decodedToken = decodeJwt(token);
+                localStorage.setItem(<span class="hljs-string">'token'</span>, token);
+                localStorage.setItem(<span class="hljs-string">'role'</span>, decodedToken.role);
+            });
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        localStorage.removeItem(<span class="hljs-string">'token'</span>);
+        localStorage.removeItem(<span class="hljs-string">'role'</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_ERROR) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_CHECK) {
+        <span class="hljs-keyword">return</span> localStorage.getItem(<span class="hljs-string">'token'</span>) ? <span class="hljs-built_in">Promise</span>.resolve() : <span class="hljs-built_in">Promise</span>.reject();
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_GET_PERMISSIONS) {
+        <span class="hljs-keyword">const</span> role = localStorage.getItem(<span class="hljs-string">'role'</span>);
+        <span class="hljs-keyword">return</span> role ? <span class="hljs-built_in">Promise</span>.resolve(role) : <span class="hljs-built_in">Promise</span>.reject();
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-string">'Unkown method'</span>);
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="restricting-access-to-resources-or-views"></a><a href="#restricting-access-to-resources-or-views" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Restricting Access to Resources or Views</h2>
+<p>It's possible to restrict access to resources or their views inside the <code>Admin</code> component. To do so, you must specify a function as the <code>Admin</code> only child. This function will be called with the permissions returned by the <code>authProvider</code>.</p>
+<pre><code class="hljs css languages- jsx">&lt;Admin
+    dataProvider={dataProvider}
+    authProvider={authProvider}
+&gt;
+    {permissions =&gt; [
+        <span class="hljs-comment">// Restrict access to the edit and remove views to admin only</span>
+        &lt;Resource
+            name=<span class="hljs-string">"customers"</span>
+            list={VisitorList}
+            edit={permissions === <span class="hljs-string">'admin'</span> ? VisitorEdit : <span class="hljs-literal">null</span>}
+            icon={VisitorIcon}
+        /&gt;,
+        <span class="hljs-comment">// Only include the categories resource for admin users</span>
+        permissions === <span class="hljs-string">'admin'</span>
+            ? <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"categories"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{CategoryList}</span> <span class="hljs-attr">edit</span>=<span class="hljs-string">{CategoryEdit}</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">{CategoryIcon}</span> /&gt;</span>
+            : null,
+    ]}
+<span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+</code></pre>
+<p>Note that the function returns an array of React elements. This is required to avoid having to wrap them in a container element which would prevent the <code>Admin</code> from working.</p>
+<p><strong>Tip</strong> Even if that's possible, be careful when completely excluding a resource (like with the <code>categories</code> resource in this example) as it will prevent you to reference them in the other resource views, too.</p>
+<h2><a class="anchor" aria-hidden="true" id="restricting-access-to-fields-and-inputs"></a><a href="#restricting-access-to-fields-and-inputs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Restricting Access to Fields and Inputs</h2>
+<p>You might want to display some fields or inputs only to users with specific permissions. Those permissions are retrieved for each route and will provided to your component as a <code>permissions</code> prop.</p>
+<p>Each route will call the <code>authProvider</code> with the <code>AUTH_GET_PERMISSIONS</code> type and some parameters including the current location and route parameters. It's up to you to return whatever you need to check inside your component such as the user's role, etc.</p>
+<p>Here's an example inside a <code>Create</code> view with a <code>SimpleForm</code> and a custom <code>Toolbar</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> UserCreateToolbar = <span class="hljs-function">(<span class="hljs-params">{ permissions, ...props }</span>) =&gt;</span>
+    &lt;Toolbar {...props}&gt;
+        &lt;SaveButton
+            label="user.action.save_and_show"
+            redirect="show"
+            submitOnEnter={true}
+        /&gt;
+        {permissions === 'admin' &amp;&amp;
+            &lt;SaveButton
+                label="user.action.save_and_add"
+                redirect={false}
+                submitOnEnter={false}
+                variant="flat"
+            /&gt;}
+    &lt;/Toolbar&gt;;
+
+export const UserCreate = ({ permissions, ...props }) =&gt;
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm
+            toolbar={&lt;UserCreateToolbar permissions={permissions} /&gt;}
+            defaultValue={{ role: 'user' }}
+        &gt;
+            &lt;TextInput source="name" validate={[required()]} /&gt;
+            {permissions === 'admin' &amp;&amp;
+                &lt;TextInput source="role" validate={[required()]} /&gt;}
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;;
+</code></pre>
+<p><strong>Tip</strong> Note how the <code>permissions</code> prop is passed down to the custom <code>toolbar</code> component.</p>
+<p>This also works inside an <code>Edition</code> view with a <code>TabbedForm</code>, and you can hide a <code>FormTab</code> completely:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserEdit = <span class="hljs-function">(<span class="hljs-params">{ permissions, ...props }</span>) =&gt;</span>
+    &lt;Edit title={&lt;UserTitle /&gt;} {...props}&gt;
+        &lt;TabbedForm defaultValue={{ role: 'user' }}&gt;
+            &lt;FormTab label="user.form.summary"&gt;
+                {permissions === 'admin' &amp;&amp; &lt;DisabledInput source="id" /&gt;}
+                &lt;TextInput source="name" validate={required()} /&gt;
+            &lt;/FormTab&gt;
+            {permissions === 'admin' &amp;&amp;
+                &lt;FormTab label="user.form.security"&gt;
+                    &lt;TextInput source="role" validate={required()} /&gt;
+                &lt;/FormTab&gt;}
+        &lt;/TabbedForm&gt;
+    &lt;/Edit&gt;;
+</code></pre>
+<p>What about the <code>List</code> view, the <code>DataGrid</code>, <code>SimpleList</code> and <code>Filter</code> components? It works there, too.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> UserFilter = <span class="hljs-function">(<span class="hljs-params">{ permissions, ...props }</span>) =&gt;</span>
+    &lt;Filter {...props}&gt;
+        &lt;TextInput
+            label="user.list.search"
+            source="q"
+            alwaysOn
+        /&gt;
+        &lt;TextInput source="name" /&gt;
+        {permissions === 'admin' ? &lt;TextInput source="role" /&gt; : null}
+    &lt;/Filter&gt;;
+
+export const UserList = ({ permissions, ...props }) =&gt;
+    &lt;List
+        {...props}
+        filters={&lt;UserFilter permissions={permissions} /&gt;}
+        sort={{ field: 'name', order: 'ASC' }}
+    &gt;
+        &lt;Responsive
+            small={
+                &lt;SimpleList
+                    primaryText={record =&gt; record.name}
+                    secondaryText={record =&gt;
+                        permissions === 'admin' ? record.role : null}
+                /&gt;
+            }
+            medium={
+                &lt;Datagrid&gt;
+                    &lt;TextField source="id" /&gt;
+                    &lt;TextField source="name" /&gt;
+                    {permissions === 'admin' &amp;&amp; &lt;TextField source="role" /&gt;}
+                    {permissions === 'admin' &amp;&amp; &lt;EditButton /&gt;}
+                    &lt;ShowButton /&gt;
+                &lt;/Datagrid&gt;
+            }
+        /&gt;
+    &lt;/List&gt;;
+</code></pre>
+<p><strong>Tip</strong> Note how the <code>permissions</code> prop is passed down to the custom <code>filters</code> component.</p>
+<h2><a class="anchor" aria-hidden="true" id="restricting-access-to-content-inside-a-dashboard"></a><a href="#restricting-access-to-content-inside-a-dashboard" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Restricting Access to Content Inside a Dashboard</h2>
+<p>The component provided as a <a href="'./Admin.md#dashboard"><code>dashboard</code></a> will receive the permissions in its props too:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/Dashboard.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> Card <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Card'</span>;
+<span class="hljs-keyword">import</span> CardContent <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardContent'</span>;
+<span class="hljs-keyword">import</span> { ViewTitle } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ({ permissions }) =&gt; (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ViewTitle</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Dashboard"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">CardContent</span>&gt;</span>Lorem ipsum sic dolor amet...<span class="hljs-tag">&lt;/<span class="hljs-name">CardContent</span>&gt;</span>
+        {permissions === 'admin'
+            ? <span class="hljs-tag">&lt;<span class="hljs-name">CardContent</span>&gt;</span>Sensitive data<span class="hljs-tag">&lt;/<span class="hljs-name">CardContent</span>&gt;</span>
+            : null
+        }
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span>
+);
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="restricting-access-to-content-inside-custom-pages"></a><a href="#restricting-access-to-content-inside-custom-pages" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Restricting Access to Content Inside Custom Pages</h2>
+<p>You might want to check user permissions inside a <a href="./Admin.md#customroutes">custom pages</a>. You'll have to use the <code>WithPermissions</code> component for that. It will ensure the user is authenticated then call the <code>authProvider</code> with the <code>AUTH_GET_PERMISSIONS</code> type and the <code>authParams</code> you specify:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyPage.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> Card <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Card'</span>;
+<span class="hljs-keyword">import</span> CardContent <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardContent'</span>;
+<span class="hljs-keyword">import</span> { ViewTitle, WithPermissions } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+
+<span class="hljs-keyword">const</span> MyPage = <span class="hljs-function">(<span class="hljs-params">{ permissions }</span>) =&gt;</span> (
+    &lt;Card&gt;
+        &lt;ViewTitle title="My custom page" /&gt;
+        &lt;CardContent&gt;Lorem ipsum sic dolor amet...&lt;/CardContent&gt;
+        {permissions === 'admin'
+            ? &lt;CardContent&gt;Sensitive data&lt;/CardContent&gt;
+            : null
+        }
+    &lt;/Card&gt;
+)
+const MyPageWithPermissions = ({ location, match }) =&gt; (
+    &lt;WithPermissions
+        authParams={{ key: match.path, params: route.params }}
+        // location is not required but it will trigger a new permissions check if specified when it changes
+        location={location}
+        render={({ permissions }) =&gt; &lt;MyPage permissions={permissions} /&gt; }
+    /&gt;
+);
+
+export default MyPageWithPermissions;
+
+// in src/customRoutes.js
+import React from 'react';
+import { Route } from 'react-router-dom';
+import Foo from './Foo';
+import Bar from './Bar';
+import Baz from './Baz';
+import MyPageWithPermissions from './MyPage';
+
+export default [
+    &lt;Route exact path="/foo" component={Foo} /&gt;,
+    &lt;Route exact path="/bar" component={Bar} /&gt;,
+    &lt;Route exact path="/baz" component={Baz} noLayout /&gt;,
+    &lt;Route exact path="/baz" component={MyPageWithPermissions} /&gt;,
+];
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="restricting-access-to-content-in-custom-menu"></a><a href="#restricting-access-to-content-in-custom-menu" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Restricting Access to Content in Custom Menu</h2>
+<p>What if you want to check the permissions inside a <a href="./Admin.html#menu">custom menu</a> ? Much like getting permissions inside a custom page, you'll have to use the <code>WithPermissions</code> component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/myMenu.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { MenuItemLink, WithPermissions } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> Menu = <span class="hljs-function">(<span class="hljs-params">{ onMenuClick, logout, permissions }</span>) =&gt;</span> (
+    &lt;div&gt;
+        &lt;MenuItemLink to="/posts" primaryText="Posts" onClick={onMenuClick} /&gt;
+        &lt;MenuItemLink to="/comments" primaryText="Comments" onClick={onMenuClick} /&gt;
+        &lt;WithPermissions
+            render={({ permissions }) =&gt; (
+                permissions === 'admin'
+                    ? &lt;MenuItemLink to="/custom-route" primaryText="Miscellaneous" onClick={onMenuClick} /&gt;
+                    : null
+            )}
+        /&gt;
+        {logout}
+    &lt;/div&gt;
+);
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/authentication.html">← Authentication</a><a class="docs-next button" href="/docs/en/theming.html">Theming →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#configuring-the-auth-provider">Configuring the Auth Provider</a></li><li><a href="#restricting-access-to-resources-or-views">Restricting Access to Resources or Views</a></li><li><a href="#restricting-access-to-fields-and-inputs">Restricting Access to Fields and Inputs</a></li><li><a href="#restricting-access-to-content-inside-a-dashboard">Restricting Access to Content Inside a Dashboard</a></li><li><a href="#restricting-access-to-content-inside-custom-pages">Restricting Access to Content Inside Custom Pages</a></li><li><a href="#restricting-access-to-content-in-custom-menu">Restricting Access to Content in Custom Menu</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

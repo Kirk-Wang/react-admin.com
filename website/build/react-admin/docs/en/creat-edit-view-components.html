@@ -1,0 +1,597 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>&lt;Create&gt; and &lt;Edit&gt; Views · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The Create and Edit views both display a form, initialized with an empty record (for the Create view) or with a record fetched from the API (for the Edit view). The `&lt;Create&gt;` and `&lt;Edit&gt;` components then delegate the actual rendering of the form to a form component - usually `&lt;SimpleForm&gt;`. This form component uses its children ([`&lt;Input&gt;`](./Inputs.md) components) to render each form input."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="&lt;Create&gt; and &lt;Edit&gt; Views · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="The Create and Edit views both display a form, initialized with an empty record (for the Create view) or with a record fetched from the API (for the Edit view). The `&lt;Create&gt;` and `&lt;Edit&gt;` components then delegate the actual rendering of the form to a form component - usually `&lt;SimpleForm&gt;`. This form component uses its children ([`&lt;Input&gt;`](./Inputs.md) components) to render each form input."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/zh-CN/creat-edit-view-components.html">中文</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/intro.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/docs/en/tutorial.html">Tutorial</a></li><li class="navListItem"><a class="navItem" href="/docs/en/data-providers.html">Data Providers</a></li><li class="navListItem"><a class="navItem" href="/docs/en/admin-component.html">&lt;Admin&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/resource-component.html">&lt;Resource&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/list-view-component.html">&lt;List&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/show-view-component.html">&lt;Show&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/field-components.html">&lt;Field&gt; Components</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/creat-edit-view-components.html">&lt;Create&gt; and &lt;Edit&gt; Views</a></li><li class="navListItem"><a class="navItem" href="/docs/en/input-components.html">&lt;Input&gt; components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authentication.html">Authentication</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authorization.html">Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/en/theming.html">Theming</a></li><li class="navListItem"><a class="navItem" href="/docs/en/actions.html">Writing Actions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/translation.html">Translation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/custom-app.html">Including the Admin in Another App</a></li><li class="navListItem"><a class="navItem" href="/docs/en/reference.html">Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/en/faq.html">FAQ</a></li><li class="navListItem"><a class="navItem" href="/docs/en/ecosystem.html">Ecosystem</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">&lt;Create&gt; and &lt;Edit&gt; Views</h1></header><article><div><span><p>The Create and Edit views both display a form, initialized with an empty record (for the Create view) or with a record fetched from the API (for the Edit view). The <code>&lt;Create&gt;</code> and <code>&lt;Edit&gt;</code> components then delegate the actual rendering of the form to a form component - usually <code>&lt;SimpleForm&gt;</code>. This form component uses its children (<a href="./Inputs.md"><code>&lt;Input&gt;</code></a> components) to render each form input.</p>
+<p><img src="https://marmelab.com/react-admin/img/create-view.png" alt="post creation form"></p>
+<p><img src="https://marmelab.com/react-admin/img/edit-view.png" alt="post edition form"></p>
+<h2><a class="anchor" aria-hidden="true" id="the-create-and-edit-components"></a><a href="#the-create-and-edit-components" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The <code>Create</code> and <code>Edit</code> components</h2>
+<p>The <code>&lt;Create&gt;</code> and <code>&lt;Edit&gt;</code> components render the page title and actions, and fetch the record from the data provider. They are not responsible for rendering the actual form - that's the job of their child component (usually <code>&lt;SimpleForm&gt;</code>), to which they pass the <code>record</code> as prop.</p>
+<p>Here are all the props accepted by the <code>&lt;Create&gt;</code> and <code>&lt;Edit&gt;</code> components:</p>
+<ul>
+<li><a href="#page-title"><code>title</code></a></li>
+<li><a href="#actions"><code>actions</code></a></li>
+</ul>
+<p>Here is the minimal code necessary to display a form to create and edit comments:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> jsonServerProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-json-server'</span>;
+
+<span class="hljs-keyword">import</span> { PostCreate, PostEdit } <span class="hljs-keyword">from</span> <span class="hljs-string">'./posts'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;Admin dataProvider={jsonServerProvider('http://jsonplaceholder.typicode.com')}&gt;
+        &lt;Resource name="posts" create={PostCreate} edit={PostEdit} /&gt;
+    &lt;/Admin&gt;
+);
+
+export default App;
+
+// in src/posts.js
+import React from 'react';
+import { Create, Edit, SimpleForm, DisabledInput, TextInput, DateInput, LongTextInput, ReferenceManyField, Datagrid, TextField, DateField, EditButton } from 'react-admin';
+import RichTextInput from 'ra-input-rich-text';
+
+export const PostCreate = (props) =&gt; (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;TextInput source="teaser" options={{ multiLine: true }} /&gt;
+            &lt;RichTextInput source="body" /&gt;
+            &lt;DateInput label="Publication date" source="published_at" defaultValue={new Date()} /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+
+export const PostEdit = (props) =&gt; (
+    &lt;Edit title={&lt;PostTitle /&gt;} {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput label="Id" source="id" /&gt;
+            &lt;TextInput source="title" validate={required()} /&gt;
+            &lt;LongTextInput source="teaser" validate={required()} /&gt;
+            &lt;RichTextInput source="body" validate={required()} /&gt;
+            &lt;DateInput label="Publication date" source="published_at" /&gt;
+            &lt;ReferenceManyField label="Comments" reference="comments" target="post_id"&gt;
+                &lt;Datagrid&gt;
+                    &lt;TextField source="body" /&gt;
+                    &lt;DateField source="created_at" /&gt;
+                    &lt;EditButton /&gt;
+                &lt;/Datagrid&gt;
+            &lt;/ReferenceManyField&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p>That's enough to display the post edit form:</p>
+<p><img src="https://marmelab.com/react-admin/img/post-edition.png" alt="post edition form"></p>
+<p><strong>Tip</strong>: You might find it cumbersome to repeat the same input components for both the <code>&lt;Create&gt;</code> and the <code>&lt;Edit&gt;</code> view. In practice, these two views almost never have exactly the same form inputs. For instance, in the previous snippet, the <code>&lt;Edit&gt;</code> views shows related comments to the current post, which makes no sense for a new post. Having two separate sets of input components for the two views is therefore a deliberate choice. However, if you have the same set of input components, export them as a custom Form component to avoid repetition.</p>
+<p><code>&lt;Create&gt;</code> accepts a <code>record</code> prop, to initialize the form based on an value object.</p>
+<h3><a class="anchor" aria-hidden="true" id="page-title"></a><a href="#page-title" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Page Title</h3>
+<p>By default, the title for the Create view is &quot;Create [resource_name]&quot;, and the title for the Edit view is &quot;Edit [resource_name] #[record_id]&quot;.</p>
+<p>You can customize this title by specifying a custom <code>title</code> prop:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Edit</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Post edition"</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Edit</span>&gt;</span></span>
+);
+</code></pre>
+<p>More interestingly, you can pass a component as <code>title</code>. React-admin clones this component and, in the <code>&lt;EditView&gt;</code>, injects the current <code>record</code>. This allows to customize the title according to the current record:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> PostTitle = <span class="hljs-function">(<span class="hljs-params">{ record }</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Post {record ? `"${record.title}"` : ''}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>;
+};
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Edit</span> <span class="hljs-attr">title</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">PostTitle</span> /&gt;</span>} {...props}&gt;
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Edit</span>&gt;</span></span>
+);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="actions"></a><a href="#actions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Actions</h3>
+<p>You can replace the list of default actions by your own element using the <code>actions</code> prop:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> {
+    CardActions,
+    ListButton,
+    ShowButton,
+    DeleteButton,
+    RefreshButton,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> PostEditActions = <span class="hljs-function">(<span class="hljs-params">{ basePath, data, resource }</span>) =&gt;</span> (
+    &lt;CardActions&gt;
+        &lt;ShowButton basePath={basePath} record={data} /&gt;
+        &lt;ListButton basePath={basePath} /&gt;
+        &lt;DeleteButton basePath={basePath} record={data} resource={resource} /&gt;
+        &lt;RefreshButton /&gt;
+        {/* Add your custom actions */}
+        &lt;Button color="primary" onClick={customAction}&gt;Custom Action&lt;/Button&gt;
+    &lt;/CardActions&gt;
+);
+
+export const PostEdit = (props) =&gt; (
+    &lt;Edit actions={&lt;PostEditActions /&gt;} {...props}&gt;
+        ...
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p>Using a custom <code>EditActions</code> component also allow to remove the <code>&lt;DeleteButton&gt;</code> if you want to prevent deletions from the admin.</p>
+<h2><a class="anchor" aria-hidden="true" id="prefilling-a-create-record"></a><a href="#prefilling-a-create-record" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Prefilling a <code>Create</code> Record</h2>
+<p>By default, the <code>&lt;Create&gt;</code> view starts with an empty <code>record</code>. You can pass a custom <code>record</code> object to start with preset values:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> commentDefaultValue = { <span class="hljs-attr">nb_views</span>: <span class="hljs-number">0</span> };
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CommentCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props} record={commentDefaultValue}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput source="author" /&gt;
+            &lt;RichTextInput source="body" /&gt;
+            &lt;NumberInput source="nb_views" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p>While using the <code>record</code> to set default values works here, it doesn't work with <code>&lt;Edit&gt;</code>. So it's recommended to use <a href="#default-values">the <code>defaultValue</code> prop in the Form component</a> instead.</p>
+<p>However, there is a valid use case for presetting the <code>record</code> prop: to prepopulate a record based on a related record. For instance, in a <code>PostShow</code> component, you may want to display a button to create a comment related to the current post, that would lead to a <code>CommentCreate</code> page where the <code>post_id</code> is preset.</p>
+<p>To enable this, you must first update the <code>CommentCreate</code> component to read the record from the <code>location</code> object (which is injected by react-router):</p>
+<pre><code class="hljs css languages- diff">const commentDefaultValue = { nb_views: 0 };
+<span class="hljs-deletion">-export const CommentCreate = (props) =&gt; (</span>
+<span class="hljs-addition">+export const CommentCreate = ({ location, ...props}) =&gt; (</span>
+<span class="hljs-deletion">-   &lt;Create {...props}&gt;</span>
+<span class="hljs-addition">+   &lt;Create</span>
+<span class="hljs-addition">+       record={(location.state &amp;&amp; location.state.record) || defaultValue}</span>
+<span class="hljs-addition">+       location={location}</span>
+<span class="hljs-addition">+       {...props}</span>
+<span class="hljs-addition">+   &gt;</span>
+       &lt;SimpleForm&gt;
+            &lt;TextInput source="author" /&gt;
+            &lt;RichTextInput source="body" /&gt;
+            &lt;NumberInput source="nb_views" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p>To set this <code>location.state</code>, you have to create a link or a button using react-router's <code>&lt;Link&gt;</code> component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in PostShow.js</span>
+<span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> { Link } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+
+<span class="hljs-keyword">const</span> CreateRelatedCommentButton = <span class="hljs-function">(<span class="hljs-params">{ record }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+        <span class="hljs-attr">component</span>=<span class="hljs-string">{Link}</span>
+        <span class="hljs-attr">to</span>=<span class="hljs-string">{{</span>
+            <span class="hljs-attr">pathname:</span> '/<span class="hljs-attr">comments</span>/<span class="hljs-attr">create</span>',
+            <span class="hljs-attr">state:</span> { <span class="hljs-attr">record:</span> { <span class="hljs-attr">post_id:</span> <span class="hljs-attr">record.id</span> } },
+        }}
+    &gt;</span>
+        Write a comment for that post
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> PostShow = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Show</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">SimpleShowLayout</span>&gt;</span>
+            ...
+            <span class="hljs-tag">&lt;<span class="hljs-name">CreateRelatedCommentButton</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">SimpleShowLayout</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Show</span>&gt;</span></span>
+)
+</code></pre>
+<p><strong>Tip</strong>: To style the button with the main color from the material-ui theme, use the <code>Link</code> component from the <code>react-admin</code> package rather than the one from <code>react-router</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="the-simpleform-component"></a><a href="#the-simpleform-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The <code>SimpleForm</code> component</h2>
+<p>The <code>&lt;SimpleForm&gt;</code> component receives the <code>record</code> as prop from its parent component. It is responsible for rendering the actual form. It is also responsible for validating the form data. Finally, it receives a <code>handleSubmit</code> function as prop, to be called with the updated record as argument when the user submits the form.</p>
+<p>The <code>&lt;SimpleForm&gt;</code> renders its child components line by line (within <code>&lt;div&gt;</code> components). It uses <code>redux-form</code>.</p>
+<p><img src="https://marmelab.com/react-admin/img/post-edition.png" alt="post edition form"></p>
+<p>By default the <code>&lt;SimpleForm&gt;</code> submits the form when the user presses <code>ENTER</code>. If you want
+to change this behaviour you can pass <code>false</code> for the <code>submitOnEnter</code> property, and the user will only be able to submit by pressing the save button. This can be useful e.g. if you have an input widget using <code>ENTER</code> for a special function.</p>
+<p>Here are all the props accepted by the <code>&lt;SimpleForm&gt;</code> component:</p>
+<ul>
+<li><a href="#default-values"><code>defautValue</code></a></li>
+<li><a href="#validation"><code>validate</code></a></li>
+<li><a href="#submit-on-enter"><code>submitOnEnter</code></a></li>
+<li><a href="#redirection-after-submission"><code>redirect</code></a></li>
+<li><a href="#toolbar"><code>toolbar</code></a></li>
+<li><code>save</code>: The function invoked when the form is submitted. This is passed automatically by <code>react-admin</code> when the form component is used inside <code>Create</code> and <code>Edit</code> components.</li>
+<li><code>saving</code>: A boolean indicating whether a save operation is ongoing. This is passed automatically by <code>react-admin</code> when the form component is used inside <code>Create</code> and <code>Edit</code> components.</li>
+<li><code>form</code>: The name of the <a href="https://redux-form.com/7.4.2/docs/api/reduxform.md/#-code-form-string-code-required-"><code>redux-form</code></a>. It defaults to <code>record-form</code> and should only be modified when using the <code>SimpleForm</code> outside of a <code>Create</code> or <code>Edit</code> component.</li>
+</ul>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;RichTextInput source="body" /&gt;
+            &lt;NumberInput source="nb_views" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="the-tabbedform-component"></a><a href="#the-tabbedform-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The <code>TabbedForm</code> component</h2>
+<p>Just like <code>&lt;SimpleForm&gt;</code>, <code>&lt;TabbedForm&gt;</code> receives the <code>record</code> prop, renders the actual form, and handles form validation on submit. However, the <code>&lt;TabbedForm&gt;</code> component renders inputs grouped by tab. The tabs are set by using <code>&lt;FormTab&gt;</code> components, which expect a <code>label</code> and an <code>icon</code> prop.</p>
+<p><img src="https://marmelab.com/react-admin/img/tabbed-form.gif" alt="tabbed form"></p>
+<p>By default the <code>&lt;TabbedForm&gt;</code> submits the form when the user presses <code>ENTER</code>, if you want
+to change this behaviour you can pass <code>false</code> for the <code>submitOnEnter</code> property.</p>
+<p>Here are all the props accepted by the <code>&lt;TabbedForm&gt;</code> component:</p>
+<ul>
+<li><a href="#default-values"><code>defautValue</code></a></li>
+<li><a href="#validation"><code>validate</code></a></li>
+<li><a href="#submit-on-enter"><code>submitOnEnter</code></a></li>
+<li><a href="#redirection-after-submission"><code>redirect</code></a></li>
+<li><a href="#toolbar"><code>toolbar</code></a></li>
+<li><code>save</code>: The function invoked when the form is submitted. This is passed automatically by <code>react-admin</code> when the form component is used inside <code>Create</code> and <code>Edit</code> components.</li>
+<li><code>saving</code>: A boolean indicating whether a save operation is ongoing. This is passed automatically by <code>react-admin</code> when the form component is used inside <code>Create</code> and <code>Edit</code> components.</li>
+<li><code>form</code>: The name of the <a href="https://redux-form.com/7.4.2/docs/api/reduxform.md/#-code-form-string-code-required-"><code>redux-form</code></a>. It defaults to <code>record-form</code> and should only be modified when using the <code>TabbedForm</code> outside of a <code>Create</code> or <code>Edit</code> component.</li>
+</ul>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { TabbedForm, FormTab } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;TabbedForm&gt;
+            &lt;FormTab label="summary"&gt;
+                &lt;DisabledInput label="Id" source="id" /&gt;
+                &lt;TextInput source="title" validate={required()} /&gt;
+                &lt;LongTextInput source="teaser" validate={required()} /&gt;
+            &lt;/FormTab&gt;
+            &lt;FormTab label="body"&gt;
+                &lt;RichTextInput source="body" validate={required()} addLabel={false} /&gt;
+            &lt;/FormTab&gt;
+            &lt;FormTab label="Miscellaneous"&gt;
+                &lt;TextInput label="Password (if protected post)" source="password" type="password" /&gt;
+                &lt;DateInput label="Publication date" source="published_at" /&gt;
+                &lt;NumberInput source="average_note" validate={[ number(), minValue(0) ]} /&gt;
+                &lt;BooleanInput label="Allow comments?" source="commentable" defaultValue /&gt;
+                &lt;DisabledInput label="Nb views" source="views" /&gt;
+            &lt;/FormTab&gt;
+            &lt;FormTab label="comments"&gt;
+                &lt;ReferenceManyField reference="comments" target="post_id" addLabel={false}&gt;
+                    &lt;Datagrid&gt;
+                        &lt;TextField source="body" /&gt;
+                        &lt;DateField source="created_at" /&gt;
+                        &lt;EditButton /&gt;
+                    &lt;/Datagrid&gt;
+                &lt;/ReferenceManyField&gt;
+            &lt;/FormTab&gt;
+        &lt;/TabbedForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="default-values"></a><a href="#default-values" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Default Values</h2>
+<p>To define default values, you can add a <code>defaultValue</code> prop to form components (<code>&lt;SimpleForm&gt;</code>, <code>&lt;Tabbedform&gt;</code>, etc.), or add a <code>defaultValue</code> to individual input components. Let's see each of these options.</p>
+<h3><a class="anchor" aria-hidden="true" id="global-default-value"></a><a href="#global-default-value" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Global Default Value</h3>
+<p>The value of the form <code>defaultValue</code> prop can be an object, or a function returning an object, specifying default values for the created record. For instance:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> postDefaultValue = { <span class="hljs-attr">created_at</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(), <span class="hljs-attr">nb_views</span>: <span class="hljs-number">0</span> };
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm defaultValue={postDefaultValue}&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;RichTextInput source="body" /&gt;
+            &lt;NumberInput source="nb_views" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p><strong>Tip</strong>: You can include properties in the form <code>defaultValue</code> that are not listed as input components, like the <code>created_at</code> property in the previous example.</p>
+<h3><a class="anchor" aria-hidden="true" id="per-input-default-value"></a><a href="#per-input-default-value" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Per Input Default Value</h3>
+<p>Alternatively, you can specify a <code>defaultValue</code> prop directly in <code>&lt;Input&gt;</code> components. Just like for form-level default values, an input-level default value can be a scalar, or a function returning a scalar.  React-admin will merge the input default values with the form default value (input &gt; form):</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput source="id" defaultValue={() =&gt; uuid()}/&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;RichTextInput source="body" /&gt;
+            &lt;NumberInput source="nb_views" defaultValue={0} /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="validation"></a><a href="#validation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Validation</h2>
+<p>React-admin relies on <a href="http://redux-form.com/">redux-form</a> for the validation.</p>
+<p>To validate values submitted by a form, you can add a <code>validate</code> prop to the form component, to individual inputs, or even mix both approaches.</p>
+<h3><a class="anchor" aria-hidden="true" id="global-validation"></a><a href="#global-validation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Global Validation</h3>
+<p>The value of the form <code>validate</code> prop must be a function taking the record as input, and returning an object with error messages indexed by field. For instance:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> validateUserCreation = <span class="hljs-function">(<span class="hljs-params">values</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> errors = {};
+    <span class="hljs-keyword">if</span> (!values.firstName) {
+        errors.firstName = [<span class="hljs-string">'The firstName is required'</span>];
+    }
+    <span class="hljs-keyword">if</span> (!values.age) {
+        errors.age = [<span class="hljs-string">'The age is required'</span>];
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (values.age &lt; <span class="hljs-number">18</span>) {
+        errors.age = [<span class="hljs-string">'Must be over 18'</span>];
+    }
+    <span class="hljs-keyword">return</span> errors
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm validate={validateUserCreation}&gt;
+            &lt;TextInput label="First Name" source="firstName" /&gt;
+            &lt;TextInput label="Age" source="age" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p><strong>Tip</strong>: The props you pass to <code>&lt;SimpleForm&gt;</code> and <code>&lt;TabbedForm&gt;</code> end up as <code>reduxForm()</code> parameters. This means that, in addition to <code>validate</code>, you can also pass <code>warn</code> or <code>asyncValidate</code> functions. Read the <a href="http://redux-form.com/6.5.0/docs/api/ReduxForm.md/"><code>reduxForm()</code> documentation</a> for details.</p>
+<h3><a class="anchor" aria-hidden="true" id="per-input-validation-function-validator"></a><a href="#per-input-validation-function-validator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Per Input Validation: Function Validator</h3>
+<p>Alternatively, you can specify a <code>validate</code> prop directly in <code>&lt;Input&gt;</code> components, taking either a function, or an array of functions. These functions should return <code>undefined</code> when there is no error, or an error string.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> required = <span class="hljs-function">(<span class="hljs-params">message = <span class="hljs-string">'Required'</span></span>) =&gt;</span>
+    value =&gt; value ? <span class="hljs-literal">undefined</span> : message;
+<span class="hljs-keyword">const</span> maxLength = <span class="hljs-function">(<span class="hljs-params">max, message = <span class="hljs-string">'Too short'</span></span>) =&gt;</span>
+    value =&gt; value &amp;&amp; value.length &gt; max ? message : <span class="hljs-literal">undefined</span>;
+<span class="hljs-keyword">const</span> number = <span class="hljs-function">(<span class="hljs-params">message = <span class="hljs-string">'Must be a number'</span></span>) =&gt;</span>
+    value =&gt; value &amp;&amp; <span class="hljs-built_in">isNaN</span>(<span class="hljs-built_in">Number</span>(value)) ? message : <span class="hljs-literal">undefined</span>;
+<span class="hljs-keyword">const</span> minValue = <span class="hljs-function">(<span class="hljs-params">min, message = <span class="hljs-string">'Too small'</span></span>) =&gt;</span>
+    value =&gt; value &amp;&amp; value &lt; min ? message : <span class="hljs-literal">undefined</span>;
+
+<span class="hljs-keyword">const</span> ageValidation = <span class="hljs-function">(<span class="hljs-params">value, allValues</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (!value) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'The age is required'</span>;
+    }
+    <span class="hljs-keyword">if</span> (value &lt; <span class="hljs-number">18</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'Must be over 18'</span>;
+    }
+    <span class="hljs-keyword">return</span> [];
+}
+
+<span class="hljs-keyword">const</span> validateFirstName = [required(), maxLength(<span class="hljs-number">15</span>)];
+<span class="hljs-keyword">const</span> validateAge = [required(), number(), ageValidation];
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput label="First Name" source="firstName" validate={validateFirstName} /&gt;
+            &lt;TextInput label="Age" source="age" validate={validateAge}/&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p>React-admin will combine all the input-level functions into a single function looking just like the previous one.</p>
+<p>Input validation functions receive the current field value, and the values of all fields of the current record. This allows for complex validation scenarios (e.g. validate that two passwords are the same).</p>
+<p><strong>Tip</strong>: Validator functions receive the form <code>props</code> as third parameter, including the <code>translate</code> function. This lets you build internationalized validators:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> required = <span class="hljs-function">(<span class="hljs-params">message = <span class="hljs-string">'myroot.validation.required'</span></span>) =&gt;</span> 
+    (value, allValues, props) =&gt; value ? <span class="hljs-literal">undefined</span> : props.translate(message);
+</code></pre>
+<p><strong>Tip</strong>: Make sure to define validation functions or array of functions in a variable, instead of defining them directly in JSX. This can result in a new function or array at every render, and trigger infinite rerender.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> validateStock = [required(), number(), minValue(<span class="hljs-number">0</span>)];
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> ProductEdit = <span class="hljs-function">(<span class="hljs-params">{ ...props }</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm defaultValue={{ stock: 0 }}&gt;
+            ...
+            {/* do this */}
+            &lt;NumberInput source="stock" validate={validateStock} /&gt;
+            {/* don't do that */}
+            &lt;NumberInput source="stock" validate={[required(), number(), minValue(0)]} /&gt;
+            ...
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p><strong>Tip</strong>: The props of your Input components are passed to a redux-form <code>&lt;Field&gt;</code> component. So in addition to <code>validate</code>, you can also use <code>warn</code>.</p>
+<p><strong>Tip</strong>: You can use <em>both</em> Form validation and input validation.</p>
+<h3><a class="anchor" aria-hidden="true" id="built-in-field-validators"></a><a href="#built-in-field-validators" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Built-in Field Validators</h3>
+<p>React-admin already bundles a few validator functions, that you can just require, and use as input-level validators:</p>
+<ul>
+<li><code>required(message)</code> if the field is mandatory,</li>
+<li><code>minValue(min, message)</code> to specify a minimum value for integers,</li>
+<li><code>maxValue(max, message)</code> to specify a maximum value for integers,</li>
+<li><code>minLength(min, message)</code> to specify a minimum length for strings,</li>
+<li><code>maxLength(max, message)</code> to specify a maximum length for strings,</li>
+<li><code>number(message)</code> to check that the input is a valid number,</li>
+<li><code>email(message)</code> to check that the input is a valid email address,</li>
+<li><code>regex(pattern, message)</code> to validate that the input matches a regex,</li>
+<li><code>choices(list, message)</code> to validate that the input is within a given list,</li>
+</ul>
+<p>Example usage:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { 
+    required,
+    minLength,
+    maxLength,
+    minValue,
+    maxValue,
+    number,
+    regex,
+    email,
+    choices
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> validateFirstName = [required(), minLength(<span class="hljs-number">2</span>), maxLength(<span class="hljs-number">15</span>)];
+<span class="hljs-keyword">const</span> validateEmail = email();
+<span class="hljs-keyword">const</span> validateAge = [number(), minValue(<span class="hljs-number">18</span>)];
+<span class="hljs-keyword">const</span> validateZipCode = regex(<span class="hljs-regexp">/^\d{5}$/</span>, <span class="hljs-string">'Must be a valid Zip Code'</span>);
+<span class="hljs-keyword">const</span> validateSex = choices([<span class="hljs-string">'m'</span>, <span class="hljs-string">'f'</span>], <span class="hljs-string">'Must be Male or Female'</span>);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput label="First Name" source="firstName" validate={validateFirstName} /&gt;
+            &lt;TextInput label="Email" source="email" validate={validateEmail} /&gt;
+            &lt;TextInput label="Age" source="age" validate={validateAge}/&gt;
+            &lt;TextInput label="Zip Code" source="zip" validate={validateZipCode}/&gt;
+            &lt;SelectInput label="Sex" source="sex" choices={[
+                { id: 'm', name: 'Male' },
+                { id: 'f', name: 'Female' },
+            ]} validate={validateSex}/&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p><strong>Tip</strong>: If you pass a function as a message, react-admin calls this function with <code>{ args, value, values,translate, ...props }</code> as argument. For instance:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> message = <span class="hljs-function">(<span class="hljs-params">{ translate }</span>) =&gt;</span> translate(<span class="hljs-string">'myroot.validation.email_invalid'</span>);
+<span class="hljs-keyword">const</span> validateEmail = email(message);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="submit-on-enter"></a><a href="#submit-on-enter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Submit On Enter</h2>
+<p>By default, pressing <code>ENTER</code> in any of the form fields submits the form - this is the expected behavior in most cases. However, some of your custom input components (e.g. Google Maps widget) may have special handlers for the <code>ENTER</code> key. In that case, to disable the automated form submission on enter, set the <code>submitOnEnter</code> prop of the form component to <code>false</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Edit</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">SimpleForm</span> <span class="hljs-attr">submitOnEnter</span>=<span class="hljs-string">{false}</span>&gt;</span>
+            ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">SimpleForm</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Edit</span>&gt;</span></span>
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="redirection-after-submission"></a><a href="#redirection-after-submission" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Redirection After Submission</h2>
+<p>By default:</p>
+<ul>
+<li>Submitting the form in the <code>&lt;Create&gt;</code> view redirects to the <code>&lt;Edit&gt;</code> view</li>
+<li>Submitting the form in the <code>&lt;Edit&gt;</code> view redirects to the <code>&lt;List&gt;</code> view</li>
+</ul>
+<p>You can customize the redirection by setting the <code>redirect</code> prop of the form component. Possible values are &quot;edit&quot;, &quot;show&quot;, &quot;list&quot;, and <code>false</code> to disable redirection. You may also specify a custom path such as <code>/my-custom-route</code>. For instance, to redirect to the <code>&lt;Show&gt;</code> view after edition:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Edit</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">SimpleForm</span> <span class="hljs-attr">redirect</span>=<span class="hljs-string">"show"</span>&gt;</span>
+            ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">SimpleForm</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Edit</span>&gt;</span></span>
+);
+</code></pre>
+<p>You can also pass a custom route (e.g. &quot;/home&quot;) or a function as <code>redirect</code> prop value. For example, if you want to redirect to a page related to the current object:</p>
+<pre><code class="hljs css languages- jsx">// redirect to the related Author show page
+const redirect = (basePath, id, data) =&gt; `/author/${data.author_id}/show`;
+  
+export const PostEdit = (props) =&gt; {
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm redirect={redirect}&gt;
+            ...
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p>This affects both the submit button, and the form submission when the user presses <code>ENTER</code> in one of the form fields.</p>
+<h2><a class="anchor" aria-hidden="true" id="toolbar"></a><a href="#toolbar" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Toolbar</h2>
+<p>At the bottom of the form, the toolbar displays the submit button. You can override this component by setting the <code>toolbar</code> prop, to display the buttons of your choice.</p>
+<p>The most common use case is to display two submit buttons in the <code>&lt;Create&gt;</code> view:</p>
+<ul>
+<li>one that creates and redirects to the <code>&lt;Show&gt;</code> view of the new resource, and</li>
+<li>one that redirects to a blank <code>&lt;Create&gt;</code> view after creation (allowing bulk creation)</li>
+</ul>
+<p><img src="https://marmelab.com/react-admin/img/form-toolbar.png" alt="Form toolbar"></p>
+<p>For that use case, use the <code>&lt;SaveButton&gt;</code> component with a custom <code>redirect</code> prop:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { Edit, SimpleForm, SaveButton, Toolbar } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> PostCreateToolbar = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    &lt;Toolbar {...props} &gt;
+        &lt;SaveButton
+            label="post.action.save_and_show"
+            redirect="show"
+            submitOnEnter={true}
+        /&gt;
+        &lt;SaveButton
+            label="post.action.save_and_add"
+            redirect={false}
+            submitOnEnter={false}
+            variant="flat"
+        /&gt;
+    &lt;/Toolbar&gt;
+);
+
+export const PostEdit = (props) =&gt; (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm toolbar={&lt;PostCreateToolbar /&gt;} redirect="show"&gt;
+            ...
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p>Here are the props received by the <code>Toolbar</code> component when passed as the <code>toolbar</code> prop of the <code>SimpleForm</code> or <code>TabbedForm</code> components:</p>
+<ul>
+<li><code>handleSubmitWithRedirect</code>: The function to call in order to submit the form. It accepts a single parameter overriding the form's default redirect.</li>
+<li><code>invalid</code>: A boolean indicating whether the form is invalid</li>
+<li><code>pristine</code>: A boolean indicating whether the form is pristine (eg: no inputs have been changed yet)</li>
+<li><code>redirect</code>: The default form's redirect</li>
+<li><code>saving</code>: A boolean indicating whether a save operation is ongoing.</li>
+<li><code>submitOnEnter</code>: A boolean indicating whether the form should be submitted when pressing <code>enter</code></li>
+</ul>
+<p><strong>Tip</strong>: Use react-admin's <code>&lt;Toolbar&gt;</code> component instead of material-ui's <code>&lt;Toolbar&gt;</code> component. The former builds up on the latter, and adds support for an alternative mobile layout (and is therefore responsive).</p>
+<p><strong>Tip</strong>: Don't forget to also set the <code>redirect</code> prop of the Form component to handle submission by the <code>ENTER</code> key.</p>
+<h2><a class="anchor" aria-hidden="true" id="customizing-input-container-styles"></a><a href="#customizing-input-container-styles" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Customizing Input Container Styles</h2>
+<p>The input components are wrapped inside a <code>div</code> to ensure a good looking form by default. You can pass a <code>formClassName</code> prop to the input components to customize the style of this <code>div</code>. For example, here is how to display two inputs on the same line:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">inlineBlock</span>: { <span class="hljs-attr">display</span>: <span class="hljs-string">'inline-flex'</span>, <span class="hljs-attr">marginRight</span>: <span class="hljs-string">'1rem'</span> },
+};
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserEdit = withStyles(styles)(<span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput source="first_name" formClassName={classes.inlineBlock} /&gt;
+            &lt;TextInput source="last_name" formClassName={classes.inlineBlock} /&gt;
+            {/* This input will be display below the two first ones */}
+            &lt;TextInput source="email" type="email" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="displaying-fields-or-inputs-depending-on-the-user-permissions"></a><a href="#displaying-fields-or-inputs-depending-on-the-user-permissions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Displaying Fields or Inputs depending on the user permissions</h2>
+<p>You might want to display some fields, inputs or filters only to users with specific permissions. Those permissions are retrieved for each route and will provided to your component as a <code>permissions</code> prop.</p>
+<p>Each route will call the <code>authProvider</code> with the <code>AUTH_GET_PERMISSIONS</code> type and some parameters including the current location and route parameters. It's up to you to return whatever you need to check inside your component such as the user's role, etc.</p>
+<p>Here's an example inside a <code>Create</code> view with a <code>SimpleForm</code> and a custom <code>Toolbar</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> UserCreateToolbar = <span class="hljs-function">(<span class="hljs-params">{ permissions, ...props }</span>) =&gt;</span>
+    &lt;Toolbar {...props}&gt;
+        &lt;SaveButton
+            label="user.action.save_and_show"
+            redirect="show"
+            submitOnEnter={true}
+        /&gt;
+        {permissions === 'admin' &amp;&amp;
+            &lt;SaveButton
+                label="user.action.save_and_add"
+                redirect={false}
+                submitOnEnter={false}
+                variant="flat"
+            /&gt;}
+    &lt;/Toolbar&gt;;
+
+export const UserCreate = ({ permissions, ...props }) =&gt;
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm
+            toolbar={&lt;UserCreateToolbar permissions={permissions} /&gt;}
+            defaultValue={{ role: 'user' }}
+        &gt;
+            &lt;TextInput source="name" validate={[required()]} /&gt;
+            {permissions === 'admin' &amp;&amp;
+                &lt;TextInput source="role" validate={[required()]} /&gt;}
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;;
+</code></pre>
+<p><strong>Tip</strong>: Note how the <code>permissions</code> prop is passed down to the custom <code>toolbar</code> component.</p>
+<p>This also works inside an <code>Edition</code> view with a <code>TabbedForm</code>, and you can hide a <code>FormTab</code> completely:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserEdit = <span class="hljs-function">(<span class="hljs-params">{ permissions, ...props }</span>) =&gt;</span>
+    &lt;Edit title={&lt;UserTitle /&gt;} {...props}&gt;
+        &lt;TabbedForm defaultValue={{ role: 'user' }}&gt;
+            &lt;FormTab label="user.form.summary"&gt;
+                {permissions === 'admin' &amp;&amp; &lt;DisabledInput source="id" /&gt;}
+                &lt;TextInput source="name" validate={required()} /&gt;
+            &lt;/FormTab&gt;
+            {permissions === 'admin' &amp;&amp;
+                &lt;FormTab label="user.form.security"&gt;
+                    &lt;TextInput source="role" validate={required()} /&gt;
+                &lt;/FormTab&gt;}
+        &lt;/TabbedForm&gt;
+    &lt;/Edit&gt;;
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/field-components.html">← &lt;Field&gt; Components</a><a class="docs-next button" href="/docs/en/input-components.html">&lt;Input&gt; components →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#the-create-and-edit-components">The <code>Create</code> and <code>Edit</code> components</a><ul class="toc-headings"><li><a href="#page-title">Page Title</a></li><li><a href="#actions">Actions</a></li></ul></li><li><a href="#prefilling-a-create-record">Prefilling a <code>Create</code> Record</a></li><li><a href="#the-simpleform-component">The <code>SimpleForm</code> component</a></li><li><a href="#the-tabbedform-component">The <code>TabbedForm</code> component</a></li><li><a href="#default-values">Default Values</a><ul class="toc-headings"><li><a href="#global-default-value">Global Default Value</a></li><li><a href="#per-input-default-value">Per Input Default Value</a></li></ul></li><li><a href="#validation">Validation</a><ul class="toc-headings"><li><a href="#global-validation">Global Validation</a></li><li><a href="#per-input-validation-function-validator">Per Input Validation: Function Validator</a></li><li><a href="#built-in-field-validators">Built-in Field Validators</a></li></ul></li><li><a href="#submit-on-enter">Submit On Enter</a></li><li><a href="#redirection-after-submission">Redirection After Submission</a></li><li><a href="#toolbar">Toolbar</a></li><li><a href="#customizing-input-container-styles">Customizing Input Container Styles</a></li><li><a href="#displaying-fields-or-inputs-depending-on-the-user-permissions">Displaying Fields or Inputs depending on the user permissions</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

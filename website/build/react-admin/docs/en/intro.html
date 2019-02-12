@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Introduction · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, [React](https://facebook.github.io/react/) and [Material Design](https://material.io/). Previously named [admin-on-rest](https://github.com/marmelab/admin-on-rest). Open sourced and maintained by [marmelab](https://marmelab.com/)."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Introduction · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, [React](https://facebook.github.io/react/) and [Material Design](https://material.io/). Previously named [admin-on-rest](https://github.com/marmelab/admin-on-rest). Open sourced and maintained by [marmelab](https://marmelab.com/)."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive siteNavItemActive"><a href="/docs/en/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/zh-CN/intro.html">中文</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/intro.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/docs/en/tutorial.html">Tutorial</a></li><li class="navListItem"><a class="navItem" href="/docs/en/data-providers.html">Data Providers</a></li><li class="navListItem"><a class="navItem" href="/docs/en/admin-component.html">&lt;Admin&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/resource-component.html">&lt;Resource&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/list-view-component.html">&lt;List&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/show-view-component.html">&lt;Show&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/field-components.html">&lt;Field&gt; Components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/creat-edit-view-components.html">&lt;Create&gt; and &lt;Edit&gt; Views</a></li><li class="navListItem"><a class="navItem" href="/docs/en/input-components.html">&lt;Input&gt; components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authentication.html">Authentication</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authorization.html">Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/en/theming.html">Theming</a></li><li class="navListItem"><a class="navItem" href="/docs/en/actions.html">Writing Actions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/translation.html">Translation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/custom-app.html">Including the Admin in Another App</a></li><li class="navListItem"><a class="navItem" href="/docs/en/reference.html">Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/en/faq.html">FAQ</a></li><li class="navListItem"><a class="navItem" href="/docs/en/ecosystem.html">Ecosystem</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Introduction</h1></header><article><div><span><p>A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, <a href="https://facebook.github.io/react/">React</a> and <a href="https://material.io/">Material Design</a>. Previously named <a href="https://github.com/marmelab/admin-on-rest">admin-on-rest</a>. Open sourced and maintained by <a href="https://marmelab.com/">marmelab</a>.</p>
+<p><a href="https://marmelab.com/react-admin-demo/">Demo</a> - <a href="https://github.com/marmelab/react-admin">Source</a> - <a href="https://github.com/marmelab/react-admin/releases">Releases</a> - <a href="http://stackoverflow.com/questions/tagged/react-admin">Support</a></p>
+<iframe src="https://player.vimeo.com/video/268958716?byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="display:block;margin:0 auto"></iframe>
+<h2><a class="anchor" aria-hidden="true" id="features"></a><a href="#features" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Features</h2>
+<ul>
+<li>Adapts to any backend (REST, GraphQL, SOAP, etc.)</li>
+<li>Complete documentation</li>
+<li>Super-fast UI thanks to optimistic rendering (renders before the server returns)</li>
+<li>Undo updates and deletes for a few seconds</li>
+<li>Supports relationships (many to one, one to many)</li>
+<li>Internationalization (i18n)</li>
+<li>Conditional formatting</li>
+<li>Themeable</li>
+<li>Supports any authentication provider (REST API, OAuth, Basic Auth, ...)</li>
+<li>Full-featured Datagrid (sort, pagination, filters)</li>
+<li>Filter-as-you-type</li>
+<li>Supports any form layout (simple, tabbed, etc.)</li>
+<li>Data Validation</li>
+<li>Custom actions</li>
+<li>Large library of components for various data types: boolean, number, rich text, etc.</li>
+<li>WYSIWYG editor</li>
+<li>Customize dashboard, menu, layout</li>
+<li>Super easy to extend and override (it's just React components)</li>
+<li>Highly customizable interface</li>
+<li>Can connect to multiple backends</li>
+<li>Leverages the best libraries in the React ecosystem (Redux, redux-form, redux-saga, material-ui, recompose)</li>
+<li>Can be included in another React app</li>
+<li>Inspired by the popular <a href="https://github.com/marmelab/ng-admin">ng-admin</a> library (also by marmelab)</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="installation"></a><a href="#installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h2>
+<p>React-admin is available from npm. You can install it (and its required dependencies)
+using:</p>
+<pre><code class="hljs css languages- sh">npm install react-admin
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="usage"></a><a href="#usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
+<p>Read the <a href="./Tutorial.md">Tutorial</a> for a 15 minutes introduction. After that, head to the <a href="./index.md">Documentation</a>, or checkout the <a href="https://github.com/marmelab/react-admin/tree/master/examples/demo">source code of the demo</a> for an example usage.</p>
+<h2><a class="anchor" aria-hidden="true" id="at-a-glance"></a><a href="#at-a-glance" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>At a Glance</h2>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in app.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { render } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> simpleRestProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-simple-rest'</span>;
+
+<span class="hljs-keyword">import</span> { PostList, PostEdit, PostCreate, PostIcon } <span class="hljs-keyword">from</span> <span class="hljs-string">'./posts'</span>;
+
+render(
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">localhost:3000</span>')}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{PostList}</span> <span class="hljs-attr">edit</span>=<span class="hljs-string">{PostEdit}</span> <span class="hljs-attr">create</span>=<span class="hljs-string">{PostCreate}</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">{PostIcon}/</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>,
+    document.getElementById('root')
+);
+</span></code></pre>
+<p>The <code>&lt;Resource&gt;</code> component is a configuration component that allows to define sub components for each of the admin view: <code>list</code>, <code>edit</code>, and <code>create</code>. These components use Material UI and custom components from react-admin:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, DisabledInput, TextInput, LongTextInput, DateInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> BookIcon <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/Book'</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostIcon = BookIcon;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;DateField source="published_at" /&gt;
+            &lt;TextField source="average_note" /&gt;
+            &lt;TextField source="views" /&gt;
+            &lt;EditButton basePath="/posts" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+
+const PostTitle = ({ record }) =&gt; {
+    return &lt;span&gt;Post {record ? `"${record.title}"` : ''}&lt;/span&gt;;
+};
+
+export const PostEdit = (props) =&gt; (
+    &lt;Edit title={&lt;PostTitle /&gt;} {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput source="id" /&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;TextInput source="teaser" options={{ multiLine: true }} /&gt;
+            &lt;LongTextInput source="body" /&gt;
+            &lt;DateInput label="Publication date" source="published_at" /&gt;
+            &lt;TextInput source="average_note" /&gt;
+            &lt;DisabledInput label="Nb views" source="views" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+
+export const PostCreate = (props) =&gt; (
+    &lt;Create title="Create a Post" {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;TextInput source="teaser" options={{ multiLine: true }} /&gt;
+            &lt;LongTextInput source="body" /&gt;
+            &lt;TextInput label="Publication date" source="published_at" /&gt;
+            &lt;TextInput source="average_note" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="does-it-work-with-my-api"></a><a href="#does-it-work-with-my-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Does It Work With My API?</h2>
+<p>Yes.</p>
+<p>React-admin uses an adapter approach, with a concept called <em>Data Providers</em>. Existing providers can be used as a blueprint to design your API, or you can write your own Data Provider to query an existing API. Writing a custom Data Provider is a matter of hours.</p>
+<p><img src="https://marmelab.com/react-admin/img/data-provider.png" alt="Data Provider architecture"></p>
+<p>See the <a href="./DataProviders.md">Data Providers documentation</a> for details.</p>
+<h2><a class="anchor" aria-hidden="true" id="batteries-included-but-removable"></a><a href="#batteries-included-but-removable" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Batteries Included But Removable</h2>
+<p>React-admin is designed as a library of loosely coupled React components built on top of <a href="http://www.material-ui.com/#/">material-ui</a>, in addition to controller functions implemented the Redux way. It is very easy to replace one part of react-admin with your own, e.g. to use a custom datagrid, GraphQL instead of REST, or bootstrap instead of Material Design.</p>
+<h2><a class="anchor" aria-hidden="true" id="contributing"></a><a href="#contributing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Contributing</h2>
+<p>Pull requests are welcome on the <a href="https://github.com/marmelab/react-admin">GitHub repository</a>. Try to follow the coding style of the existing files, and include unit tests and documentation. Be prepared for a thorough code review, and be patient for the merge - this is an open-source initiative.</p>
+<p>You can run the example app by calling:</p>
+<pre><code class="hljs css languages- sh">make run
+</code></pre>
+<p>And then browse to <a href="http://localhost:8080/">http://localhost:8080/</a>.</p>
+<p>If you want to contribute to the documentation, install jekyll, then call</p>
+<pre><code class="hljs css languages- sh">make doc
+</code></pre>
+<p>And then browse to <a href="http://localhost:4000/">http://localhost:4000/</a></p>
+<p>You can run the unit tests by calling</p>
+<pre><code class="hljs css languages- sh">make <span class="hljs-built_in">test</span>
+</code></pre>
+<p>If you are using react-admin as a dependency, and if you want to try and hack it, here is the advised process:</p>
+<pre><code class="hljs css languages- sh"><span class="hljs-comment"># in myapp</span>
+<span class="hljs-comment"># install react-admin from GitHub in another directory</span>
+$ <span class="hljs-built_in">cd</span> ..
+$ git <span class="hljs-built_in">clone</span> git@github.com:marmelab/react-admin.git &amp;&amp; <span class="hljs-built_in">cd</span> react-admin &amp;&amp; make install
+<span class="hljs-comment"># replace your node_modules/react-admin by a symbolic link to the github checkout</span>
+$ <span class="hljs-built_in">cd</span> ../myapp
+$ npm link ../react-admin
+<span class="hljs-comment"># go back to the checkout, and replace the version of react by the one in your app</span>
+$ <span class="hljs-built_in">cd</span> ../react-admin
+$ npm link ../myapp/node_modules/react
+$ make watch
+<span class="hljs-comment"># in another terminal, go back to your app, and start it as usual</span>
+$ <span class="hljs-built_in">cd</span> ../myapp
+$ npm run
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="license"></a><a href="#license" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>License</h2>
+<p>React-admin is licensed under the <a href="https://github.com/marmelab/react-admin/blob/master/LICENSE.md">MIT Licence</a>, sponsored and supported by <a href="http://marmelab.com">marmelab</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="donate"></a><a href="#donate" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Donate</h2>
+<p>This library is free to use, even for commercial purpose. If you want to give back, please talk about it, help newcomers, or contribute code. But the best way to give back is to <strong>donate to a charity</strong>. We recommend <a href="http://www.doctorswithoutborders.org/">Doctors Without Borders</a>.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/docs/en/tutorial.html">Tutorial →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#features">Features</a></li><li><a href="#installation">Installation</a></li><li><a href="#usage">Usage</a></li><li><a href="#at-a-glance">At a Glance</a></li><li><a href="#does-it-work-with-my-api">Does It Work With My API?</a></li><li><a href="#batteries-included-but-removable">Batteries Included But Removable</a></li><li><a href="#contributing">Contributing</a></li><li><a href="#license">License</a></li><li><a href="#donate">Donate</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

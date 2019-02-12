@@ -1,0 +1,596 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Create 和 Edit 视图组件 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="“创建”和“编辑”视图都显示一个表单，使用空记录初始化的（对于“创建视图”）或具有一条从API（对于“编辑”视图）获取的记录。 `&lt;Create&gt;` 和 `&lt;Edit&gt;` 组件然后将表单的实际渲染委托给表单组件 - 通常是 `&lt;SimpleForm&gt;`。 此表单组件使用其子级 ([`&lt;Input&gt;`](./Inputs.md) 组件) 来呈现每个 from input。"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="Create 和 Edit 视图组件 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="“创建”和“编辑”视图都显示一个表单，使用空记录初始化的（对于“创建视图”）或具有一条从API（对于“编辑”视图）获取的记录。 `&lt;Create&gt;` 和 `&lt;Edit&gt;` 组件然后将表单的实际渲染委托给表单组件 - 通常是 `&lt;SimpleForm&gt;`。 此表单组件使用其子级 ([`&lt;Input&gt;`](./Inputs.md) 组件) 来呈现每个 from input。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/creat-edit-view-components.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Create 和 Edit 视图组件</h1></header><article><div><span><p>“创建”和“编辑”视图都显示一个表单，使用空记录初始化的（对于“创建视图”）或具有一条从API（对于“编辑”视图）获取的记录。 <code>&lt;Create&gt;</code> 和 <code>&lt;Edit&gt;</code> 组件然后将表单的实际渲染委托给表单组件 - 通常是 <code>&lt;SimpleForm&gt;</code>。 此表单组件使用其子级 (<a href="./Inputs.md"><code>&lt;Input&gt;</code></a> 组件) 来呈现每个 from input。</p>
+<p><img src="https://marmelab.com/react-admin/img/create-view.png" alt="post creation form"></p>
+<p><img src="https://marmelab.com/react-admin/img/edit-view.png" alt="post edition form"></p>
+<h2><a class="anchor" aria-hidden="true" id="create-和-edit-组件"></a><a href="#create-和-edit-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>Create</code> 和 <code>Edit</code> 组件</h2>
+<p><code>&lt;Create&gt;</code> 和 <code>&lt;Edit&gt;</code> 组件渲染页面标题和操作，并从 Data Provider 获取记录。 他们不负责渲染实际的表单 - 这是他们的子组件（通常是 <code>&lt;SimpleForm&gt;</code>）的工作，他们将 <code>record</code> 作为属性传递给它们。</p>
+<p>这里是 <code>&lt;Create&gt;</code> 和 <code>&lt;Edit&gt;</code> 组件接受的所有属性：</p>
+<ul>
+<li><a href="#page-title"><code>title</code></a></li>
+<li><a href="#actions"><code>actions</code></a></li>
+</ul>
+<p>以下是显示一个表单来创建和编辑评论所需的最少代码：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> jsonServerProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-json-server'</span>;
+
+<span class="hljs-keyword">import</span> { PostCreate, PostEdit } <span class="hljs-keyword">from</span> <span class="hljs-string">'./posts'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;Admin dataProvider={jsonServerProvider('http://jsonplaceholder.typicode.com')}&gt;
+        &lt;Resource name="posts" create={PostCreate} edit={PostEdit} /&gt;
+    &lt;/Admin&gt;
+);
+
+export default App;
+
+// in src/posts.js
+import React from 'react';
+import { Create, Edit, SimpleForm, DisabledInput, TextInput, DateInput, LongTextInput, ReferenceManyField, Datagrid, TextField, DateField, EditButton } from 'react-admin';
+import RichTextInput from 'ra-input-rich-text';
+
+export const PostCreate = (props) =&gt; (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;TextInput source="teaser" options={{ multiLine: true }} /&gt;
+            &lt;RichTextInput source="body" /&gt;
+            &lt;DateInput label="Publication date" source="published_at" defaultValue={new Date()} /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+
+export const PostEdit = (props) =&gt; (
+    &lt;Edit title={&lt;PostTitle /&gt;} {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput label="Id" source="id" /&gt;
+            &lt;TextInput source="title" validate={required()} /&gt;
+            &lt;LongTextInput source="teaser" validate={required()} /&gt;
+            &lt;RichTextInput source="body" validate={required()} /&gt;
+            &lt;DateInput label="Publication date" source="published_at" /&gt;
+            &lt;ReferenceManyField label="Comments" reference="comments" target="post_id"&gt;
+                &lt;Datagrid&gt;
+                    &lt;TextField source="body" /&gt;
+                    &lt;DateField source="created_at" /&gt;
+                    &lt;EditButton /&gt;
+                &lt;/Datagrid&gt;
+            &lt;/ReferenceManyField&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p>这足以显示 post 编辑表单：</p>
+<p><img src="https://marmelab.com/react-admin/img/post-edition.png" alt="post edition form"></p>
+<p><strong>提示</strong>：您可能会发现为 <code>&lt;Create&gt;</code> 和 <code>&lt;Edit&gt;</code> 视图重复相同的 input 组件很麻烦。 实际上，这两个视图几乎从来没有完全相同的表单输入。 例如，在以前的代码片段中， <code>&lt;Edit&gt;</code> 视图显示了对当前帖子的相关评论，这对于新的帖子是没有意义的。 因此，为两个视图拥有两组单独的输入组件是一个有意的选择。 但是，如果您具有相同的输入组件集，则将它们导出为自定义Form组件以避免重复。</p>
+<p><code>&lt; Create&gt;</code> 接受 <code>record</code> 属性，以基于值对象初始化表单。</p>
+<h3><a class="anchor" aria-hidden="true" id="页面标题"></a><a href="#页面标题" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>页面标题</h3>
+<p>默认情况下，&quot;创建&quot; 视图的标题为 &quot;创建 [resource_name]&quot;，编辑视图的标题为 &quot;编辑 [resource_name] #[record_id]&quot;。</p>
+<p>您可以通过指定一个自定义 <code>title</code> 属性来自定义此标题：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Edit</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Post edition"</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Edit</span>&gt;</span></span>
+);
+</code></pre>
+<p>更有趣的是，你可以通过传递一个组件作为 <code>title</code>。 React-admin 克隆此组件，并在 <code>&lt;EditView&gt;</code> 中注入当前 <code>record</code>。 这允许根据当前记录自定义标题：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> PostTitle = <span class="hljs-function">(<span class="hljs-params">{ record }</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Post {record ? `"${record.title}"` : ''}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>;
+};
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Edit</span> <span class="hljs-attr">title</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">PostTitle</span> /&gt;</span>} {...props}&gt;
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Edit</span>&gt;</span></span>
+);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="actions"></a><a href="#actions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Actions</h3>
+<p>你可以通过你自己的元素使用 <code>actions</code> 属性来替换默认 action 列表：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> {
+    CardActions,
+    ListButton,
+    ShowButton,
+    DeleteButton,
+    RefreshButton,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> PostEditActions = <span class="hljs-function">(<span class="hljs-params">{ basePath, data, resource }</span>) =&gt;</span> (
+    &lt;CardActions&gt;
+        &lt;ShowButton basePath={basePath} record={data} /&gt;
+        &lt;ListButton basePath={basePath} /&gt;
+        &lt;DeleteButton basePath={basePath} record={data} resource={resource} /&gt;
+        &lt;RefreshButton /&gt;
+        {/* Add your custom actions */}
+        &lt;Button color="primary" onClick={customAction}&gt;Custom Action&lt;/Button&gt;
+    &lt;/CardActions&gt;
+);
+
+export const PostEdit = (props) =&gt; (
+    &lt;Edit actions={&lt;PostEditActions /&gt;} {...props}&gt;
+        ...
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p>如果要阻止 admin 删除，使用自定义<code>EditActions</code>组件还允许删除<code>&lt; DeleteButton &gt;</code>。</p>
+<h2><a class="anchor" aria-hidden="true" id="预填充-创建-记录"></a><a href="#预填充-创建-记录" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>预填充<code>创建</code>记录</h2>
+<p>默认情况下，<code>&lt;Create&gt;</code> 视图以空 <code>record</code> 开头。可以通过自定义 <code>record</code> 对象来从预设值开始：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> commentDefaultValue = { <span class="hljs-attr">nb_views</span>: <span class="hljs-number">0</span> };
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CommentCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props} record={commentDefaultValue}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput source="author" /&gt;
+            &lt;RichTextInput source="body" /&gt;
+            &lt;NumberInput source="nb_views" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p>在这里使用 <code>record</code> 设置默认值时，它不适用于 <code>&lt;Edit&gt;</code>。 因此，建议在 Form 组件中使用 <a href="#default-values"> <code>defaultValue</code></a> 属性代替。</p>
+<p>但是，有一个有效的用例来预置<code>record</code> 属性：根据相关记录预填充记录。 例如，在<code>PostShow</code>组件中，您可能希望显示一个按钮来创建与当前帖子相关的评论，这将导致<code>CommentCreate</code>页面中的<code>post_id</code>已预设。</p>
+<p>要启用此项，必须首先更新 <code>CommentCreate</code> 组件，以从 <code>location</code> 对象中读取记录 (由 react-router 注入)：</p>
+<pre><code class="hljs css languages- diff">const commentDefaultValue = { nb_views: 0 };
+<span class="hljs-deletion">-export const CommentCreate = (props) =&gt; (</span>
+<span class="hljs-addition">+export const CommentCreate = ({ location, ...props}) =&gt; (</span>
+<span class="hljs-deletion">-   &lt;Create {...props}&gt;</span>
+<span class="hljs-addition">+   &lt;Create</span>
+<span class="hljs-addition">+       record={(location.state &amp;&amp; location.state.record) || defaultValue}</span>
+<span class="hljs-addition">+       location={location}</span>
+<span class="hljs-addition">+       {...props}</span>
+<span class="hljs-addition">+   &gt;</span>
+       &lt;SimpleForm&gt;
+            &lt;TextInput source="author" /&gt;
+            &lt;RichTextInput source="body" /&gt;
+            &lt;NumberInput source="nb_views" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p>要设置此<code>location.state</code>，您必须使用 react-router 的 <code>&lt;Link&gt;</code> 组件创建链接或按钮：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in PostShow.js</span>
+<span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> { Link } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+
+<span class="hljs-keyword">const</span> CreateRelatedCommentButton = <span class="hljs-function">(<span class="hljs-params">{ record }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+        <span class="hljs-attr">component</span>=<span class="hljs-string">{Link}</span>
+        <span class="hljs-attr">to</span>=<span class="hljs-string">{{</span>
+            <span class="hljs-attr">pathname:</span> '/<span class="hljs-attr">comments</span>/<span class="hljs-attr">create</span>',
+            <span class="hljs-attr">state:</span> { <span class="hljs-attr">record:</span> { <span class="hljs-attr">post_id:</span> <span class="hljs-attr">record.id</span> } },
+        }}
+    &gt;</span>
+        Write a comment for that post
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> PostShow = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Show</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">SimpleShowLayout</span>&gt;</span>
+            ...
+            <span class="hljs-tag">&lt;<span class="hljs-name">CreateRelatedCommentButton</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">SimpleShowLayout</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Show</span>&gt;</span></span>
+)
+</code></pre>
+<p><strong>提示</strong>：要使用 material-ui 主题中的主要颜色设置样式，请使用<code>react-admin</code>包中的<code>Link</code>组件，而不是来自<code>react-router</code>的那个。</p>
+<h2><a class="anchor" aria-hidden="true" id="simpleform-组件"></a><a href="#simpleform-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>SimpleForm</code> 组件</h2>
+<p><code>&lt;SimpleForm&gt;</code> 组件从其父组件接收 <code>record</code> 作为属性。 它负责渲染实际的表单。 它还负责验证表单数据。 最后，它收到一个 <code>handleSubmit</code> 函数作为属性，当用户提交表单时，以更新的记录作为参数调用。</p>
+<p><code>&lt; SimpleForm&gt;</code>逐行呈现其子组件（在<code>&lt; div&gt;</code>组件中）。 它使用<code>redux-form</code>。</p>
+<p><img src="https://marmelab.com/react-admin/img/post-edition.png" alt="post edition form"></p>
+<p>默认情况下, <code>&lt;SimpleForm&gt;</code> 在用户按 <code>ENTER</code> 时提交表单。 如果您想要改变这种行为，你可以传递 <code>false</code> 给 <code>submitOnEnter</code> 属性。 如果您有一个使用 <code>ENTER</code> 的输入小部件来进行特殊的功能，这可能很有用。</p>
+<p>以下是 <code>&lt;SimpleForm&gt;</code> 组件所接受的所有属性：</p>
+<ul>
+<li><a href="#default-values"><code>defautValue</code></a></li>
+<li><a href="#validation"><code>validate</code></a></li>
+<li><a href="#submit-on-enter"><code>submitOnEnter</code></a></li>
+<li><a href="#redirection-after-submission"><code>redirect</code></a></li>
+<li><a href="#toolbar"><code>toolbar</code></a></li>
+<li><code>save</code>: The function invoked when the form is submitted. This is passed automatically by <code>react-admin</code> when the form component is used inside <code>Create</code> and <code>Edit</code> components.</li>
+<li><code>saving</code>: A boolean indicating whether a save operation is ongoing. This is passed automatically by <code>react-admin</code> when the form component is used inside <code>Create</code> and <code>Edit</code> components.</li>
+<li><code>form</code>: The name of the <a href="https://redux-form.com/7.4.2/docs/api/reduxform.md/#-code-form-string-code-required-"><code>redux-form</code></a>. It defaults to <code>record-form</code> and should only be modified when using the <code>SimpleForm</code> outside of a <code>Create</code> or <code>Edit</code> component.</li>
+</ul>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;RichTextInput source="body" /&gt;
+            &lt;NumberInput source="nb_views" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="tabbedform-组件"></a><a href="#tabbedform-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>TabbedForm</code> 组件</h2>
+<p>就像 <code>&lt;SimpleForm&gt;</code> 一样， <code>&lt;TabbedForm&gt;</code> 接收 <code>record</code> 属性，渲染实际的表单，并在提交上处理表单验证。 但是，<code>&lt;TabbedForm&gt;</code> 组件会按选项卡渲染 input。 这些选项卡通过使用 <code>&lt;FormTab&gt;</code> 组件设置，该组件期望一个<code>label</code> 和一个 <code>icon</code> 属性。</p>
+<p><img src="https://marmelab.com/react-admin/img/tabbed-form.gif" alt="tabbed form"></p>
+<p>默认情况下，当用户按 <code>ENTER</code> 键时 <code>&lt;TabbedForm&gt;</code> 提交表单，如果要更改此行为，你可以为 <code>submitOnEnter</code> 属性传递 <code>false</code>。</p>
+<p>以下是 <code>&lt;TabbedForm&gt;</code> 组件所接受的所有属性：</p>
+<ul>
+<li><a href="#default-values"><code>defautValue</code></a></li>
+<li><a href="#validation"><code>validate</code></a></li>
+<li><a href="#submit-on-enter"><code>submitOnEnter</code></a></li>
+<li><a href="#redirection-after-submission"><code>redirect</code></a></li>
+<li><a href="#toolbar"><code>toolbar</code></a></li>
+<li><code>save</code>: The function invoked when the form is submitted. This is passed automatically by <code>react-admin</code> when the form component is used inside <code>Create</code> and <code>Edit</code> components.</li>
+<li><code>saving</code>: A boolean indicating whether a save operation is ongoing. This is passed automatically by <code>react-admin</code> when the form component is used inside <code>Create</code> and <code>Edit</code> components.</li>
+<li><code>form</code>: The name of the <a href="https://redux-form.com/7.4.2/docs/api/reduxform.md/#-code-form-string-code-required-"><code>redux-form</code></a>. It defaults to <code>record-form</code> and should only be modified when using the <code>TabbedForm</code> outside of a <code>Create</code> or <code>Edit</code> component.</li>
+</ul>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { TabbedForm, FormTab } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;TabbedForm&gt;
+            &lt;FormTab label="summary"&gt;
+                &lt;DisabledInput label="Id" source="id" /&gt;
+                &lt;TextInput source="title" validate={required()} /&gt;
+                &lt;LongTextInput source="teaser" validate={required()} /&gt;
+            &lt;/FormTab&gt;
+            &lt;FormTab label="body"&gt;
+                &lt;RichTextInput source="body" validate={required()} addLabel={false} /&gt;
+            &lt;/FormTab&gt;
+            &lt;FormTab label="Miscellaneous"&gt;
+                &lt;TextInput label="Password (if protected post)" source="password" type="password" /&gt;
+                &lt;DateInput label="Publication date" source="published_at" /&gt;
+                &lt;NumberInput source="average_note" validate={[ number(), minValue(0) ]} /&gt;
+                &lt;BooleanInput label="Allow comments?" source="commentable" defaultValue /&gt;
+                &lt;DisabledInput label="Nb views" source="views" /&gt;
+            &lt;/FormTab&gt;
+            &lt;FormTab label="comments"&gt;
+                &lt;ReferenceManyField reference="comments" target="post_id" addLabel={false}&gt;
+                    &lt;Datagrid&gt;
+                        &lt;TextField source="body" /&gt;
+                        &lt;DateField source="created_at" /&gt;
+                        &lt;EditButton /&gt;
+                    &lt;/Datagrid&gt;
+                &lt;/ReferenceManyField&gt;
+            &lt;/FormTab&gt;
+        &lt;/TabbedForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="默认值"></a><a href="#默认值" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>默认值</h2>
+<p>要定义默认值，您可以添加一个 <code>defaultValue</code> 属性到表单组件（<code>&lt;SimpleForm&gt;</code>，<code>&lt;Tabbedform&gt;</code>等），或者添加一个 <code>defaultValue</code> 到每个输入组件。 让我们看看这些选项。</p>
+<h3><a class="anchor" aria-hidden="true" id="全局默认值"></a><a href="#全局默认值" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>全局默认值</h3>
+<p>表单 <code>defaultValue</code> 属性的值可以是一个对象或一个返回对象的函数，为创建的记录指定默认值。 例如：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> postDefaultValue = { <span class="hljs-attr">created_at</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(), <span class="hljs-attr">nb_views</span>: <span class="hljs-number">0</span> };
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm defaultValue={postDefaultValue}&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;RichTextInput source="body" /&gt;
+            &lt;NumberInput source="nb_views" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p><strong>提示</strong>：你可以在表单 <code>defaultValue</code> 中包含不被列为输入组件的属性，如上例中的 <code>created_at</code> 属性。</p>
+<h3><a class="anchor" aria-hidden="true" id="每个字段默认值"></a><a href="#每个字段默认值" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>每个字段默认值</h3>
+<p>或者, 您可以在 <code>&lt;Input&gt;</code> 组件中直接指定 <code>defaultValue</code> 属性。 与 form-level 默认值一样， input-level 的默认值可以是标量，或者返回标量的函数。 React-admin 将 input 默认值与 form 默认值 (输入 &gt; 窗体) 合并：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput source="id" defaultValue={() =&gt; uuid()}/&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;RichTextInput source="body" /&gt;
+            &lt;NumberInput source="nb_views" defaultValue={0} /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="验证"></a><a href="#验证" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>验证</h2>
+<p>React-admin 依赖于 <a href="http://redux-form.com/">redux-form</a> 进行验证。</p>
+<p>要验证表单提交的值，您可以向表单组件添加一个 <code>validate</code> 属性，将其添加到单个输入中，甚至可以混合使用两种方法。</p>
+<h3><a class="anchor" aria-hidden="true" id="全局验证"></a><a href="#全局验证" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>全局验证</h3>
+<p>表单 <code>validate</code> 属性的值必须是将记录作为输入的函数，并返回一个具有由字段索引的错误消息的对象。 例如：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> validateUserCreation = <span class="hljs-function">(<span class="hljs-params">values</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> errors = {};
+    <span class="hljs-keyword">if</span> (!values.firstName) {
+        errors.firstName = [<span class="hljs-string">'The firstName is required'</span>];
+    }
+    <span class="hljs-keyword">if</span> (!values.age) {
+        errors.age = [<span class="hljs-string">'The age is required'</span>];
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (values.age &lt; <span class="hljs-number">18</span>) {
+        errors.age = [<span class="hljs-string">'Must be over 18'</span>];
+    }
+    <span class="hljs-keyword">return</span> errors
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm validate={validateUserCreation}&gt;
+            &lt;TextInput label="First Name" source="firstName" /&gt;
+            &lt;TextInput label="Age" source="age" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p><strong>提示</strong>：您传递给<code>&lt;SimpleForm&gt;</code> 和 <code>&lt;TabbedForm&gt;</code> 的属性最后为 <code>reduxForm()</code> 参数。 这意味着, 除了 <code>validate</code>之外, 还可以通过 <code>warn</code> 或 <code>asyncValidate</code> 函数。 有关详细信息, 请阅读 <a href="http://redux-form.com/6.5.0/docs/api/ReduxForm.md/"><code>reduxForm()</code> 文档</a>。</p>
+<h3><a class="anchor" aria-hidden="true" id="每个-input-验证-函数验证程序"></a><a href="#每个-input-验证-函数验证程序" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>每个 Input 验证: 函数验证程序</h3>
+<p>或者，您可以在 <code>&lt;Input&gt;</code> 组件中直接指定一个 <code>validate</code> 属性，使用一个函数或一组函数。 当没有错误或错误字符串时，这些函数应该返回 <code>undefined</code>。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> required = <span class="hljs-function">(<span class="hljs-params">message = <span class="hljs-string">'Required'</span></span>) =&gt;</span>
+    value =&gt; value ? <span class="hljs-literal">undefined</span> : message;
+<span class="hljs-keyword">const</span> maxLength = <span class="hljs-function">(<span class="hljs-params">max, message = <span class="hljs-string">'Too short'</span></span>) =&gt;</span>
+    value =&gt; value &amp;&amp; value.length &gt; max ? message : <span class="hljs-literal">undefined</span>;
+<span class="hljs-keyword">const</span> number = <span class="hljs-function">(<span class="hljs-params">message = <span class="hljs-string">'Must be a number'</span></span>) =&gt;</span>
+    value =&gt; value &amp;&amp; <span class="hljs-built_in">isNaN</span>(<span class="hljs-built_in">Number</span>(value)) ? message : <span class="hljs-literal">undefined</span>;
+<span class="hljs-keyword">const</span> minValue = <span class="hljs-function">(<span class="hljs-params">min, message = <span class="hljs-string">'Too small'</span></span>) =&gt;</span>
+    value =&gt; value &amp;&amp; value &lt; min ? message : <span class="hljs-literal">undefined</span>;
+
+<span class="hljs-keyword">const</span> ageValidation = <span class="hljs-function">(<span class="hljs-params">value, allValues</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (!value) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'The age is required'</span>;
+    }
+    <span class="hljs-keyword">if</span> (value &lt; <span class="hljs-number">18</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'Must be over 18'</span>;
+    }
+    <span class="hljs-keyword">return</span> [];
+}
+
+<span class="hljs-keyword">const</span> validateFirstName = [required(), maxLength(<span class="hljs-number">15</span>)];
+<span class="hljs-keyword">const</span> validateAge = [required(), number(), ageValidation];
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput label="First Name" source="firstName" validate={validateFirstName} /&gt;
+            &lt;TextInput label="Age" source="age" validate={validateAge}/&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p>React-admin 将所有 input-level 函数组合成一个函数，就像前一个函数一样。</p>
+<p>输入验证函数接收当前字段值和当前记录的所有字段的值。 这允许复杂的验证场景（例如，验证两个密码是相同的）。</p>
+<p><strong>提示</strong>：验证器函数接收表单 <code>props</code> 作为第三个参数，包括<code>translate</code> 函数。这样可以建立国际化验证器：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> required = <span class="hljs-function">(<span class="hljs-params">message = <span class="hljs-string">'myroot.validation.required'</span></span>) =&gt;</span> 
+    (value, allValues, props) =&gt; value ? <span class="hljs-literal">undefined</span> : props.translate(message);
+</code></pre>
+<p>**提示&lt;/ strong&gt;：确保在变量中定义验证函数或函数数组，而不是直接在JSX中定义它们。 这会在每次渲染时产生新函数或数组，并触发无限重新渲染。</p></p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> validateStock = [required(), number(), minValue(<span class="hljs-number">0</span>)];
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> ProductEdit = <span class="hljs-function">(<span class="hljs-params">{ ...props }</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm defaultValue={{ stock: 0 }}&gt;
+            ...
+            {/* do this */}
+            &lt;NumberInput source="stock" validate={validateStock} /&gt;
+            {/* don't do that */}
+            &lt;NumberInput source="stock" validate={[required(), number(), minValue(0)]} /&gt;
+            ...
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p><strong>提示</strong>：将您的输入组件的属性传递给redux-form <code>&lt;Field&gt;</code>组件。所以除了 <code>validate</code>，你也可以使用 <code>warn</code>。</p>
+<p><strong>提示</strong>：您可以 <em>同时</em> 使用表单验证和输入验证。</p>
+<h3><a class="anchor" aria-hidden="true" id="内置字段验证器"></a><a href="#内置字段验证器" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>内置字段验证器</h3>
+<p>React-admin 已经捆绑了一些您可以只需 require 的验证器函数，并用作输入级验证器：</p>
+<ul>
+<li><code>required(message)</code> if the field is mandatory,</li>
+<li><code>minValue(min, message)</code> to specify a minimum value for integers,</li>
+<li><code>maxValue(max, message)</code> to specify a maximum value for integers,</li>
+<li><code>minLength(min, message)</code> to specify a minimum length for strings,</li>
+<li><code>maxLength(max, message)</code> to specify a maximum length for strings,</li>
+<li><code>number(message)</code> to check that the input is a valid number,</li>
+<li><code>email(message)</code> to check that the input is a valid email address,</li>
+<li><code>regex(pattern, message)</code> to validate that the input matches a regex,</li>
+<li><code>choices(list, message)</code> to validate that the input is within a given list,</li>
+</ul>
+<p>使用示例：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { 
+    required,
+    minLength,
+    maxLength,
+    minValue,
+    maxValue,
+    number,
+    regex,
+    email,
+    choices
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> validateFirstName = [required(), minLength(<span class="hljs-number">2</span>), maxLength(<span class="hljs-number">15</span>)];
+<span class="hljs-keyword">const</span> validateEmail = email();
+<span class="hljs-keyword">const</span> validateAge = [number(), minValue(<span class="hljs-number">18</span>)];
+<span class="hljs-keyword">const</span> validateZipCode = regex(<span class="hljs-regexp">/^\d{5}$/</span>, <span class="hljs-string">'Must be a valid Zip Code'</span>);
+<span class="hljs-keyword">const</span> validateSex = choices([<span class="hljs-string">'m'</span>, <span class="hljs-string">'f'</span>], <span class="hljs-string">'Must be Male or Female'</span>);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserCreate = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput label="First Name" source="firstName" validate={validateFirstName} /&gt;
+            &lt;TextInput label="Email" source="email" validate={validateEmail} /&gt;
+            &lt;TextInput label="Age" source="age" validate={validateAge}/&gt;
+            &lt;TextInput label="Zip Code" source="zip" validate={validateZipCode}/&gt;
+            &lt;SelectInput label="Sex" source="sex" choices={[
+                { id: 'm', name: 'Male' },
+                { id: 'f', name: 'Female' },
+            ]} validate={validateSex}/&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p>**提示&lt;/ strong&gt;：如果您将函数作为消息传递，则 react-admin 调用此函数并传递<code>{args，value，values，translate，... props}</code> 作为参数。例如：</p></p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> message = <span class="hljs-function">(<span class="hljs-params">{ translate }</span>) =&gt;</span> translate(<span class="hljs-string">'myroot.validation.email_invalid'</span>);
+<span class="hljs-keyword">const</span> validateEmail = email(message);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="回车提交"></a><a href="#回车提交" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>回车提交</h2>
+<p>默认情况下，在任何表单字段中按 <code>ENTER</code> 提交表单 - 这是大多数情况下的预期行为。 但是，您的某些自定义输入组件（例如，Google Maps小部件）可能会有 <code>ENTER</code> 键的特殊处理程序。 在这种情况下，要在 enter 上禁用自动表单提交，请将表单组件的 <code>submitOnEnter</code> 属性设置为 <code>false</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Edit</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">SimpleForm</span> <span class="hljs-attr">submitOnEnter</span>=<span class="hljs-string">{false}</span>&gt;</span>
+            ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">SimpleForm</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Edit</span>&gt;</span></span>
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="提交后重定向"></a><a href="#提交后重定向" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提交后重定向</h2>
+<p>默认情况下：</p>
+<ul>
+<li>在 <code>&lt;Create&gt;</code> 视图中提交表单重定向到 <code>&lt;Edit&gt;</code> 视图</li>
+<li>在 <code>&lt;Edit&gt;</code> 视图中提交表单重定向到 <code>&lt;List&gt;</code> 视图</li>
+</ul>
+<p>您可以通过设置表单组件的 <code>redirect</code> 属性来自定义重定向。 可能的值为“edit”，“show”，“list” 和 <code>false</code> 以禁用重定向。 您还可以指定自定义路径, 如 <code>/my-custom-route</code>。 例如，要在编辑后重定向到 <code>&lt;Show&gt;</code> 视图：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Edit</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">SimpleForm</span> <span class="hljs-attr">redirect</span>=<span class="hljs-string">"show"</span>&gt;</span>
+            ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">SimpleForm</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Edit</span>&gt;</span></span>
+);
+</code></pre>
+<p>您还可以将自定义路由（例如“/home”）或函数作为<code>redirect</code> 属性值传递。 例如，如果要重定向到与当前对象相关的页面：</p>
+<pre><code class="hljs css languages- jsx">// redirect to the related Author show page
+const redirect = (basePath, id, data) =&gt; `/author/${data.author_id}/show`;
+
+export const PostEdit = (props) =&gt; {
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm redirect={redirect}&gt;
+            ...
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p>当用户在其中一个表单字段中按<code>ENTER</code>时，这会影响提交按钮和表单提交。</p>
+<h2><a class="anchor" aria-hidden="true" id="toolbar"></a><a href="#toolbar" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Toolbar</h2>
+<p>在表单的底部，工具栏显示提交按钮。 您可以通过设置` toolbar &lt;/ code&gt; 属性来覆盖此组件，以显示您选择的按钮。</p></p>
+<p>最常见的用例是在 <code><Create>` 视图中显示两个提交按钮:
+<ul>
+<li>创建并重定向到新资源的 `<Show> &lt;/ code&gt;视图的那个，以及</li></li>
+</ul>
+<li>在创建后重定向到一个空白 <code><Create>` 视图的（允许批量创建）
+<p><img src="https://marmelab.com/react-admin/img/form-toolbar.png" alt="Form toolbar"></p>
+<p>对于该用例，请使用具有自定义 <code>redirect</code> 属性的 <code>&lt;SaveButton&gt;</code> 组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { Edit, SimpleForm, SaveButton, Toolbar } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> PostCreateToolbar = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    &lt;Toolbar {...props} &gt;
+        &lt;SaveButton
+            label="post.action.save_and_show"
+            redirect="show"
+            submitOnEnter={true}
+        /&gt;
+        &lt;SaveButton
+            label="post.action.save_and_add"
+            redirect={false}
+            submitOnEnter={false}
+            variant="flat"
+        /&gt;
+    &lt;/Toolbar&gt;
+);
+
+export const PostEdit = (props) =&gt; (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm toolbar={&lt;PostCreateToolbar /&gt;} redirect="show"&gt;
+            ...
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p>以下是 <code>Toolbar</code> 组件在作为<code>SimpleForm</code>或<code>TabbedForm</code>组件的` toolbar &lt;/ code&gt; 属性传递时收到的：</p></p>
+<ul>
+<li><code>handleSubmitWithRedirect`: The function to call in order to submit the form. It accepts a single parameter overriding the form's default redirect.</li> 
+<ul>
+<li><code>invalid</code>: A boolean indicating whether the form is invalid</li>
+<li><code>pristine</code>: A boolean indicating whether the form is pristine (eg: no inputs have been changed yet)</li>
+<li><code>redirect</code>: The default form's redirect</li>
+<li><code>saving</code>: A boolean indicating whether a save operation is ongoing.</li>
+<li><code>submitOnEnter</code>: A boolean indicating whether the form should be submitted when pressing <code>enter</code></ul></li>
+</ul>
+<p>** 提示 **: 使用 react-admin 的 <code>&lt;Toolbar&gt;</code> 组件代替 material-ui 的 <code>&lt;Toolbar&gt;</code> 组件。 前者建立在后者之上, 并增加了对另一种移动布局的支持 (因此是响应性的)。</p>
+<p><strong>提示</strong>: 不要忘记还要设置表单组件的 <code>redirect</code> 属性，以处理由 <code>ENTER</code> 键。</p>
+<h2><a class="anchor" aria-hidden="true" id="自定义输入容器样式"></a><a href="#自定义输入容器样式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>自定义输入容器样式</h2>
+<p>输入组件包含在<code>div</code>中，以确保默认情况下具有良好外观。 可以将 <code>formClassName</code> 属性传递给输入组件, 以自定义此 <code>div</code> 的样式。 例如, 下面是如何在同一行上显示两个输入：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">inlineBlock</span>: { <span class="hljs-attr">display</span>: <span class="hljs-string">'inline-flex'</span>, <span class="hljs-attr">marginRight</span>: <span class="hljs-string">'1rem'</span> },
+};
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserEdit = withStyles(styles)(<span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput source="first_name" formClassName={classes.inlineBlock} /&gt;
+            &lt;TextInput source="last_name" formClassName={classes.inlineBlock} /&gt;
+            {/* This input will be display below the two first ones */}
+            &lt;TextInput source="email" type="email" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="根据用户权限显示-field-或-input"></a><a href="#根据用户权限显示-field-或-input" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>根据用户权限显示 Field 或 Input</h2>
+<p>您可能希望仅向具有特定权限的用户显示某些 field，input 或 filter。 将为每个路径检索这些权限，并将其作为<code>permissions</code> 属性提供给您的组件。</p>
+<p>每个路由将使用 <code>AUTH_GET_PERMISSIONS</code> 类型和一些参数（包括当前位置和路由参数）调用 <code>authProvider</code>。 您可以在组件内部返回需要检查的内容，例如用户的角色等。</p>
+<p>以下是在<code>Create</code>视图中使用<code>SimpleForm</code>和自定义<code>Toolbar</code>的示例：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> UserCreateToolbar = <span class="hljs-function">(<span class="hljs-params">{ permissions, ...props }</span>) =&gt;</span>
+    &lt;Toolbar {...props}&gt;
+        &lt;SaveButton
+            label="user.action.save_and_show"
+            redirect="show"
+            submitOnEnter={true}
+        /&gt;
+        {permissions === 'admin' &amp;&amp;
+            &lt;SaveButton
+                label="user.action.save_and_add"
+                redirect={false}
+                submitOnEnter={false}
+                variant="flat"
+            /&gt;}
+    &lt;/Toolbar&gt;;
+
+export const UserCreate = ({ permissions, ...props }) =&gt;
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm
+            toolbar={&lt;UserCreateToolbar permissions={permissions} /&gt;}
+            defaultValue={{ role: 'user' }}
+        &gt;
+            &lt;TextInput source="name" validate={[required()]} /&gt;
+            {permissions === 'admin' &amp;&amp;
+                &lt;TextInput source="role" validate={[required()]} /&gt;}
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;;
+</code></pre>
+<p>**提示&lt;/ strong&gt;：请注意<code>permissions</code> 属性如何传递给自定义<code>toolbar</code>组件。</p></p>
+<p>这也适用于带<code>TabbedForm</code>的<code>Edition</code>视图，你可以完全隐藏<code>FormTab</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserEdit = <span class="hljs-function">(<span class="hljs-params">{ permissions, ...props }</span>) =&gt;</span>
+    &lt;Edit title={&lt;UserTitle /&gt;} {...props}&gt;
+        &lt;TabbedForm defaultValue={{ role: 'user' }}&gt;
+            &lt;FormTab label="user.form.summary"&gt;
+                {permissions === 'admin' &amp;&amp; &lt;DisabledInput source="id" /&gt;}
+                &lt;TextInput source="name" validate={required()} /&gt;
+            &lt;/FormTab&gt;
+            {permissions === 'admin' &amp;&amp;
+                &lt;FormTab label="user.form.security"&gt;
+                    &lt;TextInput source="role" validate={required()} /&gt;
+                &lt;/FormTab&gt;}
+        &lt;/TabbedForm&gt;
+    &lt;/Edit&gt;;
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/field-components.html">← Field 组件</a><a class="docs-next button" href="/docs/zh-CN/input-components.html">Input 组件 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#create-和-edit-组件"><code>Create</code> 和 <code>Edit</code> 组件</a><ul class="toc-headings"><li><a href="#页面标题">页面标题</a></li><li><a href="#actions">Actions</a></li></ul></li><li><a href="#预填充-创建-记录">预填充<code>创建</code>记录</a></li><li><a href="#simpleform-组件"><code>SimpleForm</code> 组件</a></li><li><a href="#tabbedform-组件"><code>TabbedForm</code> 组件</a></li><li><a href="#默认值">默认值</a><ul class="toc-headings"><li><a href="#全局默认值">全局默认值</a></li><li><a href="#每个字段默认值">每个字段默认值</a></li></ul></li><li><a href="#验证">验证</a><ul class="toc-headings"><li><a href="#全局验证">全局验证</a></li><li><a href="#每个-input-验证-函数验证程序">每个 Input 验证: 函数验证程序</a></li><li><a href="#内置字段验证器">内置字段验证器</a></li></ul></li><li><a href="#回车提交">回车提交</a></li><li><a href="#提交后重定向">提交后重定向</a></li><li><a href="#toolbar">Toolbar</a></li><li><a href="#自定义输入容器样式">自定义输入容器样式</a></li><li><a href="#根据用户权限显示-field-或-input">根据用户权限显示 Field 或 Input</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

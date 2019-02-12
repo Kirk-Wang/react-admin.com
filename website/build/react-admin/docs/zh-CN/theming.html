@@ -1,0 +1,568 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>主题 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="无论您需要为单个组件调整CSS规则，还是更改整个应用程序中的标签颜色，都可以！"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="主题 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="无论您需要为单个组件调整CSS规则，还是更改整个应用程序中的标签颜色，都可以！"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/theming.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">主题</h1></header><article><div><span><p>无论您需要为单个组件调整CSS规则，还是更改整个应用程序中的标签颜色，都可以！</p>
+<h2><a class="anchor" aria-hidden="true" id="重写组件样式"></a><a href="#重写组件样式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>重写组件样式</h2>
+<p>每个 react-admin 组件都提供 <code>className</code> 属性，该属性始终应用于根元素。</p>
+<p>下面是使用其 <code>className</code> 属性和 Material-UI 中的 <code>withStyles</code> 高阶组件自定义 <code>Datagrid</code> 中的 <code>EditButton</code> 组件的示例：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NumberField, List, Datagrid, EditButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">button</span>: {
+        <span class="hljs-attr">fontWeight</span>: <span class="hljs-string">'bold'</span>,
+        <span class="hljs-comment">// This is JSS syntax to target a deeper element using css selector, here the svg icon for this button</span>
+        <span class="hljs-string">'&amp; svg'</span>: { <span class="hljs-attr">color</span>: <span class="hljs-string">'orange'</span> }
+    },
+};
+
+<span class="hljs-keyword">const</span> MyEditButton = withStyles(styles)(<span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;EditButton
+        className={classes.button}
+        {...props}
+    /&gt;
+));
+
+export const ProductList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="sku" /&gt;
+            &lt;TextField source="price" /&gt;
+            &lt;MyEditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>对于某些组件，您可能不仅要覆盖根组件样式，还要覆盖根目录中组件的样式。 在这种情况下 <code>className</code> 属性是不够的。 您可以利用 <code>classes</code> 属性来自定义组件在内部使用的类。</p>
+<p>下面是使用 <code>Filter</code> 和 <code>List</code> 组件的 <code>classes</code> 属性的示例：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> {
+    BooleanField,
+    Datagrid,
+    DateField,
+    DateInput,
+    EditButton,
+    Filter,
+    List,
+    NullableBooleanInput,
+    NumberField,
+    TextInput,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> Icon <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/Person'</span>;
+<span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> VisitorIcon = Icon;
+
+<span class="hljs-comment">// The Filter component supports the `form` and `button` CSS classes. Here we override the `form` class</span>
+<span class="hljs-keyword">const</span> filterStyles = {
+    <span class="hljs-attr">form</span>: {
+        <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'Lavender'</span>,
+    },
+};
+
+<span class="hljs-keyword">const</span> VisitorFilter = withStyles(filterStyles)(<span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;Filter classes={classes} {...props}&gt;
+        &lt;TextInput
+            className={classes.searchInput}
+            label="pos.search"
+            source="q"
+            alwaysOn
+        /&gt;
+        &lt;DateInput source="last_seen_gte" /&gt;
+        &lt;NullableBooleanInput source="has_ordered" /&gt;
+        &lt;NullableBooleanInput source="has_newsletter" defaultValue /&gt;
+    &lt;/Filter&gt;
+));
+
+// The List component supports the `root`, `header`, `actions` and `noResults` CSS classes. Here we override the `header` and `actions` classes
+const listStyles = {
+    actions: {
+        backgroundColor: 'Lavender',
+    },
+    header: {
+        backgroundColor: 'Lavender',
+    },
+};
+
+export const VisitorList = withStyles(listStyles)(({ classes, ...props }) =&gt; (
+    &lt;List
+        classes={classes}
+        {...props}
+        filters={&lt;VisitorFilter /&gt;}
+        sort={{ field: 'last_seen', order: 'DESC' }}
+        perPage={25}
+    &gt;
+        &lt;Datagrid classes={classes} {...props}&gt;
+            &lt;DateField source="last_seen" type="date" /&gt;
+            &lt;NumberField
+                source="nb_commands"
+                label="resources.customers.fields.commands"
+            /&gt;
+            &lt;NumberField
+                source="total_spent"
+                options={{ style: 'currency', currency: 'USD' }}
+            /&gt;
+            &lt;DateField source="latest_purchase" showTime /&gt;
+            &lt;BooleanField source="has_newsletter" label="News." /&gt;
+            &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+));
+</code></pre>
+<p>此示例导致：</p>
+<p><img src="https://marmelab.com/react-admin/img/list_with_customized_css.png" alt="Visitor List with customized CSS classes"></p>
+<p>查看组件文档和源代码，了解哪些类可用于样式。 例如，您可以查看 <a href="./List.md#the-datagrid-component">Datagrid CSS文档</a>。</p>
+<p>如果您需要更多地控制 HTML 代码，您还可以创建自己的 <a href="./Fields.md#writing-your-own-field-component">Field</a> 和 <a href="./Inputs.md#writing-your-own-input-component">Input</a> 组件。</p>
+<h2><a class="anchor" aria-hidden="true" id="条件格式"></a><a href="#条件格式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>条件格式</h2>
+<p>有时您希望格式取决于值。 以下示例显示如何创建新的自定义 <code>NumberField</code> 组件，该组件在其值为100或更高时以红色突出显示其文本。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NumberField, List, Datagrid, EditButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+<span class="hljs-keyword">import</span> classnames <span class="hljs-keyword">from</span> <span class="hljs-string">'classnames'</span>;
+
+<span class="hljs-keyword">const</span> coloredStyles = {
+    <span class="hljs-attr">small</span>: { <span class="hljs-attr">color</span>: <span class="hljs-string">'black'</span> },
+    <span class="hljs-attr">big</span>: { <span class="hljs-attr">color</span>: <span class="hljs-string">'red'</span> },
+};
+
+<span class="hljs-keyword">const</span> ColoredNumberField = withStyles(coloredStyles)(
+    <span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+        &lt;NumberField
+            className={classnames({
+                [classes.small]: props.record[props.source] &lt; 100,
+                [classes.big]: props.record[props.source] &gt;= 100,
+            })}
+            {...props}
+        /&gt;
+    ));
+
+// Ensure the original component defaultProps are still applied as they may be used by its parents (such as the `Show` component):
+ColoredNumberField.defaultProps = NumberField.defaultProps;
+
+export const PostList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            ...
+            &lt;ColoredNumberField source="nb_views" /&gt;
+            &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>此外，如果您想将其重新用于其他组件，则可以将此突出显示策略提取到高阶组件中：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NumberField, List, Datagrid, EditButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+<span class="hljs-keyword">import</span> classnames <span class="hljs-keyword">from</span> <span class="hljs-string">'classnames'</span>;
+
+<span class="hljs-keyword">const</span> coloredStyles = {
+    <span class="hljs-attr">small</span>: { <span class="hljs-attr">color</span>: <span class="hljs-string">'black'</span> },
+    <span class="hljs-attr">big</span>: { <span class="hljs-attr">color</span>: <span class="hljs-string">'red'</span> },
+};
+
+<span class="hljs-keyword">const</span> colored = <span class="hljs-function"><span class="hljs-params">WrappedComponent</span> =&gt;</span> withStyles(coloredStyles)(
+    <span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+        &lt;WrappedComponent
+            className={classnames({
+                [classes.small]: props.record[props.source] &lt; 500,
+                [classes.big]: props.record[props.source] &gt;= 500,
+            })}
+            {...props}
+        /&gt;
+    ));
+
+
+const ColoredNumberField = colored(NumberField);
+// Ensure the original component defaultProps are still applied as they may be used by its parents (such as the `Show` component):
+ColoredNumberField.defaultProps = NumberField.defaultProps;
+
+export const PostList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            ...
+            &lt;ColoredNumberField source="nb_views" /&gt;
+            &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>如果您想了解有关高阶组件的更多信息，请查看此SitePoint教程：<a href="https://www.sitepoint.com/react-higher-order-components/">Higher Order Components: A React Application Design Pattern</a></p>
+<h2><a class="anchor" aria-hidden="true" id="responsive-utility"></a><a href="#responsive-utility" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Responsive Utility</h2>
+<p>要在移动设备，平板电脑和桌面设备上提供优化的体验，您通常需要根据屏幕大小显示不同的组件。 这就是 <code>&lt;Responsive&gt;</code> 组件的目的，它为响应式Web设计提供了一种声明式方法。</p>
+<p>它期望元素道具命名为 <code>small</code>，<code>medium</code> 和 <code>large</code>。 它显示与屏幕大小匹配的元素（断点为768和992像素）：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Responsive, SimpleList, Datagrid, TextField, ReferenceField, EditButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Responsive
+            small={
+                &lt;SimpleList
+                    primaryText={record =&gt; record.title}
+                    secondaryText={record =&gt; `${record.views} views`}
+                    tertiaryText={record =&gt; new Date(record.published_at).toLocaleDateString()}
+                /&gt;
+            }
+            medium={
+                &lt;Datagrid&gt;
+                    &lt;TextField source="id" /&gt;
+                    &lt;ReferenceField label="User" source="userId" reference="users"&gt;
+                        &lt;TextField source="name" /&gt;
+                    &lt;/ReferenceField&gt;
+                    &lt;TextField source="title" /&gt;
+                    &lt;TextField source="body" /&gt;
+                    &lt;EditButton /&gt;
+                &lt;/Datagrid&gt;
+            }
+        /&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p><strong>提示</strong>：如果您只提供<code>small</code> 和 <code>medium</code>，则<code>medium</code>型元素也将用于大屏幕。 当省略 <code>small</code> 或 <code>medium</code> 时，存在相同类型的智能默认值。</p>
+<p>提示：您可以将 null 指定为 <code>small</code>，<code>medium</code> 或 <code>large</code> 的值，以避免在特定大小上呈现某些内容而不会回退到其他大小。</p>
+<p>提示：您还可以使用 <a href="https://github.com/callemall/material-ui/blob/master/src/utils/withWidth.js">material-ui 的 <code>withWidth()</code> 高阶组件</a>，以便在您自己的组件中注入 <code>with</code> 属性。</p>
+<h2><a class="anchor" aria-hidden="true" id="使用预定义主题"></a><a href="#使用预定义主题" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用预定义主题</h2>
+<p>Material UI 也支持开箱即用的 <a href="http://www.material-ui.com/#/customization/themes">complete theming</a>。 Material UI提供两个基本主题：light 和 dark。 React-admin 默认使用 light。 要使用深色的, 请将 <code>theme</code> 属性传递到 <code>&lt;Admin&gt;</code> 组件（连同 <code>createMuiTheme()</code>）。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { createMuiTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">const</span> theme = createMuiTheme({
+  <span class="hljs-attr">palette</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'dark'</span>, <span class="hljs-comment">// Switching the dark mode on is a single property value change.</span>
+  },
+});
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">{theme}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/dark-theme.png" alt="Dark theme"></p>
+<h2><a class="anchor" aria-hidden="true" id="编写自定义主题"></a><a href="#编写自定义主题" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>编写自定义主题</h2>
+<p>如果需要更精细的调优，则需要编写自己的 <code>theme</code> 对象, 以下是 <a href="https://material-ui.com/customization/themes/">Material UI 主题文档</a>。 Material UI将自定义主题对象与默认主题合并。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { createMuiTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+<span class="hljs-keyword">import</span> indigo <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/colors/indigo'</span>;
+<span class="hljs-keyword">import</span> pink <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/colors/pink'</span>;
+<span class="hljs-keyword">import</span> red <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/colors/red'</span>;
+
+<span class="hljs-keyword">const</span> myTheme = createMuiTheme({
+    <span class="hljs-attr">palette</span>: {
+        <span class="hljs-attr">primary</span>: indigo,
+        <span class="hljs-attr">secondary</span>: pink,
+        <span class="hljs-attr">error</span>: red,
+        <span class="hljs-attr">contrastThreshold</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-attr">tonalOffset</span>: <span class="hljs-number">0.2</span>,
+    },
+    <span class="hljs-attr">typography</span>: {
+        <span class="hljs-comment">// Use the system font instead of the default Roboto font.</span>
+        fontFamily: [
+            <span class="hljs-string">'-apple-system'</span>,
+            <span class="hljs-string">'BlinkMacSystemFont'</span>,
+            <span class="hljs-string">'"Segoe UI"'</span>,
+            <span class="hljs-string">'Arial'</span>,
+            <span class="hljs-string">'sans-serif'</span>,
+        ].join(<span class="hljs-string">','</span>),
+    },
+    <span class="hljs-attr">overrides</span>: {
+        <span class="hljs-attr">MuiButton</span>: { <span class="hljs-comment">// override the styles of all instances of this component</span>
+            root: { <span class="hljs-comment">// Name of the rule</span>
+                color: <span class="hljs-string">'white'</span>, <span class="hljs-comment">// Some CSS</span>
+            },
+        },
+    },
+});
+</code></pre>
+<p>MuiTheme 对象包含以下键：</p>
+<ul>
+<li><code>breakpoints</code></li>
+<li><code>direction</code></li>
+<li><code>mixins</code></li>
+<li><code>overrides</code></li>
+<li><code>palette</code></li>
+<li><code>props</code></li>
+<li><code>shadows</code></li>
+<li><code>typography</code></li>
+<li><code>transitions</code></li>
+<li><code>spacing</code></li>
+<li><code>zIndex</code></li>
+</ul>
+<p><strong>提示</strong>：查看 <a href="https://material-ui.com/customization/default-theme/">Material UI默认主题文档</a> 以查看这些键的默认值和含义。</p>
+<p>定义主题后，将其传递给 <code>&lt;Admin&gt;</code> 组件的 <code>theme</code> 属性中。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">{myTheme}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="使用自定义布局"></a><a href="#使用自定义布局" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用自定义布局</h2>
+<p>您可以使用自己的组件作为 admin 布局，而不是默认布局。 只需使用 <code>&lt;Admin&gt;</code> 组件的 appLayout 属性：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> MyLayout <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyLayout'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">appLayout</span>=<span class="hljs-string">{MyLayout}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p>如果您只想覆盖 appBar，menu 或 notification 组件，则自定义布局可以扩展默认的 <code>&lt;Layout&gt;</code> 组件。 例如：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyLayout.js</span>
+<span class="hljs-keyword">import</span> { Layout } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> MyAppBar <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyAppBar'</span>;
+<span class="hljs-keyword">import</span> MyMenu <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyMenu'</span>;
+<span class="hljs-keyword">import</span> MyNotification <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyNotification'</span>;
+
+<span class="hljs-keyword">const</span> MyLayout = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> &lt;Layout 
+    {...props}
+    appBar={MyAppBar}
+    menu={MyMenu}
+    notification={MyNotification}
+/&gt;;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> MyLayout;
+</code></pre>
+<p>要获得更多自定义布局，请从头开始编写组件。 它必须包含 <code>{children}</code> 占位符, 其中就是 react-admin 将渲染的资源。 使用 <a href="https://github.com/marmelab/react-admin/blob/master/src/mui/layout/Layout.js">default layout</a> 作为起点。 下面是一个简化版本 (没有 responsive 支持):</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyLayout.js</span>
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'prop-types'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { withStyles, MuiThemeProvider, createMuiTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+<span class="hljs-keyword">import</span> {
+    AppBar,
+    Menu,
+    Notification,
+    Sidebar,
+    setSidebarVisibility,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> styles = <span class="hljs-function"><span class="hljs-params">theme</span> =&gt;</span> ({
+    <span class="hljs-attr">root</span>: {
+        <span class="hljs-attr">display</span>: <span class="hljs-string">'flex'</span>,
+        <span class="hljs-attr">flexDirection</span>: <span class="hljs-string">'column'</span>,
+        <span class="hljs-attr">zIndex</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">minHeight</span>: <span class="hljs-string">'100vh'</span>,
+        <span class="hljs-attr">backgroundColor</span>: theme.palette.background.default,
+        <span class="hljs-attr">position</span>: <span class="hljs-string">'relative'</span>,
+    },
+    <span class="hljs-attr">appFrame</span>: {
+        <span class="hljs-attr">display</span>: <span class="hljs-string">'flex'</span>,
+        <span class="hljs-attr">flexDirection</span>: <span class="hljs-string">'column'</span>,
+        <span class="hljs-attr">overflowX</span>: <span class="hljs-string">'auto'</span>,
+    },
+    <span class="hljs-attr">contentWithSidebar</span>: {
+        <span class="hljs-attr">display</span>: <span class="hljs-string">'flex'</span>,
+        <span class="hljs-attr">flexGrow</span>: <span class="hljs-number">1</span>,
+    },
+    <span class="hljs-attr">content</span>: {
+        <span class="hljs-attr">display</span>: <span class="hljs-string">'flex'</span>,
+        <span class="hljs-attr">flexDirection</span>: <span class="hljs-string">'column'</span>,
+        <span class="hljs-attr">flexGrow</span>: <span class="hljs-number">2</span>,
+        <span class="hljs-attr">padding</span>: theme.spacing.unit * <span class="hljs-number">3</span>,
+        <span class="hljs-attr">marginTop</span>: <span class="hljs-string">'4em'</span>,
+        <span class="hljs-attr">paddingLeft</span>: <span class="hljs-number">5</span>,
+    },
+});
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyLayout</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    componentWillMount() {
+        <span class="hljs-keyword">this</span>.props.setSidebarVisibility(<span class="hljs-literal">true</span>);
+    }
+
+    render() {
+        <span class="hljs-keyword">const</span> {
+            children,
+            classes,
+            dashboard,
+            isLoading,
+            logout,
+            open,
+            title,
+        } = <span class="hljs-keyword">this</span>.props;
+        <span class="hljs-keyword">return</span> (
+            &lt;div className={classes.root}&gt;
+                &lt;div className={classes.appFrame}&gt;
+                    &lt;AppBar title={title} open={open} logout={logout} /&gt;
+                    &lt;main className={classes.contentWithSidebar}&gt;
+                        &lt;Sidebar&gt;
+                            &lt;Menu logout={logout} hasDashboard={!!dashboard} /&gt;
+                        &lt;/Sidebar&gt;
+                        &lt;div className={classes.content}&gt;
+                            {children}
+                        &lt;/div&gt;
+                    &lt;/main&gt;
+                    &lt;Notification /&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+MyLayout.propTypes = {
+    children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    dashboard: PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.string,
+    ]),
+    isLoading: PropTypes.bool.isRequired,
+    logout: componentPropType,
+    setSidebarVisibility: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = state =&gt; ({ isLoading: state.admin.loading &gt; 0 });
+export default connect(mapStateToProps, { setSidebarVisibility })(withStyles(styles)(MyLayout));
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="使用自定义菜单"></a><a href="#使用自定义菜单" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用自定义菜单</h2>
+<p>默认情况下，React-admin 使用作为 <code>&lt;Admin&gt;</code> 子级传递的 <code>&lt;Resource&gt;</code> 组件列表来为具有 <code>list</code> 组件的每个资源构建菜单。</p>
+<p>如果要添加或删除菜单项，例如链接到非资源页面，可以创建自己的菜单组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyMenu.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { MenuItemLink, getResources } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+<span class="hljs-keyword">import</span> Responsive <span class="hljs-keyword">from</span> <span class="hljs-string">'../layout/Responsive'</span>;
+
+<span class="hljs-keyword">const</span> MyMenu = <span class="hljs-function">(<span class="hljs-params">{ resources, onMenuClick, logout }</span>) =&gt;</span> (
+    &lt;div&gt;
+        {resources.map(resource =&gt; (
+            &lt;MenuItemLink to={`/${resource.name}`} primaryText={resource.name} onClick={onMenuClick} /&gt;
+        ))}
+        &lt;MenuItemLink to="/custom-route" primaryText="Miscellaneous" onClick={onMenuClick} /&gt;
+        &lt;Responsive
+            small={logout}
+            medium={null} // Pass null to render nothing on larger devices
+        /&gt;
+    &lt;/div&gt;
+);
+
+const mapStateToProps = state =&gt; ({
+    resources: getResources(state),
+});
+
+export default withRouter(connect(mapStateToProps)(MyMenu));
+
+</code></pre>
+<p><strong>提示</strong>：请注意 <code>MenuItemLink</code> 组件。 必须使用它来避免移动视图中不必要的副作用。</p>
+<p><strong>提示</strong>：注意, 我们只在小设备上包含 <code>logout</code> 项。实际上, <code>logout</code> 按钮已显示在较大设备的 AppBar 中。</p>
+<p><strong>提示</strong>：请注意，我们使用React Router <a href="https://reacttraining.com/react-router/web/api/withRouter"><code>withRouter</code></a> Hoc，并在Redux <a href="https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options">connect</a> <strong>之前</strong>使用它。 如果要突出显示活动菜单项，则需要这样做。</p>
+<p>要使用此自定义菜单组件，请将其传递给自定义布局，如上所述：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyLayout.js</span>
+<span class="hljs-keyword">import</span> { Layout } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> MyMenu <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyMenu'</span>;
+
+<span class="hljs-keyword">const</span> MyLayout = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> &lt;Layout {...props} menu={MyMenu} /&gt;;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> MyLayout;
+</code></pre>
+<p>然后，在 <code>&lt;Admin&gt;</code> <code>applayout</code> 属性中使用此布局：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> MyLayout <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyLayout'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">appLayout</span>=<span class="hljs-string">{MyLayout}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p><strong>提示</strong>：如果您使用 authentication，请不要忘记在自定义菜单组件中渲染<code>logout</code>属性。 此外，作为属性传递的 <code>onMenuClick</code> 函数用于关闭移动设备上的侧边栏。</p>
+<p><code>MenuItemLink</code> 组件使用 React Router <code>NavLink</code> 组件，因此允许在定位当前页面时自定义其样式。</p></p>
+<p>如果默认的活动样式不符合您的喜好，您可以通过传递自己的 <code>classes</code> 来覆盖它：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyMenu.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { MenuItemLink, getResources } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+<span class="hljs-keyword">import</span> { withRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+
+<span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">root</span>: {}, <span class="hljs-comment">// Style applied to the MenuItem from material-ui</span>
+    active: { <span class="hljs-attr">fontWeight</span>: <span class="hljs-string">'bold'</span> }, <span class="hljs-comment">// Style applied when the menu item is the active one</span>
+    icon: {}, <span class="hljs-comment">// Style applied to the icon</span>
+};
+
+<span class="hljs-keyword">const</span> MyMenu = <span class="hljs-function">(<span class="hljs-params">{ classes, resources, onMenuClick, logout }</span>) =&gt;</span> (
+    &lt;div&gt;
+        {resources.map(resource =&gt; (
+            &lt;MenuItemLink classes={classes} to={`/${resource.name}`} primaryText={resource.name} onClick={onMenuClick} /&gt;
+        ))}
+        &lt;MenuItemLink classes={classes} to="/custom-route" primaryText="Miscellaneous" onClick={onMenuClick} /&gt;
+        &lt;Responsive
+            small={logout}
+            medium={null} // Pass null to render nothing on larger devices
+        /&gt;
+    &lt;/div&gt;
+);
+
+const mapStateToProps = state =&gt; ({
+    resources: getResources(state),
+});
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(Menu)));
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="notifications"></a><a href="#notifications" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Notifications</h2>
+<p>如果您使用自己的layout（或自定义登录页面），则可能使用 <code>&lt;Notification&gt;</code> 组件。</p>
+<p>您可以通过设置 <code>autoHideDuration</code> 属性来重写通知持续时间。 它默认为4000，即4秒。 例如，要创建一个默认为5秒的自定义通知组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyNotification.js</span>
+<span class="hljs-keyword">import</span> { Notification } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> MyNotification = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> &lt;Notification {...props}autoHideDuration={<span class="hljs-number">5000</span>} /&gt;;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> MyNotification;
+</code></pre>
+<p><strong>提示</strong>：如果您使用 <code>showNotification</code> action，则可以将每条消息的 <code>autoHideDuration</code> 定义为 <code>showNotification</code> action创建者的第三个参数。</p>
+<h2><a class="anchor" aria-hidden="true" id="loading"></a><a href="#loading" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Loading</h2>
+<p>显示带有可选消息的循环进度组件。 在自定义页面上显示与 <code>react-admin</code> 相同的加载组件以保持一致性。</p>
+<p>Supported props:</p>
+<table>
+<thead>
+<tr><th>Prop</th><th>Type</th><th>Default</th><th>Descriptions</th></tr>
+</thead>
+<tbody>
+<tr><td><code>loadingPrimary</code></td><td><code>String</code></td><td><code>ra.page.loading</code></td><td>Label to use for primary loading message</td></tr>
+<tr><td><code>loadingSecondary</code></td><td><code>String</code></td><td><code>ra.message.loading</code></td><td>Label to use for secondary loading message</td></tr>
+</tbody>
+</table>
+<p>Usage:</p>
+<pre><code class="hljs css languages- jsx">&lt;Loading loadingPrimary=<span class="hljs-string">"app.page.loading"</span> loadingSecondary=<span class="hljs-string">"app.message.loading"</span> /&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="linearprogress"></a><a href="#linearprogress" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>LinearProgress</h2>
+<p>显示线性进度组件。在自定义输入上显示与<code>react-admin</code>相同的加载组件以保持一致性。</p>
+<p>用法：</p>
+<pre><code class="hljs css languages- jsx">({ data, ...props }) =&gt; !data? 
+        &lt;LinearProgress /&gt; : 
+        &lt;MyInput data={data} /&gt;        
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/authorization.html">← 授权</a><a class="docs-next button" href="/docs/zh-CN/actions.html">编写 Action →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#重写组件样式">重写组件样式</a></li><li><a href="#条件格式">条件格式</a></li><li><a href="#responsive-utility">Responsive Utility</a></li><li><a href="#使用预定义主题">使用预定义主题</a></li><li><a href="#编写自定义主题">编写自定义主题</a></li><li><a href="#使用自定义布局">使用自定义布局</a></li><li><a href="#使用自定义菜单">使用自定义菜单</a></li><li><a href="#notifications">Notifications</a></li><li><a href="#loading">Loading</a></li><li><a href="#linearprogress">LinearProgress</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

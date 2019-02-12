@@ -1,0 +1,632 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>数据提供程序 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="无论使用何种规范，REST，GraphQL还是SOAP。React-admin都可以与它的API进行通信。 对于 REST 服务器, 它可以是 [JSON API](http://jsonapi.org/), [HAL](http://stateless.co/hal_specification.html), [OData](http://www.odata.org/) 或自定义规范。 React-admin 只需要一个 Data Provider 函数。 这是将数据查询转换为 http 请求的地方, 以及对数据响应的 http 响应。"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="数据提供程序 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="无论使用何种规范，REST，GraphQL还是SOAP。React-admin都可以与它的API进行通信。 对于 REST 服务器, 它可以是 [JSON API](http://jsonapi.org/), [HAL](http://stateless.co/hal_specification.html), [OData](http://www.odata.org/) 或自定义规范。 React-admin 只需要一个 Data Provider 函数。 这是将数据查询转换为 http 请求的地方, 以及对数据响应的 http 响应。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/data-providers.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">数据提供程序</h1></header><article><div><span><p>无论使用何种规范，REST，GraphQL还是SOAP。React-admin都可以与它的API进行通信。 对于 REST 服务器, 它可以是 <a href="http://jsonapi.org/">JSON API</a>, <a href="http://stateless.co/hal_specification.html">HAL</a>, <a href="http://www.odata.org/">OData</a> 或自定义规范。 React-admin 只需要一个 Data Provider 函数。 这是将数据查询转换为 http 请求的地方, 以及对数据响应的 http 响应。</p>
+<p><img src="https://marmelab.com/react-admin/img/data-provider.png" alt="Data Provider architecture"></p>
+<p><code>&lt;Admin&gt;</code> 组件的 <code>dataProvider</code> 参数必须是具有以下签名的函数：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">/**
+ * Query a data provider and return a promise for a response
+ *
+ * @example
+ * dataProvider(GET_ONE, 'posts', { id: 123 })
+ *  =&gt; Promise.resolve({ data: { id: 123, title: "hello, world" } })
+ *
+ * @param {string} type Request type, e.g GET_LIST
+ * @param {string} resource Resource name, e.g. "posts"
+ * @param {Object} payload Request parameters. Depends on the action type
+ * @returns {Promise} the Promise for a response
+ */</span>
+<span class="hljs-keyword">const</span> dataProvider = <span class="hljs-function">(<span class="hljs-params">type, resource, params</span>) =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>();
+</code></pre>
+<p>您可以在 <a href="https://github.com/marmelab/react-admin/blob/master/packages/ra-data-simple-rest/src/index.js"><code>packages/ra-data-simple-rest/src/index.js</code></a> 找到 Data Provider 示例实现。</p>
+<p><code>dataProvider</code> 也是添加自定义 HTTP 头、身份验证等的理想位置。</p>
+<h2><a class="anchor" aria-hidden="true" id="可用的-provider"></a><a href="#可用的-provider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>可用的 Provider</h2>
+<p>React-admin 项目包括 4 个 Data Provider:</p>
+<ul>
+<li>Simple REST：<a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest">marmelab/ra-data-simple-rest</a> （<a href="#simple-rest">请阅读以下内容</a>）。 它主要用作一个例子。 顺便提一下, 它与 <a href="https://github.com/marmelab/FakeRest">FakeRest</a> API 兼容。</li>
+<li><strong><a href="https://github.com/typicode/json-server">JSON server</a></strong>: <a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-json-server">marmelab/ra-data-json-server</a>. 非常适合在尚未开发的 REST API 上，做一个 admin 原型。</li>
+<li><a href="https://www.graph.cool/">Graphcool</a>: <a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-graphcool">marmelab/ra-data-graphcool</a>. 遵循 Graphcool 约定的 GraphQL 服务器 Provider。 顺便提一下, 这个包建立在 <a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-graphql">marmelab/ra-data-graphql</a>上, 它允许您为其他 graphql 约定开发Provider。</li>
+<li>Local JSON: <a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-fakerest">marmelab/ra-data-fakerest</a>. 基于本地对象, 它甚至不使用 HTTP。 用于测试目的。</li>
+</ul>
+<p>您可以在第三方存储库中找到各种后端的 Data Provider：</p>
+<ul>
+<li><strong><a href="https://github.com/abiglobalhealth/aor-dynamodb-client">DynamoDb</a></strong>: <a href="https://github.com/abiglobalhealth/aor-dynamodb-client">abiglobalhealth/aor-dynamodb-client</a></li>
+<li><strong><a href="https://github.com/dchester/epilogue">Epilogue</a></strong>: <a href="https://github.com/dunghuynh/aor-epilogue-client">dunghuynh/aor-epilogue-client</a></li>
+<li><strong><a href="http://www.feathersjs.com/">Feathersjs</a></strong>: <a href="https://github.com/josx/aor-feathers-client">josx/aor-feathers-client</a></li>
+<li><strong><a href="https://firebase.google.com/">Firebase</a></strong>: <a href="https://github.com/sidferreira/aor-firebase-client">sidferreira/aor-firebase-client</a></li>
+<li><strong><a href="http://jsonapi.org/">JSON API</a></strong>: <a href="https://github.com/moonlight-labs/aor-jsonapi-client">moonlight-labs/aor-jsonapi-client</a></li>
+<li><strong><a href="http://loopback.io/">Loopback</a></strong>: <a href="https://github.com/kimkha/aor-loopback">kimkha/aor-loopback</a></li>
+<li><strong><a href="https://github.com/ParsePlatform/parse-server">Parse Server</a></strong>: <a href="https://github.com/leperone/aor-parseserver-client">leperone/aor-parseserver-client</a></li>
+<li><strong><a href="http://postgrest.com/en/v0.4/">PostgREST</a></strong>: <a href="https://github.com/tomberek/aor-postgrest-client">tomberek/aor-postgrest-client</a></li>
+<li><strong><a href="https://github.com/o1lab/xmysql">Xmysql</a></strong>: <a href="https://github.com/soaserele/aor-xmysql">soaserele/aor-xmysql</a></li>
+</ul>
+<p>如果您已经为另一个后端编写了一个 Data Provider，并开放了它的源代码，请使用您的包帮助完成这个列表。</p>
+<h2><a class="anchor" aria-hidden="true" id="用法"></a><a href="#用法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h2>
+<p>作为一个示例，让我们关注 Simple REST data provider 。它使用过滤器和排序的简单GET参数来满足REST api。</p>
+<p>安装 <code>ra-data-simple-rest</code> 包以使用此 provider。</p>
+<pre><code class="hljs css languages- sh">npm install ra-data-simple-rest
+</code></pre>
+<p>然后, 使用 REST 后端 URL 初始化 Provider, 并将结果传递给 <code>&lt;Admin&gt;</code> 组件的 <code>dataProvider</code> 属性:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> simpleRestProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-simple-rest'</span>;
+
+<span class="hljs-keyword">import</span> { PostList } <span class="hljs-keyword">from</span> <span class="hljs-string">'./posts'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>/')}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{PostList}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+);
+
+export default App;
+</span></code></pre>
+<p>以下是此 Provider 如何将请求类型映射到 API 调用：</p>
+<table>
+<thead>
+<tr><th>Request type</th><th>API calls</th></tr>
+</thead>
+<tbody>
+<tr><td><code>GET_LIST</code></td><td><code>GET http://my.api.url/posts?sort=['title','ASC']&amp;range=[0, 24]&amp;filter={title:'bar'}</code></td></tr>
+<tr><td><code>GET_ONE</code></td><td><code>GET http://my.api.url/posts/123</code></td></tr>
+<tr><td><code>CREATE</code></td><td><code>POST http://my.api.url/posts/123</code></td></tr>
+<tr><td><code>UPDATE</code></td><td><code>PUT http://my.api.url/posts/123</code></td></tr>
+<tr><td><code>UPDATE_MANY</code></td><td>Multiple calls to <code>PUT http://my.api.url/posts/123</code></td></tr>
+<tr><td><code>DELETE</code></td><td><code>DELETE http://my.api.url/posts/123</code></td></tr>
+<tr><td><code>DELETE_MANY</code></td><td>Multiple calls to <code>DELETE http://my.api.url/posts/123</code></td></tr>
+<tr><td><code>GET_MANY</code></td><td><code>GET http://my.api.url/posts?filter={ids:[123,456,789]}</code></td></tr>
+<tr><td><code>GET_MANY_REFERENCE</code></td><td><code>GET http://my.api.url/posts?filter={author_id:345}</code></td></tr>
+</tbody>
+</table>
+<p><strong>注意</strong>：Simple REST Client 希望 API 在对 GET_LIST 调用的响应中包含 Content-Range 头。 该值必须是集合中的资源总数。 这使 react-admin 能够知道总共有多少页资源，并生成分页控件。</p>
+<pre><code class="hljs">Content-Range: posts 0-24/319
+</code></pre>
+<p>在 JS 代码中如果您的 API 是在另一个域中，你需要到白名单中为这个添加一个 <code>Access-Control-Expose-Headers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">CORS</a> 头。</p>
+<pre><code class="hljs">Access-Control-Expose-Headers: Content-Range
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="添加自定义头"></a><a href="#添加自定义头" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>添加自定义头</h2>
+<p><code>simpleRestProvider</code> 函数接受一个 HTTP client 函数作为第二个参数。 默认情况下, 他们使用 react-admin 的 <code>fetchUtils.fetchJson()</code> 作为 HTTP client。 它类似于HTML5 <code>fetch()</code>，除了它自动处理 JSON 解码和 HTTP 错误代码。</p>
+<p>这意味着如果您需要为请求添加自定义头，您可以将 <code>etchJson()</code> 调用<em>包装</em>在您自己的函数中：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { fetchUtils, Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> simpleRestProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-simple-rest'</span>;
+
+<span class="hljs-keyword">const</span> httpClient = <span class="hljs-function">(<span class="hljs-params">url, options = {}</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (!options.headers) {
+        options.headers = <span class="hljs-keyword">new</span> Headers({ <span class="hljs-attr">Accept</span>: <span class="hljs-string">'application/json'</span> });
+    }
+    <span class="hljs-comment">// add your own headers here</span>
+    options.headers.set(<span class="hljs-string">'X-Custom-Header'</span>, <span class="hljs-string">'foobar'</span>);
+    <span class="hljs-keyword">return</span> fetchUtils.fetchJson(url, options);
+}
+<span class="hljs-keyword">const</span> dataProvider = simpleRestProvider(<span class="hljs-string">'http://path.to.my.api/'</span>, httpClient);
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{dataProvider}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{PostList}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+);
+</span></code></pre>
+<p>现在，对 REST API 的所有请求都将包含 <code>X-Custom-Header:foobar</code> 头。</p>
+<p><strong>提示</strong>：自定义头的最常见用法是进行身份验证。 <code>fetchJson</code> 具有对 Authorization 令牌头的内置支持：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> httpClient = <span class="hljs-function">(<span class="hljs-params">url, options = {}</span>) =&gt;</span> {
+    options.user = {
+        <span class="hljs-attr">authenticated</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">token</span>: <span class="hljs-string">'SRTRDFVESGNJYTUKTYTHRG'</span>
+    }
+    <span class="hljs-keyword">return</span> fetchUtils.fetchJson(url, options);
+}
+<span class="hljs-keyword">const</span> dataProvider = simpleRestProvider(<span class="hljs-string">'http://path.to.my.api/'</span>, httpClient);
+</code></pre>
+<p>现在，对REST API的所有请求都将包含 <code>Authorization：SRTRDFVESGNJYTUKTYTHRG</code> 头。</p>
+<h2><a class="anchor" aria-hidden="true" id="装饰-data-provider-文件上载示例"></a><a href="#装饰-data-provider-文件上载示例" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>装饰 Data Provider（文件上载示例）</h2>
+<p>您可以增强现有 Data Provider 的功能，而不是编写自己的 Data Provider。您甚至可以自定义限制给定资源。</p>
+<p>例如，如果您想要使用上传组件（如 <code>&lt;ImageInput /&gt;</code>组件），你可以按以下方式修饰它：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in addUploadFeature.js</span>
+<span class="hljs-comment">/**
+ * Convert a `File` object returned by the upload input into a base 64 string.
+ * That's not the most optimized way to store images in production, but it's
+ * enough to illustrate the idea of data provider decoration.
+ */</span>
+<span class="hljs-keyword">const</span> convertFileToBase64 = <span class="hljs-function"><span class="hljs-params">file</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> reader = <span class="hljs-keyword">new</span> FileReader();
+    reader.readAsDataURL(file.rawFile);
+
+    reader.onload = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> resolve(reader.result);
+    reader.onerror = reject;
+});
+
+<span class="hljs-comment">/**
+ * For posts update only, convert uploaded image in base 64 and attach it to
+ * the `picture` sent property, with `src` and `title` attributes.
+ */</span>
+<span class="hljs-keyword">const</span> addUploadFeature = <span class="hljs-function"><span class="hljs-params">requestHandler</span> =&gt;</span> (type, resource, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === <span class="hljs-string">'UPDATE'</span> &amp;&amp; resource === <span class="hljs-string">'posts'</span>) {
+        <span class="hljs-keyword">if</span> (params.data.pictures &amp;&amp; params.data.pictures.length) {
+            <span class="hljs-comment">// only freshly dropped pictures are instance of File</span>
+            <span class="hljs-keyword">const</span> formerPictures = params.data.pictures.filter(p.rawFile =&gt; !(p <span class="hljs-keyword">instanceof</span> File));
+            <span class="hljs-keyword">const</span> newPictures = params.data.pictures.filter(p.rawFile =&gt; p <span class="hljs-keyword">instanceof</span> File);
+
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.all(newPictures.map(convertFileToBase64))
+                .then(<span class="hljs-function"><span class="hljs-params">base64Pictures</span> =&gt;</span> base64Pictures.map(<span class="hljs-function"><span class="hljs-params">picture64</span> =&gt;</span> ({
+                    <span class="hljs-attr">src</span>: picture64,
+                    <span class="hljs-attr">title</span>: <span class="hljs-string">`<span class="hljs-subst">${params.data.title}</span>`</span>,
+                })))
+                .then(<span class="hljs-function"><span class="hljs-params">transformedNewPictures</span> =&gt;</span> requestHandler(type, resource, {
+                    ...params,
+                    <span class="hljs-attr">data</span>: {
+                        ...params.data,
+                        <span class="hljs-attr">pictures</span>: [...transformedNewPictures, ...formerPictures],
+                    },
+                }));
+        }
+    }
+    <span class="hljs-comment">// for other request types and reources, fall back to the defautl request handler</span>
+    <span class="hljs-keyword">return</span> requestHandler(type, resource, params);
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> addUploadFeature;
+</code></pre>
+<p>让上传功能增强 Provider，使用 Data Provider 函数组合 addUploadFeature 函数：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> simpleRestProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-simple-rest'</span>;
+<span class="hljs-keyword">import</span> addUploadFeature <span class="hljs-keyword">from</span> <span class="hljs-string">'./addUploadFeature'</span>;
+
+<span class="hljs-keyword">const</span> dataProvider = simpleRestProvider(<span class="hljs-string">'http://path.to.my.api/'</span>);
+<span class="hljs-keyword">const</span> uploadCapableDataProvider = addUploadFeature(dataProvider);
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{uploadCapableDataProvider}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{PostList}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+);
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="编写自己的-data-provider"></a><a href="#编写自己的-data-provider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>编写自己的 Data Provider</h2>
+<p>通常，没有适合您 API 的 Data Provider — 无论是在核心 Provider 中，还是在第三方 Provider 中。在这种情况下，您必须编写自己的 Data Provider。</p>
+<p>Data Provider 是一个接收请求并针对响应返回 Promise 的函数。请求和响应格式都是标准化的。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">/**
+ * Query a data provider and return a promise for a response
+ *
+ * @example
+ * dataProvider(GET_ONE, 'posts', { id: 123 })
+ *  =&gt; Promise.resolve({ data: { id: 123, title: "hello, world" } })
+ *
+ * @param {string} type Request type, e.g GET_LIST
+ * @param {string} resource Resource name, e.g. "posts"
+ * @param {Object} payload Request parameters. Depends on the action type
+ * @returns {Promise} the Promise for a response
+ */</span>
+<span class="hljs-keyword">const</span> dataProvider = <span class="hljs-function">(<span class="hljs-params">type, resource, params</span>) =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>();
+</code></pre>
+<p>编写一个 Data provider 时，您的任务是将请求路由到 API 后端，然后转换它们的响应以匹配 Data Provider 返回的格式。</p>
+<h3><a class="anchor" aria-hidden="true" id="request-format"></a><a href="#request-format" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Request Format</h3>
+<p>数据查询需要一个<em>类型</em>(例如 <code>GET_ONE</code>)、一个<em>资源</em>(例如“posts”)和一组参数。</p>
+<p><em>提示</em>: 相比之下, HTTP 请求需要 <em>动词</em> (例如 &quot;GET&quot;), <em>url</em> (例如 &quot;<a href="http://myapi.com/posts">http://myapi.com/posts</a>&quot;), <em>headers</em> 的列表 (如 <code>Content-Type</code>)和 <em>body</em>。</p>
+<p>可能的类型有：</p>
+<table>
+<thead>
+<tr><th>Type</th><th>Usage</th><th>Params format</th></tr>
+</thead>
+<tbody>
+<tr><td><code>GET_LIST</code></td><td>Search for resources</td><td><code>{ pagination: { page: {int} , perPage: {int} }, sort: { field: {string}, order: {string} }, filter: {Object} }</code></td></tr>
+<tr><td><code>GET_ONE</code></td><td>Read a single resource, by id</td><td><code>{ id: {mixed} }</code></td></tr>
+<tr><td><code>CREATE</code></td><td>Create a single resource</td><td><code>{ data: {Object} }</code></td></tr>
+<tr><td><code>UPDATE</code></td><td>Update a single resource</td><td><code>{ id: {mixed}, data: {Object}, previousData: {Object} }</code></td></tr>
+<tr><td><code>UPDATE_MANY</code></td><td>Update multiple resources</td><td><code>{ ids: {mixed[]}, data: {Object} }</code></td></tr>
+<tr><td><code>DELETE</code></td><td>Delete a single resource</td><td><code>{ id: {mixed}, previousData: {Object} }</code></td></tr>
+<tr><td><code>DELETE_MANY</code></td><td>Delete multiple resources</td><td><code>{ ids: {mixed[]} }</code></td></tr>
+<tr><td><code>GET_MANY</code></td><td>Read a list of resource, by ids</td><td><code>{ ids: {mixed[]} }</code></td></tr>
+<tr><td><code>GET_MANY_REFERENCE</code></td><td>Read a list of resources related to another one</td><td><code>{ target: {string}, id: {mixed}, pagination: { page: {int} , perPage: {int} }, sort: { field: {string}, order: {string} }, filter: {Object} }</code></td></tr>
+</tbody>
+</table>
+<p>以下是 react-admin 如何使用以下类型调用 Data Provider 的几个示例：</p>
+<pre><code class="hljs css languages- jsx">dataProvider(GET_LIST, <span class="hljs-string">'posts'</span>, {
+    <span class="hljs-attr">pagination</span>: { <span class="hljs-attr">page</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">perPage</span>: <span class="hljs-number">5</span> },
+    <span class="hljs-attr">sort</span>: { <span class="hljs-attr">field</span>: <span class="hljs-string">'title'</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">'ASC'</span> },
+    <span class="hljs-attr">filter</span>: { <span class="hljs-attr">author_id</span>: <span class="hljs-number">12</span> },
+});
+dataProvider(GET_ONE, <span class="hljs-string">'posts'</span>, { <span class="hljs-attr">id</span>: <span class="hljs-number">123</span> });
+dataProvider(CREATE, <span class="hljs-string">'posts'</span>, { <span class="hljs-attr">data</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">"hello, world"</span> } });
+dataProvider(UPDATE, <span class="hljs-string">'posts'</span>, {
+    <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>,
+    <span class="hljs-attr">data</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">"hello, world!"</span> },
+    <span class="hljs-attr">previousData</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">"previous title"</span> }
+});
+dataProvider(UPDATE_MANY, <span class="hljs-string">'posts'</span>, {
+    <span class="hljs-attr">ids</span>: [<span class="hljs-number">123</span>, <span class="hljs-number">234</span>],
+    <span class="hljs-attr">data</span>: { <span class="hljs-attr">views</span>: <span class="hljs-number">0</span> },
+});
+dataProvider(DELETE, <span class="hljs-string">'posts'</span>, {
+    <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>,
+    <span class="hljs-attr">previousData</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">"hello, world"</span> }
+});
+dataProvider(DELETE_MANY, <span class="hljs-string">'posts'</span>, { <span class="hljs-attr">ids</span>: [<span class="hljs-number">123</span>, <span class="hljs-number">234</span>] });
+dataProvider(GET_MANY, <span class="hljs-string">'posts'</span>, { <span class="hljs-attr">ids</span>: [<span class="hljs-number">123</span>, <span class="hljs-number">124</span>, <span class="hljs-number">125</span>] });
+dataProvider(GET_MANY_REFERENCE, <span class="hljs-string">'comments'</span>, {
+    <span class="hljs-attr">target</span>: <span class="hljs-string">'post_id'</span>,
+    <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>,
+    <span class="hljs-attr">sort</span>: { <span class="hljs-attr">field</span>: <span class="hljs-string">'created_at'</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">'DESC'</span> }
+});
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="示例请求处理"></a><a href="#示例请求处理" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>示例请求处理</h3>
+<p>假设您希望将 Data Provider 请求映射到 REST 后端，是如下所示的样子:</p>
+<ul>
+<li><code>GET_LIST =&gt; GET http://path.to.my.api/posts?sort=[&quot;title&quot;,&quot;ASC&quot;]&amp;range=[0, 24]&amp;filter={&quot;author_id&quot;:12}</code></li>
+<li><code>GET_ONE =&gt; GET http://path.to.my.api/posts/123</code></li>
+<li><code>CREATE =&gt; POST http://path.to.my.api/posts</code></li>
+<li><code>UPDATE =&gt; PUT http://path.to.my.api/posts/123</code></li>
+<li><code>UPDATE_MANY =&gt; PUT http://path.to.my.api/posts?filter={&quot;ids&quot;:[123,124,125]}</code></li>
+<li><code>DELETE =&gt; DELETE http://path.to.my.api/posts/123</code></li>
+<li><code>DELETE_MANY =&gt; DELETE http://path.to.my.api/posts?filter={&quot;ids&quot;:[123,124,125]}</code></li>
+<li><code>GET_MANY =&gt; GET http://path.to.my.api/posts?filter={&quot;ids&quot;:[123,124,125]}</code></li>
+<li><code>GET_MANY_REFERENCE =&gt; GET http://path.to.my.api/comments?sort=[&quot;created_at&quot;,&quot;DESC&quot;]&amp;range=[0, 24]&amp;filter={&quot;post_id&quot;:123}</code></li>
+</ul>
+<p>数据提供者经常使用<code>switch</code>语句，并通过调用<code>fetch()</code>来完成。 这是一个示例实现：</p>
+<pre><code class="hljs css languages- js"><span class="hljs-comment">// in myRestProvider.js</span>
+<span class="hljs-keyword">import</span> { stringify } <span class="hljs-keyword">from</span> <span class="hljs-string">'query-string'</span>;
+<span class="hljs-keyword">import</span> {
+    GET_LIST,
+    GET_ONE,
+    CREATE,
+    UPDATE,
+    DELETE,
+    GET_MANY,
+    GET_MANY_REFERENCE,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> apiUrl = <span class="hljs-string">'http://path.to.my.api/'</span>;
+
+<span class="hljs-comment">/**
+ * Maps react-admin queries to my REST API
+ *
+ * @param {string} type Request type, e.g GET_LIST
+ * @param {string} resource Resource name, e.g. "posts"
+ * @param {Object} payload Request parameters. Depends on the request type
+ * @returns {Promise} the Promise for a data response
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, resource, params) =&gt; {
+    <span class="hljs-keyword">let</span> url = <span class="hljs-string">''</span>;
+    <span class="hljs-keyword">const</span> options = { 
+        <span class="hljs-attr">headers</span> : <span class="hljs-keyword">new</span> Headers({
+            <span class="hljs-attr">Accept</span>: <span class="hljs-string">'application/json'</span>,
+        }),
+    };
+    <span class="hljs-keyword">switch</span> (type) {
+        <span class="hljs-keyword">case</span> GET_LIST: {
+            <span class="hljs-keyword">const</span> { page, perPage } = params.pagination;
+            <span class="hljs-keyword">const</span> { field, order } = params.sort;
+            <span class="hljs-keyword">const</span> query = {
+                <span class="hljs-attr">sort</span>: <span class="hljs-built_in">JSON</span>.stringify([field, order]),
+                <span class="hljs-attr">range</span>: <span class="hljs-built_in">JSON</span>.stringify([
+                    (page - <span class="hljs-number">1</span>) * perPage,
+                    page * perPage - <span class="hljs-number">1</span>,
+                ]),
+                <span class="hljs-attr">filter</span>: <span class="hljs-built_in">JSON</span>.stringify(params.filter),
+            };
+            url = <span class="hljs-string">`<span class="hljs-subst">${apiUrl}</span>/<span class="hljs-subst">${resource}</span>?<span class="hljs-subst">${stringify(query)}</span>`</span>;
+            <span class="hljs-keyword">break</span>;
+        }
+        <span class="hljs-keyword">case</span> GET_ONE:
+            url = <span class="hljs-string">`<span class="hljs-subst">${apiUrl}</span>/<span class="hljs-subst">${resource}</span>/<span class="hljs-subst">${params.id}</span>`</span>;
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> CREATE:
+            url = <span class="hljs-string">`<span class="hljs-subst">${apiUrl}</span>/<span class="hljs-subst">${resource}</span>`</span>;
+            options.method = <span class="hljs-string">'POST'</span>;
+            options.body = <span class="hljs-built_in">JSON</span>.stringify(params.data);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> UPDATE:
+            url = <span class="hljs-string">`<span class="hljs-subst">${apiUrl}</span>/<span class="hljs-subst">${resource}</span>/<span class="hljs-subst">${params.id}</span>`</span>;
+            options.method = <span class="hljs-string">'PUT'</span>;
+            options.body = <span class="hljs-built_in">JSON</span>.stringify(params.data);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> UPDATE_MANY:
+            <span class="hljs-keyword">const</span> query = {
+                <span class="hljs-attr">filter</span>: <span class="hljs-built_in">JSON</span>.stringify({ <span class="hljs-attr">id</span>: params.ids }),
+            };
+            url = <span class="hljs-string">`<span class="hljs-subst">${apiUrl}</span>/<span class="hljs-subst">${resource}</span>?<span class="hljs-subst">${stringify(query)}</span>`</span>;
+            options.method = <span class="hljs-string">'PATCH'</span>;
+            options.body = <span class="hljs-built_in">JSON</span>.stringify(params.data);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> DELETE:
+            url = <span class="hljs-string">`<span class="hljs-subst">${apiUrl}</span>/<span class="hljs-subst">${resource}</span>/<span class="hljs-subst">${params.id}</span>`</span>;
+            options.method = <span class="hljs-string">'DELETE'</span>;
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> DELETE_MANY:
+            <span class="hljs-keyword">const</span> query = {
+                <span class="hljs-attr">filter</span>: <span class="hljs-built_in">JSON</span>.stringify({ <span class="hljs-attr">id</span>: params.ids }),
+            };
+            url = <span class="hljs-string">`<span class="hljs-subst">${apiUrl}</span>/<span class="hljs-subst">${resource}</span>?<span class="hljs-subst">${stringify(query)}</span>`</span>;
+            options.method = <span class="hljs-string">'DELETE'</span>;
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> GET_MANY: {
+            <span class="hljs-keyword">const</span> query = {
+                <span class="hljs-attr">filter</span>: <span class="hljs-built_in">JSON</span>.stringify({ <span class="hljs-attr">id</span>: params.ids }),
+            };
+            url = <span class="hljs-string">`<span class="hljs-subst">${apiUrl}</span>/<span class="hljs-subst">${resource}</span>?<span class="hljs-subst">${stringify(query)}</span>`</span>;
+            <span class="hljs-keyword">break</span>;
+        }
+        <span class="hljs-keyword">case</span> GET_MANY_REFERENCE: {
+            <span class="hljs-keyword">const</span> { page, perPage } = params.pagination;
+            <span class="hljs-keyword">const</span> { field, order } = params.sort;
+            <span class="hljs-keyword">const</span> query = {
+                <span class="hljs-attr">sort</span>: <span class="hljs-built_in">JSON</span>.stringify([field, order]),
+                <span class="hljs-attr">range</span>: <span class="hljs-built_in">JSON</span>.stringify([
+                    (page - <span class="hljs-number">1</span>) * perPage,
+                    page * perPage - <span class="hljs-number">1</span>,
+                ]),
+                <span class="hljs-attr">filter</span>: <span class="hljs-built_in">JSON</span>.stringify({
+                    ...params.filter,
+                    [params.target]: params.id,
+                }),
+            };
+            url = <span class="hljs-string">`<span class="hljs-subst">${apiUrl}</span>/<span class="hljs-subst">${resource}</span>?<span class="hljs-subst">${stringify(query)}</span>`</span>;
+            <span class="hljs-keyword">break</span>;
+        }
+        <span class="hljs-keyword">default</span>:
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Unsupported Data Provider request type <span class="hljs-subst">${type}</span>`</span>);
+    }
+
+    <span class="hljs-keyword">return</span> fetch(url, options)
+        .then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> res.json())
+        .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span>
+            <span class="hljs-comment">/* Convert HTTP Response to Data Provider Response */</span>
+            <span class="hljs-comment">/* Covered in the next section */</span>
+        );
+};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="响应格式"></a><a href="#响应格式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>响应格式</h3>
+<p>React-admin 希望 Data Provider 的响应是具有 <code>data</code> 属性的对象。数据格式取决于请求类型。</p>
+<table>
+<thead>
+<tr><th>Request Type</th><th>Response format</th></tr>
+</thead>
+<tbody>
+<tr><td><code>GET_LIST</code></td><td><code>{ data: {Record[]}, total: {int} }</code></td></tr>
+<tr><td><code>GET_ONE</code></td><td><code>{ data: {Record} }</code></td></tr>
+<tr><td><code>CREATE</code></td><td><code>{ data: {Record} }</code></td></tr>
+<tr><td><code>UPDATE</code></td><td><code>{ data: {Record} }</code></td></tr>
+<tr><td><code>UPDATE_MANY</code></td><td><code>{ data: {mixed[]} }</code> The ids which have been updated</td></tr>
+<tr><td><code>DELETE</code></td><td><code>{ data: {Record} }</code></td></tr>
+<tr><td><code>DELETE_MANY</code></td><td><code>{ data: {mixed[]} }</code> The ids which have been deleted</td></tr>
+<tr><td><code>GET_MANY</code></td><td><code>{ data: {Record[]} }</code></td></tr>
+<tr><td><code>GET_MANY_REFERENCE</code></td><td><code>{ data: {Record[]}, total: {int} }</code></td></tr>
+</tbody>
+</table>
+<p><code>{Record}</code> 是一个至少具有 <code>id</code> 属性的对象文本, 例如 <code>{id: 123, title: &quot;hello, world&quot;}</code>。</p>
+<p>在上一个示例的基础上，这里是与 react-admin 所期望的格式匹配的示例响应：</p>
+<pre><code class="hljs css languages- jsx">dataProvider(GET_LIST, <span class="hljs-string">'posts'</span>, {
+    <span class="hljs-attr">pagination</span>: { <span class="hljs-attr">page</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">perPage</span>: <span class="hljs-number">5</span> },
+    <span class="hljs-attr">sort</span>: { <span class="hljs-attr">field</span>: <span class="hljs-string">'title'</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">'ASC'</span> },
+    <span class="hljs-attr">filter</span>: { <span class="hljs-attr">author_id</span>: <span class="hljs-number">12</span> },
+})
+.then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(response));
+<span class="hljs-comment">// {</span>
+<span class="hljs-comment">//     data: [</span>
+<span class="hljs-comment">//         { id: 126, title: "allo?", author_id: 12 },</span>
+<span class="hljs-comment">//         { id: 127, title: "bien le bonjour", author_id: 12 },</span>
+<span class="hljs-comment">//         { id: 124, title: "good day sunshine", author_id: 12 },</span>
+<span class="hljs-comment">//         { id: 123, title: "hello, world", author_id: 12 },</span>
+<span class="hljs-comment">//         { id: 125, title: "howdy partner", author_id: 12 },</span>
+<span class="hljs-comment">//     ],</span>
+<span class="hljs-comment">//     total: 27</span>
+<span class="hljs-comment">// }</span>
+
+dataProvider(GET_ONE, <span class="hljs-string">'posts'</span>, { <span class="hljs-attr">id</span>: <span class="hljs-number">123</span> })
+.then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(response));
+<span class="hljs-comment">// {</span>
+<span class="hljs-comment">//     data: { id: 123, title: "hello, world" }</span>
+<span class="hljs-comment">// }</span>
+
+dataProvider(CREATE, <span class="hljs-string">'posts'</span>, { <span class="hljs-attr">data</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">"hello, world"</span> } })
+.then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(response));
+<span class="hljs-comment">// {</span>
+<span class="hljs-comment">//     data: { id: 450, title: "hello, world" }</span>
+<span class="hljs-comment">// }</span>
+
+dataProvider(UPDATE, <span class="hljs-string">'posts'</span>, {
+    <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>,
+    <span class="hljs-attr">data</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">"hello, world!"</span> },
+    <span class="hljs-attr">previousData</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">"previous title"</span> }
+})
+.then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(response));
+<span class="hljs-comment">// {</span>
+<span class="hljs-comment">//     data: { id: 123, title: "hello, world!" }</span>
+<span class="hljs-comment">// }</span>
+
+dataProvider(UPDATE_MANY, <span class="hljs-string">'posts'</span>, {
+    <span class="hljs-attr">ids</span>: [<span class="hljs-number">123</span>, <span class="hljs-number">234</span>],
+    <span class="hljs-attr">data</span>: { <span class="hljs-attr">views</span>: <span class="hljs-number">0</span> },
+})
+.then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(response));
+<span class="hljs-comment">// {</span>
+<span class="hljs-comment">//     data: [123, 234]</span>
+<span class="hljs-comment">// }</span>
+
+dataProvider(DELETE, <span class="hljs-string">'posts'</span>, {
+    <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>,
+    <span class="hljs-attr">previousData</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">"hello, world!"</span> }
+})
+.then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(response));
+<span class="hljs-comment">// {</span>
+<span class="hljs-comment">//     data: { id: 123, title: "hello, world" }</span>
+<span class="hljs-comment">// }</span>
+
+dataProvider(DELETE_MANY, <span class="hljs-string">'posts'</span>, { <span class="hljs-attr">ids</span>: [<span class="hljs-number">123</span>, <span class="hljs-number">234</span>] })
+.then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(response));
+<span class="hljs-comment">// {</span>
+<span class="hljs-comment">//     data: [123, 234]</span>
+<span class="hljs-comment">// }</span>
+
+dataProvider(GET_MANY, <span class="hljs-string">'posts'</span>, { <span class="hljs-attr">ids</span>: [<span class="hljs-number">123</span>, <span class="hljs-number">124</span>, <span class="hljs-number">125</span>] })
+.then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(response));
+<span class="hljs-comment">// {</span>
+<span class="hljs-comment">//     data: [</span>
+<span class="hljs-comment">//         { id: 123, title: "hello, world" },</span>
+<span class="hljs-comment">//         { id: 124, title: "good day sunshise" },</span>
+<span class="hljs-comment">//         { id: 125, title: "howdy partner" },</span>
+<span class="hljs-comment">//     ]</span>
+<span class="hljs-comment">// }</span>
+
+dataProvider(GET_MANY_REFERENCE, <span class="hljs-string">'comments'</span>, {
+    <span class="hljs-attr">target</span>: <span class="hljs-string">'post_id'</span>,
+    <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>,
+    <span class="hljs-attr">sort</span>: { <span class="hljs-attr">field</span>: <span class="hljs-string">'created_at'</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">'DESC'</span> }
+});
+.then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(response));
+<span class="hljs-comment">// {</span>
+<span class="hljs-comment">//     data: [</span>
+<span class="hljs-comment">//         { id: 667, title: "I agree", post_id: 123 },</span>
+<span class="hljs-comment">//         { id: 895, title: "I don't agree", post_id: 123 },</span>
+<span class="hljs-comment">//     ],</span>
+<span class="hljs-comment">//     total: 2,</span>
+<span class="hljs-comment">// }</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="响应处理示例"></a><a href="#响应处理示例" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>响应处理示例</h3>
+<p>让我们继续REST后端示例。 此后端返回响应如下：</p>
+<pre><code class="hljs">GET http://path.to.my.api/posts?sort=['title','ASC']&amp;range=[0, 4]&amp;filter={author_id:12}
+Content-Range: posts 0-4/27
+[
+    { &quot;id&quot;: 126, &quot;title&quot;: &quot;allo?&quot;, &quot;author_id&quot;: 12 },
+    { &quot;id&quot;: 127, &quot;title&quot;: &quot;bien le bonjour&quot;, &quot;author_id&quot;: 12 },
+    { &quot;id&quot;: 124, &quot;title&quot;: &quot;good day sunshine&quot;, &quot;author_id&quot;: 12 },
+    { &quot;id&quot;: 123, &quot;title&quot;: &quot;hello, world&quot;, &quot;author_id&quot;: 12 },
+    { &quot;id&quot;: 125, &quot;title&quot;: &quot;howdy partner&quot;, &quot;author_id&quot;: 12 }
+]
+
+GET http://path.to.my.api/posts/123
+{ &quot;id&quot;: 123, &quot;title&quot;: &quot;hello, world&quot;, &quot;author_id&quot;: 12 }
+
+POST http://path.to.my.api/posts
+{ &quot;id&quot;: 123, &quot;title&quot;: &quot;hello, world&quot;, &quot;author_id&quot;: 12 }
+
+PUT http://path.to.my.api/posts/123
+{ &quot;id&quot;: 123, &quot;title&quot;: &quot;hello, world&quot;, &quot;author_id&quot;: 12 }
+
+PATCH http://path.to.my.api/posts?filter={ids:[123,124,125]}
+[123, 124, 125]
+
+DELETE http://path.to.my.api/posts/123
+{ &quot;id&quot;: 123, &quot;title&quot;: &quot;hello, world&quot;, &quot;author_id&quot;: 12 }
+
+DELETE http://path.to.my.api/posts?filter={ids:[123,124,125]}
+[123, 124, 125]
+
+GET http://path.to.my.api/posts?filter={ids:[123,124,125]}
+[
+    { &quot;id&quot;: 123, &quot;title&quot;: &quot;hello, world&quot;, &quot;author_id&quot;: 12 },
+    { &quot;id&quot;: 124, &quot;title&quot;: &quot;good day sunshine&quot;, &quot;author_id&quot;: 12 },
+    { &quot;id&quot;: 125, &quot;title&quot;: &quot;howdy partner&quot;, &quot;author_id&quot;: 12 }
+]
+
+GET http://path.to.my.api/comments?sort=['created_at','DESC']&amp;range=[0, 24]&amp;filter={post_id:123}
+Content-Range: comments 0-1/2
+[
+    { &quot;id&quot;: 667, &quot;title&quot;: &quot;I agree&quot;, &quot;post_id&quot;: 123 },
+    { &quot;id&quot;: 895, &quot;title&quot;: &quot;I don't agree&quot;, &quot;post_id&quot;: 123 }
+]
+</code></pre>
+<p>因此，Data Provider 必须将 API 后端的响应转换为 React-Admin 期望的响应格式。</p>
+<pre><code class="hljs css languages- js"><span class="hljs-comment">// in myRestProvider.js</span>
+<span class="hljs-keyword">import</span> { stringify } <span class="hljs-keyword">from</span> <span class="hljs-string">'query-string'</span>;
+<span class="hljs-keyword">import</span> {
+    GET_LIST,
+    GET_ONE,
+    CREATE,
+    UPDATE,
+    UPDATE_MANY,
+    DELETE,
+    DELETE_MANY,
+    GET_MANY,
+    GET_MANY_REFERENCE,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> apiUrl = <span class="hljs-string">'http://path.to.my.api/'</span>;
+
+<span class="hljs-comment">/**
+ * Maps react-admin queries to my REST API
+ *
+ * @param {string} type Request type, e.g GET_LIST
+ * @param {string} resource Resource name, e.g. "posts"
+ * @param {Object} payload Request parameters. Depends on the request type
+ * @returns {Promise} the Promise for a data response
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, resource, params) =&gt; {
+    <span class="hljs-keyword">let</span> url = <span class="hljs-string">''</span>;
+    <span class="hljs-keyword">const</span> options = { 
+        <span class="hljs-attr">headers</span> : <span class="hljs-keyword">new</span> Headers({
+            <span class="hljs-attr">Accept</span>: <span class="hljs-string">'application/json'</span>,
+        }),
+    };
+    <span class="hljs-keyword">switch</span> (type) {
+        <span class="hljs-comment">/* Prepare url and options as above */</span>
+    }
+
+    <span class="hljs-keyword">let</span> headers;
+    <span class="hljs-keyword">return</span> fetch(url, options)
+        .then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> {
+            headers = res.headers;
+            <span class="hljs-keyword">return</span> res.json();
+        })
+        .then(<span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> {
+            <span class="hljs-keyword">switch</span> (type) {
+                <span class="hljs-keyword">case</span> GET_LIST:
+                <span class="hljs-keyword">case</span> GET_MANY_REFERENCE:
+                    <span class="hljs-keyword">if</span> (!headers.has(<span class="hljs-string">'content-range'</span>)) {
+                        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(
+                            <span class="hljs-string">'The Content-Range header is missing in the HTTP Response. The simple REST data provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare Content-Range in the Access-Control-Expose-Headers header?'</span>
+                        );
+                    }
+                    <span class="hljs-keyword">return</span> {
+                        <span class="hljs-attr">data</span>: json,
+                        <span class="hljs-attr">total</span>: <span class="hljs-built_in">parseInt</span>(
+                            headers
+                                .get(<span class="hljs-string">'content-range'</span>)
+                                .split(<span class="hljs-string">'/'</span>)
+                                .pop(),
+                            <span class="hljs-number">10</span>
+                        ),
+                    };
+                <span class="hljs-keyword">case</span> CREATE:
+                    <span class="hljs-keyword">return</span> { <span class="hljs-attr">data</span>: { ...params.data, <span class="hljs-attr">id</span>: json.id } };
+                <span class="hljs-keyword">default</span>:
+                    <span class="hljs-keyword">return</span> { <span class="hljs-attr">data</span>: json };
+            }
+        });
+};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="错误格式"></a><a href="#错误格式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>错误格式</h3>
+<p>当 API 后端返回一个错误时，这个 Data Provider 应该 <code>throw</code> 一个 <code>Error</code> 对象。 此对象应包含具有 HTTP 响应代码 (404、500等) 的 <code>status</code> 属性。 React-admin 检查此错误代码, 并将其用于 <a href="./Authentication.md">身份验证</a> (在401或403错误的情况下)。 此外，react-admin 会在屏幕上显示错误 <code>message</code> 。</p>
+<h3><a class="anchor" aria-hidden="true" id="示例实现"></a><a href="#示例实现" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>示例实现</h3>
+<p>从 <a href="https://github.com/marmelab/react-admin/blob/master/packages/ra-data-simple-rest/src/index.js"> simple REST client </a>中查看代码: 它是自定义 Data Provider 实现的一个良好起点。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/tutorial.html">← 十分钟教程</a><a class="docs-next button" href="/docs/zh-CN/admin-component.html">Admin 组件 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#可用的-provider">可用的 Provider</a></li><li><a href="#用法">用法</a></li><li><a href="#添加自定义头">添加自定义头</a></li><li><a href="#装饰-data-provider-文件上载示例">装饰 Data Provider（文件上载示例）</a></li><li><a href="#编写自己的-data-provider">编写自己的 Data Provider</a><ul class="toc-headings"><li><a href="#request-format">Request Format</a></li><li><a href="#示例请求处理">示例请求处理</a></li><li><a href="#响应格式">响应格式</a></li><li><a href="#响应处理示例">响应处理示例</a></li><li><a href="#错误格式">错误格式</a></li><li><a href="#示例实现">示例实现</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>
