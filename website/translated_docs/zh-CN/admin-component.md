@@ -2,6 +2,7 @@
 id: admin-component
 title: Admin 组件
 ---
+
 `<Admin>` 组件创建一个具有自己的状态、路由和控制器逻辑的应用程序。 `<Admin>` 只需要一个 `dataProvider` 属性, 并且至少有一个子 `<Resource>` 就能工作：
 
 ```jsx
