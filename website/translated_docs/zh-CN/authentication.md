@@ -2,6 +2,7 @@
 id: authentication
 title: 身份验证
 ---
+
 ![Logout button](https://marmelab.com/react-admin/img/login.gif)
 
 React-admin 可以通过您选择的身份验证策略来保护您的admin app。 由于有许多不同的可能策略（Basic Auth，JWT，OAuth等），react-admin 只需提供钩子来执行您自己的验证代码。
