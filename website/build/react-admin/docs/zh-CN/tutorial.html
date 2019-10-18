@@ -1,0 +1,641 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>十分钟教程 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="这 15 分钟的教程将揭示如何创建一个新的管理应用程序基于现有的 REST API。&lt;video width=&quot;100%&quot; controls&gt; &lt;source src=&quot;http://static.marmelab.com/react-admin/react-admin.mp4&quot; type=&quot;video/mp4&quot;&gt; Your browser does not support the video tag. &lt;/video&gt;"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="十分钟教程 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="这 15 分钟的教程将揭示如何创建一个新的管理应用程序基于现有的 REST API。&lt;video width=&quot;100%&quot; controls&gt; &lt;source src=&quot;http://static.marmelab.com/react-admin/react-admin.mp4&quot; type=&quot;video/mp4&quot;&gt; Your browser does not support the video tag. &lt;/video&gt;"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/tutorial.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">十分钟教程</h1></header><article><div><span><p>这 15 分钟的教程将揭示如何创建一个新的管理应用程序基于现有的 REST API。<video width="100%" controls> <source src="http://static.marmelab.com/react-admin/react-admin.mp4" type="video/mp4"> Your browser does not support the video tag. </video></p>
+<h2><a class="anchor" aria-hidden="true" id="设置"></a><a href="#设置" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>设置</h2>
+<p>React-Admin 使用 React。 我们将使用 Facebook 的 <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a> 创建一个空的 React app, 并安装 <code>react-admin</code> 软件包:</p>
+<pre><code class="hljs css languages- sh">npm install -g create-react-app
+create-react-app <span class="hljs-built_in">test</span>-admin
+<span class="hljs-built_in">cd</span> <span class="hljs-built_in">test</span>-admin/
+yarn add react-admin
+yarn start
+</code></pre>
+<p>您应该是在 3000 端口上启动并运行着一个空的 React 应用程序。</p>
+<h2><a class="anchor" aria-hidden="true" id="使用-api-作为数据源"></a><a href="#使用-api-作为数据源" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用 API 作为数据源</h2>
+<p>React-admin 运行在浏览器中, 并使用 API 获取和存储数据。</p>
+<p>我们将使用 <a href="http://jsonplaceholder.typicode.com/">JSONPlaceholder</a>, 一个用于测试和原型设计的假 REST API, 作为管理员的数据源。下面是它的样子：</p>
+<pre><code class="hljs">curl http://jsonplaceholder.typicode.com/posts/12
+</code></pre>
+<pre><code class="hljs css languages- json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-number">12</span>,
+  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"in quibusdam tempore odit est dolorem"</span>,
+  <span class="hljs-attr">"body"</span>:
+    <span class="hljs-string">"itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"</span>,
+  <span class="hljs-attr">"userId"</span>: <span class="hljs-number">2</span>
+}
+</code></pre>
+<p>JSONPlaceholder 为帖子，评论和用户提供端点（API）。 我们建立的管理员将允许创建，检索，更新和删除（CRUD）这些资源。</p>
+<h2><a class="anchor" aria-hidden="true" id="使用-data-provider-与-api-进行联系"></a><a href="#使用-data-provider-与-api-进行联系" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用 Data Provider 与 API 进行联系</h2>
+<p>通过以下代码替换<code>src/App.js</code>来引导 admin app：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-admin"</span>;
+<span class="hljs-keyword">import</span> jsonServerProvider <span class="hljs-keyword">from</span> <span class="hljs-string">"ra-data-json-server"</span>;
+
+<span class="hljs-keyword">const</span> dataProvider = jsonServerProvider(<span class="hljs-string">"http://jsonplaceholder.typicode.com"</span>);
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &lt;Admin dataProvider={dataProvider} /&gt;;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
+</code></pre>
+<p><code>App</code> 组件现在渲染了一个 <code>&lt;Admin&gt;</code> 组件, 它是 react-admin 应用程序的根组件。 该组件需要一个<code>dataProvider</code> 属性- 一个能够从 API 获取数据的函数。 由于计算机之间并没有数据交换的标准，因此您可能必须编写自定义提供程序（Provider）以便将 react-admin 连接到您自己的 API- 稍后我们会深入了解数据提供程序（Data Providers）。 现在, 让我们利用 <code>ra-data-json-server</code> 数据提供程序, 它将适用于 JSONPlaceholder 。</p>
+<pre><code class="hljs css languages- sh">yarn add ra-data-json-server
+</code></pre>
+<p>这足以让 react-admin 运行一个空的应用程序。现在是添加功能的时候了!</p>
+<h2><a class="anchor" aria-hidden="true" id="使用-resource-映射-api-端点"></a><a href="#使用-resource-映射-api-端点" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用 Resource 映射 API 端点</h2>
+<p><code>&lt;Admin&gt;</code> 组件需要一个或多个 <code>&lt;Resource&gt;</code> 子级组件。 每个 Resource 映射一个名称到 API 中的端点。 编辑 <code>App.js</code> 文件来添加一个<code>posts</code>资源:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> { PostList } <span class="hljs-keyword">from</span> <span class="hljs-string">"./posts"</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{dataProvider}</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{PostList}</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+);
+</span></code></pre>
+<p><strong>提示</strong>: 在下一节中, 我们将定义 <code>&lt;PostList&gt;</code> 组件。</p>
+<p><code>&lt;Resource name=&quot;posts&quot; /&gt;</code> 这一行通知 react-admin 从 <a href="http://jsonplaceholder.typicode.com/posts">http://jsonplaceholder.typicode.com/posts </a> URL 上获取 &quot;posts&quot; 记录。</p>
+<h2><a class="anchor" aria-hidden="true" id="显示记录列表"></a><a href="#显示记录列表" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>显示记录列表</h2>
+<p><code>&lt;Resource&gt;</code> 还定义了每个 CRUD 操作所使用的 React 组件 （<code>列表（list）</code>, <code>创建（create）</code>, <code>编辑（edit）</code>, <code>显示（show）</code>）。 <code>list={PostList}</code>属性意味着 react-admin 应该使用 <code>&lt;PostList&gt;</code> 组件来显示帖子列表。 按如下方式创建该组件:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-admin"</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+  &lt;List {...props}&gt;
+    &lt;Datagrid&gt;
+      &lt;TextField source="id" /&gt;
+      &lt;TextField source="title" /&gt;
+      &lt;TextField source="body" /&gt;
+    &lt;/Datagrid&gt;
+  &lt;/List&gt;
+);
+</code></pre>
+<p>PostList 的主要组件是 <code>&lt;List&gt;</code> 组件，负责从 API 中抓取信息，显示页面标题，以及处理页。 然后, 该 List 将实际 posts 列表的显示委托给其子级。 在这种情况下, 这是一个 <code>&lt;Datagrid&gt;</code> 组件, 它渲染为一张表，一行一条记录。 datagrid 使用其子组件 (此处为 <code>&lt;TextField&gt;</code>) 来确定要呈现的列。 每个域组件在 API 响应中映射一个不同的域, 由 <code>source</code>属性指定。</p>
+<p>这足以显示 Post 列表：</p>
+<p><img src="https://marmelab.com/react-admin/img/simple-post-list.png" alt="Simple posts list"></p>
+<p>如果你在浏览器开发者工具中查看网络选项卡时, 则会注意到应用程序拉取了 <code>http://jsonplaceholder.typicode.com/posts</code> URL, 然后使用结果（数据）生成 datagrid。 这些基本上解释了 react-admin 是如何工作的。</p>
+<p>该列表已经功能化: 您可以通过单击列标题来重新排序, 或者使用底部分页控件更改页面。 <code>ra-data-json-server</code> 数据提供程序（Data Provider）将这些操作转换为 JSONPlaceholder 理解的查询字符串。</p>
+<h2><a class="anchor" aria-hidden="true" id="使用字段类型"></a><a href="#使用字段类型" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用字段类型</h2>
+<p>你刚看到<code>&lt;TextField&gt;</code>组件，React-admin 提供了许多字段组件去映射各种内容类型： number，date， image，HTML,，array，reference 等。</p>
+<p>例如, <a href="http://jsonplaceholder.typicode.com/users"> <code>/user</code> API 端点在 JSONPlaceholder</a> 中包含电子邮件。</p>
+<pre><code class="hljs">curl http://jsonplaceholder.typicode.com/users/2
+</code></pre>
+<pre><code class="hljs css languages- json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Ervin Howell"</span>,
+  <span class="hljs-attr">"username"</span>: <span class="hljs-string">"Antonette"</span>,
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"Shanna@melissa.tv"</span>
+}
+</code></pre>
+<p>让我们创建一个新的 <code>users</code> 资源来获取该端点。在 <code>src</code> 中添加它：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> { PostList } <span class="hljs-keyword">from</span> <span class="hljs-string">"./posts"</span>;
+<span class="hljs-keyword">import</span> { UserList } <span class="hljs-keyword">from</span> <span class="hljs-string">"./users"</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+  &lt;Admin dataProvider={dataProvider}&gt;
+    &lt;Resource name="posts" list={PostList} /&gt;
+    &lt;Resource name="users" list={UserList} /&gt;
+  &lt;/Admin&gt;
+);
+</code></pre>
+<p>现在, 创建 <code>users. js</code> 文件导出 <code>UserList</code>，使用 <code>&lt;EmailField&gt;</code> 映射 <code>电子邮件</code> 字段：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/users.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, EmailField, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-admin"</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserList = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+  &lt;List title="All users" {...props}&gt;
+    &lt;Datagrid&gt;
+      &lt;TextField source="id" /&gt;
+      &lt;TextField source="name" /&gt;
+      &lt;TextField source="username" /&gt;
+      &lt;EmailField source="email" /&gt;
+    &lt;/Datagrid&gt;
+  &lt;/List&gt;
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/simple-user-list.png" alt="Simple user datagrid"></p>
+<p>边栏现在提供了对第二个资源“users”的访问。你可以点击它，它工作了！“users” 列表将电子邮件地址显示为 <code>&lt;a href=&quot;mailto:&quot;&gt;</code> 标记。</p>
+<p>在 react-admin 中， Field 是简单的 react 组件。 在运行时, 它们接收从 API 获取的 <code>记录</code> (例如, <code>{ &quot;id&quot;: 2, &quot;name&quot;: &quot;Ervin Howell&quot;, &quot;username&quot;: &quot;Antonette&quot;, &quot;email&quot;: &quot;Shanna@melissa.tv&quot; }</code>) 并且他们应该显示<code>source</code>所指定的字段 (如：<code>email</code>)。</p>
+<p>这意味着编写自定义字段组件非常简单。例如，去创建一个<code>UrlField</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyUrlField.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">"prop-types"</span>;
+
+<span class="hljs-keyword">const</span> UrlField = <span class="hljs-function">(<span class="hljs-params">{ record = {}, source }</span>) =&gt;</span> (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">{record[source]}</span>&gt;</span>{record[source]}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span>
+);
+
+UrlField.propTypes = {
+  <span class="hljs-attr">record</span>: PropTypes.object,
+  <span class="hljs-attr">source</span>: PropTypes.string.isRequired
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> UrlField;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="处理关联性"></a><a href="#处理关联性" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>处理关联性</h2>
+<p>在 JSONPlaceholder 中, 每个 <code>post</code> 记录都包括一个 <code>userId</code> 字段, 它指向一个 <code>user</code>：</p>
+<pre><code class="hljs css languages- json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"title"</span>:
+    <span class="hljs-string">"sunt aut facere repellat provident occaecati excepturi optio reprehenderit"</span>,
+  <span class="hljs-attr">"body"</span>:
+    <span class="hljs-string">"quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"</span>,
+  <span class="hljs-attr">"userId"</span>: <span class="hljs-number">1</span>
+}
+</code></pre>
+<p>React-admin 知道如何利用这些外键来获取引用。例如，在这些 post 列表中包含用户名，使用<code>&lt;ReferenceField&gt;</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> {
+  List,
+  Datagrid,
+  TextField,
+  EmailField,
+  ReferenceField
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"react-admin"</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+  &lt;List {...props}&gt;
+    &lt;Datagrid&gt;
+      &lt;TextField source="id" /&gt;
+      &lt;ReferenceField label="User" source="userId" reference="users"&gt;
+        &lt;TextField source="name" /&gt;
+      &lt;/ReferenceField&gt;
+      &lt;TextField source="title" /&gt;
+      &lt;TextField source="body" /&gt;
+    &lt;/Datagrid&gt;
+  &lt;/List&gt;
+);
+</code></pre>
+<p>当我们显示这些帖子列表时，这个 app 现在会获取关联的用户纪录，并显示他们的 <code>name</code> 作为一个 <code>&lt;TextField&gt;</code> 。 请注意 <code>label</code> 属性： 可以在任何字段组件上使用它来自定义字段标签。</p>
+<p><img src="https://marmelab.com/react-admin/img/reference-posts.png" alt="reference posts in comment list"></p>
+<p><strong>提示</strong>：单独的 <code>&lt;ReferenceField&gt;</code> 组件不显示任何内容。 它只提取引用数据, 并将其作为 <code>record</code> 传递给其子组件。 就像 <code>&lt;List&gt;</code> 组件, 所有 <code>&lt;Reference&gt;</code> 组件只负责获取和准备数据, 并将呈现委托给其子级。</p>
+<p><strong>提示</strong>：再次查看浏览器的网络选项卡：react-admin 对 users 的请求进行重复删除，并聚合它们，以便对于整个 datagrid 向 <code>/ users</code> 端点只发出<em>一个</em>HTTP 请求。 这是保持 UI 快速响应的众多优化之一。</p>
+<h2><a class="anchor" aria-hidden="true" id="添加创建和编辑功能"></a><a href="#添加创建和编辑功能" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>添加创建和编辑功能</h2>
+<p>管理界面不仅仅是显示远程数据，还应该允许创建和编辑记录。 React-admin 提供了<code>&lt;Create&gt;</code>和<code>&lt;Edit&gt;</code>组件来做这件事。 添加它们到<code>posts.js</code>脚本：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> {
+  List,
+  Edit,
+  Create,
+  Datagrid,
+  ReferenceField,
+  TextField,
+  EditButton,
+  DisabledInput,
+  LongTextInput,
+  ReferenceInput,
+  SelectInput,
+  SimpleForm,
+  TextInput
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"react-admin"</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+  &lt;List {...props}&gt;
+    &lt;Datagrid&gt;
+      &lt;TextField source="id" /&gt;
+      &lt;ReferenceField label="User" source="userId" reference="users"&gt;
+        &lt;TextField source="name" /&gt;
+      &lt;/ReferenceField&gt;
+      &lt;TextField source="title" /&gt;
+      &lt;TextField source="body" /&gt;
+      &lt;EditButton /&gt;
+    &lt;/Datagrid&gt;
+  &lt;/List&gt;
+);
+
+const PostTitle = ({ record }) =&gt; {
+  return &lt;span&gt;Post {record ? `"${record.title}"` : ""}&lt;/span&gt;;
+};
+
+export const PostEdit = props =&gt; (
+  &lt;Edit title={&lt;PostTitle /&gt;} {...props}&gt;
+    &lt;SimpleForm&gt;
+      &lt;DisabledInput source="id" /&gt;
+      &lt;ReferenceInput label="User" source="userId" reference="users"&gt;
+        &lt;SelectInput optionText="name" /&gt;
+      &lt;/ReferenceInput&gt;
+      &lt;TextInput source="title" /&gt;
+      &lt;LongTextInput source="body" /&gt;
+    &lt;/SimpleForm&gt;
+  &lt;/Edit&gt;
+);
+
+export const PostCreate = props =&gt; (
+  &lt;Create {...props}&gt;
+    &lt;SimpleForm&gt;
+      &lt;ReferenceInput label="User" source="userId" reference="users"&gt;
+        &lt;SelectInput optionText="name" /&gt;
+      &lt;/ReferenceInput&gt;
+      &lt;TextInput source="title" /&gt;
+      &lt;LongTextInput source="body" /&gt;
+    &lt;/SimpleForm&gt;
+  &lt;/Create&gt;
+);
+</code></pre>
+<p>如果你已经理解<code>&lt;List&gt;</code>组件，这个<code>&lt;Edit&gt;</code>和<code>&lt;Create&gt;</code>组件将不足为奇。 他们负责获取记录（或者在<code>&lt;Create&gt;</code>的情况下初始化空记录），并显示页面标题。 它们传递纪录到这个<code>&lt;SimpleForm&gt;</code>组件，它负责表单布局，默认值，和验证。 就像<code>&lt;Datagrid&gt;</code>，<code>&lt;SimpleForm&gt;</code>用它的子组件来确定要显示的表单输入项。 它期望<em>input components</em>作为字组件。 <code>&lt;DisabledInput&gt;</code>，<code>&lt;TextInput&gt;</code>，<code>&lt;LongTextInput&gt;</code>和<code>&lt;ReferenceInput&gt;</code>都是这样的组件。</p>
+<p>至于<code>&lt;ReferenceInput&gt;</code>，它采用相同的属性作为<code>&lt;ReferenceField&gt;</code>（在早先的列表页用过）。 <code>&lt;ReferenceInput&gt;</code>用这些属性去获取可能引用关联到当前纪录的 API（在这个例子中, 可能 <code>users</code>关联到了当前的<code>post</code>）。 它然后传递这些可能的引用到子组件（<code>&lt;SelectInput&gt;</code>），它是负责显示它们（在这种情况通过它们的<code>name</code>字段），并且让用户选择一个。 在 HTML 中<code>&lt;SelectInput&gt;</code>渲染为一个<code>&lt;select&gt;</code>标签。</p>
+<p><strong>提示</strong>：<code>&lt;Edit&gt;</code>和<code>&lt;Create&gt;</code>组件使用了几乎相同的子表单，但<code>&lt;Edit&gt;</code>中的附加<code>id</code> input 除外。 在大多数情况下, 创建和编辑记录的表单会有点不同。 但是, 如果它们相同, 则可以在两者之间共享一个常见的表单组件。</p>
+<p>注意在<code>&lt;PostList&gt;</code>子组件中增加的<code>&lt;EditButton&gt;</code>字段：这是给予获得编辑页的访问。 另外, <code>&lt;Edit&gt;</code> 组件使用自定义 <code>&lt;PostTitle&gt;</code> 组件作为标题, 它显示了自定义给定页的标题的方式。</p>
+<p>要在 posts 资源中使用新的<code>&lt;PostEdit&gt;</code>和<code>&lt;PostCreate&gt;</code>组件，只需将它们添加成为<code>&lt;Resource&gt;</code>组件的 edit 和 create 属性：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> { PostList, PostEdit, PostCreate } <span class="hljs-keyword">from</span> <span class="hljs-string">"./posts"</span>;
+<span class="hljs-keyword">import</span> { UserList } <span class="hljs-keyword">from</span> <span class="hljs-string">"./users"</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{dataProvider}</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span>
+      <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span>
+      <span class="hljs-attr">list</span>=<span class="hljs-string">{PostList}</span>
+      <span class="hljs-attr">edit</span>=<span class="hljs-string">{PostEdit}</span>
+      <span class="hljs-attr">create</span>=<span class="hljs-string">{PostCreate}</span>
+    /&gt;</span>
+    // ...
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+);
+</span></code></pre>
+<p>在 posts 列表顶部 React-admin 自动地添加了一个 “create” 按钮来给予访问<code>&lt;PostCreate&gt;</code>组件。 并且 <code>&lt;EditButton&gt;</code>呈现在列表中的每一行来提供访问<code>&lt;PostEdit&gt;</code>组件。</p>
+<p><img src="https://marmelab.com/react-admin/img/editable-post.png" alt="post list with access to edit and create"></p>
+<p>这个表单在创建和编辑页中已经是可使用了的。在提交上它分别发送<code>POST</code>和<code>PUT</code>请求到 REST API。</p>
+<p><img src="https://marmelab.com/react-admin/img/post-edition.png" alt="post edition form"></p>
+<p><strong>注释</strong>：JSONPlaceholder 是一个只读的 api；虽然它似乎接受<code>POST</code>和<code>PUT</code>请求，但它并没有考虑账户的新建和编辑 - 这就是为什么，在这种特定情况下，你将在创建后看到错误，并且在保存之后将不会看到你的编辑。 这只是 JSONPlaceholder 的一个假象。</p>
+<p>React-admin 使用 <em>积极（optimistic ）呈现</em>。 这意味着, 当您编辑记录并点击 “保存” 按钮时, UI 将显示一个确认, 并在<em>将更新查询发送到服务器之前</em>显示更新后的数据 。 这不仅使界面超快，而且还允许“Undo”功能。 它已经在 admin 中作为一个功能点了。 尝试编辑记录，然后在滑出之前点击黑色确认栏中的“Undo”链接。 您将看到应用程序不会将 <code>UPDATE</code> 查询发送到 API，并显示未修改的数据。</p>
+<p><strong>注意</strong>：添加编辑项目的功能时，还可以添加删除项目的功能。 编辑视图中的 “Delete” 按钮完全开箱即用。</p>
+<h2><a class="anchor" aria-hidden="true" id="向列表中添加搜索和筛选器"></a><a href="#向列表中添加搜索和筛选器" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>向列表中添加搜索和筛选器</h2>
+<p>让我们回到 Post 列表一分钟。它提供排序和分页, 但缺少一个功能: 搜索内容的能力。</p>
+<p>React-admin 可以使用输入组件在列表视图中创建多标准搜索引擎。 首先, 创建一个 <code>&lt;Filter&gt;</code> 组件, 就像您将编写一个 <code>&lt;SimpleForm&gt;</code> 组件, 使用输入组件作为子级。 然后, 使用 <code>filters</code> 属性将其添加到 List 中:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> { Filter, ReferenceInput, SelectInput, TextInput } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-admin"</span>;
+
+<span class="hljs-keyword">const</span> PostFilter = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+  &lt;Filter {...props}&gt;
+    &lt;TextInput label="Search" source="q" alwaysOn /&gt;
+    &lt;ReferenceInput label="User" source="userId" reference="users" allowEmpty&gt;
+      &lt;SelectInput optionText="name" /&gt;
+    &lt;/ReferenceInput&gt;
+  &lt;/Filter&gt;
+);
+
+export const PostList = props =&gt; (
+  &lt;List {...props} filters={&lt;PostFilter /&gt;}&gt;
+    // ...
+  &lt;/List&gt;
+);
+</code></pre>
+<p>第一个过滤器 ‘q’ 利用了 JSONPlaceholder 提供的全文功能。 它是 <code>alwaysOn</code>，所以它总是出现在屏幕上。 第二个筛选器，‘userId’ 可以通过位于列表顶部的 “add filter” 按钮来添加。 因为它是一个<code>&lt;ReferenceInput&gt;</code>，所以它已经填充了可能的用户。 它可以由终端用户关闭。</p>
+<p><img src="https://marmelab.com/react-admin/img/filters.gif" alt="posts search engine"></p>
+<p>过滤器是 “search-as-you-type”，这意味着当用户在筛选表单中输入新值时，列表会立即刷新 (通过 API 请求)。</p>
+<h2><a class="anchor" aria-hidden="true" id="自定义菜单图标"></a><a href="#自定义菜单图标" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>自定义菜单图标</h2>
+<p>侧栏菜单显示出 posts 和 users 图标是一样的。幸运的是，自定义菜单图标只是将 <code>icon</code> 属性传递给每个 <code>&lt;Resource&gt;</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> PostIcon <span class="hljs-keyword">from</span> <span class="hljs-string">"@material-ui/icons/Book"</span>;
+<span class="hljs-keyword">import</span> UserIcon <span class="hljs-keyword">from</span> <span class="hljs-string">"@material-ui/icons/Group"</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+  &lt;Admin dataProvider={dataProvider}&gt;
+    &lt;Resource
+      name="posts"
+      list={PostList}
+      edit={PostEdit}
+      create={PostCreate}
+      icon={PostIcon}
+    /&gt;
+    &lt;Resource name="users" list={UserList} icon={UserIcon} /&gt;
+  &lt;/Admin&gt;
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/custom-menu.gif" alt="custom menu icons"></p>
+<h2><a class="anchor" aria-hidden="true" id="使用自定义主页"></a><a href="#使用自定义主页" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用自定义主页</h2>
+<p>默认情况下，admin-on-rest 显示第一个资源列表页为主页。 如果你想要显示一个自定义组件来代替，在 <code>&lt;Admin&gt;</code> 组件中作为 <code>dashboard</code> 属性传递它。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/Dashboard.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> Card <span class="hljs-keyword">from</span> <span class="hljs-string">"@material-ui/core/Card"</span>;
+<span class="hljs-keyword">import</span> CardContent <span class="hljs-keyword">from</span> <span class="hljs-string">"@material-ui/core/CardContent"</span>;
+<span class="hljs-keyword">import</span> CardHeader <span class="hljs-keyword">from</span> <span class="hljs-string">"@material-ui/core/CardHeader"</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> () =&gt; (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">CardHeader</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Welcome to the administration"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">CardContent</span>&gt;</span>Lorem ipsum sic dolor amet...<span class="hljs-tag">&lt;/<span class="hljs-name">CardContent</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span>
+);
+</span></code></pre>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> Dashboard <span class="hljs-keyword">from</span> <span class="hljs-string">"./Dashboard"</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dashboard</span>=<span class="hljs-string">{Dashboard}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{dataProvider}</span>&gt;</span>
+    // ...
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/dashboard.png" alt="Custom home page"></p>
+<h2><a class="anchor" aria-hidden="true" id="添加登录页"></a><a href="#添加登录页" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>添加登录页</h2>
+<p>大多数 admin app 都需要身份验证。React-admin 可以在显示页面之前检查用户凭据，并在 REST API 返回 403 错误代码时重定向到登录表单。</p>
+<p>这些凭据是<em>什么</em>以及<em>如何</em>获取它们是您作为开发人员必须回答的问题。 React-admin 不会对您的身份验证策略（basic auth, OAuth, custom route, 等）做出任何假设，但会通过调用 authProvider 函数为您提供在正确位置插入逻辑的钩子。</p>
+<p>对于本教程，由于没有我们能使用的公共认证 API，让我们使用一个假身份验证提供程序，接受每一个登录请求，并存储 <code>username</code> 在 <code>localStorage</code> 中。 每个页面更改都要求 <code>localStorage</code> 包含 <code>username名</code> 项。</p>
+<p><code>authProvider</code> 是一个简单的函数, 它必须返回 <code>Promise</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-admin"</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+  <span class="hljs-comment">// called when the user attempts to log in</span>
+  <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+    <span class="hljs-keyword">const</span> { username } = params;
+    localStorage.setItem(<span class="hljs-string">"username"</span>, username);
+    <span class="hljs-comment">// accept all username/password combinations</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+  }
+  <span class="hljs-comment">// called when the user clicks on the logout button</span>
+  <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+    localStorage.removeItem(<span class="hljs-string">"username"</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+  }
+  <span class="hljs-comment">// called when the API returns an error</span>
+  <span class="hljs-keyword">if</span> (type === AUTH_ERROR) {
+    <span class="hljs-keyword">const</span> { status } = params;
+    <span class="hljs-keyword">if</span> (status === <span class="hljs-number">401</span> || status === <span class="hljs-number">403</span>) {
+      localStorage.removeItem(<span class="hljs-string">"username"</span>);
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject();
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+  }
+  <span class="hljs-comment">// called when the user navigates to a new location</span>
+  <span class="hljs-keyword">if</span> (type === AUTH_CHECK) {
+    <span class="hljs-keyword">return</span> localStorage.getItem(<span class="hljs-string">"username"</span>)
+      ? <span class="hljs-built_in">Promise</span>.resolve()
+      : <span class="hljs-built_in">Promise</span>.reject();
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-string">"Unknown method"</span>);
+};
+</code></pre>
+<p><strong>提示</strong>: 由于 <code>dataProvider</code> 响应是异步的, 因此您可以非常容易地在这里 fetch 一个身份验证服务。</p>
+<p>要启用此身份验证策略, 请将 client 作为 <code>authProvider</code> 属性在 <code>&lt;Admin&gt;</code> 组件中传递：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> Dashboard <span class="hljs-keyword">from</span> <span class="hljs-string">"./Dashboard"</span>;
+<span class="hljs-keyword">import</span> authProvider <span class="hljs-keyword">from</span> <span class="hljs-string">"./authProvider"</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span>
+    <span class="hljs-attr">dashboard</span>=<span class="hljs-string">{Dashboard}</span>
+    <span class="hljs-attr">authProvider</span>=<span class="hljs-string">{authProvider}</span>
+    <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{dataProvider}</span>
+  &gt;</span>
+    // ...
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p>应用程序重新加载后，会出现一个登录表单：</p>
+<p><img src="https://marmelab.com/react-admin/img/login.gif" alt="Login form"></p>
+<h2><a class="anchor" aria-hidden="true" id="支持移动设备"></a><a href="#支持移动设备" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>支持移动设备</h2>
+<p>react-admin 布局已是响应式。尝试调整浏览器大小来查看侧栏如何切换到较小屏幕上的抽屉样式。</p>
+<p>但是一个响应式布局不足以去做一个响应式的 app。datagrid 组件在桌面上工作良好，但绝对不能适应移动设备。 如果您的 Admin 必须在移动设备上使用, 您必须为小屏幕提供一个替代组件。</p>
+<p>首先, 您应该知道您不必使用 <code>&lt;Datagrid&gt;</code> 组件作为 <code>&lt;List&gt;</code> 子级。 您可以使用您喜欢的任何其他组件。 例如, <code>&lt;SimpleList&gt;</code> 组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> { List, SimpleList } <span class="hljs-keyword">from</span> <span class="hljs-string">"react-admin"</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">SimpleList</span>
+      <span class="hljs-attr">primaryText</span>=<span class="hljs-string">{record</span> =&gt;</span> record.title}
+      secondaryText={record =&gt; `${record.views} views`}
+      tertiaryText={record =&gt;
+        new Date(record.published_at).toLocaleDateString()
+      }
+    /&gt;
+  <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span>
+);
+</span></code></pre>
+<p><code>&lt;SimpleList&gt;</code> 组件使用 <a href="http://www.material-ui.com/#/components/list">material-ui 的 <code>&lt;List&gt;</code> 和 <code>&lt;ListItem&gt;</code> 组件</a>, 并且期望函数作为 <code>primaryText</code>, <code>secondaryText</code>, <code>tertiaryText</code> 的属性值。</p>
+<p><img src="https://marmelab.com/react-admin/img/mobile-post-list.png" alt="Mobile post list" style="display:block;margin:2em auto;box-shadow:none;filter:drop-shadow(13px 12px 7px rgba(0,0,0,0.5));" /></p>
+<p>注意：我们切换到这些屏幕截图的自定义 API，以演示如何使用一些 SimpleList 组件属性。</p>
+<p>这在移动设备上运行良好，但现在桌面用户体验更糟。 最好的折衷方案是在小屏幕上使用<code>&lt;SimpleList&gt;</code>，在其他屏幕上使用<code>&lt;Datagrid&gt;</code>。 这就是 <code>&lt;Responsive&gt;</code> 组件的用武之地：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> {
+  List,
+  Responsive,
+  SimpleList,
+  Datagrid,
+  TextField,
+  ReferenceField,
+  EditButton
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"react-admin"</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+  &lt;List {...props}&gt;
+    &lt;Responsive
+      small={
+        &lt;SimpleList
+          primaryText={record =&gt; record.title}
+          secondaryText={record =&gt; `${record.views} views`}
+          tertiaryText={record =&gt;
+            new Date(record.published_at).toLocaleDateString()
+          }
+        /&gt;
+      }
+      medium={
+        &lt;Datagrid&gt;
+          &lt;TextField source="id" /&gt;
+          &lt;ReferenceField label="User" source="userId" reference="users"&gt;
+            &lt;TextField source="name" /&gt;
+          &lt;/ReferenceField&gt;
+          &lt;TextField source="title" /&gt;
+          &lt;TextField source="body" /&gt;
+          &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+      }
+    /&gt;
+  &lt;/List&gt;
+);
+</code></pre>
+<p>这完全按你期望的方式工作。这里的经验是 react-admin 针对布局注意了响应式的 web 设计，但它是你的工作－在页面中用 <code>&lt;Responsive&gt;</code> 。</p>
+<p><img src="https://marmelab.com/react-admin/img/responsive-list.gif" alt="Responsive List"></p>
+<h2><a class="anchor" aria-hidden="true" id="连接到真正的-api"></a><a href="#连接到真正的-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>连接到真正的 API</h2>
+<p>这是本教程的重点。 在现实世界的项目中，你的 API 的规范（REST? GraphQL? 别的？不符合 JSONPLaceholder 规范。 编写 Data Provider 可能是您必须做的第一件事，以使 react-admin 工作。 根据您的 API, 这可能需要几个小时的额外工作。</p>
+<p>React-admin 将每个数据查询委托给 Data Provider 函数。 这个函数必须针对结果返回一个 promise。 这为映射任何 API 规范，添加身份验证头，使用来自多个域的 API 端点等提供了极大的自由度。</p>
+<p>例如，让我们假设您必须使用 <code>my.api.url</code> REST api，它需要以下参数：</p>
+<table>
+<thead>
+<tr><th>Action</th><th>Expected API request</th></tr>
+</thead>
+<tbody>
+<tr><td>Get list</td><td><code>GET http://my.api.url/posts?sort=['title','ASC']&amp;range=[0, 24]&amp;filter={title:'bar'}</code></td></tr>
+<tr><td>Get one record</td><td><code>GET http://my.api.url/posts/123</code></td></tr>
+<tr><td>Get several records</td><td><code>GET http://my.api.url/posts?filter={ids:[123,456,789]}</code></td></tr>
+<tr><td>Update a record</td><td><code>PUT http://my.api.url/posts/123</code></td></tr>
+<tr><td>Create a record</td><td><code>POST http://my.api.url/posts/123</code></td></tr>
+<tr><td>Delete a record</td><td><code>DELETE http://my.api.url/posts/123</code></td></tr>
+</tbody>
+</table>
+<p>React-admin 为这个列表的每个动作定义了自定义动词。 就像 HTTP 动词（GET，POST 等）一样，react-admin 动词限定一个 request 到一个 data provider 。 React-admin 动词被叫做 <code>GET_LIST</code>， <code>GET_ONE</code>，<code>GET_MANY</code>，<code>CREATE</code>，<code>UPDATE</code> 和 <code>DELETE</code>。 Data Provider 将得映射这些动词的每一个对应一个（或多个）HTTP 请求。</p>
+<p><code>my.api.url</code> API 的 Data Provider 代码如下：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/dataProvider</span>
+<span class="hljs-keyword">import</span> {
+  GET_LIST,
+  GET_ONE,
+  GET_MANY,
+  GET_MANY_REFERENCE,
+  CREATE,
+  UPDATE,
+  DELETE,
+  fetchUtils
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"react-admin"</span>;
+<span class="hljs-keyword">import</span> { stringify } <span class="hljs-keyword">from</span> <span class="hljs-string">"query-string"</span>;
+
+<span class="hljs-keyword">const</span> API_URL = <span class="hljs-string">"my.api.url"</span>;
+
+<span class="hljs-comment">/**
+ * @param {String} type One of the constants appearing at the top if this file, e.g. 'UPDATE'
+ * @param {String} resource Name of the resource to fetch, e.g. 'posts'
+ * @param {Object} params The Data Provider request params, depending on the type
+ * @returns {Object} { url, options } The HTTP request parameters
+ */</span>
+<span class="hljs-keyword">const</span> convertDataProviderRequestToHTTP = <span class="hljs-function">(<span class="hljs-params">type, resource, params</span>) =&gt;</span> {
+  <span class="hljs-keyword">switch</span> (type) {
+    <span class="hljs-keyword">case</span> GET_LIST: {
+      <span class="hljs-keyword">const</span> { page, perPage } = params.pagination;
+      <span class="hljs-keyword">const</span> { field, order } = params.sort;
+      <span class="hljs-keyword">const</span> query = {
+        <span class="hljs-attr">sort</span>: <span class="hljs-built_in">JSON</span>.stringify([field, order]),
+        <span class="hljs-attr">range</span>: <span class="hljs-built_in">JSON</span>.stringify([(page - <span class="hljs-number">1</span>) * perPage, page * perPage - <span class="hljs-number">1</span>]),
+        <span class="hljs-attr">filter</span>: <span class="hljs-built_in">JSON</span>.stringify(params.filter)
+      };
+      <span class="hljs-keyword">return</span> { <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>?<span class="hljs-subst">${stringify(query)}</span>`</span> };
+    }
+    <span class="hljs-keyword">case</span> GET_ONE:
+      <span class="hljs-keyword">return</span> { <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>/<span class="hljs-subst">${params.id}</span>`</span> };
+    <span class="hljs-keyword">case</span> GET_MANY: {
+      <span class="hljs-keyword">const</span> query = {
+        <span class="hljs-attr">filter</span>: <span class="hljs-built_in">JSON</span>.stringify({ <span class="hljs-attr">id</span>: params.ids })
+      };
+      <span class="hljs-keyword">return</span> { <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>?<span class="hljs-subst">${stringify(query)}</span>`</span> };
+    }
+    <span class="hljs-keyword">case</span> GET_MANY_REFERENCE: {
+      <span class="hljs-keyword">const</span> { page, perPage } = params.pagination;
+      <span class="hljs-keyword">const</span> { field, order } = params.sort;
+      <span class="hljs-keyword">const</span> query = {
+        <span class="hljs-attr">sort</span>: <span class="hljs-built_in">JSON</span>.stringify([field, order]),
+        <span class="hljs-attr">range</span>: <span class="hljs-built_in">JSON</span>.stringify([(page - <span class="hljs-number">1</span>) * perPage, page * perPage - <span class="hljs-number">1</span>]),
+        <span class="hljs-attr">filter</span>: <span class="hljs-built_in">JSON</span>.stringify({ ...params.filter, [params.target]: params.id })
+      };
+      <span class="hljs-keyword">return</span> { <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>?<span class="hljs-subst">${stringify(query)}</span>`</span> };
+    }
+    <span class="hljs-keyword">case</span> UPDATE:
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>/<span class="hljs-subst">${params.id}</span>`</span>,
+        <span class="hljs-attr">options</span>: { <span class="hljs-attr">method</span>: <span class="hljs-string">"PUT"</span>, <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify(params.data) }
+      };
+    <span class="hljs-keyword">case</span> CREATE:
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>`</span>,
+        <span class="hljs-attr">options</span>: { <span class="hljs-attr">method</span>: <span class="hljs-string">"POST"</span>, <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify(params.data) }
+      };
+    <span class="hljs-keyword">case</span> DELETE:
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/<span class="hljs-subst">${resource}</span>/<span class="hljs-subst">${params.id}</span>`</span>,
+        <span class="hljs-attr">options</span>: { <span class="hljs-attr">method</span>: <span class="hljs-string">"DELETE"</span> }
+      };
+    <span class="hljs-keyword">default</span>:
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Unsupported fetch action type <span class="hljs-subst">${type}</span>`</span>);
+  }
+};
+
+<span class="hljs-comment">/**
+ * @param {Object} response HTTP response from fetch()
+ * @param {String} type One of the constants appearing at the top if this file, e.g. 'UPDATE'
+ * @param {String} resource Name of the resource to fetch, e.g. 'posts'
+ * @param {Object} params The Data Provider request params, depending on the type
+ * @returns {Object} Data Provider response
+ */</span>
+<span class="hljs-keyword">const</span> convertHTTPResponseToDataProvider = (
+  response,
+  type,
+  resource,
+  params
+) =&gt; {
+  <span class="hljs-keyword">const</span> { headers, json } = response;
+  <span class="hljs-keyword">switch</span> (type) {
+    <span class="hljs-keyword">case</span> GET_LIST:
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">data</span>: json.map(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x),
+        <span class="hljs-attr">total</span>: <span class="hljs-built_in">parseInt</span>(
+          headers
+            .get(<span class="hljs-string">"content-range"</span>)
+            .split(<span class="hljs-string">"/"</span>)
+            .pop(),
+          <span class="hljs-number">10</span>
+        )
+      };
+    <span class="hljs-keyword">case</span> CREATE:
+      <span class="hljs-keyword">return</span> { <span class="hljs-attr">data</span>: { ...params.data, <span class="hljs-attr">id</span>: json.id } };
+    <span class="hljs-keyword">default</span>:
+      <span class="hljs-keyword">return</span> { <span class="hljs-attr">data</span>: json };
+  }
+};
+
+<span class="hljs-comment">/**
+ * @param {string} type Request type, e.g GET_LIST
+ * @param {string} resource Resource name, e.g. "posts"
+ * @param {Object} payload Request parameters. Depends on the request type
+ * @returns {Promise} the Promise for response
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, resource, params) =&gt; {
+  <span class="hljs-keyword">const</span> { fetchJson } = fetchUtils;
+  <span class="hljs-keyword">const</span> { url, options } = convertDataProviderRequestToHTTP(
+    type,
+    resource,
+    params
+  );
+  <span class="hljs-keyword">return</span> fetchJson(url, options).then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span>
+    convertHTTPResponseToDataProvider(response, type, resource, params)
+  );
+};
+</code></pre>
+<p><strong>提示</strong>：<code>fetchJson()</code>只是 <code>fetch().then(r =&gt; r.json())</code> 的快捷方式。加上对 HTTP 响应代码的控制，以便在 4xx 或 5xx 响应的情况下抛出 <code>HTTPError</code>。 如果不符合您的需要, 请随意使用 <code>fetch()</code>。</p>
+<p>使用此提供程序代替以前的 <code>jsonServerProvider</code> 只是切换函数的问题：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/app.js</span>
+<span class="hljs-keyword">import</span> dataProvider <span class="hljs-keyword">from</span> <span class="hljs-string">"./dataProvider"</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &lt;Admin dataProvider={dataProvider}&gt;<span class="hljs-comment">// ...&lt;/Admin&gt;;</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="结论"></a><a href="#结论" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>结论</h2>
+<p>React-admin 是以考虑定制为基础构建的。 您可以将任何 react-admin 组件替换为你自己的组件, 例如, 显示自定义列表布局或为一个给定的 resource 不同的编辑表单。</p>
+<p>现在, 您已经完成了教程, 请继续阅读 <a href="http://marmelab.com/react-admin/">react-admin 文档</a>, 并阅读 <a href="http://www.material-ui.com/#/">Material UI 组件文档</a>。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/intro.html">← 简介</a><a class="docs-next button" href="/docs/zh-CN/data-providers.html">数据提供程序 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#设置">设置</a></li><li><a href="#使用-api-作为数据源">使用 API 作为数据源</a></li><li><a href="#使用-data-provider-与-api-进行联系">使用 Data Provider 与 API 进行联系</a></li><li><a href="#使用-resource-映射-api-端点">使用 Resource 映射 API 端点</a></li><li><a href="#显示记录列表">显示记录列表</a></li><li><a href="#使用字段类型">使用字段类型</a></li><li><a href="#处理关联性">处理关联性</a></li><li><a href="#添加创建和编辑功能">添加创建和编辑功能</a></li><li><a href="#向列表中添加搜索和筛选器">向列表中添加搜索和筛选器</a></li><li><a href="#自定义菜单图标">自定义菜单图标</a></li><li><a href="#使用自定义主页">使用自定义主页</a></li><li><a href="#添加登录页">添加登录页</a></li><li><a href="#支持移动设备">支持移动设备</a></li><li><a href="#连接到真正的-api">连接到真正的 API</a></li><li><a href="#结论">结论</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

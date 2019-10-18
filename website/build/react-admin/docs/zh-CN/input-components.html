@@ -1,0 +1,961 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Input 组件 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="`Input` 组件显示一个输入, 或一个下拉列表, 一个单选按钮列表, 等等。 这些组件允许编辑记录属性，并且在 `&lt;Edit&gt;`， `&lt;Create&gt;` 和 `&lt;Filter&gt;` 视图中是常见的。"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="Input 组件 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="`Input` 组件显示一个输入, 或一个下拉列表, 一个单选按钮列表, 等等。 这些组件允许编辑记录属性，并且在 `&lt;Edit&gt;`， `&lt;Create&gt;` 和 `&lt;Filter&gt;` 视图中是常见的。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/input-components.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Input 组件</h1></header><article><div><span><p><code>Input</code> 组件显示一个输入, 或一个下拉列表, 一个单选按钮列表, 等等。 这些组件允许编辑记录属性，并且在 <code>&lt;Edit&gt;</code>， <code>&lt;Create&gt;</code> 和 <code>&lt;Filter&gt;</code> 视图中是常见的。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Edit, DisabledInput, LongTextInput, ReferenceInput, SelectInput, SimpleForm, TextInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Edit title={&lt;PostTitle /&gt;} {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput source="id" /&gt;
+            &lt;ReferenceInput label="User" source="userId" reference="users"&gt;
+                &lt;SelectInput optionText="name" /&gt;
+            &lt;/ReferenceInput&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;LongTextInput source="body" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p>所有输入组件都接受以下属性：</p>
+<ul>
+<li><code>source</code>：view/edit 中你实体的属性名称。此属性是必需的。</li>
+<li><code>defaultValue</code>：当属性为 <code>null</code> 或 <code>undefined</code> 时要设置的值。</li>
+<li><code>validate</code>：当前属性的验证规则（请参阅[Validation Documentation](./CreateEdit.html#validation)）</li>
+<li><code>label</code>：用作输入标签的 header。省略时默认为 <code>source</code>。</li>
+<li><code>style</code>：用于定制字段容器的外观和风格的样式对象（例如表单中的 <code>&lt;div&gt;</code>）。</li>
+<li><code>elStyle</code>：一个样式对象，用于定制字段元素本身的外观。</li>
+</ul>
+<pre><code class="hljs css languages- jsx">&lt;TextInput source=<span class="hljs-string">"zb_title"</span> label=<span class="hljs-string">"Title"</span> /&gt;
+</code></pre>
+<p>其他属性传递给底层组件（通常是 material-ui 组件）。 例如，在<code>TextInput</code>组件上设置<code>fullWidth</code> 属性时，底层 material-ui <code>&lt;TextField&gt;</code> 接收它，并且全宽。</p>
+<p><strong>提示</strong>：如果编辑具有复杂结构的记录，则可以使用路径作为<code>source</code>参数。 例如，如果 API 返回以下 “book” 记录：</p>
+<pre><code class="hljs css languages- jsx">{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">1234</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'War and Peace'</span>,
+    <span class="hljs-attr">author</span>: {
+        <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Leo'</span>,
+        <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Tolstoi'</span>
+    }
+}
+</code></pre>
+<p>然后，您可以显示文本输入以便编辑作者名字，如下所示：</p>
+<pre><code class="hljs css languages- jsx">&lt;TextInput source=<span class="hljs-string">"author.firstName"</span> /&gt;
+</code></pre>
+<p><strong>提示</strong>：如果您的界面必须支持多种语言，请不要使用<code>label</code> 属性，而是将本地化标签放入字典中。 有关详细信息，请参阅<a href="./Translation.md#translating-resource-and-field-names">翻译文档</a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="arrayinput-组件"></a><a href="#arrayinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ArrayInput</code> 组件</h2>
+<p>要编辑嵌入记录中的数据数组，<code>&lt;ArrayInput&gt;</code> 会创建子表单列表。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ArrayInput, SimpleFormIterator, DateInput, UrlInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+&lt;ArrayInput source="backlinks"&gt;
+    &lt;SimpleFormIterator&gt;
+        &lt;DateInput source="date" /&gt;
+        &lt;UrlInput source="url" /&gt;
+    &lt;/SimpleFormIterator&gt;
+&lt;/ArrayInput&gt;
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/array-input.png" alt="ArrayInput"></p>
+<p><code>&lt;ArrayInput&gt;</code> 允许嵌入式数组的编辑，例如以下 <code>post</code>记录中的<code>backlinks</code>字段：</p>
+<pre><code class="hljs css languages- js">{
+  <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>
+  backlinks: [
+        {
+            <span class="hljs-attr">date</span>: <span class="hljs-string">'2012-08-10T00:00:00.000Z'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'http://example.com/foo/bar.html'</span>,
+        },
+        {
+            <span class="hljs-attr">date</span>: <span class="hljs-string">'2012-08-14T00:00:00.000Z'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'https://blog.johndoe.com/2012/08/12/foobar.html'</span>,
+        }
+   ]
+}
+</code></pre>
+<p><code>&lt;ArrayInput&gt;</code> 需要一个子节点，它必须是* 表单迭代器 *组件。 表单迭代器是一个组件，它接受由redux-form <code>&lt;FieldArray&gt;</code> 组件传递的 <code>fields</code> 对象，并定义 fields 数组的布局。 例如，<code>&lt;SimpleFormIterator&gt;</code> 组件显示无序列表（<code>&lt;ul&gt;</code>）中的字段数组，按列表项（<code>&lt;li&gt;</code>）显示一个子表单。 它还提供了添加和删除子记录的控件（在此示例中为反向链接）。</p>
+<p>您可以将 <code>disableAdd</code> 和 <code>disableRemove</code> 作为 <code>SimpleFormIterator</code> 的属性传递，分别禁用 <code>ADD</code> 和 <code>REMOVE</code> 按钮。 两者的默认值均为 <code>false</code>。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ArrayInput, SimpleFormIterator, DateInput, UrlInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+&lt;ArrayInput source="backlinks"&gt;
+    &lt;SimpleFormIterator disableRemove &gt;
+        &lt;DateInput source="date" /&gt;
+        &lt;UrlInput source="url" /&gt;
+    &lt;/SimpleFormIterator&gt;
+&lt;/ArrayInput&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="autocompleteinput-组件"></a><a href="#autocompleteinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>AutocompleteInput</code>组件</h2>
+<p>要让用户使用带有自动完成功能的下拉列表在 list 中选择一个值, 请使用 <code>&lt;AutocompleteInput&gt;</code>。 它使用 <a href="http://react-autosuggest.js.org/"> react-autosuggest</a> 和 <code>fuzzySearch</code> 筛选器渲染。 设置 <code>choices</code> 属性以确定选项列表 (使用 <code>id</code>, <code>name</code> tuples)。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { AutocompleteInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AutocompleteInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"category"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{[</span>
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">programming</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Programming</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">lifestyle</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Lifestyle</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">photography</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Photography</span>' },
+]} /&gt;</span>
+</span></code></pre>
+<p>还可以自定义用于选项名称和值的属性，这归功于 <code>optionText</code> 和 <code>optionValue</code> 属性：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Leo Tolstoi'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'M'</span> },
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Jane Austen'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'F'</span> },
+];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AutocompleteInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"full_name"</span> <span class="hljs-attr">optionValue</span>=<span class="hljs-string">"_id"</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> 也接受一个函数，所以你可以随意设置选项文本：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Leo'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Tolstoi'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Austen'</span> },
+];
+<span class="hljs-keyword">const</span> optionRenderer = <span class="hljs-function"><span class="hljs-params">choice</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${choice.first_name}</span> <span class="hljs-subst">${choice.last_name}</span>`</span>;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AutocompleteInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">{optionRenderer}</span> /&gt;</span>
+</span></code></pre>
+<p>默认情况下将转换这些选项，因此可以将翻译标识符用作选项：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'M'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.male'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'F'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.female'</span> },
+];
+</code></pre>
+<p>但是, 在某些情况下 (例如, 在 <code>&lt;ReferenceInput&gt;</code>中)，您可能不希望翻译该选项。在这种情况下, 将 <code>translateChoice</code> 设置为 false。</p>
+<pre><code class="hljs css languages- jsx">&lt;AutocompleteInput source=<span class="hljs-string">"gender"</span> choices={choices} translateChoice={<span class="hljs-literal">false</span>}/&gt;
+</code></pre>
+<p>默认情况下，组件使用当前 Input searchText 匹配选项：如果找到匹配项，则将选择此选项。 例如，给出选项<code>[{id：'M'，name：'Male'，id：'F'，name：'Female'}]</code>，当用户输入文本<code>male</code>时，然后组件将输入值设置为<code>M &lt;/ code&gt;。 如果需要更改选择的匹配方式, 请将自定义函数作为 &lt;code&gt;inputValueMatcher</code> 属性传递。 例如，给定以下选项：<code>[{id:1,iso2:'NL',name:'Dutch'},{id:2,iso2:'EN',name:'English'},{id:3,iso2:'FR',name:'French'}]</code>，如果要匹配 iso2 上的选项代码中, 可以创建以下 <code>inputValueMatcher</code> 函数：</p>
+<pre><code class="hljs css languages- javascript">&lt;AutocompleteInput inputValueMatcher={
+    (input, suggestion, getOptionText) =&gt; 
+        input.toUpperCase().trim() === suggestion.iso2 || 
+        input.toLowerCase().trim() === getOptionText(suggestion).toLowerCase().trim()
+}/&gt;
+</code></pre>
+<p>如果要将显示的初始选择限制为仅当前值，可以设置` limitChoicesToValue &lt;/ 0&gt; 属性。</p></p>
+<p>最后，<code><AutocompleteInput>` 呈现 material-ui `<TextField> `组件。 使用` options `属性覆盖任何 `<TextField>` 属性：
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx">&lt;AutocompleteInput source=<span class="hljs-string">"category"</span> options={{
+    <span class="hljs-attr">fullWidth</span>: <span class="hljs-literal">true</span>,
+}} /&gt;
+</code></pre>
+<p>{% endraw %}</p>
+<p><strong>提示</strong>：如果要使用相关记录的列表填充 <code>choices</code> 属性，则应使用 <a href="#referenceinput"><code>&lt;ReferenceInput&gt;</code></a> 装饰<code>&lt;AutocompleteInput&gt;</code>，并将 <code>choices</code> 留空：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { AutocompleteInput, ReferenceInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceInput label=<span class="hljs-string">"Post"</span> source=<span class="hljs-string">"post_id"</span> reference=<span class="hljs-string">"posts"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AutocompleteInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<p><strong>提示</strong>： <code>&lt;AutocompleteInput&gt;</code> 是一个无状态组件，所以它只允许 <em>过滤</em> choice 列表，而不是 <em>扩展</em>。 如果您需要根据 <code>fetch</code> 调用的结果填充选项列表（如<a href="#referenceinput"><code>&lt;ReferenceInput&gt;</code></a>不能满足您的需要），你得编写<a href="#writing-your-own-input-component">自己的输入组件</a>， 基于 material-ui <code>&lt;AutoComplete&gt;</code> 组件。</p>
+<p><strong>提示</strong>：React-admin 的 <code>&lt;AutocompleteInput&gt;</code> 只有一个大写字母 A，而 material-ui 的 <code>&lt;AutoComplete&gt;</code> 有一个大写字母A和一个大写字母C。不要混淆组件！</p>
+<h3><a class="anchor" aria-hidden="true" id="properties"></a><a href="#properties" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Properties</h3>
+<table>
+<thead>
+<tr><th>Prop</th><th>Required</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>choices</code></td><td>Required</td><td><code>Object[]</code></td><td>-</td><td>List of items to autosuggest</td></tr>
+<tr><td><code>resource</code></td><td>Required</td><td><code>string</code></td><td>-</td><td>The resource working on. This field is passed down by wrapped components like <code>Create</code> and <code>Edit</code>.</td></tr>
+<tr><td><code>source</code></td><td>Required</td><td><code>string</code></td><td>-</td><td>Name of field to edit, its type should match the type retrieved from <code>optionValue</code></td></tr>
+<tr><td><code>allowEmpty</code></td><td>Optional</td><td><code>boolean</code></td><td><code>false</code></td><td>If <code>false</code> and the searchText typed did not match any suggestion, the searchText will revert to the current value when the field is blurred. If <code>true</code> and the <code>searchText</code> is set to <code>''</code> then the field will set the input value to <code>null</code>.</td></tr>
+<tr><td><code>inputValueMatcher</code></td><td>Optional</td><td><code>Function</code></td><td><code>(input, suggestion, getOptionText) =&gt; input.toLowerCase().trim() === getOptionText(suggestion).toLowerCase().trim()</code></td><td>Allows to define how choices are matched with the searchText while typing.</td></tr>
+<tr><td><code>optionValue</code></td><td>Optional</td><td><code>string</code></td><td><code>id</code></td><td>Fieldname of record containing the value to use as input value</td></tr>
+<tr><td><code>optionText</code></td><td>Optional</td><td><code>string &amp;#124; Function</code></td><td><code>name</code></td><td>Fieldname of record to display in the suggestion item or function which accepts the currect record as argument (<code>(record)=&gt; {string}</code>)</td></tr>
+<tr><td><code>setFilter</code></td><td>Optional</td><td><code>Function</code></td><td>null</td><td>A callback to inform the <code>searchText</code> has changed and new <code>choices</code> can be retrieved based on this <code>searchText</code>. Signature <code>searchText =&gt; void</code>. This function is automatically setup when using <code>ReferenceInput</code>.</td></tr>
+<tr><td><code>suggestionComponent</code></td><td>Optional</td><td>Function</td><td><code>({ suggestion, query, isHighlighted, props }) =&gt; &lt;div {...props} /&gt;</code></td><td>Allows to override how the item is rendered.</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="booleaninput-与-nullablebooleaninput-组件"></a><a href="#booleaninput-与-nullablebooleaninput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>BooleanInput</code> 与 <code>NullableBooleanInput</code> 组件</h2>
+<p><code>&lt;BooleanInput /&gt;</code> 是一个切换按钮，允许您把 <code>true</code> 或 <code>false</code> 值归于一个记录字段。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { BooleanInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BooleanInput</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Commentable"</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"commentable"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/boolean-input.png" alt="BooleanInput"></p>
+<p>此输入不处理 <code>null</code> 值。如果您必须处理非设置的布尔值，则需要 <code>&lt;NullableBooleanInput /&gt;</code> 组件。</p>
+<p>您可以使用<code>options</code> 属性传递Material UI <code>Switch</code>组件支持的任何选项。 例如，以下是设置自定义选中图标的方法：</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { BooleanInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> FavoriteIcon <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/Favorite'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BooleanInput</span>
+    <span class="hljs-attr">source</span>=<span class="hljs-string">"favorite"</span>
+    <span class="hljs-attr">options</span>=<span class="hljs-string">{{</span>
+        <span class="hljs-attr">checkedIcon:</span> &lt;<span class="hljs-attr">FavoriteIcon</span> /&gt;</span>,
+    }}
+/&gt;
+</span></code></pre>
+<p>{% endraw %}</p>
+<p><img src="https://marmelab.com/react-admin/img/custom-switch-icon.png" alt="CustomBooleanInputCheckIcon"></p>
+<p>有关详细信息, 请参阅 <a href="http://www.material-ui.com/#/components/switch">Material UI Switch 文档</a>。</p>
+<p><code>&lt;NullableBooleanInput /&gt;</code> 呈现为下拉列表，允许在 true、false 和 null 值之间进行选择。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NullableBooleanInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">NullableBooleanInput</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Commentable"</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"commentable"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/nullable-boolean-input.png" alt="NullableBooleanInput"></p>
+<h2><a class="anchor" aria-hidden="true" id="checkboxgroupinput-组件"></a><a href="#checkboxgroupinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>CheckboxGroupInput</code> 组件</h2>
+<p>如果要让用户通过显示所有可能的值来选择多个值, 则 <code>&lt;CheckboxGroupInput&gt;</code> 是正确的组件。 设置 <code>choices</code> 属性以确定 options （使用 <code>id</code>, <code>name</code> 元组）：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { CheckboxGroupInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">CheckboxGroupInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"category"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{[</span>
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">programming</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Programming</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">lifestyle</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Lifestyle</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">photography</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Photography</span>' },
+]} /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/checkbox-group-input.png" alt="CheckboxGroupInput"></p>
+<p>还可以自定义用于选项名称和值的属性，这归功于 <code>optionText</code> 和 <code>optionValue</code> 属性：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Leo Tolstoi'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'M'</span> },
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Jane Austen'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'F'</span> },
+];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">CheckboxGroupInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"full_name"</span> <span class="hljs-attr">optionValue</span>=<span class="hljs-string">"_id"</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> 还接受一个函数, 因此您可以按意愿对选项文本进行设置：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Leo'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Tolstoi'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Austen'</span> },
+];
+<span class="hljs-keyword">const</span> optionRenderer = <span class="hljs-function"><span class="hljs-params">choice</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${choice.first_name}</span> <span class="hljs-subst">${choice.last_name}</span>`</span>;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">CheckboxGroupInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">{optionRenderer}</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> 还接受一个 React 元素, 它将被克隆并接收与 <code>record</code> 属性相关的选项。您可以在那里使用 Field 组件。</p>
+<pre><code class="hljs css languages- jsx">const choices = [
+   { id: 123, first_name: 'Leo', last_name: 'Tolstoi' },
+   { id: 456, first_name: 'Jane', last_name: 'Austen' },
+];
+const FullNameField = ({ record }) =&gt; &lt;span&gt;{record.first_name} {record.last_name}&lt;/span&gt;;
+&lt;CheckboxGroupInput source="gender" choices={choices} optionText={&lt;FullNameField /&gt;}/&gt;
+</code></pre>
+<p>默认情况下翻译当前选项，因此您可以使用翻译标识符作为选项：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+    { <span class="hljs-attr">id</span>: <span class="hljs-string">'programming'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.category.programming'</span> },
+    { <span class="hljs-attr">id</span>: <span class="hljs-string">'lifestyle'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.category.lifestyle'</span> },
+    { <span class="hljs-attr">id</span>: <span class="hljs-string">'photography'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.category.photography'</span> },
+];
+</code></pre>
+<p>但是, 在某些情况下 (例如, 在 <code>&lt;ReferenceInput&gt;</code>中)，您可能不希望翻译该选项。在这种情况下，将 <code>translateChoice</code> 设置为 false。</p>
+<pre><code class="hljs css languages- jsx">&lt;CheckboxGroupInput source=<span class="hljs-string">"gender"</span> choices={choices} translateChoice={<span class="hljs-literal">false</span>}/&gt;
+</code></pre>
+<p>最后，如果要覆盖任何 Material UI 的 <code>&lt;Checkbox&gt;</code> 属性，请使用<code>options</code>属性：</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx">&lt;CheckboxGroupInput source=<span class="hljs-string">"category"</span> options={{
+    <span class="hljs-attr">labelPosition</span>: <span class="hljs-string">'right'</span>
+}} /&gt;
+</code></pre>
+<p>{% endraw %}</p>
+<p>有关详细信息, 请参阅 <a href="http://www.material-ui.com/#/components/checkbox">Material UI Checkbox 文档</a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="dateinput-组件"></a><a href="#dateinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>DateInput</code> 组件</h2>
+<p>理想的编辑日期, <code>&lt;DateInput&gt;</code> 呈现标准浏览器 <a href="http://www.material-ui.com/#/components/date-picker">日期选取器</a>。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { DateInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">DateInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"published_at"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="./img/date-input.gif" alt="DateInput"></p>
+<h2><a class="anchor" aria-hidden="true" id="disabledinput-组件"></a><a href="#disabledinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>DisabledInput</code> 组件</h2>
+<p>如果要在 <code>&lt;Edit&gt;&lt;/ code&gt; 表单中显示记录属性而不让用户更新它（例如自动递增的主键），请使用&lt;code&gt;&lt;DisabledInput&gt;</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { DisabledInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">DisabledInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"id"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/disabled-input.png" alt="DisabledInput"></p>
+<p>**提示&lt;/ strong&gt;：要将不可修改的字段添加到 <code>&lt;Edit&gt;</code> 视图，您还可以使用 react-admin <code>Field</code>组件之一：</p></p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> { Edit, LongTextInput, SimpleForm, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextField source="title" /&gt; {/* NOT EDITABLE */}
+            &lt;LongTextInput source="body" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p><strong>提示</strong>：您甚至可以使用自己的组件，前提是它接受 <code>record</code> 属性：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> { Edit, Labeled, LongTextInput, SimpleForm } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> titleStyle = { <span class="hljs-attr">textOverflow</span>: <span class="hljs-string">'ellipsis'</span>, <span class="hljs-attr">overflow</span>: <span class="hljs-string">'hidden'</span>, <span class="hljs-attr">maxWidth</span>: <span class="hljs-string">'20em'</span> };
+<span class="hljs-keyword">const</span> Title = <span class="hljs-function">(<span class="hljs-params">{ record, label }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Labeled</span> <span class="hljs-attr">label</span>=<span class="hljs-string">{label}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{titleStyle}</span>&gt;</span>{record.title}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Labeled</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;Title label="Title" /&gt;
+            &lt;LongTextInput source="body" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="imageinput-组件"></a><a href="#imageinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ImageInput</code> 组件</h2>
+<p><code>&lt;ImageInput&gt;</code> 允许使用 <a href="https://github.com/okonet/react-dropzone">react-dropzone</a> 上传一些图片。</p>
+<p><img src="https://marmelab.com/react-admin/img/image-input.png" alt="ImageInput"></p>
+<p>使用 <code>&lt;ImageInput&gt;</code> 子项启用预览，如下所示：</p>
+<pre><code class="hljs css languages- jsx">&lt;ImageInput source=<span class="hljs-string">"pictures"</span> label=<span class="hljs-string">"Related pictures"</span> accept=<span class="hljs-string">"image/*"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ImageField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"src"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ImageInput</span>&gt;</span></span>
+</code></pre>
+<p>编写用于显示当前值的自定义 field 组件很简单：它是标准的 <a href="./Fields.md#writing_your_own_field_component">Field</a>。</p>
+<p>当接收到 <strong>新的</strong> 文件时，<code>ImageInput</code> 会将一个 <code>rawFile</code> 属性添加到作为子级 <code>record</code> 属性传递的对象中。 这个 <code>rawFile</code> 是新添加的文件 <a href="https://developer.mozilla.org/en-US/docs/Web/API/File">File</a> 的实例。 这对于在自定义字段内显示大小或 mimetype 的信息很有用。</p>
+<p>除了react-admin之外，<code>ImageInput</code> 组件还接受所有 <a href="https://github.com/okonet/react-dropzone#features">react-dropzone</a> 属性。 例如，如果您需要一次上传多个图像，只需将<code>多个</code> DropZone 属性添加到<code>&lt;ImageInput/&gt;</code> field 即可。</p>
+<p>如果默认的 dropzone 上标签不符合您的需要, 则可以传递 <code>placeholder</code> 属性来覆盖它。 属性可以是任何 React 可以渲染的东西（<code>PropTypes.node</code>）：</p>
+<pre><code class="hljs css languages- jsx">&lt;ImageInput source="pictures" label="Related pictures" accept="image/*" placeholder={&lt;p&gt;Drop your file here&lt;/p&gt;}&gt;
+    &lt;ImageField source="src" title="title" /&gt;
+&lt;/ImageInput&gt;
+</code></pre>
+<p>请注意, 图像上载返回 <a href="https://developer.mozilla.org/en/docs/Web/API/File">File</a> 对象。 根据您的 API 行为来处理它是您的责任。 例如，可以在 base64 中对其进行编码或者将其作为多部分表单数据发送。 通过扩展 REST 客户端，检查此 <a href="./DataProviders.md#decorating-your-rest-client-example-of-file-upload">示例</a> 以获取 base64 编码数据。</p>
+<h2><a class="anchor" aria-hidden="true" id="fileinput-组件"></a><a href="#fileinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>FileInput</code> 组件</h2>
+<p><code>&lt;FileInput&gt;</code> 允许使用 <a href="https://github.com/okonet/react-dropzone">react-dropzone</a> 上传一些文件。</p>
+<p><img src="https://marmelab.com/react-admin/img/file-input.png" alt="FileInput"></p>
+<p>使用 <code>&lt;FileInput&gt;</code> 子级启用预览（实际上是一个简单的文件名称列表），如下所示：</p>
+<pre><code class="hljs css languages- jsx">&lt;FileInput source=<span class="hljs-string">"files"</span> label=<span class="hljs-string">"Related files"</span> accept=<span class="hljs-string">"application/pdf"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">FileField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"src"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">FileInput</span>&gt;</span></span>
+</code></pre>
+<p>编写用于显示当前值的自定义字段组件很简单：它是标准的 <a href="./Fields.md#writing_your_own_field_component">field</a></p>
+<p>当接收到 <strong>新的</strong> 文件时， <code>FileInput</code> 将会将一个 <code>rawFile</code> 属性添加到作为子级 <code>record</code> 属性传递的对象中。 这个 <code>rawFile</code> 是新添加的文件的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/File">File</a> 实例。 这对于在自定义字段内显示大小或 mimetype 的信息很有用。</p>
+<p>除了 react-admin 之外，<code>FileInput</code> 组件还接受所有 <a href="https://github.com/okonet/react-dropzone#features">react-dropzone</a> 属性。 例如，如果您需要一次上传多个文件，只需将<code>多个</code> DropZone 属性添加到<code>&lt;FileInput /&gt;</code> field 即可。</p>
+<p>如果默认的 dropzone 上标签不符合您的需要, 则可以传递 <code>placeholder</code> 属性来覆盖它。 属性可以是任何 React 可以渲染的东西（<code>PropTypes.node</code>）：</p>
+<pre><code class="hljs css languages- jsx">&lt;FileInput source="files" label="Related files" accept="application/pdf" placeholder={&lt;p&gt;Drop your file here&lt;/p&gt;}&gt;
+    &lt;ImageField source="src" title="title" /&gt;
+&lt;/FileInput&gt;
+</code></pre>
+<p>请注意, 文件上载返回 <a href="https://developer.mozilla.org/en/docs/Web/API/File">File</a> 对象。 根据您的 API 行为来处理它是您的责任。 例如，可以在 base64 中对其进行编码或者将其作为多部分表单数据发送。 通过扩展 REST 客户端，查看此 <a href="./DataProviders.md#decorating-your-rest-client-example-of-file-upload">示例</a> 以获取 base64 编码数据。</p>
+<h2><a class="anchor" aria-hidden="true" id="longtextinput-组件"></a><a href="#longtextinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>LongTextInput</code> 组件</h2>
+<p><code>&lt;LongTextInput&gt;</code> 是多行文本值的最佳选择。它呈现为自动扩展 textarea。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { LongTextInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">LongTextInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"teaser"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/long-text-input.png" alt="LongTextInput"></p>
+<h2><a class="anchor" aria-hidden="true" id="numberinput-组件"></a><a href="#numberinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>NumberInput</code> 组件</h2>
+<p><code>&lt;NumberInput&gt;</code> 转换为HTMl <code>&lt;input type=&quot;number&quot;&gt;</code>。 由于 <a href="https://github.com/facebook/react/issues/1425">known React bug</a>，因此数字值是必需的，在那种情况下这阻止了使用更通用的 <a href="#textinput"><TextInput></code></a>。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NumberInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">NumberInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"nb_views"</span> /&gt;</span>
+</span></code></pre>
+<p>您可以自定义 <code>step</code> 属性（默认为“any”）：</p>
+<pre><code class="hljs css languages- jsx">&lt;NumberInput source=<span class="hljs-string">"nb_views"</span> step={<span class="hljs-number">1</span>} /&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="radiobuttongroupinput-组件"></a><a href="#radiobuttongroupinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>RadioButtonGroupInput</code> 组件</h2>
+<p>如果要让用户通过显示的所有值（而不是将它们隐藏在下拉列表之后）选择一个在可能值列表中的值，如 <a href="#selectinput"><code>&lt;SelectInput&gt;</code></a>，<code>&lt;RadioButtonGroupInput&gt;</code> 是正确的组件。 设置 <code>choices</code> 属性来确定选项（使用 <code>id</code>，<code>name</code> 元组）：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { RadioButtonGroupInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RadioButtonGroupInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"category"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{[</span>
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">programming</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Programming</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">lifestyle</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Lifestyle</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">photography</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Photography</span>' },
+]} /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/radio-button-group-input.png" alt="RadioButtonGroupInput"></p>
+<p>还可以自定义用于选项名称和值的属性, 这归功于 <code>optionText</code> 和 <code>optionValue</code> 属性：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Leo Tolstoi'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'M'</span> },
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Jane Austen'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'F'</span> },
+];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RadioButtonGroupInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"full_name"</span> <span class="hljs-attr">optionValue</span>=<span class="hljs-string">"_id"</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> 还接受一个函数, 因此您可以按意愿对选项文本进行设置：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Leo'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Tolstoi'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Austen'</span> },
+];
+<span class="hljs-keyword">const</span> optionRenderer = <span class="hljs-function"><span class="hljs-params">choice</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${choice.first_name}</span> <span class="hljs-subst">${choice.last_name}</span>`</span>;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RadioButtonGroupInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">{optionRenderer}</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> 也接受一个 React 元素，它将被克隆，并接收相关选择作为 <code>record</code> 属性。您可以在那里使用 Field 组件。</p>
+<pre><code class="hljs css languages- jsx">const choices = [
+   { id: 123, first_name: 'Leo', last_name: 'Tolstoi' },
+   { id: 456, first_name: 'Jane', last_name: 'Austen' },
+];
+const FullNameField = ({ record }) =&gt; &lt;span&gt;{record.first_name} {record.last_name}&lt;/span&gt;;
+&lt;RadioButtonGroupInput source="gender" choices={choices} optionText={&lt;FullNameField /&gt;}/&gt;
+</code></pre>
+<p>默认情况下翻译当前选项，因此您可以使用翻译标识符作为选项：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'M'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.male'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'F'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.female'</span> },
+];
+</code></pre>
+<p>但是, 在某些情况下 (例如, 在 <code>&lt;ReferenceInput&gt;</code>中)，您可能不希望翻译该选项。在这种情况下, 将 <code>translateChoice</code> 设置为 false。</p>
+<pre><code class="hljs css languages- jsx">&lt;RadioButtonGroupInput source=<span class="hljs-string">"gender"</span> choices={choices} translateChoice={<span class="hljs-literal">false</span>}/&gt;
+</code></pre>
+<p>最后，如果要覆盖任何 Material UI 的 <code>&lt;RadioButtonGroup&gt;</code> 属性，请使用<code>options</code>属性：</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx">&lt;RadioButtonGroupInput source=<span class="hljs-string">"category"</span> options={{
+    <span class="hljs-attr">labelPosition</span>: <span class="hljs-string">'right'</span>
+}} /&gt;
+</code></pre>
+<p>{% endraw %}</p>
+<p>有关详细信息, 请参阅 <a href="http://www.material-ui.com/#/components/radio-button">Material UI RadioGroup 文档</a>。</p>
+<p><strong>提示</strong>：如果要使用相关记录的列表填充 <code>choices</code> 属性，则应使用 <a href="#referenceinput"><code>&lt;ReferenceInput&gt;</code></a> 装饰<code>&lt;AutocompleteInput&gt;</code>，并将 <code>choices</code> 留空：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { RadioButtonGroupInput, ReferenceInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceInput label=<span class="hljs-string">"Author"</span> source=<span class="hljs-string">"author_id"</span> reference=<span class="hljs-string">"authors"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RadioButtonGroupInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"last_name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="referencearrayinput-组件"></a><a href="#referencearrayinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ReferenceArrayInput</code> 组件</h2>
+<p>使用 <code>&lt;ReferenceArrayInput&gt;</code> 编辑引用值数组，即让用户从另一个 REST 端点中选择值列表（通常是外键）。</p>
+<p>在引用端点中，<code>&lt;ReferenceArrayInput&gt;</code> 获取相关资源（使用<code>CRUD_GET_MANY</code> REST方法）与获取可能的资源（使用<code>CRUD_GET_MATCHING</code> REST方法）一样</p>
+<p>例如，如果 post 对象有许多 tag，则 post 资源可能如下所示：</p>
+<pre><code class="hljs css languages- js">{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">1234</span>,
+    <span class="hljs-attr">tag_ids</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">23</span>, <span class="hljs-number">4</span>]
+}
+</code></pre>
+<p>然后 <code>&lt;ReferenceArrayInput&gt;</code> 将从这两个调用中获取 tag 资源列表：</p>
+<pre><code class="hljs">http://myapi.com/tags?id=[1,23,4]
+http://myapi.com/tags?page=1&amp;perPage=25
+</code></pre>
+<p>一旦接收到重复数据删除的引用资源，该组件将渲染委托给一个子组件，它将可能的选择作为 <code>choices</code> 属性传递给该子组件。</p>
+<p>这意味着您可以使用具有 <a href="#selectarrayinput"><code>&lt;SelectArrayInput&gt;</code></a> 的 <code>&lt;ReferenceArrayInput&gt;</code>，或者使用您选择的组件，只要它支持 <code>choices</code> 属性。</p>
+<p>该组件需要一个 <code>source</code> 和 <code>reference</code> 属性。 例如，要使 <code>post</code> 的 <code>tag_ids</code> 可编辑：</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">import</span> { ReferenceArrayInput, SelectArrayInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceArrayInput source=<span class="hljs-string">"tag_ids"</span> reference=<span class="hljs-string">"tags"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceArrayInput</span>&gt;</span></span>
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/select-array-input.gif" alt="SelectArrayInput"></p>
+<p><strong>注意</strong>：你<strong>必须</strong>为引用资源添加一个<code>&lt;Resource&gt;</code> - react-admin 需要它来获取引用数据。 如果你想在侧边栏菜单中隐藏它，你 可以 省略此引用中的 list 属性。</p>
+<pre><code class="hljs css languages- js">&lt;Admin dataProvider={myDataProvider}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{PostList}</span> <span class="hljs-attr">edit</span>=<span class="hljs-string">{PostEdit}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"tags"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+</span></code></pre>
+<p>如果要在选项列表中添加值为null的空选项，请设置<code>allowEmpty</code> 属性。 禁用<code>allowEmpty</code>并不意味着需要输入。 如果要进行所需的输入，则必须按照 <a href="./CreateEdit.html#validation">验证文档</a> 中的说明添加验证器。 启用 <code>allowEmpty</code> 属性只会在选项之上添加一个空选项（具有<code>null</code>值），并使值可为空。</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">import</span> { ReferenceArrayInput, SelectArrayInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceArrayInput source=<span class="hljs-string">"tag_ids"</span> reference=<span class="hljs-string">"tags"</span> allowEmpty&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceArrayInput</span>&gt;</span></span>
+</code></pre>
+<p>**提示&lt;/ strong&gt;：默认情况下为 <code>&lt;Filter&gt;</code> 组件的所有子级输入组件设置<code>allowEmpty</code></p></p>
+<p>您可以使用<code>perPage</code>，<code>sort</code>和<code>filter</code> 属性来调整此组件如何获取可能的值。</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- js"><span class="hljs-comment">// by default, fetches only the first 25 values. You can extend this limit</span>
+<span class="hljs-comment">// by setting the `perPage` prop.</span>
+&lt;ReferenceArrayInput
+     source=<span class="hljs-string">"tag_ids"</span>
+     reference=<span class="hljs-string">"tags"</span>
+     perPage={<span class="hljs-number">100</span>}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceArrayInput</span>&gt;</span></span>
+
+<span class="hljs-comment">// by default, orders the possible values by id desc. You can change this order</span>
+<span class="hljs-comment">// by setting the `sort` prop (an object with `field` and `order` properties).</span>
+&lt;ReferenceArrayInput
+     source=<span class="hljs-string">"tag_ids"</span>
+     reference=<span class="hljs-string">"tags"</span>
+     sort={{ <span class="hljs-attr">field</span>: <span class="hljs-string">'title'</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">'ASC'</span> }}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceArrayInput</span>&gt;</span></span>
+
+<span class="hljs-comment">// you can filter the query used to populate the possible values. Use the</span>
+<span class="hljs-comment">// `filter` prop for that.</span>
+&lt;ReferenceArrayInput
+     source=<span class="hljs-string">"tag_ids"</span>
+     reference=<span class="hljs-string">"tags"</span>
+     filter={{ <span class="hljs-attr">is_published</span>: <span class="hljs-literal">true</span> }}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceArrayInput</span>&gt;</span></span>
+</code></pre>
+<p>{% endraw %}</p>
+<h2><a class="anchor" aria-hidden="true" id="referenceinput-组件"></a><a href="#referenceinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ReferenceInput</code> 组件</h2>
+<p>例如，对外键值使用 <code>&lt;ReferenceInput&gt;</code> 来编辑 <code>comment</code> 资源的 <code>post_id</code>。 此组件获取引用资源中的可能值（使用 <code>GET_LIST</code> REST方法）和引用的记录（使用 <code>GET_ONE</code> REST方法），然后将呈现委托给子组件，它将可能的选项作为 <code>choices</code> 属性传递给子组件。</p>
+<p>这意味着您可以将 <code>&lt;ReferenceInput&gt;</code> 与 <a href="#selectinput"><code>&lt;SelectInput&gt;</code></a> ，<a href="#autocompleteinput"><code>&lt;AutocompleteInput&gt;</code></a> 或 <a href="#radiobuttongroupinput"><code>&lt;RadioButtonGroupInput&gt;</code></a> 中的任何一个一起使用，或者甚至使用您选择的组件，前提是它支持 <code>choices</code> 属性。</p>
+<p>该组件需要一个 <code>source</code> 和 <code>reference</code> 属性。 例如，要使 <code>comment</code> 的 <code>post_id</code> 可编辑：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ReferenceInput, SelectInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceInput label=<span class="hljs-string">"Post"</span> source=<span class="hljs-string">"post_id"</span> reference=<span class="hljs-string">"posts"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/reference-input.gif" alt="ReferenceInput"></p>
+<p><strong>注意</strong>：你<strong>必须</strong>为引用资源添加一个<code>&lt;Resource&gt;</code> - react-admin 需要它来获取引用数据。 如果你想在侧边栏菜单中隐藏它，你 <em>可以</em> 省略此引用中的 <code>list</code> 属性。</p>
+<pre><code class="hljs css languages- jsx">&lt;Admin dataProvider={myDataProvider}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"comments"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{CommentList}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+</span></code></pre>
+<p>如果要在选项列表中添加值为 null 的空选项，请设置<code>allowEmpty</code> 属性。 禁用<code>allowEmpty</code>并不意味着需要输入。 如果要进行所需的输入，则必须按照 <a href="./CreateEdit.html#validation">验证文档</a> 中的说明添加验证器。 启用 <code>allowEmpty</code> 属性只会在选项之上添加一个空选项（具有<code>null</code>值），并使值可为空。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ReferenceInput, SelectInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceInput label=<span class="hljs-string">"Post"</span> source=<span class="hljs-string">"post_id"</span> reference=<span class="hljs-string">"posts"</span> allowEmpty&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<p>**提示&lt;/ strong&gt;：默认情况下为 <code>&lt;Filter&gt;</code> 组件的所有子级输入组件设置<code>allowEmpty</code>：</p></p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> CommentFilter = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Filter</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ReferenceInput</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Post"</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"post_id"</span> <span class="hljs-attr">reference</span>=<span class="hljs-string">"posts"</span>&gt;</span> // no need for allowEmpty
+            <span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span>
+);
+</span></code></pre>
+<p>您可以使用<code>perPage</code>，<code>sort</code>和<code>filter</code> 属性来调整此组件如何获取可能的值。</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// by default, fetches only the first 25 values. You can extend this limit</span>
+<span class="hljs-comment">// by setting the `perPage` prop.</span>
+&lt;ReferenceInput
+     source=<span class="hljs-string">"post_id"</span>
+     reference=<span class="hljs-string">"posts"</span>
+     perPage={<span class="hljs-number">100</span>}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+
+<span class="hljs-comment">// by default, orders the possible values by id desc. You can change this order</span>
+<span class="hljs-comment">// by setting the `sort` prop (an object with `field` and `order` properties).</span>
+&lt;ReferenceInput
+     source=<span class="hljs-string">"post_id"</span>
+     reference=<span class="hljs-string">"posts"</span>
+     sort={{ <span class="hljs-attr">field</span>: <span class="hljs-string">'title'</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">'ASC'</span> }}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+
+<span class="hljs-comment">// you can filter the query used to populate the possible values. Use the</span>
+<span class="hljs-comment">// `filter` prop for that.</span>
+&lt;ReferenceInput
+     source=<span class="hljs-string">"post_id"</span>
+     reference=<span class="hljs-string">"posts"</span>
+     filter={{ <span class="hljs-attr">is_published</span>: <span class="hljs-literal">true</span> }}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<p>{% endraw %}</p>
+<p>子组件可以进一步过滤结果（例如，<code>&lt; AutocompleteInput&gt;</code>的情况）。 ReferenceInput 将 <code>setFilter</code>函数作为属性传递给其子组件。 它使用该值为查询创建过滤器 - 默认情况下为 <code>{q: [searchText] }</code>。 您可以自定义映射 <code>searchText =&gt; searchQuery</code>通过设置自定义<code>filterToQuery</code> 函数属性：</p>
+<pre><code class="hljs css languages- jsx">&lt;ReferenceInput
+     source=<span class="hljs-string">"post_id"</span>
+     reference=<span class="hljs-string">"posts"</span>
+     filterToQuery={searchText =&gt; ({ <span class="hljs-attr">title</span>: searchText })}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<p>子组件从 <code>&lt;ReferenceInput&gt;</code> 接收以下属性：</p>
+<ul>
+<li><code>isLoading</code>: whether the request for possible values is loading or not</li>
+<li><code>filter</code>: the current filter of the request for possible values. Defaults to <code>{}</code>.</li>
+<li><code>pagination</code>: the current pagination of the request for possible values. Defaults to <code>{ page: 1, perPage: 25 }</code>.</li>
+<li><code>sort</code>: the current sorting of the request for possible values. Defaults to <code>{ field: 'id', order: 'DESC' }</code>.</li>
+<li><code>error</code>: the error message if the form validation failed for that input</li>
+<li><code>warning</code>: the warning message if the form validation failed for that input</li>
+<li><code>onChange</code>: function to call when the value changes</li>
+<li><code>setFilter</code>: function to call to update the filter of the request for possible values</li>
+<li><code>setPagination</code>: : function to call to update the pagination of the request for possible values</li>
+<li><code>setSort</code>: function to call to update the sorting of the request for possible values</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="richtextinput-组件"></a><a href="#richtextinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>RichTextInput</code> 组件</h2>
+<p>如果您希望允许用户编辑某些 HTML 内容，<code>&lt;RichTextInput&gt;</code> 是理想的组件。它由 <a href="https://quilljs.com/">Quill</a> 提供动力。</p>
+<p>注意：由于其大小，<code>&lt;RichTextInput&gt;</code> 默认情况下不与 react-admin 捆绑在一起。 您必须先使用npm 安装它：</p>
+<pre><code class="hljs css languages- sh">npm install ra-input-rich-text
+</code></pre>
+<p>Then use it as a normal input component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> RichTextInput <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-input-rich-text'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RichTextInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"body"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/rich-text-input.png" alt="RichTextInput"></p>
+<p>您可以使用 <code>toolbar</code> 属性自定义富文本编辑器工具栏，如 <a href="https://quilljs.com/docs/modules/toolbar/">Quill官方工具栏文档</a> 中所述。</p>
+<pre><code class="hljs css languages- jsx">&lt;RichTextInput source=<span class="hljs-string">"body"</span> toolbar={[ [<span class="hljs-string">'bold'</span>, <span class="hljs-string">'italic'</span>, <span class="hljs-string">'underline'</span>, <span class="hljs-string">'link'</span>] ]} /&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="selectinput-组件"></a><a href="#selectinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>SelectInput</code> 组件</h2>
+<p>要让用户使用下拉列表选择 list 中的值, 请使用 <code>&lt;SelectInput&gt;</code>。 它使用 <a href="http://www.material-ui.com/#/components/select-field"> Material ui 的 <code>&lt;SelectField&gt;</code></a> 呈现。 设置 <code>choices</code> 属性以确定 options（具有 <code>id</code>, <code>name</code> 元组）：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { SelectInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"category"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{[</span>
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">programming</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Programming</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">lifestyle</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Lifestyle</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">photography</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Photography</span>' },
+]} /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/select-input.gif" alt="SelectInput"></p>
+<p>还可以自定义用于选项名称和值的属性, 这归功于 <code>optionText</code> 和 <code>optionValue</code> 属性：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Leo Tolstoi'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'M'</span> },
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Jane Austen'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'F'</span> },
+];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"full_name"</span> <span class="hljs-attr">optionValue</span>=<span class="hljs-string">"_id"</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> 也接受一个函数，所以你可以随意设置选项文本：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Leo'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Tolstoi'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Austen'</span> },
+];
+<span class="hljs-keyword">const</span> optionRenderer = <span class="hljs-function"><span class="hljs-params">choice</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${choice.first_name}</span> <span class="hljs-subst">${choice.last_name}</span>`</span>;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">{optionRenderer}</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> 还接受一个 React 元素, 它将被克隆并接收与 <code>record</code> 属性相关的选项。您可以在那里使用 Field 组件。</p>
+<pre><code class="hljs css languages- jsx">const choices = [
+   { id: 123, first_name: 'Leo', last_name: 'Tolstoi' },
+   { id: 456, first_name: 'Jane', last_name: 'Austen' },
+];
+const FullNameField = ({ record }) =&gt; &lt;span&gt;{record.first_name} {record.last_name}&lt;/span&gt;;
+&lt;SelectInput source="gender" choices={choices} optionText={&lt;FullNameField /&gt;}/&gt;
+</code></pre>
+<p>启用 <code>allowEmpty</code> 属性只会在选项之上添加一个空选项（具有<code>null</code>值），并使值可为空。</p>
+<pre><code class="hljs css languages- jsx">&lt;SelectInput source=<span class="hljs-string">"category"</span> allowEmpty choices={[
+    { <span class="hljs-attr">id</span>: <span class="hljs-string">'programming'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Programming'</span> },
+    { <span class="hljs-attr">id</span>: <span class="hljs-string">'lifestyle'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Lifestyle'</span> },
+    { <span class="hljs-attr">id</span>: <span class="hljs-string">'photography'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Photography'</span> },
+]} /&gt;
+</code></pre>
+<p>默认情况下翻译当前选项，因此您可以使用翻译标识符作为选项：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'M'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.male'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'F'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.female'</span> },
+];
+</code></pre>
+<p>但是, 在某些情况下您可能不希望翻译该选项。在这种情况下, 将 <code>translateChoice</code> 设置为 false。</p>
+<pre><code class="hljs css languages- jsx">&lt;SelectInput source=<span class="hljs-string">"gender"</span> choices={choices} translateChoice={<span class="hljs-literal">false</span>}/&gt;
+</code></pre>
+<p>请注意，当 <code>&lt;SelectInput&gt;</code> 是 <code>&lt;ReferenceInput&gt;</code> 的子项时， <code>translateChoice</code> 设置为 false。</p>
+<p>最后，如果要覆盖任何 Material UI 的 <code>&lt; SelectField&gt;</code> 属性，请使用<code>options</code>属性：</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx">&lt;SelectInput source=<span class="hljs-string">"category"</span> options={{
+    <span class="hljs-attr">maxHeight</span>: <span class="hljs-number">200</span>
+}} /&gt;
+</code></pre>
+<p>{% endraw %}</p>
+<p>有关详细信息, 请参阅 <a href="http://www.material-ui.com/#/components/select-field">Material UI SelectField 文档</a>。</p>
+<p><strong>提示</strong>：如果要使用相关记录的列表填充 <code>choices</code> 属性，则应使用 <a href="#referenceinput"><code>&lt;ReferenceInput&gt;</code></a> 装饰 <code>&lt;SelectInput&gt;</code> ，并将 <code>choices</code> 留空：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { SelectInput, ReferenceInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceInput label=<span class="hljs-string">"Author"</span> source=<span class="hljs-string">"author_id"</span> reference=<span class="hljs-string">"authors"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"last_name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<p>如果您不想将选项显示为下拉列表，而是希望将它们显示为单选按钮列表，请尝试 <a href="#radiobuttongroupinput"><code>&lt;RadioButtonGroupInput&gt;</code></a>。 如果列表太大，则更喜欢 <a href="#autocompleteinput"><code>&lt;AutocompleteInput&gt;</code></a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="selectarrayinput-组件"></a><a href="#selectarrayinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>SelectArrayInput</code> 组件</h2>
+<p>要让用户使用下拉列表选择 list 中的几个值, 请使用 <code>&lt; SelectArrayInput&gt;</code>。 它使用 <a href="http://www.material-ui.com/#/components/select"> Material ui 的 <code>&lt; Select&gt;</code></a> 呈现。 设置 <code>choices</code> 属性以确定 options（具有 <code>id</code>, <code>name</code> 元组）：</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">import</span> { SelectArrayInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Tags"</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"categories"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{[</span>
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">music</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Music</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">photography</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Photo</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">programming</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Code</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">tech</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Technology</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">sport</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Sport</span>' },
+]} /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/select-array-input.gif" alt="SelectArrayInput"></p>
+<p>还可以自定义用于选项名称和值的属性，这归功于 <code>optionText</code> 和 <code>optionValue</code> 属性：</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">_id</span>: <span class="hljs-string">'1'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Book'</span>, <span class="hljs-attr">plural_name</span>: <span class="hljs-string">'Books'</span> },
+   { <span class="hljs-attr">_id</span>: <span class="hljs-string">'2'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Video'</span>, <span class="hljs-attr">plural_name</span>: <span class="hljs-string">'Videos'</span> },
+   { <span class="hljs-attr">_id</span>: <span class="hljs-string">'3'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Audio'</span>, <span class="hljs-attr">plural_name</span>: <span class="hljs-string">'Audios'</span> },
+];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"categories"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"plural_name"</span> <span class="hljs-attr">optionValue</span>=<span class="hljs-string">"_id"</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> 也接受一个函数，所以你可以随意设置选项文本：</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'1'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Book'</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">23</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'2'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Video'</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">56</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'3'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Audio'</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">12</span> },
+];
+<span class="hljs-keyword">const</span> optionRenderer = <span class="hljs-function"><span class="hljs-params">choice</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${choice.name}</span> (<span class="hljs-subst">${choice.quantity}</span>)`</span>;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"categories"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">{optionRenderer}</span> /&gt;</span>
+</span></code></pre>
+<p>默认情况下翻译当前选项，因此您可以使用翻译标识符作为选项：</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'books'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.category.books'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'sport'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.category.sport'</span> },
+];
+</code></pre>
+<p>最后，如果要覆盖任何 <code>&lt;Select&gt;</code> 的属性，请使用<code>options</code>属性：</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- js">&lt;SelectArrayInput source=<span class="hljs-string">"category"</span> options={{ <span class="hljs-attr">fullWidth</span>: <span class="hljs-literal">true</span> }} /&gt;
+</code></pre>
+<p>{% endraw %}</p>
+<p>有关详细信息, 请参阅 <a href="http://www.material-ui.com/#/components/select"> Select 文档</a>。</p>
+<p><code>SelectArrayInput</code> 组件<strong>不能</strong>在 <code>ReferenceInput</code> 中使用，但可以在<code>ReferenceArrayInput</code> 中使用。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> {
+    ChipField,
+    Create,
+    DateInput,
+    LongTextInput,
+    ReferenceArrayInput,
+    SelectArrayInput,
+    TextInput,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostCreate = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;LongTextInput source="body" /&gt;
+            &lt;DateInput source="published_at" /&gt;
+
+            &lt;ReferenceArrayInput reference="tags" source="tags"&gt;
+                &lt;SelectArrayInput&gt;
+                    &lt;ChipField source="name" /&gt;
+                &lt;/SelectArrayInput&gt;
+            &lt;/ReferenceArrayInput&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p>提示：由于它不提供自动完成功能，因此当引用的资源包含大量项目时，<code>SelectArrayInput</code>可能不适用。</p>
+<h2><a class="anchor" aria-hidden="true" id="textinput-组件"></a><a href="#textinput-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>TextInput</code> 组件</h2>
+<p><code>&lt;TextInput&gt;</code> 是最常见的输入。它用于文本、电子邮件、URL 或密码。在转换为 HTML <code>&lt;input&gt;</code> 标记中。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { TextInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/text-input.png" alt="TextInput"></p>
+<p>可以使用 <code>type</code> 属性选择特定的输入类型，例如 <code>text</code> (默认值)，<code>email</code>，<code>url</code> 或 <code>password</code>：</p>
+<pre><code class="hljs css languages- jsx">&lt;TextInput label=<span class="hljs-string">"Email Address"</span> source=<span class="hljs-string">"email"</span> type=<span class="hljs-string">"email"</span> /&gt;
+</code></pre>
+<p><strong>警告</strong>: 不要使用 <code>type=&quot;number&quot;</code>, 或者您将收到一个字符串作为值 (这是一个 <a href="https://github.com/facebook/react/issues/1425">已知的React bug</a>)。 相反, 请使用 <a href="#numberinput"><code>&lt;NumberInput&gt;</code></a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="将输入值转换-to-from-记录"></a><a href="#将输入值转换-to-from-记录" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>将输入值转换 to/from 记录</h2>
+<p>输入组件返回的数据格式可能不是您的 API 所期望的。 由于 React-admin 使用Redux Form，我们可以使用其<code>parse()</code> 和 <code>format()</code>函数在保存到记录并从记录加载时转换 input 值。 在开始之前了解输入值的生命周期会更好。</p>
+<p>两个函数的助记符： - <code>parse()</code>：input -&gt; record - <code>format()</code>：record -&gt; input</p>
+<p>假设用户想要将0-100的值输入到百分比字段，但您的API（因此记录）需要0-1.0。 您可以使用简单的 <code>parse()</code> 和 <code>format()</code> 函数来存档转换：</p>
+<pre><code class="hljs css languages- jsx">&lt;NumberInput source=<span class="hljs-string">"percent"</span> format={v =&gt; v*<span class="hljs-number">100</span>} parse={v =&gt; v/<span class="hljs-number">100</span>} label=<span class="hljs-string">"Formatted number"</span> /&gt;
+</code></pre>
+<p><code>&lt;DateInput&gt;</code> 存储并返回一个字符串。如果您希望将 JavaScript 日期对象存储在记录中，请改用：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> dateFormatter = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+  <span class="hljs-comment">// v is a `Date` object</span>
+  <span class="hljs-keyword">if</span> (!(v <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Date</span>) || <span class="hljs-built_in">isNaN</span>(v)) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">const</span> pad = <span class="hljs-string">'00'</span>;
+  <span class="hljs-keyword">const</span> yy = v.getFullYear().toString();
+  <span class="hljs-keyword">const</span> mm = (v.getMonth() + <span class="hljs-number">1</span>).toString();
+  <span class="hljs-keyword">const</span> dd = v.getDate().toString();
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${yy}</span>-<span class="hljs-subst">${(pad + mm).slice(<span class="hljs-number">-2</span>)}</span>-<span class="hljs-subst">${(pad + dd).slice(<span class="hljs-number">-2</span>)}</span>`</span>;
+};
+
+<span class="hljs-keyword">const</span> dateParser = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+  <span class="hljs-comment">// v is a string of "YYYY-MM-DD" format</span>
+  <span class="hljs-keyword">const</span> match = <span class="hljs-regexp">/(\d{4})-(\d{2})-(\d{2})/</span>.exec(v);
+  <span class="hljs-keyword">if</span> (match === <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">const</span> d = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(match[<span class="hljs-number">1</span>], <span class="hljs-built_in">parseInt</span>(match[<span class="hljs-number">2</span>], <span class="hljs-number">10</span>) - <span class="hljs-number">1</span>, match[<span class="hljs-number">3</span>]);
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isNaN</span>(d)) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">return</span> d;
+};
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">DateInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"isodate"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">{dateFormatter}</span> <span class="hljs-attr">parse</span>=<span class="hljs-string">{dateParser}</span> /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="第三方组件"></a><a href="#第三方组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>第三方组件</h2>
+<p>您可以在第三方存储库中找到 react-admin 的组件。</p>
+<ul>
+<li><a href="https://github.com/vascofg/react-admin-color-input">vascofg/react-admin-color-input</a>: a color input using <a href="http://casesandberg.github.io/react-color/">React Color</a>, a collection of color pickers.</li>
+<li><a href="https://github.com/LoicMahieu/aor-tinymce-input">LoicMahieu/aor-tinymce-input</a>: a TinyMCE component, useful for editing HTML</li>
+<li><a href="https://github.com/vascofg/react-admin-date-inputs">vascofg/react-admin-date-inputs</a>: a collection of Date Inputs, based on <a href="https://material-ui-pickers.firebaseapp.com/">material-ui-pickers</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="编写自己的输入组件"></a><a href="#编写自己的输入组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>编写自己的输入组件</h2>
+<p>如果您需要更具体的输入类型，您也可以自己编写。 您将不得不依赖 redux-form 的 <a href="http://redux-form.com/6.5.0/docs/api/Field.md/"><code>&lt;Field&gt;</code></a> 组件，以便处理值更新周期。</p>
+<p>例如，让我们编写一个组件来编辑当前记录的纬度和经度：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in LatLongInput.js</span>
+<span class="hljs-keyword">import</span> { Field } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-form'</span>;
+<span class="hljs-keyword">const</span> LatLngInput = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;span&gt;
+        &lt;Field name="lat" component="input" type="number" placeholder="latitude" /&gt;
+        &amp;nbsp;
+        &lt;Field name="lng" component="input" type="number" placeholder="longitude" /&gt;
+    &lt;/span&gt;
+);
+export default LatLngInput;
+
+// in ItemEdit.js
+const ItemEdit = (props) =&gt; (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;LatLngInput /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p><code>LatLngInput</code> 不带任何属性，因为 <code>&lt;Field&gt;</code> 组件可以通过其上下文访问当前记录。 <code>name</code> 属性用作要编辑记录属性的选择器。 除 <code>name</code> 和 <code>component</code> 之外的所有 <code>Field</code> 属性都将传递给子组件/元素（该示例中的 <code>&lt;input&gt;</code>）。 执行此组件将大致呈现以下代码：</p>
+<pre><code class="hljs css languages- html"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"longitude"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{record.lat}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"longitude"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{record.lng}</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+</code></pre>
+<p><strong>提示</strong>：<code>&lt;Field&gt;</code> 组件支持 <code>name</code> 属性中的点表示法，以便编辑嵌套的属性：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> LatLongInput = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;span&gt;
+        &lt;Field name="position.lat" component="input" type="number" placeholder="latitude" /&gt;
+        &amp;nbsp;
+        &lt;Field name="position.lng" component="input" type="number" placeholder="longitude" /&gt;
+    &lt;/span&gt;
+);
+</code></pre>
+<p>该组件缺少label。React-admin 为此提供了 <code>&lt;Labeled&gt;</code> 组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in LatLongInput.js</span>
+<span class="hljs-keyword">import</span> { Field } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-form'</span>;
+<span class="hljs-keyword">import</span> { Labeled } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> LatLngInput = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;Labeled label="position"&gt;
+        &lt;span&gt;
+            &lt;Field name="lat" component="input" type="number" placeholder="latitude" /&gt;
+            &amp;nbsp;
+            &lt;Field name="lng" component="input" type="number" placeholder="longitude" /&gt;
+        &lt;/span&gt;
+    &lt;/Labeled&gt;
+);
+export default LatLngInput;
+</code></pre>
+<p>现在组件将使用标签渲染：</p>
+<pre><code class="hljs css languages- html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>Position<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"longitude"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{record.lat}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"longitude"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{record.lng}</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+</code></pre>
+<p>您可以使用 material-ui 组件代替 HTML <code>input</code> 元素。 要编写 material-ui 和 <code>Field</code>，请使用 <a href="http://redux-form.com/6.5.0/examples/material-ui/">field渲染器函数</a> 来映射属性：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in LatLongInput.js</span>
+<span class="hljs-keyword">import</span> TextField <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/TextField'</span>;
+<span class="hljs-keyword">import</span> { Field } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-form'</span>;
+<span class="hljs-keyword">const</span> renderTextField = <span class="hljs-function">(<span class="hljs-params">{ input, label, meta: { touched, error }, ...custom }</span>) =&gt;</span> (
+    &lt;TextField
+        hintText={label}
+        floatingLabelText={label}
+        errorText={touched &amp;&amp; error}
+        {...input}
+        {...custom}
+    /&gt;
+);
+const LatLngInput = () =&gt; (
+    &lt;span&gt;
+        &lt;Field name="lat" component={renderTextField} label="latitude" /&gt;
+        &amp;nbsp;
+        &lt;Field name="lng" component={renderTextField} label="longitude" /&gt;
+    &lt;/span&gt;
+);
+</code></pre>
+<p>Material-ui的 <code>&lt;TextField&gt;</code> 组件已包含 label，因此在这种情况下您不需要使用 <code>&lt;Labeled&gt;</code> 。 <code>&lt;Field&gt;</code> 为其子组件注入两个属性：<code>input</code> 和 <code>meta</code>。 要了解有关这些属性的更多信息，请参阅 redux-form 网站中的 <a href="http://redux-form.com/6.5.0/docs/api/Field.md/#props"><code>&lt;Field&gt;</code>组件文档</a>。</p>
+<p><strong>提示</strong>：如果在自定义输入中只需要一个 <code>&lt;Field&gt;</code> 组件，则可以让 react-admin 使用 <code>addField</code> 高阶组件为您执行 <code>&lt;Field&gt;</code> 修饰：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in SexInput.js</span>
+<span class="hljs-keyword">import</span> SelectField <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/SelectField'</span>;
+<span class="hljs-keyword">import</span> MenuItem <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/MenuItem'</span>;
+<span class="hljs-keyword">import</span> { addField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> SexInput = <span class="hljs-function">(<span class="hljs-params">{ input, meta: { touched, error } }</span>) =&gt;</span> (
+    &lt;SelectField
+        floatingLabelText="Sex"
+        errorText={touched &amp;&amp; error}
+        {...input}
+    &gt;
+        &lt;MenuItem value="M" primaryText="Male" /&gt;
+        &lt;MenuItem value="F" primaryText="Female" /&gt;
+    &lt;/SelectField&gt;
+);
+export default addField(SexInput); // decorate with redux-form's &lt;Field&gt;
+
+// equivalent of
+import SelectField from '@material-ui/core/SelectField';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Field } from 'redux-form';
+
+const renderSexInput = ({ input, meta: { touched, error } }) =&gt; (
+    &lt;SelectField
+        floatingLabelText="Sex"
+        errorText={touched &amp;&amp; error}
+        {...input}
+    &gt;
+        &lt;MenuItem value="M" primaryText="Male" /&gt;
+        &lt;MenuItem value="F" primaryText="Female" /&gt;
+    &lt;/SelectField&gt;
+);
+const SexInput = ({ source }) =&gt; &lt;Field name={source} component={renderSexInput} /&gt;
+export default SexInput;
+</code></pre>
+<p>有关如何使用 redux-form <code>&lt;Field&gt;</code> 组件的更多详细信息，请参阅 <a href="http://redux-form.com/6.5.0/docs/api/Field.md/">redux-form doc</a>。</p>
+<p>您可以使用 react-admin input 组件（例如 <code>&lt;NumberInput&gt;</code>）代替 HTML <code>input</code> 元素或 material-ui 组件。 React-admin 组件已经由 <code>&lt;Field&gt;</code> 修饰，并且已经包含一个标签，因此在使用它们时不需要 <code>&lt;Field&gt;</code> 或 <code>&lt;Labeled&gt;</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in LatLongInput.js</span>
+<span class="hljs-keyword">import</span> { NumberInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">const</span> LatLngInput = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;span&gt;
+        &lt;NumberInput source="lat" label="latitude" /&gt;
+        &amp;nbsp;
+        &lt;NumberInput source="lng" label="longitude" /&gt;
+    &lt;/span&gt;
+);
+export default LatLngInput;
+
+// in ItemEdit.js
+const ItemEdit = (props) =&gt; (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput source="id" /&gt;
+            &lt;LatLngInput /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="链接两个输入"></a><a href="#链接两个输入" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>链接两个输入</h2>
+<p>编辑表单通常包含链接的输入，例如国家和城市 (后者的选择取决于前者的值)。</p>
+<p>React-admin 依赖于 redux-form，因此您可以使用 redux-form <a href="https://redux-form.com/7.3.0/docs/api/formvalueselector.md/">formValueSelector()</a> 获取当前表单值。 或者，您可以使用react-admin <code>&lt;FormDataConsumer&gt;</code>&lt; FormDataConsumer&gt;&lt;/0&gt;组件来获取表单值，并将它们传递给子函数。</p>
+<p>这有助于实现链接输入：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { FormDataConsumer } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> OrderEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;SelectInput source="country" choices={countries} /&gt;
+            &lt;FormDataConsumer&gt;
+                {({ formData, ...rest }) =&gt;
+                     &lt;SelectInput 
+                         source="city"
+                         choices={getCitiesFor(formData.country)}
+                         {...rest}
+                     /&gt;
+                }
+            &lt;/FormDataConsumer&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+); 
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="隐藏基于其他-input-的-input"></a><a href="#隐藏基于其他-input-的-input" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>隐藏基于其他 Input 的 Input</h2>
+<p>您可能希望根据另一个 input 的值显示或隐藏输入 - 例如，仅当 <code>hasEmail</code> 布尔输入被选中为 <code>true</code> 时才显示 <code>email</code> 输入。</p>
+<p>对于这种情况，您可以使用 <code>&lt;FormDataConsumer&gt;</code> 组件使用上述方法。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { FormDataConsumer } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+ <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+     &lt;Edit {...props}&gt;
+         &lt;SimpleForm&gt;
+             &lt;BooleanInput source="hasEmail" /&gt;
+             &lt;FormDataConsumer&gt;
+                 {({ formData, ...rest }) =&gt; formData.hasEmail &amp;&amp;
+                      &lt;TextInput source="email" {...rest} /&gt;
+                 }
+             &lt;/FormDataConsumer&gt;
+         &lt;/SimpleForm&gt;
+     &lt;/Edit&gt;
+ ); 
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/creat-edit-view-components.html">← Create 和 Edit 视图组件</a><a class="docs-next button" href="/docs/zh-CN/authentication.html">身份验证 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#arrayinput-组件"><code>ArrayInput</code> 组件</a></li><li><a href="#autocompleteinput-组件"><code>AutocompleteInput</code>组件</a><ul class="toc-headings"><li><a href="#properties">Properties</a></li></ul></li><li><a href="#booleaninput-与-nullablebooleaninput-组件"><code>BooleanInput</code> 与 <code>NullableBooleanInput</code> 组件</a></li><li><a href="#checkboxgroupinput-组件"><code>CheckboxGroupInput</code> 组件</a></li><li><a href="#dateinput-组件"><code>DateInput</code> 组件</a></li><li><a href="#disabledinput-组件"><code>DisabledInput</code> 组件</a></li><li><a href="#imageinput-组件"><code>ImageInput</code> 组件</a></li><li><a href="#fileinput-组件"><code>FileInput</code> 组件</a></li><li><a href="#longtextinput-组件"><code>LongTextInput</code> 组件</a></li><li><a href="#numberinput-组件"><code>NumberInput</code> 组件</a></li><li><a href="#radiobuttongroupinput-组件"><code>RadioButtonGroupInput</code> 组件</a></li><li><a href="#referencearrayinput-组件"><code>ReferenceArrayInput</code> 组件</a></li><li><a href="#referenceinput-组件"><code>ReferenceInput</code> 组件</a></li><li><a href="#richtextinput-组件"><code>RichTextInput</code> 组件</a></li><li><a href="#selectinput-组件"><code>SelectInput</code> 组件</a></li><li><a href="#selectarrayinput-组件"><code>SelectArrayInput</code> 组件</a></li><li><a href="#textinput-组件"><code>TextInput</code> 组件</a></li><li><a href="#将输入值转换-to-from-记录">将输入值转换 to/from 记录</a></li><li><a href="#第三方组件">第三方组件</a></li><li><a href="#编写自己的输入组件">编写自己的输入组件</a></li><li><a href="#链接两个输入">链接两个输入</a></li><li><a href="#隐藏基于其他-input-的-input">隐藏基于其他 Input 的 Input</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Show 视图组件 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Show 视图以只读方式显示从 API 获取的记录。 它将记录的实际呈现方式委托给一个布局组件——通常是 `&lt;SimpleShowLayout&gt;`。 此布局组件使用其子级 ([`&lt;Fields&gt;`](./Fields.md) 组件) 来呈现每个记录字段。"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="Show 视图组件 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="Show 视图以只读方式显示从 API 获取的记录。 它将记录的实际呈现方式委托给一个布局组件——通常是 `&lt;SimpleShowLayout&gt;`。 此布局组件使用其子级 ([`&lt;Fields&gt;`](./Fields.md) 组件) 来呈现每个记录字段。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/show-view-component.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Show 视图组件</h1></header><article><div><span><p>Show 视图以只读方式显示从 API 获取的记录。 它将记录的实际呈现方式委托给一个布局组件——通常是 <code>&lt;SimpleShowLayout&gt;</code>。 此布局组件使用其子级 (<a href="./Fields.md"><code>&lt;Fields&gt;</code></a> 组件) 来呈现每个记录字段。</p>
+<p><img src="https://marmelab.com/react-admin/img/show-view.png" alt="post show view"></p>
+<h2><a class="anchor" aria-hidden="true" id="show-组件"></a><a href="#show-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>Show</code> 组件</h2>
+<p><code>&lt;Show&gt;</code> 组件呈现页标题和 action, 并从 REST API 中提取记录。 它不负责呈现实际记录-这是其子组件 (通常为 <code>&lt;SimpleShowLayout&gt;</code>) 的工作, 它们通过 <code>record</code> 作为属性。</p>
+<p>以下是 <code>&lt;Show&gt;</code> 组件所接受的所有属性：</p>
+<ul>
+<li><a href="#page-title"><code>title</code></a></li>
+<li><a href="#actions"><code>actions</code></a></li>
+</ul>
+<p>以下是 show 视图显示帖子所需的最少代码：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> jsonServerProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-json-server'</span>;
+
+<span class="hljs-keyword">import</span> { PostCreate, PostEdit, PostShow } <span class="hljs-keyword">from</span> <span class="hljs-string">'./posts'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;Admin dataProvider={jsonServerProvider('http://jsonplaceholder.typicode.com')}&gt;
+        &lt;Resource name="posts" show={PostShow} create={PostCreate} edit={PostEdit} /&gt;
+    &lt;/Admin&gt;
+);
+
+export default App;
+
+// in src/posts.js
+import React from 'react';
+import { Show, SimpleShowLayout, TextField, DateField, EditButton, RichTextField } from 'react-admin';
+
+export const PostShow = (props) =&gt; (
+    &lt;Show {...props}&gt;
+        &lt;SimpleShowLayout&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;TextField source="teaser" /&gt;
+            &lt;RichTextField source="body" /&gt;
+            &lt;DateField label="Publication date" source="created_at" /&gt;
+        &lt;/SimpleShowLayout&gt;
+    &lt;/Show&gt;
+);
+</code></pre>
+<p>That's enough to display the post show view:</p>
+<p><img src="https://marmelab.com/react-admin/img/post-show.png" alt="post show view"></p>
+<h3><a class="anchor" aria-hidden="true" id="page-title"></a><a href="#page-title" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Page Title</h3>
+<p>默认情况下，Show 视图的显示标题是&quot;[resource_name] #[record_id]&quot;。</p>
+<p>您可以通过指定一个自定义 <code>title</code> 属性来自定义此标题：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostShow = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Show</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Post view"</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Show</span>&gt;</span></span>
+);
+</code></pre>
+<p>更有趣的是，你可以通过传递一个组件作为 <code>title</code>。 React-admin 克隆此组件，并在 <code>&lt;ShowView&gt;</code> 中注入当前 <code>record</code>。 这允许根据当前记录自定义标题：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> PostTitle = <span class="hljs-function">(<span class="hljs-params">{ record }</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Post {record ? `"${record.title}"` : ''}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>;
+};
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostShow = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Show</span> <span class="hljs-attr">title</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">PostTitle</span> /&gt;</span>} {...props}&gt;
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Show</span>&gt;</span></span>
+);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="actions"></a><a href="#actions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Actions</h3>
+<p>你可以通过你自己的元素使用 <code>actions</code> 属性来替换默认 action 列表：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> CardActions <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardActions'</span>;
+<span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> { ListButton, EditButton, DeleteButton, RefreshButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> cardActionStyle = {
+    <span class="hljs-attr">zIndex</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">display</span>: <span class="hljs-string">'inline-block'</span>,
+    <span class="hljs-attr">float</span>: <span class="hljs-string">'right'</span>,
+};
+
+<span class="hljs-keyword">const</span> PostShowActions = <span class="hljs-function">(<span class="hljs-params">{ basePath, data, resource }</span>) =&gt;</span> (
+    &lt;CardActions style={cardActionStyle}&gt;
+        &lt;EditButton basePath={basePath} record={data} /&gt;
+        &lt;ListButton basePath={basePath} /&gt;
+        &lt;DeleteButton basePath={basePath} record={data} resource={resource} /&gt;
+        &lt;RefreshButton /&gt;
+        {/* Add your custom actions */}
+        &lt;Button color="primary" onClick={customAction}&gt;Custom Action&lt;/Button&gt;
+    &lt;/CardActions&gt;
+);
+
+export const PostShow = (props) =&gt; (
+    &lt;Show actions={&lt;PostShowActions /&gt;} {...props}&gt;
+        ...
+    &lt;/Show&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="simpleshowlayout-组件"></a><a href="#simpleshowlayout-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>SimpleShowLayout</code> 组件</h2>
+<p><code>&lt;SimpleShowLayout&gt;</code>组件从它的父组件接收 <code>record</code> 作为属性。它负责渲染实际的视图。</p>
+<p><code>&lt;SimpleShowLayout&gt;</code> 逐行呈现其子组件（在<code>&lt;div&gt;</code>组件内）。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostShow = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Show {...props}&gt;
+        &lt;SimpleShowLayout&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;RichTextField source="body" /&gt;
+            &lt;NumberField source="nb_views" /&gt;
+        &lt;/SimpleShowLayout&gt;
+    &lt;/Show&gt;
+);
+</code></pre>
+<p>可以通过指定 <code>style</code> 属性来重写其样式，例如：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">container</span>: {
+        <span class="hljs-attr">display</span>: <span class="hljs-string">'flex'</span>,
+    },
+    <span class="hljs-attr">item</span>: {
+        <span class="hljs-attr">marginRight</span>: <span class="hljs-string">'1rem'</span>,
+    },
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostShow = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Show {...props}&gt;
+        &lt;SimpleShowLayout style={styles.container}&gt;
+            &lt;TextField source="title" style={styles.item} /&gt;
+            &lt;RichTextField source="body" style={styles.item} /&gt;
+            &lt;NumberField source="nb_views" style={styles.item} /&gt;
+        &lt;/SimpleShowLayout&gt;
+    &lt;/Show&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="tabbedshowlayout-组件"></a><a href="#tabbedshowlayout-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>TabbedShowLayout</code> 组件</h2>
+<p>就像 <code>&lt;SimpleShowLayout&gt;</code>, <code>&lt;TabbedShowLayout&gt;</code> 接收到 <code>record</code> 属性并渲染实际视图。 但是, <code>&lt;TabbedShowLayout&gt;</code> 组件按 tab 分组渲染。 这些选项卡是使用 <code>&lt;Tab&gt;</code> 组件设置的, 该元件期望一个 <code>label</code> 和可选的 <code>icon</code> 属性。 切换 tab 将更新当前 url。 默认情况下，它使用选项卡索引，第一个选项卡将显示在根URL。 您可以通过为每个Tab组件提供<code>path</code> 属性来自定义路径。 如果您希望第一个充当索引页面，只需省略<code>path</code> 属性。</p>
+<p><img src="https://marmelab.com/react-admin/img/tabbed-show.gif" alt="tabbed show"></p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { TabbedShowLayout, Tab } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostShow = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Show {...props}&gt;
+        &lt;TabbedShowLayout&gt;
+            &lt;Tab label="summary"&gt;
+                &lt;TextField label="Id" source="id" /&gt;
+                &lt;TextField source="title" /&gt;
+                &lt;TextField source="teaser" /&gt;
+            &lt;/Tab&gt;
+            &lt;Tab label="body" path="body"&gt;
+                &lt;RichTextField source="body" addLabel={false} /&gt;
+            &lt;/Tab&gt;
+            &lt;Tab label="Miscellaneous" path="miscellaneous"&gt;
+                &lt;TextField label="Password (if protected post)" source="password" type="password" /&gt;
+                &lt;DateField label="Publication date" source="published_at" /&gt;
+                &lt;NumberField source="average_note" /&gt;
+                &lt;BooleanField label="Allow comments?" source="commentable" defaultValue /&gt;
+                &lt;TextField label="Nb views" source="views" /&gt;
+            &lt;/Tab&gt;
+            &lt;Tab label="comments" path="comments"&gt;
+                &lt;ReferenceManyField reference="comments" target="post_id" addLabel={false}&gt;
+                    &lt;Datagrid&gt;
+                        &lt;TextField source="body" /&gt;
+                        &lt;DateField source="created_at" /&gt;
+                        &lt;EditButton /&gt;
+                    &lt;/Datagrid&gt;
+                &lt;/ReferenceManyField&gt;
+            &lt;/Tab&gt;
+        &lt;/TabbedShowLayout&gt;
+    &lt;/Show&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="根据用户权限显示字段"></a><a href="#根据用户权限显示字段" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>根据用户权限显示字段</h2>
+<p>您可能希望只向具有特定权限的用户显示某些字段。为每个路由检索这些权限, 并将其作为 <code>permissions</code> 属性提供给您的组件。</p>
+<p>每个路由将使用 <code>AUTH_GET_PERMISSIONS</code> 类型和一些参数（包括当前位置和路由参数）调用 authProvider。 您可以在组件内部返回需要检查的内容，例如用户的角色等。</p>
+<p>下面是 <code>Show</code> 视图中的一个示例，其中有一个 <code>SimpleShowLayout</code> 和一个自定义 <code>actions</code> 组件:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> CardActions <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardActions'</span>;
+<span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> { ListButton, EditButton, DeleteButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> cardActionStyle = {
+    <span class="hljs-attr">zIndex</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">display</span>: <span class="hljs-string">'inline-block'</span>,
+    <span class="hljs-attr">float</span>: <span class="hljs-string">'right'</span>,
+};
+
+<span class="hljs-keyword">const</span> PostShowActions = <span class="hljs-function">(<span class="hljs-params">{ permissions, basePath, data, resource }</span>) =&gt;</span> (
+    &lt;CardActions style={cardActionStyle}&gt;
+        &lt;EditButton basePath={basePath} record={data} /&gt;
+        &lt;ListButton basePath={basePath} /&gt;
+        {permissions === 'admin' &amp;&amp;
+            &lt;DeleteButton basePath={basePath} record={data} resource={resource} /&gt;
+        }
+    &lt;/CardActions&gt;
+);
+
+export const PostShow = ({ permissions, ...props }) =&gt; (
+    &lt;Show actions={&lt;PostShowActions permissions={permissions} /&gt;} {...props}&gt;
+        &lt;SimpleShowLayout&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;RichTextField source="body" /&gt;
+            {permissions === 'admin' &amp;&amp;
+                &lt;NumberField source="nb_views" /&gt;
+            }
+        &lt;/SimpleShowLayout&gt;
+    &lt;/Show&gt;
+);
+</code></pre>
+<p><strong>提示</strong> 请注意权限属性如何传递给自定义 <code>过滤器</code> 组件。</p>
+<p>这也适用于TabbedShowLayout，您可以完全隐藏Tab：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserShow = <span class="hljs-function">(<span class="hljs-params">{ permissions, ...props }</span>) =&gt;</span>
+    &lt;Show {...props}&gt;
+        &lt;TabbedShowLayout&gt;
+            &lt;Tab label="user.form.summary"&gt;
+                {permissions === 'admin' &amp;&amp; &lt;TextField source="id" /&gt;}
+                &lt;TextField source="name" /&gt;
+            &lt;/Tab&gt;
+            {permissions === 'admin' &amp;&amp;
+                &lt;Tab label="user.form.security"&gt;
+                    &lt;TextField source="role" /&gt;
+                &lt;/Tab&gt;}
+        &lt;/TabbedShowLayout&gt;
+    &lt;/Show&gt;;
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/list-view-component.html">← List 视图组件</a><a class="docs-next button" href="/docs/zh-CN/field-components.html">Field 组件 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#show-组件"><code>Show</code> 组件</a><ul class="toc-headings"><li><a href="#page-title">Page Title</a></li><li><a href="#actions">Actions</a></li></ul></li><li><a href="#simpleshowlayout-组件"><code>SimpleShowLayout</code> 组件</a></li><li><a href="#tabbedshowlayout-组件"><code>TabbedShowLayout</code> 组件</a></li><li><a href="#根据用户权限显示字段">根据用户权限显示字段</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

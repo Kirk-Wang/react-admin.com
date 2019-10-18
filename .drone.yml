@@ -1,0 +1,62 @@
+kind: pipeline
+name: REACT-ADMIN.COM
+
+clone:
+  depth: 50
+
+steps:
+  - name: fetch tags
+    image: docker:git
+    commands:
+      - git fetch --tags
+  
+  - name: publish image
+    image: plugins/docker:17.12
+    settings:
+      repo: lotteryjs/react-admin.com
+      auto_tag: true
+      dockerfile: Dockerfile
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+        
+  - name: scp docker-compose.yml
+    image: appleboy/drone-scp
+    settings:
+      host:
+        from_secret: host
+      port:
+        from_secret: port
+      username:
+        from_secret: username
+      password:
+        from_secret: password
+      target: /data/wwwroot/react-admin
+      source: docker-compose.yml
+
+  - name: restart container
+    image: appleboy/drone-ssh
+    pull: true
+    settings:
+      host:
+        from_secret: host
+      port:
+        from_secret: port
+      username:
+        from_secret: username
+      password:
+        from_secret: password
+      script:
+        - cd /data/wwwroot/react-admin
+        - docker-compose pull react-admin.com
+        - docker-compose up -d --force-recreate --no-deps react-admin.com
+        - docker images --quiet --filter=dangling=true | xargs --no-run-if-empty docker rmi -f
+  
+trigger:
+  event:
+  - push
+  - pull_request
+  - tag
+  - promote
+  - rollback

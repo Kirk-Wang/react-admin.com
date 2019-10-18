@@ -1,0 +1,280 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>授权 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="某些应用程序可能需要确定特定身份验证的用户对安全资源的访问级别。 由于有许多不同的可能策略 (单个角色、多个角色或权限等), 因此, react-admin 只需提供 hooks 即可执行您自己的授权代码。"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="授权 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="某些应用程序可能需要确定特定身份验证的用户对安全资源的访问级别。 由于有许多不同的可能策略 (单个角色、多个角色或权限等), 因此, react-admin 只需提供 hooks 即可执行您自己的授权代码。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/authorization.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">授权</h1></header><article><div><span><p>某些应用程序可能需要确定特定身份验证的用户对安全资源的访问级别。 由于有许多不同的可能策略 (单个角色、多个角色或权限等), 因此, react-admin 只需提供 hooks 即可执行您自己的授权代码。</p>
+<p>默认情况下, react-admin 应用程序不需要授权。 但是, 如果需要, 它将依赖于 <a href="./Authentication.html">Authentication</a> 部分中引入的 <code>authProvider</code>。</p>
+<h2><a class="anchor" aria-hidden="true" id="配置-auth-provider"></a><a href="#配置-auth-provider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>配置 Auth Provider</h2>
+<p>每次组件需要检查用户的权限时，都会调用具有 <code>AUTH_GET_PERMISSIONS</code> 类型的 <code>authProvider</code>。</p>
+<p>下面是 <code>authProvider</code> 在身份验证时存储用户角色的示例，并在调用权限检查时返回它：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_GET_PERMISSIONS } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> decodeJwt <span class="hljs-keyword">from</span> <span class="hljs-string">'jwt-decode'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-keyword">const</span> { username, password } = params;
+        <span class="hljs-keyword">const</span> request = <span class="hljs-keyword">new</span> Request(<span class="hljs-string">'https://mydomain.com/authenticate'</span>, {
+            <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+            <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({ username, password }),
+            <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({ <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span> }),
+        })
+        <span class="hljs-keyword">return</span> fetch(request)
+            .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (response.status &lt; <span class="hljs-number">200</span> || response.status &gt;= <span class="hljs-number">300</span>) {
+                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(response.statusText);
+                }
+                <span class="hljs-keyword">return</span> response.json();
+            })
+            .then(<span class="hljs-function">(<span class="hljs-params">{ token }</span>) =&gt;</span> {
+                <span class="hljs-keyword">const</span> decodedToken = decodeJwt(token);
+                localStorage.setItem(<span class="hljs-string">'token'</span>, token);
+                localStorage.setItem(<span class="hljs-string">'role'</span>, decodedToken.role);
+            });
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        localStorage.removeItem(<span class="hljs-string">'token'</span>);
+        localStorage.removeItem(<span class="hljs-string">'role'</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_ERROR) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_CHECK) {
+        <span class="hljs-keyword">return</span> localStorage.getItem(<span class="hljs-string">'token'</span>) ? <span class="hljs-built_in">Promise</span>.resolve() : <span class="hljs-built_in">Promise</span>.reject();
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_GET_PERMISSIONS) {
+        <span class="hljs-keyword">const</span> role = localStorage.getItem(<span class="hljs-string">'role'</span>);
+        <span class="hljs-keyword">return</span> role ? <span class="hljs-built_in">Promise</span>.resolve(role) : <span class="hljs-built_in">Promise</span>.reject();
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-string">'Unkown method'</span>);
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="限制对资源或视图的访问"></a><a href="#限制对资源或视图的访问" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>限制对资源或视图的访问</h2>
+<p>可以限制对 <code>Admin</code> 组件内的资源或其视图的访问。 为此，您必须将一个函数指定为仅 <code>Admin</code> 子项。 将使用 authProvider 返回的 permissions 调用此函数。</p>
+<pre><code class="hljs css languages- jsx">&lt;Admin
+    dataProvider={dataProvider}
+    authProvider={authProvider}
+&gt;
+    {permissions =&gt; [
+        <span class="hljs-comment">// Restrict access to the edit and remove views to admin only</span>
+        &lt;Resource
+            name=<span class="hljs-string">"customers"</span>
+            list={VisitorList}
+            edit={permissions === <span class="hljs-string">'admin'</span> ? VisitorEdit : <span class="hljs-literal">null</span>}
+            icon={VisitorIcon}
+        /&gt;,
+        <span class="hljs-comment">// Only include the categories resource for admin users</span>
+        permissions === <span class="hljs-string">'admin'</span>
+            ? <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"categories"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{CategoryList}</span> <span class="hljs-attr">edit</span>=<span class="hljs-string">{CategoryEdit}</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">{CategoryIcon}</span> /&gt;</span>
+            : null,
+    ]}
+<span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+</code></pre>
+<p>请注意，该函数返回一个 React 元素数组。 这是必须的，以避免必须将它们包装在容器元素中，这将阻止 <code>Admin</code> 工作。</p>
+<p>提示即使可能，在完全排除资源时也要小心（比如本例中的 <code>categories</code> 资源），因为它也会阻止您在其他资源视图中引用它们。</p>
+<h2><a class="anchor" aria-hidden="true" id="限制对-fields-和-inputs-的访问"></a><a href="#限制对-fields-和-inputs-的访问" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>限制对 Fields 和 Inputs 的访问</h2>
+<p>您可能希望仅向具有特定权限的用户显示某些字段或输入。 将为每个路径检索这些权限，并将其作为 <code>permissions</code> 属性提供给您的组件。</p>
+<p>每个路由将使用 <code>AUTH_GET_PERMISSIONS</code> 类型和一些参数（包括当前位置和路由参数）调用 authProvider。 您可以在组件内部返回需要检查的内容，例如用户的角色等。</p>
+<p>以下是使用 <code>SimpleForm</code> 和自定义 <code>Toolbar</code> 的 <code>Create</code> 视图中的示例：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> UserCreateToolbar = <span class="hljs-function">(<span class="hljs-params">{ permissions, ...props }</span>) =&gt;</span>
+    &lt;Toolbar {...props}&gt;
+        &lt;SaveButton
+            label="user.action.save_and_show"
+            redirect="show"
+            submitOnEnter={true}
+        /&gt;
+        {permissions === 'admin' &amp;&amp;
+            &lt;SaveButton
+                label="user.action.save_and_add"
+                redirect={false}
+                submitOnEnter={false}
+                variant="flat"
+            /&gt;}
+    &lt;/Toolbar&gt;;
+
+export const UserCreate = ({ permissions, ...props }) =&gt;
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm
+            toolbar={&lt;UserCreateToolbar permissions={permissions} /&gt;}
+            defaultValue={{ role: 'user' }}
+        &gt;
+            &lt;TextInput source="name" validate={[required()]} /&gt;
+            {permissions === 'admin' &amp;&amp;
+                &lt;TextInput source="role" validate={[required()]} /&gt;}
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;;
+</code></pre>
+<p>**提示&lt;/ strong&gt;：请注意<code>permissions</code> 属性如何传递给自定义<code>toolbar</code>组件。</p></p>
+<p>这也适用于带<code>TabbedForm</code>的<code>Edition</code>视图，你可以完全隐藏<code>FormTab</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserEdit = <span class="hljs-function">(<span class="hljs-params">{ permissions, ...props }</span>) =&gt;</span>
+    &lt;Edit title={&lt;UserTitle /&gt;} {...props}&gt;
+        &lt;TabbedForm defaultValue={{ role: 'user' }}&gt;
+            &lt;FormTab label="user.form.summary"&gt;
+                {permissions === 'admin' &amp;&amp; &lt;DisabledInput source="id" /&gt;}
+                &lt;TextInput source="name" validate={required()} /&gt;
+            &lt;/FormTab&gt;
+            {permissions === 'admin' &amp;&amp;
+                &lt;FormTab label="user.form.security"&gt;
+                    &lt;TextInput source="role" validate={required()} /&gt;
+                &lt;/FormTab&gt;}
+        &lt;/TabbedForm&gt;
+    &lt;/Edit&gt;;
+</code></pre>
+<p>List视图，DataGrid，SimpleList和Filter组件怎么样？ 它也适用于那里。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> UserFilter = <span class="hljs-function">(<span class="hljs-params">{ permissions, ...props }</span>) =&gt;</span>
+    &lt;Filter {...props}&gt;
+        &lt;TextInput
+            label="user.list.search"
+            source="q"
+            alwaysOn
+        /&gt;
+        &lt;TextInput source="name" /&gt;
+        {permissions === 'admin' ? &lt;TextInput source="role" /&gt; : null}
+    &lt;/Filter&gt;;
+
+export const UserList = ({ permissions, ...props }) =&gt;
+    &lt;List
+        {...props}
+        filters={&lt;UserFilter permissions={permissions} /&gt;}
+        sort={{ field: 'name', order: 'ASC' }}
+    &gt;
+        &lt;Responsive
+            small={
+                &lt;SimpleList
+                    primaryText={record =&gt; record.name}
+                    secondaryText={record =&gt;
+                        permissions === 'admin' ? record.role : null}
+                /&gt;
+            }
+            medium={
+                &lt;Datagrid&gt;
+                    &lt;TextField source="id" /&gt;
+                    &lt;TextField source="name" /&gt;
+                    {permissions === 'admin' &amp;&amp; &lt;TextField source="role" /&gt;}
+                    {permissions === 'admin' &amp;&amp; &lt;EditButton /&gt;}
+                    &lt;ShowButton /&gt;
+                &lt;/Datagrid&gt;
+            }
+        /&gt;
+    &lt;/List&gt;;
+</code></pre>
+<p><strong>提示</strong> 注意 <code>permissions</code> 属性如何传递到自定义 <code>filters</code> 组件。</p>
+<h2><a class="anchor" aria-hidden="true" id="限制对-dashboard-内部内容的访问"></a><a href="#限制对-dashboard-内部内容的访问" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>限制对 Dashboard 内部内容的访问</h2>
+<p>作为 <a href="'./Admin.md#dashboard"><code>dashboard</code></a> 提供的组件也将在其属性中获得 permissions：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/Dashboard.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> Card <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Card'</span>;
+<span class="hljs-keyword">import</span> CardContent <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardContent'</span>;
+<span class="hljs-keyword">import</span> { ViewTitle } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ({ permissions }) =&gt; (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ViewTitle</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Dashboard"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">CardContent</span>&gt;</span>Lorem ipsum sic dolor amet...<span class="hljs-tag">&lt;/<span class="hljs-name">CardContent</span>&gt;</span>
+        {permissions === 'admin'
+            ? <span class="hljs-tag">&lt;<span class="hljs-name">CardContent</span>&gt;</span>Sensitive data<span class="hljs-tag">&lt;/<span class="hljs-name">CardContent</span>&gt;</span>
+            : null
+        }
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span>
+);
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="限制对自定义页中内容的访问"></a><a href="#限制对自定义页中内容的访问" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>限制对自定义页中内容的访问</h2>
+<p>您可能希望检查 <a href="./Admin.md#customroutes">自定义页</a> 内的用户权限。 您必须为此使用 <code>WithPermissions</code> 组件。 它将确保用户通过身份验证，然后使用 <code>AUTH_GET_PERMISSIONS</code> type和您指定的 <code>authParams</code> 调用 <code>authProvider</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyPage.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> Card <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Card'</span>;
+<span class="hljs-keyword">import</span> CardContent <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardContent'</span>;
+<span class="hljs-keyword">import</span> { ViewTitle, WithPermissions } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+
+<span class="hljs-keyword">const</span> MyPage = <span class="hljs-function">(<span class="hljs-params">{ permissions }</span>) =&gt;</span> (
+    &lt;Card&gt;
+        &lt;ViewTitle title="My custom page" /&gt;
+        &lt;CardContent&gt;Lorem ipsum sic dolor amet...&lt;/CardContent&gt;
+        {permissions === 'admin'
+            ? &lt;CardContent&gt;Sensitive data&lt;/CardContent&gt;
+            : null
+        }
+    &lt;/Card&gt;
+)
+const MyPageWithPermissions = ({ location, match }) =&gt; (
+    &lt;WithPermissions
+        authParams={{ key: match.path, params: route.params }}
+        // location is not required but it will trigger a new permissions check if specified when it changes
+        location={location}
+        render={({ permissions }) =&gt; &lt;MyPage permissions={permissions} /&gt; }
+    /&gt;
+);
+
+export default MyPageWithPermissions;
+
+// in src/customRoutes.js
+import React from 'react';
+import { Route } from 'react-router-dom';
+import Foo from './Foo';
+import Bar from './Bar';
+import Baz from './Baz';
+import MyPageWithPermissions from './MyPage';
+
+export default [
+    &lt;Route exact path="/foo" component={Foo} /&gt;,
+    &lt;Route exact path="/bar" component={Bar} /&gt;,
+    &lt;Route exact path="/baz" component={Baz} noLayout /&gt;,
+    &lt;Route exact path="/baz" component={MyPageWithPermissions} /&gt;,
+];
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="限制对自定义菜单中内容的访问"></a><a href="#限制对自定义菜单中内容的访问" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>限制对自定义菜单中内容的访问</h2>
+<p>如果要检查自定义菜单中的权限，该怎么办？ 就像在自定义页面中获取权限一样，您必须使用 <code>WithPermissions</code> 组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/myMenu.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { MenuItemLink, WithPermissions } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> Menu = <span class="hljs-function">(<span class="hljs-params">{ onMenuClick, logout, permissions }</span>) =&gt;</span> (
+    &lt;div&gt;
+        &lt;MenuItemLink to="/posts" primaryText="Posts" onClick={onMenuClick} /&gt;
+        &lt;MenuItemLink to="/comments" primaryText="Comments" onClick={onMenuClick} /&gt;
+        &lt;WithPermissions
+            render={({ permissions }) =&gt; (
+                permissions === 'admin'
+                    ? &lt;MenuItemLink to="/custom-route" primaryText="Miscellaneous" onClick={onMenuClick} /&gt;
+                    : null
+            )}
+        /&gt;
+        {logout}
+    &lt;/div&gt;
+);
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/authentication.html">← 身份验证</a><a class="docs-next button" href="/docs/zh-CN/theming.html">主题 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#配置-auth-provider">配置 Auth Provider</a></li><li><a href="#限制对资源或视图的访问">限制对资源或视图的访问</a></li><li><a href="#限制对-fields-和-inputs-的访问">限制对 Fields 和 Inputs 的访问</a></li><li><a href="#限制对-dashboard-内部内容的访问">限制对 Dashboard 内部内容的访问</a></li><li><a href="#限制对自定义页中内容的访问">限制对自定义页中内容的访问</a></li><li><a href="#限制对自定义菜单中内容的访问">限制对自定义菜单中内容的访问</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

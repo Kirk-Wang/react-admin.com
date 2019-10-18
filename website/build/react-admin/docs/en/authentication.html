@@ -1,0 +1,314 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Authentication · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="![Logout button](https://marmelab.com/react-admin/img/login.gif)"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Authentication · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="![Logout button](https://marmelab.com/react-admin/img/login.gif)"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/zh-CN/authentication.html">中文</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/intro.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/docs/en/tutorial.html">Tutorial</a></li><li class="navListItem"><a class="navItem" href="/docs/en/data-providers.html">Data Providers</a></li><li class="navListItem"><a class="navItem" href="/docs/en/admin-component.html">&lt;Admin&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/resource-component.html">&lt;Resource&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/list-view-component.html">&lt;List&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/show-view-component.html">&lt;Show&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/field-components.html">&lt;Field&gt; Components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/creat-edit-view-components.html">&lt;Create&gt; and &lt;Edit&gt; Views</a></li><li class="navListItem"><a class="navItem" href="/docs/en/input-components.html">&lt;Input&gt; components</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/authentication.html">Authentication</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authorization.html">Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/en/theming.html">Theming</a></li><li class="navListItem"><a class="navItem" href="/docs/en/actions.html">Writing Actions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/translation.html">Translation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/custom-app.html">Including the Admin in Another App</a></li><li class="navListItem"><a class="navItem" href="/docs/en/reference.html">Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/en/faq.html">FAQ</a></li><li class="navListItem"><a class="navItem" href="/docs/en/ecosystem.html">Ecosystem</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Authentication</h1></header><article><div><span><p><img src="https://marmelab.com/react-admin/img/login.gif" alt="Logout button"></p>
+<p>React-admin lets you secure your admin app with the authentication strategy of your choice. Since there are many different possible strategies (Basic Auth, JWT, OAuth, etc.), react-admin simply provides hooks to execute your own authentication code.</p>
+<p>By default, an react-admin app doesn't require authentication. But if the REST API ever returns a 401 (Unauthorized) or a 403 (Forbidden) response, then the user is redirected to the <code>/login</code> route. You have nothing to do - it's already built in.</p>
+<h2><a class="anchor" aria-hidden="true" id="configuring-the-auth-provider"></a><a href="#configuring-the-auth-provider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuring the Auth Provider</h2>
+<p>By default, the <code>/login</code> route renders a special component called <code>Login</code>, which displays a login form asking for username and password.</p>
+<p><img src="https://marmelab.com/react-admin/img/login-form.png" alt="Default Login Form"></p>
+<p>What this form does upon submission depends on the <code>authProvider</code> prop of the <code>&lt;Admin&gt;</code> component. This function receives authentication requests <code>(type, params)</code>, and should return a Promise. <code>Login</code> calls <code>authProvider</code> with the <code>AUTH_LOGIN</code> type, and <code>{ login, password }</code> as parameters. It's the ideal place to authenticate the user, and store their credentials.</p>
+<p>For instance, to query an authentication route via HTTPS and store the credentials (a token) in local storage, configure <code>authProvider</code> as follows:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-keyword">const</span> { username, password } = params;
+        <span class="hljs-keyword">const</span> request = <span class="hljs-keyword">new</span> Request(<span class="hljs-string">'https://mydomain.com/authenticate'</span>, {
+            <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+            <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({ username, password }),
+            <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({ <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span> }),
+        })
+        <span class="hljs-keyword">return</span> fetch(request)
+            .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+                <span class="hljs-keyword">if</span> (response.status &lt; <span class="hljs-number">200</span> || response.status &gt;= <span class="hljs-number">300</span>) {
+                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(response.statusText);
+                }
+                <span class="hljs-keyword">return</span> response.json();
+            })
+            .then(<span class="hljs-function">(<span class="hljs-params">{ token }</span>) =&gt;</span> {
+                localStorage.setItem(<span class="hljs-string">'token'</span>, token);
+            });
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+}
+</code></pre>
+<p><strong>Tip</strong>: It's a good idea to store credentials in <code>localStorage</code>, to avoid reconnection when opening a new browser tab. But this makes your application <a href="http://www.redotheweb.com/2015/11/09/api-security.html">open to XSS attacks</a>, so you'd better double down on security, and add an <code>httpOnly</code> cookie on the server side, too.</p>
+<p>Then, pass this client to the <code>&lt;Admin&gt;</code> component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> authProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'./authProvider'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">authProvider</span>=<span class="hljs-string">{authProvider}</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p>Upon receiving a 403 response, the admin app shows the Login page. <code>authProvider</code> is now called when the user submits the login form. Once the promise resolves, the login form redirects to the previous page, or to the admin index if the user just arrived.</p>
+<h2><a class="anchor" aria-hidden="true" id="sending-credentials-to-the-api"></a><a href="#sending-credentials-to-the-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Sending Credentials to the API</h2>
+<p>To use the credentials when calling a data provider, you have to tweak, this time, the <code>dataProvider</code> function. As explained in the <a href="DataProviders.md#adding-custom-headers">Data providers documentation</a>, <code>simpleRestProvider</code> and <code>jsonServerProvider</code> take an <code>httpClient</code> as second parameter. That's the place where you can change request headers, cookies, etc.</p>
+<p>For instance, to pass the token obtained during login as an <code>Authorization</code> header, configure the Data Provider as follows:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { fetchUtils, Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> simpleRestProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-simple-rest'</span>;
+
+<span class="hljs-keyword">const</span> httpClient = <span class="hljs-function">(<span class="hljs-params">url, options = {}</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (!options.headers) {
+        options.headers = <span class="hljs-keyword">new</span> Headers({ <span class="hljs-attr">Accept</span>: <span class="hljs-string">'application/json'</span> });
+    }
+    <span class="hljs-keyword">const</span> token = localStorage.getItem(<span class="hljs-string">'token'</span>);
+    options.headers.set(<span class="hljs-string">'Authorization'</span>, <span class="hljs-string">`Bearer <span class="hljs-subst">${token}</span>`</span>);
+    <span class="hljs-keyword">return</span> fetchUtils.fetchJson(url, options);
+}
+<span class="hljs-keyword">const</span> dataProvider = simpleRestProvider(<span class="hljs-string">'http://localhost:3000'</span>, httpClient);
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{dataProvider}</span> <span class="hljs-attr">authProvider</span>=<span class="hljs-string">{authProvider}</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p>If you have a custom REST client, don't forget to add credentials yourself.</p>
+<h2><a class="anchor" aria-hidden="true" id="adding-a-logout-button"></a><a href="#adding-a-logout-button" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Adding a Logout Button</h2>
+<p>If you provide an <code>authProvider</code> prop to <code>&lt;Admin&gt;</code>, react-admin displays a logout button in the top bar (or in the menu on mobile). When the user clicks on the logout button, this calls the <code>authProvider</code> with the <code>AUTH_LOGOUT</code> type and removes potentially sensitive data from the redux store. When resolved, the user gets redirected to the login page.</p>
+<p>For instance, to remove the token from local storage upon logout:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        localStorage.removeItem(<span class="hljs-string">'token'</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+};
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/logout.gif" alt="Logout button"></p>
+<p>The <code>authProvider</code> is also a good place to notify the authentication API that the user credentials are no longer valid after logout.</p>
+<h2><a class="anchor" aria-hidden="true" id="catching-authentication-errors-on-the-api"></a><a href="#catching-authentication-errors-on-the-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Catching Authentication Errors On The API</h2>
+<p>Even though a user may be authenticated on the client-side, their credentials may no longer be valid server-side (e.g. if the token is only valid for a couple weeks). In that case, the API usually answers to all REST requests with an error code 401 or 403 - but what about <em>your</em> API?</p>
+<p>Fortunately, each time the API returns an error, the <code>authProvider</code> is called with the <code>AUTH_ERROR</code> type. Once again, it's up to you to decide which HTTP status codes should let the user continue (by returning a resolved promise) or log them out (by returning a rejected promise).</p>
+<p>For instance, to redirect the user to the login page for both 401 and 403 codes:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_ERROR) {
+        <span class="hljs-keyword">const</span> status  = params.status;
+        <span class="hljs-keyword">if</span> (status === <span class="hljs-number">401</span> || status === <span class="hljs-number">403</span>) {
+            localStorage.removeItem(<span class="hljs-string">'token'</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject();
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="checking-credentials-during-navigation"></a><a href="#checking-credentials-during-navigation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Checking Credentials During Navigation</h2>
+<p>Redirecting to the login page whenever a REST response uses a 401 status code is usually not enough, because react-admin keeps data on the client side, and could display stale data while contacting the server - even after the credentials are no longer valid.</p>
+<p>Fortunately, each time the user navigates, react-admin calls the <code>authProvider</code> with the <code>AUTH_CHECK</code> type, so it's the ideal place to check for credentials.</p>
+<p>For instance, to check for the existence of the token in local storage:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_ERROR) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_CHECK) {
+        <span class="hljs-keyword">return</span> localStorage.getItem(<span class="hljs-string">'token'</span>) ? <span class="hljs-built_in">Promise</span>.resolve() : <span class="hljs-built_in">Promise</span>.reject();
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-string">'Unkown method'</span>);
+};
+</code></pre>
+<p>If the promise is rejected, react-admin redirects by default to the <code>/login</code> page. You can override where to redirect the user by passing an argument with a <code>redirectTo</code> property to the rejected promise:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_ERROR) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_CHECK) {
+        <span class="hljs-keyword">return</span> localStorage.getItem(<span class="hljs-string">'token'</span>) ? <span class="hljs-built_in">Promise</span>.resolve() : <span class="hljs-built_in">Promise</span>.reject({ <span class="hljs-attr">redirectTo</span>: <span class="hljs-string">'/no-access'</span> });
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-string">'Unkown method'</span>);
+};
+</code></pre>
+<p><strong>Tip</strong>: For the <code>AUTH_CHECK</code> call, the <code>params</code> argument contains the <code>resource</code> name, so you can implement different checks for different resources:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/authProvider.js</span>
+<span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (type, params) =&gt; {
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGIN) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_LOGOUT) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_ERROR) {
+        <span class="hljs-comment">// ...</span>
+    }
+    <span class="hljs-keyword">if</span> (type === AUTH_CHECK) {
+        <span class="hljs-keyword">const</span> { resource } = params;
+        <span class="hljs-keyword">if</span> (resource === <span class="hljs-string">'posts'</span>) {
+            <span class="hljs-comment">// check credentials for the posts resource</span>
+        }
+        <span class="hljs-keyword">if</span> (resource === <span class="hljs-string">'comments'</span>) {
+            <span class="hljs-comment">// check credentials for the comments resource</span>
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-string">'Unkown method'</span>);
+};
+</code></pre>
+<p><strong>Tip</strong>: The <code>authProvider</code> can only be called with <code>AUTH_LOGIN</code>, <code>AUTH_LOGOUT</code>, <code>AUTH_ERROR</code>, or <code>AUTH_CHECK</code>; that's why the final return is a rejected promise.</p>
+<h2><a class="anchor" aria-hidden="true" id="customizing-the-login-and-logout-components"></a><a href="#customizing-the-login-and-logout-components" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Customizing The Login and Logout Components</h2>
+<p>Using <code>authProvider</code> and <code>checkCredentials</code> is enough to implement a full-featured authorization system if the authentication relies on a username and password.</p>
+<p>But what if you want to use an email instead of a username? What if you want to use a Single-Sign-On (SSO) with a third-party authentication service? What if you want to use two-factor authentication?</p>
+<p>For all these cases, it's up to you to implement your own <code>LoginPage</code> component, which will be displayed under the <code>/login</code> route instead of the default username/password form, and your own <code>LogoutButton</code> component, which will be displayed in the sidebar. Pass both these components to the <code>&lt;Admin&gt;</code> component:</p>
+<p><strong>Tip</strong>: Use the <code>userLogin</code> and <code>userLogout</code> actions in your custom <code>Login</code> and <code>Logout</code> components.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyLoginPage.js</span>
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { userLogin } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyLoginPage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    submit = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+        e.preventDefault();
+        <span class="hljs-comment">// gather your data/credentials here</span>
+        <span class="hljs-keyword">const</span> credentials = { };
+
+        <span class="hljs-comment">// Dispatch the userLogin action (injected by connect)</span>
+        <span class="hljs-keyword">this</span>.props.userLogin(credentials);
+    }
+
+    render() {
+        <span class="hljs-keyword">return</span> (
+            <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{this.submit}</span>&gt;</span>
+            ...
+            <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></span>
+        );
+    }
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connect(<span class="hljs-literal">undefined</span>, { userLogin })(MyLoginPage);
+
+<span class="hljs-comment">// in src/MyLogoutButton.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { Responsive, userLogout } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> MenuItem <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/MenuItem'</span>;
+<span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> ExitIcon <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/PowerSettingsNew'</span>;
+
+<span class="hljs-keyword">const</span> MyLogoutButton = <span class="hljs-function">(<span class="hljs-params">{ userLogout, ...rest }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Responsive</span>
+        <span class="hljs-attr">xsmall</span>=<span class="hljs-string">{</span>
+            &lt;<span class="hljs-attr">MenuItem</span>
+                <span class="hljs-attr">onClick</span>=<span class="hljs-string">{userLogout}</span>
+                {<span class="hljs-attr">...sanitizeRestProps</span>(<span class="hljs-attr">rest</span>)}
+            &gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">ExitIcon</span> /&gt;</span> Logout
+            <span class="hljs-tag">&lt;/<span class="hljs-name">MenuItem</span>&gt;</span>
+        }
+        medium={
+            <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+                <span class="hljs-attr">onClick</span>=<span class="hljs-string">{userLogout}</span>
+                <span class="hljs-attr">size</span>=<span class="hljs-string">"small"</span>
+                {<span class="hljs-attr">...sanitizeRestProps</span>(<span class="hljs-attr">rest</span>)}
+            &gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">ExitIcon</span> /&gt;</span> Logout
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+        }
+    /&gt;
+);
+export default connect(undefined, { userLogout: userLogout() })(MyLogoutButton);
+
+// in src/App.js
+import MyLoginPage from './MyLoginPage';
+import MyLogoutButton from './MyLogoutButton';
+
+const App = () =&gt; (
+    <span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">loginPage</span>=<span class="hljs-string">{MyLoginPage}</span> <span class="hljs-attr">logoutButton</span>=<span class="hljs-string">{MyLogoutButton}</span> <span class="hljs-attr">authProvider</span>=<span class="hljs-string">{authProvider}</span>&gt;</span>
+    ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+);
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="restricting-access-to-a-custom-page"></a><a href="#restricting-access-to-a-custom-page" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Restricting Access To A Custom Page</h2>
+<p>If you add <a href="./Actions.md">custom pages</a>, of if you <a href="./CustomApp.md">create an admin app from scratch</a>, you may need to secure access to pages manually. That's the purpose of the <code>&lt;Authenticated&gt;</code> component, that you can use as a decorator for your own components.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyPage.js</span>
+<span class="hljs-keyword">import</span> { withRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+<span class="hljs-keyword">import</span> { Authenticated } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> MyPage = <span class="hljs-function">(<span class="hljs-params">{ location }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Authenticated</span> <span class="hljs-attr">authParams</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">foo:</span> '<span class="hljs-attr">bar</span>' }} <span class="hljs-attr">location</span>=<span class="hljs-string">{location}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+            ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Authenticated</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> withRouter(MyPage);
+</code></pre>
+<p>The <code>&lt;Authenticated&gt;</code> component calls the <code>authProvider</code> function with <code>AUTH_CHECK</code> and <code>authParams</code>. If the response is a fulfilled promise, the child component is rendered. If the response is a rejected promise, <code>&lt;Authenticated&gt;</code> redirects to the login form. Upon successful login, the user is redirected to the initial location (that's why it's necessary to get the location from the router).</p>
+<h2><a class="anchor" aria-hidden="true" id="redirect-after-logout"></a><a href="#redirect-after-logout" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Redirect After Logout</h2>
+<p>By default, react-admin redirects the user to '/login' after they log out. This can be changed by passing the url to redirect to as parameter to the <code>userLogout()</code> action creator when you <code>connect</code> the <code>MyLogoutButton</code> component:</p>
+<pre><code class="hljs css languages- diff">// in src/MyLogoutButton.js
+// ...
+<span class="hljs-deletion">- export default connect(undefined, { userLogout: userLogout() })(MyLogoutButton);</span>
+<span class="hljs-addition">+ export default connect(undefined, { userLogout: userLogout('/') })(MyLogoutButton);</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/input-components.html">← &lt;Input&gt; components</a><a class="docs-next button" href="/docs/en/authorization.html">Authorization →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#configuring-the-auth-provider">Configuring the Auth Provider</a></li><li><a href="#sending-credentials-to-the-api">Sending Credentials to the API</a></li><li><a href="#adding-a-logout-button">Adding a Logout Button</a></li><li><a href="#catching-authentication-errors-on-the-api">Catching Authentication Errors On The API</a></li><li><a href="#checking-credentials-during-navigation">Checking Credentials During Navigation</a></li><li><a href="#customizing-the-login-and-logout-components">Customizing The Login and Logout Components</a></li><li><a href="#restricting-access-to-a-custom-page">Restricting Access To A Custom Page</a></li><li><a href="#redirect-after-logout">Redirect After Logout</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

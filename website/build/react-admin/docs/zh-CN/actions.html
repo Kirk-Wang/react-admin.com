@@ -1,0 +1,451 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>编写 Action · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Admin 界面通常必须提供自定义操作，而不仅仅是简单的 CRUD。 例如, 在管理评论中, &quot;Approve&quot; 按钮 (允许更新` is_approved` 属性, 并在一次单击中保存更新的记录)-是必须具有的。"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="编写 Action · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="Admin 界面通常必须提供自定义操作，而不仅仅是简单的 CRUD。 例如, 在管理评论中, &quot;Approve&quot; 按钮 (允许更新` is_approved` 属性, 并在一次单击中保存更新的记录)-是必须具有的。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/actions.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">编写 Action</h1></header><article><div><span><p>Admin 界面通常必须提供自定义操作，而不仅仅是简单的 CRUD。 例如, 在管理评论中, &quot;Approve&quot; 按钮 (允许更新<code>is_approved</code> 属性, 并在一次单击中保存更新的记录)-是必须具有的。</p>
+<p>如何使用 react-admin 添加这样的自定义动作？ 答案是双重的，react-admin 如何使用 Redux 和 redux-saga，学习并正确的做到这一点会给你更好的理解。</p>
+<h2><a class="anchor" aria-hidden="true" id="简单的方法"></a><a href="#简单的方法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>简单的方法</h2>
+<p>这是一个完美的“Approve”按钮的实现：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comments/ApproveButton.js</span>
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'prop-types'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> FlatButton <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/FlatButton'</span>;
+<span class="hljs-keyword">import</span> { showNotification <span class="hljs-keyword">as</span> showNotificationAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { push <span class="hljs-keyword">as</span> pushAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-redux'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApproveButton</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> { push, record, showNotification } = <span class="hljs-keyword">this</span>.props;
+        <span class="hljs-keyword">const</span> updatedRecord = { ...record, <span class="hljs-attr">is_approved</span>: <span class="hljs-literal">true</span> };
+        fetch(<span class="hljs-string">`/comments/<span class="hljs-subst">${record.id}</span>`</span>, { <span class="hljs-attr">method</span>: <span class="hljs-string">'PUT'</span>, <span class="hljs-attr">body</span>: updatedRecord })
+            .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                showNotification(<span class="hljs-string">'Comment approved'</span>);
+                push(<span class="hljs-string">'/comments'</span>);
+            })
+            .catch(<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+                <span class="hljs-built_in">console</span>.error(e);
+                showNotification(<span class="hljs-string">'Error: comment not approved'</span>, <span class="hljs-string">'warning'</span>)
+            });
+    }
+
+    render() {
+        <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">FlatButton</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Approve"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.handleClick}</span> /&gt;</span>;
+    }
+}
+
+ApproveButton.propTypes = {
+    push: PropTypes.func,
+    record: PropTypes.object,
+    showNotification: PropTypes.func,
+};
+
+export default connect(null, {
+    showNotification: showNotificationAction,
+    push: pushAction,
+})(ApproveButton);
+</span></code></pre>
+<p><code>handleClick</code> 函数通过 <code>fetch</code> 使 <code>PUT</code> 请求 REST API，然后显示通知（使用 <code>showNotification</code>）并重定向到 comments 列表页面（使用<code>push</code>）;</p>
+<p><code>showNotification</code> 和 <code>push</code> 是 <em>动作创建者</em>。 这是返回简单 action 对象的函数的Redux术语。 当在第二个参数中给出一个动作创建者的对象时，<code>connect()</code> 将使用 Redux 的<code>dispatch</code> 方法装饰<a href="https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options">每个动作创建者</a>，因此在 <code>handleClick</code> 函数中，对<code>showNotification()</code> 的调用实际上是对 <code>dispatch(showNotification())</code> 的调用。</p>
+<p>可以立即使用此 <code>ApproveButton</code>，例如在注释列表中，其中 <code>&lt;Datagrid&gt;</code> 自动将 <code>record</code> 注入其子项：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comments/index.js</span>
+<span class="hljs-keyword">import</span> ApproveButton <span class="hljs-keyword">from</span> <span class="hljs-string">'./ApproveButton'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CommentList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span>
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;DateField source="created_at" /&gt;
+            &lt;TextField source="author.name" /&gt;
+            &lt;TextField source="body" /&gt;
+            &lt;BooleanField source="is_approved" /&gt;
+            &lt;ApproveButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;;
+</code></pre>
+<p>或者，在 <code>&lt;Edit&gt;</code> 页面中，作为 <a href="./CreateEdit.md#actions">自定义action</a>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comments/CommentEditActions.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> CardActions <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardActions'</span>;
+<span class="hljs-keyword">import</span> { ListButton, DeleteButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> ApproveButton <span class="hljs-keyword">from</span> <span class="hljs-string">'./ApproveButton'</span>;
+
+<span class="hljs-keyword">const</span> cardActionStyle = {
+    <span class="hljs-attr">zIndex</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">display</span>: <span class="hljs-string">'inline-block'</span>,
+    <span class="hljs-attr">float</span>: <span class="hljs-string">'right'</span>,
+};
+
+<span class="hljs-keyword">const</span> CommentEditActions = <span class="hljs-function">(<span class="hljs-params">{ basePath, data, resource }</span>) =&gt;</span> (
+    &lt;CardActions style={cardActionStyle}&gt;
+        &lt;ApproveButton record={data} /&gt;
+        &lt;ListButton basePath={basePath} /&gt;
+        &lt;DeleteButton basePath={basePath} record={data} resource={resource} /&gt;
+    &lt;/CardActions&gt;
+);
+
+export default CommentEditActions;
+
+// in src/comments/index.js
+import CommentEditActions from './CommentEditActions';
+
+export const CommentEdit = (props) =&gt;
+    &lt;Edit {...props} actions={&lt;CommentEditActions /&gt;}&gt;
+        ...
+    &lt;/Edit&gt;;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="使用-data-provider-代替-fetch"></a><a href="#使用-data-provider-代替-fetch" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用 Data Provider 代替 Fetch</h2>
+<p>前面的代码使用 <code>fetch()</code>，这意味着它必须生成原始 HTTP 请求。 REST 逻辑通常需要一些 HTTP 管道来处理查询参数，编码，headers，正文格式等。 事实证明，您可能已经有一个从REST请求映射到HTTP请求的函数：<a href="./DataProviders.md">Data Provider</a>。 因此，使用此函数而不是 <code>fetch</code> 是个好主意 - 前提是您已导出它：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/dataProvider.js</span>
+<span class="hljs-keyword">import</span> jsonServerProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-json-server'</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> jsonServerProvider(<span class="hljs-string">'http://Mydomain.com/api/'</span>);
+
+<span class="hljs-comment">// in src/comments/ApproveButton.js</span>
+<span class="hljs-keyword">import</span> { UPDATE } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> dataProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'../dataProvider'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApproveButton</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> { push, record, showNotification } = <span class="hljs-keyword">this</span>.props;
+        <span class="hljs-keyword">const</span> updatedRecord = { ...record, <span class="hljs-attr">is_approved</span>: <span class="hljs-literal">true</span> };
+        dataProvider(UPDATE, <span class="hljs-string">'comments'</span>, { <span class="hljs-attr">id</span>: record.id, <span class="hljs-attr">data</span>: updatedRecord })
+            .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                showNotification(<span class="hljs-string">'Comment approved'</span>);
+                push(<span class="hljs-string">'/comments'</span>);
+            })
+            .catch(<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+                <span class="hljs-built_in">console</span>.error(e);
+                showNotification(<span class="hljs-string">'Error: comment not approved'</span>, <span class="hljs-string">'warning'</span>)
+            });
+    }
+
+    render() {
+        <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">FlatButton</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Approve"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.handleClick}</span> /&gt;</span>;
+    }
+}
+</span></code></pre>
+<p>这下你会懂了：不再 <code>fetch</code>。就如 <code>fetch</code>，<code>dataProvider</code> 返回一个 <code>Promise</code>。它的签名是：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">/**
+ * Query a data provider and return a promise for a response
+ *
+ * @example
+ * dataProvider(GET_ONE, 'posts', { id: 123 })
+ *  =&gt; new Promise(resolve =&gt; resolve({ id: 123, title: "hello, world" }))
+ *
+ * @param {string} type Request type, e.g GET_LIST
+ * @param {string} resource Resource name, e.g. "posts"
+ * @param {Object} payload Request parameters. Depends on the action type
+ * @returns {Promise} the Promise for a response
+ */</span>
+<span class="hljs-keyword">const</span> dataProvider = <span class="hljs-function">(<span class="hljs-params">type, resource, params</span>) =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>();
+</code></pre>
+<p>至于各种请求类型的语法（<code>GET_LIST</code>，<code>GET_ONE</code>，<code>UPDATE</code>等），请转到 <a href="./DataProviders.md#request-format">Data Provider文档</a> 以获取更多详细信息。</p>
+<h2><a class="anchor" aria-hidden="true" id="使用自定义-action-creator"></a><a href="#使用自定义-action-creator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用自定义 Action Creator</h2>
+<p>在组件内部获取数据很容易。 但是，如果您是Redux用户，则可能需要以更为惯用的方式执行此操作-通过分发 action。 首先，创建自己的 action 创建者以替换对 <code>dataProvider</code> 的调用：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comment/commentActions.js</span>
+<span class="hljs-keyword">import</span> { UPDATE } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> COMMENT_APPROVE = <span class="hljs-string">'COMMENT_APPROVE'</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> commentApprove = <span class="hljs-function">(<span class="hljs-params">id, data, basePath</span>) =&gt;</span> ({
+    <span class="hljs-attr">type</span>: COMMENT_APPROVE,
+    <span class="hljs-attr">payload</span>: { id, <span class="hljs-attr">data</span>: { ...data, <span class="hljs-attr">is_approved</span>: <span class="hljs-literal">true</span> } },
+    <span class="hljs-attr">meta</span>: { <span class="hljs-attr">resource</span>: <span class="hljs-string">'comments'</span>, <span class="hljs-attr">fetch</span>: UPDATE },
+});
+</code></pre>
+<p>这个动作创建者利用了 react-admin 的内置 fetcher，它使用 <code>fetch</code> meta 监听动作。 在 dispatch 时，此操作将触发对 <code>dataProvider的调用（UPDATE，'comments'）</code>，dispatch 一个 <code>COMMENT_APPROVE_LOADING</code> action，然后在收到响应后，dispatch一个 <code>COMMENT_APPROVE_SUCCESS</code> 或 <code>COMMENT_APPROVE_FAILURE</code>。</p>
+<p>若要在组件中使用新的action creator，请 <code>connect</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comments/ApproveButton.js</span>
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'prop-types'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> { commentApprove <span class="hljs-keyword">as</span> commentApproveAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'./commentActions'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApproveButton</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> { commentApprove, record } = <span class="hljs-keyword">this</span>.props;
+        commentApprove(record.id, record);
+        <span class="hljs-comment">// how about push and showNotification?</span>
+    }
+
+    render() {
+        <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.handleClick}</span>&gt;</span>Approve<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span></span>;
+    }
+}
+
+ApproveButton.propTypes = {
+    <span class="hljs-attr">commentApprove</span>: PropTypes.func,
+    <span class="hljs-attr">record</span>: PropTypes.object,
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connect(<span class="hljs-literal">null</span>, {
+    <span class="hljs-attr">commentApprove</span>: commentApproveAction,
+})(ApproveButton);
+</code></pre>
+<p>这很好用：当用户按下 “Approve” 按钮时，API 接收 UPDATE 调用，并批准 comment。 但是不可能再在 <code>handleClick</code> 中调用 <code>push</code> 或 <code>showNotification</code>。 这是因为 <code>commentApprove()</code> 会立即返回，无论 API 调用是否成功。 你如何在只有当操作成功时运行一个函数？</p>
+<h2><a class="anchor" aria-hidden="true" id="处理副作用"></a><a href="#处理副作用" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>处理副作用</h2>
+<p>获取数据称为 <em>副作用</em>，因为它调用外部世界，并且是异步的。 通常 actions 可能会产生其他副作用，例如显示通知或将用户重定向到其他页面。 就像 <code>fetch</code> 副作用一样，您可以通过在动作元 <code>meta</code> 中设置适当的键，以声明方式将 side effects 与 action 相关联。</p>
+<p>例如，要在调度 <code>COMMENT_APPROVE</code> 动作时显示通知，请添加 <code>notification</code> meta：</p>
+<pre><code class="hljs css languages- diff">// in src/comment/commentActions.js
+import { UPDATE } from 'react-admin';
+export const COMMENT_APPROVE = 'COMMENT_APPROVE';
+export const commentApprove = (id, data, basePath) =&gt; ({
+    type: COMMENT_APPROVE,
+    payload: { id, data: { ...data, is_approved: true } },
+    meta: {
+        resource: 'comments',
+        fetch: UPDATE,
+<span class="hljs-addition">+        notification: {</span>
+<span class="hljs-addition">+            body: 'resources.comments.notification.approved_success',</span>
+<span class="hljs-addition">+            level: 'info',</span>
+<span class="hljs-addition">+        },</span>
+<span class="hljs-addition">+        redirectTo: '/comments',</span>
+<span class="hljs-addition">+        basePath,</span>
+    },
+});
+</code></pre>
+<p>React-admin可以处理以下副作用：</p>
+<ul>
+<li><code>notification</code>: Display a notification. The property value should be an object describing the notification to display. The <code>body</code> can be a translation key. <code>level</code> can be either <code>info</code> or <code>warning</code>.</li>
+<li><code>redirectTo</code>: Redirect the user to another page. The property value should be the path to redirect the user to.</li>
+<li><code>refresh</code>: Force a rerender of the current view (equivalent to pressing the Refresh button). Set to true to enable.</li>
+<li><code>unselectAll</code>: Unselect all lines in the current datagrid. Set to true to enable.</li>
+<li><code>basePath</code>: This is not a side effect, but it's used internaly to compute redirection paths. Set it when you have a redirection side effect.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="成功与失败的side-effects"></a><a href="#成功与失败的side-effects" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>成功与失败的Side Effects</h2>
+<p>在前面的示例中，当调度 <code>COMMENT_APPROVE</code> action 时，即在甚至调用服务器 <em>之前</em>，会出现 &quot;notification approved&quot; 通知。 这有点太早：如果服务器返回错误怎么办？</p>
+<p>在实践中，大多数副作用必须在 <code>fetch</code> 副作用成功或失败后触发。 为了支持这一点，您可以在动作的 <code>meta</code> 属性中的 onSuccess 和 onFailure 键下包含副作用：</p>
+<pre><code class="hljs css languages- diff">// in src/comment/commentActions.js
+import { UPDATE } from 'react-admin';
+export const COMMENT_APPROVE = 'COMMENT_APPROVE';
+export const commentApprove = (id, data, basePath) =&gt; ({
+    type: COMMENT_APPROVE,
+    payload: { id, data: { ...data, is_approved: true } },
+    meta: {
+        resource: 'comments',
+        fetch: UPDATE,
+<span class="hljs-deletion">-        notification: {</span>
+<span class="hljs-deletion">-            body: 'resources.comments.notification.approved_success',</span>
+<span class="hljs-deletion">-            level: 'info',</span>
+<span class="hljs-deletion">-        },</span>
+<span class="hljs-deletion">-        redirectTo: '/comments',</span>
+<span class="hljs-deletion">-        basePath,</span>
+<span class="hljs-addition">+        onSuccess: {</span>
+<span class="hljs-addition">+            notification: {</span>
+<span class="hljs-addition">+                body: 'resources.comments.notification.approved_success',</span>
+<span class="hljs-addition">+                level: 'info',</span>
+<span class="hljs-addition">+            },</span>
+<span class="hljs-addition">+            redirectTo: '/comments',</span>
+<span class="hljs-addition">+            basePath,</span>
+<span class="hljs-addition">+        },</span>
+<span class="hljs-addition">+        onFailure: {</span>
+<span class="hljs-addition">+            notification: {</span>
+<span class="hljs-addition">+                body: 'resources.comments.notification.approved_failure',</span>
+<span class="hljs-addition">+                level: 'warning',</span>
+<span class="hljs-addition">+            },</span>
+<span class="hljs-addition">+        },</span>
+    },
+});
+</code></pre>
+<p>在这种情况下，调度<code>COMMENT_APPROVE</code> action 时不会触发任何副作用。 但是，当 <code>fetch</code> 副作用成功返回时，react-admin 将 dispatch <code>COMMENT_APPROVE_SUCCESS</code> action，并将 <code>onSuccess</code> 副作用复制到 <code>meta</code> 属性中。 所以它会发出一个看起来像这样的 action：</p>
+<pre><code class="hljs css languages- js">{
+    <span class="hljs-attr">type</span>: COMMENT_APPROVE_SUCCESS,
+    <span class="hljs-attr">payload</span>: { <span class="hljs-attr">data</span>: { <span class="hljs-comment">/* data returned by the server */</span> } },
+    <span class="hljs-attr">meta</span>: {
+        <span class="hljs-attr">resource</span>: <span class="hljs-string">'comments'</span>,
+        <span class="hljs-attr">notification</span>: {
+            <span class="hljs-attr">body</span>: <span class="hljs-string">'resources.comments.notification.approved_success'</span>,
+            <span class="hljs-attr">level</span>: <span class="hljs-string">'info'</span>,
+        },
+        <span class="hljs-attr">redirectTo</span>: <span class="hljs-string">'/comments'</span>,
+        basePath,
+    },
+}
+</code></pre>
+<p>然后，副作用将触发。 使用此代码，批准审核现在会显示正确的通知，并重定向到评论列表。</p>
+<p>您可以在自己的 action 中使用 <code>onSuccess</code> 和 <code>onFailure</code> metas来处理副作用。</p>
+<h2><a class="anchor" aria-hidden="true" id="自定义-saga"></a><a href="#自定义-saga" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>自定义 saga</h2>
+<p>有时，您可能想要触发其他<em>副作用</em>。 React-admin 提升了一种编程风格，其中副作用与代码的其余部分分离，这有利于使它们可测试。</p>
+<p>在react-admin中，副作用由 Saga 处理。 <a href="https://redux-saga.github.io/redux-saga/">Redux-saga</a> 是为 Redux 构建的副作用库，其副作用由生成器函数定义。 如果这对您来说是新手，请花几分钟时间浏览Saga文档。</p>
+<p>这是处理失败的 <code>COMMENT_APPROVE</code> action的副作用所必需的生成器函数，该操作将使用 <a href="https://sentry.io">Sentry</a> 等外部服务记录错误：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comments/commentSaga.js</span>
+<span class="hljs-keyword">import</span> { call, takeEvery } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-saga/effects'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">commentApproveFailure</span>(<span class="hljs-params">{ error }</span>) </span>{
+    <span class="hljs-keyword">yield</span> call(Raven.captureException, error);
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">commentSaga</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">yield</span> takeEvery(<span class="hljs-string">'COMMENT_APPROVE_FAILURE'</span>, commentApproveFailure);
+}
+</code></pre>
+<p>让我们解释所有这些，从最后的 <code>commentSaga</code> 生成器函数开始。 <a href="http://exploringjs.com/es6/ch_generators.html">generator function</a>（由函数名中的<code>*</code>表示）在 <code>yield</code> 调用的语句上暂停 - 直到 yielding 语句返回。 <code>yield takeEvery([ACTION_NAME], callback)</code> <a href="https://redux-saga.github.io/redux-saga/docs/basics/UsingSagaHelpers.html">每次调用相关 action 时</a>都会执行提供的回调。 总而言之，当 <code>commentApprove()</code> 初始 fetch 失败时，这将执行commentApproveFailure。</p>
+<p>对于 <code>commentApproveFailure</code>，它只是从全局 <code>Raven</code> 对象向<code>captureException</code> 函数 dispatch 一个 <a href="https://redux-saga.js.org/docs/api/#callfn-args"><code>call</code></a> 副作用。</p>
+<p>要使用此 saga，请将其传递到 <code>&lt;Admin&gt;</code> 组件的 <code>customSagas</code> 属性中：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">import</span> { CommentList } <span class="hljs-keyword">from</span> <span class="hljs-string">'./comments'</span>;
+<span class="hljs-keyword">import</span> commentSaga <span class="hljs-keyword">from</span> <span class="hljs-string">'./comments/commentSaga'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">customSagas</span>=<span class="hljs-string">{[</span> <span class="hljs-attr">commentSaga</span> ]} <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{jsonServerProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">jsonplaceholder.typicode.com</span>')}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"comments"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{CommentList}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+);
+
+export default App;
+</span></code></pre>
+<p>使用此代码，失败的审核批准现在会向 Sentry 发送正确的信号。</p>
+<p><strong>提示</strong>：副作用也是<a href="https://redux-saga.github.io/redux-saga/docs/introduction/BeginnerTutorial.html#making-our-code-testable">可测试的</a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="积极的渲染和撤消"></a><a href="#积极的渲染和撤消" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>积极的渲染和撤消</h2>
+<p>在前面的示例中，单击“Approve”按钮后，将在 fetch data provider 时显示 spinner。 然后，用户被重定向到评论列表。 但在大多数情况下，服务器会返回成功响应，因此用户无需等待此响应。</p>
+<p>对于自己的 fetch actions，react-admin 使用称为 <em>积极渲染</em> 的方法。 想法是首先处理客户端上的 <code>fetch</code> actions（即更新 Redux store 的实体），并立即重新渲染屏幕。 用户可以毫不拖延地看到他们 action 的效果。 然后，react-admin 应用 success side effects, 并且仅在此之后它触发对 data provider 的 fetch。 如果 fetch 成功结束，react-admin 只会刷新以从服务器获取最新数据，但在大多数情况下，用户看不到任何差异（Redux store 中的数据和来自 data provider 的数据） 是相同的）。 如果提取失败，react-admin 会显示错误通知，并强制刷新。</p>
+<p>作为奖励，当显示成功通知时，用户可以在甚至调用 data provide <em>之前</em> 取消 action。</p>
+<p>要使用<code>fetch</code> meta optimistic 进行操作，请使用<code>startUndoable</code> action 创建器进行装饰：</p>
+<pre><code class="hljs css languages- diff">// in src/comments/ApproveButton.js
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
+<span class="hljs-addition">+ import { startUndoable as startUndoableAction } from 'ra-core';</span>
+<span class="hljs-deletion">- import { commentApprove as commentApproveAction } from './commentActions';</span>
+<span class="hljs-addition">+ import { commentApprove } from './commentActions';</span>
+
+class ApproveButton extends Component {
+    handleClick = () =&gt; {
+<span class="hljs-deletion">-        const { commentApprove, record } = this.props;</span>
+<span class="hljs-deletion">-        commentApprove(record.id, record);</span>
+<span class="hljs-addition">+        const { startUndoable, record } = this.props;</span>
+<span class="hljs-addition">+        startUndoable(commentApprove(record.id, record));</span>
+    }
+
+    render() {
+        return &lt;Button onClick={this.handleClick}&gt;Approve&lt;/Button&gt;;
+    }
+}
+
+ApproveButton.propTypes = {
+<span class="hljs-deletion">-    commentApprove: PropTypes.func,</span>
+<span class="hljs-addition">+    startUndoable: PropTypes.func,</span>
+    record: PropTypes.object,
+};
+
+export default connect(null, {
+<span class="hljs-deletion">-    commentApprove: commentApproveAction,</span>
+<span class="hljs-addition">+    startUndoable: startUndoableAction,</span>
+})(ApproveButton);
+</code></pre>
+<p>这就是使 fetch action 变得积极所需的全部内容。 请注意，<code>startUndoable</code> action 创建者将作为 <code>mapDispatchToProp</code> 传递给Redux <code>connect</code>，以便使用 <code>dispatch</code> 进行修饰 - 但是<code>commentApprove</code>不是。 只有第一个 action 必须用 dispatch 装饰。</p>
+<p>如果您对<code>fetch</code> meta 使用自定义 action，react-admin 更新内部 store 的事应该是避免使用原始 <code>fetch</code> 的另一个动机。</p>
+<h2><a class="anchor" aria-hidden="true" id="使用自定义-reducer"></a><a href="#使用自定义-reducer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用自定义 Reducer</h2>
+<p>除了触发REST调用之外，您可能希望将自己的操作的效果存储在应用程序状态。 例如，如果要显示一个显示比特币当前汇率的小部件，可能需要执行以下操作：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/bitcoinRateReceived.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> BITCOIN_RATE_RECEIVED = <span class="hljs-string">'BITCOIN_RATE_RECEIVED'</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> bitcoinRateReceived = <span class="hljs-function">(<span class="hljs-params">rate</span>) =&gt;</span> ({
+    <span class="hljs-attr">type</span>: BITCOIN_RATE_RECEIVED,
+    <span class="hljs-attr">payload</span>: { rate },
+});
+</code></pre>
+<p>可以通过以下组件在挂载时触发此动作：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/BitCoinRate.js</span>
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'prop-types'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { bitcoinRateReceived <span class="hljs-keyword">as</span> bitcoinRateReceivedAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'./bitcoinRateReceived'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BitCoinRate</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    componentWillMount() {
+        fetch(<span class="hljs-string">'https://blockchain.info/fr/ticker'</span>)
+            .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.json())
+            .then(<span class="hljs-function"><span class="hljs-params">rates</span> =&gt;</span> rates.USD[<span class="hljs-string">'15m'</span>])
+            .then(bitcoinRateReceived) <span class="hljs-comment">// dispatch action when the response is received</span>
+    }
+
+    render() {
+        <span class="hljs-keyword">const</span> { rate } = <span class="hljs-keyword">this</span>.props;
+        <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Current bitcoin value: {rate}$<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    }
+}
+
+BitCoinRate.propTypes = {
+    <span class="hljs-attr">bitcoinRateReceived</span>: PropTypes.func,
+    <span class="hljs-attr">rate</span>: PropTypes.number,
+};
+
+<span class="hljs-keyword">const</span> mapStateToProps = <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> ({ <span class="hljs-attr">rate</span>: state.bitcoinRate });
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connect(mapStateToProps, {
+    <span class="hljs-attr">bitcoinRateReceived</span>: bitcoinRateReceivedAction,
+})(BitCoinRate);
+</code></pre>
+<p>为了将汇率传递到 <code>bitcoinRateReceived()</code> 进入 Redux store 里，你需要一个reducer：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/rateReducer.js</span>
+<span class="hljs-keyword">import</span> { BITCOIN_RATE_RECEIVED } <span class="hljs-keyword">from</span> <span class="hljs-string">'./bitcoinRateReceived'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (previousState = <span class="hljs-number">0</span>, { type, payload }) =&gt; {
+    <span class="hljs-keyword">if</span> (type === BITCOIN_RATE_RECEIVED) {
+        <span class="hljs-keyword">return</span> payload.rate;
+    }
+    <span class="hljs-keyword">return</span> previousState;
+}
+</code></pre>
+<p>现在的问题是：你如何把这个 reducer 放在 <code>&lt;Admin&gt;</code> 应用程序中？ 简单：使用 <code>customReducers</code> 属性：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">import</span> rate <span class="hljs-keyword">from</span> <span class="hljs-string">'./rateReducer'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">customReducers</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">rate</span> }} <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{jsonServerProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">jsonplaceholder.typicode.com</span>')}&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
+</code></pre>
+<p><strong>提示</strong>: 您可以避免将数据存储在 Redux 状态中，而是将数据存储在组件状态中。 处理起来要复杂得多，而且性能也要高一些。 只有在真正需要时才使用全局状态。</p>
+<h2><a class="anchor" aria-hidden="true" id="list-bulk-actions"></a><a href="#list-bulk-actions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>List Bulk Actions</h2>
+<p>我们之前看到的几乎所有内容都适用于自定义 <code>List</code> 批量操作，但有以下几点不同：</p>
+<ul>
+<li>他们收到以下属性：<code>resource</code>，<code>selectedIds</code> 和 <code>filterValues</code></li>
+<li>它们没有收到<code>record</code> 属性中的当前记录，因为它们中有很多。</li>
+<li>它们必须呈现为 material-ui <a href="http://www.material-ui.com/#/components/menu"><code>MenuItem</code></a>。</li>
+</ul>
+<p>您可以在 <a href="/List.html#bulk-actions"><code>批量操作</code></a> 部分的 <code>List</code> 文档中找到完整的示例。</p>
+<h2><a class="anchor" aria-hidden="true" id="结论"></a><a href="#结论" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>结论</h2>
+<p>您应该为自己的操作按钮选择哪种样式？</p>
+<p>第一个版本（带 <code>fetch</code>）是非常好的，如果您不必单元测试您的组件，或者从纯功能中解除副作用，那么您可以坚持使用它。</p>
+<p>另一方面，如果您想提高可重用性，关注点分离，遵守 react-admin 的编码标准，并且如果您对Redux 和 Saga 有足够的了解，请使用最终版本。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/theming.html">← 主题</a><a class="docs-next button" href="/docs/zh-CN/translation.html">翻译 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#简单的方法">简单的方法</a></li><li><a href="#使用-data-provider-代替-fetch">使用 Data Provider 代替 Fetch</a></li><li><a href="#使用自定义-action-creator">使用自定义 Action Creator</a></li><li><a href="#处理副作用">处理副作用</a></li><li><a href="#成功与失败的side-effects">成功与失败的Side Effects</a></li><li><a href="#自定义-saga">自定义 saga</a></li><li><a href="#积极的渲染和撤消">积极的渲染和撤消</a></li><li><a href="#使用自定义-reducer">使用自定义 Reducer</a></li><li><a href="#list-bulk-actions">List Bulk Actions</a></li><li><a href="#结论">结论</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

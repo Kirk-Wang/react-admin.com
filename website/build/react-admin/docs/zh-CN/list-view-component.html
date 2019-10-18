@@ -1,0 +1,690 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>List 视图组件 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="列表视图显示从 REST API 获取的记录列表。 此视图的入口点是`&lt;List&gt;`组件，它负责获取数据。 然后，它将数据传递到迭代器视图-通常是 `&lt;Datagrid`，然后将每个记录属性的渲染委托给 [`&lt;Field&gt;`](./Fields.html) 组件。"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="List 视图组件 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="列表视图显示从 REST API 获取的记录列表。 此视图的入口点是`&lt;List&gt;`组件，它负责获取数据。 然后，它将数据传递到迭代器视图-通常是 `&lt;Datagrid`，然后将每个记录属性的渲染委托给 [`&lt;Field&gt;`](./Fields.html) 组件。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/list-view-component.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">List 视图组件</h1></header><article><div><span><p>列表视图显示从 REST API 获取的记录列表。 此视图的入口点是<code>&lt;List&gt;</code>组件，它负责获取数据。 然后，它将数据传递到迭代器视图-通常是 <code>&lt;Datagrid</code>，然后将每个记录属性的渲染委托给 <a href="./Fields.html"><code>&lt;Field&gt;</code></a> 组件。</p>
+<p><img src="https://marmelab.com/react-admin/img/list-view.png" alt="The List View"></p>
+<h2><a class="anchor" aria-hidden="true" id="list-组件"></a><a href="#list-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>List</code> 组件</h2>
+<p><code>&lt;List&gt;</code> 组件渲染列表布局（标题、按钮、筛选器、分页），并从 REST API 中提取记录列表。 然后将记录列表的呈现委托给其子组件。 通常，它是一个 <code>&lt;Datagrid&gt;</code>，负责显示一个具有每个帖子一行的表格。</p>
+<p><strong>提示</strong>：在Redux条款中，<code>&lt;List&gt;</code> 是一个connected组件，并且<code>&lt;Datagrid&gt;</code> 是一个dumb组件。</p>
+<p>以下是通过 <code>&lt;List&gt;</code> 组件接受的所有属性：</p>
+<ul>
+<li><a href="#page-title"><code>title</code></a></li>
+<li><a href="#actions"><code>actions</code></a></li>
+<li><a href="#bulk-actions"><code>bulkActions</code></a></li>
+<li><a href="#filters"><code>filters</code></a> (a React element used to display the filter form)</li>
+<li><a href="#records-per-page"><code>perPage</code></a></li>
+<li><a href="#default-sort-field"><code>sort</code></a></li>
+<li><a href="#permanent-filter"><code>filter</code></a> (the permanent filter used in the REST request)</li>
+<li><a href="#filter-default-values"><code>filterDefaultValues</code></a> (the default values for <code>alwaysOn</code> filters)</li>
+<li><a href="#pagination"><code>pagination</code></a></li>
+</ul>
+<p>下面是显示帖子列表所需的最少代码：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> jsonServerProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-json-server'</span>;
+
+<span class="hljs-keyword">import</span> { PostList } <span class="hljs-keyword">from</span> <span class="hljs-string">'./posts'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;Admin dataProvider={jsonServerProvider('http://jsonplaceholder.typicode.com')}&gt;
+        &lt;Resource name="posts" list={PostList} /&gt;
+    &lt;/Admin&gt;
+);
+
+export default App;
+
+// in src/posts.js
+import React from 'react';
+import { List, Datagrid, TextField } from 'react-admin';
+
+export const PostList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;TextField source="body" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>这足以显示帖子列表：</p>
+<p><img src="https://marmelab.com/react-admin/img/simple-post-list.png" alt="Simple posts list"></p>
+<h3><a class="anchor" aria-hidden="true" id="page-title"></a><a href="#page-title" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Page Title</h3>
+<p>一个列表视图的默认标题是&quot;[resource] list&quot;（例如：&quot;Posts list&quot;）。使用 <code>title</code> 属性来自定义列表视图标题：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>} <span class="hljs-attr">title</span>=<span class="hljs-string">"List of posts"</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span></span>
+);
+</code></pre>
+<p>标题可以是任何一个字符串，或者你自己的元素。</p>
+<h3><a class="anchor" aria-hidden="true" id="actions"></a><a href="#actions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Actions</h3>
+<p>你可以通过你自己的元素使用 <code>actions</code> 属性替换掉默认的 action 列表：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> { CardActions, CreateButton, RefreshButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> PostActions = <span class="hljs-function">(<span class="hljs-params">{ resource, filters, displayedFilters, filterValues, basePath, showFilter }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">CardActions</span>&gt;</span>
+        {filters &amp;&amp; React.cloneElement(filters, {
+            resource,
+            showFilter,
+            displayedFilters,
+            filterValues,
+            context: 'button',
+        }) }
+        <span class="hljs-tag">&lt;<span class="hljs-name">CreateButton</span> <span class="hljs-attr">basePath</span>=<span class="hljs-string">{basePath}</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">RefreshButton</span> /&gt;</span>
+        {/* Add your custom actions */}
+        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">primary</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{customAction}</span>&gt;</span>Custom Action<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">CardActions</span>&gt;</span>
+);
+
+export const PostList = (props) =&gt; (
+    <span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>} <span class="hljs-attr">actions</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">PostActions</span> /&gt;</span>}&gt;
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span>
+);
+</span></code></pre>
+<h3><a class="anchor" aria-hidden="true" id="bulk-actions"></a><a href="#bulk-actions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bulk Actions</h3>
+<p>Bulk actions 是同时影响多个记录的操作，例如大量删除。 在 <code>&lt;Datagrid&gt;</code> 组件中，通过勾选表格第一列中的复选框，然后从批量操作菜单中选择操作来触发批量操作。 默认情况下，所有列表视图都有一个批量操作，即批量删除操作。 您可以通过将自定义元素作为 <code>&lt;List&gt;</code> 组件的 bulkActions 属性传递来添加其他批量操作：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> { BulkActions, BulkDeleteAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> ResetViewsAction <span class="hljs-keyword">from</span> <span class="hljs-string">'./ResetViewsAction'</span>;
+
+<span class="hljs-keyword">const</span> PostBulkActions = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BulkActions</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ResetViewsAction</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Reset Views"</span> /&gt;</span>
+        {/* Add the default bulk delete action */}
+        <span class="hljs-tag">&lt;<span class="hljs-name">BulkDeleteAction</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">BulkActions</span>&gt;</span>
+);
+
+export const PostList = (props) =&gt; (
+    <span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>} <span class="hljs-attr">bulkActions</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">PostBulkActions</span> /&gt;</span>}&gt;
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span>
+);
+</span></code></pre>
+<p><strong>提示</strong>：您还可以通过将 <code>false</code> 传递给 <code>bulkActions</code> 属性来完全禁用批量操作。 当在 <code>List</code> 中使用 <code>Datagrid</code> 并禁用了批量操作时，将不会添加复选框列。</p>
+<p>React-admin 使用批量操作组件的 <code>label</code> 属性来显示批量操作菜单项。</p>
+<p>批量操作组件是在单击相关菜单项时挂载的常规 React 组件。组件接收到几个属性，允许它执行其工作:</p>
+<ul>
+<li><code>resource</code>: the currently displayed resource (eg <code>posts</code>, <code>comments</code>, etc.)</li>
+<li><code>basePath</code>: the current router base path for the resource (eg <code>/posts</code>, <code>/comments</code>, etc.)</li>
+<li><code>filterValues</code>: the filter values. This can be useful if you want to apply your action on all items matching the filter.</li>
+<li><code>selectedIds</code>: the identifiers of the currently selected items.</li>
+<li><code>onExit</code>: an event handler you should call when the bulk action ends.</li>
+</ul>
+<p>下面是一个利用 <code>UPDATE_MANY</code> crud 操作的示例, 它将所有 posts 的 <code>views</code> 属性设置为 <code>0</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in ./ResetViewsAction.js</span>
+<span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { crudUpdateMany } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResetViewsAction</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    componentDidMount = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> {
+            resource,
+            basePath,
+            selectedIds,
+            onExit,
+            crudUpdateMany,
+        } = <span class="hljs-keyword">this</span>.props;
+
+        crudUpdateMany(resource, selectedIds, { <span class="hljs-attr">views</span>: <span class="hljs-number">0</span> }, basePath);
+        onExit();
+    };
+
+    render() {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connect(<span class="hljs-literal">undefined</span>, { crudUpdateMany })(ResetViewsAction);
+</code></pre>
+<p>此组件不呈现任何内容-它只是在挂载时 dispatch action。 完成后，它还调用由主批量操作组件传递的 <code>onExit()</code> 方法, 它具有卸载 <code>ResetViewsAction</code>组件的作用。</p>
+<p>但大多数情况下，批量操作都是具有独立用户界面 (在对话框中) 的小型应用程序, 因此 <code>render ()</code> 方法很有用。 下面是在确认对话框后面实现的 <code>ResetViewsAction</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in ./ResetViewsAction.js</span>
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { Confirm } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { crudUpdateMany } <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-core'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResetViewsAction</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    handleDialogClose = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">this</span>.props.onExit();
+    };
+
+    handleConfirm = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> { basePath, crudUpdateMany, resource, selectedIds } = <span class="hljs-keyword">this</span>.props;
+        crudUpdateMany(resource, selectedIds, { <span class="hljs-attr">views</span>: <span class="hljs-number">0</span> }, basePath);
+        <span class="hljs-keyword">this</span>.props.onExit();
+    };
+
+    render() {
+        <span class="hljs-keyword">return</span> (
+            <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Confirm</span>
+                <span class="hljs-attr">isOpen</span>=<span class="hljs-string">{true}</span>
+                <span class="hljs-attr">title</span>=<span class="hljs-string">"Update View Count"</span>
+                <span class="hljs-attr">content</span>=<span class="hljs-string">"Are you sure you want to reset the views for these items?"</span>
+                <span class="hljs-attr">onConfirm</span>=<span class="hljs-string">{this.handleConfirm}</span>
+                <span class="hljs-attr">onClose</span>=<span class="hljs-string">{this.handleDialogClose}</span>
+            /&gt;</span>
+        );
+    }
+}
+
+export default connect(undefined, { crudUpdateMany })(ResetViewsAction);
+</span></code></pre>
+<p><strong>提示</strong>: <code>&lt;Confirm&gt;</code> material-ui 的 &lt;<code>&lt;Dialog&gt;</code> 组件实现确认弹出菜单。请随时使用它在您的 admin 中！</p>
+<p><strong>提示</strong>：React-admin 不在内部使用 <code>&lt;Confirm&gt;</code> 组件，因为删除和更新会立即在本地应用，然后在几秒钟后 dispatch 到服务器，除非用户选择撤消修改。 这就是我们所谓的积极渲染。 您可以通过将 <code>crudUpdateMany()</code> 动作创建器包装在 <code>startUndoable()</code> 动作创建器中来为 <code>ResetViewsAction</code> 执行相同操作，如下所示：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { startUndoable, crudUpdateMany } <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-core'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResetViewsAction</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    componentDidMount = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> { basePath, startUndoable, resource, selectedIds } = <span class="hljs-keyword">this</span>.props;
+        startUndoable(
+            crudUpdateMany(resource, selectedIds, { <span class="hljs-attr">views</span>: <span class="hljs-number">0</span> }, basePath)
+        );
+        <span class="hljs-keyword">this</span>.props.onExit();
+    };
+
+    render() {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connect(<span class="hljs-literal">undefined</span>, { startUndoable })(ResetViewsAction);
+</code></pre>
+<p>请注意，在这种情况下，<code>connect()</code> 的 <code>mapDispatchToProps</code> 参数中不存在 <code>crudUpdateMany</code> action 创建者。 在这种情况下，只需使用 <code>crudUpdateMany()</code> 调用的结果作为参数分发startUndoable。</p>
+<h3><a class="anchor" aria-hidden="true" id="filters"></a><a href="#filters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Filters</h3>
+<p>你可以使用 <code>filters</code> 属性添加一个过滤器元素到这个列表：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> PostFilter = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Filter {...props}&gt;
+        &lt;TextInput label="Search" source="q" alwaysOn /&gt;
+        &lt;TextInput label="Title" source="title" defaultValue="Hello, World!" /&gt;
+    &lt;/Filter&gt;
+);
+
+export const PostList = (props) =&gt; (
+    &lt;List {...props} filters={&lt;PostFilter /&gt;}&gt;
+        ...
+    &lt;/List&gt;
+);
+</code></pre>
+<p>过滤器组件必须是一个具有 <code>&lt;Input&gt;</code> 子级的 <code>&lt;Filter&gt;</code> 组件。</p>
+<p><strong>提示</strong>：<code>&lt;Filter&gt;</code> 是一个特殊组件, 它以两种方式呈现：</p>
+<ul>
+<li>作为一个过滤器按钮（去添加新过滤器）</li>
+<li>作为过滤器表单（去输入过滤器值）</li>
+</ul>
+<p>它通过检查其 <code>context</code> 属性来进行此项检测。</p>
+<p><strong>提示</strong>：不要混淆这个 <code>filters</code> 属性，期望一个 React 元素，具有 <code>filter</code> 属性，它期望一个对象来定义永久过滤器 (见下文)。</p>
+<p><code>Filter</code> 组件通常接受 <code>className</code> 属性，你可以通过React-admin覆盖注入内部组件的许多类名，这得益于<code>classes</code>属性（作为大多数 Material UI 组件的属性，请参阅关于它的<a href="https://material-ui.com/customization/overrides/#overriding-with-classes">文档</a>）。 此属性接受以下值：</p>
+<ul>
+<li><code>form</code>: applied to the root element when rendering as a form.</li>
+<li><code>button</code>: applied to the root element when rendering as a button.</li>
+</ul>
+<p><code>&lt;Filter&gt;</code> 表单的子项是常规输入。默认情况下，<code>&lt;Filter&gt;</code> 隐藏它们，除了那些具有 <code>alwaysOn</code> 属性的那些。</p>
+<p><strong>提示</strong>：由于技术原因，react-admin 不接受具有 <code>defaultValue</code> 和 <code>alwaysOn</code> 的 <code>&lt;Filter&gt;</code> 的子元素。 要为 always on 过滤器设置默认值，请使用 <code>&lt;List&gt;</code> 组件的 filterDefaultValues 属性（参见下文）。</p>
+<h3><a class="anchor" aria-hidden="true" id="records-per-page"></a><a href="#records-per-page" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Records Per Page</h3>
+<p>默认情况下，列表为每页10条标记页码。你可以通过指定 <code>perPage</code> 属性覆写这个设置：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>} <span class="hljs-attr">perPage</span>=<span class="hljs-string">{25}</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span></span>
+);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="default-sort-field"></a><a href="#default-sort-field" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Default Sort Field</h3>
+<p>传递一个对象字面量作为 <code>sort</code> 属性来确定用于排序的 <code>field</code> 和 <code>order</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>} <span class="hljs-attr">sort</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">field:</span> '<span class="hljs-attr">published_at</span>', <span class="hljs-attr">order:</span> '<span class="hljs-attr">DESC</span>' }}&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span></span>
+);
+</code></pre>
+<p><code>sort</code> 定义了 <em>default</em> 排序顺序；这个列表通过在列标题上单击保持可排序。</p>
+<h3><a class="anchor" aria-hidden="true" id="disabling-sorting"></a><a href="#disabling-sorting" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Disabling Sorting</h3>
+<p>通过传递一个设置为 <code>false</code> 的 <code>sortable</code> 属性，它可能会为一个指定的字段去禁用排序：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" sortable={false} /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;TextField source="body" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="specify-sort-field"></a><a href="#specify-sort-field" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Specify Sort Field</h3>
+<p>默认情况下，列按 <code>source</code> 属性排序。若要定义要排序的其他属性，请通过 <code>sortBy</code> 属性将其设置为：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;ReferenceField label="Post" source="id" reference="posts" sortBy="title"&gt;
+                &lt;TextField source="title" /&gt;
+            &lt;/ReferenceField&gt;
+            &lt;FunctionField
+                label="Author"
+                sortBy="last_name"
+                render={record =&gt; `${record.author.first_name} ${record.author.last_name}`}
+            /&gt;
+            &lt;TextField source="body" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="permanent-filter"></a><a href="#permanent-filter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Permanent Filter</h3>
+<p>您可以选择始终过滤列表，而不允许用户禁用此过滤器，例如只显示已发布的帖子。 在 <code>filter</code> 属性中写被传递到 REST client 的过滤器：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>} <span class="hljs-attr">filter</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">is_published:</span> <span class="hljs-attr">true</span> }}&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span></span>
+);
+</code></pre>
+<p>发送到 REST client 的实际过滤器参数是 <em>user</em> 过滤器（通过过滤器组件表单设置的过滤器）和永久过滤器组合的结果。 用户无法覆盖通过<code>filter</code>设置的永久过滤器。</p>
+<h3><a class="anchor" aria-hidden="true" id="filter-default-values"></a><a href="#filter-default-values" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Filter Default Values</h3>
+<p>要将默认值设置为过滤器，您可以将对象文本作为 <code>&lt;List&gt;</code> 元素的filterDefaultValues 属性传递，或者使用任何输入组件的 defaultValue 属性。</p>
+<p>有一个例外: inputs <code>alwaysOn</code> 不接受 <code>defaultValue</code>。对于那些, 您必须使用 <code>filterDefaultValues</code>。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">const</span> PostFilter = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Filter {...props}&gt;
+        &lt;TextInput label="Search" source="q" alwaysOn /&gt;
+        &lt;BooleanInput source="is_published" alwaysOn /&gt;
+        &lt;TextInput source="title" defaultValue="Hello, World!" /&gt;
+    &lt;/Filter&gt;
+);
+
+export const PostList = (props) =&gt; (
+    &lt;List {...props} filters={&lt;PostFilter /&gt;} filterDefaultValues={{ is_published: true }}&gt;
+        ...
+    &lt;/List&gt;
+);
+</code></pre>
+<p><strong>提示</strong>：<code>filter</code> 和 <code>filterDefaultValues</code> 属性有一个关键的区别：<code>filterDefaultValues</code> 可以由用户 overriddent, 而 <code>filter</code> 值始终发送到 data provider。 或者, 否则：</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">const</span> filterSentToDataProvider = { ...filterDefaultValues, ...filterChosenByUser, ...filters };
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="pagination"></a><a href="#pagination" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pagination</h3>
+<p>你可以通过你自己分页元素来替换默认分页元素，使用 <code>pagination</code> 属性。 分页元素接收当前页、每页记录数、记录总数,以及更改页面的 <code>setPage()</code> 函数。</p>
+<p>因此，如果您想要通过一个&quot;&lt;previous - next&gt;&quot;分页来替换默认的分页。&lt;previous - next&gt;创建如下所示的页状组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> ChevronLeft <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/ChevronLeft'</span>;
+<span class="hljs-keyword">import</span> ChevronRight <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/ChevronRight'</span>;
+<span class="hljs-keyword">import</span> Toolbar <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Toolbar'</span>;
+
+<span class="hljs-keyword">const</span> PostPagination = <span class="hljs-function">(<span class="hljs-params">{ page, perPage, total, setPage }</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> nbPages = <span class="hljs-built_in">Math</span>.ceil(total / perPage) || <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">return</span> (
+        nbPages &gt; <span class="hljs-number">1</span> &amp;&amp;
+            <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Toolbar</span>&gt;</span>
+                {page &gt; 1 &amp;&amp;
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">primary</span> <span class="hljs-attr">key</span>=<span class="hljs-string">"prev"</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">ChevronLeft</span> /&gt;</span>} onClick={() =&gt; setPage(page - 1)}&gt;
+                        Prev
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+                }
+                {page !== nbPages &amp;&amp;
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">primary</span> <span class="hljs-attr">key</span>=<span class="hljs-string">"next"</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">ChevronRight</span> /&gt;</span>} onClick={() =&gt; setPage(page + 1)} labelPosition="before"&gt;
+                        Next
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+                }
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Toolbar</span>&gt;</span></span>
+    );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>} <span class="hljs-attr">pagination</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">PostPagination</span> /&gt;</span>}&gt;
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span></span>
+);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="css-api"></a><a href="#css-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CSS API</h3>
+<p><code>List</code> 组件通常接受 <code>className</code> 属性，你可以通过React-admin覆盖注入内部组件的许多类名，这得益于<code>classes</code>属性（作为大多数 Material UI 组件的属性，请参阅关于它的<a href="https://material-ui.com/customization/overrides/#overriding-with-classes">文档</a>）。 此属性接受以下项：</p>
+<ul>
+<li><code>root</code>: alternative to using <code>className</code>. Applied to the root element.</li>
+<li><code>header</code>: applied to the page header</li>
+<li><code>actions</code>: applied to the actions container</li>
+<li><code>noResults</code>: applied to the component shown when there is no result</li>
+</ul>
+<p>下面是一个如何重写这些类的示例：</p>
+<p>通过将 <code>classes</code> 对象作为属性传递，通过 <code>withStyles()</code>，可以自定义列表样式。下面是一个示例：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">header</span>: {
+        <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'#ccc'</span>,
+    },
+};
+
+<span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">{ classes, ...props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>} <span class="hljs-attr">classes</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">header:</span> <span class="hljs-attr">classes.header</span> }}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Datagrid</span>&gt;</span>
+            ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Datagrid</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> withStyles(styles)(PostList);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="datagrid-组件"></a><a href="#datagrid-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>Datagrid</code> 组件</h2>
+<p>Datagrid 组件将记录列表呈现为表表格。 它通常用作 <a href="#the-list-component"><code>&lt;List&gt;</code></a> 和 <a href="./Fields.md#referencemanyfield"><code>&lt;ReferenceManyField&gt;</code></a> 组件的子级。</p>
+<p>以下是通过该组件接受的所有属性：</p>
+<ul>
+<li><a href="#row-style-function"><code>rowStyle</code></a></li>
+</ul>
+<p>它会在接收 <code>&lt;Field&gt;</code> 子项时呈现多列。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, TextField, EditButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;TextField source="body" /&gt;
+            &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>Datagrid是一个 <em>迭代器</em> 组件：它接收一个 id 数组和一个数据 store，并且应该迭代 id 以显示每个记录。 迭代器组件的另一个示例是 <a href="#the-singlefieldlist-component"><code>&lt;SingleFieldList&gt;</code></a>。</p>
+<h3><a class="anchor" aria-hidden="true" id="row-style-function"></a><a href="#row-style-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Row Style Function</h3>
+<p>由于 <code>rowStyle, 您可以根据记录自定义 datagrid 行样式 (应用于 &lt;code&gt;&lt;tr&gt;</code> 元素)</code> 属性, 它期望一个函数。</p>
+<p>例如，如果记录的一个值（如其视图数）超过某个阈值，则允许将自定义背景应用于整行。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> postRowStyle = <span class="hljs-function">(<span class="hljs-params">record, index</span>) =&gt;</span> ({
+    <span class="hljs-attr">backgroundColor</span>: record.nb_views &gt;= <span class="hljs-number">500</span> ? <span class="hljs-string">'#efe'</span> : <span class="hljs-string">'white'</span>,
+});
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Datagrid</span> <span class="hljs-attr">rowStyle</span>=<span class="hljs-string">{postRowStyle}</span>&gt;</span>
+            ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Datagrid</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span></span>
+);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="css-api-1"></a><a href="#css-api-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CSS API</h3>
+<p><code>Datagrid</code> 组件通常接受 <code>className</code> 属性，你可以通过React-admin覆盖注入内部组件的许多类名，这得益于<code>classes</code>属性（作为大多数 Material UI 组件的属性，请参阅关于它的<a href="https://material-ui.com/customization/overrides/#overriding-with-classes">文档</a>）。 此属性接受以下项：</p>
+<ul>
+<li><code>table</code>: alternative to using <code>className</code>. Applied to the root element.</li>
+<li><code>tbody</code>: applied to the tbody</li>
+<li><code>headerCell</code>: applied to each header cell</li>
+<li><code>row</code>: applied to each row</li>
+<li><code>rowEven</code>: applied to each even row</li>
+<li><code>rowOdd</code>: applied to each odd row</li>
+<li><code>rowCell</code>: applied to each row cell</li>
+</ul>
+<p>下面是一个如何重写这些类的示例：</p>
+<p>通过将 <code>classes</code> 对象作为属性传递，通过 <code>withStyles()</code>可以自定义列表样式。下面是一个示例：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">row</span>: {
+        <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'#ccc'</span>,
+    },
+};
+
+<span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">{ classes, ...props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Datagrid</span> <span class="hljs-attr">classes</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">row:</span> <span class="hljs-attr">classes.row</span> }}&gt;</span>
+            ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Datagrid</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> withStyles(styles)(PostList);
+</code></pre>
+<p><strong>提示</strong>：如果要为每列独立覆盖<code>header</code>和 <code>cell</code>样式，请在 <code>&lt;Field&gt;</code> 组件中使用 headerClassName 和 cellClassName 属性。 例如，要在小屏幕上隐藏某个列：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">const</span> styles = <span class="hljs-function"><span class="hljs-params">theme</span> =&gt;</span> ({
+    <span class="hljs-attr">hiddenOnSmallScreens</span>: {
+        [theme.breakpoints.down(<span class="hljs-string">'md'</span>)]: {
+            <span class="hljs-attr">display</span>: <span class="hljs-string">'none'</span>,
+        },
+    },
+});
+
+<span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;TextField
+                source="views"
+                headerClassName={classes.hiddenOnSmallScreens}
+                cellClassName={classes.hiddenOnSmallScreens}
+            /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+
+export default withStyles(styles)(PostList);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="simplelist-组件"></a><a href="#simplelist-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>SimpleList</code> 组件</h2>
+<p>对于移动设备，<code>&lt;Datagrid&gt;</code> 通常是不可用的， 因为没有足够的空间来显示多个列。 这种情况下的惯例是使用一个简单的列表，每行只有一列。 在这种情况下的惯例是使用一个简单的列表，每行只有一列。 <code>&lt;SimpleList&gt;</code>组件用于此目的，利用<a href="http://www.material-ui.com/#/components/list"> material-ui 的 <code>&lt;List&gt;</code> 和 <code>&lt;ListItem&gt;</code> 组件</a>。 你可以使用它作为 <code>&lt;List&gt;</code> 或者 <code>&lt;ReferenceManyField&gt;</code> 子级：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, SimpleList } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">SimpleList</span>
+            <span class="hljs-attr">primaryText</span>=<span class="hljs-string">{record</span> =&gt;</span> record.title}
+            secondaryText={record =&gt; `${record.views} views`}
+            tertiaryText={record =&gt; new Date(record.published_at).toLocaleDateString()}
+        /&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span>
+);
+</span></code></pre>
+<p><code>&lt;SimpleList&gt;</code> 遍历列表数据。 对于每个记录，它执行 <code>primaryText</code>、<code>secondaryText</code>、 <code>leftAvatar</code>、<code>leftIcon</code>、<code>rightAvatar</code> 和 <code>rightIcon</code> 的属性函数，并传递结果作为相应的 <code>&lt;ListItem&gt;</code> 属性。</p>
+<p><strong>提示</strong>：在小屏幕上使用一个<code>&lt;SimpleList&gt;</code>并在较大的屏幕上使用一个<code>&lt;Datagrid&gt;</code>，使用<code>&lt;Responsive&gt;</code>组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Responsive, SimpleList, Datagrid, TextField, ReferenceField, EditButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Responsive
+            small={
+                &lt;SimpleList
+                    primaryText={record =&gt; record.title}
+                    secondaryText={record =&gt; `${record.views} views`}
+                    tertiaryText={record =&gt; new Date(record.published_at).toLocaleDateString()}
+                /&gt;
+            }
+            medium={
+                &lt;Datagrid&gt;
+                    ...
+                &lt;/Datagrid&gt;
+            }
+        /&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p><strong>提示</strong>：默认情况下, <code>&lt;SimpleList&gt;</code> 项目链接到编辑页。 可以将 <code>linkType</code> 属性设置为 <code>show</code> , 以链接到 <code>&lt;Show&gt;</code> 页。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, SimpleList } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">List</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">SimpleList</span>
+            <span class="hljs-attr">primaryText</span>=<span class="hljs-string">{record</span> =&gt;</span> record.title}
+            secondaryText={record =&gt; `${record.views} views`}
+            tertiaryText={record =&gt; new Date(record.published_at).toLocaleDateString()}
+            linkType="show"
+        /&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">List</span>&gt;</span>
+);
+</span></code></pre>
+<p>将<code>linkType</code> 属性设置为` false &lt;/ code&gt;（boolean，而不是string）将删除所有列表项中的链接。</p></p>
+<p><h2><code>SingleFieldList` 组件</h2></p>
+<p>如果只希望显示记录列表的一个属性，而不是使用 <code>&lt;Datagrid&gt;</code>,那么请使用 <code>&lt;SingleFieldList&gt;</code>。 它期望单个 <code>&lt;Field&gt;</code> 为子级。 它特别适用于 <code>&lt;ReferenceManyField&gt;</code> 或 <code>&lt;ReferenceArrayField&gt;</code> 组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// Display all the tags for the current post</span>
+&lt;ReferenceArrayField
+    label=<span class="hljs-string">"Tags"</span>
+    reference=<span class="hljs-string">"tags"</span>
+    source=<span class="hljs-string">"tags"</span>
+&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SingleFieldList</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ChipField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">SingleFieldList</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceArrayField</span>&gt;</span></span>
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/reference-many-field-single-field-list.png" alt="ReferenceManyFieldSingleFieldList"></p>
+<p><strong>提示</strong>：默认情况下, <code>&lt;SingleFieldList&gt;</code> 项目链接到编辑页。 可以将 <code>linkType</code> 属性设置为 <code>show</code>, 以链接到 <code>&lt;Show&gt;</code> 页。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// Display all the tags for the current post</span>
+&lt;ReferenceArrayField
+    label=<span class="hljs-string">"Tags"</span>
+    reference=<span class="hljs-string">"tags"</span>
+    source=<span class="hljs-string">"tags"</span>
+&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SingleFieldList</span> <span class="hljs-attr">linkType</span>=<span class="hljs-string">"show"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ChipField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">SingleFieldList</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceArrayField</span>&gt;</span></span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="使用自定义迭代器"></a><a href="#使用自定义迭代器" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用自定义迭代器</h2>
+<p><code>&lt;List&gt;</code> 可以委派到任何迭代器组件- <code>&lt;Datagrid&gt;</code> 只是一个示例。迭代器组件必须至少接受两个属性：</p>
+<ul>
+<li><code>ids</code> 是当前显示在列表中的id的数组。</li>
+<li><code>data</code> 是一个用于此resource的所有取来数据的对象，通过id索引。</li>
+</ul>
+<p>例如，如果您希望显示卡片列表而不是datagrid，该怎么办？</p>
+<p><img src="https://marmelab.com/react-admin/img/custom-iterator.png" alt="Custom iterator"></p>
+<p>您需要创建自己的迭代器组件，如下所示：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comments.js</span>
+<span class="hljs-keyword">import</span> Card <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Card'</span>;
+<span class="hljs-keyword">import</span> CardActions <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardActions'</span>;
+<span class="hljs-keyword">import</span> CardContent <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardContent'</span>;
+<span class="hljs-keyword">import</span> CardHeader <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardHeader'</span>;
+
+<span class="hljs-keyword">const</span> cardStyle = {
+    <span class="hljs-attr">width</span>: <span class="hljs-number">300</span>,
+    <span class="hljs-attr">minHeight</span>: <span class="hljs-number">300</span>,
+    <span class="hljs-attr">margin</span>: <span class="hljs-string">'0.5em'</span>,
+    <span class="hljs-attr">display</span>: <span class="hljs-string">'inline-block'</span>,
+    <span class="hljs-attr">verticalAlign</span>: <span class="hljs-string">'top'</span>
+};
+<span class="hljs-keyword">const</span> CommentGrid = <span class="hljs-function">(<span class="hljs-params">{ ids, data, basePath }</span>) =&gt;</span> (
+    &lt;div style={{ margin: '1em' }}&gt;
+    {ids.map(id =&gt;
+        &lt;Card key={id} style={cardStyle}&gt;
+            &lt;CardHeader
+                title={&lt;TextField record={data[id]} source="author.name" /&gt;}
+                subheader={&lt;DateField record={data[id]} source="created_at" /&gt;}
+                avatar={&lt;Avatar icon={&lt;PersonIcon /&gt;} /&gt;}
+            /&gt;
+            &lt;CardContent&gt;
+                &lt;TextField record={data[id]} source="body" /&gt;
+            &lt;/CardContent&gt;
+            &lt;CardContent&gt;
+                about&amp;nbsp;
+                &lt;ReferenceField label="Post" resource="comments" record={data[id]} source="post_id" reference="posts" basePath={basePath}&gt;
+                    &lt;TextField source="title" /&gt;
+                &lt;/ReferenceField&gt;
+            &lt;/CardContent&gt;
+            &lt;CardActions style={{ textAlign: 'right' }}&gt;
+                &lt;EditButton resource="posts" basePath={basePath} record={data[id]} /&gt;
+            &lt;/CardActions&gt;
+        &lt;/Card&gt;
+    )}
+    &lt;/div&gt;
+);
+CommentGrid.defaultProps = {
+    data: {},
+    ids: [],
+};
+
+export const CommentList = (props) =&gt; (
+    &lt;List title="All comments" {...props}&gt;
+        &lt;CommentGrid /&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>如你所见，没有任何东西阻止你使用 <code>&lt;Field&gt;</code> 组件在自己的组件之内..。 如果您插入当前的 <code>记录</code>。 另外, 请注意, 组件构建链接需要 <code>basePath</code> 组件, 它也会被注入。</p>
+<h2><a class="anchor" aria-hidden="true" id="根据用户权限显示字段"></a><a href="#根据用户权限显示字段" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>根据用户权限显示字段</h2>
+<p>您可能只想向具有特定权限的用户显示某些字段或过滤器。 为每个路由检索这些权限, 并将作为 <code>permissions</code> 属性提供给您的组件。</p>
+<p>每个路由将使用 <code>AUTH_GET_PERMISSIONS</code> 类型和一些参数（包括当前位置和路由参数）调用 authProvider。 您可以在组件内部返回需要检查的内容，例如用户的角色等。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> UserFilter = <span class="hljs-function">(<span class="hljs-params">{ permissions, ...props }</span>) =&gt;</span>
+    &lt;Filter {...props}&gt;
+        &lt;TextInput
+            label="user.list.search"
+            source="q"
+            alwaysOn
+        /&gt;
+        &lt;TextInput source="name" /&gt;
+        {permissions === 'admin' ? &lt;TextInput source="role" /&gt; : null}
+    &lt;/Filter&gt;;
+
+export const UserList = ({ permissions, ...props }) =&gt;
+    &lt;List
+        {...props}
+        filters={&lt;UserFilter permissions={permissions} /&gt;}
+        sort={{ field: 'name', order: 'ASC' }}
+    &gt;
+        &lt;Responsive
+            small={
+                &lt;SimpleList
+                    primaryText={record =&gt; record.name}
+                    secondaryText={record =&gt;
+                        permissions === 'admin' ? record.role : null}
+                /&gt;
+            }
+            medium={
+                &lt;Datagrid&gt;
+                    &lt;TextField source="id" /&gt;
+                    &lt;TextField source="name" /&gt;
+                    {permissions === 'admin' &amp;&amp; &lt;TextField source="role" /&gt;}
+                    {permissions === 'admin' &amp;&amp; &lt;EditButton /&gt;}
+                    &lt;ShowButton /&gt;
+                &lt;/Datagrid&gt;
+            }
+        /&gt;
+    &lt;/List&gt;;
+</code></pre>
+<p><strong>提示</strong> 请注意权限属性如何传递给自定义 <code>过滤器</code> 组件。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/resource-component.html">← Resource 组件</a><a class="docs-next button" href="/docs/zh-CN/show-view-component.html">Show 视图组件 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#list-组件"><code>List</code> 组件</a><ul class="toc-headings"><li><a href="#page-title">Page Title</a></li><li><a href="#actions">Actions</a></li><li><a href="#bulk-actions">Bulk Actions</a></li><li><a href="#filters">Filters</a></li><li><a href="#records-per-page">Records Per Page</a></li><li><a href="#default-sort-field">Default Sort Field</a></li><li><a href="#disabling-sorting">Disabling Sorting</a></li><li><a href="#specify-sort-field">Specify Sort Field</a></li><li><a href="#permanent-filter">Permanent Filter</a></li><li><a href="#filter-default-values">Filter Default Values</a></li><li><a href="#pagination">Pagination</a></li><li><a href="#css-api">CSS API</a></li></ul></li><li><a href="#datagrid-组件"><code>Datagrid</code> 组件</a><ul class="toc-headings"><li><a href="#row-style-function">Row Style Function</a></li><li><a href="#css-api-1">CSS API</a></li></ul></li><li><a href="#simplelist-组件"><code>SimpleList</code> 组件</a></li><li><a href="#使用自定义迭代器">使用自定义迭代器</a></li><li><a href="#根据用户权限显示字段">根据用户权限显示字段</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

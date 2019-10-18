@@ -1,0 +1,971 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>&lt;Input&gt; components · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="An `Input` component displays an input, or a dropdown list, a list of radio buttons, etc. Such components allow to edit a record property, and are common in the `&lt;Edit&gt;`, `&lt;Create&gt;`, and `&lt;Filter&gt;` views."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="&lt;Input&gt; components · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="An `Input` component displays an input, or a dropdown list, a list of radio buttons, etc. Such components allow to edit a record property, and are common in the `&lt;Edit&gt;`, `&lt;Create&gt;`, and `&lt;Filter&gt;` views."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/zh-CN/input-components.html">中文</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/intro.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/docs/en/tutorial.html">Tutorial</a></li><li class="navListItem"><a class="navItem" href="/docs/en/data-providers.html">Data Providers</a></li><li class="navListItem"><a class="navItem" href="/docs/en/admin-component.html">&lt;Admin&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/resource-component.html">&lt;Resource&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/list-view-component.html">&lt;List&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/show-view-component.html">&lt;Show&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/field-components.html">&lt;Field&gt; Components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/creat-edit-view-components.html">&lt;Create&gt; and &lt;Edit&gt; Views</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/input-components.html">&lt;Input&gt; components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authentication.html">Authentication</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authorization.html">Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/en/theming.html">Theming</a></li><li class="navListItem"><a class="navItem" href="/docs/en/actions.html">Writing Actions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/translation.html">Translation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/custom-app.html">Including the Admin in Another App</a></li><li class="navListItem"><a class="navItem" href="/docs/en/reference.html">Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/en/faq.html">FAQ</a></li><li class="navListItem"><a class="navItem" href="/docs/en/ecosystem.html">Ecosystem</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">&lt;Input&gt; components</h1></header><article><div><span><p>An <code>Input</code> component displays an input, or a dropdown list, a list of radio buttons, etc. Such components allow to edit a record property, and are common in the <code>&lt;Edit&gt;</code>, <code>&lt;Create&gt;</code>, and <code>&lt;Filter&gt;</code> views.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Edit, DisabledInput, LongTextInput, ReferenceInput, SelectInput, SimpleForm, TextInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Edit title={&lt;PostTitle /&gt;} {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput source="id" /&gt;
+            &lt;ReferenceInput label="User" source="userId" reference="users"&gt;
+                &lt;SelectInput optionText="name" /&gt;
+            &lt;/ReferenceInput&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;LongTextInput source="body" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p>All input components accept the following attributes:</p>
+<ul>
+<li><code>source</code>: Property name of your entity to view/edit. This attribute is required.</li>
+<li><code>defaultValue</code>: Value to be set when the property is <code>null</code> or <code>undefined</code>.</li>
+<li><code>validate</code>: Validation rules for the current property (see the <a href="./CreateEdit.html#validation">Validation Documentation</a>)</li>
+<li><code>label</code>: Used as a table header of an input label. Defaults to the <code>source</code> when omitted.</li>
+<li><code>style</code>: A style object to customize the look and feel of the field container (e.g. the <code>&lt;div&gt;</code> in a form).</li>
+<li><code>elStyle</code>: A style object to customize the look and feel of the field element itself</li>
+</ul>
+<pre><code class="hljs css languages- jsx">&lt;TextInput source=<span class="hljs-string">"zb_title"</span> label=<span class="hljs-string">"Title"</span> /&gt;
+</code></pre>
+<p>Additional props are passed down to the underlying component (usually a material-ui component). For instance, when setting the <code>fullWidth</code> prop on a <code>TextInput</code> component, the underlying material-ui <code>&lt;TextField&gt;</code> receives it, and goes full width.</p>
+<p><strong>Tip</strong>: If you edit a record with a complex structure, you can use a path as the <code>source</code> parameter. For instance, if the API returns the following 'book' record:</p>
+<pre><code class="hljs css languages- jsx">{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">1234</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'War and Peace'</span>,
+    <span class="hljs-attr">author</span>: {
+        <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Leo'</span>,
+        <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Tolstoi'</span>
+    }
+}
+</code></pre>
+<p>Then you can display a text input to edit the author first name as follows:</p>
+<pre><code class="hljs css languages- jsx">&lt;TextInput source=<span class="hljs-string">"author.firstName"</span> /&gt;
+</code></pre>
+<p><strong>Tip</strong>: If your interface has to support multiple languages, don't use the <code>label</code> prop, and put the localized labels in a dictionary instead. See the <a href="./Translation.md#translating-resource-and-field-names">Translation documentation</a> for details.</p>
+<h2><a class="anchor" aria-hidden="true" id="arrayinput-component"></a><a href="#arrayinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ArrayInput</code> Component</h2>
+<p>To edit arrays of data embedded inside a record, <code>&lt;ArrayInput&gt;</code> creates a list of sub-forms.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ArrayInput, SimpleFormIterator, DateInput, UrlInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+&lt;ArrayInput source="backlinks"&gt;
+    &lt;SimpleFormIterator&gt;
+        &lt;DateInput source="date" /&gt;
+        &lt;UrlInput source="url" /&gt;
+    &lt;/SimpleFormIterator&gt;
+&lt;/ArrayInput&gt;
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/array-input.png" alt="ArrayInput"></p>
+<p><code>&lt;ArrayInput&gt;</code> allows the edition of embedded arrays, like the <code>backlinks</code> field in the following <code>post</code> record:</p>
+<pre><code class="hljs css languages- js">{
+  <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>
+  backlinks: [
+        {
+            <span class="hljs-attr">date</span>: <span class="hljs-string">'2012-08-10T00:00:00.000Z'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'http://example.com/foo/bar.html'</span>,
+        },
+        {
+            <span class="hljs-attr">date</span>: <span class="hljs-string">'2012-08-14T00:00:00.000Z'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'https://blog.johndoe.com/2012/08/12/foobar.html'</span>,
+        }
+   ]
+}
+</code></pre>
+<p><code>&lt;ArrayInput&gt;</code> expects a single child, which must be a <em>form iterator</em> component. A form iterator is a component accepting a <code>fields</code> object as passed by <a href="https://redux-form.com/7.3.0/examples/fieldarrays/">redux-form's <code>&lt;FieldArray&gt;</code> component</a>, and defining a layout for an array of fields. For instance, the <code>&lt;SimpleFormIterator&gt;</code> component displays an array of fields in an unordered list (<code>&lt;ul&gt;</code>), one sub-form by list item (<code>&lt;li&gt;</code>). It also provides controls for adding and removing a sub-record (a backlink in this example).</p>
+<p>You can pass <code>disableAdd</code> and <code>disableRemove</code> as props of <code>SimpleFormIterator</code>, to disable <code>ADD</code> and <code>REMOVE</code> button respectively. Default value of both is <code>false</code>.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ArrayInput, SimpleFormIterator, DateInput, UrlInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+&lt;ArrayInput source="backlinks"&gt;
+    &lt;SimpleFormIterator disableRemove &gt;
+        &lt;DateInput source="date" /&gt;
+        &lt;UrlInput source="url" /&gt;
+    &lt;/SimpleFormIterator&gt;
+&lt;/ArrayInput&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="autocompleteinput-component"></a><a href="#autocompleteinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>AutocompleteInput</code> Component</h2>
+<p>To let users choose a value in a list using a dropdown with autocompletion, use <code>&lt;AutocompleteInput&gt;</code>. It renders using <a href="http://react-autosuggest.js.org/">react-autosuggest</a> and a <code>fuzzySearch</code> filter. Set the <code>choices</code> attribute to determine the options list (with <code>id</code>, <code>name</code> tuples).</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { AutocompleteInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AutocompleteInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"category"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{[</span>
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">programming</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Programming</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">lifestyle</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Lifestyle</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">photography</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Photography</span>' },
+]} /&gt;</span>
+</span></code></pre>
+<p>You can also customize the properties to use for the option name and value, thanks to the <code>optionText</code> and <code>optionValue</code> attributes:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Leo Tolstoi'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'M'</span> },
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Jane Austen'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'F'</span> },
+];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AutocompleteInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"full_name"</span> <span class="hljs-attr">optionValue</span>=<span class="hljs-string">"_id"</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> also accepts a function, so you can shape the option text at will:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Leo'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Tolstoi'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Austen'</span> },
+];
+<span class="hljs-keyword">const</span> optionRenderer = <span class="hljs-function"><span class="hljs-params">choice</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${choice.first_name}</span> <span class="hljs-subst">${choice.last_name}</span>`</span>;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AutocompleteInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">{optionRenderer}</span> /&gt;</span>
+</span></code></pre>
+<p>The choices are translated by default, so you can use translation identifiers as choices:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'M'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.male'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'F'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.female'</span> },
+];
+</code></pre>
+<p>However, in some cases (e.g. inside a <code>&lt;ReferenceInput&gt;</code>), you may not want the choice to be translated. In that case, set the <code>translateChoice</code> prop to false.</p>
+<pre><code class="hljs css languages- jsx">&lt;AutocompleteInput source=<span class="hljs-string">"gender"</span> choices={choices} translateChoice={<span class="hljs-literal">false</span>}/&gt;
+</code></pre>
+<p>By default the component matches choices with the current input searchText: if it finds a match, this choice will be selected. For example, given the choices <code>[{ id: 'M', name: 'Male', id: 'F', name: 'Female' }]</code>, when the user enters the text <code>male</code>, then the component will set the input value to <code>M</code>. If you need to change how choices are matched, pass a custom function as <code>inputValueMatcher</code> prop. For example, given the choices: <code>[{id:1,iso2:'NL',name:'Dutch'},{id:2,iso2:'EN',name:'English'},{id:3,iso2:'FR',name:'French'}]</code>, if you want to match choices on the iso2 code, you can create the following <code>inputValueMatcher</code> function:</p>
+<pre><code class="hljs css languages- javascript">&lt;AutocompleteInput inputValueMatcher={
+    (input, suggestion, getOptionText) =&gt; 
+        input.toUpperCase().trim() === suggestion.iso2 || 
+        input.toLowerCase().trim() === getOptionText(suggestion).toLowerCase().trim()
+}/&gt;
+</code></pre>
+<p>If you want to limit the initial choices shown to the current value only, you can set the <code>limitChoicesToValue</code> prop.</p>
+<p>Lastly, <code>&lt;AutocompleteInput&gt;</code> renders a meterial-ui <code>&lt;TextField&gt;</code> component. Use the <code>options</code> attribute to override any of the <code>&lt;TextField&gt;</code> attributes:</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx">&lt;AutocompleteInput source=<span class="hljs-string">"category"</span> options={{
+    <span class="hljs-attr">fullWidth</span>: <span class="hljs-literal">true</span>,
+}} /&gt;
+</code></pre>
+<p>{% endraw %}</p>
+<p><strong>Tip</strong>: If you want to populate the <code>choices</code> attribute with a list of related records, you should decorate <code>&lt;AutocompleteInput&gt;</code> with <a href="#referenceinput"><code>&lt;ReferenceInput&gt;</code></a>, and leave the <code>choices</code> empty:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { AutocompleteInput, ReferenceInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceInput label=<span class="hljs-string">"Post"</span> source=<span class="hljs-string">"post_id"</span> reference=<span class="hljs-string">"posts"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AutocompleteInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<p><strong>Tip</strong>: <code>&lt;AutocompleteInput&gt;</code> is a stateless component, so it only allows to <em>filter</em> the list of choices, not to <em>extend</em> it. If you need to populate the list of choices based on the result from a <code>fetch</code> call (and if <a href="#referenceinput"><code>&lt;ReferenceInput&gt;</code></a> doesn't cover your need), you'll have to <a href="#writing-your-own-input-component">write your own Input component</a> based on material-ui <code>&lt;AutoComplete&gt;</code> component.</p>
+<p><strong>Tip</strong>: React-admin's <code>&lt;AutocompleteInput&gt;</code> has only a capital A, while material-ui's <code>&lt;AutoComplete&gt;</code> has a capital A and a capital C. Don't mix up the components!</p>
+<h3><a class="anchor" aria-hidden="true" id="properties"></a><a href="#properties" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Properties</h3>
+<table>
+<thead>
+<tr><th>Prop</th><th>Required</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>choices</code></td><td>Required</td><td><code>Object[]</code></td><td>-</td><td>List of items to autosuggest</td></tr>
+<tr><td><code>resource</code></td><td>Required</td><td><code>string</code></td><td>-</td><td>The resource working on. This field is passed down by wrapped components like <code>Create</code> and <code>Edit</code>.</td></tr>
+<tr><td><code>source</code></td><td>Required</td><td><code>string</code></td><td>-</td><td>Name of field to edit, its type should match the type retrieved from <code>optionValue</code></td></tr>
+<tr><td><code>allowEmpty</code></td><td>Optional</td><td><code>boolean</code></td><td><code>false</code></td><td>If <code>false</code> and the searchText typed did not match any suggestion, the searchText will revert to the current value when the field is blurred. If <code>true</code> and the <code>searchText</code> is set to <code>''</code> then the field will set the input value to <code>null</code>.</td></tr>
+<tr><td><code>inputValueMatcher</code></td><td>Optional</td><td><code>Function</code></td><td><code>(input, suggestion, getOptionText) =&gt; input.toLowerCase().trim() === getOptionText(suggestion).toLowerCase().trim()</code></td><td>Allows to define how choices are matched with the searchText while typing.</td></tr>
+<tr><td><code>optionValue</code></td><td>Optional</td><td><code>string</code></td><td><code>id</code></td><td>Fieldname of record containing the value to use as input value</td></tr>
+<tr><td><code>optionText</code></td><td>Optional</td><td><code>string | Function</code></td><td><code>name</code></td><td>Fieldname of record to display in the suggestion item or function which accepts the currect record as argument (<code>(record)=&gt; {string}</code>)</td></tr>
+<tr><td><code>setFilter</code></td><td>Optional</td><td><code>Function</code></td><td>null</td><td>A callback to inform the <code>searchText</code> has changed and new <code>choices</code> can be retrieved based on this <code>searchText</code>. Signature <code>searchText =&gt; void</code>. This function is automatically setup when using <code>ReferenceInput</code>.</td></tr>
+<tr><td><code>suggestionComponent</code></td><td>Optional</td><td>Function</td><td><code>({ suggestion, query, isHighlighted, props }) =&gt; &lt;div {...props} /&gt;</code></td><td>Allows to override how the item is rendered.</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="booleaninput-and-nullablebooleaninput-component"></a><a href="#booleaninput-and-nullablebooleaninput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>BooleanInput</code> and <code>NullableBooleanInput</code> Component</h2>
+<p><code>&lt;BooleanInput /&gt;</code> is a toggle button allowing you to attribute a <code>true</code> or <code>false</code> value to a record field.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { BooleanInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BooleanInput</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Commentable"</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"commentable"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/boolean-input.png" alt="BooleanInput"></p>
+<p>This input does not handle <code>null</code> values. You would need the <code>&lt;NullableBooleanInput /&gt;</code> component if you have to handle non-set booleans.</p>
+<p>You can use the <code>options</code> prop to pass any option supported by the Material UI <code>Switch</code> components. For example, here's how to set a custom checked icon:</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { BooleanInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> FavoriteIcon <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/Favorite'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BooleanInput</span>
+    <span class="hljs-attr">source</span>=<span class="hljs-string">"favorite"</span>
+    <span class="hljs-attr">options</span>=<span class="hljs-string">{{</span>
+        <span class="hljs-attr">checkedIcon:</span> &lt;<span class="hljs-attr">FavoriteIcon</span> /&gt;</span>,
+    }}
+/&gt;
+</span></code></pre>
+<p>{% endraw %}</p>
+<p><img src="https://marmelab.com/react-admin/img/custom-switch-icon.png" alt="CustomBooleanInputCheckIcon"></p>
+<p>Refer to <a href="http://www.material-ui.com/#/components/switch">Material UI Switch documentation</a> for more details.</p>
+<p><code>&lt;NullableBooleanInput /&gt;</code> renders as a dropdown list, allowing to choose between true, false, and null values.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NullableBooleanInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">NullableBooleanInput</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Commentable"</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"commentable"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/nullable-boolean-input.png" alt="NullableBooleanInput"></p>
+<h2><a class="anchor" aria-hidden="true" id="checkboxgroupinput-component"></a><a href="#checkboxgroupinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>CheckboxGroupInput</code> Component</h2>
+<p>If you want to let the user choose multiple values among a list of possible values by showing them all, <code>&lt;CheckboxGroupInput&gt;</code> is the right component. Set the <code>choices</code> attribute to determine the options (with <code>id</code>, <code>name</code> tuples):</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { CheckboxGroupInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">CheckboxGroupInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"category"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{[</span>
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">programming</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Programming</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">lifestyle</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Lifestyle</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">photography</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Photography</span>' },
+]} /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/checkbox-group-input.png" alt="CheckboxGroupInput"></p>
+<p>You can also customize the properties to use for the option name and value, thanks to the <code>optionText</code> and <code>optionValue</code> attributes:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Leo Tolstoi'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'M'</span> },
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Jane Austen'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'F'</span> },
+];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">CheckboxGroupInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"full_name"</span> <span class="hljs-attr">optionValue</span>=<span class="hljs-string">"_id"</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> also accepts a function, so you can shape the option text at will:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Leo'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Tolstoi'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Austen'</span> },
+];
+<span class="hljs-keyword">const</span> optionRenderer = <span class="hljs-function"><span class="hljs-params">choice</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${choice.first_name}</span> <span class="hljs-subst">${choice.last_name}</span>`</span>;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">CheckboxGroupInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">{optionRenderer}</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> also accepts a React Element, that will be cloned and receive the related choice as the <code>record</code> prop. You can use Field components there.</p>
+<pre><code class="hljs css languages- jsx">const choices = [
+   { id: 123, first_name: 'Leo', last_name: 'Tolstoi' },
+   { id: 456, first_name: 'Jane', last_name: 'Austen' },
+];
+const FullNameField = ({ record }) =&gt; &lt;span&gt;{record.first_name} {record.last_name}&lt;/span&gt;;
+&lt;CheckboxGroupInput source="gender" choices={choices} optionText={&lt;FullNameField /&gt;}/&gt;
+</code></pre>
+<p>The choices are translated by default, so you can use translation identifiers as choices:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+    { <span class="hljs-attr">id</span>: <span class="hljs-string">'programming'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.category.programming'</span> },
+    { <span class="hljs-attr">id</span>: <span class="hljs-string">'lifestyle'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.category.lifestyle'</span> },
+    { <span class="hljs-attr">id</span>: <span class="hljs-string">'photography'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.category.photography'</span> },
+];
+</code></pre>
+<p>However, in some cases (e.g. inside a <code>&lt;ReferenceInput&gt;</code>), you may not want the choice to be translated. In that case, set the <code>translateChoice</code> prop to false.</p>
+<pre><code class="hljs css languages- jsx">&lt;CheckboxGroupInput source=<span class="hljs-string">"gender"</span> choices={choices} translateChoice={<span class="hljs-literal">false</span>}/&gt;
+</code></pre>
+<p>Lastly, use the <code>options</code> attribute if you want to override any of Material UI's <code>&lt;Checkbox&gt;</code> attributes:</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx">&lt;CheckboxGroupInput source=<span class="hljs-string">"category"</span> options={{
+    <span class="hljs-attr">labelPosition</span>: <span class="hljs-string">'right'</span>
+}} /&gt;
+</code></pre>
+<p>{% endraw %}</p>
+<p>Refer to <a href="http://www.material-ui.com/#/components/checkbox">Material UI Checkbox documentation</a> for more details.</p>
+<h2><a class="anchor" aria-hidden="true" id="dateinput-component"></a><a href="#dateinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>DateInput</code> Component</h2>
+<p>Ideal for editing dates, <code>&lt;DateInput&gt;</code> renders a standard browser <a href="http://www.material-ui.com/#/components/date-picker">Date Picker</a>.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { DateInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">DateInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"published_at"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="./img/date-input.gif" alt="DateInput"></p>
+<h2><a class="anchor" aria-hidden="true" id="disabledinput-component"></a><a href="#disabledinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>DisabledInput</code> Component</h2>
+<p>When you want to display a record property in an <code>&lt;Edit&gt;</code> form without letting users update it (such as for auto-incremented primary keys), use the <code>&lt;DisabledInput&gt;</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { DisabledInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">DisabledInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"id"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/disabled-input.png" alt="DisabledInput"></p>
+<p><strong>Tip</strong>: To add non-editable fields to the <code>&lt;Edit&gt;</code> view, you can also use one of react-admin <code>Field</code> components:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> { Edit, LongTextInput, SimpleForm, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextField source="title" /&gt; {/* NOT EDITABLE */}
+            &lt;LongTextInput source="body" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p><strong>Tip</strong>: You can even use a component of your own, provided it accepts a <code>record</code> prop:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> { Edit, Labeled, LongTextInput, SimpleForm } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> titleStyle = { <span class="hljs-attr">textOverflow</span>: <span class="hljs-string">'ellipsis'</span>, <span class="hljs-attr">overflow</span>: <span class="hljs-string">'hidden'</span>, <span class="hljs-attr">maxWidth</span>: <span class="hljs-string">'20em'</span> };
+<span class="hljs-keyword">const</span> Title = <span class="hljs-function">(<span class="hljs-params">{ record, label }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Labeled</span> <span class="hljs-attr">label</span>=<span class="hljs-string">{label}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{titleStyle}</span>&gt;</span>{record.title}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Labeled</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;Title label="Title" /&gt;
+            &lt;LongTextInput source="body" /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="imageinput-component"></a><a href="#imageinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ImageInput</code> Component</h2>
+<p><code>&lt;ImageInput&gt;</code> allows to upload some pictures using <a href="https://github.com/okonet/react-dropzone">react-dropzone</a>.</p>
+<p><img src="https://marmelab.com/react-admin/img/image-input.png" alt="ImageInput"></p>
+<p>Previews are enabled using <code>&lt;ImageInput&gt;</code> children, as following:</p>
+<pre><code class="hljs css languages- jsx">&lt;ImageInput source=<span class="hljs-string">"pictures"</span> label=<span class="hljs-string">"Related pictures"</span> accept=<span class="hljs-string">"image/*"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ImageField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"src"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ImageInput</span>&gt;</span></span>
+</code></pre>
+<p>Writing a custom field component for displaying the current value(s) is easy:  it's a standard <a href="./Fields.md#writing_your_own_field_component">field</a>.</p>
+<p>When receiving <strong>new</strong> files, <code>ImageInput</code> will add a <code>rawFile</code> property to the object passed as the <code>record</code> prop of children. This <code>rawFile</code> is the <a href="https://developer.mozilla.org/en-US/docs/Web/API/File">File</a> instance of the newly added file. This can be useful to display informations about size or mimetype inside a custom field.</p>
+<p>The <code>ImageInput</code> component accepts all <a href="https://github.com/okonet/react-dropzone#features">react-dropzone properties</a>, in addition to those of react-admin. For instance, if you need to upload several images at once, just add the <code>multiple</code> DropZone attribute to your <code>&lt;ImageInput /&gt;</code> field.</p>
+<p>If the default Dropzone label doesn't fit with your need, you can pass a <code>placeholder</code> attribute to overwrite it. The attribute can be anything React can render (<code>PropTypes.node</code>):</p>
+<pre><code class="hljs css languages- jsx">&lt;ImageInput source="pictures" label="Related pictures" accept="image/*" placeholder={&lt;p&gt;Drop your file here&lt;/p&gt;}&gt;
+    &lt;ImageField source="src" title="title" /&gt;
+&lt;/ImageInput&gt;
+</code></pre>
+<p>Note that the image upload returns a <a href="https://developer.mozilla.org/en/docs/Web/API/File">File</a> object. It is your responsibility to handle it depending on your API behavior. You can for instance encode it in base64, or send it as a multi-part form data. Check <a href="./DataProviders.md#decorating-your-rest-client-example-of-file-upload">this example</a> for base64 encoding data by extending the REST Client.</p>
+<h2><a class="anchor" aria-hidden="true" id="fileinput-component"></a><a href="#fileinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>FileInput</code> Component</h2>
+<p><code>&lt;FileInput&gt;</code> allows to upload some files using <a href="https://github.com/okonet/react-dropzone">react-dropzone</a>.</p>
+<p><img src="https://marmelab.com/react-admin/img/file-input.png" alt="FileInput"></p>
+<p>Previews (actually a simple list of files names) are enabled using <code>&lt;FileInput&gt;</code> children, as following:</p>
+<pre><code class="hljs css languages- jsx">&lt;FileInput source=<span class="hljs-string">"files"</span> label=<span class="hljs-string">"Related files"</span> accept=<span class="hljs-string">"application/pdf"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">FileField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"src"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">FileInput</span>&gt;</span></span>
+</code></pre>
+<p>Writing a custom field component for displaying the current value(s) is easy:  it's a standard <a href="./Fields.md#writing_your_own_field_component">field</a>.</p>
+<p>When receiving <strong>new</strong> files, <code>FileInput</code> will add a <code>rawFile</code> property to the object passed as the <code>record</code> prop of children. This <code>rawFile</code> is the <a href="https://developer.mozilla.org/en-US/docs/Web/API/File">File</a> instance of the newly added file. This can be useful to display informations about size or mimetype inside a custom field.</p>
+<p>The <code>FileInput</code> component accepts all <a href="https://github.com/okonet/react-dropzone#features">react-dropzone properties</a>, in addition to those of react-admin. For instance, if you need to upload several files at once, just add the <code>multiple</code> DropZone attribute to your <code>&lt;FileInput /&gt;</code> field.</p>
+<p>If the default Dropzone label doesn't fit with your need, you can pass a <code>placeholder</code> attribute to overwrite it. The attribute can be anything React can render (<code>PropTypes.node</code>):</p>
+<pre><code class="hljs css languages- jsx">&lt;FileInput source="files" label="Related files" accept="application/pdf" placeholder={&lt;p&gt;Drop your file here&lt;/p&gt;}&gt;
+    &lt;ImageField source="src" title="title" /&gt;
+&lt;/FileInput&gt;
+</code></pre>
+<p>Note that the file upload returns a <a href="https://developer.mozilla.org/en/docs/Web/API/File">File</a> object. It is your responsibility to handle it depending on your API behavior. You can for instance encode it in base64, or send it as a multi-part form data. Check <a href="./DataProviders.md#decorating-your-rest-client-example-of-file-upload">this example</a> for base64 encoding data by extending the REST Client.</p>
+<h2><a class="anchor" aria-hidden="true" id="longtextinput-component"></a><a href="#longtextinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>LongTextInput</code> Component</h2>
+<p><code>&lt;LongTextInput&gt;</code> is the best choice for multiline text values. It renders as an auto expandable textarea.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { LongTextInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">LongTextInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"teaser"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/long-text-input.png" alt="LongTextInput"></p>
+<h2><a class="anchor" aria-hidden="true" id="numberinput-component"></a><a href="#numberinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>NumberInput</code> Component</h2>
+<p><code>&lt;NumberInput&gt;</code> translates to a HTML <code>&lt;input type=&quot;number&quot;&gt;</code>. It is necessary for numeric values because of a <a href="https://github.com/facebook/react/issues/1425">known React bug</a>, which prevents using the more generic <a href="#textinput"><code>&lt;TextInput&gt;</code></a> in that case.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NumberInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">NumberInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"nb_views"</span> /&gt;</span>
+</span></code></pre>
+<p>You can customize the <code>step</code> props (which defaults to &quot;any&quot;):</p>
+<pre><code class="hljs css languages- jsx">&lt;NumberInput source=<span class="hljs-string">"nb_views"</span> step={<span class="hljs-number">1</span>} /&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="radiobuttongroupinput-component"></a><a href="#radiobuttongroupinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>RadioButtonGroupInput</code> Component</h2>
+<p>If you want to let the user choose a value among a list of possible values by showing them all (instead of hiding them behind a dropdown list, as in <a href="#selectinput"><code>&lt;SelectInput&gt;</code></a>), <code>&lt;RadioButtonGroupInput&gt;</code> is the right component. Set the <code>choices</code> attribute to determine the options (with <code>id</code>, <code>name</code> tuples):</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { RadioButtonGroupInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RadioButtonGroupInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"category"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{[</span>
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">programming</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Programming</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">lifestyle</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Lifestyle</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">photography</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Photography</span>' },
+]} /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/radio-button-group-input.png" alt="RadioButtonGroupInput"></p>
+<p>You can also customize the properties to use for the option name and value, thanks to the <code>optionText</code> and <code>optionValue</code> attributes:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Leo Tolstoi'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'M'</span> },
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Jane Austen'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'F'</span> },
+];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RadioButtonGroupInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"full_name"</span> <span class="hljs-attr">optionValue</span>=<span class="hljs-string">"_id"</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> also accepts a function, so you can shape the option text at will:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Leo'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Tolstoi'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Austen'</span> },
+];
+<span class="hljs-keyword">const</span> optionRenderer = <span class="hljs-function"><span class="hljs-params">choice</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${choice.first_name}</span> <span class="hljs-subst">${choice.last_name}</span>`</span>;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RadioButtonGroupInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">{optionRenderer}</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> also accepts a React Element, that will be cloned and receive the related choice as the <code>record</code> prop. You can use Field components there.</p>
+<pre><code class="hljs css languages- jsx">const choices = [
+   { id: 123, first_name: 'Leo', last_name: 'Tolstoi' },
+   { id: 456, first_name: 'Jane', last_name: 'Austen' },
+];
+const FullNameField = ({ record }) =&gt; &lt;span&gt;{record.first_name} {record.last_name}&lt;/span&gt;;
+&lt;RadioButtonGroupInput source="gender" choices={choices} optionText={&lt;FullNameField /&gt;}/&gt;
+</code></pre>
+<p>The choices are translated by default, so you can use translation identifiers as choices:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'M'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.male'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'F'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.female'</span> },
+];
+</code></pre>
+<p>However, in some cases (e.g. inside a <code>&lt;ReferenceInput&gt;</code>), you may not want the choice to be translated. In that case, set the <code>translateChoice</code> prop to false.</p>
+<pre><code class="hljs css languages- jsx">&lt;RadioButtonGroupInput source=<span class="hljs-string">"gender"</span> choices={choices} translateChoice={<span class="hljs-literal">false</span>}/&gt;
+</code></pre>
+<p>Lastly, use the <code>options</code> attribute if you want to override any of Material UI's <code>&lt;RadioButtonGroup&gt;</code> attributes:</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx">&lt;RadioButtonGroupInput source=<span class="hljs-string">"category"</span> options={{
+    <span class="hljs-attr">labelPosition</span>: <span class="hljs-string">'right'</span>
+}} /&gt;
+</code></pre>
+<p>{% endraw %}</p>
+<p>Refer to <a href="http://www.material-ui.com/#/components/radio-button">Material UI RadioGroup documentation</a> for more details.</p>
+<p><strong>Tip</strong>: If you want to populate the <code>choices</code> attribute with a list of related records, you should decorate <code>&lt;RadioButtonGroupInput&gt;</code> with <a href="#referenceinput"><code>&lt;ReferenceInput&gt;</code></a>, and leave the <code>choices</code> empty:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { RadioButtonGroupInput, ReferenceInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceInput label=<span class="hljs-string">"Author"</span> source=<span class="hljs-string">"author_id"</span> reference=<span class="hljs-string">"authors"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RadioButtonGroupInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"last_name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="referencearrayinput-component"></a><a href="#referencearrayinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ReferenceArrayInput</code> Component</h2>
+<p>Use <code>&lt;ReferenceArrayInput&gt;</code> to edit an array of reference values, i.e. to let users choose a list of values (usually foreign keys) from another REST endpoint.</p>
+<p><code>&lt;ReferenceArrayInput&gt;</code> fetches the related resources (using the <code>CRUD_GET_MANY</code> REST method) as well as possible resources (using the
+<code>CRUD_GET_MATCHING</code> REST method) in the reference endpoint.</p>
+<p>For instance, if the post object has many tags, a post resource may look like:</p>
+<pre><code class="hljs css languages- js">{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">1234</span>,
+    <span class="hljs-attr">tag_ids</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">23</span>, <span class="hljs-number">4</span>]
+}
+</code></pre>
+<p>Then <code>&lt;ReferenceArrayInput&gt;</code> would fetch a list of tag resources from these two calls:</p>
+<pre><code class="hljs"><span class="hljs-link">http://myapi.com/tags?id=</span>[<span class="hljs-string">1,23,4</span>]
+http://myapi.com/tags?page=1&amp;perPage=25
+</code></pre>
+<p>Once it receives the deduplicated reference resources, this component delegates rendering to a subcomponent, to which it passes the possible choices as the <code>choices</code> attribute.</p>
+<p>This means you can use <code>&lt;ReferenceArrayInput&gt;</code> with <a href="#selectarrayinput"><code>&lt;SelectArrayInput&gt;</code></a>, or with the component of your choice, provided it supports the <code>choices</code> attribute.</p>
+<p>The component expects a <code>source</code> and a <code>reference</code> attributes. For instance, to make the <code>tag_ids</code> for a <code>post</code> editable:</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">import</span> { ReferenceArrayInput, SelectArrayInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceArrayInput source=<span class="hljs-string">"tag_ids"</span> reference=<span class="hljs-string">"tags"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceArrayInput</span>&gt;</span></span>
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/select-array-input.gif" alt="SelectArrayInput"></p>
+<p><strong>Note</strong>: You <strong>must</strong> add a <code>&lt;Resource&gt;</code> for the reference resource - react-admin needs it to fetch the reference data. You can omit the list prop in this reference if you want to hide it in the sidebar menu.</p>
+<pre><code class="hljs css languages- js">&lt;Admin dataProvider={myDataProvider}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{PostList}</span> <span class="hljs-attr">edit</span>=<span class="hljs-string">{PostEdit}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"tags"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+</span></code></pre>
+<p>Set the <code>allowEmpty</code> prop when you want to add an empty choice with a value of null in the choices list.
+Disabling <code>allowEmpty</code> does not mean that the input will be required. If you want to make the input required, you must add a validator as indicated in <a href="./CreateEdit.html#validation">Validation Documentation</a>. Enabling the <code>allowEmpty</code> props just adds an empty choice (with <code>null</code> value) on top of the options, and makes the value nullable.</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">import</span> { ReferenceArrayInput, SelectArrayInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceArrayInput source=<span class="hljs-string">"tag_ids"</span> reference=<span class="hljs-string">"tags"</span> allowEmpty&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceArrayInput</span>&gt;</span></span>
+</code></pre>
+<p><strong>Tip</strong>: <code>allowEmpty</code> is set by default for all Input components children of the <code>&lt;Filter&gt;</code> component</p>
+<p>You can tweak how this component fetches the possible values using the <code>perPage</code>, <code>sort</code>, and <code>filter</code> props.</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- js"><span class="hljs-comment">// by default, fetches only the first 25 values. You can extend this limit</span>
+<span class="hljs-comment">// by setting the `perPage` prop.</span>
+&lt;ReferenceArrayInput
+     source=<span class="hljs-string">"tag_ids"</span>
+     reference=<span class="hljs-string">"tags"</span>
+     perPage={<span class="hljs-number">100</span>}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceArrayInput</span>&gt;</span></span>
+
+<span class="hljs-comment">// by default, orders the possible values by id desc. You can change this order</span>
+<span class="hljs-comment">// by setting the `sort` prop (an object with `field` and `order` properties).</span>
+&lt;ReferenceArrayInput
+     source=<span class="hljs-string">"tag_ids"</span>
+     reference=<span class="hljs-string">"tags"</span>
+     sort={{ <span class="hljs-attr">field</span>: <span class="hljs-string">'title'</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">'ASC'</span> }}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceArrayInput</span>&gt;</span></span>
+
+<span class="hljs-comment">// you can filter the query used to populate the possible values. Use the</span>
+<span class="hljs-comment">// `filter` prop for that.</span>
+&lt;ReferenceArrayInput
+     source=<span class="hljs-string">"tag_ids"</span>
+     reference=<span class="hljs-string">"tags"</span>
+     filter={{ <span class="hljs-attr">is_published</span>: <span class="hljs-literal">true</span> }}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceArrayInput</span>&gt;</span></span>
+</code></pre>
+<p>{% endraw %}</p>
+<h2><a class="anchor" aria-hidden="true" id="referenceinput-component"></a><a href="#referenceinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ReferenceInput</code> Component</h2>
+<p>Use <code>&lt;ReferenceInput&gt;</code> for foreign-key values, for instance, to edit the <code>post_id</code> of a <code>comment</code> resource. This component fetches the possible values in the reference resource (using the <code>GET_LIST</code> REST method) and the referenced record (using the <code>GET_ONE</code> REST method), then delegates rendering to a subcomponent, to which it passes the possible choices as the <code>choices</code> attribute.</p>
+<p>This means you can use <code>&lt;ReferenceInput&gt;</code> with any of <a href="#selectinput"><code>&lt;SelectInput&gt;</code></a>, <a href="#autocompleteinput"><code>&lt;AutocompleteInput&gt;</code></a>, or <a href="#radiobuttongroupinput"><code>&lt;RadioButtonGroupInput&gt;</code></a>, or even with the component of your choice, provided it supports the <code>choices</code> attribute.</p>
+<p>The component expects a <code>source</code> and a <code>reference</code> attributes. For instance, to make the <code>post_id</code> for a <code>comment</code> editable:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ReferenceInput, SelectInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceInput label=<span class="hljs-string">"Post"</span> source=<span class="hljs-string">"post_id"</span> reference=<span class="hljs-string">"posts"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/reference-input.gif" alt="ReferenceInput"></p>
+<p><strong>Note</strong>: You <strong>must</strong> add a <code>&lt;Resource&gt;</code> for the reference resource - react-admin needs it to fetch the reference data. You <em>can</em> omit the <code>list</code> prop in this reference if you want to hide it in the sidebar menu.</p>
+<pre><code class="hljs css languages- jsx">&lt;Admin dataProvider={myDataProvider}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"comments"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{CommentList}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+</span></code></pre>
+<p>Set the <code>allowEmpty</code> prop when you want to add an empty choice with a value of null in the choices list.
+Disabling <code>allowEmpty</code> does not mean that the input will be required. If you want to make the input required, you must add a validator as indicated in <a href="./CreateEdit.html#validation">Validation Documentation</a>. Enabling the <code>allowEmpty</code> props just adds an empty choice (with <code>null</code> value) on top of the options, and makes the value nullable.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ReferenceInput, SelectInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceInput label=<span class="hljs-string">"Post"</span> source=<span class="hljs-string">"post_id"</span> reference=<span class="hljs-string">"posts"</span> allowEmpty&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<p><strong>Tip</strong>: <code>allowEmpty</code> is set by default for all Input components children of the <code>&lt;Filter&gt;</code> component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> CommentFilter = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Filter</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ReferenceInput</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Post"</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"post_id"</span> <span class="hljs-attr">reference</span>=<span class="hljs-string">"posts"</span>&gt;</span> // no need for allowEmpty
+            <span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span>
+);
+</span></code></pre>
+<p>You can tweak how this component fetches the possible values using the <code>perPage</code>, <code>sort</code>, and <code>filter</code> props.</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// by default, fetches only the first 25 values. You can extend this limit</span>
+<span class="hljs-comment">// by setting the `perPage` prop.</span>
+&lt;ReferenceInput
+     source=<span class="hljs-string">"post_id"</span>
+     reference=<span class="hljs-string">"posts"</span>
+     perPage={<span class="hljs-number">100</span>}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+
+<span class="hljs-comment">// by default, orders the possible values by id desc. You can change this order</span>
+<span class="hljs-comment">// by setting the `sort` prop (an object with `field` and `order` properties).</span>
+&lt;ReferenceInput
+     source=<span class="hljs-string">"post_id"</span>
+     reference=<span class="hljs-string">"posts"</span>
+     sort={{ <span class="hljs-attr">field</span>: <span class="hljs-string">'title'</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">'ASC'</span> }}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+
+<span class="hljs-comment">// you can filter the query used to populate the possible values. Use the</span>
+<span class="hljs-comment">// `filter` prop for that.</span>
+&lt;ReferenceInput
+     source=<span class="hljs-string">"post_id"</span>
+     reference=<span class="hljs-string">"posts"</span>
+     filter={{ <span class="hljs-attr">is_published</span>: <span class="hljs-literal">true</span> }}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<p>{% endraw %}</p>
+<p>The child component may further filter results (that's the case, for instance, for <code>&lt;AutocompleteInput&gt;</code>). ReferenceInput passes a <code>setFilter</code> function as prop to its child component. It uses the value to create a filter for the query - by default <code>{ q: [searchText] }</code>. You can customize the mapping
+<code>searchText =&gt; searchQuery</code> by setting a custom <code>filterToQuery</code> function prop:</p>
+<pre><code class="hljs css languages- jsx">&lt;ReferenceInput
+     source=<span class="hljs-string">"post_id"</span>
+     reference=<span class="hljs-string">"posts"</span>
+     filterToQuery={searchText =&gt; ({ <span class="hljs-attr">title</span>: searchText })}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<p>The child component receives the following props from <code>&lt;ReferenceInput&gt;</code>:</p>
+<ul>
+<li><code>isLoading</code>: whether the request for possible values is loading or not</li>
+<li><code>filter</code>: the current filter of the request for possible values. Defaults to <code>{}</code>.</li>
+<li><code>pagination</code>: the current pagination of the request for possible values. Defaults to <code>{ page: 1, perPage: 25 }</code>.</li>
+<li><code>sort</code>: the current sorting of the request for possible values. Defaults to <code>{ field: 'id', order: 'DESC' }</code>.</li>
+<li><code>error</code>: the error message if the form validation failed for that input</li>
+<li><code>warning</code>: the warning message if the form validation failed for that input</li>
+<li><code>onChange</code>: function to call when the value changes</li>
+<li><code>setFilter</code>: function to call to update the filter of the request for possible values</li>
+<li><code>setPagination</code>: : function to call to update the pagination of the request for possible values</li>
+<li><code>setSort</code>: function to call to update the sorting of the request for possible values</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="richtextinput-component"></a><a href="#richtextinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>RichTextInput</code> Component</h2>
+<p><code>&lt;RichTextInput&gt;</code> is the ideal component if you want to allow your users to edit some HTML contents. It
+is powered by <a href="https://quilljs.com/">Quill</a>.</p>
+<p><strong>Note</strong>: Due to its size, <code>&lt;RichTextInput&gt;</code> is not bundled by default with react-admin. You must install it first, using npm:</p>
+<pre><code class="hljs css languages- sh">npm install ra-input-rich-text
+</code></pre>
+<p>Then use it as a normal input component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> RichTextInput <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-input-rich-text'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RichTextInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"body"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/rich-text-input.png" alt="RichTextInput"></p>
+<p>You can customize the rich text editor toolbar using the <code>toolbar</code> attribute, as described on the <a href="https://quilljs.com/docs/modules/toolbar/">Quill official toolbar documentation</a>.</p>
+<pre><code class="hljs css languages- jsx">&lt;RichTextInput source=<span class="hljs-string">"body"</span> toolbar={[ [<span class="hljs-string">'bold'</span>, <span class="hljs-string">'italic'</span>, <span class="hljs-string">'underline'</span>, <span class="hljs-string">'link'</span>] ]} /&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="selectinput-component"></a><a href="#selectinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>SelectInput</code> Component</h2>
+<p>To let users choose a value in a list using a dropdown, use <code>&lt;SelectInput&gt;</code>. It renders using <a href="http://www.material-ui.com/#/components/select-field">Material ui's <code>&lt;SelectField&gt;</code></a>. Set the <code>choices</code> attribute to determine the options (with <code>id</code>, <code>name</code> tuples):</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { SelectInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"category"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{[</span>
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">programming</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Programming</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">lifestyle</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Lifestyle</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">photography</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Photography</span>' },
+]} /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/select-input.gif" alt="SelectInput"></p>
+<p>You can also customize the properties to use for the option name and value, thanks to the <code>optionText</code> and <code>optionValue</code> attributes:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Leo Tolstoi'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'M'</span> },
+    { <span class="hljs-attr">_id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Jane Austen'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'F'</span> },
+];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"full_name"</span> <span class="hljs-attr">optionValue</span>=<span class="hljs-string">"_id"</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> also accepts a function, so you can shape the option text at will:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Leo'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Tolstoi'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Austen'</span> },
+];
+<span class="hljs-keyword">const</span> optionRenderer = <span class="hljs-function"><span class="hljs-params">choice</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${choice.first_name}</span> <span class="hljs-subst">${choice.last_name}</span>`</span>;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">{optionRenderer}</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> also accepts a React Element, that will be cloned and receive the related choice as the <code>record</code> prop. You can use Field components there.</p>
+<pre><code class="hljs css languages- jsx">const choices = [
+   { id: 123, first_name: 'Leo', last_name: 'Tolstoi' },
+   { id: 456, first_name: 'Jane', last_name: 'Austen' },
+];
+const FullNameField = ({ record }) =&gt; &lt;span&gt;{record.first_name} {record.last_name}&lt;/span&gt;;
+&lt;SelectInput source="gender" choices={choices} optionText={&lt;FullNameField /&gt;}/&gt;
+</code></pre>
+<p>Enabling the <code>allowEmpty</code> props adds an empty choice (with <code>null</code> value) on top of the options, and makes the value nullable:</p>
+<pre><code class="hljs css languages- jsx">&lt;SelectInput source=<span class="hljs-string">"category"</span> allowEmpty choices={[
+    { <span class="hljs-attr">id</span>: <span class="hljs-string">'programming'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Programming'</span> },
+    { <span class="hljs-attr">id</span>: <span class="hljs-string">'lifestyle'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Lifestyle'</span> },
+    { <span class="hljs-attr">id</span>: <span class="hljs-string">'photography'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Photography'</span> },
+]} /&gt;
+</code></pre>
+<p>The choices are translated by default, so you can use translation identifiers as choices:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'M'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.male'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'F'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.female'</span> },
+];
+</code></pre>
+<p>However, in some cases, you may not want the choice to be translated. In that case, set the <code>translateChoice</code> prop to false.</p>
+<pre><code class="hljs css languages- jsx">&lt;SelectInput source=<span class="hljs-string">"gender"</span> choices={choices} translateChoice={<span class="hljs-literal">false</span>}/&gt;
+</code></pre>
+<p>Note that <code>translateChoice</code> is set to false when <code>&lt;SelectInput&gt;</code> is a child of <code>&lt;ReferenceInput&gt;</code>.</p>
+<p>Lastly, use the <code>options</code> attribute if you want to override any of Material UI's <code>&lt;SelectField&gt;</code> attributes:</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx">&lt;SelectInput source=<span class="hljs-string">"category"</span> options={{
+    <span class="hljs-attr">maxHeight</span>: <span class="hljs-number">200</span>
+}} /&gt;
+</code></pre>
+<p>{% endraw %}</p>
+<p>Refer to <a href="http://www.material-ui.com/#/components/select-field">Material UI SelectField documentation</a> for more details.</p>
+<p><strong>Tip</strong>: If you want to populate the <code>choices</code> attribute with a list of related records, you should decorate <code>&lt;SelectInput&gt;</code> with <a href="#referenceinput"><code>&lt;ReferenceInput&gt;</code></a>, and leave the <code>choices</code> empty:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { SelectInput, ReferenceInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;ReferenceInput label=<span class="hljs-string">"Author"</span> source=<span class="hljs-string">"author_id"</span> reference=<span class="hljs-string">"authors"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectInput</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"last_name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceInput</span>&gt;</span></span>
+</code></pre>
+<p>If, instead of showing choices as a dropdown list, you prefer to display them as a list of radio buttons, try the <a href="#radiobuttongroupinput"><code>&lt;RadioButtonGroupInput&gt;</code></a>. And if the list is too big, prefer the <a href="#autocompleteinput"><code>&lt;AutocompleteInput&gt;</code></a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="selectarrayinput-component"></a><a href="#selectarrayinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>SelectArrayInput</code> Component</h2>
+<p>To let users choose several values in a list using a dropdown, use <code>&lt;SelectArrayInput&gt;</code>. It renders using <a href="http://www.material-ui.com/#/components/select">Material ui's <code>&lt;Select&gt;</code></a>. Set the <code>choices</code> attribute to determine the options (with <code>id</code>, <code>name</code> tuples):</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">import</span> { SelectArrayInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Tags"</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"categories"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{[</span>
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">music</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Music</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">photography</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Photo</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">programming</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Code</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">tech</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Technology</span>' },
+    { <span class="hljs-attr">id:</span> '<span class="hljs-attr">sport</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Sport</span>' },
+]} /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/select-array-input.gif" alt="SelectArrayInput"></p>
+<p>You can also customize the properties to use for the option name and value,
+thanks to the <code>optionText</code> and <code>optionValue</code> attributes.</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">_id</span>: <span class="hljs-string">'1'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Book'</span>, <span class="hljs-attr">plural_name</span>: <span class="hljs-string">'Books'</span> },
+   { <span class="hljs-attr">_id</span>: <span class="hljs-string">'2'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Video'</span>, <span class="hljs-attr">plural_name</span>: <span class="hljs-string">'Videos'</span> },
+   { <span class="hljs-attr">_id</span>: <span class="hljs-string">'3'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Audio'</span>, <span class="hljs-attr">plural_name</span>: <span class="hljs-string">'Audios'</span> },
+];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"categories"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"plural_name"</span> <span class="hljs-attr">optionValue</span>=<span class="hljs-string">"_id"</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> also accepts a function, so you can shape the option text at will:</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'1'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Book'</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">23</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'2'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Video'</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">56</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'3'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Audio'</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">12</span> },
+];
+<span class="hljs-keyword">const</span> optionRenderer = <span class="hljs-function"><span class="hljs-params">choice</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${choice.name}</span> (<span class="hljs-subst">${choice.quantity}</span>)`</span>;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectArrayInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"categories"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">{optionRenderer}</span> /&gt;</span>
+</span></code></pre>
+<p>The choices are translated by default, so you can use translation identifiers as choices:</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'books'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.category.books'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'sport'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.category.sport'</span> },
+];
+</code></pre>
+<p>Lastly, use the <code>options</code> attribute if you want to override any of the <code>&lt;Select&gt;</code> attributes:</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- js">&lt;SelectArrayInput source=<span class="hljs-string">"category"</span> options={{ <span class="hljs-attr">fullWidth</span>: <span class="hljs-literal">true</span> }} /&gt;
+</code></pre>
+<p>{% endraw %}</p>
+<p>Refer to <a href="http://www.material-ui.com/#/components/select">the Select documentation</a> for more details.</p>
+<p>The <code>SelectArrayInput</code> component <strong>cannot</strong> be used inside a <code>ReferenceInput</code> but can be used inside a <code>ReferenceArrayInput</code>.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> {
+    ChipField,
+    Create,
+    DateInput,
+    LongTextInput,
+    ReferenceArrayInput,
+    SelectArrayInput,
+    TextInput,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostCreate = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    &lt;Create {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;LongTextInput source="body" /&gt;
+            &lt;DateInput source="published_at" /&gt;
+
+            &lt;ReferenceArrayInput reference="tags" source="tags"&gt;
+                &lt;SelectArrayInput&gt;
+                    &lt;ChipField source="name" /&gt;
+                &lt;/SelectArrayInput&gt;
+            &lt;/ReferenceArrayInput&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Create&gt;
+);
+</code></pre>
+<p><strong>Tip</strong>: As it does not provide autocompletion, the <code>SelectArrayInput</code> might not be suited when the referenced resource has a lot of items.</p>
+<h2><a class="anchor" aria-hidden="true" id="textinput-component"></a><a href="#textinput-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>TextInput</code> Component</h2>
+<p><code>&lt;TextInput&gt;</code> is the most common input. It is used for texts, emails, URL or passwords. In translates to an HTML <code>&lt;input&gt;</code> tag.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { TextInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/text-input.png" alt="TextInput"></p>
+<p>You can choose a specific input type using the <code>type</code> attribute, for instance <code>text</code> (the default), <code>email</code>, <code>url</code>, or <code>password</code>:</p>
+<pre><code class="hljs css languages- jsx">&lt;TextInput label=<span class="hljs-string">"Email Address"</span> source=<span class="hljs-string">"email"</span> type=<span class="hljs-string">"email"</span> /&gt;
+</code></pre>
+<p><strong>Warning</strong>: Do not use <code>type=&quot;number&quot;</code>, or you'll receive a string as value (this is a <a href="https://github.com/facebook/react/issues/1425">known React bug</a>). Instead, use <a href="#numberinput"><code>&lt;NumberInput&gt;</code></a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="transforming-input-value-to-from-record"></a><a href="#transforming-input-value-to-from-record" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Transforming Input Value to/from Record</h2>
+<p>The data format returned by the input component may not be what your API desires. Since React-admin uses Redux Form, we can use its <code>parse()</code> and <code>format()</code> functions to transform the input value when saving to and loading from the record. It's better to understand the <a href="http://redux-form.com/6.5.0/docs/ValueLifecycle.md/">input value's lifecycle</a> before you start.</p>
+<p>Mnemonic for the two functions:</p>
+<ul>
+<li><code>parse()</code>: input -&gt; record</li>
+<li><code>format()</code>: record -&gt; input</li>
+</ul>
+<p>Say the user would like to input values of 0-100 to a percentage field but your API (hence record) expects 0-1.0. You can use simple <code>parse()</code> and <code>format()</code> functions to archive the transform:</p>
+<pre><code class="hljs css languages- jsx">&lt;NumberInput source=<span class="hljs-string">"percent"</span> format={v =&gt; v*<span class="hljs-number">100</span>} parse={v =&gt; v/<span class="hljs-number">100</span>} label=<span class="hljs-string">"Formatted number"</span> /&gt;
+</code></pre>
+<p><code>&lt;DateInput&gt;</code> stores and returns a string. If you would like to store a JavaScript Date object in your record instead:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> dateFormatter = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+  <span class="hljs-comment">// v is a `Date` object</span>
+  <span class="hljs-keyword">if</span> (!(v <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Date</span>) || <span class="hljs-built_in">isNaN</span>(v)) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">const</span> pad = <span class="hljs-string">'00'</span>;
+  <span class="hljs-keyword">const</span> yy = v.getFullYear().toString();
+  <span class="hljs-keyword">const</span> mm = (v.getMonth() + <span class="hljs-number">1</span>).toString();
+  <span class="hljs-keyword">const</span> dd = v.getDate().toString();
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${yy}</span>-<span class="hljs-subst">${(pad + mm).slice(<span class="hljs-number">-2</span>)}</span>-<span class="hljs-subst">${(pad + dd).slice(<span class="hljs-number">-2</span>)}</span>`</span>;
+};
+
+<span class="hljs-keyword">const</span> dateParser = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+  <span class="hljs-comment">// v is a string of "YYYY-MM-DD" format</span>
+  <span class="hljs-keyword">const</span> match = <span class="hljs-regexp">/(\d{4})-(\d{2})-(\d{2})/</span>.exec(v);
+  <span class="hljs-keyword">if</span> (match === <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">const</span> d = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(match[<span class="hljs-number">1</span>], <span class="hljs-built_in">parseInt</span>(match[<span class="hljs-number">2</span>], <span class="hljs-number">10</span>) - <span class="hljs-number">1</span>, match[<span class="hljs-number">3</span>]);
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isNaN</span>(d)) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">return</span> d;
+};
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">DateInput</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"isodate"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">{dateFormatter}</span> <span class="hljs-attr">parse</span>=<span class="hljs-string">{dateParser}</span> /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="third-party-components"></a><a href="#third-party-components" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Third-Party Components</h2>
+<p>You can find components for react-admin in third-party repositories.</p>
+<ul>
+<li><a href="https://github.com/vascofg/react-admin-color-input">vascofg/react-admin-color-input</a>: a color input using <a href="http://casesandberg.github.io/react-color/">React Color</a>, a collection of color pickers.</li>
+<li><a href="https://github.com/LoicMahieu/aor-tinymce-input">LoicMahieu/aor-tinymce-input</a>: a TinyMCE component, useful for editing HTML</li>
+<li><a href="https://github.com/vascofg/react-admin-date-inputs">vascofg/react-admin-date-inputs</a>: a collection of Date Inputs, based on <a href="https://material-ui-pickers.firebaseapp.com/">material-ui-pickers</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="writing-your-own-input-component"></a><a href="#writing-your-own-input-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Writing Your Own Input Component</h2>
+<p>If you need a more specific input type, you can also write it yourself. You'll have to rely on redux-form's <a href="http://redux-form.com/6.5.0/docs/api/Field.md/"><code>&lt;Field&gt;</code></a> component, so as to handle the value update cycle.</p>
+<p>For instance, let's write a component to edit the latitude and longitude of the current record:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in LatLongInput.js</span>
+<span class="hljs-keyword">import</span> { Field } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-form'</span>;
+<span class="hljs-keyword">const</span> LatLngInput = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;span&gt;
+        &lt;Field name="lat" component="input" type="number" placeholder="latitude" /&gt;
+        &amp;nbsp;
+        &lt;Field name="lng" component="input" type="number" placeholder="longitude" /&gt;
+    &lt;/span&gt;
+);
+export default LatLngInput;
+
+// in ItemEdit.js
+const ItemEdit = (props) =&gt; (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;LatLngInput /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p><code>LatLngInput</code> takes no props, because the <code>&lt;Field&gt;</code> component can access the current record via its context. The <code>name</code> prop serves as a selector for the record property to edit. All <code>Field</code> props except <code>name</code> and <code>component</code> are passed to the child component/element (an <code>&lt;input&gt;</code> in that example). Executing this component will render roughly the following code:</p>
+<pre><code class="hljs css languages- html"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"longitude"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{record.lat}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"longitude"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{record.lng}</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+</code></pre>
+<p><strong>Tip</strong>: The <code>&lt;Field&gt;</code> component supports dot notation in the <code>name</code> prop, to edit nested props:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> LatLongInput = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;span&gt;
+        &lt;Field name="position.lat" component="input" type="number" placeholder="latitude" /&gt;
+        &amp;nbsp;
+        &lt;Field name="position.lng" component="input" type="number" placeholder="longitude" /&gt;
+    &lt;/span&gt;
+);
+</code></pre>
+<p>This component lacks a label. React-admin provides the <code>&lt;Labeled&gt;</code> component for that:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in LatLongInput.js</span>
+<span class="hljs-keyword">import</span> { Field } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-form'</span>;
+<span class="hljs-keyword">import</span> { Labeled } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> LatLngInput = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;Labeled label="position"&gt;
+        &lt;span&gt;
+            &lt;Field name="lat" component="input" type="number" placeholder="latitude" /&gt;
+            &amp;nbsp;
+            &lt;Field name="lng" component="input" type="number" placeholder="longitude" /&gt;
+        &lt;/span&gt;
+    &lt;/Labeled&gt;
+);
+export default LatLngInput;
+</code></pre>
+<p>Now the component will render with a label:</p>
+<pre><code class="hljs css languages- html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>Position<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"longitude"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{record.lat}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"longitude"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{record.lng}</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+</code></pre>
+<p>Instead of HTML <code>input</code> elements, you can use a material-ui component. To compose material-ui and <code>Field</code>, use a <a href="http://redux-form.com/6.5.0/examples/material-ui/">field renderer function</a> to map the props:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in LatLongInput.js</span>
+<span class="hljs-keyword">import</span> TextField <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/TextField'</span>;
+<span class="hljs-keyword">import</span> { Field } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-form'</span>;
+<span class="hljs-keyword">const</span> renderTextField = <span class="hljs-function">(<span class="hljs-params">{ input, label, meta: { touched, error }, ...custom }</span>) =&gt;</span> (
+    &lt;TextField
+        hintText={label}
+        floatingLabelText={label}
+        errorText={touched &amp;&amp; error}
+        {...input}
+        {...custom}
+    /&gt;
+);
+const LatLngInput = () =&gt; (
+    &lt;span&gt;
+        &lt;Field name="lat" component={renderTextField} label="latitude" /&gt;
+        &amp;nbsp;
+        &lt;Field name="lng" component={renderTextField} label="longitude" /&gt;
+    &lt;/span&gt;
+);
+</code></pre>
+<p>Material-ui's <code>&lt;TextField&gt;</code> component already includes a label, so you don't need to use <code>&lt;Labeled&gt;</code> in this case. <code>&lt;Field&gt;</code> injects two props to its child component: <code>input</code> and <code>meta</code>. To learn more about these props, please refer to <a href="http://redux-form.com/6.5.0/docs/api/Field.md/#props">the <code>&lt;Field&gt;</code> component documentation</a> in the redux-form website.</p>
+<p><strong>Tip</strong>: If you only need one <code>&lt;Field&gt;</code> component in a custom input, you can let react-admin do the <code>&lt;Field&gt;</code> decoration for you by using the <code>addField</code> Higher-order component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in SexInput.js</span>
+<span class="hljs-keyword">import</span> SelectField <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/SelectField'</span>;
+<span class="hljs-keyword">import</span> MenuItem <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/MenuItem'</span>;
+<span class="hljs-keyword">import</span> { addField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> SexInput = <span class="hljs-function">(<span class="hljs-params">{ input, meta: { touched, error } }</span>) =&gt;</span> (
+    &lt;SelectField
+        floatingLabelText="Sex"
+        errorText={touched &amp;&amp; error}
+        {...input}
+    &gt;
+        &lt;MenuItem value="M" primaryText="Male" /&gt;
+        &lt;MenuItem value="F" primaryText="Female" /&gt;
+    &lt;/SelectField&gt;
+);
+export default addField(SexInput); // decorate with redux-form's &lt;Field&gt;
+
+// equivalent of
+import SelectField from '@material-ui/core/SelectField';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Field } from 'redux-form';
+
+const renderSexInput = ({ input, meta: { touched, error } }) =&gt; (
+    &lt;SelectField
+        floatingLabelText="Sex"
+        errorText={touched &amp;&amp; error}
+        {...input}
+    &gt;
+        &lt;MenuItem value="M" primaryText="Male" /&gt;
+        &lt;MenuItem value="F" primaryText="Female" /&gt;
+    &lt;/SelectField&gt;
+);
+const SexInput = ({ source }) =&gt; &lt;Field name={source} component={renderSexInput} /&gt;
+export default SexInput;
+</code></pre>
+<p>For more details on how to use redux-form's <code>&lt;Field&gt;</code> component, please refer to <a href="http://redux-form.com/6.5.0/docs/api/Field.md/">the redux-form doc</a>.</p>
+<p>Instead of HTML <code>input</code> elements or material-ui components, you can use react-admin input components, like <code>&lt;NumberInput&gt;</code> for instance. React-admin components are already decorated by <code>&lt;Field&gt;</code>, and already include a label, so you don't need either <code>&lt;Field&gt;</code> or <code>&lt;Labeled&gt;</code> when using them:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in LatLongInput.js</span>
+<span class="hljs-keyword">import</span> { NumberInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">const</span> LatLngInput = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;span&gt;
+        &lt;NumberInput source="lat" label="latitude" /&gt;
+        &amp;nbsp;
+        &lt;NumberInput source="lng" label="longitude" /&gt;
+    &lt;/span&gt;
+);
+export default LatLngInput;
+
+// in ItemEdit.js
+const ItemEdit = (props) =&gt; (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput source="id" /&gt;
+            &lt;LatLngInput /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="linking-two-inputs"></a><a href="#linking-two-inputs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Linking Two Inputs</h2>
+<p>Edition forms often contain linked inputs, e.g. country and city (the choices of the latter depending on the value of the former).</p>
+<p>React-admin relies on redux-form, so you can grab the current form values using redux-form <a href="https://redux-form.com/7.3.0/docs/api/formvalueselector.md/">formValueSelector()</a>. Alternatively, you can use the react-admin <code>&lt;FormDataConsumer&gt;</code> component, which grabs the form values, and passes them to a child function.</p>
+<p>This facilitates the implementation of linked inputs:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { FormDataConsumer } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> OrderEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;SelectInput source="country" choices={countries} /&gt;
+            &lt;FormDataConsumer&gt;
+                {({ formData, ...rest }) =&gt;
+                     &lt;SelectInput 
+                         source="city"
+                         choices={getCitiesFor(formData.country)}
+                         {...rest}
+                     /&gt;
+                }
+            &lt;/FormDataConsumer&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+); 
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="hiding-inputs-based-on-other-inputs"></a><a href="#hiding-inputs-based-on-other-inputs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hiding Inputs Based On Other Inputs</h2>
+<p>You may want to display or hide inputs base on the value of another input - for instance, show an <code>email</code> input only if the <code>hasEmail</code> boolean input is ticked to <code>true</code>.</p>
+<p>For such cases, you can use the approach described above, using the <code>&lt;FormDataConsumer&gt;</code> component.</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { FormDataConsumer } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+ <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+     &lt;Edit {...props}&gt;
+         &lt;SimpleForm&gt;
+             &lt;BooleanInput source="hasEmail" /&gt;
+             &lt;FormDataConsumer&gt;
+                 {({ formData, ...rest }) =&gt; formData.hasEmail &amp;&amp;
+                      &lt;TextInput source="email" {...rest} /&gt;
+                 }
+             &lt;/FormDataConsumer&gt;
+         &lt;/SimpleForm&gt;
+     &lt;/Edit&gt;
+ ); 
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/creat-edit-view-components.html">← &lt;Create&gt; and &lt;Edit&gt; Views</a><a class="docs-next button" href="/docs/en/authentication.html">Authentication →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#arrayinput-component"><code>ArrayInput</code> Component</a></li><li><a href="#autocompleteinput-component"><code>AutocompleteInput</code> Component</a><ul class="toc-headings"><li><a href="#properties">Properties</a></li></ul></li><li><a href="#booleaninput-and-nullablebooleaninput-component"><code>BooleanInput</code> and <code>NullableBooleanInput</code> Component</a></li><li><a href="#checkboxgroupinput-component"><code>CheckboxGroupInput</code> Component</a></li><li><a href="#dateinput-component"><code>DateInput</code> Component</a></li><li><a href="#disabledinput-component"><code>DisabledInput</code> Component</a></li><li><a href="#imageinput-component"><code>ImageInput</code> Component</a></li><li><a href="#fileinput-component"><code>FileInput</code> Component</a></li><li><a href="#longtextinput-component"><code>LongTextInput</code> Component</a></li><li><a href="#numberinput-component"><code>NumberInput</code> Component</a></li><li><a href="#radiobuttongroupinput-component"><code>RadioButtonGroupInput</code> Component</a></li><li><a href="#referencearrayinput-component"><code>ReferenceArrayInput</code> Component</a></li><li><a href="#referenceinput-component"><code>ReferenceInput</code> Component</a></li><li><a href="#richtextinput-component"><code>RichTextInput</code> Component</a></li><li><a href="#selectinput-component"><code>SelectInput</code> Component</a></li><li><a href="#selectarrayinput-component"><code>SelectArrayInput</code> Component</a></li><li><a href="#textinput-component"><code>TextInput</code> Component</a></li><li><a href="#transforming-input-value-to-from-record">Transforming Input Value to/from Record</a></li><li><a href="#third-party-components">Third-Party Components</a></li><li><a href="#writing-your-own-input-component">Writing Your Own Input Component</a></li><li><a href="#linking-two-inputs">Linking Two Inputs</a></li><li><a href="#hiding-inputs-based-on-other-inputs">Hiding Inputs Based On Other Inputs</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

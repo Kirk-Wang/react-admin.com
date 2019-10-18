@@ -1,0 +1,466 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Admin 组件 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="`&lt;Admin&gt;` 组件创建一个具有自己的状态、路由和控制器逻辑的应用程序。 `&lt;Admin&gt;` 只需要一个 `dataProvider` 属性, 并且至少有一个子 `&lt;Resource&gt;` 就能工作："/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="Admin 组件 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="`&lt;Admin&gt;` 组件创建一个具有自己的状态、路由和控制器逻辑的应用程序。 `&lt;Admin&gt;` 只需要一个 `dataProvider` 属性, 并且至少有一个子 `&lt;Resource&gt;` 就能工作："/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/admin-component.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Admin 组件</h1></header><article><div><span><p><code>&lt;Admin&gt;</code> 组件创建一个具有自己的状态、路由和控制器逻辑的应用程序。 <code>&lt;Admin&gt;</code> 只需要一个 <code>dataProvider</code> 属性, 并且至少有一个子 <code>&lt;Resource&gt;</code> 就能工作：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> simpleRestProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-simple-rest'</span>;
+
+<span class="hljs-keyword">import</span> { PostList } <span class="hljs-keyword">from</span> <span class="hljs-string">'./posts'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{PostList}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+);
+
+export default App;
+</span></code></pre>
+<p>以下是通过该组件接受的所有属性：</p>
+<ul>
+<li><a href="#dataprovider"><code>dataProvider</code></a></li>
+<li><a href="#title"><code>title</code></a></li>
+<li><a href="#dashboard"><code>dashboard</code></a></li>
+<li><a href="#catchall"><code>catchAll</code></a></li>
+<li><a href="#menu"><code>menu</code></a> (deprecated)</li>
+<li><a href="#theme"><code>theme</code></a></li>
+<li><a href="#applayout"><code>appLayout</code></a></li>
+<li><a href="#customreducers"><code>customReducers</code></a></li>
+<li><a href="#customsagas"><code>customSagas</code></a></li>
+<li><a href="#customroutes"><code>customRoutes</code></a></li>
+<li><a href="#authprovider"><code>authProvider</code></a></li>
+<li><a href="#loginpage"><code>loginPage</code></a></li>
+<li><a href="#logoutbutton"><code>logoutButton</code></a></li>
+<li><a href="#internationalization"><code>locale</code></a></li>
+<li><a href="#internationalization"><code>messages</code></a></li>
+<li><a href="#initialstate"><code>initialState</code></a></li>
+<li><a href="#history"><code>history</code></a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="dataprovider"></a><a href="#dataprovider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dataProvider</code></h2>
+<p>唯一必需的属性，它必须是一个返回一个promise的函数，具有下列签名：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">/**
+ * Query a data provider and return a promise for a response
+ *
+ * @example
+ * dataProvider(GET_ONE, 'posts', { id: 123 })
+ *  =&gt; new Promise(resolve =&gt; resolve({ id: 123, title: "hello, world" }))
+ *
+ * @param {string} type Request type, e.g GET_LIST
+ * @param {string} resource Resource name, e.g. "posts"
+ * @param {Object} payload Request parameters. Depends on the action type
+ * @returns {Promise} the Promise for a response
+ */</span>
+<span class="hljs-keyword">const</span> dataProvider = <span class="hljs-function">(<span class="hljs-params">type, resource, params</span>) =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>();
+</code></pre>
+<p><code>dataProvider</code> 也是添加自定义 HTTP 头、身份验证等的理想位置。 <a href="./DataProviders.html">Data Providers 章节</a> 文档列出了可用的Data Provider，以及如何构建自己的 Data Provider 客户端。</p>
+<h2><a class="anchor" aria-hidden="true" id="title"></a><a href="#title" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>title</code></h2>
+<p>默认情况下，一个admin app的头部使用'React Admin'作为主app标题。它可能是你会想要自定义的第一件事。这个<code>title</code>属性正是为这个目的服务的。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"My Custom Admin"</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="dashboard"></a><a href="#dashboard" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dashboard</code></h2>
+<p>默认情况下，一个admin app的主页是第一个子<code>&lt;Resource&gt;</code>的<code>list</code>。 但你也可以指定一个自定义组件代替。 要适应一般设计，请使用Material UI <code>&lt;Card&gt;</code>组件和 react-admin <code>&lt;ViewTitle&gt;</code>组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/Dashboard.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> Card <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Card'</span>;
+<span class="hljs-keyword">import</span> CardContent <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardContent'</span>;
+<span class="hljs-keyword">import</span> { ViewTitle } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> () =&gt; (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ViewTitle</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Welcome to the administration"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">CardContent</span>&gt;</span>Lorem ipsum sic dolor amet...<span class="hljs-tag">&lt;/<span class="hljs-name">CardContent</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span>
+);
+</span></code></pre>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> Dashboard <span class="hljs-keyword">from</span> <span class="hljs-string">'./Dashboard'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">dashboard</span>=<span class="hljs-string">{Dashboard}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/dashboard.png" alt="Custom home page"></p>
+<p><strong>提示</strong>：添加 <code>&lt;ViewTitle&gt;</code> 组件还将允许标题以移动分辨率显示。</p>
+<h2><a class="anchor" aria-hidden="true" id="catchall"></a><a href="#catchall" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>catchAll</code></h2>
+<p>当用户键入的 url 与任何子 <code>&lt;Resource&gt;</code> 组件不匹配时, 它们会看到默认的 &quot;Not Found&quot; 页。</p>
+<p><img src="https://marmelab.com/react-admin/img/not-found.png" alt="Not Found"></p>
+<p>您可以自定义此页以使用您选择的组件, 将其作为 <code>catchAll</code> 属性传递。 要适应一般设计，请使用Material UI <code>&lt;Card&gt;</code>组件和 react-admin <code>&lt;ViewTitle&gt;</code>组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/NotFound.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> Card <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Card'</span>;
+<span class="hljs-keyword">import</span> CardContent <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardContent'</span>;
+<span class="hljs-keyword">import</span> { ViewTitle } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> () =&gt; (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ViewTitle</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Not Found"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">CardContent</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>404: Page not found<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">CardContent</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span>
+);
+</span></code></pre>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> NotFound <span class="hljs-keyword">from</span> <span class="hljs-string">'./NotFound'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">catchAll</span>=<span class="hljs-string">{NotFound}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p><strong>提示</strong>：如果您的自定义 <code>catchAll</code> 组件包含 react-router <code>&lt;Route&gt;</code> 组件，则允许您轻松注册 react-admin 布局中显示的新路由。 请注意，在测试了所有 react-admin 资源路由<em>后</em>，这些路由将匹配。 要在 react-admin <em>之前</em>添加自定义路由，并因此覆盖默认资源路由，请改用<a href="#customroutes">customRoutes</code> 属性</a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="menu"></a><a href="#menu" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>menu</code></h2>
+<p><strong>提示</strong>：这个属性被废弃了。要覆盖菜单组件，请使用自定义布局。</p>
+<p>React-admin使用作为 <code>&lt;Admin&gt;</code> 子级传递的 <code>&lt;Resource&gt;</code> 组件列表，使用列表组件为每个资源构建菜单。</p>
+<p>如果你想要添加或删除菜单项，例如要链接到非资源页面，你可以创建你自己的菜单组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/Menu.js</span>
+<span class="hljs-keyword">import</span> React, { createElement } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { MenuItemLink, getResources } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { withRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+<span class="hljs-keyword">import</span> LabelIcon <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/icons/Label'</span>;
+
+<span class="hljs-keyword">import</span> Responsive <span class="hljs-keyword">from</span> <span class="hljs-string">'../layout/Responsive'</span>;
+
+<span class="hljs-keyword">const</span> Menu = <span class="hljs-function">(<span class="hljs-params">{ resources, onMenuClick, logout }</span>) =&gt;</span> (
+    &lt;div&gt;
+        {resources.map(resource =&gt; (
+            &lt;MenuItemLink 
+                to={`/${resource.name}`}
+                primaryText={resource.name}
+                leftIcon={createElement(resource.icon)}
+                onClick={onMenuClick}
+            /&gt;
+        ))}
+        &lt;MenuItemLink 
+            to="/custom-route"
+            primaryText="Miscellaneous"
+            leftIcon={&lt;LabelIcon /&gt;}
+            onClick={onMenuClick} /&gt;
+        &lt;Responsive
+            small={logout}
+            medium={null} // Pass null to render nothing on larger devices
+        /&gt;
+    &lt;/div&gt;
+);
+
+const mapStateToProps = state =&gt; ({
+    resources: getResources(state),
+});
+
+export default withRouter(connect(mapStateToProps)(Menu));
+</code></pre>
+<p><strong>提示</strong>: 注意 <code>MenuItemLink</code> 组件。 必须使用它来避免移动视图中的不必要的副作用。 它支持自定义文本和图标 (必须是 material-ui 的 <code>&lt;SvgIcon&gt;</code>)。</p>
+<p><strong>提示</strong>：注意, 我们只在小设备上包含 <code>logout</code> 项目。实际上, <code>logout</code> 按钮已显示在较大设备的 AppBar 中。</p>
+<p><strong>提示</strong>: 注意, 我们使用React Router <a href="https://reacttraining.com/react-router/web/api/withRouter"><code>withRouter</code></a> 高阶组件和使用 <strong>之前</strong> Redux<a href="https://github.com/reactjs/react-redux/blob/master/docs/api.html#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options"> connect </a>。 如果要突出显示活动菜单项，则需要此选项。</p>
+<p>然后, 将其传递到 <code>&lt;Admin&gt;</code> 组件, 作为 <code>menu</code> 属性：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> Menu <span class="hljs-keyword">from</span> <span class="hljs-string">'./Menu'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">menu</span>=<span class="hljs-string">{Menu}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p>有关详细信息, 请参阅 <a href="./Theming.html#using-a-custom-menu">主题文档</a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="theme"></a><a href="#theme" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>theme</code></h2>
+<p>Material UI 支持 <a href="http://www.material-ui.com/#/customization/themes">主题</a>。 这使您可以通过覆盖字体、颜色和间距来自定义 admin 的外观。 您可以使用 <code>theme</code> 属性提供自定义 material ui 主题:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { createMuiTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">const</span> theme = createMuiTheme({
+  <span class="hljs-attr">palette</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'dark'</span>, <span class="hljs-comment">// Switching the dark mode on is a single property value change.</span>
+  },
+});
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">{theme}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/dark-theme.png" alt="Dark theme"></p>
+<p>有关预定义主题和自定义主题的详细信息, 请参阅 <a href="https://material-ui.com/customization/themes/">Material UI 自定义文档</a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="applayout"></a><a href="#applayout" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>appLayout</code></h2>
+<p>如果要深度自定义应用程序头、菜单或通知, 最好的方法是提供自定义布局组件。 它必须包含 <code>{children}</code> 占位符, 其中就是 react-admin 将渲染的资源。 如果使用material UI fields 和 inputs, 则应包含 <code>&lt;MuiThemeProvider&gt;</code> 元素。 最后, 如果您希望当应用程序在后台获取数据时，在 app header中显示spinner，则 Layout 应 connect 到redux store。</p>
+<p>使用 <a href="https://github.com/marmelab/react-admin/blob/master/packages/ra-ui-materialui/src/layout/Layout.js">默认布局</a> 作为起始点, 并查看 <a href="./Theming.html#using-a-custom-layout">主题文档</a> 示例。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> MyLayout <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyLayout'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">appLayout</span>=<span class="hljs-string">{MyLayout}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        // ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p>如果只想覆盖 appBar、菜单或通知组件, 则自定义布局可以简单地扩展默认的 <code>&lt;Layout&gt;</code> 组件。例如：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/MyLayout.js</span>
+<span class="hljs-keyword">import</span> { Layout } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> MyAppBar <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyAppBar'</span>;
+<span class="hljs-keyword">import</span> MyMenu <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyMenu'</span>;
+<span class="hljs-keyword">import</span> MyNotification <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyNotification'</span>;
+
+<span class="hljs-keyword">const</span> MyLayout = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> &lt;Layout 
+    {...props}
+    appBar={MyAppBar}
+    menu={MyMenu}
+    notification={MyNotification}
+/&gt;;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> MyLayout;
+</code></pre>
+<p>有关自定义布局的详细信息，请查看 <a href="./Theming.html#using-a-custom-layout">主题文档</a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="customreducers"></a><a href="#customreducers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>customReducers</code></h2>
+<p><code>&lt;Admin&gt;</code> app 使用 <a href="http://redux.js.org/">Redux</a> 来管理状态。状态具有以下键：</p>
+<pre><code class="hljs css languages- jsx">{
+    <span class="hljs-attr">admin</span>: { <span class="hljs-comment">/*...*/</span> }, <span class="hljs-comment">// used by react-admin</span>
+    form: { <span class="hljs-comment">/*...*/</span> }, <span class="hljs-comment">// used by redux-form</span>
+    routing: { <span class="hljs-comment">/*...*/</span> }, <span class="hljs-comment">// used by react-router-redux</span>
+}
+</code></pre>
+<p>如果你的组件 dispatch 自定义 action，则可能需要注册你自己的 reducer 以使用这些 action 更新状态。 让我们假设您希望将比特币汇率保持在状态中的 <code>bitcoinRate</code> 键中。 你可能有一个如下所示的 reducer：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/bitcoinRateReducer.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (previousState = <span class="hljs-number">0</span>, { type, payload }) =&gt; {
+    <span class="hljs-keyword">if</span> (type === <span class="hljs-string">'BITCOIN_RATE_RECEIVED'</span>) {
+        <span class="hljs-keyword">return</span> payload.rate;
+    }
+    <span class="hljs-keyword">return</span> previousState;
+}
+</code></pre>
+<p>要在<code>&lt;Admin&gt;</code>应用程序中注册此reducer，只需将其传递给<code>customReducers</code> 属性：</p>
+<p>{% raw %}</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">import</span> bitcoinRateReducer <span class="hljs-keyword">from</span> <span class="hljs-string">'./bitcoinRateReducer'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">customReducers</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">bitcoinRate:</span> <span class="hljs-attr">bitcoinRateReducer</span> }} <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
+</code></pre>
+<p>{% endraw %}</p>
+<p>现在 state 将看起来像：</p>
+<pre><code class="hljs css languages- jsx">{
+    <span class="hljs-attr">admin</span>: { <span class="hljs-comment">/*...*/</span> }, <span class="hljs-comment">// used by react-admin</span>
+    form: { <span class="hljs-comment">/*...*/</span> }, <span class="hljs-comment">// used by redux-form</span>
+    routing: { <span class="hljs-comment">/*...*/</span> }, <span class="hljs-comment">// used by react-router-redux</span>
+    bitcoinRate: <span class="hljs-number">123</span>, <span class="hljs-comment">// managed by rateReducer</span>
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="customsagas"></a><a href="#customsagas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>customSagas</code></h2>
+<p><code>&lt;Admin&gt;</code> app 使用 redux-saga 来处理副作用（AJAX调用，通知，重定向等）。</p>
+<p>如果你的组件 dispatch 自定义 action，则可能需要注册你自己的 side effedcts 作为 saga。 假设您希望在dispatch <code>BITCOIN_RATE_RECEIVED</code> action 时显示通知。 你可能有一个类似如下的saga：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/bitcoinSaga.js</span>
+<span class="hljs-keyword">import</span> { put, takeEvery } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-saga/effects'</span>;
+<span class="hljs-keyword">import</span> { showNotification } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">bitcoinSaga</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">yield</span> takeEvery(<span class="hljs-string">'BITCOIN_RATE_RECEIVED'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>* (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">yield</span> put(showNotification(<span class="hljs-string">'Bitcoin rate updated'</span>));
+    })
+}
+</code></pre>
+<p>要在 <code>&lt;Admin&gt;</code> app 中注册此 saga, 只需在 <code>customSagas</code> 属性中传递它：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">import</span> bitcoinSaga <span class="hljs-keyword">from</span> <span class="hljs-string">'./bitcoinSaga'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">customSagas</span>=<span class="hljs-string">{[</span> <span class="hljs-attr">bitcoinSaga</span> ]} <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="customroutes"></a><a href="#customroutes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>customRoutes</code></h2>
+<p>要注册自己的路由, 请创建一个模块, 返回一个 <a href="https://github.com/ReactTraining/react-router">react-router</a> <code>&lt;Route&gt;</code> 组件列表：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/customRoutes.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Route } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+<span class="hljs-keyword">import</span> Foo <span class="hljs-keyword">from</span> <span class="hljs-string">'./Foo'</span>;
+<span class="hljs-keyword">import</span> Bar <span class="hljs-keyword">from</span> <span class="hljs-string">'./Bar'</span>;
+<span class="hljs-keyword">import</span> Baz <span class="hljs-keyword">from</span> <span class="hljs-string">'./Baz'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> [
+    &lt;Route exact path="/foo" component={Foo} /&gt;,
+    &lt;Route exact path="/bar" component={Bar} /&gt;,
+    &lt;Route exact path="/baz" component={Baz} noLayout /&gt;,
+];
+</code></pre>
+<p>然后，将此数组作为 <code>customRoutes</code> 属性传递到 <code>&lt;Admin&gt;</code> 组件中：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">import</span> customRoutes <span class="hljs-keyword">from</span> <span class="hljs-string">'./customRoutes'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">customRoutes</span>=<span class="hljs-string">{customRoutes}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
+</code></pre>
+<p>现在，当用户浏览<code>/foo</code>或<code>/bar</code>时，您定义的组件将显示在屏幕的主要部分中。 当用户浏览 <code>/baz</code> 时，组件将出现在定义的布局之外，让您可以自由地按照自己的方式设计。</p>
+<p><strong>提示</strong>：您可以创建<a href="#menu">自定义菜单</a>入口或自定义按钮来引导您的自定义页面。</p>
+<p><strong>提示</strong>：自定义页面优先于 react-admin 自己的路由。 这意味着 <code>customRoutes</code> 允许您覆盖所需的任何路由！ 如果你要在所有 react-admin <em>之后</em>添加路由，请使用 <a href="#catchall"><code>catchAll</code> 属性</a>代替。</p>
+<p><strong>提示</strong>：要看起来像其他 react-admin 页面，您的自定义页应具有以下结构:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/Foo.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> Card <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Card'</span>;
+<span class="hljs-keyword">import</span> CardContent <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardContent'</span>;
+<span class="hljs-keyword">import</span> { ViewTitle } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> Foo = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ViewTitle</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"My Page"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">CardContent</span>&gt;</span>
+            ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">CardContent</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span>
+));
+
+export default Foo;
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="authprovider"></a><a href="#authprovider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>authProvider</code></h2>
+<p><code>authProvider</code> 属性期望函数返回一个Promise，以控制应用程序身份验证策略：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> authProvider(type, params) {
+    <span class="hljs-comment">// type can be any of AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, and AUTH_CHECK</span>
+    <span class="hljs-comment">// ...</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
+};
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">authProvider</span>=<span class="hljs-string">{authProvider}</span> <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{simpleRestProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">path.to.my.api</span>')}&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p><a href="./Authentication.html">身份验证文档</a> 解释如何详细实现这些功能。</p>
+<h2><a class="anchor" aria-hidden="true" id="loginpage"></a><a href="#loginpage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>loginPage</code></h2>
+<p>如果要自定义登录页，或切换到其他身份验证策略，而不是用户名/密码表单, 请将自己的组件作为 <code>loginPage</code> 属性传递。 只要调用 <code>/login</code> 路由，React-admin 就会显示该组件。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> MyLoginPage <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyLoginPage'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">loginPage</span>=<span class="hljs-string">{MyLoginPage}</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<p>有关详细信息, 请参阅 <a href="./Authentication.html#customizing-the-login-and-logout-components">身份验证文档</a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="logoutbutton"></a><a href="#logoutbutton" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>logoutButton</code></h2>
+<p>如果自定义 <code>loginPage</code>，则可能需要重写 <code>logoutButton</code>，因为它们共享身份验证策略。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> MyLoginPage <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyLoginPage'</span>;
+<span class="hljs-keyword">import</span> MyLogoutButton <span class="hljs-keyword">from</span> <span class="hljs-string">'./MyLogoutButton'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">loginPage</span>=<span class="hljs-string">{MyLoginPage}</span> <span class="hljs-attr">logoutButton</span>=<span class="hljs-string">{MyLogoutButton}</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="initialstate"></a><a href="#initialstate" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>initialState</code></h2>
+<p><code>initialState</code> 属性允许您将预加载状态传递给Redux。 有关详细信息, 请参阅 <a href="http://redux.js.org/docs/api/createStore.html#createstorereducer-preloadedstate-enhancer">Redux文档</a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="history"></a><a href="#history" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>history</code></h2>
+<p>默认情况下, react-admin 使用哈希符号 (例如&quot;myadmin.acme.com/#/posts/123&quot;) 创建 url。 URL 的哈希部分 (即 示例中的 <code>#/posts/123</code> 包含主应用程序路由。 此策略具有在没有服务器和旧式 web 浏览器的情况下工作的好处。 但您可能希望使用其他路由策略, 例如, 允许服务器端渲染。</p>
+<p>您可以创建自己的 <code>history</code> 函数 (与 <a href="https://github.com/reacttraining/history"> <code>history</code> npm包兼容</a>)。并将其传递到 <code>&lt;Admin&gt;</code> 组件以覆盖默认历史记录策略。 例如，要使用 <code>browserHistory</code>：</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">import</span> createHistory <span class="hljs-keyword">from</span> <span class="hljs-string">'history/createBrowserHistory'</span>;
+
+<span class="hljs-keyword">const</span> history = createHistory();
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">history</span>=<span class="hljs-string">{history}</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="国际化-in"></a><a href="#国际化-in" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>国际化 （in）</h2>
+<p><code>locale</code> 和 <code>messages</code> 属性允许您翻译GUI。翻译文档详细介绍了此过程。</p>
+<h2><a class="anchor" aria-hidden="true" id="在运行时声明资源"></a><a href="#在运行时声明资源" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>在运行时声明资源</h2>
+<p>您可能希望在应用启动时动态定义Resource。 <code>&lt;Admin&gt;</code> 组件接受一个函数作为其子函数，此函数可以返回一个Promise。 如果还定义了 <code>authProvider</code>, 则该函数将接收到 <code>authProvider</code> 的调用结果, 并使用 <code>AUTH_GET_PERMISSIONS</code> 类型 (您可以在 <a href="./Authorization.html">授权</a> 章节中阅读更多信息)。</p>
+<p>例如, 从 API 获取资源可能类似于：</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> simpleRestProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-simple-rest'</span>;
+
+<span class="hljs-keyword">import</span> { PostList } <span class="hljs-keyword">from</span> <span class="hljs-string">'./posts'</span>;
+<span class="hljs-keyword">import</span> { CommentList } <span class="hljs-keyword">from</span> <span class="hljs-string">'./comments'</span>;
+
+<span class="hljs-keyword">const</span> knownResources = [
+    &lt;Resource name="posts" list={PostList} /&gt;,
+    &lt;Resource name="comments" list={CommentList} /&gt;,
+];
+
+const fetchResources = permissions =&gt;
+    fetch('https://myapi/resources', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(permissions),
+    })
+    .then(response =&gt; response.json())
+    .then(json =&gt; knownResources.filter(resource =&gt; json.resources.includes(resource.props.name)));
+
+const App = () =&gt; (
+    &lt;Admin dataProvider={simpleRestProvider('http://path.to.my.api')}&gt;
+        {fetchResources}
+    &lt;/Admin&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="在没有-admin-和-resource-的情况下使用-react-admin"></a><a href="#在没有-admin-和-resource-的情况下使用-react-admin" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>在没有 <code>&lt;Admin&gt;</code> 和 <code>&lt;Resource&gt;</code> 的情况下使用 react-admin</h2>
+<p>使用 <code>&lt;Admin&gt;</code> 和 <code>&lt;Resource&gt;</code> 是完全可选的。 如果你想自己引导一个redux app， 这是完全有可能的。 前往<a href="./CustomApp.html">包含在另一个app</a>，给了一个详细的指引。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/data-providers.html">← 数据提供程序</a><a class="docs-next button" href="/docs/zh-CN/resource-component.html">Resource 组件 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#dataprovider"><code>dataProvider</code></a></li><li><a href="#title"><code>title</code></a></li><li><a href="#dashboard"><code>dashboard</code></a></li><li><a href="#catchall"><code>catchAll</code></a></li><li><a href="#menu"><code>menu</code></a></li><li><a href="#theme"><code>theme</code></a></li><li><a href="#applayout"><code>appLayout</code></a></li><li><a href="#customreducers"><code>customReducers</code></a></li><li><a href="#customsagas"><code>customSagas</code></a></li><li><a href="#customroutes"><code>customRoutes</code></a></li><li><a href="#authprovider"><code>authProvider</code></a></li><li><a href="#loginpage"><code>loginPage</code></a></li><li><a href="#logoutbutton"><code>logoutButton</code></a></li><li><a href="#initialstate"><code>initialState</code></a></li><li><a href="#history"><code>history</code></a></li><li><a href="#国际化-in">国际化 （in）</a></li><li><a href="#在运行时声明资源">在运行时声明资源</a></li><li><a href="#在没有-admin-和-resource-的情况下使用-react-admin">在没有 <code>和</code> 的情况下使用 react-admin</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

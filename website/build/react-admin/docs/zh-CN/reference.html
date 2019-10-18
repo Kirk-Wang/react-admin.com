@@ -1,0 +1,303 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>引用 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;div style=&quot;column-count:3&quot;&gt;"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="引用 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="&lt;div style=&quot;column-count:3&quot;&gt;"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/reference.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">引用</h1></header><article><div><span><div style="column-count:3">
+  <ul>
+    <li>
+      <code>&lt;Actions&gt;</code>
+    </li>
+    <li>
+      <a href="./Admin.html"><code>&lt;Admin&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;AdminRoutes&gt;</code>
+    </li>
+    <li>
+      <code>&lt;AppBar&gt;</code>
+    </li>
+    <li>
+      <code>&lt;AppBarMobile&gt;</code>
+    </li>
+    <li>
+      <a href="./Fields.html#arrayfield"><code>&lt;ArrayField&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#arrayinput"><code>&lt;ArrayInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Authentication.html#restricting-access-to-a-custom-page"><code>&lt;Authenticated&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#autocompleteinput"><code>&lt;AutocompleteInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Fields.html#booleanfield"><code>&lt;BooleanField&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#booleaninput-and-nullablebooleaninput"><code>&lt;BooleanInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#checkboxgroupinput"><code>&lt;CheckboxGroupInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Fields.html#chipfield"><code>&lt;ChipField&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;Confirm&gt;</code>
+    </li>
+    <li>
+      <a href="./CreateEdit.html#the-create-and-edit-components"><code>&lt;Create&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;CreateActions&gt;</code>
+    </li>
+    <li>
+      <code>&lt;CreateButton&gt;</code>
+    </li>
+    <li>
+      <code>&lt;DashboardMenuItem&gt;</code>
+    </li>
+    <li>
+      <a href="./List.html#the-datagrid-component"><code>&lt;Datagrid&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;DatagridBody&gt;</code>
+    </li>
+    <li>
+      <code>&lt;DatagridCell&gt;</code>
+    </li>
+    <li>
+      <code>&lt;DatagridHeaderCell&gt;</code>
+    </li>
+    <li>
+      <a href="./Fields.html#datefield"><code>&lt;DateField&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#dateinput"><code>&lt;DateInput&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;DeleteButton&gt;</code>
+    </li>
+    <li>
+      <a href="./Inputs.html#disabledinput"><code>&lt;DisabledInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./CreateEdit.html#the-create-and-edit-components"><code>&lt;Edit&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;EditActions&gt;</code>
+    </li>
+    <li>
+      <code>&lt;EditButton&gt;</code>
+    </li>
+    <li>
+      <a href="./Fields.html#emailfield"><code>&lt;EmailField&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Fields.html#filefield"><code>&lt;FileField&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#fileinput"><code>&lt;FileInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./List.html#filters"><code>&lt;Filter&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;FilterButton&gt;</code>
+    </li>
+    <li>
+      <code>&lt;FilterForm&gt;</code>
+    </li>
+    <li>
+      <a href="./Inputs.html#linking-two-inputs"><code>&lt;FormDataConsumer&gt;</code></a>
+    </li>
+    <li>
+      <a href="./CreateEdit.html#the-tabbedform-component"><code>&lt;FormTab&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Fields.html#functionfield"><code>&lt;FunctionField&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;EditButton&gt;</code>
+    </li>
+    <li>
+      <a href="./Fields.html#imagefield"><code>&lt;ImageField&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#imageinput"><code>&lt;ImageInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#imageinput"><code>&lt;ImageInputPreview&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Fields.html#functionfield"><code>&lt;FunctionField&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;Labeled&gt;</code>
+    </li>
+    <li>
+      <a href="./Theming.html#using-a-custom-layout"><code>&lt;Layout&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Theming.html#Loading"><code>&lt;Loading&gt;</code></a>
+    </li>
+    <li>
+      <a href="./List.html#the-list-component"><code>&lt;List&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;ListButton&gt;</code>
+    </li>
+    <li>
+      <a href="./Inputs.html#longtextinput"><code>&lt;LongTextInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Theming.html#using-a-custom-menu"><code>&lt;Menu&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;Notification&gt;</code>
+    </li>
+    <li>
+      <a href="./Inputs.html#booleaninput-and-nullablebooleaninput"><code>&lt;NullableBooleanInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Fields.html#numberfield"><code>&lt;NumberField&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#numberinput"><code>&lt;NumberInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./List.html#pagination"><code>&lt;Pagination&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#radiobuttongroupinput"><code>&lt;RadioButtonGroupInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Fields.html#referencearrayfield"><code>&lt;ReferenceArrayField&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Fields.html#referencefield"><code>&lt;ReferenceField&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#referenceinput"><code>&lt;ReferenceInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Fields.html#referencemanyfield"><code>&lt;ReferenceManyField&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;RefreshButton&gt;</code>
+    </li>
+    <li>
+      <a href="./Resource.html#the-resource-component"><code>&lt;Resource&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Theming.html#responsive-utility"><code>&lt;Responsive&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Fields.html#richtextfield"><code>&lt;RichTextField&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#richtextinput"><code>&lt;RichTextInput&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;SaveButton&gt;</code>
+    </li>
+    <li>
+      <a href="./Fields.html#selectfield"><code>&lt;SelectField&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#selectinput"><code>&lt;SelectInput&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Show.html#the-show-component"><code>&lt;Show&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;ShowButton&gt;</code>
+    </li>
+    <li>
+      <code>&lt;Sidebar&gt;</code>
+    </li>
+    <li>
+      <code>&lt;SimpleList&gt;</code>
+    </li>
+    <li>
+      <code>&lt;SingleFieldList&gt;</code>
+    </li>
+    <li>
+      <a href="./CreateEdit.html#the-simpleform-component"><code>&lt;SimpleForm&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#arrayinput"><code>&lt;SimpleformIterator&gt;</code></a>
+    </li>
+    <li>
+      <a href="./List.html#the-simplelist-component"><code>&lt;SimpleList&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Show.html#the-simpleshowlayout-component"><code>&lt;SimpleShowLayout&gt;</code></a>
+    </li>
+    <li>
+      <a href="./List.html#the-singlefieldlist-component"><code>&lt;SingleFieldList&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;Tab&gt;</code>
+    </li>
+    <li>
+      <a href="./CreateEdit.html#the-tabbedform-component"><code>&lt;TabbedForm&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Show.html#the-tabbedshowlayout-component"><code>&lt;TabbedShowLayout&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Fields.html#textfield"><code>&lt;TextField&gt;</code></a>
+    </li>
+    <li>
+      <a href="./Inputs.html#textinput"><code>&lt;TextInput&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;Title&gt;</code>
+    </li>
+    <li>
+      <code>&lt;Toolbar&gt;</code>
+    </li>
+    <li>
+      <a href="./Fields.html#urlfield"><code>&lt;UrlField&gt;</code></a>
+    </li>
+    <li>
+      <code>&lt;ViewTitle&gt;</code>
+    </li>
+    <li>
+      <a href="./Authorization.html#withpermissions"><code>&lt;WithPermissions&gt;</code></a>
+    </li>
+  </ul>
+</div></span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/custom-app.html">← 在其它 App 中包含 Admin</a><a class="docs-next button" href="/docs/zh-CN/faq.html">常见问题 →</a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

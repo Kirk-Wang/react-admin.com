@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>生态 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="- [Input 组件和 Field 组件](#inputs-and-fields)"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="生态 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="- [Input 组件和 Field 组件](#inputs-and-fields)"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/ecosystem.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">生态</h1></header><article><div><span><ul>
+<li><a href="#inputs-and-fields">Input 组件和 Field 组件</a></li>
+<li><a href="#translations">翻译</a></li>
+<li><a href="#data-providers">Data Providers</a></li>
+<li><a href="#miscellaneous">杂项</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="input-组件和-field-组件"></a><a href="#input-组件和-field-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Input 组件和 Field 组件</h2>
+<ul>
+<li><a href="https://github.com/vascofg/react-admin-color-input">vascofg/react-admin-color-input</a>：使用 <a href="http://casesandberg.github.io/react-color/">React Color</a> 的颜色输入，一个颜色选择器的集合。</li>
+<li><a href="https://github.com/LoicMahieu/aor-tinymce-input">LoicMahieu/aor-tinymce-input</a>：TinyMCE组件，用于编辑HTML</li>
+<li><a href="https://github.com/vascofg/react-admin-date-inputs">vascofg/react-admin-date-inputs</a>: 日期输入的集合，基于 <a href="https://material-ui-pickers.firebaseapp.com/">material-ui-pickers</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="翻译"></a><a href="#翻译" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>翻译</h2>
+<p>请参阅 <a href="./Translation.md#available-locales">translation</a> 页面。</p>
+<h2><a class="anchor" aria-hidden="true" id="data-providers"></a><a href="#data-providers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Data Providers</h2>
+<ul>
+<li><strong><a href="https://github.com/dchester/epilogue">Epilogue</a></strong>: <a href="https://github.com/dunghuynh/aor-epilogue-client">dunghuynh/aor-epilogue-client</a></li>
+<li><strong><a href="http://www.feathersjs.com/">Feathersjs</a></strong>: <a href="https://github.com/josx/aor-feathers-client">josx/aor-feathers-client</a></li>
+<li><strong><a href="https://firebase.google.com/">Firebase</a></strong>: <a href="https://github.com/sidferreira/aor-firebase-client">sidferreira/aor-firebase-client</a></li>
+<li><strong><a href="http://graphql.org/">GraphQL</a></strong>: <a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-graphql">marmelab/ra-data-graphql</a> (uses <a href="http://www.apollodata.com/">Apollo</a>)</li>
+<li><strong><a href="http://www.graph.cool/">GraphCool</a></strong>: <a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-graphql">marmelab/ra-data-graphcool</a> (uses <a href="http://www.apollodata.com/">Apollo</a>)</li>
+<li><strong><a href="http://www.hydra-cg.com/">Hydra</a> / <a href="https://json-ld.org/">JSON-LD</a></strong>: <a href="https://github.com/api-platform/admin/blob/master/src/hydra/hydraClient.js">api-platform/admin/hydra</a></li>
+<li><strong><a href="http://jsonapi.org/">JSON API</a></strong>: <a href="https://github.com/moonlight-labs/aor-jsonapi-client">moonlight-labs/aor-jsonapi-client</a></li>
+<li><strong><a href="https://github.com/typicode/json-server">JSON server</a></strong>: <a href="https://github.com/marmelab/ra-data-json-server">marmelab/ra-data-json-server</a>.</li>
+<li>Local JSON: <a href="https://github.com/marmelab/ra-data-fakerest">marmelab/ra-data-fakerest</a></li>
+<li><strong><a href="http://loopback.io/">Loopback</a></strong>: <a href="https://github.com/kimkha/aor-loopback">kimkha/aor-loopback</a></li>
+<li><strong><a href="https://github.com/ParsePlatform/parse-server">Parse Server</a></strong>: <a href="https://github.com/leperone/aor-parseserver-client">leperone/aor-parseserver-client</a></li>
+<li><strong><a href="http://postgrest.com/en/v0.4/">PostgREST</a></strong>: <a href="https://github.com/tomberek/aor-postgrest-client">tomberek/aor-postgrest-client</a></li>
+<li>Simple REST: <a href="https://github.com/marmelab/ra-data-simple-rest">marmelab/ra-data-simple-rest</a>.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="miscellaneous"></a><a href="#miscellaneous" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Miscellaneous</h2>
+<ul>
+<li><a href="https://api-platform.com/docs/admin">api-platform/admin</a>: create a fully featured admin using React Admin for API supporting the <a href="http://www.hydra-cg.com/">Hydra Core Vocabulary</a>, including but not limited to APIs created using the <a href="https://api-platform.com">API Platform framework</a></li>
+<li><a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-realtime">marmelab/ra-realtime</a>: enable realtime updates</li>
+<li><a href="https://github.com/zifnab87/ra-component-factory">zifnab87/ra-component-factory</a>: centralized configuration of immutability/visibility of fields/menu-links/action buttons, easy re-ordering of fields/properties and tab reorganization based on permission roles</li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/faq.html">← 常见问题</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#input-组件和-field-组件">Input 组件和 Field 组件</a></li><li><a href="#翻译">翻译</a></li><li><a href="#data-providers">Data Providers</a></li><li><a href="#miscellaneous">Miscellaneous</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

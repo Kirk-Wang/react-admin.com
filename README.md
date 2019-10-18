@@ -1,7 +1,3 @@
-# react-admin.com（为混乱的中后台应用提供动力）
+# react-admin.com
 
-> Hello Guys~
-
-## License
-
-MIT © Kirk-Wang
+非官方中文文档

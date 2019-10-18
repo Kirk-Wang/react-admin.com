@@ -1,0 +1,772 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Field 组件 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="`Field` 组件显示 REST 资源的给定属性。 此类组件在 `List` 视图中使用，但也可以针对只读字段在 `Edit` 和` Create` 视图中使用。 所有 Field 组件中最常见的是 `&lt;TextField&gt;`:"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="Field 组件 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="`Field` 组件显示 REST 资源的给定属性。 此类组件在 `List` 视图中使用，但也可以针对只读字段在 `Edit` 和` Create` 视图中使用。 所有 Field 组件中最常见的是 `&lt;TextField&gt;`:"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/field-components.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Field 组件</h1></header><article><div><span><p><code>Field</code> 组件显示 REST 资源的给定属性。 此类组件在 <code>List</code> 视图中使用，但也可以针对只读字段在 <code>Edit</code> 和<code>Create</code> 视图中使用。 所有 Field 组件中最常见的是 <code>&lt;TextField&gt;</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/posts.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;TextField source="body" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>所有字段组件都接受以下属性：</p>
+<ul>
+<li><code>source</code>: Property name of your entity to view/edit. This attribute is required.</li>
+<li><code>label</code>: Used as a table header of an input label. Defaults to the <code>source</code> when omitted.</li>
+<li><code>sortable</code>: Should the list be sortable using <code>source</code> attribute? Defaults to <code>true</code>.</li>
+<li><code>className</code>: A class name (usually generated by JSS) to customize the look and feel of the field element itself</li>
+<li><code>cellClassName</code>: A class name (usually generated by JSS) to customize the look and feel of the field container (e.g. the <code>&lt;td&gt;</code> in a datagrid).</li>
+<li><code>headerClassName</code>: A class name (usually generated by JSS) to customize the look and feel of the field header (e.g. the <code>&lt;th&gt;</code> in a datagrid).</li>
+<li><code>addLabel</code>: Defines the visibility of the label when the field is not in a datagrid. Default value is <code>true</code>.</li>
+<li><code>textAlign</code>: Defines the text alignment inside a cell. Supports <code>left</code> (the default) and <code>right</code>.</li>
+</ul>
+<pre><code class="hljs css languages- jsx">&lt;TextField source=<span class="hljs-string">"zb_title"</span> label=<span class="hljs-string">"Title"</span> style={{ <span class="hljs-attr">color</span>: <span class="hljs-string">'purple'</span> }} /&gt;
+</code></pre>
+<p><strong>提示</strong>：您也可以在 <code>Edit</code> 或 <code>Show</code> 视图中使用 Field 组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostShow = <span class="hljs-function">(<span class="hljs-params">{ ...props }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Show</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">SimpleShowLayout</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">TextField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">SimpleShowLayout</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Show</span>&gt;</span>
+);
+</span></code></pre>
+<p><strong>提示</strong>：如果显示具有复杂结构的记录，则可以使用带有点分隔符的路径作为 <code>source</code> 属性。 例如，如果API返回以下'book'记录：</p>
+<pre><code class="hljs css languages- jsx">{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">1234</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'War and Peace'</span>,
+    <span class="hljs-attr">author</span>: {
+        <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Leo'</span>,
+        <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Tolstoi'</span>
+    }
+}
+</code></pre>
+<p>然后可以显示作者名字如下：</p>
+<pre><code class="hljs css languages- jsx">&lt;TextField source=<span class="hljs-string">"author.firstName"</span> /&gt;
+</code></pre>
+<p><strong>提示</strong>：如果要根据该值格式化字段，请使用高阶组件执行条件格式设置，如<a href="./Theming.md#conditional-formatting"> Theming documentation </a>中所述。</p>
+<p><strong>提示</strong>：如果你的界面必须支持多种语言，请勿使用 <code>label</code>，放本地化标签在字典中代替它。 有关详细信息, 请参阅 <a href="./Translation.md#translating-resource-and-field-names">身份验证文档</a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="arrayfield-组件"></a><a href="#arrayfield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ArrayField</code> 组件</h2>
+<p>使用 <code>&lt;Field&gt;</code> 子组件显示一个集合。</p>
+<p>非常适合嵌入式对象数组，例如： 以下<code>post</code>对象中的 <code>tags</code> 和 <code>backlinks</code>：</p>
+<pre><code class="hljs css languages- js">{
+  <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>
+  tags: [
+        { <span class="hljs-attr">name</span>: <span class="hljs-string">'foo'</span> },
+        { <span class="hljs-attr">name</span>: <span class="hljs-string">'bar'</span> }
+  ],
+  <span class="hljs-attr">backlinks</span>: [
+        {
+            <span class="hljs-attr">date</span>: <span class="hljs-string">'2012-08-10T00:00:00.000Z'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'http://example.com/foo/bar.html'</span>,
+        },
+        {
+            <span class="hljs-attr">date</span>: <span class="hljs-string">'2012-08-14T00:00:00.000Z'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'https://blog.johndoe.com/2012/08/12/foobar.html'</span>,
+        }
+   ]
+}
+</code></pre>
+<p>该子级必须是迭代器组件 (如 <code>&lt;Datagrid&gt;</code> 或 <code>&lt;SingleFieldList&gt;</code>)。</p>
+<p>以下是如何将当前 post 的所有 backlinks 显示为 <code>&lt;datagrid&gt;</code></p>
+<pre><code class="hljs css languages- jsx">&lt;ArrayField source=<span class="hljs-string">"backlinks"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Datagrid</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">DateField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"date"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">UrlField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"url"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Datagrid</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ArrayField</span>&gt;</span>
+</span></code></pre>
+<p>下面是如何将当前 post 的所有 tag 显示为 <code>&lt;Chip&gt;</code> 组件:</p>
+<pre><code class="hljs css languages- jsx">&lt;ArrayField source=<span class="hljs-string">"tags"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SingleFieldList</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ChipField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">SingleFieldList</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ArrayField</span>&gt;</span></span>
+</code></pre>
+<p><strong>提示</strong>：如果需要以自定义方式呈现集合，则编写自己的组件通常比较简单：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> TagsField = <span class="hljs-function">(<span class="hljs-params">{ record }</span>) =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+        {record.tags.map(item =&gt; (
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{item.name}</span>&gt;</span>{item.name}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        ))}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span>
+)
+TagsField.defaultProps = { <span class="hljs-attr">addLabel</span>: <span class="hljs-literal">true</span> };
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="booleanfield-组件"></a><a href="#booleanfield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>BooleanField</code> 组件</h2>
+<p>将布尔值显示为 check 。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { BooleanField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BooleanField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"commentable"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/boolean-field.png" alt="BooleanField"></p>
+<h2><a class="anchor" aria-hidden="true" id="chipfield-组件"></a><a href="#chipfield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ChipField</code> 组件</h2>
+<p>在 <a href="http://www.material-ui.com/#/components/chip">&quot;Chip&quot;</a>中显示一个值, 它是 label 的 Material UI 术语。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ChipField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ChipField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"category"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/chip-field.png" alt="ChipField"></p>
+<p>该字段类型对于一对多关系特别有用，例如， 显示给定作者的书籍列表：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ChipField, SingleFieldList, ReferenceManyField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ReferenceManyField</span> <span class="hljs-attr">reference</span>=<span class="hljs-string">"books"</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"author_id"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">SingleFieldList</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ChipField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">SingleFieldList</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceManyField</span>&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="datefield-组件"></a><a href="#datefield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>DateField</code> 组件</h2>
+<p>使用浏览器 locale 显示一个日期或日期时间（得益于 <code>Date.toLocaleDateString()</code> 和 <code>Date.toLocaleString()</code>）。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { DateField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">DateField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"publication_date"</span> /&gt;</span>
+</span></code></pre>
+<p>此组件接受一个 <code>showTime</code> 属性（默认为false），以强制显示除日期之外的时间。 它使用 <code>Intl.DateTimeFormat()</code> 如果可用，传递 <code>locales</code> 和 <code>options</code> 属性作为参数。 如果 Intl 不可用，它将忽略 <code>locales</code> 和 <code>options</code> 属性。</p>
+<pre><code class="hljs css languages- jsx">&lt;DateField source="publication_date" /&gt;
+// renders the record { id: 1234, publication_date: new Date('2017-04-23') } as
+&lt;span&gt;4/23/2017&lt;/span&gt;
+
+&lt;DateField source="publication_date" showTime /&gt;
+// renders the record { id: 1234, publication_date: new Date('2017-04-23 23:05') } as
+&lt;span&gt;4/23/2017, 11:05:00 PM&lt;/span&gt;
+
+&lt;DateField source="publication_date" options={{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }} /&gt;
+// renders the record { id: 1234, publication_date: new Date('2017-04-23') } as
+&lt;span&gt;Sunday, April 23, 2017&lt;/span&gt;
+
+&lt;DateField source="publication_date" locales="fr-FR" /&gt;
+// renders the record { id: 1234, publication_date: new Date('2017-04-23') } as
+&lt;span&gt;23/04/2017&lt;/span&gt;
+
+&lt;DateField source="publication_date" elStyle={{ color: 'red' }} /&gt;
+// renders the record { id: 1234, publication_date: new Date('2017-04-23') } as
+&lt;span style="color:red;"&gt;4/23/2017&lt;/span&gt;
+</code></pre>
+<p>有关 <code>options</code> 属性语法，请参阅 <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Date/toLocaleDateString">Intl.DateTimeformat documentation</a></p>
+<p>** 提示 **：如果您需要比 <code>Intl.DateTimeformat</code> 可提供更多的格式化选项，利用一个第三方库如 <a href="http://momentjs.com/">moment.js</a> 构建你自己的字段组件。</p>
+<h2><a class="anchor" aria-hidden="true" id="emailfield-组件"></a><a href="#emailfield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>EmailField</code> 组件</h2>
+<p><code>&lt;EmailField&gt;</code> 将电子邮件显示为 <code>&lt;a href=&quot;mailto:&quot; /&gt;</code> 链接。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { EmailField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">EmailField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"personal_email"</span> /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="functionfield-组件"></a><a href="#functionfield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>FunctionField</code> 组件</h2>
+<p>如果你需要一个特殊的函数来渲染一个字段，那么 <code>&lt;FunctionField&gt;</code> 就是完美的匹配。 它将 <code>record</code> 传递给通过开发人员提供的一个 <code>render</code> 函数。 例如，要显示基于 <code>first_name</code> 和 <code>last_name</code> 属性的 <code>user</code>记录的全名：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { FunctionField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>
+
+&lt;FunctionField label=<span class="hljs-string">"Name"</span> render={record =&gt; <span class="hljs-string">`<span class="hljs-subst">${record.first_name}</span> <span class="hljs-subst">${record.last_name}</span>`</span>} /&gt;
+</code></pre>
+<p><strong>提示</strong>：从技术上讲，由于您提供了渲染函数，因此您可以省略<code>&lt;FunctionField&gt;</code> 的 <code>source</code> 属性。 但是，提供 <code>source</code> 或 <code>sortBy</code> 将允许 datagrid 使列可排序，因为当用户单击列时，datagrid使用这些属性进行排序。 如果同时提供两者，<code>sortBy</code> 将覆盖用于对列进行排序的 <code>source</code>。</p>
+<h2><a class="anchor" aria-hidden="true" id="imagefield-组件"></a><a href="#imagefield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ImageField</code> 组件</h2>
+<p>如果需要显示 API 提供的 image，你可以使用 <code>&lt;ImageField /&gt;</code> 组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ImageField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ImageField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"url"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+</span></code></pre>
+<p>这个 Field 也通常用在一个 <a href="http://marmelab.com/react-admin/Inputs.md#imageinput"><code>&lt;ImageInput /&gt;</code></a> 组件内来显示预览。</p>
+<p>可选的 <code>title</code> 属性指向图片标题属性，用于 <code>alt</code> 和 <code>title</code> 属性。 它可以是一个硬编码的字符串，也可以是在你JSON对象内的路径：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// { picture: { url: 'cover.jpg', title: 'Larry Cover (French pun intended)' } }</span>
+
+<span class="hljs-comment">// Title would be "picture.title", hence "Larry Cover (French pun intended)"</span>
+&lt;ImageField source=<span class="hljs-string">"picture.url"</span> title=<span class="hljs-string">"picture.title"</span> /&gt;
+
+<span class="hljs-comment">// Title would be "Picture", as "Picture" is not a path in previous given object</span>
+&lt;ImageField source=<span class="hljs-string">"picture.url"</span> title=<span class="hljs-string">"Picture"</span> /&gt;
+</code></pre>
+<p>如果传递的值是在你 JSON 对象内的现有路径，那么它将使用 object 属性。否则，它将其值视为一个硬编码的标题。</p>
+<p>如果该记录实际上包含一个由 <code>source</code> 属性定义在它属性中的图片数组，则需要 <code>src</code> 属性来确定图像的 <code>src</code> 值，例如：</p>
+<pre><code class="hljs css languages- js"><span class="hljs-comment">// This is the record</span>
+{
+    <span class="hljs-attr">pictures</span>: [
+        { <span class="hljs-attr">url</span>: <span class="hljs-string">'image1.jpg'</span>, <span class="hljs-attr">desc</span>: <span class="hljs-string">'First image'</span> },
+        { <span class="hljs-attr">url</span>: <span class="hljs-string">'image2.jpg'</span>, <span class="hljs-attr">desc</span>: <span class="hljs-string">'Second image'</span> },
+    ],
+}
+
+&lt;ImageField source=<span class="hljs-string">"pictures"</span> src=<span class="hljs-string">"url"</span> title=<span class="hljs-string">"desc"</span> /&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="filefield-组件"></a><a href="#filefield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>FileField</code> 组件</h2>
+<p>如果需要显示 API 提供的文件，可以使用 <code>&lt;FileField /&gt;</code> 组件：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { FileField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">FileField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"url"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"title"</span> /&gt;</span>
+</span></code></pre>
+<p>这个 Field 也通常用在一个 <a href="http://marmelab.com/react-admin/Inputs.md#fileinput"><code>&lt;FileInput /&gt;</code></a> 组件内来显示预览。</p>
+<p>可选的 <code>title</code> 属性指向文件标题属性，用于 <code>title</code> 属性。 它可以是一个硬编码的字符串，也可以是你JSON对象中的路径：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// { file: { url: 'doc.pdf', title: 'Presentation' } }</span>
+
+<span class="hljs-comment">// Title would be "file.title", hence "Presentation"</span>
+&lt;FileField source=<span class="hljs-string">"file.url"</span> title=<span class="hljs-string">"file.title"</span> /&gt;
+
+<span class="hljs-comment">// Title would be "File", as "File" is not a path in previous given object</span>
+&lt;FileField source=<span class="hljs-string">"file.url"</span> title=<span class="hljs-string">"File"</span> /&gt;
+</code></pre>
+<p>如果传递的值是在你 JSON 对象内的现有路径，那么它将使用 object 属性。否则，它将其值视为一个硬编码的标题。</p>
+<p>如果该记录实际上包含一个由 <code>source</code> 属性定义在它属性中的文件数组，则需要 <code>src</code> 属性来确定图像的 <code>href</code> 值，例如：</p>
+<pre><code class="hljs css languages- js"><span class="hljs-comment">// This is the record</span>
+{
+    <span class="hljs-attr">files</span>: [
+        { <span class="hljs-attr">url</span>: <span class="hljs-string">'image1.jpg'</span>, <span class="hljs-attr">desc</span>: <span class="hljs-string">'First image'</span> },
+        { <span class="hljs-attr">url</span>: <span class="hljs-string">'image2.jpg'</span>, <span class="hljs-attr">desc</span>: <span class="hljs-string">'Second image'</span> },
+    ],
+}
+
+&lt;FileField source=<span class="hljs-string">"files"</span> src=<span class="hljs-string">"url"</span> title=<span class="hljs-string">"desc"</span> /&gt;
+</code></pre>
+<p>您可以选择设置<code>target</code>属性，以选择链接尝试打开的窗口。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// Will make the file open in new window</span>
+&lt;FileField source=<span class="hljs-string">"file.url"</span> target=<span class="hljs-string">"_blank"</span> /&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="numberfield-组件"></a><a href="#numberfield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>NumberField</code> 组件</h2>
+<p>显示根据浏览器区域设置格式化的数字，右对齐。</p>
+<p>使用 <code>Intl.NumberFormat()</code> 如果可用，传递 <code>locales</code> 和 <code>options</code> 属性作为参数。 这允许完美显示小数，货币，百分比等。</p>
+<p>如果Intl不可用，它会按原样输出数字（并忽略 <code>locales</code> 和 <code>options</code> 属性）。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NumberField }  <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+&lt;NumberField source="score" /&gt;
+// renders the record { id: 1234, score: 567 } as
+&lt;span&gt;567&lt;/span&gt;
+
+&lt;NumberField source="score" options={{ maximumFractionDigits: 2 }}/&gt;
+// renders the record { id: 1234, score: 567.3567458569 } as
+&lt;span&gt;567.35&lt;/span&gt;
+
+&lt;NumberField source="share" options={{ style: 'percent' }} /&gt;
+// renders the record { id: 1234, share: 0.2545 } as
+&lt;span&gt;25%&lt;/span&gt;
+
+&lt;NumberField source="price" options={{ style: 'currency', currency: 'USD' }} /&gt;
+// renders the record { id: 1234, price: 25.99 } as
+&lt;span&gt;$25.99&lt;/span&gt;
+
+&lt;NumberField source="price" locales="fr-FR" options={{ style: 'currency', currency: 'USD' }} /&gt;
+// renders the record { id: 1234, price: 25.99 } as
+&lt;span&gt;25,99 $US&lt;/span&gt;
+
+&lt;NumberField source="score" elStyle={{ color: 'red' }} /&gt;
+// renders the record { id: 1234, score: 567 } as
+&lt;span style="color:red;"&gt;567&lt;/span&gt;
+</code></pre>
+<p>有关 <code>options</code> 属性语法，请参阅 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString"> Intl.Numberformat documentation</a></p>
+<p><strong>提示</strong>：如果您需要比 Intl.Numberformat 可以提供更多的格式化选项，使用像 <a href="http://numeraljs.com/">numeral.js</a> 一个第三方库构建你自己的field组件。</p>
+<p><strong>提示</strong>：当在 <code>Show</code> 视图中使用时, 右对齐可能看起来很怪异。通过重置 <code>style</code> 属性禁用它：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { NumberField }  <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">NumberField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"score"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{}}</span> /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="selectfield-组件"></a><a href="#selectfield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>SelectField</code> 组件</h2>
+<p>当需要显示枚举字段时, <code>&lt;SelectField&gt;</code> 将该值映射到字符串。</p>
+<p>例如, 如果 <code>gender</code> 字段可以取值 &quot;M&quot; 和 &quot;F&quot;，下面是如何将其显示为 &quot;Male&quot; 或 &quot;Female&quot;：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { SelectField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"gender"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{[</span>
+   { <span class="hljs-attr">id:</span> '<span class="hljs-attr">M</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Male</span>' },
+   { <span class="hljs-attr">id:</span> '<span class="hljs-attr">F</span>', <span class="hljs-attr">name:</span> '<span class="hljs-attr">Female</span>' },
+]} /&gt;</span>
+</span></code></pre>
+<p>默认情况下，文本构建通过</p>
+<ul>
+<li>查找 &quot;id&quot; 属性等于字段值的选项</li>
+<li>使用'name'属性作为一个选项文本</li>
+</ul>
+<p><strong>警告</strong>： 如果同时导入这两个，此组件名称可能与 material-ui 的 <a href="http://www.material-ui.com/#/components/select-field"><code>&lt;SelectField&gt;</code></a> 冲突。</p>
+<p>还可以自定义用于查找值和文本的属性, 这要归功于 &quot;optionValue&quot; 和 &quot;optionText&quot; 属性。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">_id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Leo Tolstoi'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'M'</span> },
+   { <span class="hljs-attr">_id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">full_name</span>: <span class="hljs-string">'Jane Austen'</span>, <span class="hljs-attr">sex</span>: <span class="hljs-string">'F'</span> },
+];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">"full_name"</span> <span class="hljs-attr">optionValue</span>=<span class="hljs-string">"_id"</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> 也接受一个函数，所以你可以随意设置选项文本：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Leo'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Tolstoi'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-number">456</span>, <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Jane'</span>, <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Austen'</span> },
+];
+<span class="hljs-keyword">const</span> optionRenderer = <span class="hljs-function"><span class="hljs-params">choice</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${choice.first_name}</span> <span class="hljs-subst">${choice.last_name}</span>`</span>;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"author_id"</span> <span class="hljs-attr">choices</span>=<span class="hljs-string">{choices}</span> <span class="hljs-attr">optionText</span>=<span class="hljs-string">{optionRenderer}</span> /&gt;</span>
+</span></code></pre>
+<p><code>optionText</code> 也接受一个 Reac t元素，它将被克隆，并接收相关选择作为<code>record</code> 属性。您可以在那里使用 Field 组件。</p>
+<pre><code class="hljs css languages- jsx">const choices = [
+   { id: 123, first_name: 'Leo', last_name: 'Tolstoi' },
+   { id: 456, first_name: 'Jane', last_name: 'Austen' },
+];
+const FullNameField = ({ record }) =&gt; &lt;Chip&gt;{record.first_name} {record.last_name}&lt;/Chip&gt;;
+&lt;SelectField source="gender" choices={choices} optionText={&lt;FullNameField /&gt;}/&gt;
+</code></pre>
+<p>默认情况下翻译当前选项，因此您可以使用翻译标识符作为选择：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> choices = [
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'M'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.male'</span> },
+   { <span class="hljs-attr">id</span>: <span class="hljs-string">'F'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'myroot.gender.female'</span> },
+];
+</code></pre>
+<p>然而，在某些情况下（例如在 <code>&lt;ReferenceField&gt;</code> 内），您可能不希望翻译该选择。在这种情况下，请将 <code>translateChoice</code> 属性设置为false。</p>
+<pre><code class="hljs css languages- jsx">&lt;SelectField source=<span class="hljs-string">"gender"</span> choices={choices} translateChoice={<span class="hljs-literal">false</span>}/&gt;
+</code></pre>
+<p><strong>提示</strong>： <referencefield> 默认情况下, 将 <code>translateChoice</code> 设置为 false。</p>
+<h2><a class="anchor" aria-hidden="true" id="referencefield-组件"></a><a href="#referencefield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ReferenceField</code> 组件</h2>
+<p>此组件提取单个引用的记录 (使用 <code>GET_MANY</code> REST 方法)，并显示此记录的一个字段。 这就是为什么 <code>&lt;ReferenceField&gt;</code> 必须始终有一个子 <code>&lt;Field&gt;</code> 的原因。</p>
+<p>例如，这里是如何获取与 <code>post</code> 相关的 <code>user</code> 记录，并显示每个的 <code>name</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, ReferenceField, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;ReferenceField label="Author" source="user_id" reference="users"&gt;
+                &lt;TextField source="name" /&gt;
+            &lt;/ReferenceField&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p>使用此配置，<code>&lt;ReferenceField&gt;</code> 将用户的名称包装到相关用户 <code>&lt;Edit&gt;</code> 页的链接中。</p>
+<p><img src="https://marmelab.com/react-admin/img/reference-field.png" alt="ReferenceField"></p>
+<p><code>&lt;ReferenceField&gt;</code> 接受一个 <code>reference</code> 属性，它指定为相关记录获取资源。 此外，您可以使用任何 <code>Field</code> 组件作为子级。</p>
+<p><strong>注释</strong>: 您 <strong>必须</strong> 添加 <code>&lt;Resource&gt;</code> 对于 reference resource - react-admin 需要它来获取引用数据。 如果你想在侧边栏菜单中隐藏它，你 <em>可以</em> 省略此引用中的 <code>list</code> 属性。</p>
+<pre><code class="hljs css languages- jsx">&lt;Admin dataProvider={myDataProvider}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"comments"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{CommentList}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"posts"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+</span></code></pre>
+<p>要将链接从 <code>&lt;Edit&gt;</code> 页更改为 <code>&lt;Show&gt;</code> 页， 将 <code>linkType</code> 属性设置为 &quot;show&quot;。</p>
+<pre><code class="hljs css languages- jsx">&lt;ReferenceField label=<span class="hljs-string">"User"</span> source=<span class="hljs-string">"userId"</span> reference=<span class="hljs-string">"users"</span> linkType=<span class="hljs-string">"show"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceField</span>&gt;</span></span>
+</code></pre>
+<p>默认情况下，<code>&lt;ReferenceField&gt;</code> 按其 <code>source</code> 排序。 要指定要排序的其他属性，请将 <code>sortBy</code> 属性设置为相应属性的名称。</p>
+<pre><code class="hljs css languages- jsx">&lt;ReferenceField label=<span class="hljs-string">"User"</span> source=<span class="hljs-string">"userId"</span> reference=<span class="hljs-string">"users"</span> sortBy=<span class="hljs-string">"user.name"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceField</span>&gt;</span></span>
+</code></pre>
+<p>你也可以通过将 <code>linkType</code> 设置为 <code>false</code> 来阻止 <code>&lt;ReferenceField&gt;</code> 添加链接到子级。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// No link</span>
+&lt;ReferenceField label=<span class="hljs-string">"User"</span> source=<span class="hljs-string">"userId"</span> reference=<span class="hljs-string">"users"</span> linkType={<span class="hljs-literal">false</span>}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ReferenceField</span>&gt;</span></span>
+</code></pre>
+<p><strong>提示</strong>：React-admin 使用 <code>CRUD_GET_ONE_REFERENCE</code> action 来累积和重复数据删除引用记录的 ID，以便对整个列表进行一次 <code>GET_MANY</code> 调用，而不是 n 次 <code>GET_ONE</code> 调用。 如果这个API返回下面的评论列表：</p>
+<pre><code class="hljs css languages- jsx">[
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>,
+        <span class="hljs-attr">body</span>: <span class="hljs-string">'Totally agree'</span>,
+        <span class="hljs-attr">post_id</span>: <span class="hljs-number">789</span>,
+    },
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-number">124</span>,
+        <span class="hljs-attr">title</span>: <span class="hljs-string">'You are right my friend'</span>,
+        <span class="hljs-attr">post_id</span>: <span class="hljs-number">789</span>
+    },
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-number">125</span>,
+        <span class="hljs-attr">title</span>: <span class="hljs-string">'Not sure about this one'</span>,
+        <span class="hljs-attr">post_id</span>: <span class="hljs-number">735</span>
+    }
+]
+</code></pre>
+<p>然后 react-admin 使用 <code>&lt;ReferenceField&gt;</code> loader 渲染 <code>&lt;CommentList&gt;</code>，在一次调用（<code>GET http://path.to.my.api/posts?ids=[789,735]</code>）中获取相关帖子的API，并在数据到达后重新呈现列表。 这加速了渲染，并最大限度地减少了网络负载。</p>
+<h2><a class="anchor" aria-hidden="true" id="referencemanyfield-组件"></a><a href="#referencemanyfield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ReferenceManyField</code> 组件</h2>
+<p>该组件通过在其他资源（使用 <code>GET_MANY_REFERENCE</code> REST方法）中反向查找当前的 <code>record.id</code> 来获取引用的记录列表。 另一资源中当前记录的 id 的字段名由所需的 <code>target</code> 字段指定。 然后将结果传递给迭代器组件（如 <code>&lt;SingleFieldList&gt;</code> 或 <code>&lt;Datagrid&gt;</code> ）。 迭代器组件通常具有一个或更多子 <code>&lt;Field&gt;</code> 组件。</p>
+<p>例如，这里是如何通过将 <code>comment.post_id</code> 匹配到 <code>post.id</code> 来获取与 <code>post</code> 记录相关的 <code>comments</code>，然后在 <code>&lt;ChipField&gt;</code> 中显示 <code>author.name</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, ChipField, ReferenceManyField, SingleFieldList, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" type="email" /&gt;
+            &lt;ReferenceManyField label="Comments by" reference="comments" target="post_id"&gt;
+                &lt;SingleFieldList&gt;
+                    &lt;ChipField source="author.name" /&gt;
+                &lt;/SingleFieldList&gt;
+            &lt;/ReferenceManyField&gt;
+            &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/reference-many-field-single-field-list.png" alt="ReferenceManyFieldSingleFieldList"></p>
+<p><code>&lt;ReferenceManyField&gt;</code>接受一个 <code>reference</code> 属性，它指定获取相关记录的资源。 它还接受<code>source</code>属性，该属性定义包含要在引用资源的<code>target &lt;/ code&gt;字段中查找的值的字段。 默认情况下, 这是资源的 &lt;code&gt;id</code> (<code>post. id</code> 在上一个示例中)。</p>
+<p><strong>注释</strong>：您 <strong>必须</strong> 添加 <code>&lt;Resource&gt;</code> 对于 reference resource - react-admin 需要它来获取引用数据。 如果你想在侧边栏菜单中隐藏它，你 <em>可以</em> 省略此引用中的 <code>list</code> 属性。</p>
+<p>您可以使用 <code>&lt;Datagrid&gt;</code> 而不是 <code>&lt;SingleFieldList&gt;</code> - 但不能在另一个 <code>&lt;Datagrid&gt;</code> 内！ 如果要显示相关记录的只读列表，这很有用。 例如，如果要在帖子的 <code>&lt;Edit&gt;</code> 视图中显示与 <code>post</code> 相关的<code>comments</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Edit, Datagrid, SimpleForm, DisabledInput, DateField, EditButton, ReferenceManyField, TextField, TextInput } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostEdit = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput label="Id" source="id" /&gt;
+            &lt;TextInput source="title" /&gt;
+            &lt;ReferenceManyField
+                label="Comments"
+                reference="comments"
+                target="post_id"
+            &gt;
+                &lt;Datagrid&gt;
+                    &lt;DateField source="created_at" /&gt;
+                    &lt;TextField source="author.name" /&gt;
+                    &lt;TextField source="body" /&gt;
+                    &lt;EditButton /&gt;
+                &lt;/Datagrid&gt;
+            &lt;/ReferenceManyField&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p><img src="https://marmelab.com/react-admin/img/reference-many-field-datagrid.png" alt="ReferenceManyFieldDatagrid"></p>
+<p>默认情况下，react-admin 将可能的值限制为 25。您可以通过设置 <code>perPage</code> 属性来更改此限制。</p>
+<pre><code class="hljs css languages- jsx">&lt;ReferenceManyField perPage={10} reference="comments" target="post_id"&gt;
+   ...
+&lt;/ReferenceManyField&gt;
+</code></pre>
+<p>默认情况下，它通过 id desc 排序可能的值。 您可以通过设置 <code>sort</code> 属性（具有 <code>field</code> 和 <code>order</code> 属性的对象）来更改此顺序。</p>
+<pre><code class="hljs css languages- jsx">&lt;ReferenceManyField sort={{ field: 'created_at', order: 'DESC' }} reference="comments" target="post_id"&gt;
+   ...
+&lt;/ReferenceManyField&gt;
+</code></pre>
+<p>此外，您还可以过滤用于填充可能值的查询。使用 <code>filter</code> 属性。</p>
+<pre><code class="hljs css languages- jsx">&lt;ReferenceManyField filter={{ is_published: true }} reference="comments" target="post_id"&gt;
+   ...
+&lt;/ReferenceManyField&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="referencearrayfield-组件"></a><a href="#referencearrayfield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ReferenceArrayField</code> 组件</h2>
+<p>使用 <code>&lt;ReferenceArrayField&gt;</code> 来显示基于外键数组的引用值列表。</p>
+<p>例如, 如果 post 有许多 tag, 则 post 资源可能类似于：</p>
+<pre><code class="hljs css languages- js">{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">1234</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'Lorem Ipsum'</span>,
+    <span class="hljs-attr">tag_ids</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">23</span>, <span class="hljs-number">4</span>]
+}
+</code></pre>
+<p>其中 <code>[1, 23, 4]</code> 引用 <code>tag</code> 资源的 id。</p>
+<p><code>&lt;ReferenceArrayField&gt;</code> 可以通过将 <code>post.tag_ids</code> 匹配到 <code>tag.id</code> 来获取与这个 <code>post</code> 资源相关的 <code>tag</code> 资源。 <code>&lt;ReferenceArrayField source=&quot;tags_ids&quot; reference=&quot;tags&quot;&gt;</code> 将发出一个 HTTP 请求, 其样子如下：</p>
+<pre><code class="hljs">http://myapi.com/tags?id=[1,23,4]
+</code></pre>
+<p><strong>提示</strong>：<code>&lt;ReferenceArrayField&gt;</code> 使用 <code>GET_MANY</code> REST 方法获取相关资源，所以实际的 HTTP 请求取决于你的REST客户端。</p>
+<p>一旦接收到相关的资源， <code>&lt;ReferenceArrayField&gt;</code> 使用 <code>ids</code> 和 <code>data</code> 属性传递它们给它的子组件，所以子级必须是一个迭代器组件（如 <code>&lt;SingleFieldList&gt;</code> 或 <code>&lt;Datagrid&gt;</code>）。 迭代器组件通常具有一个或多个子 <code>&lt;Field&gt;</code> 组件。</p>
+<p>以下是如何获取 <code>PostList</code> 中每个帖子的标签列表，并在<code>&lt;ChipField&gt;</code> 中显示每个 <code>tag</code> 的 <code>name</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { List, Datagrid, ChipField, ReferenceArrayField, SingleFieldList, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;ReferenceArrayField label="Tags" reference="tags" source="tag_ids"&gt;
+                &lt;SingleFieldList&gt;
+                    &lt;ChipField source="name" /&gt;
+                &lt;/SingleFieldList&gt;
+            &lt;/ReferenceArrayField&gt;
+            &lt;EditButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p><strong>注意</strong>：您<strong>必须</strong>为引用资源添加一个<code>&lt;Resource&gt;</code> 组件到您的 <code>&lt;Admin&gt;</code> 组件，因为 react-admin 需要它来获取引用数据。 如果您不想在侧边栏菜单中显示一个条目给它，你可以在此资源中省略 <code>list</code> 属性。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;Admin dataProvider={restProvider('http://path.to.my.api')}&gt;
+        &lt;Resource name="posts" list={PostList} /&gt;
+        &lt;Resource name="tags" /&gt; // &lt;= this one is compulsory
+    &lt;/Admin&gt;
+);
+</code></pre>
+<p>在 &quot;显示&quot; 视图的编辑中, 可以将 <code>&lt;ReferenceArrayField&gt;</code> 与 <code>&lt;Datagrid&gt;</code>合并在一起 显示表中的相关资源。 例如, 要在 <code>PostShow</code> 视图中显示与 post 相关的标记的详细信息, 请执行以下操作：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Show, SimpleShowLayout, TextField, ReferenceArrayField, Datagrid, ShowButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> PostShow = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> (
+    &lt;Show {...props}&gt;
+        &lt;SimpleShowLayout&gt;
+            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;ReferenceArrayField label="Tags" reference="tags" source="tag_ids"&gt;
+                &lt;Datagrid&gt;
+                    &lt;TextField source="id" /&gt;
+                    &lt;TextField source="name" /&gt;
+                    &lt;ShowButton /&gt;
+                &lt;/Datagrid&gt;
+            &lt;/ReferenceArrayField&gt;
+            &lt;EditButton /&gt;
+        &lt;/SimpleShowLayout&gt;
+    &lt;/Show&gt;
+);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="richtextfield-组件"></a><a href="#richtextfield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>RichTextField</code> 组件</h2>
+<p>此组件显示一些HTML内容。 内容默认为“丰富”（即未转义）。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { RichTextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RichTextField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"body"</span> /&gt;</span>
+</span></code></pre>
+<p><img src="https://marmelab.com/react-admin/img/rich-text-field.png" alt="RichTextField"></p>
+<p><code>stripTags</code>属性（默认情况下为<code>false</code>）允许您删除任何HTML标记，从而防止出现一些显示毛刺（这在列表视图中尤其有用）。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { RichTextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RichTextField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"body"</span> <span class="hljs-attr">stripTags</span> /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="textfield-组件"></a><a href="#textfield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>TextField</code> 组件</h2>
+<p>最简单的作为所有字段，<code>&lt;TextField&gt;</code> 只是将记录属性显示为纯文本。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextField</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Author Name"</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="urlfield-组件"></a><a href="#urlfield-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>UrlField</code> 组件</h2>
+<p><code>&lt;UrlField&gt;</code> 在<code>&lt; a href=&quot;&quot;&gt;</code> 标签中显示一个url。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { UrlField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">UrlField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"site_url"</span> /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="styling-fields"></a><a href="#styling-fields" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Styling Fields</h2>
+<p>所有 field 组件都接受 <code>className</code> 属性, 允许您根据自己的喜好自定义其样式。 我们建议您使用Material UI样式解决方案，JSS来生成这些类。 请参阅他们的<a href="https://material-ui.com/customization/css-in-js/#api">文档</a>。</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">price</span>: { <span class="hljs-attr">color</span>: <span class="hljs-string">'purple'</span> },
+};
+
+<span class="hljs-keyword">const</span> PriceField = withStyles(styles)(<span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;TextField className={classes.price} {...props} /&gt;
+));
+
+export const ProductList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;PriceField source="price" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+
+// renders in the datagrid as
+&lt;td&gt;&lt;span class="[class name generated by JSS]"&gt;2&lt;/span&gt;&lt;/td&gt;
+</code></pre>
+<p>React-admin 通常将 field 组件的呈现委托给 material-ui 组件。请参阅material-ui文档以查看元素的默认样式。</p>
+<p>您可能需要自定义 <code>DataGrid</code> 内的单元格样式。可以使用 <code>cellClassName</code> 进行以下操作：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">priceCell</span>: { <span class="hljs-attr">fontWeight</span>: <span class="hljs-string">'bold'</span> },
+};
+
+<span class="hljs-keyword">const</span> PriceField = withStyles(styles)(<span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;TextField cellClassName={classes.priceCell} {...props} /&gt;
+));
+
+export const ProductList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;PriceField source="price" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+
+// renders in the datagrid as
+&lt;td class="[class name generated by JSS]"&gt;&lt;span&gt;2&lt;/span&gt;&lt;/td&gt;
+</code></pre>
+<p>最后，您可能需要覆盖 Field header（datagrid中的 <code>&lt;th&gt;</code> 元素）。在这种情况下，使用 <code>headerClassName</code> 属性：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { withStyles } <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/styles'</span>;
+
+<span class="hljs-keyword">const</span> styles = {
+    <span class="hljs-attr">priceHeader</span>: { <span class="hljs-attr">fontWeight</span>: <span class="hljs-string">'bold'</span> },
+};
+
+<span class="hljs-keyword">const</span> PriceField = withStyles(styles)(<span class="hljs-function">(<span class="hljs-params">{ classes, ...props }</span>) =&gt;</span> (
+    &lt;TextField headerClassName={classes.priceHeader} {...props} /&gt;
+));
+
+export const ProductList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;PriceField source="price" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+// renders in the table header as
+&lt;th class="[class name generated by JSS]"&gt;&lt;button&gt;Price&lt;/button&gt;&lt;/td&gt;
+</code></pre>
+<p>最后，有时候，您只想对齐单元格的文本。使用<code>textAlign &lt;/ code&gt; 属性，它接受&lt;code&gt; left</code> 或 <code>right</code>：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> PriceField = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextField</span> {<span class="hljs-attr">...props</span>} /&gt;</span>
+);
+
+PriceField.defaultProps = {
+    textAlign: 'right',
+};
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="编写你自己的-field-组件"></a><a href="#编写你自己的-field-组件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>编写你自己的 Field 组件</h2>
+<p>如果你在上面的列表中找不到您需要的内容，编写你自己的 Field 组件非常容易。 它必须是一个常规的 React 组件，不仅可以接受 <code>source</code> 属性，还可以接受<code>record</code> 属性。 React-admin 将在渲染时基于 API 响应数据注入 <code>record</code>。 字段组件只需要在 <code>record</code> 中找到 <code>source</code> 并显示它。</p>
+<p>例如, 这里是一个类似的 react-admin 的 <code>&lt;TextField&gt;</code> 组件：</p>
+<pre><code class="hljs css languages- jsx">import React from 'react';
+import PropTypes from 'prop-types';
+
+const TextField = ({ source, record = {} }) =&gt; &lt;span&gt;{record[source]}&lt;/span&gt;;
+
+TextField.propTypes = {
+    label: PropTypes.string,
+    record: PropTypes.object,
+    source: PropTypes.string.isRequired,
+};
+
+export default TextField;
+</code></pre>
+<p><strong>提示</strong>：<code>label</code> 属性不使用在 <code>render()</code> 方法, 但 react-admin 使用它来显示表头。</p>
+<p><strong>提示</strong>：如果想要支持深层 Field source（例如<code>author.name</code> 等 source code），请使用<a href="https://www.npmjs.com/package/lodash.get"><code>lodash.get</code></a> 替换简单的对象查找：</p>
+<pre><code class="hljs css languages- jsx">import get from 'lodash/get';
+const TextField = ({ source, record = {} }) =&gt; &lt;span&gt;{get(record, source)}&lt;/span&gt;;
+</code></pre>
+<p>如果您不是在寻找可重用性，您可以创建更简单的组件，没有任何属性。 假设一个API返回具有 <code>firstName</code> 和 <code>lastName</code> 属性的用户记录，并且要在用户列表中显示全名。</p>
+<pre><code class="hljs css languages- jsx">{
+    <span class="hljs-attr">id</span>: <span class="hljs-number">123</span>,
+    <span class="hljs-attr">firstName</span>: <span class="hljs-string">'John'</span>,
+    <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Doe'</span>
+}
+</code></pre>
+<p>该组件将是：</p>
+<pre><code class="hljs css languages- jsx">import React from 'react';
+import { List, Datagrid, TextField } from 'react-admin';
+
+const FullNameField = ({ record = {} }) =&gt; &lt;span&gt;{record.firstName} {record.lastName}&lt;/span&gt;;
+FullNameField.defaultProps = { label: 'Name' };
+
+export const UserList = (props) =&gt; (
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;FullNameField source="lastName" /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+);
+</code></pre>
+<p><strong>提示</strong>：在此类自定义字段中，<code>source</code>是可选的。 React-admin 使用它来确定单击列标题时用于排序的列。 如果您将<code>source</code>属性用于其他目的，则可以通过任何<code>Field</code>组件上的<code>sortBy</code>属性覆盖排序。</p>
+<h2><a class="anchor" aria-hidden="true" id="在-show-视图中向自定义-field-组件添加标签"></a><a href="#在-show-视图中向自定义-field-组件添加标签" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>在 &quot;Show&quot; 视图中向自定义 Field 组件添加标签</h2>
+<p>React-admin 允许您在 List 视图和 Show 视图中使用相同的 Field 组件。 但是，如果您使用之前在 “Show” 视图中定义的<code>&lt;FullNameField&gt;</code>自定义 Field 组件，则会缺少某些内容：Field label。 为什么其他 Field 有标签而这个自定义 Field 没有？ 如何在 “Show” 视图中创建一个具有 label 但不在 “List” 视图中的 Field 组件？</p>
+<p>React-admin 使用的技巧：Show 视图布局 (<code>&lt;SimpleShowLayout&gt;</code> 和 <code>&lt;TabbedShowLayout&gt;</code>) 检查他们的 Field 子级, 并且每当一个有 <code>addLabel</code> 属性设置为 <code>true</code>时，布局将添加一个 label。</p>
+<p>这意味着您需要添加到自定义组件以使其在 Show 视图中可用的唯一内容是` addLabel: true &lt;/ code&gt; 默认属性。</p></p>
+<pre><code class="jsx">FullNameField.defaultProps = {
+    addLabel: true,
+};
+`</pre> 
+<h2><a class="anchor" aria-hidden="true" id="基于其他值隐藏-field"></a><a href="#基于其他值隐藏-field" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>基于其他值隐藏 Field</h2>
+<p>在 Show 视图中，您可能希望根据另一个 Field 的值显示或隐藏 Field- 例如，仅当<code>hasEmail</code>布尔字段为<code>true</code>时，才显示` email &lt;/ code&gt; Field。</p></p>
+<p>对于这种情况，您可以使用自定义 Field 方法：使用注入的 <code>record</ code> 属性，并根据值渲染另一个 Field。</p>
+<pre><code class="jsx">import React from 'react';
+import { EmailField } from 'react-admin';
+<p>const ConditionalEmailField = ({ record, ...rest }) =&gt;
+record &amp;&amp; record.hasEmail
+? &lt;EmailField source=&quot;email&quot; record={record} {...rest} /&gt;
+: null;</p>
+<p>export default ConditionalEmailField;
+`</pre></p>
+<p><strong>提示</strong>：在检查其属性之前，请务必检查是否已定义<code>record</code>，因为 react-admin 会在从数据中提取记录 <em>之前</em> 显示 Show 视图。 因此，第一次呈现资源的show视图时，<code>record</code>是未定义的。</p>
+<p>当 <code>hasEmail</code> 为 false 时, 此 <code>ConditionalEmailField</code> 正确隐藏。 但是当 <code>hasEmail</code> 为 true 时, 显示布局将呈现它。 没有标签。 如果添加<code>addLabel</code>默认属性，则无论<code>hasEmail</code>值如何，Show布局都会呈现label...</p>
+<p>一种解决方案是在自定义组件中手动添加label：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Labeled, EmailField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> ConditionalEmailField = <span class="hljs-function">(<span class="hljs-params">{ record, ...rest }</span>) =&gt;</span> 
+    record &amp;&amp; record.hasEmail 
+        ? (
+            <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Labeled</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Email"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">EmailField</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">record</span>=<span class="hljs-string">{record}</span> {<span class="hljs-attr">...rest</span>} /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Labeled</span>&gt;</span>
+        )
+        : null;
+
+export default ConditionalEmailField;
+</span></code></pre>
+<p>但是这有一个缺点：<code>&lt; ConditionalEmailField&gt;</code>不能再用于List视图，因为它总是有一个标签。 如果要在 List 中重用自定义组件，则这不是正确的解决方案。</p>
+<p>另一种解决方案是拆分<code>&lt; Show&gt;</code>组件。 在引擎盖下，<code>&lt; Show&gt;</code> 组件由两个子组件组成：<code>&lt;ShowController&gt;</code>组件，用于获取记录，<code>&lt;ShowView&gt; &lt;/ code&gt;，负责呈现视图标题，操作和子项。 &lt;code&gt;&lt;ShowController&gt;</code> 使用 *render props&lt;/ em&gt; 模式：</p></p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// inside react-admin</span>
+<span class="hljs-keyword">const</span> Show = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ShowController</span> {<span class="hljs-attr">...props</span>}&gt;</span>
+        {controllerProps =&gt; <span class="hljs-tag">&lt;<span class="hljs-name">ShowView</span> {<span class="hljs-attr">...props</span>} {<span class="hljs-attr">...controllerProps</span>} /&gt;</span>}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ShowController</span>&gt;</span>
+);
+</span></code></pre>
+<p><code>&lt;ShowController&gt;</code> 从 Data Provider 中提取 <code>记录</code>, 并将其传递给其子级接收时的函数 (在 <code>controllerProps</code> 中)。 这意味着以下代码：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { Show, SimpleShowLayout, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> UserShow = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    &lt;Show {...props}&gt;
+        &lt;SimpleShowLayout&gt;
+            &lt;TextField source="username" /&gt;
+            &lt;TextField source="email" /&gt;
+        &lt;/SimpleShowLayout&gt;
+    &lt;/Show&gt;
+);
+</code></pre>
+<p>相当于：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ShowController, ShowView, SimpleShowLayout, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> UserShow = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    &lt;ShowController {...props}&gt;
+        {controllerProps =&gt; 
+            &lt;ShowView {...props} {...controllerProps}&gt;
+                &lt;SimpleShowLayout&gt;
+                    &lt;TextField source="username" /&gt;
+                    &lt;TextField source="email" /&gt;
+                &lt;/SimpleShowLayout&gt;
+            &lt;/ShowView&gt;
+        }
+    &lt;/ShowController&gt;
+);
+</code></pre>
+<p>如果希望基于 <code>record</code> 显示一个字段，例如，仅当 <code>hasEmail</code> 时字段为 <code>true</code>时才显示电子邮件 Field，只需测试 <code>controllerProps.record</code> 的值, 如下所示：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">import</span> { ShowController, ShowView, SimpleShowLayout, TextField } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">const</span> UserShow = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> (
+    &lt;ShowController {...props}&gt;
+        {controllerProps =&gt; 
+            &lt;ShowView {...props} {...controllerProps}&gt;
+                &lt;SimpleShowLayout&gt;
+                    &lt;TextField source="username" /&gt;
+                    {controllerProps.record &amp;&amp; controllerProps.record.hasEmail &amp;&amp; 
+                        &lt;TextField source="email" /&gt;
+                    }
+                &lt;/SimpleShowLayout&gt;
+            &lt;/ShowView&gt;
+        }
+    &lt;/ShowController&gt;
+);
+</code></pre>
+<p>现在，您可以使用常规 Field 组件, 并且 label 在 &quot;Show&quot; 视图中正确显示。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/show-view-component.html">← Show 视图组件</a><a class="docs-next button" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#arrayfield-组件"><code>ArrayField</code> 组件</a></li><li><a href="#booleanfield-组件"><code>BooleanField</code> 组件</a></li><li><a href="#chipfield-组件"><code>ChipField</code> 组件</a></li><li><a href="#datefield-组件"><code>DateField</code> 组件</a></li><li><a href="#emailfield-组件"><code>EmailField</code> 组件</a></li><li><a href="#functionfield-组件"><code>FunctionField</code> 组件</a></li><li><a href="#imagefield-组件"><code>ImageField</code> 组件</a></li><li><a href="#filefield-组件"><code>FileField</code> 组件</a></li><li><a href="#numberfield-组件"><code>NumberField</code> 组件</a></li><li><a href="#selectfield-组件"><code>SelectField</code> 组件</a></li><li><a href="#referencefield-组件"><code>ReferenceField</code> 组件</a></li><li><a href="#referencemanyfield-组件"><code>ReferenceManyField</code> 组件</a></li><li><a href="#referencearrayfield-组件"><code>ReferenceArrayField</code> 组件</a></li><li><a href="#richtextfield-组件"><code>RichTextField</code> 组件</a></li><li><a href="#textfield-组件"><code>TextField</code> 组件</a></li><li><a href="#urlfield-组件"><code>UrlField</code> 组件</a></li><li><a href="#styling-fields">Styling Fields</a></li><li><a href="#编写你自己的-field-组件">编写你自己的 Field 组件</a></li><li><a href="#在-show-视图中向自定义-field-组件添加标签">在 &quot;Show&quot; 视图中向自定义 Field 组件添加标签</a></li><li><a href="#基于其他值隐藏-field">基于其他值隐藏 Field</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

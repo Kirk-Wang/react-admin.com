@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>常见问题 · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="- [是否可以为资源提供自定义标识符/主键？](#can-i-have-custom-identifiersprimary-keys-for-my-resources)"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="常见问题 · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="- [是否可以为资源提供自定义标识符/主键？](#can-i-have-custom-identifiersprimary-keys-for-my-resources)"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/faq.html">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro.html">简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tutorial.html">十分钟教程</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/data-providers.html">数据提供程序</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/admin-component.html">Admin 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/resource-component.html">Resource 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-view-component.html">List 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/show-view-component.html">Show 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/field-components.html">Field 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/creat-edit-view-components.html">Create 和 Edit 视图组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/input-components.html">Input 组件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authentication.html">身份验证</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/authorization.html">授权</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/theming.html">主题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/actions.html">编写 Action</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/translation.html">翻译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/custom-app.html">在其它 App 中包含 Admin</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/reference.html">引用</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/ecosystem.html">生态</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">常见问题</h1></header><article><div><span><ul>
+<li><a href="#can-i-have-custom-identifiersprimary-keys-for-my-resources">是否可以为资源提供自定义标识符/主键？</a></li>
+<li><a href="#i-get-warning-about-unique-key-for-child-in-array">我收到关于数组中子项的唯一键的警告</a></li>
+<li><a href="#a-form-with-validation-freezes-when-rendering">呈现时冻结验证的表单</a></li>
+<li><a href="#how-can-i-customize-the-ui-depending-on-the-user-permissions">如何根据用户权限自定义 UI？</a></li>
+<li><a href="#how-can-i-customize-forms-depending-on-its-inputs-values">如何根据输入值来自定义表单？</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="是否可以为资源提供自定义标识符-主键"></a><a href="#是否可以为资源提供自定义标识符-主键" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>是否可以为资源提供自定义标识符/主键？</h2>
+<p>React-admin 需要每个资源都有一个 <code>id</code> field来标识它。 如果您的 API 为主键使用不同的名称，则必须将该名称映射到自定义 <a href="./DataProviders.md">dataProvider</a> 中的 <code>id</code>。 例如，要使用名为 <code>_id</code> 的字段作为标识符：</p>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">const</span> convertHTTPResponse = <span class="hljs-function">(<span class="hljs-params">response, type, resource, params</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> { headers, json } = response;
+    <span class="hljs-keyword">switch</span> (type) {
+    <span class="hljs-keyword">case</span> GET_LIST:
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">data</span>: json.map(<span class="hljs-function"><span class="hljs-params">resource</span> =&gt;</span> ({ ...resource, <span class="hljs-attr">id</span>: resource._id }) ),
+            <span class="hljs-attr">total</span>: <span class="hljs-built_in">parseInt</span>(headers.get(<span class="hljs-string">'content-range'</span>).split(<span class="hljs-string">'/'</span>).pop(), <span class="hljs-number">10</span>),
+        };
+    <span class="hljs-keyword">case</span> UPDATE:
+    <span class="hljs-keyword">case</span> DELETE:
+    <span class="hljs-keyword">case</span> GET_ONE:
+        <span class="hljs-keyword">return</span> { ...json, <span class="hljs-attr">id</span>: json._id }; 
+    <span class="hljs-keyword">case</span> CREATE:
+        <span class="hljs-keyword">return</span> { ...params.data, <span class="hljs-attr">id</span>: json._id };
+    <span class="hljs-keyword">default</span>:
+        <span class="hljs-keyword">return</span> json;
+    }
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="我收到关于数组中子项的唯一键的警告"></a><a href="#我收到关于数组中子项的唯一键的警告" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>我收到关于数组中子项的唯一键的警告</h2>
+<p>当显示<code>Datagrid</code>组件时，您将得到以下警告：</p>
+<blockquote>
+<p>警告: 数组或迭代器中的每个子元素都应该有一个唯一的 “key” 属性。检查DatagridBody的渲染方法。</p>
+</blockquote>
+<p>这很可能是因为资源没有 react-admin 所期望的 <code>id</code> 属性。 请参阅上一个常见问题解答以了解如何解决此问题：<a href="#can-i-have-custom-identifiersprimary-keys-for-my-resources">我可以为自己的资源设置自定义标识符/主键吗？</a></p>
+<h2><a class="anchor" aria-hidden="true" id="呈现时冻结验证的表单"></a><a href="#呈现时冻结验证的表单" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>呈现时冻结验证的表单</h2>
+<p>您可能直接在组件的 render 方法中使用验证器工厂：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CommentEdit = <span class="hljs-function">(<span class="hljs-params">{ ...props }</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput source="id" /&gt;
+            &lt;DateInput source="created_at" /&gt;
+            &lt;LongTextInput source="body" validate={minLength(10)} /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p>避免直接在render方法中调用函数：</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-keyword">const</span> validateMinLength = minLength(<span class="hljs-number">10</span>);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CommentEdit = <span class="hljs-function">(<span class="hljs-params">{ ...props }</span>) =&gt;</span> (
+    &lt;Edit {...props}&gt;
+        &lt;SimpleForm&gt;
+            &lt;DisabledInput source="id" /&gt;
+            &lt;DateInput source="created_at" /&gt;
+            &lt;LongTextInput source="body" validate={validateMinLength} /&gt;
+        &lt;/SimpleForm&gt;
+    &lt;/Edit&gt;
+);
+</code></pre>
+<p>这与 <a href="https://github.com/erikras/redux-form/issues/3288">redux-form</a> 有关。</p>
+<h2><a class="anchor" aria-hidden="true" id="如何根据用户权限自定义-ui"></a><a href="#如何根据用户权限自定义-ui" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>如何根据用户权限自定义 UI？</h2>
+<p>一些相当常见的用例可能依赖于用户权限：</p>
+<ul>
+<li>特定视图</li>
+<li>视图（字段，输入）的部分对于特定用户而言是不同的</li>
+<li>隐藏或显示菜单项</li>
+</ul>
+<p>对于所有这些情况，您可以使用 <a href="https://github.com/marmelab/aor-permissions">aor-permissions</a> 插件。</p>
+<h2><a class="anchor" aria-hidden="true" id="如何根据输入值来自定义表单"></a><a href="#如何根据输入值来自定义表单" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>如何根据输入值来自定义表单？</h2>
+<p>一些用例：</p>
+<ul>
+<li>如果另一个输入有一个值，则显示/隐藏某些输入</li>
+<li>如果另一个输入具有特定值，则显示/隐藏某些输入</li>
+<li>如果当前表单值与特定约束匹配，则显示/隐藏某些输入</li>
+</ul>
+<p>对于所有这些情况，您可以使用 <a href="https://github.com/marmelab/aor-dependent-input">aor-dependent-input</a> 插件。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/reference.html">← 引用</a><a class="docs-next button" href="/docs/zh-CN/ecosystem.html">生态 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#是否可以为资源提供自定义标识符-主键">是否可以为资源提供自定义标识符/主键？</a></li><li><a href="#我收到关于数组中子项的唯一键的警告">我收到关于数组中子项的唯一键的警告</a></li><li><a href="#呈现时冻结验证的表单">呈现时冻结验证的表单</a></li><li><a href="#如何根据用户权限自定义-ui">如何根据用户权限自定义 UI？</a></li><li><a href="#如何根据输入值来自定义表单">如何根据输入值来自定义表单？</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/zh-CN/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>

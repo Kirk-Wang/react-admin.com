@@ -1,6 +1,7 @@
 const siteConfig = {
   title: 'React-Admin',
-  tagline: 'A frontend framework for building admin SPAs on top of REST services, using React and Material Design',
+  tagline:
+    'A frontend framework for building admin SPAs on top of REST services, using React and Material Design',
   // url: 'https://kanto-riders.github.io/bonfire/',
   url: '/',
   baseUrl: '/',
@@ -16,7 +17,7 @@ const siteConfig = {
   /* On page navigation for the current documentation page */
   onPageNav: 'separate',
 
-  // users,
+  users: [],
   headerIcon: 'img/icon_common.png',
   footerIcon: 'img/icon_common.png',
   favicon: 'img/favicon/favicon.ico',

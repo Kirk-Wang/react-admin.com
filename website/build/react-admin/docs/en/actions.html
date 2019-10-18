@@ -1,0 +1,451 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Writing Actions · React-Admin</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Admin interfaces often have to offer custom actions, beyond the simple CRUD. For instance, in an administration for comments, an &quot;Approve&quot; button (allowing to update the `is_approved` property and to save the updated record in one click) - is a must have."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Writing Actions · React-Admin"/><meta property="og:type" content="website"/><meta property="og:url" content="//index.html"/><meta property="og:description" content="Admin interfaces often have to offer custom actions, beyond the simple CRUD. For instance, in an administration for comments, an &quot;Approve&quot; button (allowing to update the `is_approved` property and to save the updated record in one click) - is a must have."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/icon_common.png" alt="React-Admin"/><h2 class="headerTitleWithLogo">React-Admin</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/intro.html" target="_self">Doc</a></li><li class=""><a target="_self"></a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/zh-CN/actions.html">中文</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Knowledge</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Knowledge</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/intro.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/docs/en/tutorial.html">Tutorial</a></li><li class="navListItem"><a class="navItem" href="/docs/en/data-providers.html">Data Providers</a></li><li class="navListItem"><a class="navItem" href="/docs/en/admin-component.html">&lt;Admin&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/resource-component.html">&lt;Resource&gt;</a></li><li class="navListItem"><a class="navItem" href="/docs/en/list-view-component.html">&lt;List&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/show-view-component.html">&lt;Show&gt; View</a></li><li class="navListItem"><a class="navItem" href="/docs/en/field-components.html">&lt;Field&gt; Components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/creat-edit-view-components.html">&lt;Create&gt; and &lt;Edit&gt; Views</a></li><li class="navListItem"><a class="navItem" href="/docs/en/input-components.html">&lt;Input&gt; components</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authentication.html">Authentication</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authorization.html">Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/en/theming.html">Theming</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/actions.html">Writing Actions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/translation.html">Translation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/custom-app.html">Including the Admin in Another App</a></li><li class="navListItem"><a class="navItem" href="/docs/en/reference.html">Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/en/faq.html">FAQ</a></li><li class="navListItem"><a class="navItem" href="/docs/en/ecosystem.html">Ecosystem</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Writing Actions</h1></header><article><div><span><p>Admin interfaces often have to offer custom actions, beyond the simple CRUD. For instance, in an administration for comments, an &quot;Approve&quot; button (allowing to update the <code>is_approved</code> property and to save the updated record in one click) - is a must have.</p>
+<p>How can you add such custom actions with react-admin? The answer is twofold, and learning to do it properly will give you a better understanding of how react-admin uses Redux and redux-saga.</p>
+<h2><a class="anchor" aria-hidden="true" id="the-simple-way"></a><a href="#the-simple-way" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Simple Way</h2>
+<p>Here is an implementation of the &quot;Approve&quot; button that works perfectly:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comments/ApproveButton.js</span>
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'prop-types'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> FlatButton <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/FlatButton'</span>;
+<span class="hljs-keyword">import</span> { showNotification <span class="hljs-keyword">as</span> showNotificationAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> { push <span class="hljs-keyword">as</span> pushAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-redux'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApproveButton</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> { push, record, showNotification } = <span class="hljs-keyword">this</span>.props;
+        <span class="hljs-keyword">const</span> updatedRecord = { ...record, <span class="hljs-attr">is_approved</span>: <span class="hljs-literal">true</span> };
+        fetch(<span class="hljs-string">`/comments/<span class="hljs-subst">${record.id}</span>`</span>, { <span class="hljs-attr">method</span>: <span class="hljs-string">'PUT'</span>, <span class="hljs-attr">body</span>: updatedRecord })
+            .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                showNotification(<span class="hljs-string">'Comment approved'</span>);
+                push(<span class="hljs-string">'/comments'</span>);
+            })
+            .catch(<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+                <span class="hljs-built_in">console</span>.error(e);
+                showNotification(<span class="hljs-string">'Error: comment not approved'</span>, <span class="hljs-string">'warning'</span>)
+            });
+    }
+
+    render() {
+        <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">FlatButton</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Approve"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.handleClick}</span> /&gt;</span>;
+    }
+}
+
+ApproveButton.propTypes = {
+    push: PropTypes.func,
+    record: PropTypes.object,
+    showNotification: PropTypes.func,
+};
+
+export default connect(null, {
+    showNotification: showNotificationAction,
+    push: pushAction,
+})(ApproveButton);
+</span></code></pre>
+<p>The <code>handleClick</code> function makes a <code>PUT</code> request the REST API with <code>fetch</code>, then displays a notification (with <code>showNotification</code>) and redirects to the comments list page (with <code>push</code>);</p>
+<p><code>showNotification</code> and <code>push</code> are <em>action creators</em>. This is a Redux term for functions that return a simple action object. When given an object of action creators in the second argument, <code>connect()</code> will <a href="https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options">decorate each action creator</a> with Redux' <code>dispatch</code> method, so in the <code>handleClick</code> function, a call to <code>showNotification()</code> is actually a call to <code>dispatch(showNotification())</code>.</p>
+<p>This <code>ApproveButton</code> can be used right away, for instance in the list of comments, where <code>&lt;Datagrid&gt;</code> automatically injects the <code>record</code> to its children:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comments/index.js</span>
+<span class="hljs-keyword">import</span> ApproveButton <span class="hljs-keyword">from</span> <span class="hljs-string">'./ApproveButton'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CommentList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span>
+    &lt;List {...props}&gt;
+        &lt;Datagrid&gt;
+            &lt;DateField source="created_at" /&gt;
+            &lt;TextField source="author.name" /&gt;
+            &lt;TextField source="body" /&gt;
+            &lt;BooleanField source="is_approved" /&gt;
+            &lt;ApproveButton /&gt;
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;;
+</code></pre>
+<p>Or, in the <code>&lt;Edit&gt;</code> page, as a <a href="./CreateEdit.md#actions">custom action</a>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comments/CommentEditActions.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> CardActions <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/CardActions'</span>;
+<span class="hljs-keyword">import</span> { ListButton, DeleteButton } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> ApproveButton <span class="hljs-keyword">from</span> <span class="hljs-string">'./ApproveButton'</span>;
+
+<span class="hljs-keyword">const</span> cardActionStyle = {
+    <span class="hljs-attr">zIndex</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">display</span>: <span class="hljs-string">'inline-block'</span>,
+    <span class="hljs-attr">float</span>: <span class="hljs-string">'right'</span>,
+};
+
+<span class="hljs-keyword">const</span> CommentEditActions = <span class="hljs-function">(<span class="hljs-params">{ basePath, data, resource }</span>) =&gt;</span> (
+    &lt;CardActions style={cardActionStyle}&gt;
+        &lt;ApproveButton record={data} /&gt;
+        &lt;ListButton basePath={basePath} /&gt;
+        &lt;DeleteButton basePath={basePath} record={data} resource={resource} /&gt;
+    &lt;/CardActions&gt;
+);
+
+export default CommentEditActions;
+
+// in src/comments/index.js
+import CommentEditActions from './CommentEditActions';
+
+export const CommentEdit = (props) =&gt;
+    &lt;Edit {...props} actions={&lt;CommentEditActions /&gt;}&gt;
+        ...
+    &lt;/Edit&gt;;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="using-a-data-provider-instead-of-fetch"></a><a href="#using-a-data-provider-instead-of-fetch" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using a Data Provider Instead of Fetch</h2>
+<p>The previous code uses <code>fetch()</code>, which means it has to make raw HTTP requests. The REST logic often requires a bit of HTTP plumbing to deal with query parameters, encoding, headers, body formatting, etc. It turns out you probably already have a function that maps from a REST request to an HTTP request: the <a href="./DataProviders.md">Data Provider</a>. So it's a good idea to use this function instead of <code>fetch</code> - provided you have exported it:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/dataProvider.js</span>
+<span class="hljs-keyword">import</span> jsonServerProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'ra-data-json-server'</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> jsonServerProvider(<span class="hljs-string">'http://Mydomain.com/api/'</span>);
+
+<span class="hljs-comment">// in src/comments/ApproveButton.js</span>
+<span class="hljs-keyword">import</span> { UPDATE } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">import</span> dataProvider <span class="hljs-keyword">from</span> <span class="hljs-string">'../dataProvider'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApproveButton</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> { push, record, showNotification } = <span class="hljs-keyword">this</span>.props;
+        <span class="hljs-keyword">const</span> updatedRecord = { ...record, <span class="hljs-attr">is_approved</span>: <span class="hljs-literal">true</span> };
+        dataProvider(UPDATE, <span class="hljs-string">'comments'</span>, { <span class="hljs-attr">id</span>: record.id, <span class="hljs-attr">data</span>: updatedRecord })
+            .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                showNotification(<span class="hljs-string">'Comment approved'</span>);
+                push(<span class="hljs-string">'/comments'</span>);
+            })
+            .catch(<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+                <span class="hljs-built_in">console</span>.error(e);
+                showNotification(<span class="hljs-string">'Error: comment not approved'</span>, <span class="hljs-string">'warning'</span>)
+            });
+    }
+
+    render() {
+        <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">FlatButton</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Approve"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.handleClick}</span> /&gt;</span>;
+    }
+}
+</span></code></pre>
+<p>There you go: no more <code>fetch</code>. Just like <code>fetch</code>, the <code>dataProvider</code> returns a <code>Promise</code>. It's signature is:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">/**
+ * Query a data provider and return a promise for a response
+ *
+ * @example
+ * dataProvider(GET_ONE, 'posts', { id: 123 })
+ *  =&gt; new Promise(resolve =&gt; resolve({ id: 123, title: "hello, world" }))
+ *
+ * @param {string} type Request type, e.g GET_LIST
+ * @param {string} resource Resource name, e.g. "posts"
+ * @param {Object} payload Request parameters. Depends on the action type
+ * @returns {Promise} the Promise for a response
+ */</span>
+<span class="hljs-keyword">const</span> dataProvider = <span class="hljs-function">(<span class="hljs-params">type, resource, params</span>) =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>();
+</code></pre>
+<p>As for the syntax of the various request types (<code>GET_LIST</code>, <code>GET_ONE</code>, <code>UPDATE</code>, etc.), head to the <a href="./DataProviders.md#request-format">Data Provider documentation</a> for more details.</p>
+<h2><a class="anchor" aria-hidden="true" id="using-a-custom-action-creator"></a><a href="#using-a-custom-action-creator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using a Custom Action Creator</h2>
+<p>Fetching data right inside the component is easy. But if you're a Redux user, you might want to do it in a more idiomatic way - by dispatching actions. First, create your own action creator to replace the call to <code>dataProvider</code>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comment/commentActions.js</span>
+<span class="hljs-keyword">import</span> { UPDATE } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> COMMENT_APPROVE = <span class="hljs-string">'COMMENT_APPROVE'</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> commentApprove = <span class="hljs-function">(<span class="hljs-params">id, data, basePath</span>) =&gt;</span> ({
+    <span class="hljs-attr">type</span>: COMMENT_APPROVE,
+    <span class="hljs-attr">payload</span>: { id, <span class="hljs-attr">data</span>: { ...data, <span class="hljs-attr">is_approved</span>: <span class="hljs-literal">true</span> } },
+    <span class="hljs-attr">meta</span>: { <span class="hljs-attr">resource</span>: <span class="hljs-string">'comments'</span>, <span class="hljs-attr">fetch</span>: UPDATE },
+});
+</code></pre>
+<p>This action creator takes advantage of react-admin's built in fetcher, which listens to actions with the <code>fetch</code> meta. Upon dispatch, this action will trigger the call to <code>dataProvider(UPDATE, 'comments')</code>, dispatch a <code>COMMENT_APPROVE_LOADING</code> action, then after receiving the response, dispatch either a <code>COMMENT_APPROVE_SUCCESS</code>, or a <code>COMMENT_APPROVE_FAILURE</code>.</p>
+<p>To use the new action creator in the component, <code>connect</code> it:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comments/ApproveButton.js</span>
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'prop-types'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> Button <span class="hljs-keyword">from</span> <span class="hljs-string">'@material-ui/core/Button'</span>;
+<span class="hljs-keyword">import</span> { commentApprove <span class="hljs-keyword">as</span> commentApproveAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'./commentActions'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApproveButton</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> { commentApprove, record } = <span class="hljs-keyword">this</span>.props;
+        commentApprove(record.id, record);
+        <span class="hljs-comment">// how about push and showNotification?</span>
+    }
+
+    render() {
+        <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.handleClick}</span>&gt;</span>Approve<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span></span>;
+    }
+}
+
+ApproveButton.propTypes = {
+    <span class="hljs-attr">commentApprove</span>: PropTypes.func,
+    <span class="hljs-attr">record</span>: PropTypes.object,
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connect(<span class="hljs-literal">null</span>, {
+    <span class="hljs-attr">commentApprove</span>: commentApproveAction,
+})(ApproveButton);
+</code></pre>
+<p>This works fine: when a user presses the &quot;Approve&quot; button, the API receives the <code>UPDATE</code> call, and that approves the comment. But it's not possible to call <code>push</code> or <code>showNotification</code> in <code>handleClick</code> anymore. This is because <code>commentApprove()</code> returns immediately, whether the API call succeeds or not. How can you run a function only when the action succeeds?</p>
+<h2><a class="anchor" aria-hidden="true" id="handling-side-effects"></a><a href="#handling-side-effects" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Handling Side Effects</h2>
+<p>Fetching data is called a <em>side effect</em>, since it calls the outside world, and is asynchronous. Usual actions may have other side effects, like showing a notification, or redirecting the user to another page. Just like for the <code>fetch</code> side effect, you can associate side effects to an action declaratively by setting the appropriate keys in the action <code>meta</code>.</p>
+<p>For instance, to display a notification when the <code>COMMENT_APPROVE</code> action is dispatched, add the <code>notification</code> meta:</p>
+<pre><code class="hljs css languages- diff">// in src/comment/commentActions.js
+import { UPDATE } from 'react-admin';
+export const COMMENT_APPROVE = 'COMMENT_APPROVE';
+export const commentApprove = (id, data, basePath) =&gt; ({
+    type: COMMENT_APPROVE,
+    payload: { id, data: { ...data, is_approved: true } },
+    meta: {
+        resource: 'comments',
+        fetch: UPDATE,
+<span class="hljs-addition">+        notification: {</span>
+<span class="hljs-addition">+            body: 'resources.comments.notification.approved_success',</span>
+<span class="hljs-addition">+            level: 'info',</span>
+<span class="hljs-addition">+        },</span>
+<span class="hljs-addition">+        redirectTo: '/comments',</span>
+<span class="hljs-addition">+        basePath,</span>
+    },
+});
+</code></pre>
+<p>React-admin can handle the following side effects metas:</p>
+<ul>
+<li><code>notification</code>: Display a notification. The property value should be an object describing the notification to display. The <code>body</code> can be a translation key. <code>level</code> can be either <code>info</code> or <code>warning</code>.</li>
+<li><code>redirectTo</code>: Redirect the user to another page. The property value should be the path to redirect the user to.</li>
+<li><code>refresh</code>: Force a rerender of the current view (equivalent to pressing the Refresh button). Set to true to enable.</li>
+<li><code>unselectAll</code>: Unselect all lines in the current datagrid. Set to true to enable.</li>
+<li><code>basePath</code>: This is not a side effect, but it's used internaly to compute redirection paths. Set it when you have a redirection side effect.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="success-and-failure-side-effects"></a><a href="#success-and-failure-side-effects" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Success and Failure Side Effects</h2>
+<p>In the previous example, the &quot;notification approved&quot; notification appears when the <code>COMMENT_APPROVE</code> action is dispatched, i.e. <em>before</em> the server is even called. That's a bit too early: what if the server returns an error?</p>
+<p>In practice, most side effects must be triggered after the <code>fetch</code> side effect succeeds or fails. To support that, you can enclose side effects under the <code>onSuccess</code> and <code>onFailure</code> keys in the <code>meta</code> property of an action:</p>
+<pre><code class="hljs css languages- diff">// in src/comment/commentActions.js
+import { UPDATE } from 'react-admin';
+export const COMMENT_APPROVE = 'COMMENT_APPROVE';
+export const commentApprove = (id, data, basePath) =&gt; ({
+    type: COMMENT_APPROVE,
+    payload: { id, data: { ...data, is_approved: true } },
+    meta: {
+        resource: 'comments',
+        fetch: UPDATE,
+<span class="hljs-deletion">-        notification: {</span>
+<span class="hljs-deletion">-            body: 'resources.comments.notification.approved_success',</span>
+<span class="hljs-deletion">-            level: 'info',</span>
+<span class="hljs-deletion">-        },</span>
+<span class="hljs-deletion">-        redirectTo: '/comments',</span>
+<span class="hljs-deletion">-        basePath,</span>
+<span class="hljs-addition">+        onSuccess: {</span>
+<span class="hljs-addition">+            notification: {</span>
+<span class="hljs-addition">+                body: 'resources.comments.notification.approved_success',</span>
+<span class="hljs-addition">+                level: 'info',</span>
+<span class="hljs-addition">+            },</span>
+<span class="hljs-addition">+            redirectTo: '/comments',</span>
+<span class="hljs-addition">+            basePath,</span>
+<span class="hljs-addition">+        },</span>
+<span class="hljs-addition">+        onFailure: {</span>
+<span class="hljs-addition">+            notification: {</span>
+<span class="hljs-addition">+                body: 'resources.comments.notification.approved_failure',</span>
+<span class="hljs-addition">+                level: 'warning',</span>
+<span class="hljs-addition">+            },</span>
+<span class="hljs-addition">+        },</span>
+    },
+});
+</code></pre>
+<p>In this case, no side effect is triggered when the <code>COMMENT_APPROVE</code> action is dispatched. However, when the <code>fetch</code> side effects returns successfully, react-admin dispatches a <code>COMMENT_APPROVE_SUCCESS</code> action, and copies the <code>onSuccess</code> side effects into the <code>meta</code> property. So it will dispatch an action looking like:</p>
+<pre><code class="hljs css languages- js">{
+    <span class="hljs-attr">type</span>: COMMENT_APPROVE_SUCCESS,
+    <span class="hljs-attr">payload</span>: { <span class="hljs-attr">data</span>: { <span class="hljs-comment">/* data returned by the server */</span> } },
+    <span class="hljs-attr">meta</span>: {
+        <span class="hljs-attr">resource</span>: <span class="hljs-string">'comments'</span>,
+        <span class="hljs-attr">notification</span>: {
+            <span class="hljs-attr">body</span>: <span class="hljs-string">'resources.comments.notification.approved_success'</span>,
+            <span class="hljs-attr">level</span>: <span class="hljs-string">'info'</span>,
+        },
+        <span class="hljs-attr">redirectTo</span>: <span class="hljs-string">'/comments'</span>,
+        basePath,
+    },
+}
+</code></pre>
+<p>And then, the side effects will trigger. With this code, approving a review now displays the correct notification, and redirects to the comment list.</p>
+<p>You can use <code>onSuccess</code> and <code>onFailure</code> metas in your own actions to handle side effects.</p>
+<h2><a class="anchor" aria-hidden="true" id="custom-sagas"></a><a href="#custom-sagas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom sagas</h2>
+<p>Sometimes, you may want to trigger other <em>side effects</em>. React-admin promotes a programming style where side effects are decoupled from the rest of the code, which has the benefit of making them testable.</p>
+<p>In react-admin, side effects are handled by Sagas. <a href="https://redux-saga.github.io/redux-saga/">Redux-saga</a> is a side effect library built for Redux, where side effects are defined by generator functions. If this is new to you, take a few minutes to go through the Saga documentation.</p>
+<p>Here is the generator function necessary to handle the side effects for a failed <code>COMMENT_APPROVE</code> action which would log the error with an external service such as <a href="https://sentry.io">Sentry</a>:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/comments/commentSaga.js</span>
+<span class="hljs-keyword">import</span> { call, takeEvery } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-saga/effects'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">commentApproveFailure</span>(<span class="hljs-params">{ error }</span>) </span>{
+    <span class="hljs-keyword">yield</span> call(Raven.captureException, error);
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">commentSaga</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">yield</span> takeEvery(<span class="hljs-string">'COMMENT_APPROVE_FAILURE'</span>, commentApproveFailure);
+}
+</code></pre>
+<p>Let's explain all of that, starting with the final <code>commentSaga</code> generator function. A <a href="http://exploringjs.com/es6/ch_generators.html">generator function</a> (denoted by the <code>*</code> in the function name) gets paused on statements called by <code>yield</code> - until the yielded statement returns. <code>yield takeEvery([ACTION_NAME], callback)</code> executes the provided callback <a href="https://redux-saga.github.io/redux-saga/docs/basics/UsingSagaHelpers.html">every time the related action is called</a>. To summarize, this will execute <code>commentApproveFailure</code> when the fetch initiated by <code>commentApprove()</code> fails.</p>
+<p>As for <code>commentApproveFailure</code>, it just dispatch a <a href="https://redux-saga.js.org/docs/api/#callfn-args"><code>call</code></a> side effect to the <code>captureException</code> function from the global <code>Raven</code> object.</p>
+<p>To use this saga, pass it in the <code>customSagas</code> props of the <code>&lt;Admin&gt;</code> component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin, Resource } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">import</span> { CommentList } <span class="hljs-keyword">from</span> <span class="hljs-string">'./comments'</span>;
+<span class="hljs-keyword">import</span> commentSaga <span class="hljs-keyword">from</span> <span class="hljs-string">'./comments/commentSaga'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">customSagas</span>=<span class="hljs-string">{[</span> <span class="hljs-attr">commentSaga</span> ]} <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{jsonServerProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">jsonplaceholder.typicode.com</span>')}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"comments"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">{CommentList}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span>
+);
+
+export default App;
+</span></code></pre>
+<p>With this code, a failed review approval now sends the the correct signal to Sentry.</p>
+<p><strong>Tip</strong>:  The side effects are <a href="https://redux-saga.github.io/redux-saga/docs/introduction/BeginnerTutorial.html#making-our-code-testable">testable</a>, too.</p>
+<h2><a class="anchor" aria-hidden="true" id="optimistic-rendering-and-undo"></a><a href="#optimistic-rendering-and-undo" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optimistic Rendering and Undo</h2>
+<p>In the previous example, after clicking on the &quot;Approve&quot; button, a spinner displays while the data provider is fetched. Then, users are redirected to the comments list. But in most cases, the server returns a success response, so the user waits for this response for nothing.</p>
+<p>For its own fetch actions, react-admin uses an approach called <em>optimistic rendering</em>. The idea is to handle the <code>fetch</code> actions on the client side first (i.e. updating entities in the Redux store), and re-render the screen immediately. The user sees the effect of their action with no delay. Then, react-admin applies the success side effects, and only after that it triggers the fetch to the data provider. If the fetch ends with a success, react-admin does nothing more than a refresh to grab the latest data from the server, but in most cases, the user sees no difference (the data in the Redux store and the data from the data provider are the same). If the fetch fails, react-admin shows an error notification, and forces a refresh, too.</p>
+<p>As a bonus, while the success notification is displayed, users have the ability to cancel the action <em>before</em> the data provider is even called.</p>
+<p>To make an action with a <code>fetch</code> meta optimistic, decorate it with the <code>startUndoable</code> action creator:</p>
+<pre><code class="hljs css languages- diff">// in src/comments/ApproveButton.js
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
+<span class="hljs-addition">+ import { startUndoable as startUndoableAction } from 'ra-core';</span>
+<span class="hljs-deletion">- import { commentApprove as commentApproveAction } from './commentActions';</span>
+<span class="hljs-addition">+ import { commentApprove } from './commentActions';</span>
+
+class ApproveButton extends Component {
+    handleClick = () =&gt; {
+<span class="hljs-deletion">-        const { commentApprove, record } = this.props;</span>
+<span class="hljs-deletion">-        commentApprove(record.id, record);</span>
+<span class="hljs-addition">+        const { startUndoable, record } = this.props;</span>
+<span class="hljs-addition">+        startUndoable(commentApprove(record.id, record));</span>
+    }
+
+    render() {
+        return &lt;Button onClick={this.handleClick}&gt;Approve&lt;/Button&gt;;
+    }
+}
+
+ApproveButton.propTypes = {
+<span class="hljs-deletion">-    commentApprove: PropTypes.func,</span>
+<span class="hljs-addition">+    startUndoable: PropTypes.func,</span>
+    record: PropTypes.object,
+};
+
+export default connect(null, {
+<span class="hljs-deletion">-    commentApprove: commentApproveAction,</span>
+<span class="hljs-addition">+    startUndoable: startUndoableAction,</span>
+})(ApproveButton);
+</code></pre>
+<p>And that's all it takes to make a fetch action optimistic. Note that the <code>startUndoable</code> action creator is passed to Redux <code>connect</code> as <code>mapDispatchToProp</code>, to be decorated with <code>dispatch</code> - but <code>commentApprove</code> is not. Only the first action must be decorated with dispatch.</p>
+<p>The fact that react-admin updates the internal store if you use custom actions with the <code>fetch</code> meta should be another motivation to avoid using raw <code>fetch</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="using-a-custom-reducer"></a><a href="#using-a-custom-reducer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using a Custom Reducer</h2>
+<p>In addition to triggering REST calls, you may want to store the effect of your own actions in the application state. For instance, if you want to display a widget showing the current exchange rate for the bitcoin, you might need the following action:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/bitcoinRateReceived.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> BITCOIN_RATE_RECEIVED = <span class="hljs-string">'BITCOIN_RATE_RECEIVED'</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> bitcoinRateReceived = <span class="hljs-function">(<span class="hljs-params">rate</span>) =&gt;</span> ({
+    <span class="hljs-attr">type</span>: BITCOIN_RATE_RECEIVED,
+    <span class="hljs-attr">payload</span>: { rate },
+});
+</code></pre>
+<p>This action can be triggered on mount by the following component:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/BitCoinRate.js</span>
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'prop-types'</span>;
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-keyword">import</span> { bitcoinRateReceived <span class="hljs-keyword">as</span> bitcoinRateReceivedAction } <span class="hljs-keyword">from</span> <span class="hljs-string">'./bitcoinRateReceived'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BitCoinRate</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    componentWillMount() {
+        fetch(<span class="hljs-string">'https://blockchain.info/fr/ticker'</span>)
+            .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.json())
+            .then(<span class="hljs-function"><span class="hljs-params">rates</span> =&gt;</span> rates.USD[<span class="hljs-string">'15m'</span>])
+            .then(bitcoinRateReceived) <span class="hljs-comment">// dispatch action when the response is received</span>
+    }
+
+    render() {
+        <span class="hljs-keyword">const</span> { rate } = <span class="hljs-keyword">this</span>.props;
+        <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Current bitcoin value: {rate}$<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    }
+}
+
+BitCoinRate.propTypes = {
+    <span class="hljs-attr">bitcoinRateReceived</span>: PropTypes.func,
+    <span class="hljs-attr">rate</span>: PropTypes.number,
+};
+
+<span class="hljs-keyword">const</span> mapStateToProps = <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> ({ <span class="hljs-attr">rate</span>: state.bitcoinRate });
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connect(mapStateToProps, {
+    <span class="hljs-attr">bitcoinRateReceived</span>: bitcoinRateReceivedAction,
+})(BitCoinRate);
+</code></pre>
+<p>In order to put the rate passed to <code>bitcoinRateReceived()</code> into the Redux store, you'll need a reducer:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/rateReducer.js</span>
+<span class="hljs-keyword">import</span> { BITCOIN_RATE_RECEIVED } <span class="hljs-keyword">from</span> <span class="hljs-string">'./bitcoinRateReceived'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (previousState = <span class="hljs-number">0</span>, { type, payload }) =&gt; {
+    <span class="hljs-keyword">if</span> (type === BITCOIN_RATE_RECEIVED) {
+        <span class="hljs-keyword">return</span> payload.rate;
+    }
+    <span class="hljs-keyword">return</span> previousState;
+}
+</code></pre>
+<p>Now the question is: How can you put this reducer in the <code>&lt;Admin&gt;</code> app? Simple: use the <code>customReducers</code> props:</p>
+<pre><code class="hljs css languages- jsx"><span class="hljs-comment">// in src/App.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { Admin } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-admin'</span>;
+
+<span class="hljs-keyword">import</span> rate <span class="hljs-keyword">from</span> <span class="hljs-string">'./rateReducer'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Admin</span> <span class="hljs-attr">customReducers</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">rate</span> }} <span class="hljs-attr">dataProvider</span>=<span class="hljs-string">{jsonServerProvider(</span>'<span class="hljs-attr">http:</span>//<span class="hljs-attr">jsonplaceholder.typicode.com</span>')}&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Admin</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
+</code></pre>
+<p><strong>Tip</strong>: You can avoid storing data in the Redux state by storing data in a component state instead. It's much less complicated to deal with, and more performant, too. Use the global state only when you really need to.</p>
+<h2><a class="anchor" aria-hidden="true" id="list-bulk-actions"></a><a href="#list-bulk-actions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>List Bulk Actions</h2>
+<p>Almost everything we saw before is true for custom <code>List</code> bulk actions too, with the following few differences:</p>
+<ul>
+<li>They receive the following props: <code>resource</code>, <code>selectedIds</code> and <code>filterValues</code></li>
+<li>They do not receive the current record in the <code>record</code> prop as there are many of them.</li>
+<li>They must render as a material-ui <a href="http://www.material-ui.com/#/components/menu"><code>MenuItem</code></a>.</li>
+</ul>
+<p>You can find a complete example in the <code>List</code> documentation, in the <a href="/List.html#bulk-actions"><code>bulk-actions</code></a> section.</p>
+<h2><a class="anchor" aria-hidden="true" id="conclusion"></a><a href="#conclusion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conclusion</h2>
+<p>Which style should you choose for your own action buttons?</p>
+<p>The first version (with <code>fetch</code>) is perfectly fine, and if you're not into unit testing your components, or decoupling side effects from pure functions, then you can stick with it without problem.</p>
+<p>On the other hand, if you want to promote reusability, separation of concerns, adhere to react-admin's coding standards, and if you know enough Redux and Saga, use the final version.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/theming.html">← Theming</a><a class="docs-next button" href="/docs/en/translation.html">Translation →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#the-simple-way">The Simple Way</a></li><li><a href="#using-a-data-provider-instead-of-fetch">Using a Data Provider Instead of Fetch</a></li><li><a href="#using-a-custom-action-creator">Using a Custom Action Creator</a></li><li><a href="#handling-side-effects">Handling Side Effects</a></li><li><a href="#success-and-failure-side-effects">Success and Failure Side Effects</a></li><li><a href="#custom-sagas">Custom sagas</a></li><li><a href="#optimistic-rendering-and-undo">Optimistic Rendering and Undo</a></li><li><a href="#using-a-custom-reducer">Using a Custom Reducer</a></li><li><a href="#list-bulk-actions">List Bulk Actions</a></li><li><a href="#conclusion">Conclusion</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icon_common.png" alt="React-Admin" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/intro.html">intro</a></div><div><h5>Community</h5><a href="#">Project Chat</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/Kirk-Wang/react-admin.com.git" data-icon="octicon-star" data-count-href="#" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-admin.com.</section></footer></div></body></html>
