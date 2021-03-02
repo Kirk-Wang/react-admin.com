@@ -2,6 +2,7 @@
 id: data-providers
 title: 数据提供程序
 ---
+
 无论使用何种规范，REST，GraphQL还是SOAP。React-admin都可以与它的API进行通信。 对于 REST 服务器, 它可以是 [JSON API](http://jsonapi.org/), [HAL](http://stateless.co/hal_specification.html), [OData](http://www.odata.org/) 或自定义规范。 React-admin 只需要一个 Data Provider 函数。 这是将数据查询转换为 http 请求的地方, 以及对数据响应的 http 响应。
 
 ![Data Provider architecture](https://marmelab.com/react-admin/img/data-provider.png)

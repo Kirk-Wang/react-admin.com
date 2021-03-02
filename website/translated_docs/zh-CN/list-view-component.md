@@ -2,6 +2,7 @@
 layout: list-view-component
 title: List 视图组件
 ---
+
 列表视图显示从 REST API 获取的记录列表。 此视图的入口点是`<List>`组件，它负责获取数据。 然后，它将数据传递到迭代器视图-通常是 `<Datagrid`，然后将每个记录属性的渲染委托给 [`<Field>`](./Fields.html) 组件。
 
 ![The List View](https://marmelab.com/react-admin/img/list-view.png)

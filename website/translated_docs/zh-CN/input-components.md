@@ -2,6 +2,7 @@
 id: input-components
 title: Input 组件
 ---
+
 `Input` 组件显示一个输入, 或一个下拉列表, 一个单选按钮列表, 等等。 这些组件允许编辑记录属性，并且在 `<Edit>`， `<Create>` 和 `<Filter>` 视图中是常见的。
 
 ```jsx

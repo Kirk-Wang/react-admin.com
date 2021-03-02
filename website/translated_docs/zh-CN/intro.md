@@ -2,6 +2,7 @@
 id: intro
 title: 简介
 ---
+
 一个运行在浏览器中，在REST/GraphQL API之上，用于构建admin（中后台）应用程序的前端框架。它使用了ES6，[React](https://facebook.github.io/react/) 和 [Material Design](https://material.io/)进行编写。 它以前的名字叫做 [admin-on-rest](https://github.com/marmelab/admin-on-rest)。 由[marmelab](https://marmelab.com/)开源和维护。
 
 [Demo](https://marmelab.com/react-admin-demo/) - [Source](https://github.com/marmelab/react-admin) - [Releases](https://github.com/marmelab/react-admin/releases) - [Support](http://stackoverflow.com/questions/tagged/react-admin) <iframe src="https://player.vimeo.com/video/268958716?byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="display:block;margin:0 auto" mark="crwd-mark"></iframe> 
